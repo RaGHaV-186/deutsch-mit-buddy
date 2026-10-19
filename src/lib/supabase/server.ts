@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { hardenCookie } from "./cookies";
 
 export async function createClient() {
   const cookieStore = await cookies();
@@ -12,10 +13,10 @@ export async function createClient() {
         setAll: (toSet) => {
           try {
             toSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options),
+              cookieStore.set(name, value, hardenCookie(options)),
             );
           } catch {
-            // Called from a Server Component; session refresh happens in proxy.ts (slice 1).
+            // Called from a Server Component; the session refresh happens in proxy.ts.
           }
         },
       },

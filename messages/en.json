@@ -1,0 +1,11 @@
+{
+  "Home": {
+    "greeting": "Hallo! Ich bin Buddy.",
+    "tagline": "Your German teacher, from zero to C1. Wuff!",
+    "buddyAlt": "Buddy, a blue-grey and white dog with a red collar"
+  },
+  "Meta": {
+    "title": "Deutsch mit Buddy",
+    "description": "Learn German from zero to C1 with Buddy, your AI teacher dog."
+  }
+}

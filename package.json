@@ -7,8 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "test": "vitest run --project unit",
+    "test:watch": "vitest",
+    "test:rls": "vitest run --project rls",
+    "db:start": "supabase start",
+    "db:reset": "supabase db reset"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -30,6 +33,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.2",
     "jsdom": "^30.1.3",
+    "supabase": "^2.121.0",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^5.0.5"

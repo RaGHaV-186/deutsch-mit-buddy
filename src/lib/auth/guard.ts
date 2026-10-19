@@ -2,7 +2,7 @@ import "server-only";
 import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 import type { ZodType } from "zod";
-import { clientIp, rateLimit } from "@/lib/rate-limit";
+import { clientIp, limitError } from "@/lib/rate-limit";
 import { createClient } from "@/lib/supabase/server";
 
 export type AuthState =
@@ -36,6 +36,9 @@ export async function requireSession() {
   return state;
 }
 
+const limitResponse = (reason: "rate_limited" | "unavailable") =>
+  NextResponse.json({ error: reason }, { status: reason === "rate_limited" ? 429 : 503 });
+
 interface RouteOptions<T> {
   /** Name used in the rate-limit key, e.g. "feedback". */
   name: string;
@@ -54,15 +57,13 @@ export function withAuth<T>(
 ) {
   return async function route(request: Request): Promise<Response> {
     const ip = clientIp(request.headers);
-    if (!(await rateLimit(`ip:${options.name}:${ip}`, options.limit * 3, options.windowSeconds))) {
-      return NextResponse.json({ error: "rate_limited" }, { status: 429 });
-    }
+    const ipBlocked = await limitError(`ip:${options.name}:${ip}`, options.limit * 3, options.windowSeconds);
+    if (ipBlocked) return limitResponse(ipBlocked);
     const state = await getAuthState();
     if (state.status === "anonymous") return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
     if (state.status === "aal1") return NextResponse.json({ error: "mfa_required" }, { status: 403 });
-    if (!(await rateLimit(`user:${options.name}:${state.userId}`, options.limit, options.windowSeconds))) {
-      return NextResponse.json({ error: "rate_limited" }, { status: 429 });
-    }
+    const userBlocked = await limitError(`user:${options.name}:${state.userId}`, options.limit, options.windowSeconds);
+    if (userBlocked) return limitResponse(userBlocked);
     let body: unknown;
     try {
       body = await request.json();

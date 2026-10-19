@@ -3,13 +3,13 @@ import { z } from "zod";
 
 const getUser = vi.fn();
 const getClaims = vi.fn();
-const rateLimit = vi.fn();
+const limitError = vi.fn();
 
 vi.mock("@/lib/supabase/server", () => ({
   createClient: async () => ({ auth: { getUser, getClaims } }),
 }));
 vi.mock("@/lib/rate-limit", () => ({
-  rateLimit: (...a: unknown[]) => rateLimit(...a),
+  limitError: (...a: unknown[]) => limitError(...a),
   clientIp: () => "1.1.1.1",
 }));
 vi.mock("next/navigation", () => ({
@@ -27,7 +27,7 @@ const signedIn = (aal: string) => {
 
 beforeEach(() => {
   vi.clearAllMocks();
-  rateLimit.mockResolvedValue(true);
+  limitError.mockResolvedValue(undefined);
   getUser.mockResolvedValue({ data: { user: null }, error: { message: "no session" } });
 });
 
@@ -62,10 +62,20 @@ describe("withAuth", () => {
     expect(await res.json()).toEqual({ error: "mfa_required" });
     expect(handler).not.toHaveBeenCalled();
   });
-  it("answers 429 when rate limited", async () => {
+  it("answers 429 when really rate limited", async () => {
     signedIn("aal2");
-    rateLimit.mockResolvedValue(false);
-    expect((await post({ message: "hi" })).status).toBe(429);
+    limitError.mockResolvedValue("rate_limited");
+    const res = await post({ message: "hi" });
+    expect(res.status).toBe(429);
+    expect(await res.json()).toEqual({ error: "rate_limited" });
+    expect(handler).not.toHaveBeenCalled();
+  });
+  it("answers 503, not 429, when the limiter itself is unavailable", async () => {
+    signedIn("aal2");
+    limitError.mockResolvedValue("unavailable");
+    const res = await post({ message: "hi" });
+    expect(res.status).toBe(503);
+    expect(await res.json()).toEqual({ error: "unavailable" });
     expect(handler).not.toHaveBeenCalled();
   });
   it("validates JSON and input", async () => {

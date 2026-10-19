@@ -6,8 +6,14 @@ export function clientIp(headers: Headers): string {
   return forwarded || headers.get("x-real-ip") || "unknown";
 }
 
-/** Fixed-window limit backed by Postgres. Returns true while `key` is within `limit` hits per window. Fails closed. */
-export async function rateLimit(key: string, limit: number, windowSeconds: number): Promise<boolean> {
+/**
+ * ok: within the limit. limited: the caller really is over it. unavailable: we could not check
+ * (database or service-role key problem). Fails closed, but callers must not tell members "too many tries" for that.
+ */
+export type RateLimitResult = "ok" | "limited" | "unavailable";
+
+/** Fixed-window limit backed by Postgres: at most `limit` hits per `windowSeconds` for `key`. */
+export async function rateLimit(key: string, limit: number, windowSeconds: number): Promise<RateLimitResult> {
   try {
     const { data, error } = await createAdminClient().rpc("hit_rate_limit", {
       p_key: key,
@@ -15,9 +21,28 @@ export async function rateLimit(key: string, limit: number, windowSeconds: numbe
       p_window_seconds: windowSeconds,
     });
     if (error) throw error;
-    return data === true;
+    return data === true ? "ok" : "limited";
   } catch (err) {
-    console.error("rate limit check failed", err instanceof Error ? err.message : err);
-    return false;
+    // Safe to log: error code/name and which settings exist, never keys, keys' values, the rate-limit key or user data.
+    const e = err as { code?: string; name?: string; status?: number };
+    console.error("rate limiter unavailable", {
+      code: e?.code,
+      name: e?.name,
+      status: e?.status,
+      supabaseUrlSet: Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL),
+      serviceRoleKeySet: Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY),
+    });
+    return "unavailable";
   }
+}
+
+/** The error key (messages/en.json "Errors") to show when a request must stop, or undefined to carry on. */
+export async function limitError(
+  key: string,
+  limit: number,
+  windowSeconds: number,
+): Promise<"rate_limited" | "unavailable" | undefined> {
+  const result = await rateLimit(key, limit, windowSeconds);
+  if (result === "ok") return undefined;
+  return result === "limited" ? "rate_limited" : "unavailable";
 }

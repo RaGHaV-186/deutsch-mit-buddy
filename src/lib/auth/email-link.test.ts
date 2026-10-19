@@ -3,13 +3,13 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const exchangeCodeForSession = vi.fn();
 const verifyOtp = vi.fn();
-const rateLimit = vi.fn();
+const limitError = vi.fn();
 
 vi.mock("@/lib/supabase/server", () => ({
   createClient: async () => ({ auth: { exchangeCodeForSession, verifyOtp } }),
 }));
 vi.mock("@/lib/rate-limit", () => ({
-  rateLimit: (...a: unknown[]) => rateLimit(...a),
+  limitError: (...a: unknown[]) => limitError(...a),
   clientIp: () => "1.1.1.1",
 }));
 
@@ -25,7 +25,7 @@ const where = (res: Response) => {
 
 beforeEach(() => {
   vi.clearAllMocks();
-  rateLimit.mockResolvedValue(true);
+  limitError.mockResolvedValue(undefined);
   exchangeCodeForSession.mockResolvedValue({ error: null });
   verifyOtp.mockResolvedValue({ error: null });
 });
@@ -86,8 +86,14 @@ describe("guards", () => {
   });
 
   it("is rate limited and does not touch Supabase when over the limit", async () => {
-    rateLimit.mockResolvedValue(false);
+    limitError.mockResolvedValue("rate_limited");
     expect(where(await call(confirm, "/auth/confirm?code=abc"))).toBe("/login?error=rate_limited");
+    expect(exchangeCodeForSession).not.toHaveBeenCalled();
+  });
+
+  it("shows 'unavailable' rather than 'too many tries' when the limiter is down", async () => {
+    limitError.mockResolvedValue("unavailable");
+    expect(where(await call(confirm, "/auth/confirm?code=abc"))).toBe("/login?error=unavailable");
     expect(exchangeCodeForSession).not.toHaveBeenCalled();
   });
 });

@@ -1,6 +1,6 @@
 import type { EmailOtpType } from "@supabase/supabase-js";
 import { NextResponse, type NextRequest } from "next/server";
-import { clientIp, rateLimit } from "@/lib/rate-limit";
+import { clientIp, limitError } from "@/lib/rate-limit";
 import { createClient } from "@/lib/supabase/server";
 
 const TYPES: EmailOtpType[] = ["signup", "email", "recovery", "magiclink", "email_change", "invite"];
@@ -17,7 +17,8 @@ export async function handleEmailLink(request: NextRequest, successPath: string)
   const { searchParams, origin } = request.nextUrl;
   const go = (path: string) => NextResponse.redirect(new URL(path, origin));
 
-  if (!(await rateLimit(`confirm:${clientIp(request.headers)}`, 30, 600))) return go("/login?error=rate_limited");
+  const blocked = await limitError(`confirm:${clientIp(request.headers)}`, 30, 600);
+  if (blocked) return go(`/login?error=${blocked}`);
 
   // Supabase reports expired or already-used links as ?error=...&error_code=otp_expired.
   if (searchParams.get("error") || searchParams.get("error_code")) return go("/login?error=link");

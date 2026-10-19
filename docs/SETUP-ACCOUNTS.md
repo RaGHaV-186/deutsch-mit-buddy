@@ -63,6 +63,13 @@ Lost authenticator? Authentication → Users → the user → remove the MFA fac
 
 GitHub needs no secrets: CI runs the RLS tests against a throwaway local Supabase.
 
+### Checking a deployment
+Open `https://<deployment>/api/health` (on a preview, while signed in to Vercel). It answers with plain words only, never keys:
+- `supabase: ok` and `rateLimiter: ok`: the app can reach Supabase and use its rate limiter.
+- `rateLimiter: not-configured` / `config.serviceRoleKey: missing`: `SUPABASE_SERVICE_ROLE_KEY` isn't set for this environment. In Vercel, each variable must be ticked for **Preview** as well as Production, and a new deployment is needed after changing it.
+- `rateLimiter: unavailable`: the key is set but Supabase rejects it (wrong key, or from a different project).
+- Sign-up failures are also logged in the Vercel function logs as `auth error in signUp {code, name, status}` or `rate limiter unavailable {…}` (codes only, no emails or keys).
+
 ## 5. Local development
 ```bash
 npm run db:start            # Docker must be running; starts a local Supabase (Mailpit inbox: http://127.0.0.1:54324)

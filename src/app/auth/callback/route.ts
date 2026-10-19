@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { isMemberCapError } from "@/lib/auth/errors";
-import { clientIp, rateLimit } from "@/lib/rate-limit";
+import { clientIp, limitError } from "@/lib/rate-limit";
 import { createClient } from "@/lib/supabase/server";
 
 // Google (OAuth) lands here with ?code=. Exchange it for a session, then let /mfa decide setup vs verify.
@@ -8,7 +8,8 @@ export async function GET(request: NextRequest) {
   const { searchParams, origin } = request.nextUrl;
   const fail = (path: string) => NextResponse.redirect(new URL(path, origin));
 
-  if (!(await rateLimit(`callback:${clientIp(request.headers)}`, 30, 600))) return fail("/login?error=rate_limited");
+  const blocked = await limitError(`callback:${clientIp(request.headers)}`, 30, 600);
+  if (blocked) return fail(`/login?error=${blocked}`);
 
   const oauthError = searchParams.get("error_description");
   if (oauthError) {

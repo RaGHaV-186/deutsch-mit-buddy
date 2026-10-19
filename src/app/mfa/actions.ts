@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { authErrorKey } from "@/lib/auth/errors";
 import { requireSession } from "@/lib/auth/guard";
 import { safeNextPath } from "@/lib/auth/next-path";
-import { rateLimit } from "@/lib/rate-limit";
+import { limitError } from "@/lib/rate-limit";
 import { mfaCodeSchema } from "@/lib/schemas/auth";
 import { createClient } from "@/lib/supabase/server";
 
@@ -15,7 +15,8 @@ export type EnrollResult = { factorId: string; qr: string; secret: string } | { 
 /** Starts authenticator setup: returns the QR code (SVG data URI) and the manual-entry key. */
 export async function enrollTotpAction(): Promise<EnrollResult> {
   const { userId } = await requireSession();
-  if (!(await rateLimit(`mfa-enroll:${userId}`, 10, 600))) return { error: "rate_limited" };
+  const blocked = await limitError(`mfa-enroll:${userId}`, 10, 600);
+  if (blocked) return { error: blocked };
 
   const supabase = await createClient();
   const { data: factors } = await supabase.auth.mfa.listFactors();
@@ -37,7 +38,8 @@ export async function verifyEnrollAction(_prev: MfaFormState, formData: FormData
   const code = mfaCodeSchema.safeParse(formData.get("code"));
   const factorId = formData.get("factorId");
   if (!code.success || typeof factorId !== "string" || factorId.length > 64) return { error: "invalid_code" };
-  if (!(await rateLimit(`mfa-verify:${userId}`, 10, 600))) return { error: "rate_limited" };
+  const blocked = await limitError(`mfa-verify:${userId}`, 10, 600);
+  if (blocked) return { error: blocked };
 
   const supabase = await createClient();
   const { error } = await supabase.auth.mfa.challengeAndVerify({ factorId, code: code.data });
@@ -49,7 +51,8 @@ export async function verifyLoginAction(_prev: MfaFormState, formData: FormData)
   const { userId } = await requireSession();
   const code = mfaCodeSchema.safeParse(formData.get("code"));
   if (!code.success) return { error: "invalid_code" };
-  if (!(await rateLimit(`mfa-verify:${userId}`, 10, 600))) return { error: "rate_limited" };
+  const blocked = await limitError(`mfa-verify:${userId}`, 10, 600);
+  if (blocked) return { error: blocked };
 
   const supabase = await createClient();
   const { data: factors } = await supabase.auth.mfa.listFactors();

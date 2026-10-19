@@ -4,14 +4,15 @@ import { redirect } from "next/navigation";
 import { requireAal2 } from "@/lib/auth/guard";
 import { findStartingPoint } from "@/lib/curriculum/starting-points";
 import { getProfile } from "@/lib/profile";
-import { rateLimit } from "@/lib/rate-limit";
+import { limitError } from "@/lib/rate-limit";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export type OnboardingState = { error?: string } | undefined;
 
 export async function saveStartingPointAction(_prev: OnboardingState, formData: FormData): Promise<OnboardingState> {
   const { userId } = await requireAal2();
-  if (!(await rateLimit(`onboard:${userId}`, 10, 600))) return { error: "rate_limited" };
+  const blocked = await limitError(`onboard:${userId}`, 10, 600);
+  if (blocked) return { error: blocked };
 
   const seq = Number(formData.get("seq"));
   const point = Number.isInteger(seq) ? findStartingPoint(seq) : undefined;

@@ -1,0 +1,260 @@
+# Deutsch mit Buddy — Blueprint & Build Guide
+
+19 Oct 2026 · Raghav
+
+## 1. Product
+
+Deutsch mit Buddy is a free web app (installable on phones) where an AI teacher, Buddy, takes each learner from absolute zero to C1 with a daily lesson, personalised flashcards, tests on demand and multiplayer word games. Domain: **deutschmitbuddy.de**.
+
+**Who uses it**
+
+- **Raghav (admin)**: full access, Opus lessons, admin page.
+- **Members**: anyone with an account (email + password or Google, 2FA required). Capped at 30 members, then a waitlist. Minimum age 16.
+- **Guests**: no account, nickname only, can join game rooms by code. No AI, no stored learning data.
+
+**Teaching format (every lesson, Z1 → C1)**
+
+1. Review: exercises on yesterday's words and recycled past mistakes.
+2. Grammar: one point, explained in English at first, more German as the level rises, then 10 drills.
+3. Vocabulary: 10 core + 5 bonus words (reassess at W1), learned through flashcards.
+4. Writing: task sized to the level; every error corrected with the reason.
+5. Speaking: voice drill with Buddy, sentences that also become speaking cards.
+6. End-of-day test, then Close Day (log: Covered | Mistakes | Carry over).
+
+Saturday = review + longer writing; Sunday = weekly test; checkpoint mocks after each level. Every learner picks their starting lesson at signup (or takes a short placement quiz).
+
+**v1 scope (everything below ships in v1)**
+
+- Buddy as teacher and Tandem partner, with voice
+- Personalised flashcards with spaced repetition (Again / Hard / Got it / Easy)
+- Self-test any time, covering everything learned up to the current day, plus Mistake Grind mode
+- Practice: typing quiz, Diktat, numbers & time drill, word-order builder, Hörverstehen
+- Games: Hangman (Galgenmännchen), der/die/das race, quiz battle; guests can join
+- XP (Buddy's treats), streaks, friends, leaderboard, daily challenge
+- Tracker: day counter, test scores, weak spots, logs, curriculum map, export tracker.md
+- "What Buddy knows about me" page, offline flashcards, reminders (push + weekly email)
+- Interface in English; built so German and other languages can be added later
+
+## 2. Buddy
+
+Buddy is one character with two modes: **Teacher** (runs lessons, tests, corrections) and **Tandem** (a friendly conversation partner, wearing a headset). He is drawn from Raghav's dog: a blue-grey and white pit bull type with a white forehead blaze, grey eye patches, rose ears, amber eyes, a slate nose and a tongue-out grin.
+
+**Personality**: playful but strict. Light dog humour ("Wuff!", treats as XP), never sarcastic. Corrects every error and explains why, hints before giving answers, never writes the learner's sentences for them. English at first, more German as the level rises.
+
+**Moods (artwork set)**: happy, curious tilt, celebrating, sleepy (missed day), Tandem headset. Shown on the home screen, in lessons and in games.
+
+**Which model does what**
+
+| Job | Model | Why |
+| --- | --- | --- |
+| Raghav's lessons, writing correction, mock tests | Opus 5.5 | Best teaching quality, admin only |
+| Members' lessons and writing correction | Sonnet 5.5 | Strong quality at half Opus price |
+| Tandem chats, quick checks, test grading | Haiku 5.5 | Very cheap, fast replies |
+| Shield (is this message about learning?) | Haiku 5.5 | Runs before every message |
+| Curriculum card generation (one-off) | Sonnet 5.5 via Batch API | 50% discount, runs once |
+
+**Voice**: Buddy speaks with a German neural text-to-speech voice (Azure or Google TTS, roughly €2–5/month at this scale); the free browser voice is the fallback. The learner speaks through the browser's speech recognition (free). When it is unavailable (iOS Safari, Firefox), the server falls back to Azure Speech-to-Text. A typed fallback exists everywhere voice is used. Tandem mode is voice-first, like a phone call. A short iOS voice spike opens slice 6.
+
+**How Buddy remembers each learner**: every review, mistake, weak spot, test score and lesson log is stored as structured data. Before each session the server builds a compact learner profile (level, current lesson, top weak spots, last 3 logs, recent scores, due cards) and gives it to Buddy. Old chats are summarised, not replayed. This keeps lessons personal and cheap.
+
+**Shield (learning only)**
+
+1. A Haiku check classifies every message: learning German, or off-topic / jailbreak attempt. Off-topic gets "Wuff, I only teach German!" and never reaches the expensive model.
+2. Buddy's system rules allow only teaching, German conversation, correction and quizzing.
+3. Hard limits: message length, reply length, daily quota per user.
+4. Flagged attempts are logged; repeat offenders are blocked automatically and listed on the admin page.
+
+## 3. Features and screens
+
+The app has five tabs on the phone (bottom bar) and the same five in a side bar on the laptop: Home, Learn, Cards, Play, Me.
+
+| Screen | What it does |
+| --- | --- |
+| **Home** | Buddy's mood, today's lesson (Day N · code · topic), cards due, streak, XP, daily challenge, one-tap "Continue" |
+| **Learn → Lesson** | Chat with Buddy in the 6-step format; voice in/out; Buddy adds cards, logs mistakes and closes the day by himself |
+| **Learn → Tandem** | Voice conversation with Buddy in headset mode; pick a scenario; ends with feedback (top 5 mistakes, what went well, cards added) |
+| **Learn → Test** | Self-test any time: mixed test up to the current day, weekly/checkpoint tests, Mistake Grind, timed exam mocks from W14 |
+| **Learn → Practice** | Typing quiz, Diktat, numbers & time drill, word-order builder, Hörverstehen (Buddy-generated dialogues + questions) |
+| **Cards** | Your format: der blue / die red / das green, plural line, example, audio + slow; Words / Speaking / Both; due-today queue; browse + edit deck; offline |
+| **Play** | Create or join a room by code; Hangman, der/die/das race, quiz battle; 2–8 players; emoji reactions only (no free chat) |
+| **Me** | Tracker (logs, weak spots, test scores, curriculum map), friends, leaderboard, "What Buddy knows about me", settings, export tracker.md, export/delete account |
+| **Auth** | Sign up / log in (email + password or Google), 2FA setup (authenticator app), choose starting point or placement quiz, waitlist page when full |
+| **Admin** (Raghav only) | Users, quotas, AI spend this month, shield flags, block/unblock, waitlist approvals |
+| **Legal** | Impressum, Datenschutzerklärung, Nutzungsbedingungen, cookie notice (only essential cookies, so no banner needed) |
+
+**XP rules (Buddy's treats)**: 1 per card reviewed, 20 per lesson closed, 10 per Tandem chat, test score ÷ 2, 5 per game won, 15 for the daily challenge. Weekly and all-time leaderboards, among friends or all members.
+
+**Reminders**: web push at the learner's chosen hour when cards are due or the streak is at risk; Sunday weekly report email (progress, weak spots, next week). Supabase pg_cron runs hourly and uses pg_net to call a secret-protected API route, which sends to learners whose reminder hour matches. Vercel cron is not used (Hobby allows daily only).
+
+**Feedback**: the Me screen has a "Send feedback" button, so the first 30 members can report problems and ideas.
+
+## 4. Architecture and tech stack
+
+One TypeScript codebase on Next.js, hosted on Vercel, with Supabase for data, login and live games. The API keys live only on the server, so the browser never talks to Claude directly.
+
+How the parts connect:
+
+- **Browser (phone/laptop)**: Next.js app (installable PWA), offline flashcards, speech recognition, game room client. Talks to the Next.js server over HTTPS, and to Supabase Realtime directly for live game rooms.
+- **Vercel: Next.js server**: Buddy API + shield, quotas + rate limits, learner profile builder, cron jobs for reminders. Calls the Claude API (Opus, Sonnet, Haiku), the neural TTS service (Buddy's voice) and Resend + Web Push (reminders, weekly report). Reads/writes Supabase (data, auth).
+- **Supabase (Frankfurt, EU)**: Postgres with row-level security, Auth (email, Google, 2FA), Realtime for game rooms.
+
+| Layer | Choice | Why |
+| --- | --- | --- |
+| Framework | Next.js 16 (App Router) + TypeScript | One language front and back; streaming; easy Vercel deploy |
+| Styling | Tailwind CSS + your colour tokens (der blue, die red, das green) | Fast to build, easy to redesign later |
+| Data + login | Supabase: Postgres, Auth (email, Google, TOTP 2FA), Realtime, Storage | All-in-one, free tier, EU region |
+| AI | Anthropic SDK, prompt caching, Batch API for card generation | Cost control |
+| Voice | Azure neural TTS (German voice) + browser speech recognition, Azure Speech-to-Text as server fallback | Natural voice, cheap, works on iOS |
+| Scheduling | Supabase pg_cron (hourly) + pg_net → secured API route | Reminders at each learner's hour without Vercel Pro |
+| CI | GitHub Actions: lint, test, build on every push and PR | Catch breakage before deploy |
+| Email | Resend (free tier: 3,000 emails/month) | Reminders, weekly report, auth emails |
+| Offline | Service worker + IndexedDB queue | Cards work on the train |
+| Hosting | Vercel Hobby (free) | Preview link for every change |
+| Tests | Vitest (logic) + Playwright (browser flows) | Catch breakage before deploy |
+| Errors | Sentry free tier | See crashes on real phones |
+| i18n | next-intl, English first | German UI later without rewrites |
+
+## 5. Database tables
+
+About 25 tables in Supabase Postgres (the exact count shifts slightly as pairs like `chats` + `messages` are counted). Every user-owned table has a `user_id` and a row-level security rule "you can only read and write your own rows"; shared content tables are read-only for members and written only by the server.
+
+Supabase setting: **"Automatically expose new tables" is OFF** and **automatic RLS is ON**, so every migration must explicitly grant privileges to the anon/authenticated roles together with RLS policies.
+
+**Shared content (written by the server, read by everyone)**
+
+| Table | Holds | Key columns |
+| --- | --- | --- |
+| `curriculum_sessions` | Every lesson Z1 → C1 in order, plus Saturdays, Sundays, checkpoints | seq, code, kind, level, grammar, theme, goal, word_target |
+| `card_templates` | Pre-generated word cards per lesson (the shared deck) | session_code, en, article, de, plural, example, example_en, audio_url |
+| `question_bank` | Test questions per lesson (multiple choice, gap fill, ordering, typing) | session_code, skill, type, prompt, answer, distractors |
+| `game_words` | Word lists for games by level | level, article, word, en, hint |
+
+**Per learner (row-level security: own rows only)**
+
+| Table | Holds | Key columns |
+| --- | --- | --- |
+| `profiles` | Name, avatar, level, current session pointer, day counter, settings, timezone | user_id, display_name, role, session_seq, day_count, start_code, voice_on, reminder_time |
+| `cards` | The learner's own deck: copies of templates + Buddy-made cards from their mistakes | user_id, kind (word/say/answer), en, article, de, plural, example, tip, source, session_code, locked |
+| `card_srs` | Spaced-repetition state per card | card_id, due_at, interval_days, ease, reps, lapses |
+| `reviews` | Every flashcard answer. Offline sync conflict rule: the latest `reviewed_at` wins | card_id, grade (again/hard/good/easy), reviewed_at, ms_taken |
+| `lessons` | One row per lesson run | session_code, day_number, status, started_at, closed_at |
+| `lesson_logs` | The 3-line log from Close Day | lesson_id, covered, mistakes, carry_over |
+| `mistakes` | Every single error Buddy found | user_id, said, correct, why, category, source (lesson/tandem/test), created_at |
+| `weak_spots` | Grouped recurring mistakes with ⟳ counter | user_id, text, repeats, status (active/fixed), last_seen |
+| `chats` + `messages` | Lesson and Tandem conversations (summarised after 30 days) | mode, session_code, role, content, tokens_in, tokens_out |
+| `tests` + `test_answers` | Every self-test and its items | kind, score, max, per-skill breakdown; question_id, given, correct |
+| `tandem_sessions` | Tandem scenario, feedback, cards added | scenario, did_well, mistakes, summary |
+| `xp_events` | Every treat earned | user_id, reason, amount, created_at |
+| `friendships` | Friend requests and accepted friends | user_id, friend_id, status |
+| `push_subscriptions` | Device push endpoints | user_id, endpoint, keys |
+
+**Games**
+
+| Table | Holds | Key columns |
+| --- | --- | --- |
+| `game_rooms` | A room with code, game type, level, host, state | code (6 letters), game, level, host_id, status, expires_at |
+| `game_players` | Members and guests in a room | room_id, user_id (null for guests), nickname, score |
+
+**Safety and admin**
+
+| Table | Holds | Key columns |
+| --- | --- | --- |
+| `ai_usage` | Every AI call: who, model, tokens, cost | user_id, model, purpose, tokens_in, tokens_out, cost_usd |
+| `shield_flags` | Blocked off-topic or jailbreak attempts | user_id, message_excerpt, reason |
+| `waitlist` | People waiting after the 30-member cap | email, created_at, approved |
+| `feedback` | Messages from the Me → Send feedback button | user_id, message, created_at |
+
+Daily quotas and the leaderboard are computed from `ai_usage` and `xp_events` (database views), so no extra tables are needed.
+
+## 6. Security, privacy and German law
+
+The rule: the browser is never trusted. Every permission is checked in the database (row-level security) and every AI call goes through the server, which checks login, 2FA, quota and the shield first.
+
+**Accounts and access**
+
+- Email + password (min. 10 characters, checked against leaked-password lists) or Google sign-in.
+- 2FA required for every member: authenticator app (TOTP) through Supabase MFA; no AI or data access until 2FA is set up.
+- Email confirmation before first login; captcha (Cloudflare Turnstile) on sign-up and password reset.
+- Session cookies are HTTP-only and secure; sessions expire after 7 days of inactivity.
+- Signup closes automatically at 30 members; new people land on the waitlist.
+
+**Protecting your money and the AI**
+
+- Anthropic and Azure keys exist only as Vercel environment variables (and in the local, git-ignored `.env.local`), never in the browser or the repo.
+- Rate limits per user and per IP on every API route.
+- Daily AI quota per member; admin unlimited. Prepaid Anthropic credits with auto-reload off act as the hard spending cap.
+- The shield (section 2) blocks non-learning use before it costs anything.
+
+**Data and the app itself**
+
+- Row-level security on every table; tested with automated tests that try to read another user's data. The RLS test harness is built in slice 1 and runs in CI on every push.
+- Input validation (zod) on every API route; all text escaped on display. Buddy's tools (add card, log mistake, update weak spot, close day) use shared zod schemas with length caps, because learner text flows into them.
+- Security headers: Content-Security-Policy, HSTS, no iframes from other sites. Sentry and these headers are set up in slice 1.
+- Automated tests check that account deletion removes every row and that data export is complete.
+- Guests in games get a random ID, store nothing, and can only send moves and emoji.
+- Dependabot alerts on the GitHub repo; secrets scanning on.
+- Daily automatic database backups (Supabase).
+
+**GDPR and German law (to set up before going public)**
+
+- **Impressum** (§ 5 DDG): full name, postal address, email. Raghav uses his own address for now; it will be public. Re-check before the public launch.
+- **Datenschutzerklärung**: what is stored, why, how long, which processors (Supabase EU, Vercel, Anthropic, Azure, Resend, Google sign-in), users' rights, contact.
+- **Nutzungsbedingungen** (terms): 16+, fair use, no abuse, account removal.
+- Data processing agreements (AVV/DPA) accepted with each provider in their dashboards.
+- Only essential cookies, no tracking, so no cookie banner is needed. Analytics, if added, must be cookie-free.
+- Users can export all their data and delete their account in one click; deletion removes all rows.
+- Not legal advice: have the Impressum and privacy policy checked before the public launch.
+
+## 7. Costs and limits
+
+Everything except AI and the voice is free at this scale; Raghav's own daily Opus lessons alone are about $12–15 a month, so members need a budget guard to keep the total near €15–20.
+
+**Fixed monthly costs**
+
+| Item | Cost |
+| --- | --- |
+| Vercel Hobby, Supabase free, Resend free, Sentry free, Cloudflare Turnstile | €0 |
+| Domain deutschmitbuddy.de | ~€1 (≈€10/year) |
+| Neural TTS voice | ~€2–5 |
+| One-off: generating ~2,000 curriculum cards + question bank (Batch API) | ~$2–5 once |
+
+**AI per activity (approximate, with prompt caching)**
+
+| Activity | Model | ≈ cost each |
+| --- | --- | --- |
+| Raghav's lesson | Opus 5.5 | $0.40–0.50 |
+| Member lesson | Sonnet 5.5 | $0.20–0.25 |
+| Member lesson (budget mode) | Haiku 5.5 | ~$0.01 |
+| Tandem chat (15 min) | Haiku 5.5 | ~$0.01 |
+| Self-test with writing graded | Haiku 5.5 (Sonnet for writing) | $0.02–0.10 |
+| Shield check per message | Haiku 5.5 | < $0.001 |
+| Flashcards, games, practice drills | none | $0 |
+
+**Budget guard (built into the server)**
+
+- Monthly AI budget set in the admin page (start: $20). Spend is tracked live in `ai_usage`. **Admin (Raghav) spend is tracked separately and never counts toward this member budget**; the limits below apply to members only.
+- Members: up to 10 Sonnet lessons per month, then lessons switch to Haiku automatically; Tandem within a daily cap (3 chats).
+- When 80% of the monthly budget is used, all members switch to Haiku and Raghav gets an email; at 100% member AI pauses until the 1st.
+- Anthropic: prepaid credits, auto-reload off, key scoped to the `deutschmitbuddy` workspace, key expires 28 Feb 2027 (rotate before).
+
+Pricing (Claude API, checked 19 Oct 2026): Opus 5.5 $4 / $20, Sonnet 5.5 $2 / $10, Haiku 5.5 $0.10 / $0.50 per million input / output tokens; Batch API −50%. Model IDs (verified in the current SDK): `claude-opus-5-5`, `claude-sonnet-5-5`, `claude-haiku-5-5`.
+
+## 8. Build order
+
+The app is built in 13 thin slices, each one working end to end and deployed before the next starts. At 1–2 slices per evening the whole v1 takes about two weeks.
+
+0. **Setup** — git repo (remote github.com/RaGHaV-186/deutsch-mit-buddy), Next.js + Supabase connected, theme, `.env.example`, GitHub Actions CI (lint, test, build on every push and PR), Vercel previews, a live "Hallo! Ich bin Buddy." page on Vercel. Done when the URL loads on Raghav's phone and CI is green.
+1. **Accounts** — sign-up/login (email + Google), required 2FA, captcha, 30-member cap + waitlist, profiles, starting-point picker, legal page skeletons, RLS test harness in CI, Sentry, security headers, feedback button + `feedback` table. Done when Raghav can sign up with 2FA on his phone and the RLS tests pass in CI.
+2. **Flashcards** — the card format (see CLAUDE.md), spaced repetition, Words/Speaking modes, audio + slow, Raghav's 213 existing cards imported from data/seed-cards.json, offline queue. Done when today's cards can be reviewed offline.
+3. **Curriculum content** — curriculum Z1 → C1 in the database, B2–C1 lessons generated, ~2,000 word cards + question bank generated with the Batch API (Z1–Z3 sample first as reviewable JSON; the rest is generated and inserted only after Raghav approves the sample), cards unlock per lesson. Done when Day N shows the right lesson and cards.
+4. **Buddy lessons** — streaming chat in the 6-step format, learner profile, Buddy's tools (add cards, log mistakes, update weak spots, close day), model routing, shield, quotas, budget guard (members only; admin spend tracked separately), shared zod tool schemas, canned-lesson regression tests. Done when Raghav finishes a real lesson in the app.
+5. **Tracker** — logs, weak spots, test scores, curriculum map, "What Buddy knows about me", export tracker.md, Raghav's history imported from data/seed-tracker.ts. Done when the export matches his Project tracker.
+6. **Voice + Tandem** — starts with an iOS voice spike (TTS playback, speech recognition, Azure Speech-to-Text fallback), then Buddy's neural voice, speech recognition with typed fallback, Tandem mode with scenarios and feedback. Done when a 10-minute voice Tandem works on a phone.
+7. **Tests** — self-test up to today, weekly and checkpoint tests, Mistake Grind, scores saved. Done when a test result lands in the tracker.
+8. **Practice** — typing quiz, Diktat, numbers & time drill, word-order builder, Hörverstehen.
+9. **Games** — rooms with codes, guests, live sync via Supabase Realtime, Hangman, der/die/das race, quiz battle; server validates scores. Done when two phones play one game.
+10. **XP + friends** — treats, streaks, friends, leaderboards, daily challenge.
+11. **Reminders** — Web Push (VAPID) and the Sunday report email via Resend, triggered hourly by Supabase pg_cron + pg_net calling a secret-protected API route.
+12. **Hardening + launch** — extra security tests (account deletion and data export tests), Playwright browser tests, final legal texts (Impressum re-check), final Buddy artwork, custom domain deutschmitbuddy.de, then the LinkedIn post.
+
+Design can change at any time: colours, fonts and spacing live in one theme file.

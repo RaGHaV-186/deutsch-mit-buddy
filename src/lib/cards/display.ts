@@ -44,6 +44,8 @@ export interface SpeakView {
 
 export interface CardView {
   front: FrontView;
+  /** German on the front that can be played (German-first cards and answer questions); null when the front is English. */
+  frontSpeak: SpeakView | null;
   back: BackView;
   speak: SpeakView;
   /** Direction actually used (answer cards never reverse). */
@@ -73,10 +75,12 @@ export function buildCardView(card: SnapshotCard, direction: Direction): CardVie
   };
 
   if (card.kind === "word") {
+    const speak: SpeakView = { word: card.article ? `${card.article} ${card.de}` : card.de, sentence: card.example };
     return {
       direction,
       back,
-      speak: { word: card.article ? `${card.article} ${card.de}` : card.de, sentence: card.example },
+      speak,
+      frontSpeak: direction === "de-en" ? { word: speak.word, sentence: null } : null,
       front:
         direction === "en-de"
           ? { label: null, text: card.en, article: null, context: null }
@@ -92,6 +96,7 @@ export function buildCardView(card: SnapshotCard, direction: Direction): CardVie
     return {
       direction: "en-de",
       speak,
+      frontSpeak: { word: null, sentence: question },
       back,
       front: { label: "answerOutLoud", text: question, article: null, context },
     };
@@ -100,6 +105,7 @@ export function buildCardView(card: SnapshotCard, direction: Direction): CardVie
   return {
     direction,
     speak,
+    frontSpeak: direction === "de-en" ? { word: null, sentence: card.de } : null,
     back,
     front:
       direction === "en-de"

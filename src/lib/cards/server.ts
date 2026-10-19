@@ -325,3 +325,28 @@ export async function importSeedDeck(db: SupabaseClient, userId: string, rawSeed
     fresh: missing.length - seen,
   };
 }
+
+/** For the Home screen: how many cards are waiting today (reviews due + new cards still allowed). */
+export async function getDueCounts(db: SupabaseClient, userId: string, now: Date, timezone: string) {
+  const endOfDay = startOfNextLocalDay(now, timezone).toISOString();
+  const [due, fresh, started] = await Promise.all([
+    db
+      .from("card_srs")
+      .select("card_id", { count: "exact", head: true })
+      .eq("user_id", userId)
+      .not("last_reviewed_at", "is", null)
+      .lt("due_at", endOfDay),
+    db.from("card_srs").select("card_id", { count: "exact", head: true }).eq("user_id", userId).is("last_reviewed_at", null),
+    db
+      .from("reviews")
+      .select("card_id")
+      .eq("user_id", userId)
+      .eq("was_new", true)
+      .eq("applied", true)
+      .gte("reviewed_at", startOfLocalDay(now, timezone).toISOString())
+      .limit(1000),
+  ]);
+  if (due.error || fresh.error || started.error) return null;
+  const startedToday = new Set((started.data ?? []).map((r) => r.card_id as string)).size;
+  return { due: due.count ?? 0, fresh: Math.min(fresh.count ?? 0, Math.max(0, DAILY_NEW_LIMIT - startedToday)) };
+}

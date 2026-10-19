@@ -7,6 +7,10 @@
   --der: #2457c5;
   --die: #c3303a;
   --das: #1e8a4c;
+  --article-der: #2457c5;
+  --article-die: #c3303a;
+  --article-das: #1e8a4c;
+  --article-none: #6b7280;
   --gutter: 16px;
 }
 
@@ -15,6 +19,10 @@
     --background: #12151b;
     --foreground: #eef0f4;
     --muted: #a3acbb;
+    --article-der: #7da2f5;
+    --article-die: #f27c85;
+    --article-das: #4dc585;
+    --article-none: #9aa3b2;
   }
 }
 

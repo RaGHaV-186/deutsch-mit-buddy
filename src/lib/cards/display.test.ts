@@ -40,12 +40,14 @@ describe("word cards", () => {
       tip: "-t → die",
     });
     expect(v.speak).toEqual({ word: "die Stadt", sentence: "Bielefeld ist eine Stadt." });
+    expect(v.frontSpeak).toBeNull(); // the English front has nothing to play
   });
 
   it("German → English: coloured article + word on the front, same full back", () => {
     const v = buildCardView(noun, "de-en");
     expect(v.front).toEqual({ label: null, text: "Stadt", article: "die", context: null });
     expect(v.back.english).toBe("city");
+    expect(v.frontSpeak).toEqual({ word: "die Stadt", sentence: null }); // the German front can be played
   });
 
   it("words without an article are grey and are spoken bare", () => {
@@ -62,6 +64,8 @@ describe("speaking cards", () => {
     const v = buildCardView(say, "en-de");
     expect(v.back).toMatchObject({ article: "none", german: "Ich heiße Raghav.", english: "My name is Raghav.", tip: "ich → -e" });
     expect(v.speak).toEqual({ word: null, sentence: "Ich heiße Raghav." });
+    expect(v.frontSpeak).toBeNull();
+    expect(buildCardView(say, "de-en").frontSpeak).toEqual({ word: null, sentence: "Ich heiße Raghav." });
   });
 
   it("answer: 'Answer out loud' with the German question; never reverses", () => {
@@ -71,6 +75,7 @@ describe("speaking cards", () => {
       expect(v.front).toEqual({ label: "answerOutLoud", text: "Was möchten Sie?", article: null, context: "in a café" });
       expect(v.back).toMatchObject({ german: "Ich möchte einen Tee, bitte.", english: null });
       expect(v.speak.sentence).toBe("Ich möchte einen Tee, bitte.");
+      expect(v.frontSpeak).toEqual({ word: null, sentence: "Was möchten Sie?" }); // hear the question
     }
   });
 });

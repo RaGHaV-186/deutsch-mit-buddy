@@ -11,6 +11,7 @@ export interface Profile {
   day_count: number;
   onboarded_at: string | null;
   terms_accepted_at: string | null;
+  timezone: string | null;
 }
 
 /** The signed-in member's own profile (row-level security returns nothing below two-factor). */
@@ -18,7 +19,7 @@ export const getProfile = cache(async (userId: string): Promise<Profile | null> 
   const supabase = await createClient();
   const { data } = await supabase
     .from("profiles")
-    .select("user_id, display_name, role, start_code, session_seq, day_count, onboarded_at, terms_accepted_at")
+    .select("user_id, display_name, role, start_code, session_seq, day_count, onboarded_at, terms_accepted_at, timezone")
     .eq("user_id", userId)
     .maybeSingle();
   return (data as Profile | null) ?? null;

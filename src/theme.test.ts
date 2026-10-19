@@ -15,4 +15,12 @@ describe("theme", () => {
     expect(css).toContain(`--die: ${theme.article.die.toLowerCase()}`);
     expect(css).toContain(`--das: ${theme.article.das.toLowerCase()}`);
   });
+
+  it("keeps the article text colours (light and dark) in sync with the theme", () => {
+    const css = readFileSync("src/app/globals.css", "utf8").toLowerCase();
+    for (const key of ["der", "die", "das", "none"] as const) {
+      expect(css).toContain(`--article-${key}: ${theme.article[key].toLowerCase()}`);
+      expect(css).toContain(`--article-${key}: ${theme.articleDark[key].toLowerCase()}`);
+    }
+  });
 });

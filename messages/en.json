@@ -2,10 +2,198 @@
   "Home": {
     "greeting": "Hallo! Ich bin Buddy.",
     "tagline": "Your German teacher, from zero to C1. Wuff!",
-    "buddyAlt": "Buddy, a blue-grey and white dog with a red collar"
+    "buddyAlt": "Buddy, a blue-grey and white dog with a red collar",
+    "signUp": "Sign up free",
+    "logIn": "Log in"
   },
   "Meta": {
     "title": "Deutsch mit Buddy",
     "description": "Learn German from zero to C1 with Buddy, your AI teacher dog."
+  },
+  "Common": {
+    "email": "Email",
+    "password": "Password",
+    "or": "or",
+    "back": "Back",
+    "continue": "Continue",
+    "loading": "One moment…",
+    "legalImpressum": "Impressum",
+    "legalPrivacy": "Datenschutz",
+    "legalTerms": "Terms",
+    "home": "Home"
+  },
+  "Errors": {
+    "invalid_input": "Please check what you typed and try again.",
+    "captcha": "We couldn't confirm you're not a robot. Please try again.",
+    "rate_limited": "Too many tries. Please wait a few minutes.",
+    "generic": "Something went wrong. Please try again.",
+    "pwned": "That password appears in known data leaks. Please choose a different one.",
+    "weak_password": "That password is too weak. Use at least 10 characters.",
+    "invalid_credentials": "Email or password is wrong.",
+    "email_not_confirmed": "Please confirm your email first. Check your inbox for the link.",
+    "invalid_code": "That code didn't work. Check your authenticator app and try again.",
+    "same_password": "Please choose a password you haven't used before.",
+    "oauth": "Google sign-in didn't work. Please try again.",
+    "link": "That link has expired or was already used. Please request a new one.",
+    "terms_required": "Please confirm you are 16 or older and accept the terms."
+  },
+  "SignUp": {
+    "title": "Create your account",
+    "subtitle": "Free. Takes a minute. You'll set up two-factor login next.",
+    "displayName": "Your name (optional)",
+    "passwordHint": "At least 10 characters.",
+    "terms": "I am 16 or older and accept the",
+    "termsLinkTerms": "Terms",
+    "termsLinkPrivacy": "Datenschutzerklärung",
+    "submit": "Create account",
+    "google": "Sign up with Google",
+    "haveAccount": "Already have an account?",
+    "logIn": "Log in"
+  },
+  "LogIn": {
+    "title": "Welcome back",
+    "subtitle": "Log in to continue with Buddy.",
+    "submit": "Log in",
+    "google": "Continue with Google",
+    "forgot": "Forgot your password?",
+    "noAccount": "New here?",
+    "signUp": "Create an account"
+  },
+  "CheckEmail": {
+    "title": "Check your inbox",
+    "confirm": "If that email can be used, we've sent a link to confirm it. Open it on any device to continue.",
+    "reset": "If an account exists for that email, we've sent a link to choose a new password.",
+    "spam": "Nothing after a few minutes? Check your spam folder.",
+    "toLogin": "Back to log in"
+  },
+  "Forgot": {
+    "title": "Reset your password",
+    "subtitle": "Enter your email and we'll send you a link.",
+    "submit": "Send reset link"
+  },
+  "Reset": {
+    "title": "Choose a new password",
+    "newPassword": "New password",
+    "submit": "Save password"
+  },
+  "Mfa": {
+    "setupTitle": "Set up two-factor login",
+    "setupIntro": "Buddy needs a second lock on your account. You'll use an authenticator app (Google Authenticator, Microsoft Authenticator, 1Password, Aegis…).",
+    "step1": "1. Scan this QR code with your authenticator app.",
+    "step2": "Can't scan? Enter this key by hand:",
+    "saveKey": "Save this key somewhere safe. It is the only way to restore your authenticator if you lose your phone.",
+    "step3": "2. Enter the 6-digit code the app shows.",
+    "code": "6-digit code",
+    "confirm": "Confirm and continue",
+    "qrAlt": "QR code for your authenticator app",
+    "preparing": "Preparing your QR code…",
+    "verifyTitle": "Enter your code",
+    "verifyIntro": "Open your authenticator app and type the 6-digit code for Deutsch mit Buddy.",
+    "verify": "Verify",
+    "signOut": "Use a different account"
+  },
+  "Waitlist": {
+    "title": "We're full right now",
+    "intro": "Deutsch mit Buddy is free and limited to 30 learners while it grows. Leave your email and we'll let you know when a spot opens.",
+    "submit": "Join the waitlist",
+    "doneTitle": "You're on the list",
+    "done": "Thanks! If your email is new to the list, we'll write when a spot opens.",
+    "open": "Spots are open — you can sign up now.",
+    "toSignUp": "Sign up"
+  },
+  "Onboarding": {
+    "title": "Where do you want to start?",
+    "intro": "Pick the lesson to begin with. If you're brand new, keep Z1. You can change this later.",
+    "label": "Starting lesson",
+    "terms": "I am 16 or older and accept the",
+    "submit": "Start learning",
+    "phase": {
+      "zero": "Zero phase (before A1)",
+      "A1": "A1",
+      "A2": "A2",
+      "B1": "B1",
+      "exam": "B1 exam preparation"
+    }
+  },
+  "App": {
+    "hello": "Hallo, {name}!",
+    "helloNoName": "Hallo!",
+    "today": "Your next lesson",
+    "day": "Day {day}",
+    "soon": "Lessons, cards and games arrive in the next slices. Your account is ready.",
+    "signOut": "Log out"
+  },
+  "Feedback": {
+    "button": "Send feedback",
+    "title": "Send feedback",
+    "label": "What's on your mind?",
+    "placeholder": "A bug, an idea, something confusing…",
+    "send": "Send",
+    "cancel": "Cancel",
+    "thanks": "Thank you! Buddy wags his tail.",
+    "error": "Couldn't send that. Please try again."
+  },
+  "Legal": {
+    "placeholderNotice": "Placeholder text. This page is not final and is not legal advice. It will be completed and checked before the public launch.",
+    "updated": "Draft",
+    "impressum": {
+      "title": "Impressum",
+      "sections": {
+        "provider": {
+          "heading": "Angaben gemäß § 5 DDG",
+          "body": "[Full name]\n[Street and number]\n[Postcode and city]\nGermany"
+        },
+        "contact": {
+          "heading": "Kontakt",
+          "body": "Email: [email address]"
+        },
+        "responsible": {
+          "heading": "Verantwortlich für den Inhalt",
+          "body": "[Full name, address as above]"
+        }
+      }
+    },
+    "privacy": {
+      "title": "Datenschutzerklärung",
+      "sections": {
+        "controller": {
+          "heading": "Who is responsible",
+          "body": "[Name and contact details, same as the Impressum.]"
+        },
+        "data": {
+          "heading": "What we store and why",
+          "body": "Account data (email, name, login and two-factor setup), your learning data (cards, mistakes, lesson logs, test scores) and feedback you send. We use it only to run the app for you."
+        },
+        "processors": {
+          "heading": "Who processes data for us",
+          "body": "Supabase (database and login, EU region), Vercel (hosting), Cloudflare (bot protection), Google (optional sign-in), Sentry (error reports), and later Anthropic, Microsoft Azure and Resend. [To be completed with details and agreements.]"
+        },
+        "cookies": {
+          "heading": "Cookies",
+          "body": "Only essential cookies that keep you logged in. No tracking and no advertising cookies."
+        },
+        "rights": {
+          "heading": "Your rights",
+          "body": "You can ask for access, correction, export and deletion of your data at any time, and complain to a data protection authority. [To be completed.]"
+        }
+      }
+    },
+    "terms": {
+      "title": "Nutzungsbedingungen (Terms)",
+      "sections": {
+        "age": {
+          "heading": "Who can use Deutsch mit Buddy",
+          "body": "You must be 16 or older. One account per person."
+        },
+        "use": {
+          "heading": "Fair use",
+          "body": "Use Buddy to learn German. No abuse, no attempts to bypass limits or security, no sharing of your account."
+        },
+        "removal": {
+          "heading": "Account removal",
+          "body": "You can delete your account at any time. We may remove accounts that break these terms. [To be completed.]"
+        }
+      }
+    }
   }
 }

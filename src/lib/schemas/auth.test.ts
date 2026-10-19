@@ -1,18 +1,26 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { feedbackSchema, mfaCodeSchema, signInSchema, signUpSchema, waitlistSchema } from "./auth";
 
 const good = { email: "  Anna@Example.com ", password: "correct-horse-battery", terms: "on", captchaToken: "tok" };
+
+afterEach(() => vi.unstubAllEnvs());
 
 describe("auth schemas", () => {
   it("normalises the email and accepts a valid sign-up", () => {
     const r = signUpSchema.parse(good);
     expect(r.email).toBe("anna@example.com");
   });
-  it("rejects short passwords, missing terms and missing captcha", () => {
+  it("rejects short passwords and missing terms", () => {
     expect(signUpSchema.safeParse({ ...good, password: "short" }).success).toBe(false);
     expect(signUpSchema.safeParse({ ...good, terms: undefined }).success).toBe(false);
-    expect(signUpSchema.safeParse({ ...good, captchaToken: "" }).success).toBe(false);
     expect(signUpSchema.safeParse({ ...good, email: "nope" }).success).toBe(false);
+  });
+  it("requires a captcha token only when Turnstile is configured", () => {
+    expect(signUpSchema.safeParse({ ...good, captchaToken: "" }).success).toBe(true);
+    vi.stubEnv("NEXT_PUBLIC_TURNSTILE_SITE_KEY", "site-key");
+    expect(signUpSchema.safeParse({ ...good, captchaToken: "" }).success).toBe(false);
+    expect(signUpSchema.safeParse({ ...good, captchaToken: undefined }).success).toBe(false);
+    expect(signUpSchema.safeParse(good).success).toBe(true);
   });
   it("caps lengths", () => {
     expect(signUpSchema.safeParse({ ...good, password: "x".repeat(129) }).success).toBe(false);

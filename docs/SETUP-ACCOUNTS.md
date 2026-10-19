@@ -14,7 +14,7 @@ Supabase's built-in email sender only mails your own team members and is heavily
 | S4 | Authentication → URL Configuration | **Site URL** = your live URL. **Redirect URLs**: `http://localhost:3000/**`, `https://<your-vercel-project>.vercel.app/**`, `https://*-<your-vercel-team>.vercel.app/**` (previews), later `https://deutschmitbuddy.de/**` |
 | S5 | Authentication → Multi-Factor | **TOTP: Enroll and Verify both enabled** |
 | S6 | Authentication → Emails → SMTP Settings | Enable custom SMTP. Resend: host `smtp.resend.com`, port `465`, username `resend`, password = a Resend API key, sender `no-reply@deutschmitbuddy.de` |
-| S7 | Authentication → Emails → Templates | **Confirm signup**: paste `supabase/templates/confirmation.html`. **Reset password**: paste `supabase/templates/recovery.html`. (They link to our `/auth/confirm` route so links work on any device.) |
+| S7 | Authentication → Emails → Templates | **Optional, only possible once custom SMTP (S6) is set up.** Until then Supabase's default templates are used and the app handles them (see "Email links" below). Later: **Confirm signup** ← `supabase/templates/confirmation.html`, **Reset password** ← `supabase/templates/recovery.html`; they work on any device. |
 | S8 | Authentication → Attack Protection (Bot and Abuse Protection) | Enable **CAPTCHA** → provider **Cloudflare Turnstile** → paste the Turnstile **secret key**. Note: Supabase then asks for the token on sign-up, **sign-in** and password reset, so the login page also shows the (mostly invisible) widget. |
 | S9 | Project Settings → JWT Keys | Make sure an **asymmetric signing key** is current (default on new projects), so sessions are verified locally and fast. |
 | — | Pro-only, skipped | "Prevent use of leaked passwords" (we check Have I Been Pwned ourselves) and Sessions → inactivity timeout (we expire the cookie after 7 days instead). |
@@ -33,6 +33,11 @@ where user_id = (select id from auth.users where email = '<your email>');
 (Admins don't use one of the 30 seats.) To let someone past the cap: `insert into public.waitlist (email, approved) values ('<their email>', true);`. To change the cap: `update public.app_config set value = '40' where key = 'member_cap';`
 
 Lost authenticator? Authentication → Users → the user → remove the MFA factor, then they enrol again.
+
+### Email links: default templates vs ours
+- **Default templates (what you get on the free plan without custom SMTP):** the link goes to Supabase, which verifies it and redirects to `/auth/confirm?code=…` (sign-up) or `/auth/confirm/recovery?code=…` (password reset). The app exchanges the code for a session. **This only works in the browser that asked for the email** (it holds a one-time PKCE cookie). Opened elsewhere, the member lands on the login page with a hint: sign-up links still confirm the email on Supabase's side, so they can just log in; for a reset they request a new link in the browser they'll open it in.
+- **Our templates (later):** link straight to our routes with `?token_hash=`, which work on any device.
+- Either way, the redirect URL must be allow-listed (S4: `https://<site>/**` covers `/auth/confirm` and `/auth/confirm/recovery`). If it isn't, Supabase falls back to the Site URL and the link breaks.
 
 ## 2. Google Cloud Console (console.cloud.google.com)
 1. Create project **deutsch-mit-buddy**. Google Auth Platform → **Branding**: app name, support email, authorized domains `deutschmitbuddy.de` and `supabase.co`, privacy policy `https://<site>/datenschutz`, terms `https://<site>/terms`.

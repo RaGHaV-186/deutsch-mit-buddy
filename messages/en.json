@@ -35,6 +35,7 @@
     "same_password": "Please choose a password you haven't used before.",
     "oauth": "Google sign-in didn't work. Please try again.",
     "link": "That link has expired or was already used. Please request a new one.",
+    "link_device": "We couldn't finish that link in this browser. Signing up? Try logging in. Resetting your password? Request a new link and open it in the same browser you requested it from.",
     "terms_required": "Please confirm you are 16 or older and accept the terms."
   },
   "SignUp": {

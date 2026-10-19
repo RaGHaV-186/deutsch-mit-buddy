@@ -111,7 +111,7 @@ export async function forgotPasswordAction(_prev: FormState, formData: FormData)
   const supabase = await createClient();
   const { error } = await supabase.auth.resetPasswordForEmail(parsed.data.email, {
     captchaToken: parsed.data.captchaToken,
-    redirectTo: `${siteUrl()}/auth/confirm`,
+    redirectTo: `${siteUrl()}/auth/confirm/recovery`,
   });
   if (error?.code === "captcha_failed") return { error: "captcha" };
   if (error?.code === "over_email_send_rate_limit" || error?.code === "over_request_rate_limit") {

@@ -3,7 +3,7 @@ import { LoginForm } from "@/components/AuthForms";
 import { AuthShell } from "@/components/ui";
 import { safeNextPath } from "@/lib/auth/next-path";
 
-const URL_ERRORS = new Set(["oauth", "link", "rate_limited"]);
+const URL_ERRORS = new Set(["oauth", "link", "link_device", "rate_limited"]);
 
 export default async function LoginPage({
   searchParams,

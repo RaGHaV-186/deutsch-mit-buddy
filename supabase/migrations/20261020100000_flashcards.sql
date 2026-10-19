@@ -49,10 +49,13 @@ create table public.reviews (
   ms_taken integer not null default 0 check (ms_taken between 0 and 600000),
   -- false when a newer review of the same card had already been applied (latest reviewed_at wins).
   applied boolean not null default true,
+  -- true when this was the card's first-ever review; counts against the daily new-card limit.
+  was_new boolean not null default false,
   created_at timestamptz not null default now()
 );
 create index reviews_user_reviewed_idx on public.reviews (user_id, reviewed_at);
 create index reviews_card_idx on public.reviews (card_id);
+create index reviews_new_idx on public.reviews (user_id, reviewed_at) where was_new;
 
 alter table public.cards enable row level security;
 alter table public.card_srs enable row level security;

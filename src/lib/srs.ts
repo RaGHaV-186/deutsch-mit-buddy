@@ -94,7 +94,7 @@ export function schedule(state: SrsState, grade: Grade, reviewedAt: Date | strin
 export interface FoldResult {
   state: SrsState;
   /** One entry per distinct event id, in the order they were considered (oldest first). */
-  results: { id: string; applied: boolean }[];
+  results: { id: string; applied: boolean; /** The card had never been reviewed before this event. */ wasNew: boolean }[];
 }
 
 /**
@@ -114,8 +114,9 @@ export function foldReviews(state: SrsState, events: ReviewEvent[]): FoldResult 
   for (const event of ordered) {
     const last = current.lastReviewedAt === null ? -Infinity : Date.parse(current.lastReviewedAt);
     const applied = Date.parse(event.reviewedAt) > last;
+    const wasNew = applied && current.lastReviewedAt === null;
     if (applied) current = schedule(current, event.grade, event.reviewedAt);
-    results.push({ id: event.id, applied });
+    results.push({ id: event.id, applied, wasNew });
   }
   return { state: current, results };
 }

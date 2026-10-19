@@ -103,8 +103,8 @@ describe("foldReviews: latest review wins", () => {
     expect(backward.state).toEqual(forward.state);
     expect(forward.state.reps).toBe(2);
     expect(forward.results).toEqual([
-      { id: "a", applied: true },
-      { id: "b", applied: true },
+      { id: "a", applied: true, wasNew: true },
+      { id: "b", applied: true, wasNew: false },
     ]);
   });
 
@@ -112,7 +112,7 @@ describe("foldReviews: latest review wins", () => {
     const afterOther = schedule(newSrsState(T0), "easy", minutes(30));
     const { state, results } = foldReviews(afterOther, [ev("late", "again", minutes(10))]);
     expect(state).toEqual(afterOther);
-    expect(results).toEqual([{ id: "late", applied: false }]);
+    expect(results).toEqual([{ id: "late", applied: false, wasNew: false }]);
   });
 
   it("counts a repeated event id once", () => {
@@ -124,7 +124,7 @@ describe("foldReviews: latest review wins", () => {
 
   it("does not apply an event at exactly the last review time twice", () => {
     const once = schedule(newSrsState(T0), "good", minutes(5));
-    expect(foldReviews(once, [ev("x", "good", minutes(5))]).results).toEqual([{ id: "x", applied: false }]);
+    expect(foldReviews(once, [ev("x", "good", minutes(5))]).results).toEqual([{ id: "x", applied: false, wasNew: false }]);
   });
 
   it("is unchanged by an empty batch", () => {

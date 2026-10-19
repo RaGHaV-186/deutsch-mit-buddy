@@ -172,10 +172,10 @@ The rule: the browser is never trusted. Every permission is checked in the datab
 
 **Accounts and access**
 
-- Email + password (min. 10 characters, checked against leaked-password lists) or Google sign-in.
+- Email + password (min. 10 characters, checked against Have I Been Pwned by our server, because Supabase's own leaked-password toggle is Pro-only) or Google sign-in.
 - 2FA required for every member: authenticator app (TOTP) through Supabase MFA; no AI or data access until 2FA is set up.
-- Email confirmation before first login; captcha (Cloudflare Turnstile) on sign-up and password reset.
-- Session cookies are HTTP-only and secure; sessions expire after 7 days of inactivity.
+- Email confirmation before first login; captcha (Cloudflare Turnstile) on sign-up and password reset. Supabase's built-in CAPTCHA also covers sign-in, so the login page carries the widget too.
+- Session cookies are HTTP-only and secure (all auth runs on the server); they expire after 7 days without a visit (Supabase's inactivity timeout is Pro-only). 2FA is enforced in `proxy.ts`, in every server page/action/route, and in the database (RLS requires an `aal2` session).
 - Signup closes automatically at 30 members; new people land on the waitlist.
 
 **Protecting your money and the AI**

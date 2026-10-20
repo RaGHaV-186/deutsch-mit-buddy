@@ -33,3 +33,9 @@ One section at a time; wait for the learner's answer. Hint first, never write th
 
 ## Card format (keep exactly)
 Front: English (word cards) or "Say it in German" / "Answer out loud" (speaking cards). Back: coloured article + word (der blue / die red / das green / none grey), plural or verb forms line, English meaning, example sentence + English, tip line. Buttons: Play word, Play sentence, Slow; Again / Hard / Got it / Easy. Modes: Words / Speaking / Words + Speaking. Direction: English → German (default) or German → English.
+
+## Design
+- All UI work follows `docs/DESIGN_BRIEF.md` (it replaces any earlier design instructions). Work phase by phase as the brief says.
+- Reference images are in `docs/design/`.
+- Mascot assets (poses, app icons, glyph) are in `public/buddy/`.
+- Auth and 2FA logic must never be changed by design work (restyle the screens only).

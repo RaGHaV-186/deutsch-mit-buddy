@@ -440,15 +440,26 @@ describe("LevelCard and DueCardsTile", () => {
   it("shows the level, formatted treats, the wedge bar and the treats to go", () => {
     renderWithIntl(<LevelCard level={3} treats={1240} nextAt={1500} />);
     expect(screen.getByRole("heading", { name: "Level 3" })).toBeInTheDocument();
-    expect(screen.getByText("1,240 / 1,500")).toBeInTheDocument();
+    expect(screen.getByText("240 / 500")).toBeInTheDocument(); // next to the bar: progress inside this level
+    expect(screen.getByText("1,240 treats")).toBeInTheDocument(); // the total, as a caption under the title
     expect(screen.getByText("260 treats to Level 4")).toBeInTheDocument();
     const bar = screen.getByRole("progressbar", { name: "Progress to level 4" });
     expect(bar).toHaveAttribute("aria-valuenow", "48"); // 240 of the 500 treats of this level
   });
 
-  it("never shows negative treats to go", () => {
+  it("never shows negative treats to go, or more than the level holds", () => {
     renderWithIntl(<LevelCard level={1} treats={600} nextAt={500} />);
     expect(screen.getByText("0 treats to Level 2")).toBeInTheDocument();
+    expect(screen.getByText("500 / 500")).toBeInTheDocument();
+  });
+
+  it("the label and the bar always agree", () => {
+    for (const [treats, label, now] of [[1000, "0 / 500", "0"], [1250, "250 / 500", "50"], [1499, "499 / 500", "100"]] as const) {
+      const { unmount } = renderWithIntl(<LevelCard level={3} treats={treats} nextAt={1500} />);
+      expect(screen.getByText(label)).toBeInTheDocument();
+      expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", now);
+      unmount();
+    }
   });
 
   it("due tile links to the deck and pluralises", () => {

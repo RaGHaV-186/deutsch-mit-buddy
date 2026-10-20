@@ -16,6 +16,7 @@ import {
   PillButton,
   Skeleton,
   SpeechBubble,
+  Splash,
   TextField,
   TreatChip,
   WedgeProgress,
@@ -320,6 +321,10 @@ export default function DesignPage() {
         {TABS.map((tab) => (
           <FloatingTabBar key={tab} active={tab} position="static" badges={{ play: true }} />
         ))}
+      </Section>
+
+      <Section title="Splash" note="Shown once per session when the app is opened from the home screen. Add ?splash=1 to any URL to see the real one; the spinner appears after 1 second.">
+        <Splash title="Deutsch mit Buddy" preview />
       </Section>
 
       <Section title="States: Skeleton, EmptyState, ErrorState, Toast">

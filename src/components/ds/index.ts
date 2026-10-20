@@ -13,6 +13,8 @@ export { PawStreakWeek, type DayStatus } from "./PawStreakWeek";
 export { PillButton, type PillVariant } from "./PillButton";
 export { Screen } from "./Screen";
 export { SpeechBubble } from "./SpeechBubble";
+export { Splash } from "./Splash";
+export { SplashGate } from "./SplashGate";
 export { EmptyState, ErrorState, Skeleton, Toast } from "./states";
 export { TextField } from "./TextField";
 export { TreatChip } from "./TreatChip";

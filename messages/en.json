@@ -75,7 +75,8 @@
     "level": {
       "title": "Level {level}",
       "toNext": "{count} treats to Level {next}",
-      "progressLabel": "Progress to level {next}"
+      "progressLabel": "Progress to level {next}",
+      "total": "{count} treats"
     },
     "due": {
       "cards": "{count, plural, one {card due} other {cards due}}",

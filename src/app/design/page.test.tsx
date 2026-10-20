@@ -31,6 +31,15 @@ describe("/design", () => {
   });
 });
 
+describe("server component rules", () => {
+  it("the page passes no functions to client components (that crashes the whole page with a global error)", () => {
+    // Interactive demos live in demos.tsx, a client file. A handler such as onChange={() => {}} here breaks rendering.
+    const page = readFileSync("src/app/design/page.tsx", "utf8");
+    expect(page).not.toMatch(/\bon[A-Z][A-Za-z]*=\{/);
+    expect(page).not.toMatch(/=\{\s*(?:async\s*)?\(?[\w,\s]*\)?\s*=>/);
+  });
+});
+
 describe("no hard-coded colours outside the tokens", () => {
   const files = (dir: string): string[] =>
     readdirSync(dir, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? files(join(dir, e.name)) : [join(dir, e.name)]));

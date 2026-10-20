@@ -89,6 +89,11 @@ export class OfflineStore {
     };
   }
 
+  /** The account the stored deck belongs to, if any. */
+  async currentUserId(): Promise<string | null> {
+    return (await this.meta())?.userId ?? null;
+  }
+
   async getCards(): Promise<SnapshotCard[]> {
     const tx = this.db.transaction("cards", "readonly");
     return (await wrap(tx.objectStore("cards").getAll())) as SnapshotCard[];

@@ -18,7 +18,12 @@ const heading = Fraunces({
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Meta");
-  return { title: t("title"), description: t("description") };
+  return {
+    title: t("title"),
+    description: t("description"),
+    icons: { apple: "/icons/apple-touch-icon.png" },
+    appleWebApp: { capable: true, title: "Buddy", statusBarStyle: "default" },
+  };
 }
 
 export const viewport: Viewport = {

@@ -7,7 +7,11 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
   async headers() {
-    return [{ source: "/:path*", headers: staticSecurityHeaders }];
+    return [
+      { source: "/:path*", headers: staticSecurityHeaders },
+      // The worker file must always be re-checked, or a bad version could stick on phones.
+      { source: "/sw.js", headers: [{ key: "Cache-Control", value: "no-cache, max-age=0, must-revalidate" }] },
+    ];
   },
   turbopack: {
     rules: {

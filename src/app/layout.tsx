@@ -31,6 +31,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export const viewport: Viewport = {
+  // Use the whole screen in the installed app (components pad for the notch and home indicator with env(safe-area-*)),
+  // and let the keyboard shrink the page on Android so a bottom-pinned button stays above it.
+  viewportFit: "cover",
+  interactiveWidget: "resizes-content",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: themeColor.light },
     { media: "(prefers-color-scheme: dark)", color: themeColor.dark },

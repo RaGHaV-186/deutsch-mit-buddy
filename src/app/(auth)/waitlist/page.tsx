@@ -1,15 +1,17 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { AuthLayout } from "@/components/auth/AuthLayout";
 import { WaitlistForm } from "@/components/AuthForms";
-import { AuthShell, linkClass } from "@/components/ui";
+import { linkClass } from "@/components/ui";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function WaitlistPage() {
   const t = await getTranslations("Waitlist");
+  const b = await getTranslations("Buddy");
   const supabase = await createClient();
   const { data: open } = await supabase.rpc("signup_open");
   return (
-    <AuthShell title={t("title")} subtitle={t("intro")}>
+    <AuthLayout title={t("title")} line={b("soonYourTurn.de")} helper={b("soonYourTurn.en")} intro={t("intro")} pose="resting">
       {open ? (
         <p>
           {t("open")}{" "}
@@ -19,6 +21,6 @@ export default async function WaitlistPage() {
         </p>
       ) : null}
       <WaitlistForm />
-    </AuthShell>
+    </AuthLayout>
   );
 }

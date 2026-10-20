@@ -19,7 +19,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   return (
     <>
       <ServiceWorkerRegister />
-      <header className="mx-auto flex w-full max-w-3xl items-center justify-between gap-3 px-4 py-3">
+      <header className="mx-auto flex w-full max-w-3xl items-center justify-between gap-3 px-4 pb-3 pt-[max(12px,env(safe-area-inset-top))]">
         <Image src="/buddy/buddy-happy.svg" alt="" width={40} height={41} />
         <div className="flex items-center gap-2">
           <FeedbackButton />
@@ -31,7 +31,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         </div>
       </header>
       <div className="flex flex-1 flex-col">{children}</div>
-      <footer className="flex flex-col items-center gap-4 px-4 py-6">
+      <footer className="flex flex-col items-center gap-4 px-4 pb-[max(24px,env(safe-area-inset-bottom))] pt-6">
         {/* Temporary home for the theme switch until the Me screen exists (design phase 7). */}
         <ThemeSwitch />
         <LegalLinks />

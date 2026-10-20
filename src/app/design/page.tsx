@@ -4,6 +4,11 @@ import type { ReactNode } from "react";
 import {
   ArticleWord,
   BUDDY_POSES,
+  CheckboxField,
+  Divider,
+  PasswordStrength,
+  SelectField,
+  StickyActions,
   BuddyMascot,
   CoatHeader,
   Cushion,
@@ -261,6 +266,24 @@ export default function DesignPage() {
         <TextField label="Disabled" defaultValue="Locked" disabled />
         <PasswordField label="Password" defaultValue="hunter2hunter2" />
         <PasswordField label="Password" defaultValue="short" error="At least 10 characters." />
+      </Section>
+
+      <Section title="Form parts" note="SelectField, CheckboxField, Divider, PasswordStrength (short / okay / strong) and StickyActions (pinned to the bottom of a form).">
+        <SelectField label="Starting lesson" defaultValue="1">
+          <option value="1">Z1 · Greetings</option>
+          <option value="2">Z2 · Pronouns</option>
+        </SelectField>
+        <CheckboxField name="demo-terms">I am 16 or older and accept the Terms</CheckboxField>
+        <CheckboxField name="demo-checked" defaultChecked>
+          Checked
+        </CheckboxField>
+        <Divider>or</Divider>
+        <PasswordStrength password="short" />
+        <PasswordStrength password="twelve-chars" />
+        <PasswordStrength password="a-much-longer-passphrase" />
+        <StickyActions>
+          <PillButton fullWidth>Primary action</PillButton>
+        </StickyActions>
       </Section>
 
       <Section title="CodeInput" note="Empty (interactive), filled, focus, error, disabled.">

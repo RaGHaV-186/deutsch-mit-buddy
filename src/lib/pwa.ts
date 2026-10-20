@@ -16,5 +16,6 @@ export const PWA = {
     { src: "/buddy/buddy-icon-light-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
   ],
   appleTouchIcon: "/buddy/buddy-icon-light-180.png",
-  favicon: "/buddy/buddy-glyph.svg",
+  // A copy of the glyph that switches its ink to #F2F1EE in dark browser themes (the original glyph is untouched).
+  favicon: "/buddy/buddy-glyph-favicon.svg",
 } as const;

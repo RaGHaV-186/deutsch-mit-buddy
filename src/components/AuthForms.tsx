@@ -11,9 +11,11 @@ import {
   signInAction,
   signUpAction,
 } from "@/app/(auth)/actions";
-import { FormError, SubmitButton } from "./FormParts";
+import { EMAIL_ERRORS, PASSWORD_ERRORS, routeError } from "@/lib/auth/error-routing";
+import { CheckboxField, Divider, PasswordField, PasswordStrength, PillButton, StickyActions, TextField } from "./ds";
+import { FormError, SubmitButton, useBuddyReaction, useErrorMessage, useRetainedValue } from "./FormParts";
 import { TurnstileField } from "./TurnstileField";
-import { Field, inputClass, linkClass, secondaryButtonClass } from "./ui";
+import { linkClass } from "./ui";
 
 const captchaConfigured = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
@@ -23,15 +25,15 @@ function useCaptcha() {
 }
 
 export function GoogleButton({ label }: { label: string }) {
-  const t = useTranslations("Errors");
   const [error, setError] = useState<string>();
   const [busy, setBusy] = useState(false);
+  useBuddyReaction(Boolean(error));
   return (
     <div className="flex flex-col gap-2">
-      <button
-        type="button"
-        className={secondaryButtonClass}
-        disabled={busy}
+      <PillButton
+        variant="cushion"
+        fullWidth
+        loading={busy}
         onClick={async () => {
           setBusy(true);
           setError(undefined);
@@ -45,66 +47,83 @@ export function GoogleButton({ label }: { label: string }) {
         }}
       >
         {label}
-      </button>
-      {error ? (
-        <p role="alert" className="text-die">
-          {t.has(error) ? t(error) : t("generic")}
-        </p>
-      ) : null}
+      </PillButton>
+      <FormError code={error} />
     </div>
+  );
+}
+
+function TermsLabel({ lead }: { lead: string }) {
+  const s = useTranslations("SignUp");
+  return (
+    <span>
+      {lead}{" "}
+      <Link href="/terms" className={linkClass} target="_blank">
+        {s("termsLinkTerms")}
+      </Link>
+      {" · "}
+      <Link href="/datenschutz" className={linkClass} target="_blank">
+        {s("termsLinkPrivacy")}
+      </Link>
+    </span>
   );
 }
 
 export function SignUpForm({ googleEnabled }: { googleEnabled: boolean }) {
   const t = useTranslations("SignUp");
   const c = useTranslations("Common");
+  const message = useErrorMessage();
   const [state, action] = useActionState(signUpAction, undefined);
   const captcha = useCaptcha();
+  const name = useRetainedValue();
+  const email = useRetainedValue();
+  const [password, setPassword] = useState("");
+  const routed = routeError(state?.error, { email: EMAIL_ERRORS, password: PASSWORD_ERRORS });
+  useBuddyReaction(Boolean(state?.error));
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       {googleEnabled ? (
         <>
           <GoogleButton label={t("google")} />
-          <p className="text-center text-muted">{c("or")}</p>
+          <Divider>{c("or")}</Divider>
         </>
       ) : null}
       <form action={action} className="flex flex-col gap-4">
-        <FormError code={state?.error} />
-        <Field label={t("displayName")} htmlFor="displayName">
-          <input id="displayName" name="displayName" maxLength={40} autoComplete="given-name" className={inputClass} />
-        </Field>
-        <Field label={c("email")} htmlFor="email">
-          <input id="email" name="email" type="email" required maxLength={254} autoComplete="email" className={inputClass} />
-        </Field>
-        <Field label={c("password")} hint={t("passwordHint")} htmlFor="password">
-          <input
-            id="password"
+        <FormError code={routed.banner} />
+        <TextField label={t("displayName")} name="displayName" maxLength={40} autoComplete="given-name" {...name} />
+        <TextField
+          label={c("email")}
+          name="email"
+          type="email"
+          required
+          maxLength={254}
+          autoComplete="email"
+          error={message(routed.email)}
+          {...email}
+        />
+        <div className="flex flex-col gap-2">
+          <PasswordField
+            label={c("password")}
             name="password"
-            type="password"
             required
             minLength={10}
             maxLength={128}
             autoComplete="new-password"
-            className={inputClass}
+            hint={routed.password ? undefined : t("passwordHint")}
+            error={message(routed.password)}
+            onChange={(e) => setPassword(e.target.value)}
           />
-        </Field>
-        <label className="flex items-start gap-3">
-          <input type="checkbox" name="terms" required className="mt-1 size-5 shrink-0 accent-[var(--der)]" />
-          <span>
-            {t("terms")}{" "}
-            <Link href="/terms" className={linkClass} target="_blank">
-              {t("termsLinkTerms")}
-            </Link>
-            {" · "}
-            <Link href="/datenschutz" className={linkClass} target="_blank">
-              {t("termsLinkPrivacy")}
-            </Link>
-          </span>
-        </label>
+          <PasswordStrength password={password} />
+        </div>
+        <CheckboxField name="terms" required>
+          <TermsLabel lead={t("terms")} />
+        </CheckboxField>
         <TurnstileField onToken={captcha.setToken} resetSignal={state} />
-        <SubmitButton disabled={captcha.blocked}>{t("submit")}</SubmitButton>
+        <StickyActions>
+          <SubmitButton disabled={captcha.blocked}>{t("submit")}</SubmitButton>
+        </StickyActions>
       </form>
-      <p>
+      <p className="text-center">
         {t("haveAccount")}{" "}
         <Link href="/login" className={linkClass}>
           {t("logIn")}
@@ -117,38 +136,51 @@ export function SignUpForm({ googleEnabled }: { googleEnabled: boolean }) {
 export function LoginForm({ next, initialError }: { next?: string; initialError?: string }) {
   const t = useTranslations("LogIn");
   const c = useTranslations("Common");
+  const message = useErrorMessage();
   const [state, action] = useActionState(signInAction, undefined);
   const captcha = useCaptcha();
+  const email = useRetainedValue();
+  const error = state?.error ?? initialError;
+  const routed = routeError(error, { email: EMAIL_ERRORS, password: ["invalid_credentials"] });
+  useBuddyReaction(Boolean(error));
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       <GoogleButton label={t("google")} />
-      <p className="text-center text-muted">{c("or")}</p>
+      <Divider>{c("or")}</Divider>
       <form action={action} className="flex flex-col gap-4">
-        <FormError code={state?.error ?? initialError} />
+        <FormError code={routed.banner} />
         {next ? <input type="hidden" name="next" value={next} /> : null}
-        <Field label={c("email")} htmlFor="email">
-          <input id="email" name="email" type="email" required maxLength={254} autoComplete="email" className={inputClass} />
-        </Field>
-        <Field label={c("password")} htmlFor="password">
-          <input
-            id="password"
+        <TextField
+          label={c("email")}
+          name="email"
+          type="email"
+          required
+          maxLength={254}
+          autoComplete="email"
+          error={message(routed.email)}
+          {...email}
+        />
+        <div className="flex flex-col gap-1">
+          <PasswordField
+            label={c("password")}
             name="password"
-            type="password"
             required
             maxLength={128}
             autoComplete="current-password"
-            className={inputClass}
+            error={message(routed.password)}
           />
-        </Field>
+          <p className="self-end">
+            <Link href="/forgot-password" className={`${linkClass} inline-flex min-h-11 items-center`}>
+              {t("forgot")}
+            </Link>
+          </p>
+        </div>
         <TurnstileField onToken={captcha.setToken} resetSignal={state} />
-        <SubmitButton disabled={captcha.blocked}>{t("submit")}</SubmitButton>
+        <StickyActions>
+          <SubmitButton disabled={captcha.blocked}>{t("submit")}</SubmitButton>
+        </StickyActions>
       </form>
-      <p>
-        <Link href="/forgot-password" className={linkClass}>
-          {t("forgot")}
-        </Link>
-      </p>
-      <p>
+      <p className="text-center">
         {t("noAccount")}{" "}
         <Link href="/signup" className={linkClass}>
           {t("signUp")}
@@ -161,16 +193,29 @@ export function LoginForm({ next, initialError }: { next?: string; initialError?
 export function ForgotPasswordForm() {
   const t = useTranslations("Forgot");
   const c = useTranslations("Common");
+  const message = useErrorMessage();
   const [state, action] = useActionState(forgotPasswordAction, undefined);
   const captcha = useCaptcha();
+  const email = useRetainedValue();
+  const routed = routeError(state?.error, { email: [...EMAIL_ERRORS, "invalid_input"] });
+  useBuddyReaction(Boolean(state?.error));
   return (
     <form action={action} className="flex flex-col gap-4">
-      <FormError code={state?.error} />
-      <Field label={c("email")} htmlFor="email">
-        <input id="email" name="email" type="email" required maxLength={254} autoComplete="email" className={inputClass} />
-      </Field>
+      <FormError code={routed.banner} />
+      <TextField
+        label={c("email")}
+        name="email"
+        type="email"
+        required
+        maxLength={254}
+        autoComplete="email"
+        error={message(routed.email)}
+        {...email}
+      />
       <TurnstileField onToken={captcha.setToken} resetSignal={state} />
-      <SubmitButton disabled={captcha.blocked}>{t("submit")}</SubmitButton>
+      <StickyActions>
+        <SubmitButton disabled={captcha.blocked}>{t("submit")}</SubmitButton>
+      </StickyActions>
     </form>
   );
 }
@@ -178,23 +223,31 @@ export function ForgotPasswordForm() {
 export function ResetPasswordForm() {
   const t = useTranslations("Reset");
   const s = useTranslations("SignUp");
+  const message = useErrorMessage();
   const [state, action] = useActionState(resetPasswordAction, undefined);
+  const [password, setPassword] = useState("");
+  const routed = routeError(state?.error, { password: [...PASSWORD_ERRORS, "invalid_input"] });
+  useBuddyReaction(Boolean(state?.error));
   return (
     <form action={action} className="flex flex-col gap-4">
-      <FormError code={state?.error} />
-      <Field label={t("newPassword")} hint={s("passwordHint")} htmlFor="password">
-        <input
-          id="password"
+      <FormError code={routed.banner} />
+      <div className="flex flex-col gap-2">
+        <PasswordField
+          label={t("newPassword")}
           name="password"
-          type="password"
           required
           minLength={10}
           maxLength={128}
           autoComplete="new-password"
-          className={inputClass}
+          hint={routed.password ? undefined : s("passwordHint")}
+          error={message(routed.password)}
+          onChange={(e) => setPassword(e.target.value)}
         />
-      </Field>
-      <SubmitButton>{t("submit")}</SubmitButton>
+        <PasswordStrength password={password} />
+      </div>
+      <StickyActions>
+        <SubmitButton>{t("submit")}</SubmitButton>
+      </StickyActions>
     </form>
   );
 }
@@ -202,24 +255,38 @@ export function ResetPasswordForm() {
 export function WaitlistForm() {
   const t = useTranslations("Waitlist");
   const c = useTranslations("Common");
+  const message = useErrorMessage();
   const [state, action] = useActionState(joinWaitlistAction, undefined);
   const captcha = useCaptcha();
+  const email = useRetainedValue();
+  const routed = routeError(state?.error, { email: [...EMAIL_ERRORS, "invalid_input"] });
+  useBuddyReaction(Boolean(state?.error));
+  useBuddyReaction(Boolean(state?.done), "happy");
   if (state?.done) {
     return (
-      <div role="status" className="flex flex-col gap-2 rounded-lg border border-das/50 bg-das/10 p-4">
-        <p className="font-heading text-xl font-bold">{t("doneTitle")}</p>
-        <p>{t("done")}</p>
+      <div role="status" className="flex flex-col gap-1 rounded-cushion bg-surface p-5 shadow-cushion">
+        <p className="text-headline">{t("doneTitle")}</p>
+        <p className="text-muted">{t("done")}</p>
       </div>
     );
   }
   return (
     <form action={action} className="flex flex-col gap-4">
-      <FormError code={state?.error} />
-      <Field label={c("email")} htmlFor="email">
-        <input id="email" name="email" type="email" required maxLength={254} autoComplete="email" className={inputClass} />
-      </Field>
+      <FormError code={routed.banner} />
+      <TextField
+        label={c("email")}
+        name="email"
+        type="email"
+        required
+        maxLength={254}
+        autoComplete="email"
+        error={message(routed.email)}
+        {...email}
+      />
       <TurnstileField onToken={captcha.setToken} resetSignal={state} />
-      <SubmitButton disabled={captcha.blocked}>{t("submit")}</SubmitButton>
+      <StickyActions>
+        <SubmitButton disabled={captcha.blocked}>{t("submit")}</SubmitButton>
+      </StickyActions>
     </form>
   );
 }

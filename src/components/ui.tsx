@@ -63,7 +63,7 @@ export function AuthShell({
   children: ReactNode;
 }) {
   return (
-    <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center gap-6 px-4 py-10">
+    <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center gap-6 px-4 pb-[max(40px,env(safe-area-inset-bottom))] pt-[max(40px,calc(env(safe-area-inset-top)+16px))]">
       <header className="flex flex-col gap-2">
         <h1 className="font-heading text-3xl font-bold">{title}</h1>
         {subtitle ? <p className="text-muted">{subtitle}</p> : null}

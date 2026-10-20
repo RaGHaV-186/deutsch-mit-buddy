@@ -6,8 +6,14 @@ import {
   BlazeNotch,
   BuddyMascot,
   BUDDY_POSES,
+  CheckboxField,
   CodeInput,
   CoatHeader,
+  Divider,
+  PasswordStrength,
+  SelectField,
+  StickyActions,
+  strengthOf,
   Cushion,
   DueCardsTile,
   EmptyState,
@@ -554,5 +560,79 @@ describe("states", () => {
       </Toast>,
     );
     expect(screen.getByRole("alert")).toHaveTextContent("Failed");
+  });
+});
+
+describe("form parts", () => {
+  it("strengthOf is a length hint: nothing, short under 10, fair under 14, strong from 14", () => {
+    expect(["", "a", "123456789", "1234567890", "1234567890123", "12345678901234"].map(strengthOf)).toEqual([
+      "empty",
+      "short",
+      "short",
+      "fair",
+      "fair",
+      "strong",
+    ]);
+  });
+
+  it("PasswordStrength shows a wedge meter with a text label, in the die / progress / das colours", () => {
+    const { container, rerender } = renderWithIntl(<PasswordStrength password="" />);
+    expect(container).toBeEmptyDOMElement();
+    rerender(<PasswordStrength password="short" />);
+    expect(screen.getByText("Too short")).toBeInTheDocument();
+    expect(container.querySelector(".bg-die")).not.toBeNull();
+    rerender(<PasswordStrength password="twelve-chars" />);
+    expect(screen.getByText("Okay")).toBeInTheDocument();
+    expect(container.querySelector(".bg-progress")).not.toBeNull();
+    rerender(<PasswordStrength password="a-much-longer-passphrase" />);
+    expect(screen.getByText("Strong")).toBeInTheDocument();
+    expect(container.querySelector(".bg-das")).not.toBeNull();
+    expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "100");
+  });
+
+  it("SelectField: labelled 56px native select with its options", () => {
+    render(
+      <SelectField label="Starting lesson" name="seq" defaultValue="2">
+        <option value="1">Z1</option>
+        <option value="2">Z2</option>
+      </SelectField>,
+    );
+    const select = screen.getByLabelText("Starting lesson") as HTMLSelectElement;
+    expect(select.value).toBe("2");
+    expect(select.className).toContain("h-14");
+    expect(select).toHaveAttribute("name", "seq");
+  });
+
+  it("CheckboxField: a real checkbox, named by its text (which may hold links), required passes through, 44px tap area", () => {
+    render(
+      <CheckboxField name="terms" required>
+        <span>
+          Accept the <a href="/terms">Terms</a>
+        </span>
+      </CheckboxField>,
+    );
+    const box = screen.getByRole("checkbox", { name: "Accept the Terms" });
+    expect(box).toBeRequired();
+    expect(box).toHaveAttribute("name", "terms");
+    expect(box.closest("label")!.className).toContain("w-11");
+    fireEvent.click(box);
+    expect(box).toBeChecked();
+  });
+
+  it("Divider is a separator with its word; StickyActions pins its children to the bottom of the screen", () => {
+    const { container } = render(
+      <>
+        <Divider>or</Divider>
+        <StickyActions>
+          <button>Go</button>
+        </StickyActions>
+      </>,
+    );
+    expect(screen.getByRole("separator")).toHaveTextContent("or");
+    const sticky = screen.getByRole("button", { name: "Go" }).parentElement!;
+    expect(sticky.className).toContain("sticky");
+    expect(sticky.className).toContain("bottom-0");
+    expect(sticky.className).toContain("safe-area-inset-bottom");
+    expect(container).toBeTruthy();
   });
 });

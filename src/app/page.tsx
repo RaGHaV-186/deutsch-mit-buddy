@@ -7,7 +7,7 @@ export default function Home() {
   const t = useTranslations("Home");
   return (
     <>
-      <main className="flex flex-1 flex-col items-center justify-center gap-6 px-4 py-12 text-center">
+      <main className="flex flex-1 flex-col items-center justify-center gap-6 px-4 pb-12 pt-[max(48px,calc(env(safe-area-inset-top)+16px))] text-center">
         <Image src="/buddy/buddy-happy.svg" alt={t("buddyAlt")} width={240} height={244} priority />
         <h1 className="font-heading text-4xl font-bold sm:text-5xl">{t("greeting")}</h1>
         <p className="max-w-md text-lg text-muted">{t("tagline")}</p>
@@ -20,7 +20,7 @@ export default function Home() {
           </Link>
         </div>
       </main>
-      <footer className="px-4 py-6">
+      <footer className="px-4 pb-[max(24px,env(safe-area-inset-bottom))] pt-6">
         <LegalLinks />
       </footer>
     </>

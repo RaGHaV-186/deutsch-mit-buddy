@@ -10,12 +10,14 @@ interface Props {
   onCoat?: boolean;
   /** A paw at the end of the fill. */
   marker?: boolean;
+  /** Fill colour on the page. "die" and "das" are for meters such as password strength; default is --progress. */
+  tone?: "progress" | "die" | "das";
   label: string;
   className?: string;
 }
 
 /** Progress as a wedge: thin on the left, full height on the right. */
-export function WedgeProgress({ value, height = 12, onCoat = false, marker = false, label, className }: Props) {
+export function WedgeProgress({ value, height = 12, onCoat = false, marker = false, tone = "progress", label, className }: Props) {
   const v = Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : 0;
   const percent = Math.round(v * 100);
   const markerSize = height + 12;
@@ -33,7 +35,7 @@ export function WedgeProgress({ value, height = 12, onCoat = false, marker = fal
         className={cx("absolute inset-0 overflow-hidden", onCoat ? "bg-coat-track" : "bg-track")}
         style={{ clipPath: "polygon(0 36%, 100% 0, 100% 100%, 0 64%)" }}
       >
-        <div className={cx("h-full", onCoat ? "bg-on-coat" : "bg-progress")} style={{ width: `${v * 100}%` }} />
+        <div className={cx("h-full", onCoat ? "bg-on-coat" : tone === "die" ? "bg-die" : tone === "das" ? "bg-das" : "bg-progress")} style={{ width: `${v * 100}%` }} />
       </div>
       {marker ? (
         <span

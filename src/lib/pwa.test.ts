@@ -49,9 +49,16 @@ describe("home-screen and browser icons", () => {
     expect([png.width, png.height, png.hasAlpha]).toEqual([180, 180, false]);
   });
 
-  it("favicon is Buddy's glyph (SVG), with a legacy favicon.ico made from it", () => {
-    expect(PWA.favicon).toBe("/buddy/buddy-glyph.svg");
-    expect(readFileSync(publicFile(PWA.favicon), "utf8")).toContain("<svg");
+  it("favicon is Buddy's glyph as an SVG that turns light in dark browser themes, with a legacy favicon.ico", () => {
+    expect(PWA.favicon).toBe("/buddy/buddy-glyph-favicon.svg");
+    const favicon = readFileSync(publicFile(PWA.favicon), "utf8");
+    expect(favicon).toMatch(/@media \(prefers-color-scheme: dark\)/);
+    expect(favicon).toContain("fill:#F2F1EE");
+    expect(favicon).toContain("stroke:#F2F1EE");
+    // The artwork itself is unchanged: removing the added <style> gives back the original glyph exactly.
+    const glyph = readFileSync(publicFile("/buddy/buddy-glyph.svg"), "utf8");
+    expect(glyph).not.toContain("prefers-color-scheme");
+    expect(favicon.replace(/<style>[\s\S]*?<\/style>/, "")).toBe(glyph);
     const ico = readFileSync("src/app/favicon.ico");
     expect(ico.readUInt16LE(2)).toBe(1); // ICO type
     expect(ico.readUInt16LE(4)).toBeGreaterThanOrEqual(1); // image count

@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { primaryButtonClass, secondaryButtonClass } from "@/components/ui";
+import { compactButtonClass, primaryButtonClass } from "@/components/ui";
 import { buildCardView } from "@/lib/cards/display";
 import { requeue, type Direction } from "@/lib/cards/queue";
 import type { SnapshotCard } from "@/lib/cards/schema";
@@ -84,10 +84,10 @@ export function ReviewSession({ cards, direction, onAnswer, onFinish }: Props) {
   return (
     <div className="mx-auto flex w-full max-w-xl flex-1 flex-col gap-4 px-4 pb-4">
       <div className="flex items-center justify-between gap-3">
-        <button type="button" className={`${secondaryButtonClass} w-auto px-3 py-2 text-sm`} onClick={() => onFinish(answered)}>
+        <button type="button" className={`${compactButtonClass} min-h-11 whitespace-nowrap px-3 text-sm`} onClick={() => onFinish(answered)}>
           {t("exit")}
         </button>
-        <p className="font-bold" aria-live="polite">
+        <p className="whitespace-nowrap font-bold" aria-live="polite">
           {t("left", { count: queue.length })}
         </p>
       </div>
@@ -111,7 +111,7 @@ export function ReviewSession({ cards, direction, onAnswer, onFinish }: Props) {
                 type="button"
                 disabled={busy}
                 onClick={() => grade(g)}
-                className={`${secondaryButtonClass} flex min-h-16 flex-col items-center justify-center gap-0.5 px-1 py-2 text-base`}
+                className="flex min-h-16 flex-col items-center justify-center gap-0.5 rounded-lg border border-foreground/30 px-1 py-2 text-base font-bold hover:bg-foreground/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-der disabled:opacity-60"
               >
                 <span>{t(`grade.${g}`)}</span>
                 <span className="text-xs font-normal text-muted">

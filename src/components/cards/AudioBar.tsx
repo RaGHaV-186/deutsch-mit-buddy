@@ -4,10 +4,10 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import type { SpeakView } from "@/lib/cards/display";
 import { speak, type SpeakResult } from "@/lib/speech";
-import { secondaryButtonClass } from "@/components/ui";
+import { compactButtonClass } from "@/components/ui";
 
 type Target = "word" | "sentence";
-const buttonClass = `${secondaryButtonClass} w-auto min-h-12 px-4 py-2 text-base`;
+const buttonClass = `${compactButtonClass} min-h-12`;
 
 /**
  * Play word / Play sentence / Slow. "Slow" repeats whichever was played last (the word, or the sentence if there is no word).

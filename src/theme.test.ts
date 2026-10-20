@@ -29,22 +29,30 @@ describe("theme tokens match the design brief", () => {
 
 describe("globals.css mirrors src/theme.ts", () => {
   it("light values in :root", () => {
-    const root = block(":root {");
+    const root = block(':root,\n[data-theme="light"]');
     for (const token of tokens) expect(root).toContain(`--${token}: ${colors.light[token].toLowerCase()};`);
-    expect(root).toContain(shadows.light.toLowerCase());
+    expect(root).toContain(`--cushion: ${shadows.light.toLowerCase()};`);
+    expect(root).toContain(`--cushion-pressed: ${shadows.pressedLight.toLowerCase()};`);
   });
 
   it("dark values for the system setting, unless the learner chose light", () => {
     const media = block("@media (prefers-color-scheme: dark)");
     expect(media).toContain(':root:not([data-theme="light"])');
     for (const token of tokens) expect(media).toContain(`--${token}: ${colors.dark[token].toLowerCase()};`);
-    expect(media).toContain(shadows.dark.toLowerCase());
+    expect(media).toContain(`--cushion: ${shadows.dark.toLowerCase()};`);
+    expect(media).toContain(`--cushion-pressed: ${shadows.pressedDark.toLowerCase()};`);
+  });
+
+  it("a [data-theme] box shows its own theme even inside a page set to the other one", () => {
+    expect(css).toContain('[data-theme="light"] {');
+    expect(css).toContain(".theme-scope {");
   });
 
   it("dark values when the learner chose dark", () => {
-    const manual = block(':root[data-theme="dark"]');
+    const manual = block('[data-theme="dark"] {');
     for (const token of tokens) expect(manual).toContain(`--${token}: ${colors.dark[token].toLowerCase()};`);
-    expect(manual).toContain(shadows.dark.toLowerCase());
+    expect(manual).toContain(`--cushion: ${shadows.dark.toLowerCase()};`);
+    expect(manual).toContain(`--cushion-pressed: ${shadows.pressedDark.toLowerCase()};`);
   });
 
   it("every token is available to Tailwind as a colour", () => {
@@ -85,6 +93,7 @@ const TEXT_PAIRS: [ColorToken, ColorToken][] = [
   ["das", "bg"],
   ["on-coat", "coat"],
   ["on-coat-muted", "coat"],
+  ["on-progress", "progress"],
   ["on-coat", "bubble"],
   ["on-coat-muted", "bubble"],
   ["on-blaze", "blaze"],
@@ -97,8 +106,13 @@ describe("contrast", () => {
       expect(contrast(colors[mode][fg], colors[mode][bg])).toBeGreaterThanOrEqual(4.5);
     });
 
-    // Not asserted: --coat fill on --track is only ~1.1:1 in dark mode (the approved reference image looks the same),
-    // so a wedge progress bar on the page is hard to read there. Raised with the design owner; tokens are unchanged.
+    // --progress is what shows "filled / done" on a page surface (graphics need 3:1).
+    it(`${mode}: --progress stands out from --track and --surface (3:1)`, () => {
+      expect(contrast(colors[mode].progress, colors[mode].track)).toBeGreaterThanOrEqual(3);
+      expect(contrast(colors[mode].progress, colors[mode].surface)).toBeGreaterThanOrEqual(3);
+      expect(contrast(colors[mode].progress, colors[mode].bg)).toBeGreaterThanOrEqual(3);
+    });
+
     it(`${mode}: progress fill stands out from its track on the coat block (3:1)`, () => {
       expect(contrast(colors[mode]["on-coat"], colors[mode]["coat-track"])).toBeGreaterThanOrEqual(3);
     });

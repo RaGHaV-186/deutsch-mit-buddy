@@ -20,6 +20,9 @@ export const colors = {
     der: "#2457A8",
     die: "#B83A32",
     das: "#2B7550",
+    // "Filled / done" on a page surface (progress fill, done paws, level bar). Coat stays for the coat block.
+    progress: "#5E6875",
+    "on-progress": "#FFFFFF",
     // Focus ring. The brief says --coat; in dark mode coat is nearly the page colour, so the ring uses --on-coat there.
     focus: "#5E6875",
   },
@@ -41,6 +44,8 @@ export const colors = {
     der: "#8DB4F2",
     die: "#F29A90",
     das: "#7CCB9C",
+    progress: "#8A95A3",
+    "on-progress": "#16191E",
     focus: "#F2F1EE",
   },
 } as const;
@@ -50,6 +55,9 @@ export type ColorToken = keyof typeof colors.light;
 export const shadows = {
   light: "0 1px 2px rgba(30,40,55,.06), 0 14px 30px -14px rgba(30,40,55,.22)",
   dark: "inset 0 1px 0 rgba(255,255,255,.05), 0 14px 30px -12px rgba(0,0,0,.6)",
+  // The same shadows, reduced, while a cushion or button is pressed.
+  pressedLight: "0 1px 2px rgba(30,40,55,.06), 0 5px 12px -10px rgba(30,40,55,.22)",
+  pressedDark: "inset 0 1px 0 rgba(255,255,255,.05), 0 5px 12px -10px rgba(0,0,0,.6)",
 } as const;
 
 export const radii = {

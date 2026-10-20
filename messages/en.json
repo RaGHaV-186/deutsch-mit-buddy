@@ -28,6 +28,69 @@
     "light": "Light",
     "dark": "Dark"
   },
+  "Ds": {
+    "nav": {
+      "label": "Main",
+      "home": "Home",
+      "learn": "Learn",
+      "cards": "Cards",
+      "play": "Play",
+      "me": "Me",
+      "newActivity": "New activity"
+    },
+    "close": "Close",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "codeGroup": "6-digit code",
+    "codeDigit": "Digit {n} of {total}",
+    "treats": "+{count} treats",
+    "streak": {
+      "title": "{count}-day streak",
+      "rest": "Sunday is a rest day",
+      "days": {
+        "mo": "Mo",
+        "di": "Di",
+        "mi": "Mi",
+        "do": "Do",
+        "fr": "Fr",
+        "sa": "Sa",
+        "so": "So"
+      },
+      "dayNames": {
+        "mo": "Monday",
+        "di": "Tuesday",
+        "mi": "Wednesday",
+        "do": "Thursday",
+        "fr": "Friday",
+        "sa": "Saturday",
+        "so": "Sunday"
+      },
+      "status": {
+        "done": "done",
+        "today": "today, not done yet",
+        "upcoming": "upcoming",
+        "missed": "missed"
+      }
+    },
+    "level": {
+      "title": "Level {level}",
+      "toNext": "{count} treats to Level {next}",
+      "progressLabel": "Progress to level {next}"
+    },
+    "due": {
+      "cards": "{count, plural, one {card due} other {cards due}}",
+      "review": "Review"
+    },
+    "states": {
+      "loading": "Loading",
+      "retry": "Retry",
+      "error": "Something went wrong",
+      "dismiss": "Dismiss"
+    },
+    "progress": {
+      "label": "Progress"
+    }
+  },
   "Errors": {
     "invalid_input": "Please check what you typed and try again.",
     "captcha": "We couldn't confirm you're not a robot. Please try again.",

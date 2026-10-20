@@ -2,7 +2,8 @@
 
 /* Design tokens: docs/DESIGN_BRIEF.md. Values mirror src/theme.ts (theme.test.ts keeps them in sync).
    Dark mode follows the system, unless <html data-theme="light|dark"> is set (see src/lib/theme-mode.ts). */
-:root {
+:root,
+[data-theme="light"] {
   color-scheme: light;
   --bg: #f2f3f5;
   --surface: #ffffff;
@@ -21,8 +22,11 @@
   --der: #2457a8;
   --die: #b83a32;
   --das: #2b7550;
+  --progress: #5e6875;
+  --on-progress: #ffffff;
   --focus: #5e6875;
   --cushion: 0 1px 2px rgba(30,40,55,.06), 0 14px 30px -14px rgba(30,40,55,.22);
+  --cushion-pressed: 0 1px 2px rgba(30,40,55,.06), 0 5px 12px -10px rgba(30,40,55,.22);
   --r-coat: 0 0 40px 72px;
   --r-coat-card: 0 0 28px 56px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -49,12 +53,15 @@
     --der: #8db4f2;
     --die: #f29a90;
     --das: #7ccb9c;
+    --progress: #8a95a3;
+    --on-progress: #16191e;
     --focus: #f2f1ee;
     --cushion: inset 0 1px 0 rgba(255,255,255,.05), 0 14px 30px -12px rgba(0,0,0,.6);
+    --cushion-pressed: inset 0 1px 0 rgba(255,255,255,.05), 0 5px 12px -10px rgba(0,0,0,.6);
   }
 }
 
-:root[data-theme="dark"] {
+[data-theme="dark"] {
   color-scheme: dark;
   --bg: #16191e;
   --surface: #20252b;
@@ -73,8 +80,17 @@
   --der: #8db4f2;
   --die: #f29a90;
   --das: #7ccb9c;
+  --progress: #8a95a3;
+  --on-progress: #16191e;
   --focus: #f2f1ee;
   --cushion: inset 0 1px 0 rgba(255,255,255,.05), 0 14px 30px -12px rgba(0,0,0,.6);
+  --cushion-pressed: inset 0 1px 0 rgba(255,255,255,.05), 0 5px 12px -10px rgba(0,0,0,.6);
+}
+
+/* A box that always shows one theme, whatever the page is set to (the /design showcase uses this). */
+.theme-scope {
+  background: var(--bg);
+  color: var(--text);
 }
 
 @theme inline {
@@ -95,6 +111,8 @@
   --color-der: var(--der);
   --color-die: var(--die);
   --color-das: var(--das);
+  --color-progress: var(--progress);
+  --color-on-progress: var(--on-progress);
   --color-focus: var(--focus);
   /* Names the first screens were built with; they now point at the new tokens. */
   --color-background: var(--bg);
@@ -147,13 +165,52 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--focus);
+  outline: 2px solid var(--ring, var(--focus));
+  outline-offset: 2px;
+}
+
+/* Shared interaction states. --ring is set by components that sit on the coat block (see PillButton).
+   [data-force="pressed|focus"] lets the /design page show these states without a real press. */
+.ds-press {
+  transition:
+    transform 0.2s var(--ease-out),
+    box-shadow 0.2s var(--ease-out);
+}
+.ds-press:active:not(:disabled),
+[data-force="pressed"] .ds-press {
+  transform: translateY(2px);
+}
+.ds-press.shadow-cushion:active:not(:disabled),
+[data-force="pressed"] .ds-press.shadow-cushion {
+  box-shadow: var(--cushion-pressed);
+}
+[data-force="focus"] .ds-focus {
+  outline: 2px solid var(--ring, var(--focus));
   outline-offset: 2px;
 }
 
 /* Counters and codes line up. */
 .tabular {
   font-variant-numeric: tabular-nums;
+}
+
+/* Motion: 200-300ms ease-out, slightly springy; reward animations stay under 600ms. */
+@keyframes ds-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+.ds-shake {
+  animation: ds-shake 0.4s var(--ease-out) 1;
+}
+@keyframes ds-toast-in {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.ds-toast {
+  animation: ds-toast-in 0.3s var(--ease-spring) 1;
 }
 
 @media (prefers-reduced-motion: reduce) {

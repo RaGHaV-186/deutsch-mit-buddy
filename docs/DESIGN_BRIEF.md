@@ -21,6 +21,20 @@ Look at the reference images in `docs/design/` before building each screen and m
 
 ---
 
+## Scope update (supersedes the phases below where they differ)
+
+The redesign covers only what exists today (slices 1 and 2: accounts, 2FA, Home, Flashcards). Game-layer UI is built, but gets real data later.
+
+- **Feature flag:** `NEXT_PUBLIC_GAME_LAYER` (off by default; on in development and on `/design`). Everything gamified (treats, "+N treats" labels, level, streak, combo) is hidden when it is off. **No mock numbers in production.**
+- **Phase 4 (auth):** done.
+- **Phase 5 (Home):** real data only: today's lesson, cards due, Continue. Streak, level and "+N treats" are behind the flag.
+- **Phase 6 (Flashcards):** same rule for the combo chip and the treat labels on the grade buttons.
+- **Phase 7 (other screens):** minimal. "Coming soon" placeholders for Learn and Play, and a small Me screen with the theme switch, legal links, feedback and log out (moved from the temporary row).
+- **Phase 8 (game layer logic): skipped.** It belongs to slice 10 (XP + friends). The UI pieces (`PawStreakWeek`, `LevelCard`, `TreatChip`, the combo chip) already exist in `@/components/ds` and only need data then.
+- **Phase 9 (QA):** only for what exists, then merge.
+
+---
+
 ## The design in one paragraph
 
 Inspired by my blue-grey-and-white pit bull, Buddy — felt in the details, never cartoonish. Calm, Apple-level restraint, lots of white space. Each main screen has a **blue-grey "coat" block** on top (rounded only at the bottom, uneven: `0 0 40px 72px`) and white below, joined by the **"blaze notch"**: a narrow white wedge rising from the white area into the grey block, like the white stripe on his face. Everything tappable below the block is a soft **"cushion"** (rounded card with a soft double shadow). Progress bars are **wedges** (thin on the left, full height on the right). **Belly-pink** is reserved for rewards and the active tab. A light game layer: treats (XP), levels, a weekly paw streak, a combo counter, and Buddy saying one German line per day.
@@ -215,7 +229,7 @@ Apply the system to all remaining screens (Learn, Cards/deck list, Play, Me/prof
 
 ---
 
-## Phase 8 — Game layer (logic, minimal)
+## Phase 8 — Game layer (logic, minimal) — SKIPPED, belongs to slice 10 (see Scope update)
 
 Only where not already present; store per user, server-safe:
 - **Treats (XP):** lesson complete +50; grades Again 0 / Hard 5 / Got it 10 / Easy 15.

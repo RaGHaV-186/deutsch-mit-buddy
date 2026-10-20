@@ -39,3 +39,5 @@ Front: English (word cards) or "Say it in German" / "Answer out loud" (speaking 
 - Reference images are in `docs/design/`.
 - Mascot assets (poses, app icons, glyph) are in `public/buddy/`.
 - Auth and 2FA logic must never be changed by design work (restyle the screens only).
+- Every new slice must build its screens from the components in `@/components/ds` and follow `docs/DESIGN_BRIEF.md` (tokens, layout, states). Don't add one-off styles or hard-coded colours.
+- Game-layer UI (treats, level, streak, combo) is already built and hidden behind `NEXT_PUBLIC_GAME_LAYER` (off by default); slice 10 only needs to supply the data and turn the flag on. Never show mock numbers in production.

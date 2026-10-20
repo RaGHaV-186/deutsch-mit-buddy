@@ -9,17 +9,19 @@ import { AlertIcon, CheckIcon, InfoIcon } from "./icons";
 import { PillButton } from "./PillButton";
 
 /** A rounded placeholder block shown while content loads. Give `label` once per group so screen readers hear "Loading". */
-export function Skeleton({ width = "100%", height = 16, radius = 12, label, className }: {
+export function Skeleton({ width = "100%", height = 16, radius = 12, label, className, onCoat = false }: {
   width?: number | string;
   height?: number | string;
   radius?: number;
   label?: string;
   className?: string;
+  /** On the coat block: the lighter coat track colour instead of the page one. */
+  onCoat?: boolean;
 }) {
   const t = useTranslations("Ds.states");
   return (
     <div
-      className={cx("animate-pulse bg-track", className)}
+      className={cx("animate-pulse", onCoat ? "bg-coat-track" : "bg-track", className)}
       style={{ width, height, borderRadius: radius }}
       {...(label !== undefined ? { role: "status", "aria-label": label || t("loading") } : { "aria-hidden": true })}
     />

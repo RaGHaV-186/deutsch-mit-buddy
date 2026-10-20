@@ -28,7 +28,7 @@ export function ThemeSwitch() {
             setThemePreference(option);
           }}
           className={`min-h-11 rounded-full px-4 text-caption font-bold ${
-            option === value ? "bg-coat text-on-coat" : "text-text hover:bg-surface"
+            option === value ? "bg-progress text-on-progress" : "text-text hover:bg-surface"
           }`}
         >
           {t(option)}

@@ -35,6 +35,9 @@ import {
   CloseIcon,
 } from "@/components/ds";
 import { colors, type ColorToken } from "@/theme";
+import { HomeSkeleton } from "@/components/home/HomeSkeleton";
+import { HomeView } from "@/components/home/HomeView";
+import { GAME_PREVIEW } from "@/lib/game-layer";
 import { CodeDemo, ErrorDemo, ToastDemo } from "./demos";
 
 // Dev tool: every design-system component in light and dark, side by side, with all its states.
@@ -329,6 +332,21 @@ export default function DesignPage() {
         <p className="text-headline">
           <ArticleWord article={null} word="heißen" /> · <ArticleWord article="die" word="Kaffees" plural />
         </p>
+      </Section>
+
+      <Section title="Home" note="The real Home screen with the game layer off (what production shows) and on (preview numbers), and its loading state.">
+        <p className="text-caption text-muted">game layer off</p>
+        <div className="overflow-hidden rounded-[24px]">
+          <HomeView name="Raghav" line="Heute geht's um Essen & Trinken!" lesson={{ day: 11, code: "Z9", title: "Essen & Trinken" }} due={29} game={null} tabBar="static" />
+        </div>
+        <p className="text-caption text-muted">game layer on (preview data)</p>
+        <div className="overflow-hidden rounded-[24px]">
+          <HomeView name="Raghav" line="Heute geht's um Essen & Trinken!" lesson={{ day: 11, code: "Z9", title: "Essen & Trinken" }} due={29} game={GAME_PREVIEW} tabBar="static" />
+        </div>
+        <p className="text-caption text-muted">loading</p>
+        <div className="overflow-hidden rounded-[24px]">
+          <HomeSkeleton game={false} tabBar="static" />
+        </div>
       </Section>
 
       <Section title="PawStreakWeek, LevelCard, DueCardsTile">

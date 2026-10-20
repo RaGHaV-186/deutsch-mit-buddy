@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
-import { inputClass, primaryButtonClass, secondaryButtonClass } from "./ui";
+import { compactButtonClass, inputClass, primaryButtonClass, secondaryButtonClass } from "./ui";
 
 export function FeedbackButton() {
   const t = useTranslations("Feedback");
@@ -27,7 +27,7 @@ export function FeedbackButton() {
     <>
       <button
         type="button"
-        className={`${secondaryButtonClass} w-auto whitespace-nowrap px-3 py-2 text-sm`}
+        className={`${compactButtonClass} min-h-11 whitespace-nowrap px-3 text-sm`}
         onClick={() => {
           setStatus("idle");
           dialog.current?.showModal();

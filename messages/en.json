@@ -4,7 +4,11 @@
     "tagline": "Your German teacher, from zero to C1. Wuff!",
     "buddyAlt": "Buddy, a blue-grey and white dog with a red collar",
     "signUp": "Sign up free",
-    "logIn": "Log in"
+    "logIn": "Log in",
+    "dayLabel": "Day {day} · {code}",
+    "continue": "Continue",
+    "preview": "Preview data: the game layer is switched on only for testing.",
+    "accountLabel": "Account and settings"
   },
   "Meta": {
     "title": "Deutsch mit Buddy",
@@ -120,6 +124,16 @@
     "soonYourTurn": {
       "de": "Bald bist du dran!",
       "en": "Your turn soon!"
+    },
+    "home": {
+      "theme": "Heute geht's um {theme}!",
+      "letsGo": "Los geht's!",
+      "stepByStep": "Schritt für Schritt!",
+      "youCanDoIt": "Du schaffst das!",
+      "wuff": "Wuff! Weiter geht's!",
+      "review": "Heute wiederholen wir!",
+      "test": "Zeit für einen Test!",
+      "catchUp": "Heute holen wir auf!"
     }
   },
   "Auth": {
@@ -387,5 +401,10 @@
         }
       }
     }
+  },
+  "Soon": {
+    "title": "Coming soon",
+    "line": "Kommt bald!",
+    "message": "This part of Buddy is still being built."
   }
 }

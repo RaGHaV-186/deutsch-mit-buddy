@@ -111,7 +111,7 @@ export function ReviewSession({ cards, direction, onAnswer, onFinish }: Props) {
                 type="button"
                 disabled={busy}
                 onClick={() => grade(g)}
-                className="flex min-h-16 flex-col items-center justify-center gap-0.5 rounded-lg border border-foreground/30 px-1 py-2 text-base font-bold hover:bg-foreground/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-der disabled:opacity-60"
+                className="flex min-h-16 flex-col items-center justify-center gap-0.5 rounded-lg border border-foreground/30 px-1 py-2 text-base font-bold hover:bg-foreground/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:opacity-60"
               >
                 <span>{t(`grade.${g}`)}</span>
                 <span className="text-xs font-normal text-muted">

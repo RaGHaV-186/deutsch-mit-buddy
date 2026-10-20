@@ -47,7 +47,7 @@ export function GoogleButton({ label }: { label: string }) {
         {label}
       </button>
       {error ? (
-        <p role="alert" className="text-die dark:text-red-300">
+        <p role="alert" className="text-die">
           {t.has(error) ? t(error) : t("generic")}
         </p>
       ) : null}

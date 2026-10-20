@@ -1,4 +1,4 @@
-import { theme, type Article } from "@/theme";
+import { articleToken, type Article } from "@/theme";
 import type { Direction } from "./queue";
 import type { SnapshotCard } from "./schema";
 
@@ -6,7 +6,8 @@ import type { SnapshotCard } from "./schema";
 export type ArticleTone = Article;
 
 export const articleTone = (article: SnapshotCard["article"]): ArticleTone => article ?? "none";
-export const articleColor = (tone: ArticleTone) => theme.article[tone];
+/** CSS colour for an article tone: the design token (so it follows light and dark mode). */
+export const articleColor = (tone: ArticleTone) => `var(--${articleToken(tone)})`;
 
 /** Which prompt label sits above the front of the card (messages: Cards.label.*). */
 export type FrontLabel = "sayInGerman" | "answerOutLoud" | "sayInEnglish";

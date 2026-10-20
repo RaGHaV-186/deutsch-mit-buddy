@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
-import type { ArticleTone, CardView } from "@/lib/cards/display";
+import { articleColor, type CardView } from "@/lib/cards/display";
 
-const toneVar = (tone: ArticleTone) => `var(--article-${tone})`;
+const toneVar = articleColor;
 
 /** One side of a card: `front` while guessing, `back` after the flip. Layout follows CLAUDE.md "Card format". */
 export function CardFace({ view, side }: { view: CardView; side: "front" | "back" }) {

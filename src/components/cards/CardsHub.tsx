@@ -28,8 +28,8 @@ function Choice<T extends string>({
             role="radio"
             aria-checked={o === value}
             onClick={() => onChange(o)}
-            className={`min-h-12 rounded-lg px-2 py-2 text-base font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-der ${
-              o === value ? "bg-der text-white" : "hover:bg-foreground/5"
+            className={`min-h-12 rounded-lg px-2 py-2 text-base font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus ${
+              o === value ? "bg-coat text-on-coat" : "hover:bg-foreground/5"
             }`}
           >
             {text(o)}

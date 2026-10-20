@@ -32,7 +32,7 @@ describe("ReviewSession", () => {
     fireEvent.click(screen.getByRole("button", { name: "Show answer" }));
     const german = screen.getByTestId("german");
     expect(german).toHaveTextContent("die Stadt");
-    expect(german).toHaveStyle({ color: "var(--article-die)" });
+    expect(german).toHaveStyle({ color: "var(--die)" });
     expect(screen.getByText("die Städte")).toBeInTheDocument();
     expect(screen.getByText("city")).toBeInTheDocument();
     expect(screen.getByText("Bielefeld ist eine Stadt.")).toBeInTheDocument();

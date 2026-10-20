@@ -81,7 +81,7 @@ export function CardsApp({ userId, isAdmin }: { userId: string; isAdmin: boolean
   const header = (
     <header className="flex items-center justify-between gap-3">
       <h1 className="font-heading text-2xl font-bold">{t("title")}</h1>
-      <Link href="/home" className="text-sm font-bold text-der underline underline-offset-2 dark:text-sky-300">
+      <Link href="/home" className="text-sm font-bold text-text underline underline-offset-2">
         {t("backHome")}
       </Link>
     </header>

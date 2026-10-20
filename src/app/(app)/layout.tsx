@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { FeedbackButton } from "@/components/FeedbackButton";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import { SignOutForm } from "@/components/SignOutForm";
+import { ThemeSwitch } from "@/components/ThemeSwitch";
 import { LegalLinks, secondaryButtonClass } from "@/components/ui";
 import { requireAal2 } from "@/lib/auth/guard";
 import { getProfile } from "@/lib/profile";
@@ -30,7 +31,9 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         </div>
       </header>
       <div className="flex flex-1 flex-col">{children}</div>
-      <footer className="px-4 py-6">
+      <footer className="flex flex-col items-center gap-4 px-4 py-6">
+        {/* Temporary home for the theme switch until the Me screen exists (design phase 7). */}
+        <ThemeSwitch />
         <LegalLinks />
       </footer>
     </>

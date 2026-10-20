@@ -3,15 +3,15 @@ import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
 export const inputClass =
-  "w-full rounded-lg border border-foreground/30 bg-background px-3 py-3 text-base text-foreground placeholder:text-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-der";
+  "w-full rounded-field border border-track bg-surface px-4 py-3 text-base text-text placeholder:text-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus";
 export const primaryButtonClass =
-  "w-full rounded-lg bg-der px-4 py-3 text-base font-bold text-white hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-der disabled:cursor-not-allowed disabled:opacity-60";
+  "w-full rounded-lg bg-coat px-4 py-3 text-base font-bold text-on-coat hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:cursor-not-allowed disabled:opacity-60";
 export const secondaryButtonClass =
-  "w-full rounded-lg border border-foreground/30 px-4 py-3 text-base font-bold text-foreground hover:bg-foreground/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-der disabled:opacity-60";
+  "w-full rounded-lg border border-foreground/30 px-4 py-3 text-base font-bold text-foreground hover:bg-foreground/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:opacity-60";
 // Same look as secondaryButtonClass but sized to its content (the two can't be combined: both set the width).
 export const compactButtonClass =
-  "rounded-lg border border-foreground/30 px-4 py-2 text-base font-bold text-foreground hover:bg-foreground/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-der disabled:opacity-60";
-export const linkClass = "font-bold text-der underline underline-offset-2 dark:text-sky-300";
+  "rounded-lg border border-foreground/30 px-4 py-2 text-base font-bold text-foreground hover:bg-foreground/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:opacity-60";
+export const linkClass = "font-bold text-text underline underline-offset-2";
 
 export function Field({
   label,

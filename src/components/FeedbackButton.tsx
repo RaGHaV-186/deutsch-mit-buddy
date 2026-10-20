@@ -62,7 +62,7 @@ export function FeedbackButton() {
               className={inputClass}
             />
             {status === "error" ? (
-              <p role="alert" className="text-die dark:text-red-300">
+              <p role="alert" className="text-die">
                 {t("error")}
               </p>
             ) : null}

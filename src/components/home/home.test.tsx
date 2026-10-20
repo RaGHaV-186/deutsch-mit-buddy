@@ -23,6 +23,7 @@ vi.mock("@/components/SignOutForm", () => ({ SignOutForm: ({ children }: { child
 
 import HomePage from "@/app/(app)/home/page";
 import { GAME_PREVIEW } from "@/lib/game-layer";
+import { homeAction } from "@/lib/home-action";
 import { AccountRow } from "./AccountRow";
 import { HomeSkeleton } from "./HomeSkeleton";
 import { HomeView } from "./HomeView";
@@ -44,6 +45,13 @@ describe("HomeView with the game layer off (what production shows)", () => {
     expect(header.querySelector("img")!.getAttribute("src")).toContain("buddy-happy");
     expect(header).toHaveTextContent("Day 11 · Z9");
     expect(screen.getByRole("heading", { level: 2, name: "Essen & Trinken" })).toBeInTheDocument();
+    // Lessons don't exist yet, so the button leads to today's cards, not to a "coming soon" page.
+    expect(screen.getByRole("link", { name: "Review cards" })).toHaveAttribute("href", "/cards");
+    expect(screen.queryByRole("link", { name: "Continue" })).toBeNull();
+  });
+
+  it("once lessons exist the button says Continue and opens the lesson", () => {
+    view({ action: homeAction(true) });
     expect(screen.getByRole("link", { name: "Continue" })).toHaveAttribute("href", "/learn");
   });
 
@@ -70,7 +78,7 @@ describe("HomeView with the game layer off (what production shows)", () => {
     view({ name: null, lesson: null });
     expect(screen.getByRole("heading", { level: 1, name: "Hallo!" })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { level: 2 })).toBeNull();
-    expect(screen.getByRole("link", { name: "Continue" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Review cards" })).toBeInTheDocument();
   });
 });
 

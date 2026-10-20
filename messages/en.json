@@ -8,7 +8,8 @@
     "dayLabel": "Day {day} · {code}",
     "continue": "Continue",
     "preview": "Preview data: the game layer is switched on only for testing.",
-    "accountLabel": "Account and settings"
+    "accountLabel": "Account and settings",
+    "reviewCards": "Review cards"
   },
   "Meta": {
     "title": "Deutsch mit Buddy",
@@ -50,7 +51,6 @@
     "treats": "+{count} treats",
     "streak": {
       "title": "{count}-day streak",
-      "rest": "Sunday is a rest day",
       "days": {
         "mo": "Mo",
         "di": "Di",

@@ -421,10 +421,10 @@ describe("FloatingTabBar", () => {
 describe("PawStreakWeek", () => {
   const week = ["done", "today", "upcoming", "upcoming", "upcoming", "upcoming", "upcoming"] as const;
 
-  it("title, rest-day note and seven days Mo to So", () => {
-    renderWithIntl(<PawStreakWeek streak={10} days={week} />);
+  it("title and seven days Mo to So (no rest-day copy: Sunday is a test day)", () => {
+    const { container } = renderWithIntl(<PawStreakWeek streak={10} days={week} />);
     expect(screen.getByRole("heading", { name: "10-day streak" })).toBeInTheDocument();
-    expect(screen.getByText("Sunday is a rest day")).toBeInTheDocument();
+    expect(container.textContent).not.toMatch(/rest day/i);
     expect(screen.getAllByRole("listitem")).toHaveLength(7);
     for (const d of ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]) expect(screen.getByText(d)).toBeInTheDocument();
   });

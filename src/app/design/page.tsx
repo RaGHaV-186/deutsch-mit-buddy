@@ -150,7 +150,7 @@ export default function DesignPage() {
         <p className="text-headline">Level 3 (headline)</p>
         <p className="text-body">Ich trinke einen Kaffee. (body)</p>
         <p className="text-label uppercase">Day 11 · Z9 (label)</p>
-        <p className="text-caption text-muted">Sunday is a rest day (caption)</p>
+        <p className="text-caption text-muted">Level 3 · 1,240 treats (caption)</p>
         <p className="tabular text-headline">1,240 / 1,500 0123456789 (tabular)</p>
       </Section>
 

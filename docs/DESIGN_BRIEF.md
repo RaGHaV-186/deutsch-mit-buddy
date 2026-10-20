@@ -30,6 +30,7 @@ The redesign covers only what exists today (slices 1 and 2: accounts, 2FA, Home,
 - **Phase 5 (Home):** real data only: today's lesson, cards due, Continue. Streak, level and "+N treats" are behind the flag.
 - **Phase 6 (Flashcards):** same rule for the combo chip and the treat labels on the grade buttons.
 - **Phase 7 (other screens):** minimal. "Coming soon" placeholders for Learn and Play, and a small Me screen with the theme switch, legal links, feedback and log out (moved from the temporary row).
+- **Sunday is a test day** in the curriculum (`SUN`), not a rest day. There is no rest-day state and no "Sunday is a rest day" copy anywhere. Streak rules (what counts as a day, what Sunday does) are decided in slice 10.
 - **Phase 8 (game layer logic): skipped.** It belongs to slice 10 (XP + friends). The UI pieces (`PawStreakWeek`, `LevelCard`, `TreatChip`, the combo chip) already exist in `@/components/ds` and only need data then.
 - **Phase 9 (QA):** only for what exists, then merge.
 
@@ -129,7 +130,7 @@ Build reusable components (adapt names to project conventions) and a dev-only **
 8. **`TreatChip`** — pill, bg `--tint`, text `--on-tint`, 12px/700, e.g. "+50 treats".
 9. **`SpeechBubble`** — on coat: bg `--bubble`, text `--on-coat`, radius `16px 16px 16px 4px`, 14px/600; German text in „…“ quotes. Variant on white: bg `--surface` + cushion shadow, text `--text`.
 10. **`FloatingTabBar`** — detached pill (margin `0 16px max(28px, safe-area-bottom + 12px)`), height 68, `--surface`, `--cushion`. Tabs: Home, Learn, Cards, Play, Me. Active = pill (52 high, padding 0 16) bg `--tint`, icon + label (14/700, `--on-tint`); inactive = icon only, 52×52, `--muted`, with `aria-label`. Optional 8px dot badge (`--coat`, 2px ring `--surface`).
-11. **`PawStreakWeek`** — Cushion: "{n}-day streak" (16/800) + "Sunday is a rest day" (13, muted); 7 columns Mo Di Mi Do Fr Sa So; 34px circles with filled paw: done = `--coat` bg + `--on-coat` paw; today not done = `--tint` bg + 2px ring `--coat`; future/missed = `--track` + `--muted`.
+11. **`PawStreakWeek`** — Cushion: "{n}-day streak" (16/800); 7 columns Mo Di Mi Do Fr Sa So; 34px circles with filled paw: done = `--coat` bg + `--on-coat` paw; today not done = `--tint` bg + 2px ring `--coat`; future/missed = `--track` + `--muted`.
 12. **`LevelCard`** — "Level {n}" (16/800) + "1,240 / 1,500" (12, muted), WedgeProgress, "260 treats to Level 4".
 13. **`DueCardsTile`** — Cushion link: number (26/800), "cards due", "Review →".
 14. **`ArticleWord`** — noun with article coloured by gender from data (`der`/`die`/`das` → token). Plural articles use `--muted`.
@@ -196,7 +197,7 @@ All auth screens share one layout: **CoatHeader (compact)** with Buddy + title +
    - BlazeNotch.
 2. Content (padding 20, gap 12): **PawStreakWeek**; then two columns: **LevelCard** (1.4fr) + **DueCardsTile** (1fr).
 3. **FloatingTabBar**, Home active.
-4. States: loading = skeletons in the same layout; Sunday rest day = Buddy `resting` + "Ruhetag — enjoy your Sunday" with optional "Review anyway".
+4. States: loading = skeletons in the same layout (see docs/known-issues.md: no route-level `loading.tsx` for now). ~~Sunday rest day state~~ removed: Sunday is a test day (see Scope update).
 
 Review data: Raghav, Day 11 · Z9 · Essen & Trinken, +50 treats, 10-day streak (Mon done, Tue today), Level 3 (1,240 / 1,500), 29 cards due. Use real data where it exists; otherwise a clearly marked mock.
 

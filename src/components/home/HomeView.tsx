@@ -12,6 +12,7 @@ import {
   TreatChip,
 } from "@/components/ds";
 import type { GameData } from "@/lib/game-layer";
+import { homeAction, type HomeAction } from "@/lib/home-action";
 
 export interface HomeLesson {
   day: number;
@@ -32,12 +33,14 @@ interface Props {
   game: GameData | null;
   /** Content below the cards, above the tab bar (the temporary account row until the Me screen exists). */
   children?: React.ReactNode;
+  /** The big button. Defaults to what is possible today (see lib/home-action.ts). */
+  action?: HomeAction;
   /** "static" lets the /design page show the tab bar in place instead of pinned to the screen. */
   tabBar?: "fixed" | "static";
 }
 
 /** The Home screen: coat block with today's lesson and Continue, then cards due (and the game layer when it is on). */
-export function HomeView({ name, line, lesson, due, game, children, tabBar = "fixed" }: Props) {
+export function HomeView({ name, line, lesson, due, game, children, tabBar = "fixed", action = homeAction() }: Props) {
   const t = useTranslations("App");
   const h = useTranslations("Home");
   const ds = useTranslations("Ds");
@@ -61,8 +64,8 @@ export function HomeView({ name, line, lesson, due, game, children, tabBar = "fi
               <h2 className="text-title">{lesson.title}</h2>
             </div>
           ) : null}
-          <PillButton variant="blaze" fullWidth href="/learn" className="mt-5">
-            {h("continue")}
+          <PillButton variant="blaze" fullWidth href={action.href} className="mt-5">
+            {h(action.label)}
           </PillButton>
         </CoatHeader>
 

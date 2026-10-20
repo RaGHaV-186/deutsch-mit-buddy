@@ -6,15 +6,12 @@ import { PawIcon } from "./icons";
 export type DayStatus = "done" | "today" | "upcoming" | "missed";
 const DAY_KEYS = ["mo", "di", "mi", "do", "fr", "sa", "so"] as const;
 
-/** Mon to Sun. `days` has seven entries. Sunday is a rest day and never breaks a streak. */
+/** Mon to Sun. `days` has seven entries. What counts as a day (and what Sunday, a test day, does) is decided in slice 10. */
 export function PawStreakWeek({ streak, days }: { streak: number; days: readonly DayStatus[] }) {
   const t = useTranslations("Ds.streak");
   return (
     <Cushion radius={28} className="p-4">
-      <div className="flex items-baseline justify-between gap-3">
-        <h2 className="text-[16px] font-extrabold leading-tight tabular">{t("title", { count: streak })}</h2>
-        <p className="text-caption text-muted">{t("rest")}</p>
-      </div>
+      <h2 className="text-[16px] font-extrabold leading-tight tabular">{t("title", { count: streak })}</h2>
       <ol className="mt-3 grid grid-cols-7 gap-1">
         {DAY_KEYS.map((key, i) => {
           const status = days[i] ?? "upcoming";

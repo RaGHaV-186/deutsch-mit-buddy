@@ -8,6 +8,9 @@ export const primaryButtonClass =
   "w-full rounded-lg bg-der px-4 py-3 text-base font-bold text-white hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-der disabled:cursor-not-allowed disabled:opacity-60";
 export const secondaryButtonClass =
   "w-full rounded-lg border border-foreground/30 px-4 py-3 text-base font-bold text-foreground hover:bg-foreground/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-der disabled:opacity-60";
+// Same look as secondaryButtonClass but sized to its content (the two can't be combined: both set the width).
+export const compactButtonClass =
+  "rounded-lg border border-foreground/30 px-4 py-2 text-base font-bold text-foreground hover:bg-foreground/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-der disabled:opacity-60";
 export const linkClass = "font-bold text-der underline underline-offset-2 dark:text-sky-300";
 
 export function Field({

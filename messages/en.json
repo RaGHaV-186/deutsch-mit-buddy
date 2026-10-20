@@ -124,8 +124,86 @@
     "helloNoName": "Hallo!",
     "today": "Your next lesson",
     "day": "Day {day}",
-    "soon": "Lessons, cards and games arrive in the next slices. Your account is ready.",
-    "signOut": "Log out"
+    "soon": "Lessons and games arrive in the next slices.",
+    "signOut": "Log out",
+    "cardsDue": "{count, plural, one {# card to review} other {# cards to review}}",
+    "cardsOpen": "Open cards"
+  },
+  "Cards": {
+    "title": "Cards",
+    "backHome": "Home",
+    "due": "{count, plural, one {# card to review} other {# cards to review}}",
+    "fresh": "{count, plural, =0 {No new cards} one {# new card} other {# new cards}} today",
+    "waiting": "{count, plural, one {# more new card waits for tomorrow} other {# more new cards wait for tomorrow}}",
+    "allDone": "Nothing left for today. Wuff!",
+    "start": "Start review",
+    "mode": {
+      "label": "What to practise",
+      "words": "Words",
+      "speaking": "Speaking",
+      "both": "Both"
+    },
+    "direction": {
+      "label": "Direction",
+      "enDe": "English → German",
+      "deEn": "German → English"
+    },
+    "label": {
+      "sayInGerman": "Say it in German",
+      "answerOutLoud": "Answer out loud",
+      "sayInEnglish": "Say it in English"
+    },
+    "flip": "Show answer",
+    "flipHint": "Tap the card or press Space",
+    "grade": {
+      "again": "Again",
+      "hard": "Hard",
+      "good": "Got it",
+      "easy": "Easy"
+    },
+    "gradeHint": {
+      "minutes": "{n} min",
+      "days": "{n, plural, one {# day} other {# days}}"
+    },
+    "gradeGroup": "How well did you know it?",
+    "audio": {
+      "word": "Play word",
+      "sentence": "Play sentence",
+      "slow": "Slow",
+      "noVoice": "This device has no German voice installed, so audio can't play. Add one in your device's language settings.",
+      "unsupported": "This browser can't play speech."
+    },
+    "left": "{count} left",
+    "exit": "End session",
+    "done": {
+      "title": "Wuff! Session done",
+      "body": "{count, plural, one {You answered # card.} other {You answered # cards.}}",
+      "back": "Back to cards"
+    },
+    "sync": {
+      "synced": "Saved",
+      "syncing": "Saving…",
+      "offline": "Offline. Your reviews are saved on this phone.",
+      "offlineWaiting": "{count, plural, one {Offline · # review waiting to sync} other {Offline · # reviews waiting to sync}}",
+      "waiting": "{count, plural, one {# review waiting to sync} other {# reviews waiting to sync}}",
+      "failed": "Couldn't sync yet. Your reviews are safe on this phone.",
+      "retry": "Try again",
+      "signedOut": "Please log in again to sync your reviews."
+    },
+    "empty": {
+      "offline": "No cards on this phone yet. Open Cards once with a connection and they'll be here next time, also offline.",
+      "none": "You have no cards yet.",
+      "loading": "Loading your cards…",
+      "storage": "This browser can't store cards for offline use. Try another browser, or leave private mode."
+    },
+    "import": {
+      "title": "Import Raghav's deck",
+      "body": "Adds your 213 seed cards (Days 2–11). Safe to press again: nothing is duplicated and progress is kept.",
+      "button": "Import seed deck",
+      "working": "Importing…",
+      "result": "Imported {imported} cards ({seen} already seen, {fresh} new). {alreadyThere} were already there, {duplicatesSkipped} repeats skipped.",
+      "forbidden": "Only the admin can import the seed deck."
+    }
   },
   "Feedback": {
     "button": "Send feedback",

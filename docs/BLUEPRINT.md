@@ -12,24 +12,38 @@ Deutsch mit Buddy is a free web app (installable on phones) where an AI teacher,
 - **Members**: anyone with an account (email + password or Google, 2FA required). Capped at 30 members, then a waitlist. Minimum age 16.
 - **Guests**: no account, nickname only, can join game rooms by code. No AI, no stored learning data.
 
-**Teaching format (every lesson, Z1 → C1)**
+**Lesson standard (every session from Z1 to C1, no exceptions)**
 
-1. Review: exercises on yesterday's words and recycled past mistakes.
-2. Grammar: one point, explained in English at first, more German as the level rises, then 10 drills.
-3. Vocabulary: 10 core + 5 bonus words (reassess at W1), learned through flashcards.
-4. Writing: task sized to the level; every error corrected with the reason.
-5. Speaking: voice drill with Buddy, sentences that also become speaking cards.
-6. End-of-day test, then Close Day (log: Covered | Mistakes | Carry over).
+Buddy's daily lesson is the core of the product; flashcards are only its vocabulary part. Every lesson has all 14 parts, and a lesson cannot be published (in the database or in the generator) unless every part exists and passed the Opus check:
 
-Saturday = review + longer writing; Sunday = weekly test; checkpoint mocks after each level. Every learner picks their starting lesson at signup (or takes a short placement quiz).
+0. Can-do goal
+1. Warm-up: yesterday's mistakes + spaced grammar review
+2. Grammar point with examples and common traps
+3. Exercises: gap fill, multiple choice, sentence builder, translation, dictation
+4. Vocabulary: 15–20 words + useful phrases (Redemittel), learned through flashcards
+5. Pronunciation focus of the day
+6. Reading + questions
+7. Listening (dialogue + questions; audio comes with the voice slice, the script is text until then)
+8. Writing task with AI correction, every error explained
+9. Speaking drill + Tandem scenario
+10. Culture note
+11. Real-world mission (reported back in the app, corrected by Buddy)
+12. Day exam: all four skills + the day's grammar and words
+13. Close Day (Covered | Mistakes | Carry over), which unlocks the day's flashcards
+
+Progression: instructions are mostly English at A1, with more German at each level, and fully German from B2. Tasks grow from short messages (A1) to emails and opinions (B1), arguments and formal letters (B2), essays, presentations and long audio (C1). Saturday = review + longer writing; Sunday = weekly test (assembled from the week's lessons); a mock exam every 4 weeks in the format of the current level (original content, "modelled on the Goethe/telc format"). Every learner picks a starting lesson at signup or takes the placement test. B2 and C1 are shown as "coming soon" (visible, not selectable) until slice 13.
 
 **v1 scope (everything below ships in v1)**
 
-- Buddy as teacher and Tandem partner, with voice
+- Buddy as teacher and Tandem partner (text first, then voice); Buddy is always labelled as AI
+- The daily lesson loop (14 parts), pre-generated and verified content; live AI only for writing correction, Tandem, Buddy's answers and mistake-based exercises
+- Mistake log (an item clears after 3 correct answers on different days; feeds the warm-up, the day exam and generated exercises) and spaced repetition for grammar points
+- Real-world missions, placement test, graded short stories that recycle the learner's words, busy-day mode (15 min), skill meter (Lesen / Hören / Schreiben / Sprechen), morning summary
+- "Report a mistake" on cards and exercises, and corrections that reach every learner's copy without touching their progress
 - Personalised flashcards with spaced repetition (Again / Hard / Got it / Easy)
 - Self-test any time, covering everything learned up to the current day, plus Mistake Grind mode
-- Practice: typing quiz, Diktat, numbers & time drill, word-order builder, Hörverstehen
-- Games: Hangman (Galgenmännchen), der/die/das race, quiz battle; guests can join
+- Practice: typing quiz, Diktat, numbers & time drill, word-order builder, Hörverstehen (the same engines as the lesson exercises)
+- Games: Hangman (Galgenmännchen), der/die/das race (the article-drill engine, also played solo in a lesson when the mistake log shows article errors), quiz battle; guests can join
 - XP (Buddy's treats), streaks, friends, leaderboard, daily challenge
 - Tracker: day counter, test scores, weak spots, logs, curriculum map, export tracker.md
 - "What Buddy knows about me" page, offline flashcards, reminders (push + weekly email)
@@ -47,13 +61,16 @@ Buddy is one character with two modes: **Teacher** (runs lessons, tests, correct
 
 | Job | Model | Why |
 | --- | --- | --- |
-| Raghav's lessons, writing correction, mock tests | Opus 5.5 | Best teaching quality, admin only |
-| Members' lessons and writing correction | Sonnet 5.5 | Strong quality at half Opus price |
-| Tandem chats, quick checks, test grading | Haiku 5.5 | Very cheap, fast replies |
+| Lesson content (all 14 parts) and test questions, written once | Sonnet 5.5 via Batch API | 50% discount, runs once per lesson |
+| Correctness check of every card, question and part, once | Opus 5.5 via Batch API | Best judge of German; items marked ok / fixed / needs-human |
+| Writing correction (every error explained), mission reports | Opus 5.5 for Raghav, Sonnet 5.5 for members, then Haiku (budget guard) | Quality where it matters |
+| Tandem chats and their end feedback, Buddy's answers, mistake-based exercises, grading short writing and speaking in the day exam | Haiku 5.5 | Very cheap, fast replies |
+| Graded short stories that recycle the learner's words | Sonnet 5.5 | Needs the learner's own words |
 | Shield (is this message about learning?) | Haiku 5.5 | Runs before every message |
-| Curriculum card generation (one-off) | Sonnet 5.5 via Batch API | 50% discount, runs once |
 
-**Voice**: Buddy speaks with a German neural text-to-speech voice (Azure or Google TTS, roughly €2–5/month at this scale); the free browser voice is the fallback. The learner speaks through the browser's speech recognition (free). When it is unavailable (iOS Safari, Firefox), the server falls back to Azure Speech-to-Text. A typed fallback exists everywhere voice is used. Tandem mode is voice-first, like a phone call. A short iOS voice spike opens slice 6.
+Lessons are **not** generated live: teaching content and exercises are pre-generated and verified. Buddy is always labelled as an AI ("Buddy is an AI and can make mistakes") with a "Report a mistake" button wherever he speaks (EU AI Act, Art. 50).
+
+**Voice**: Buddy speaks with a German neural text-to-speech voice (Azure or Google TTS, roughly €2–5/month at this scale); the free browser voice is the fallback. The learner speaks through the browser's speech recognition (free). When it is unavailable (iOS Safari, Firefox), the server falls back to Azure Speech-to-Text. A typed fallback exists everywhere voice is used. Tandem mode is voice-first, like a phone call. A short iOS voice spike opens slice 6. Pronunciation: the browser's speech recognition now, a design that lets Azure Pronunciation Assessment be switched on later as a per-user flag (consent first, recordings never stored).
 
 **How Buddy remembers each learner**: every review, mistake, weak spot, test score and lesson log is stored as structured data. Before each session the server builds a compact learner profile (level, current lesson, top weak spots, last 3 logs, recent scores, due cards) and gives it to Buddy. Old chats are summarised, not replayed. This keeps lessons personal and cheap.
 
@@ -71,8 +88,8 @@ The app has five tabs on the phone (bottom bar) and the same five in a side bar 
 | Screen | What it does |
 | --- | --- |
 | **Home** | Buddy's mood, today's lesson (Day N · code · topic), cards due, streak, XP, daily challenge, one-tap "Continue" |
-| **Learn → Lesson** | Chat with Buddy in the 6-step format; voice in/out; Buddy adds cards, logs mistakes and closes the day by himself |
-| **Learn → Tandem** | Voice conversation with Buddy in headset mode; pick a scenario; ends with feedback (top 5 mistakes, what went well, cards added) |
+| **Learn → Lesson** | The 14-part lesson player (goal, warm-up, grammar, exercises, vocabulary, pronunciation, reading, listening, writing, speaking, culture, mission, day exam, Close Day); busy-day mode (15 min); mistakes are logged automatically |
+| **Learn → Tandem** | Buddy as conversation partner (not teacher) on the day's theme, no interruptions; text first, voice later; ends with a feedback list that goes into the mistake log |
 | **Learn → Test** | Self-test any time: mixed test up to the current day, weekly/checkpoint tests, Mistake Grind, timed exam mocks from W14 |
 | **Learn → Practice** | Typing quiz, Diktat, numbers & time drill, word-order builder, Hörverstehen (Buddy-generated dialogues + questions) |
 | **Cards** | Your format: der blue / die red / das green, plural line, example, audio + slow; Words / Speaking / Both; due-today queue; browse + edit deck; offline |
@@ -129,17 +146,27 @@ Supabase setting: **"Automatically expose new tables" is OFF** and **automatic R
 | `question_bank` | Test questions per lesson (multiple choice, gap fill, ordering, typing) | session_code, skill, type, prompt, answer, distractors |
 | `game_words` | Word lists for games by level | level, article, word, en, hint |
 
+**Lessons (written by the server, read by everyone; a lesson is visible only when published)**
+
+| Table | Holds | Key columns |
+| --- | --- | --- |
+| `lesson_parts` | One row per lesson part (the 14 parts as validated JSON), each with its Opus review status | session_code, part, content, review_status (ok/fixed/needs-human), reviewed_by_model, template_version |
+| `lesson_publications` | A lesson is published only when all parts exist and every one is ok or fixed (a database trigger enforces it) | session_code, published_at |
+
 **Per learner (row-level security: own rows only)**
 
 | Table | Holds | Key columns |
 | --- | --- | --- |
 | `profiles` | Name, avatar, level, current session pointer, day counter, settings, timezone | user_id, display_name, role, session_seq, day_count, start_code, voice_on, reminder_time |
-| `cards` | The learner's own deck: copies of templates + Buddy-made cards from their mistakes | user_id, kind (word/say/answer), en, article, de, plural, example, tip, source, session_code, locked |
+| `cards` | The learner's own deck: copies of templates + Buddy-made cards from their mistakes. A copy keeps its `template_id`; a template fix updates it unless the learner edited the card | user_id, kind (word/say/answer), en, article, de, plural, example, tip, source, session_code, locked, template_id, user_edited |
 | `card_srs` | Spaced-repetition state per card | card_id, due_at, interval_days, ease, reps, lapses |
 | `reviews` | Every flashcard answer. Offline sync conflict rule: the latest `reviewed_at` wins | card_id, grade (again/hard/good/easy), reviewed_at, ms_taken |
 | `lessons` | One row per lesson run | session_code, day_number, status, started_at, closed_at |
 | `lesson_logs` | The 3-line log from Close Day | lesson_id, covered, mistakes, carry_over |
-| `mistakes` | Every single error Buddy found | user_id, said, correct, why, category, source (lesson/tandem/test), created_at |
+| `mistakes` + `mistake_answers` | Every error found (exercises, writing, tests, Tandem, speaking). Clears only after 3 correct answers on different days | user_id, item_ref, said, correct, why, grammar_key, source, created_at, cleared_at; mistake_id, correct, answered_on |
+| `grammar_srs` | Spaced repetition per grammar point (same engine as cards) | user_id, grammar_key, due_at, interval_days, ease, reps, lapses |
+| `lesson_progress` | Which parts of today's lesson are done, with scores and answers | user_id, session_seq, part, status, score, answers |
+| `mission_reports`, `stories` | Real-world mission reports with Buddy's correction; graded stories made from the learner's words | user_id, session_code, report, correction; level, words, text |
 | `weak_spots` | Grouped recurring mistakes with ⟳ counter | user_id, text, repeats, status (active/fixed), last_seen |
 | `chats` + `messages` | Lesson and Tandem conversations (summarised after 30 days) | mode, session_code, role, content, tokens_in, tokens_out |
 | `tests` + `test_answers` | Every self-test and its items | kind, score, max, per-skill breakdown; question_id, given, correct |
@@ -163,6 +190,7 @@ Supabase setting: **"Automatically expose new tables" is OFF** and **automatic R
 | `shield_flags` | Blocked off-topic or jailbreak attempts | user_id, message_excerpt, reason |
 | `waitlist` | People waiting after the 30-member cap | email, created_at, approved |
 | `feedback` | Messages from the Me → Send feedback button | user_id, message, created_at |
+| `content_reports` | "Report a mistake" on a card, exercise or lesson part. Members can only add reports; only admins read them (admin review screen) | user_id, kind, ref, session_code, message, status (open/fixed/dismissed), resolved_by, resolved_at |
 
 Daily quotas and the leaderboard are computed from `ai_usage` and `xp_events` (database views), so no extra tables are needed.
 
@@ -203,11 +231,14 @@ The rule: the browser is never trusted. Every permission is checked in the datab
 - Data processing agreements (AVV/DPA) accepted with each provider in their dashboards.
 - Only essential cookies, no tracking, so no cookie banner is needed. Analytics, if added, must be cookie-free.
 - Users can export all their data and delete their account in one click; deletion removes all rows.
+- **Wording:** the product is "AI-based personalised German practice", never "official" or "certified". Mock exams are original, "modelled on the Goethe/telc format", with the line "not affiliated with Goethe-Institut or telc".
+- **AI transparency (EU AI Act, Art. 50):** Buddy is always labelled as an AI, with "can make mistakes" and a report button, on every screen where he writes or speaks.
+- **Pronunciation:** recording only after explicit consent, recordings are never stored; any third-party assessment (Azure) is a per-user opt-in.
 - Not legal advice: have the Impressum and privacy policy checked before the public launch.
 
 ## 7. Costs and limits
 
-Everything except AI and the voice is free at this scale; Raghav's own daily Opus lessons alone are about $12–15 a month, so members need a budget guard to keep the total near €15–20.
+Everything except AI and the voice is free at this scale. Lessons are pre-generated once, so the live AI per learner is small (about $0.3–1.1 a month for a daily learner, see below); the one-off content generation is the larger cost. A budget guard keeps the total near €15–20.
 
 **Fixed monthly costs**
 
@@ -216,47 +247,59 @@ Everything except AI and the voice is free at this scale; Raghav's own daily Opu
 | Vercel Hobby, Supabase free, Resend free, Sentry free, Cloudflare Turnstile | €0 |
 | Domain deutschmitbuddy.de | ~€1 (≈€10/year) |
 | Neural TTS voice | ~€2–5 |
-| One-off: generating ~2,000 curriculum cards + question bank (Batch API) | ~$2–5 once |
+| One-off: all 14 parts of the 90 lessons Z1 → B1, Sonnet (write) + Opus (check), Batch API | ~$16 expected, up to ~$35 worst case; run in tranches, each pass under €10 |
+| One-off, later (slice 13): B2–C1 outlines and lessons | ~$17 expected |
 
-**AI per activity (approximate, with prompt caching)**
+**Live AI per activity (approximate, with prompt caching)**
 
 | Activity | Model | ≈ cost each |
 | --- | --- | --- |
-| Raghav's lesson | Opus 5.5 | $0.40–0.50 |
-| Member lesson | Sonnet 5.5 | $0.20–0.25 |
-| Member lesson (budget mode) | Haiku 5.5 | ~$0.01 |
-| Tandem chat (15 min) | Haiku 5.5 | ~$0.01 |
-| Self-test with writing graded | Haiku 5.5 (Sonnet for writing) | $0.02–0.10 |
-| Shield check per message | Haiku 5.5 | < $0.001 |
-| Flashcards, games, practice drills | none | $0 |
+| Writing correction, every error explained | Opus 5.5 / Sonnet 5.5 / Haiku 5.5 | $0.055 / $0.027 / $0.001 |
+| Tandem chat (15 min) incl. end feedback and shield | Haiku 5.5 | ~$0.004 |
+| Buddy's answers (5 questions) | Haiku 5.5 | ~$0.001 |
+| Day exam: grading the short writing and speaking parts | Haiku 5.5 | < $0.001 |
+| Mistake-based exercises, mission report, morning summary | Haiku 5.5 | < $0.001 each |
+| Graded story | Sonnet 5.5 | ~$0.008 |
+| Lesson parts, exercises, flashcards, games, practice drills | none (pre-generated) | $0 |
+
+Per learner who studies every day for a month: about $1.1 with Sonnet writing correction throughout, **$0.6 with the default guard** (10 Sonnet corrections, then Haiku), $0.3 in budget mode. Raghav (Opus writing, more use): about $2.7.
 
 **Budget guard (built into the server)**
 
 - Monthly AI budget set in the admin page (start: $20). Spend is tracked live in `ai_usage`. **Admin (Raghav) spend is tracked separately and never counts toward this member budget**; the limits below apply to members only.
-- Members: up to 10 Sonnet lessons per month, then lessons switch to Haiku automatically; Tandem within a daily cap (3 chats).
+- Members: up to 10 Sonnet writing corrections per month, then they switch to Haiku automatically; Tandem within a daily cap (3 chats).
 - When 80% of the monthly budget is used, all members switch to Haiku and Raghav gets an email; at 100% member AI pauses until the 1st.
 - Anthropic: prepaid credits, auto-reload off, key scoped to the `deutschmitbuddy` workspace, key expires 28 Feb 2027 (rotate before).
 
-Pricing (Claude API, checked 19 Oct 2026): Opus 5.5 $4 / $20, Sonnet 5.5 $2 / $10, Haiku 5.5 $0.10 / $0.50 per million input / output tokens; Batch API −50%. Model IDs (verified in the current SDK): `claude-opus-5-5`, `claude-sonnet-5-5`, `claude-haiku-5-5`.
+Pricing (Claude API, checked 19 Oct 2026): Opus 5.5 $4 / $20, Sonnet 5.5 $2 / $10, Haiku 5.5 $0.10 / $0.50 per million input / output tokens; Batch API −50%. Content generation passes are capped at €10 each (worst case, by token limits), show a cost estimate first and wait for approval. Model IDs (verified in the current SDK): `claude-opus-5-5`, `claude-sonnet-5-5`, `claude-haiku-5-5`.
 
 ## 8. Build order
 
-The app is built in 14 thin slices, each one working end to end and deployed before the next starts. At 1–2 slices per evening the whole v1 takes about two weeks.
+The app is built in 14 slices (3 and 4 split into small steps), each one working end to end and deployed before the next starts. At 1–2 slices per evening the whole v1 takes about two weeks.
 
 0. **Setup** — git repo (remote github.com/RaGHaV-186/deutsch-mit-buddy), Next.js + Supabase connected, theme, `.env.example`, GitHub Actions CI (lint, test, build on every push and PR), Vercel previews, a live "Hallo! Ich bin Buddy." page on Vercel. Done when the URL loads on Raghav's phone and CI is green.
 1. **Accounts** — sign-up/login (email + Google), required 2FA, captcha, 30-member cap + waitlist, profiles, starting-point picker, legal page skeletons, RLS test harness in CI, Sentry, security headers, feedback button + `feedback` table. Done when Raghav can sign up with 2FA on his phone and the RLS tests pass in CI.
 2. **Flashcards** — the card format (see CLAUDE.md), spaced repetition, Words/Speaking modes, audio + slow, Raghav's 213 existing cards imported from data/seed-cards.json, offline queue. Done when today's cards can be reviewed offline.
-3. **Curriculum content (Z1 → B1)** — the 131 sessions of `data/curriculum.ts` (Z1 → B1, 90 lessons) in the database; ~1,350 word cards (15 per lesson: 10 core + 5 bonus) and a question bank (12 questions per lesson) written by Sonnet 5.5 through the Batch API and then **checked by a second Opus 5.5 Batch pass** (article, plural, example grammar, English meaning, CEFR level; every item marked ok / fixed / needs-human with the reason). Z1–Z3 are generated first as a reviewable sample; the rest is generated and inserted only after Raghav approves it, and only ok and fixed items are inserted. Every paid run shows a cost estimate first and has a hard cap of €10. Cards unlock per lesson (a learner who starts later gets the earlier lessons' cards as already seen and spread over days, the starting lesson's as new). Done when Day N shows the right lesson and cards. **B2–C1 lesson outlines and cards are not part of this slice: see slice 13.**
-4. **Buddy lessons** — streaming chat in the 6-step format, learner profile, Buddy's tools (add cards, log mistakes, update weak spots, close day), model routing, shield, quotas, budget guard (members only; admin spend tracked separately), shared zod tool schemas, canned-lesson regression tests. Done when Raghav finishes a real lesson in the app.
-5. **Tracker** — logs, weak spots, test scores, curriculum map, "What Buddy knows about me", export tracker.md, Raghav's history imported from data/seed-tracker.ts. Done when the export matches his Project tracker.
-6. **Voice + Tandem** — starts with an iOS voice spike (TTS playback, speech recognition, Azure Speech-to-Text fallback), then Buddy's neural voice, speech recognition with typed fallback, Tandem mode with scenarios and feedback. Done when a 10-minute voice Tandem works on a phone.
-7. **Tests** — self-test up to today, weekly and checkpoint tests, Mistake Grind, scores saved. Done when a test result lands in the tracker.
-8. **Practice** — typing quiz, Diktat, numbers & time drill, word-order builder, Hörverstehen.
-9. **Games** — rooms with codes, guests, live sync via Supabase Realtime, Hangman, der/die/das race, quiz battle; server validates scores. Done when two phones play one game.
+3. **Lesson content (Z1 → B1)** — the 131 sessions of `data/curriculum.ts` in the database and all 14 lesson parts for the 90 lessons, as a schema-enforced template (a lesson publishes only when every part exists and passed the Opus check). Sonnet 5.5 writes, Opus 5.5 checks every item (ok / fixed / needs-human with the reason; only ok and fixed go in), free automatic checks run before and after, and a preview page shows everything. Every paid pass shows a cost estimate first (€10 cap per pass). Split into small steps:
+   - **3a** Template, generator and Z1–Z3 sample. Done when Raghav approves the sample.
+   - **3b** The rest in tranches (A1 first, then A2, B1), publish, unlock cards per lesson (a later starting point gets earlier lessons' cards as already seen and spread over days) with `template_id`, and propagation of template corrections to every copy without touching SRS or user-edited cards. Done when Day N shows the right lesson and cards.
+   - **3c** "Report a mistake" on cards and exercises, `content_reports` (admins only) with a simple admin review screen, the AI label and legal wording, and B2/C1 shown as "coming soon" in the starting-lesson picker.
+4. **Daily lesson loop** — in small slices, each working end to end:
+   - **4a** Lesson player without AI: the 14 parts from published content, progress, automatic mistake capture, busy-day mode, Close Day with the Covered / Mistakes / Carry over log.
+   - **4b** Mistake log (clears after 3 correct answers on different days), grammar spaced repetition, the warm-up, the day exam (objective parts graded without AI), article-drill round in the lesson.
+   - **4c** AI foundation: `ai_usage`, quotas, budget guard (members only; admin tracked separately), shield, model routing, shared zod tool schemas, the AI label; Buddy's answers (Haiku).
+   - **4d** Writing correction (every error explained, errors into the mistake log), real-world mission reports, grading the day exam's writing and speaking parts.
+   - **4e** Tandem with Buddy, text mode: partner not teacher, no interruptions, feedback list into the mistake log.
+5. **Tracker** — **5a** logs, weak spots, test scores, curriculum map, skill meter, morning summary in the app, "What Buddy knows about me", export tracker.md, Raghav's history imported from data/seed-tracker.ts (done when the export matches his Project tracker). **5b** placement test at onboarding (sets the starting lesson) and graded short stories.
+6. **Voice + Tandem voice** — starts with an iOS voice spike (TTS playback, speech recognition, Azure Speech-to-Text fallback), then Buddy's neural voice, audio for listening and dictation, pronunciation focus with browser speech recognition (consent first, recordings never stored), voice Tandem. Done when a 10-minute voice Tandem works on a phone.
+7. **Tests** — Sunday tests assembled from the week's lessons, original mock exams every 4 weeks (generated with the same two-pass pipeline, "modelled on the Goethe/telc format"), checkpoint tests, Mistake Grind, scores saved. Done when a test result lands in the tracker.
+8. **Practice** — typing quiz, Diktat, numbers & time drill, word-order builder, Hörverstehen (the lesson exercise engines, available on their own).
+9. **Games** — rooms with codes, guests, live sync via Supabase Realtime, Hangman, der/die/das race (the article-drill engine), quiz battle; server validates scores. Done when two phones play one game.
 10. **XP + friends** — treats, streaks, friends, leaderboards, daily challenge.
-11. **Reminders** — Web Push (VAPID) and the Sunday report email via Resend, triggered hourly by Supabase pg_cron + pg_net calling a secret-protected API route.
-12. **Hardening + launch** — extra security tests (account deletion and data export tests), Playwright browser tests, final legal texts (Impressum re-check), final Buddy artwork, custom domain deutschmitbuddy.de, then the LinkedIn post.
+11. **Reminders** — Web Push (VAPID), the morning summary and the Sunday report email via Resend, triggered hourly by Supabase pg_cron + pg_net calling a secret-protected API route.
+12. **Hardening + launch** — extra security tests (account deletion and data export tests), Playwright browser tests, final legal texts (Impressum re-check, AI and exam wording), final Buddy artwork, custom domain deutschmitbuddy.de, then the LinkedIn post.
+13. **B2–C1 content** — starts with the B2 and C1 lesson outlines (grammar, theme, goal) for Raghav's review, and nothing is generated before he approves them. Then the same 14-part template and two-pass pipeline (instructions fully German from B2). Until then B2 and C1 are visible but not selectable in the starting-lesson picker ("coming soon").
 
-13. **B2–C1 content** — the B2 and C1 lesson outlines (grammar, theme, goal) written and approved, then their cards and questions through the same two-pass pipeline as slice 3. The database (`curriculum_sessions.phase` already allows B2 and C1) and the starting-lesson picker are ready for them.
+**Later (not in v1):** Azure Pronunciation Assessment as a per-user flag (consent first, no stored recordings); Tandem with real people.
 
 Design can change at any time: colours, fonts and spacing live in one theme file.

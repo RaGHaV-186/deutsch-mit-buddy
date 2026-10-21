@@ -12,7 +12,9 @@
     "test:rls": "vitest run --project rls",
     "db:start": "supabase start",
     "db:reset": "supabase db reset",
-    "seed:curriculum": "node --env-file=.env.local --no-warnings scripts/seed-curriculum.mts"
+    "seed:curriculum": "node --env-file=.env.local --no-warnings scripts/seed-curriculum.mts",
+    "content": "node --env-file=.env.local --no-warnings scripts/content.mts",
+    "check:bundle": "node --no-warnings scripts/check-client-bundle.mts"
   },
   "dependencies": {
     "@sentry/nextjs": "^11.8.0",

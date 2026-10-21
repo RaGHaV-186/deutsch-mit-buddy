@@ -124,7 +124,7 @@ Supabase setting: **"Automatically expose new tables" is OFF** and **automatic R
 
 | Table | Holds | Key columns |
 | --- | --- | --- |
-| `curriculum_sessions` | Every lesson Z1 → C1 in order, plus Saturdays, Sundays, checkpoints | seq, code, kind, level, grammar, theme, goal, word_target |
+| `curriculum_sessions` | Every lesson in order, plus Saturdays, Sundays, checkpoints (Z1 → B1 now, B2 and C1 later) | seq, code, kind, phase (the plan's level), grammar, theme, goal, word_target |
 | `card_templates` | Pre-generated word cards per lesson (the shared deck) | session_code, en, article, de, plural, example, example_en, audio_url |
 | `question_bank` | Test questions per lesson (multiple choice, gap fill, ordering, typing) | session_code, skill, type, prompt, answer, distractors |
 | `game_words` | Word lists for games by level | level, article, word, en, hint |
@@ -241,12 +241,12 @@ Pricing (Claude API, checked 19 Oct 2026): Opus 5.5 $4 / $20, Sonnet 5.5 $2 / $1
 
 ## 8. Build order
 
-The app is built in 13 thin slices, each one working end to end and deployed before the next starts. At 1–2 slices per evening the whole v1 takes about two weeks.
+The app is built in 14 thin slices, each one working end to end and deployed before the next starts. At 1–2 slices per evening the whole v1 takes about two weeks.
 
 0. **Setup** — git repo (remote github.com/RaGHaV-186/deutsch-mit-buddy), Next.js + Supabase connected, theme, `.env.example`, GitHub Actions CI (lint, test, build on every push and PR), Vercel previews, a live "Hallo! Ich bin Buddy." page on Vercel. Done when the URL loads on Raghav's phone and CI is green.
 1. **Accounts** — sign-up/login (email + Google), required 2FA, captcha, 30-member cap + waitlist, profiles, starting-point picker, legal page skeletons, RLS test harness in CI, Sentry, security headers, feedback button + `feedback` table. Done when Raghav can sign up with 2FA on his phone and the RLS tests pass in CI.
 2. **Flashcards** — the card format (see CLAUDE.md), spaced repetition, Words/Speaking modes, audio + slow, Raghav's 213 existing cards imported from data/seed-cards.json, offline queue. Done when today's cards can be reviewed offline.
-3. **Curriculum content** — curriculum Z1 → C1 in the database, B2–C1 lessons generated, ~2,000 word cards + question bank generated with the Batch API (Z1–Z3 sample first as reviewable JSON; the rest is generated and inserted only after Raghav approves the sample), cards unlock per lesson. Done when Day N shows the right lesson and cards.
+3. **Curriculum content (Z1 → B1)** — the 131 sessions of `data/curriculum.ts` (Z1 → B1, 90 lessons) in the database; ~1,350 word cards (15 per lesson: 10 core + 5 bonus) and a question bank (12 questions per lesson) written by Sonnet 5.5 through the Batch API and then **checked by a second Opus 5.5 Batch pass** (article, plural, example grammar, English meaning, CEFR level; every item marked ok / fixed / needs-human with the reason). Z1–Z3 are generated first as a reviewable sample; the rest is generated and inserted only after Raghav approves it, and only ok and fixed items are inserted. Every paid run shows a cost estimate first and has a hard cap of €10. Cards unlock per lesson (a learner who starts later gets the earlier lessons' cards as already seen and spread over days, the starting lesson's as new). Done when Day N shows the right lesson and cards. **B2–C1 lesson outlines and cards are not part of this slice: see slice 13.**
 4. **Buddy lessons** — streaming chat in the 6-step format, learner profile, Buddy's tools (add cards, log mistakes, update weak spots, close day), model routing, shield, quotas, budget guard (members only; admin spend tracked separately), shared zod tool schemas, canned-lesson regression tests. Done when Raghav finishes a real lesson in the app.
 5. **Tracker** — logs, weak spots, test scores, curriculum map, "What Buddy knows about me", export tracker.md, Raghav's history imported from data/seed-tracker.ts. Done when the export matches his Project tracker.
 6. **Voice + Tandem** — starts with an iOS voice spike (TTS playback, speech recognition, Azure Speech-to-Text fallback), then Buddy's neural voice, speech recognition with typed fallback, Tandem mode with scenarios and feedback. Done when a 10-minute voice Tandem works on a phone.
@@ -256,5 +256,7 @@ The app is built in 13 thin slices, each one working end to end and deployed bef
 10. **XP + friends** — treats, streaks, friends, leaderboards, daily challenge.
 11. **Reminders** — Web Push (VAPID) and the Sunday report email via Resend, triggered hourly by Supabase pg_cron + pg_net calling a secret-protected API route.
 12. **Hardening + launch** — extra security tests (account deletion and data export tests), Playwright browser tests, final legal texts (Impressum re-check), final Buddy artwork, custom domain deutschmitbuddy.de, then the LinkedIn post.
+
+13. **B2–C1 content** — the B2 and C1 lesson outlines (grammar, theme, goal) written and approved, then their cards and questions through the same two-pass pipeline as slice 3. The database (`curriculum_sessions.phase` already allows B2 and C1) and the starting-lesson picker are ready for them.
 
 Design can change at any time: colours, fonts and spacing live in one theme file.

@@ -12,6 +12,9 @@ export function isGameLayerOn(env: { flag?: string; nodeEnv?: string } = { flag:
   return env.nodeEnv !== "production";
 }
 
+/** Treats earned per answer (design brief, game layer): Again 0, Hard 5, Got it 10, Easy 15. Shown only when the game layer is on. */
+export const GRADE_TREATS = { again: 0, hard: 5, good: 10, easy: 15 } as const;
+
 export interface GameData {
   /** True while the numbers are placeholders (everything, until slice 10 supplies real data). */
   preview: boolean;

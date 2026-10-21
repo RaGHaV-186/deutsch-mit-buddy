@@ -213,6 +213,23 @@ body {
   animation: ds-toast-in 0.3s var(--ease-spring) 1;
 }
 
+/* Reward chip floating up after an answer (game layer only), and the options sheet sliding in. */
+@keyframes ds-float-up {
+  0% { opacity: 0; transform: translateY(8px); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-30px); }
+}
+.ds-float-up {
+  animation: ds-float-up 0.55s var(--ease-out) 1 forwards;
+}
+@keyframes ds-sheet-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.ds-sheet {
+  animation: ds-sheet-in 0.25s var(--ease-spring) 1;
+}
+
 /* First-load splash (src/components/ds/Splash.tsx). Shown only while <html data-splash> is set. */
 .splash {
   display: none;

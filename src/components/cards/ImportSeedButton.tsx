@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
 import { importSeedDeckAction, type ImportState } from "@/app/(app)/cards/actions";
 import { FormError } from "@/components/FormParts";
-import { secondaryButtonClass } from "@/components/ui";
+import { Cushion, PillButton } from "@/components/ds";
 
 /** Admin only: gives Raghav his seed deck. Safe to press again. */
 export function ImportSeedButton({ onImported }: { onImported: () => void }) {
@@ -13,13 +13,14 @@ export function ImportSeedButton({ onImported }: { onImported: () => void }) {
   const [state, setState] = useState<ImportState>();
 
   return (
-    <section className="flex flex-col gap-2 rounded-xl border border-foreground/20 p-4">
-      <h2 className="font-heading text-lg font-bold">{t("title")}</h2>
-      <p className="text-sm text-muted">{t("body")}</p>
-      <button
-        type="button"
-        className={secondaryButtonClass}
-        disabled={pending}
+    <Cushion radius={28} className="flex flex-col gap-3 p-5">
+      <h2 className="text-headline">{t("title")}</h2>
+      <p className="text-caption text-muted">{t("body")}</p>
+      <PillButton
+        variant="cushion"
+        fullWidth
+        loading={pending}
+        className="shadow-none ring-1 ring-track"
         onClick={() =>
           start(async () => {
             const result = await importSeedDeckAction();
@@ -28,10 +29,10 @@ export function ImportSeedButton({ onImported }: { onImported: () => void }) {
           })
         }
       >
-        {pending ? t("working") : t("button")}
-      </button>
+        {t("button")}
+      </PillButton>
       {state?.result ? (
-        <p role="status">
+        <p role="status" className="text-caption">
           {t("result", {
             imported: state.result.imported,
             seen: state.result.seen,
@@ -43,6 +44,6 @@ export function ImportSeedButton({ onImported }: { onImported: () => void }) {
       ) : null}
       <FormError code={state?.error === "forbidden" ? undefined : state?.error} />
       {state?.error === "forbidden" ? <p role="alert">{t("forbidden")}</p> : null}
-    </section>
+    </Cushion>
   );
 }

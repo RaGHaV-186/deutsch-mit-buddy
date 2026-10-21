@@ -2,16 +2,15 @@
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { PillButton, SpeakerIcon } from "@/components/ds";
 import type { SpeakView } from "@/lib/cards/display";
 import { speak, type SpeakResult } from "@/lib/speech";
-import { compactButtonClass } from "@/components/ui";
 
 type Target = "word" | "sentence";
-const buttonClass = `${compactButtonClass} min-h-12`;
 
 /**
- * Play word / Play sentence / Slow. "Slow" repeats whichever was played last (the word, or the sentence if there is no word).
- * Give it a `key` that changes with the card and the side, so its state starts fresh.
+ * Play word / Play sentence / Slow, sitting on the coat strip of the card. "Slow" repeats whichever was played last
+ * (the word, or the sentence if there is no word). Give it a `key` that changes with the card and the side.
  */
 export function AudioBar({ speakView }: { speakView: SpeakView }) {
   const t = useTranslations("Cards.audio");
@@ -29,24 +28,24 @@ export function AudioBar({ speakView }: { speakView: SpeakView }) {
 
   if (!speakView.word && !speakView.sentence) return null;
   return (
-    <div className="flex flex-col items-center gap-2">
-      <div className="flex flex-wrap justify-center gap-2">
+    <div className="flex flex-col items-end gap-2">
+      <div className="flex flex-wrap justify-end gap-2">
         {speakView.word ? (
-          <button type="button" className={buttonClass} onClick={() => play("word", false)}>
+          <PillButton variant="blaze" size={44} icon={<SpeakerIcon size={20} />} className="px-4" onClick={() => play("word", false)}>
             {t("word")}
-          </button>
+          </PillButton>
         ) : null}
         {speakView.sentence ? (
-          <button type="button" className={buttonClass} onClick={() => play("sentence", false)}>
+          <PillButton variant="blaze" size={44} icon={<SpeakerIcon size={20} />} className="px-4" onClick={() => play("sentence", false)}>
             {t("sentence")}
-          </button>
+          </PillButton>
         ) : null}
-        <button type="button" className={buttonClass} onClick={() => play(last, true)}>
+        <PillButton variant="outline-on-coat" size={44} className="px-4" onClick={() => play(last, true)}>
           {t("slow")}
-        </button>
+        </PillButton>
       </div>
       {problem ? (
-        <p role="status" className="max-w-sm text-center text-sm text-muted">
+        <p role="status" className="max-w-[28ch] text-right text-caption text-on-coat-muted">
           {problem === "no-voice" ? t("noVoice") : t("unsupported")}
         </p>
       ) : null}

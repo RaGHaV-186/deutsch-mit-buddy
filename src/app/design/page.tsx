@@ -35,6 +35,9 @@ import {
   CloseIcon,
 } from "@/components/ds";
 import { colors, type ColorToken } from "@/theme";
+import { FlashCard } from "@/components/cards/FlashCard";
+import { buildCardView } from "@/lib/cards/display";
+import { makeCard } from "@/lib/cards/test-helpers";
 import { HomeSkeleton } from "@/components/home/HomeSkeleton";
 import { HomeView } from "@/components/home/HomeView";
 import { GAME_PREVIEW } from "@/lib/game-layer";
@@ -347,6 +350,21 @@ export default function DesignPage() {
         <div className="overflow-hidden rounded-[24px]">
           <HomeSkeleton game={false} tabBar="static" />
         </div>
+      </Section>
+
+      <Section title="Flashcard" note="Front, back, and the back with the combo chip (game layer). Audio sits on the coat strip.">
+        {[
+          { flipped: false, combo: null },
+          { flipped: true, combo: null },
+          { flipped: true, combo: 5 },
+        ].map((v, i) => {
+          const card = makeCard({ kind: "word", article: "der", de: "Kaffee", en: "coffee", plural: "die Kaffees", example: "Ich trinke einen Kaffee.", exampleEn: "I drink a coffee." });
+          return (
+            <div key={i} className="flex h-[480px] flex-col">
+              <FlashCard view={buildCardView(card, "en-de")} cardId={card.id} flipped={v.flipped} combo={v.combo} />
+            </div>
+          );
+        })}
       </Section>
 
       <Section title="PawStreakWeek, LevelCard, DueCardsTile">

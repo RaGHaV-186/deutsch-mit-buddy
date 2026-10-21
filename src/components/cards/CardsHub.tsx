@@ -1,78 +1,46 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { primaryButtonClass } from "@/components/ui";
-import { DIRECTIONS, MODES, type Direction, type Mode, type QueueCounts } from "@/lib/cards/queue";
-
-function Choice<T extends string>({
-  label,
-  value,
-  options,
-  onChange,
-  text,
-}: {
-  label: string;
-  value: T;
-  options: T[];
-  onChange: (v: T) => void;
-  text: (v: T) => string;
-}) {
-  return (
-    <div role="radiogroup" aria-label={label} className="flex flex-col gap-1.5">
-      <p className="font-bold">{label}</p>
-      <div className="grid auto-cols-fr grid-flow-col gap-1 rounded-xl border border-foreground/20 p-1">
-        {options.map((o) => (
-          <button
-            key={o}
-            type="button"
-            role="radio"
-            aria-checked={o === value}
-            onClick={() => onChange(o)}
-            className={`min-h-12 rounded-lg px-2 py-2 text-base font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus ${
-              o === value ? "bg-coat text-on-coat" : "hover:bg-foreground/5"
-            }`}
-          >
-            {text(o)}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
+import { BuddyMascot, CoatHeader, PillButton, SlidersIcon } from "@/components/ds";
+import type { QueueCounts } from "@/lib/cards/queue";
 
 interface Props {
-  counts: QueueCounts;
-  mode: Mode;
-  direction: Direction;
-  onMode: (m: Mode) => void;
-  onDirection: (d: Direction) => void;
+  /** null while the deck isn't available (loading, empty, offline without data): just the title is shown. */
+  counts: QueueCounts | null;
   onStart: () => void;
+  onOptions: () => void;
 }
 
-export function CardsHub({ counts, mode, direction, onMode, onDirection, onStart }: Props) {
+/** The Cards tab's coat block: today's reviews and new cards, Start review, and the options button. */
+export function CardsHub({ counts, onStart, onOptions }: Props) {
   const t = useTranslations("Cards");
-  const total = counts.due + counts.fresh;
+  const total = counts ? counts.due + counts.fresh : 0;
   return (
-    <div className="flex flex-col gap-5">
-      <section className="flex flex-col gap-1 rounded-xl border border-foreground/20 p-4 text-center">
-        <p className="font-heading text-2xl font-bold">{t("due", { count: counts.due })}</p>
-        <p>{t("fresh", { count: counts.fresh })}</p>
-        {counts.waiting > 0 ? <p className="text-sm text-muted">{t("waiting", { count: counts.waiting })}</p> : null}
-        {total === 0 ? <p className="mt-1 text-muted">{t("allDone")}</p> : null}
-      </section>
-
-      <Choice label={t("mode.label")} value={mode} options={MODES} onChange={onMode} text={(m) => t(`mode.${m}`)} />
-      <Choice
-        label={t("direction.label")}
-        value={direction}
-        options={DIRECTIONS}
-        onChange={onDirection}
-        text={(d) => t(d === "en-de" ? "direction.enDe" : "direction.deEn")}
-      />
-
-      <button type="button" className={`${primaryButtonClass} min-h-14`} disabled={total === 0} onClick={onStart}>
-        {t("start")}
-      </button>
-    </div>
+    <CoatHeader>
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex min-w-0 flex-col gap-1">
+          <h1 className="text-display">{t("title")}</h1>
+          {counts ? (
+            <>
+              <p className="mt-3 text-title tabular">{t("due", { count: counts.due })}</p>
+              <p className="text-[16px] text-on-coat-muted tabular">{t("fresh", { count: counts.fresh })}</p>
+              {counts.waiting > 0 ? <p className="text-caption text-on-coat-muted tabular">{t("waiting", { count: counts.waiting })}</p> : null}
+              {total === 0 ? <p className="text-[16px] text-on-coat-muted">{t("allDone")}</p> : null}
+            </>
+          ) : null}
+        </div>
+        <BuddyMascot pose={counts && total === 0 ? "resting" : "happy"} size={58} className="mt-1 shrink-0" priority />
+      </div>
+      {counts ? (
+        <div className="mt-5 flex gap-3">
+          <PillButton variant="blaze" className="flex-1" disabled={total === 0} onClick={onStart}>
+            {t("start")}
+          </PillButton>
+          <PillButton variant="outline-on-coat" icon={<SlidersIcon size={20} />} className="px-5" onClick={onOptions}>
+            {t("options.button")}
+          </PillButton>
+        </div>
+      ) : null}
+    </CoatHeader>
   );
 }

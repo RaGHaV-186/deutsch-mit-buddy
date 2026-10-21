@@ -2,6 +2,8 @@
 
 Save this file in the project as `docs/DESIGN_BRIEF.md`. Reference screenshots live in `docs/design/`. Mascot and icon assets are already in `public/buddy/`.
 
+**Redesign v1 shipped in PR #10 (design-v1). New slices build on `@/components/ds`.**
+
 ---
 
 ## Your task

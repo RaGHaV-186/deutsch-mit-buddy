@@ -89,6 +89,7 @@ describe("Cards screen, offline (airplane mode)", () => {
     fireEvent.click(screen.getByRole("button", { name: /^Got it/ }));
     await screen.findByText("Wuff! Session done");
     expect(document.body.textContent).not.toMatch(/treats/i);
+    expect(document.querySelector('img[src="/buddy/buddy-happy.svg"]')).not.toBeNull();
     unmount();
 
     (globalThis as { indexedDB: IDBFactory }).indexedDB = new IDBFactory();
@@ -99,6 +100,7 @@ describe("Cards screen, offline (airplane mode)", () => {
     fireEvent.click(screen.getByRole("button", { name: /^Got it/ }));
     await screen.findByText("Wuff! Session done");
     expect(screen.getAllByText("+10 treats").length).toBeGreaterThan(0);
+    expect(document.querySelector('img[src="/buddy/buddy-happy.svg"]')).not.toBeNull();
   });
 
   it("mode and direction live behind the Options button; the choice is remembered", async () => {

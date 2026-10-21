@@ -1,7 +1,17 @@
 import { execSync } from "node:child_process";
 
 // Reads the local stack's URL and keys from `supabase status` unless they are already set (CI can export them).
-export default function setup() {
+export default async function setup() {
+  loadEnv();
+  // The cap tests change the member cap; remember the real value so every file (and the teardown) puts it back.
+  const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/app_config?key=eq.member_cap&select=value`, {
+    headers: { apikey: process.env.SUPABASE_SERVICE_ROLE_KEY!, Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}` },
+  });
+  const rows = (await res.json()) as { value: number }[];
+  process.env.RLS_ORIGINAL_MEMBER_CAP = String(rows[0]?.value ?? 30);
+}
+
+function loadEnv() {
   if (process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY && process.env.SUPABASE_SERVICE_ROLE_KEY) {
     return;
   }

@@ -1,12 +1,21 @@
 import { afterAll, beforeEach, describe, expect, it } from "vitest";
-import { admin, anon, createUserRaw, resetState, setMemberCap, sql, uniqueEmail } from "./helpers";
+import { admin, anon, createUserRaw, resetState, seatsUsed, setMemberCap, sql, uniqueEmail } from "./helpers";
+
+/** Profiles of the users this file created (the dev account's profile is not ours to count). */
+const testProfiles = async () => {
+  const { data } = await admin.from("profiles").select("user_id");
+  const { data: users } = await admin.auth.admin.listUsers({ perPage: 200 });
+  const ours = new Set((users?.users ?? []).filter((u) => /^rls-.+@example\.test$/.test(u.email ?? "")).map((u) => u.id));
+  return (data ?? []).filter((p) => ours.has(p.user_id)).length;
+};
 
 const open = async () => (await anon().rpc("signup_open")).data;
 
 describe("member cap and waitlist", () => {
   beforeEach(async () => {
     await resetState();
-    await setMemberCap(3);
+    // Room for exactly 3 of our users on top of any real member account already in the database.
+    await setMemberCap((await seatsUsed()) + 3);
   });
   afterAll(resetState);
 
@@ -16,15 +25,13 @@ describe("member cap and waitlist", () => {
     expect(await open()).toBe(false);
     const extra = await createUserRaw();
     expect(extra.error).not.toBeNull();
-    const { count } = await admin.from("profiles").select("*", { count: "exact", head: true });
-    expect(count).toBe(3);
+    expect(await testProfiles()).toBe(3);
   });
 
   it("never overshoots the cap under concurrent sign-ups", async () => {
     const results = await Promise.all(Array.from({ length: 6 }, () => createUserRaw()));
     expect(results.filter((r) => !r.error)).toHaveLength(3);
-    const { count } = await admin.from("profiles").select("*", { count: "exact", head: true });
-    expect(count).toBe(3);
+    expect(await testProfiles()).toBe(3);
   });
 
   it("lets an approved waitlist email in when full, but not an unapproved one", async () => {

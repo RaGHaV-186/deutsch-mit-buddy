@@ -59,13 +59,24 @@ export async function createMember(): Promise<TestUser> {
   return { id: data.user.id, email, aal2, aal1 };
 }
 
+/** Every user these tests create has an address like this; nothing else is ever deleted. */
+const isTestEmail = (email?: string) => /^rls-.+@example\.test$/.test(email ?? "");
+
+/** Deletes the test users left behind by earlier runs and by the current file. Real (dev) accounts are never touched. */
 export async function purgeUsers() {
-  for (;;) {
-    const { data, error } = await admin.auth.admin.listUsers({ page: 1, perPage: 200 });
+  for (let page = 1; ; page++) {
+    const { data, error } = await admin.auth.admin.listUsers({ page, perPage: 200 });
     if (error) throw error;
-    if (data.users.length === 0) return;
-    await Promise.all(data.users.map((u) => admin.auth.admin.deleteUser(u.id)));
+    await Promise.all(data.users.filter((u) => isTestEmail(u.email)).map((u) => admin.auth.admin.deleteUser(u.id)));
+    if (data.users.length < 200) return;
   }
+}
+
+/** Seats currently used by accounts that are not ours (e.g. a dev member account); cap tests add this to their cap. */
+export async function seatsUsed() {
+  const { data, error } = await admin.rpc("member_seats_used");
+  if (error) throw error;
+  return data as number;
 }
 
 export async function setMemberCap(cap: number) {
@@ -86,7 +97,7 @@ export async function sql<T = unknown>(text: string, params: unknown[] = []): Pr
 
 export async function resetState() {
   await purgeUsers();
-  await admin.from("waitlist").delete().neq("id", "00000000-0000-0000-0000-000000000000");
-  await admin.from("rate_limits").delete().neq("key", "");
-  await setMemberCap(30);
+  await admin.from("waitlist").delete().like("email", "rls-%@example.test");
+  await admin.from("rate_limits").delete().like("key", "test:%");
+  await setMemberCap(Number(process.env.RLS_ORIGINAL_MEMBER_CAP ?? 30));
 }

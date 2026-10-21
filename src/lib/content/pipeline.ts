@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import type { CurriculumRow } from "./curriculum-rows.ts";
 import { applyFix, enumerateItems, valueOf, type LessonItem, type UnitName } from "./lesson-items.ts";
-import { errorIds, lessonErrors, lintLesson } from "./lesson-lint.ts";
+import { lessonErrors, lintLesson } from "./lesson-lint.ts";
 import {
   PART_NUMBER,
   PARTS,

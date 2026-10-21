@@ -59,7 +59,8 @@ describe("applyFix", () => {
   it("refuses text that is not JSON, and JSON that does not fit the unit (a card with a wrong article, a missing field)", () => {
     expect(applyFix(lesson, item, "not json")).toBeNull();
     expect(applyFix(lesson, item, JSON.stringify({ ...lesson.vocabulary.words[0], article: "le" }))).toBeNull();
-    const { example: _example, ...missing } = lesson.vocabulary.words[0];
+    const missing: Record<string, unknown> = { ...lesson.vocabulary.words[0] };
+    delete missing.example;
     expect(applyFix(lesson, item, JSON.stringify(missing))).toBeNull();
     expect(applyFix(lesson, item, JSON.stringify({ can_do: "wrong unit" }))).toBeNull();
   });

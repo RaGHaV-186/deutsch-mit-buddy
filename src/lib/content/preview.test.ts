@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { listRuns, loadRun, RUN_NAME } from "./preview";
-import { validContent } from "./test-fixtures";
+import { validPassA, validPassB } from "./test-fixtures";
 
 let base: string;
 beforeEach(() => {
@@ -21,14 +21,16 @@ describe("run names", () => {
 describe("loadRun", () => {
   it("reads the generated content, the review file and the cost reports of a run", () => {
     mkdirSync(join(base, "sample"));
-    writeFileSync(join(base, "sample", "generate.raw.json"), JSON.stringify({ contents: { Z1: validContent() }, failures: [] }));
-    writeFileSync(join(base, "sample", "review.json"), JSON.stringify({ run: "sample", summary: { items: 27 }, lessons: [] }));
-    writeFileSync(join(base, "sample", "generate.report.json"), JSON.stringify({ stage: "generate", actualEur: 0.05 }));
+    writeFileSync(join(base, "sample", "generate-a.raw.json"), JSON.stringify({ lessons: { Z1: validPassA(), Z2: validPassA() }, failures: [] }));
+    writeFileSync(join(base, "sample", "generate-b.raw.json"), JSON.stringify({ lessons: { Z1: validPassB() }, failures: [] }));
+    writeFileSync(join(base, "sample", "review.json"), JSON.stringify({ run: "sample", summary: { items: 93 }, lessons: [] }));
+    writeFileSync(join(base, "sample", "generate-a.report.json"), JSON.stringify({ stage: "generate-a", actualEur: 0.05 }));
     const run = loadRun("sample", base)!;
     expect(run.name).toBe("sample");
-    expect(Object.keys(run.generated!)).toEqual(["Z1"]);
-    expect(run.review!.summary.items).toBe(27);
-    expect(run.reports.generate!.actualEur).toBe(0.05);
+    expect(Object.keys(run.generated!)).toEqual(["Z1"]); // Z2 has pass A only: not a complete lesson yet
+    expect(Object.keys(run.generated!.Z1)).toHaveLength(14);
+    expect(run.review!.summary.items).toBe(93);
+    expect(run.reports["generate-a"]!.actualEur).toBe(0.05);
     expect(run.reports.review).toBeNull();
   });
 

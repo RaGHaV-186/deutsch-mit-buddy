@@ -70,7 +70,8 @@ describe("publish_lesson", () => {
   it("refuses a lesson with a part that has not passed the review (needs-human, or no status at all)", async () => {
     const p = payload();
     expect((await publish(p, { status: { ...p.part_status, reading: "needs-human" } })).error?.message).toMatch(/Part reading .* has not passed the review/);
-    const { writing: _w, ...without } = p.part_status;
+    const without: Record<string, unknown> = { ...p.part_status };
+    delete without.writing;
     expect((await publish(p, { status: without })).error?.message).toMatch(/Part writing/);
     expect(await counts()).toEqual({ parts: 0, cards: 0, questions: 0, published: 0 });
   });
@@ -137,7 +138,7 @@ describe("publish_lesson", () => {
       expect(error?.code).toBe("42501");
     }
     for (const table of ["lesson_parts", "lesson_publications"]) {
-      const row = table === "lesson_parts" ? { session_code: CODE, part: "goal", content: {}, review_status: "ok", reviewed_by_model: "x" } : { session_code: CODE };
+      const row: Record<string, unknown> = table === "lesson_parts" ? { session_code: CODE, part: "goal", content: {}, review_status: "ok", reviewed_by_model: "x" } : { session_code: CODE };
       expect((await a.aal2.from(table).insert(row)).error?.code).toBe("42501");
       expect((await a.aal2.from(table).delete().eq("session_code", CODE)).error?.code).toBe("42501");
       expect((await anon().from(table).select("*")).error?.code).toBe("42501");

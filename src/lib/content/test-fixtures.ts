@@ -37,7 +37,7 @@ const gap = (i: number): Question => ({ skill: "grammar", type: "gap_fill", prom
 const order = (i: number): Question => ({ skill: "word_order", type: "ordering", prompt: `${NOUNS[i][1]} / ich / trinke`, answer: `Ich trinke ${NOUNS[i][1]}.`, distractors: [], explanation: "The verb is the second word." });
 const translate = (i: number): Question => ({ skill: "translation", type: "typing", prompt: `I drink ${NOUNS[i][2]}.`, answer: `Ich trinke ${NOUNS[i][1]}.`, distractors: [], explanation: "Ich trinke = I drink." });
 const dictate = (i: number): Question => ({ skill: "dictation", type: "dictation", prompt: "Listen and write the sentence.", answer: `Ich trinke gern ${NOUNS[i][1]}.`, distractors: [], explanation: "Capital letter for the noun." });
-const article = (i: number): Question => ({ skill: "articles", type: "multiple_choice", prompt: `___ ${NOUNS[i][1]}`, answer: NOUNS[i][0], distractors: ["der", "die", "das"].filter((a) => a !== NOUNS[i][0]), explanation: `${NOUNS[i][1]} is ${NOUNS[i][0]}.` });
+export const articleQuestion = (i: number): Question => ({ skill: "articles", type: "multiple_choice", prompt: `___ ${NOUNS[i][1]}`, answer: NOUNS[i][0], distractors: ["der", "die", "das"].filter((a) => a !== NOUNS[i][0]), explanation: `${NOUNS[i][1]} is ${NOUNS[i][0]}.` });
 const seq = (n: number, f: (i: number) => Question, from = 0) => Array.from({ length: n }, (_, i) => f(from + i));
 
 const script = (lines: [string, string][]) => lines.map(([speaker, de]) => ({ speaker, de, en: `English for: ${de}` }));

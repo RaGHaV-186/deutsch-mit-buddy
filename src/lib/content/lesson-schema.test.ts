@@ -92,7 +92,7 @@ describe("JSON Schemas sent to the API", () => {
   });
 
   it("nullable fields are expressed as anyOf with null (so the model can say 'none')", () => {
-    const words = (PASS_A_JSON_SCHEMA as any).properties.vocabulary.properties.words.items.properties;
+    const words = (PASS_A_JSON_SCHEMA as { properties: { vocabulary: { properties: { words: { items: { properties: Record<string, { anyOf: unknown[] }> } } } } } }).properties.vocabulary.properties.words.items.properties;
     expect(words.article.anyOf).toEqual([{ type: "string", enum: ["der", "die", "das"] }, { type: "null" }]);
     expect(words.tip.anyOf).toContainEqual({ type: "null" });
   });
@@ -100,7 +100,7 @@ describe("JSON Schemas sent to the API", () => {
   it("toApiSchema strips limits but keeps structure", () => {
     const s = toApiSchema(z.object({ a: z.string().min(2).max(5), b: z.array(z.string()).min(1).max(3), c: z.number().int().min(1) }));
     expect(JSON.stringify(s)).not.toMatch(/minLength|maxLength|minItems|maxItems|minimum/);
-    expect((s as any).properties.b.type).toBe("array");
+    expect((s as { properties: { b: { type: string } } }).properties.b.type).toBe("array");
   });
 
   it("the review answer carries a correction as a JSON string, and a status from the three verdicts", () => {

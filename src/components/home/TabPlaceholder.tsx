@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { BuddyMascot, CoatHeader, EmptyState, AppNav, Screen, SpeechBubble, type TabId } from "@/components/ds";
+import { BuddyMascot, CoatHeader, AppNav, Screen, SpeechBubble, type TabId } from "@/components/ds";
 
 /** A tab whose screen isn't built yet (Learn and Play): the coat header, "coming soon", and the tab bar so the app stays navigable. */
 export function TabPlaceholder({ tab }: { tab: Extract<TabId, "learn" | "play"> }) {
@@ -18,7 +18,7 @@ export function TabPlaceholder({ tab }: { tab: Extract<TabId, "learn" | "play"> 
           </div>
         </CoatHeader>
         <div className="px-5 pt-6 desk:px-0 desk:pt-8">
-          <EmptyState pose="curious" message={`${soon("title")}. ${soon("message")}`} />
+          <p className="mx-auto max-w-[28ch] py-10 text-center text-[16px] font-semibold">{`${soon("title")}. ${soon("message")}`}</p>
         </div>
       </Screen>
       <AppNav active={tab} />

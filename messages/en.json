@@ -285,6 +285,11 @@
     "flip": "Show answer",
     "flipHint": "Tap the card or press Space",
     "gradeHintDesk": "Space to play · 1–4 to grade",
+    "prompt": {
+      "enDe": "Wie sagt man das auf Deutsch?",
+      "deEn": "What's that in English?",
+      "answer": "Und was antwortest du?"
+    },
     "grade": {
       "again": "Again",
       "hard": "Hard",
@@ -437,7 +442,16 @@
   },
   "Desktop": {
     "tagline": "German from zero to C1, with your AI teacher dog.",
-    "loginSubtitle": "Pick up where you left off."
+    "loginSubtitle": "Pick up where you left off.",
+    "heading": {
+      "forgot": "Reset link",
+      "reset": "New password",
+      "checkEmail": "Check your email",
+      "waitlist": "Waitlist",
+      "mfaSetup": "Two-factor setup",
+      "mfaVerify": "Enter code",
+      "onboarding": "Your start"
+    }
   },
   "Soon": {
     "title": "Coming soon",

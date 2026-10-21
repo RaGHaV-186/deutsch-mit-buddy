@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { BlazeNotch, PawIcon, SlidersIcon } from "@/components/ds";
+import { BlazeNotch, PawIcon, SlidersIcon, SpeechBubble } from "@/components/ds";
 import type { CardView } from "@/lib/cards/display";
 import { AudioBar } from "./AudioBar";
 import { CardFace } from "./CardFace";
@@ -25,13 +25,15 @@ export function FlashCard({ view, cardId, flipped, combo, onFlip, onOptions }: P
   const audio = flipped ? view.speak : view.frontSpeak;
   const comboOn = combo !== null && combo >= 3;
   const direction = t(view.direction === "en-de" ? "direction.enDe" : "direction.deEn");
+  // Buddy's prompt on the front: German when the learner has to say it in German, English the other way round.
+  const promptKey = view.front.label === "answerOutLoud" ? "answer" : view.direction === "en-de" ? "enDe" : "deEn";
   return (
     <div
       className="flex flex-1 flex-col overflow-hidden rounded-[32px] bg-surface shadow-cushion desk:min-h-[520px] desk:flex-none"
       onClick={flipped ? undefined : onFlip}
     >
-      <div className="relative flex min-h-[84px] flex-wrap items-start justify-between gap-3 rounded-coat-card bg-coat px-[18px] pb-10 pt-5 text-on-coat desk:min-h-[106px] desk:flex-nowrap desk:items-center desk:pb-12 desk:pt-4">
-        <div className="flex min-h-11 items-center">
+      <div className="relative flex min-h-[84px] flex-wrap items-start justify-between gap-3 rounded-coat-card bg-coat px-[18px] pb-10 pt-5 text-on-coat desk:min-h-[106px] desk:items-center desk:pb-12 desk:pt-4">
+        <div className="flex min-h-11 min-w-0 flex-col items-start justify-center gap-2 desk:flex-row desk:items-center desk:gap-3">
           {comboOn ? (
             <span className="inline-flex h-11 items-center gap-2 rounded-full bg-bubble px-4 text-[14px] font-bold tabular">
               <PawIcon size={16} />
@@ -40,6 +42,7 @@ export function FlashCard({ view, cardId, flipped, combo, onFlip, onOptions }: P
           ) : (
             <span className="text-label uppercase text-on-coat-muted desk:hidden">{direction}</span>
           )}
+          {flipped ? null : <SpeechBubble quoted={promptKey !== "deEn"}>{t(`prompt.${promptKey}`)}</SpeechBubble>}
         </div>
         <div className="flex items-start gap-2 desk:items-center">
           {audio ? <AudioBar key={`${cardId}-${flipped}`} speakView={audio} /> : null}

@@ -5,7 +5,10 @@ import { renderWithIntl } from "@/test-utils";
 import { AuthLayout } from "@/components/auth/AuthLayout";
 import { CoatHeader, DueCardsTile, Screen } from "@/components/ds";
 import { HomeView } from "@/components/home/HomeView";
+import { FlashCard } from "@/components/cards/FlashCard";
+import { buildCardView } from "@/lib/cards/display";
 import { ReviewSession } from "@/components/cards/ReviewSession";
+import { TabPlaceholder } from "@/components/home/TabPlaceholder";
 import { makeCard } from "@/lib/cards/test-helpers";
 import { GAME_PREVIEW } from "@/lib/game-layer";
 import Landing from "@/app/page";
@@ -172,5 +175,59 @@ describe("review session on desktop", () => {
     // The audio buttons keep their full names for assistive tech, and have short visible labels on desktop.
     const word = screen.getByRole("button", { name: "Play word" });
     expect(within(word).getByText("Word")).toBeInTheDocument();
+  });
+});
+
+describe("Buddy's prompt on the flashcard front", () => {
+  const word = makeCard({ kind: "word", en: "coffee", de: "Kaffee", article: "der" });
+  const say = (card = word, dir: "en-de" | "de-en" = "en-de", flipped = false, combo: number | null = null) =>
+    renderWithIntl(<FlashCard view={buildCardView(card, dir)} cardId={card.id} flipped={flipped} combo={combo} onOptions={() => {}} />);
+
+  it("is German when the learner says it in German and English the other way round", () => {
+    const first = say();
+    expect(screen.getByText("„Wie sagt man das auf Deutsch?“")).toBeInTheDocument();
+    first.unmount();
+    say(word, "de-en");
+    expect(screen.getByText("What's that in English?")).toBeInTheDocument();
+    expect(screen.queryByText(/Wie sagt man/)).toBeNull();
+  });
+
+  it("has a prompt for answer cards too, and is gone on the back", () => {
+    const answer = makeCard({ kind: "answer", en: "Answer: Wie geht's?", de: "Gut, danke.", article: null, plural: null });
+    const first = say(answer);
+    expect(screen.getByText("„Und was antwortest du?“")).toBeInTheDocument();
+    first.unmount();
+    say(word, "en-de", true);
+    expect(screen.queryByText(/Wie sagt man/)).toBeNull();
+  });
+
+  it("sits beside the combo chip and the options button", () => {
+    say(word, "en-de", false, 5);
+    expect(screen.getByText("5 in a row")).toBeInTheDocument();
+    expect(screen.getByText("„Wie sagt man das auf Deutsch?“")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Options" })).toBeInTheDocument();
+  });
+
+  it("speaking cards have no Word button on the back (they only have a sentence): that is intended", () => {
+    const sayCard = makeCard({ kind: "say", en: "My name is Raghav.", de: "Ich heiße Raghav.", article: null, plural: null, example: null, exampleEn: null });
+    say(sayCard, "en-de", true);
+    expect(screen.queryByRole("button", { name: "Play word" })).toBeNull();
+    expect(screen.getByRole("button", { name: "Play sentence" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Slow" })).toBeInTheDocument();
+  });
+});
+
+describe("Learn and Play placeholders", () => {
+  it("have Buddy once, in the hero", () => {
+    const { container } = renderWithIntl(<TabPlaceholder tab="learn" />);
+    expect(container.querySelectorAll('img[src*="/buddy/buddy-"]:not([src*="icon"])')).toHaveLength(1);
+    expect(container).toHaveTextContent("Coming soon");
+  });
+});
+
+describe("every auth screen has a heading above its form on desktop", () => {
+  const pages = ["src/app/(auth)/login/page.tsx", "src/app/(auth)/signup/page.tsx", "src/app/(auth)/forgot-password/page.tsx", "src/app/(auth)/reset-password/page.tsx", "src/app/(auth)/check-email/page.tsx", "src/app/(auth)/waitlist/page.tsx", "src/app/mfa/setup/page.tsx", "src/app/mfa/verify/page.tsx", "src/app/onboarding/page.tsx"];
+  it.each(pages)("%s passes formTitle", (file) => {
+    expect(readFileSync(file, "utf8")).toMatch(/<AuthLayout[\s\S]*?formTitle=/);
   });
 });

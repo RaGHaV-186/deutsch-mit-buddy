@@ -22,8 +22,9 @@ export default async function MfaSetupPage({
 
   const t = await getTranslations("Mfa");
   const b = await getTranslations("Buddy");
+  const d = await getTranslations("Desktop");
   return (
-    <AuthLayout title={t("setupTitle")} line={b("oneMoreStep.de")} helper={b("oneMoreStep.en")} intro={t("setupIntro")} pose="listening">
+    <AuthLayout formTitle={d("heading.mfaSetup")} title={t("setupTitle")} line={b("oneMoreStep.de")} helper={b("oneMoreStep.en")} intro={t("setupIntro")} pose="listening">
       <TotpSetup next={next || undefined} />
     </AuthLayout>
   );

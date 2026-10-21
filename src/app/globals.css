@@ -196,11 +196,9 @@ body {
   outline: 2px solid var(--ring, var(--focus));
   outline-offset: 2px;
 }
-/* A sheet takes focus itself (for Escape and the tab order) but is not a control. Desktop shows no ring around it; phones are left as they were. */
-@media (min-width: 1024px) {
-  .ds-sheet:focus-visible {
-    outline: none;
-  }
+/* A sheet takes focus itself (for Escape and the tab order) but is not a control: no ring around it. Its buttons keep theirs. */
+.ds-sheet:focus-visible {
+  outline: none;
 }
 
 /* Shared interaction states. --ring is set by components that sit on the coat block (see PillButton).

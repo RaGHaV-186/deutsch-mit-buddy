@@ -8,10 +8,11 @@ import { createClient } from "@/lib/supabase/server";
 export default async function WaitlistPage() {
   const t = await getTranslations("Waitlist");
   const b = await getTranslations("Buddy");
+  const d = await getTranslations("Desktop");
   const supabase = await createClient();
   const { data: open } = await supabase.rpc("signup_open");
   return (
-    <AuthLayout title={t("title")} line={b("soonYourTurn.de")} helper={b("soonYourTurn.en")} intro={t("intro")} pose="resting">
+    <AuthLayout formTitle={d("heading.waitlist")} title={t("title")} line={b("soonYourTurn.de")} helper={b("soonYourTurn.en")} intro={t("intro")} pose="resting">
       {open ? (
         <p>
           {t("open")}{" "}

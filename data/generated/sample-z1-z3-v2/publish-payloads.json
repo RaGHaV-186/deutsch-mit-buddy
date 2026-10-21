@@ -1,0 +1,4168 @@
+{
+  "Z1": {
+    "code": "Z1",
+    "parts": {
+      "goal": {
+        "can_do": "I can say the German letters and sounds, spell my name aloud, and greet and say goodbye."
+      },
+      "warmup": {
+        "preview": {
+          "points": [
+            "to say the German letters out loud and spell your name letter by letter (buchstabieren)",
+            "the special letters ä, ö, ü and ß, and how ei and ie sound",
+            "how tsch (like English \"ch\" in \"church\") is different from sch (like English \"sh\"), for example in Tschüs and Schule",
+            "to greet people and say goodbye: Hallo, Guten Morgen, Auf Wiedersehen, Tschüs",
+            "to ask and answer \"What is your name?\" with Wie heißt du? and Ich heiße Anna."
+          ]
+        },
+        "items": []
+      },
+      "grammar": {
+        "intro": {
+          "title": "The German alphabet, special sounds and spelling your name",
+          "explanation": [
+            "German has 26 letters like English, plus ä, ö, ü and ß. The letter names are different, so learn them from the table. You need them to spell your name (buchstabieren), for example on the phone.",
+            "Some letters sound different from English. W sounds like English v (Wasser), V often sounds like f (Vater), and Z sounds like ts (Zahl). Ei sounds like English eye (heißen), and ie sounds like ee (Wiedersehen).",
+            "Ch, sch and tsch are different sounds. Sch sounds like English sh (Schule). Tsch sounds like English ch in church (Tschüs, Deutsch). Ä, ö and ü are changed vowels called Umlaute, and ß is a sharp s sound, like ss (heißen).",
+            "To greet someone and ask their name, use Hallo, Wie heißt du? and Ich heiße ... To say goodbye, use Tschüs or Auf Wiedersehen."
+          ],
+          "rule_summary": "Learn the letter names, spell names letter by letter, and keep tsch (like English ch) apart from sch (like English sh)."
+        },
+        "examples": [
+          {
+            "de": "Jonas: jott – oh – enn – ah – ess",
+            "en": "Jonas is spelled: J – O – N – A – S.",
+            "note": "Say each letter with its German name."
+          },
+          {
+            "de": "Lena: ell – eh – enn – ah",
+            "en": "Lena is spelled: L – E – N – A.",
+            "note": "E is said eh, not ee."
+          },
+          {
+            "de": "Hallo, ich heiße Anna.",
+            "en": "Hello, my name is Anna.",
+            "note": "Ei sounds like English eye; ß is a sharp s."
+          },
+          {
+            "de": "Wie heißt du?",
+            "en": "What is your name? (to a friend)",
+            "note": "Informal question with du."
+          },
+          {
+            "de": "Tschüs, Jonas!",
+            "en": "Bye, Jonas!",
+            "note": "Tsch sounds like English ch in church."
+          },
+          {
+            "de": "Auf Wiedersehen, Lena!",
+            "en": "Goodbye, Lena!",
+            "note": "Ie sounds like English ee; W sounds like English v."
+          }
+        ],
+        "traps": [
+          {
+            "wrong": "Guten Nacht!",
+            "right": "Gute Nacht!",
+            "why": "Nacht is feminine, so it takes Gute. Morgen, Tag and Abend take Guten."
+          },
+          {
+            "wrong": "Tschüs is said with sch, like English sh.",
+            "right": "Tschüs is said with tsch, like English ch in church.",
+            "why": "Tschüs = t + sch + ü + s, so it starts with the sound of English ch, not sh."
+          },
+          {
+            "wrong": "Wie heißt Sie?",
+            "right": "Wie heißen Sie?",
+            "why": "The formal Sie has a capital S and uses the verb form heißen. The du form heißt belongs only to du."
+          }
+        ],
+        "tables": [
+          {
+            "title": "The German alphabet with letter names",
+            "headers": [
+              "Letter",
+              "Name (how it is said)"
+            ],
+            "rows": [
+              [
+                "A",
+                "ah"
+              ],
+              [
+                "B",
+                "beh"
+              ],
+              [
+                "C",
+                "tseh"
+              ],
+              [
+                "D",
+                "deh"
+              ],
+              [
+                "E",
+                "eh"
+              ],
+              [
+                "F",
+                "eff"
+              ],
+              [
+                "G",
+                "geh"
+              ],
+              [
+                "H",
+                "hah"
+              ],
+              [
+                "I",
+                "ih"
+              ],
+              [
+                "J",
+                "jott"
+              ],
+              [
+                "K",
+                "kah"
+              ],
+              [
+                "L",
+                "ell"
+              ],
+              [
+                "M",
+                "emm"
+              ],
+              [
+                "N",
+                "enn"
+              ],
+              [
+                "O",
+                "oh"
+              ],
+              [
+                "P",
+                "peh"
+              ],
+              [
+                "Q",
+                "kuh"
+              ],
+              [
+                "R",
+                "err"
+              ],
+              [
+                "S",
+                "ess"
+              ],
+              [
+                "T",
+                "teh"
+              ],
+              [
+                "U",
+                "uh"
+              ],
+              [
+                "V",
+                "fau"
+              ],
+              [
+                "W",
+                "veh"
+              ],
+              [
+                "X",
+                "iks"
+              ],
+              [
+                "Y",
+                "üpsilon"
+              ],
+              [
+                "Z",
+                "tsett"
+              ],
+              [
+                "Ä",
+                "ah-Umlaut"
+              ],
+              [
+                "Ö",
+                "oh-Umlaut"
+              ],
+              [
+                "Ü",
+                "uh-Umlaut"
+              ],
+              [
+                "ß",
+                "Eszett"
+              ]
+            ]
+          }
+        ]
+      },
+      "exercises": {
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ Anna.",
+            "answer": "heiße",
+            "distractors": [
+              "heißt",
+              "heißen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With ich, the verb ends in -e: ich heiße."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Wie ___ du?",
+            "answer": "heißt",
+            "distractors": [
+              "heiße",
+              "heißen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With du, the verb ends in -t: du heißt."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Wie ___ Sie?",
+            "answer": "heißen",
+            "distractors": [
+              "heißt",
+              "heiße"
+            ],
+            "accepted_answers": [],
+            "explanation": "The formal Sie takes the verb form heißen."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "___ Morgen!",
+            "answer": "Guten",
+            "distractors": [
+              "Gute",
+              "Guter"
+            ],
+            "accepted_answers": [],
+            "explanation": "Morgen is masculine, so the greeting is Guten Morgen."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Gute ___!",
+            "answer": "Nacht",
+            "distractors": [
+              "Morgen",
+              "Tag",
+              "Abend"
+            ],
+            "accepted_answers": [],
+            "explanation": "Only Nacht goes with Gute."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Mein ___ ist Jonas.",
+            "answer": "Name",
+            "distractors": [
+              "Buchstabe",
+              "Alphabet"
+            ],
+            "accepted_answers": [],
+            "explanation": "Mein Name ist ... means My name is ..."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "You meet your teacher, an adult you do not know well. What do you ask?",
+            "answer": "Wie heißen Sie?",
+            "distractors": [
+              "Wie heißt du?",
+              "Wie heiße ich?"
+            ],
+            "accepted_answers": [],
+            "explanation": "Use the formal Sie with adults you do not know well."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which letter is called veh?",
+            "answer": "W",
+            "distractors": [
+              "V",
+              "F",
+              "B"
+            ],
+            "accepted_answers": [],
+            "explanation": "W is veh; V is fau."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which word starts with tsch, like English ch in church?",
+            "answer": "Tschüs",
+            "distractors": [
+              "Schule",
+              "schön"
+            ],
+            "accepted_answers": [],
+            "explanation": "Tschüs has tsch; Schule and schön have sch, like English sh."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What is the name of the letter ß?",
+            "answer": "Eszett",
+            "distractors": [
+              "ess-Umlaut",
+              "tsett",
+              "Beta"
+            ],
+            "accepted_answers": [],
+            "explanation": "The letter ß is called Eszett."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "heiße / Ich / Lena",
+            "answer": "Ich heiße Lena.",
+            "distractors": [],
+            "accepted_answers": [
+              "Lena heiße ich."
+            ],
+            "explanation": "The verb is in second position: Ich heiße Lena."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "heißt / du / Wie",
+            "answer": "Wie heißt du?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "The question word comes first, then the verb, then du."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Sie / heißen / Wie",
+            "answer": "Wie heißen Sie?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "The question word comes first, then the verb, then Sie."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Greet a friend: Hello!",
+            "answer": "Hallo!",
+            "distractors": [],
+            "accepted_answers": [
+              "Hi!"
+            ],
+            "explanation": "Hallo is the usual informal greeting."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Say with the verb heißen: My name is Anna.",
+            "answer": "Ich heiße Anna.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Ich heiße plus your name."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Ask a friend: What is your name?",
+            "answer": "Wie heißt du?",
+            "distractors": [],
+            "accepted_answers": [
+              "Wie ist dein Name?"
+            ],
+            "explanation": "Use du with a friend."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Wie heißt du?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Remember ß in heißt."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Ich heiße Jonas.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Ich heiße plus the name."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Guten Morgen, Lena!",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Guten Morgen is a fixed greeting; names have capitals."
+          }
+        ]
+      },
+      "vocabulary": {
+        "words": [
+          {
+            "tier": "core",
+            "en": "hello",
+            "article": null,
+            "de": "Hallo",
+            "plural": null,
+            "example": "Hallo, Anna!",
+            "example_en": "Hello, Anna!",
+            "tip": "Informal greeting."
+          },
+          {
+            "tier": "core",
+            "en": "bye (informal)",
+            "article": null,
+            "de": "Tschüs",
+            "plural": null,
+            "example": "Tschüs, Jonas!",
+            "example_en": "Bye, Jonas!",
+            "tip": "tsch sounds like English ch."
+          },
+          {
+            "tier": "core",
+            "en": "name",
+            "article": "der",
+            "de": "Name",
+            "plural": "die Namen",
+            "example": "Mein Name ist Lena.",
+            "example_en": "My name is Lena.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "letter (of the alphabet)",
+            "article": "der",
+            "de": "Buchstabe",
+            "plural": "die Buchstaben",
+            "example": "Das ist ein Buchstabe.",
+            "example_en": "That is a letter.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "alphabet",
+            "article": "das",
+            "de": "Alphabet",
+            "plural": "die Alphabete",
+            "example": "Das Alphabet hat 26 Buchstaben.",
+            "example_en": "The alphabet has 26 letters.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "to be called",
+            "article": null,
+            "de": "heißen",
+            "plural": "ich heiße · du heißt · er heißt",
+            "example": "Ich heiße Anna.",
+            "example_en": "My name is Anna.",
+            "tip": "du heißt = heiß + t; the ß stays, no extra s."
+          },
+          {
+            "tier": "core",
+            "en": "to spell",
+            "article": null,
+            "de": "buchstabieren",
+            "plural": "ich buchstabiere · du buchstabierst · er buchstabiert",
+            "example": "Ich buchstabiere meinen Namen.",
+            "example_en": "I spell my name.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "I",
+            "article": null,
+            "de": "ich",
+            "plural": null,
+            "example": "Ich heiße Jonas.",
+            "example_en": "My name is Jonas.",
+            "tip": "Only capital at the start of a sentence."
+          },
+          {
+            "tier": "core",
+            "en": "you (informal)",
+            "article": null,
+            "de": "du",
+            "plural": null,
+            "example": "Wie heißt du?",
+            "example_en": "What is your name?",
+            "tip": "For friends, family and children."
+          },
+          {
+            "tier": "core",
+            "en": "you (formal)",
+            "article": null,
+            "de": "Sie",
+            "plural": null,
+            "example": "Wie heißen Sie?",
+            "example_en": "What is your name?",
+            "tip": "Always a capital S."
+          },
+          {
+            "tier": "core",
+            "en": "yes",
+            "article": null,
+            "de": "ja",
+            "plural": null,
+            "example": "Ja, ich heiße Lena.",
+            "example_en": "Yes, my name is Lena.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "no",
+            "article": null,
+            "de": "nein",
+            "plural": null,
+            "example": "Nein, ich heiße Anna.",
+            "example_en": "No, my name is Anna.",
+            "tip": "ei sounds like English eye."
+          },
+          {
+            "tier": "bonus",
+            "en": "morning",
+            "article": "der",
+            "de": "Morgen",
+            "plural": "die Morgen",
+            "example": "Guten Morgen, Anna!",
+            "example_en": "Good morning, Anna!",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "day",
+            "article": "der",
+            "de": "Tag",
+            "plural": "die Tage",
+            "example": "Guten Tag, Jonas!",
+            "example_en": "Hello, Jonas!",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "evening",
+            "article": "der",
+            "de": "Abend",
+            "plural": "die Abende",
+            "example": "Guten Abend, Lena!",
+            "example_en": "Good evening, Lena!",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "night",
+            "article": "die",
+            "de": "Nacht",
+            "plural": "die Nächte",
+            "example": "Gute Nacht, Anna!",
+            "example_en": "Good night, Anna!",
+            "tip": "Feminine, so Gute Nacht."
+          },
+          {
+            "tier": "bonus",
+            "en": "teacher (male)",
+            "article": "der",
+            "de": "Lehrer",
+            "plural": "die Lehrer",
+            "example": "Der Lehrer heißt Jonas.",
+            "example_en": "The teacher is called Jonas.",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "teacher (female)",
+            "article": "die",
+            "de": "Lehrerin",
+            "plural": "die Lehrerinnen",
+            "example": "Die Lehrerin heißt Lena.",
+            "example_en": "The teacher is called Lena.",
+            "tip": "Add -in for a woman."
+          }
+        ],
+        "phrases": [
+          {
+            "en": "What is your name? (informal)",
+            "de": "Wie heißt du?",
+            "example": "Hallo! Wie heißt du?",
+            "example_en": "Hello! What is your name?",
+            "tip": "For friends, children and fellow students."
+          },
+          {
+            "en": "What is your name? (formal)",
+            "de": "Wie heißen Sie?",
+            "example": "Guten Tag! Wie heißen Sie?",
+            "example_en": "Hello! What is your name?",
+            "tip": "Sie is for adults you do not know, with a capital S."
+          },
+          {
+            "en": "What is your name? (formal, with Name)",
+            "de": "Wie ist Ihr Name?",
+            "example": "Entschuldigung, wie ist Ihr Name?",
+            "example_en": "Excuse me, what is your name?",
+            "tip": "Sie is for adults you do not know, with a capital S."
+          },
+          {
+            "en": "My name is Anna.",
+            "de": "Ich heiße Anna.",
+            "example": "Hallo, ich heiße Anna.",
+            "example_en": "Hello, my name is Anna.",
+            "tip": "You can also say: Mein Name ist Anna."
+          },
+          {
+            "en": "How do you spell that?",
+            "de": "Wie schreibt man das?",
+            "example": "Jonas? Wie schreibt man das?",
+            "example_en": "Jonas? How do you spell that?",
+            "tip": "Answer with the letter names."
+          },
+          {
+            "en": "Good morning!",
+            "de": "Guten Morgen!",
+            "example": "Guten Morgen, Lena!",
+            "example_en": "Good morning, Lena!",
+            "tip": "Guten with Morgen, Tag and Abend."
+          },
+          {
+            "en": "Goodbye!",
+            "de": "Auf Wiedersehen!",
+            "example": "Auf Wiedersehen, Anna!",
+            "example_en": "Goodbye, Anna!",
+            "tip": "Polite; with friends you can say Tschüs."
+          }
+        ]
+      },
+      "pronunciation": {
+        "focus": "tsch (like English ch) versus sch (like English sh), plus ei and ie",
+        "explanation": "Tsch sounds like English ch in church (Tschüs, Deutsch). Sch sounds like English sh (Schule, schön). Ei sounds like English eye (heißen), and ie sounds like English ee (Wiedersehen).",
+        "words": [
+          {
+            "de": "Tschüs",
+            "hint": "tsch = ch as in church: chüs"
+          },
+          {
+            "de": "Deutsch",
+            "hint": "eu = oy; tsch = ch: doych"
+          },
+          {
+            "de": "Schule",
+            "hint": "sch = sh: SHOO-leh"
+          },
+          {
+            "de": "schön",
+            "hint": "sch = sh; ö is like the e in her with round lips"
+          },
+          {
+            "de": "heißen",
+            "hint": "ei = eye; ß = sharp s: HY-sen"
+          },
+          {
+            "de": "Wiedersehen",
+            "hint": "ie = ee; W = v; s = z: VEE-der-zay-en"
+          },
+          {
+            "de": "nein",
+            "hint": "ei = eye: nine"
+          }
+        ],
+        "sentences": [
+          "Tschüs, Anna!",
+          "Ich heiße Jonas.",
+          "Deutsch ist schön.",
+          "Auf Wiedersehen, Lena!"
+        ]
+      },
+      "reading": {
+        "passage": {
+          "title": "Anna und Jonas",
+          "text": "Hallo! Ich heiße Anna. Ich bin die Lehrerin. Das ist Jonas. Jonas ist neu. Ich frage: „Wie heißt du?“ Jonas sagt: „Ich heiße Jonas.“ Ich frage: „Wie schreibt man das?“ Jonas buchstabiert: J, O, N, A, S. Dann sagen wir: „Tschüs!“"
+        },
+        "questions": [
+          {
+            "skill": "reading",
+            "type": "multiple_choice",
+            "prompt": "Who is the teacher in the text?",
+            "answer": "Anna",
+            "distractors": [
+              "Jonas",
+              "Lena"
+            ],
+            "accepted_answers": [],
+            "explanation": "The text says: \"Ich bin die Lehrerin\" and the speaker is Anna."
+          },
+          {
+            "skill": "reading",
+            "type": "typing",
+            "prompt": "Who is new? Write the name in German.",
+            "answer": "Jonas",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "The text says: \"Jonas ist neu.\""
+          },
+          {
+            "skill": "reading",
+            "type": "multiple_choice",
+            "prompt": "What does Anna ask to hear the spelling of a name?",
+            "answer": "Wie schreibt man das?",
+            "distractors": [
+              "Wie heißt du?",
+              "Wie heißen Sie?"
+            ],
+            "accepted_answers": [],
+            "explanation": "\"Wie schreibt man das?\" asks how to write something."
+          },
+          {
+            "skill": "reading",
+            "type": "multiple_choice",
+            "prompt": "Which letters does Jonas say when he spells his name?",
+            "answer": "J, O, N, A, S",
+            "distractors": [
+              "J, O, N, A",
+              "G, O, N, A, S",
+              "J, A, N, A, S"
+            ],
+            "accepted_answers": [],
+            "explanation": "Jonas spells J, O, N, A, S."
+          },
+          {
+            "skill": "reading",
+            "type": "multiple_choice",
+            "prompt": "How do Anna and Jonas say goodbye at the end?",
+            "answer": "Tschüs!",
+            "distractors": [
+              "Guten Morgen!",
+              "Guten Abend!"
+            ],
+            "accepted_answers": [],
+            "explanation": "Tschüs (t + sch + ü + s) starts with tsch, like English \"ch\" in \"church\"."
+          }
+        ]
+      },
+      "listening": {
+        "passage": {
+          "title": "Wie schreibt man das?",
+          "speakers": [
+            "Anna",
+            "Jonas",
+            "Lena"
+          ],
+          "script": [
+            {
+              "speaker": "Anna",
+              "de": "Guten Morgen! Wie heißt du?",
+              "en": "Good morning! What is your name?"
+            },
+            {
+              "speaker": "Jonas",
+              "de": "Guten Morgen! Ich heiße Jonas.",
+              "en": "Good morning! My name is Jonas."
+            },
+            {
+              "speaker": "Anna",
+              "de": "Wie schreibt man das?",
+              "en": "How do you write that?"
+            },
+            {
+              "speaker": "Jonas",
+              "de": "J, O, N, A, S.",
+              "en": "J, O, N, A, S."
+            },
+            {
+              "speaker": "Anna",
+              "de": "Ja, super! Und du?",
+              "en": "Yes, super! And you?"
+            },
+            {
+              "speaker": "Lena",
+              "de": "Ich heiße Lena. L, E, N, A.",
+              "en": "My name is Lena. L, E, N, A."
+            },
+            {
+              "speaker": "Jonas",
+              "de": "Hallo, Lena!",
+              "en": "Hello, Lena!"
+            },
+            {
+              "speaker": "Lena",
+              "de": "Hallo, Jonas! Tschüs, Anna!",
+              "en": "Hello, Jonas! Bye, Anna!"
+            },
+            {
+              "speaker": "Anna",
+              "de": "Tschüs!",
+              "en": "Bye!"
+            }
+          ]
+        },
+        "questions": [
+          {
+            "skill": "listening",
+            "type": "multiple_choice",
+            "prompt": "Which greeting does Anna use at the start?",
+            "answer": "Guten Morgen",
+            "distractors": [
+              "Guten Abend",
+              "Guten Tag",
+              "Gute Nacht"
+            ],
+            "accepted_answers": [],
+            "explanation": "Anna says \"Guten Morgen!\" in the first line."
+          },
+          {
+            "skill": "listening",
+            "type": "multiple_choice",
+            "prompt": "Which letters does Jonas say?",
+            "answer": "J, O, N, A, S",
+            "distractors": [
+              "J, O, N, A",
+              "G, O, N, A, S",
+              "J, A, N, A, S"
+            ],
+            "accepted_answers": [],
+            "explanation": "Jonas spells his name J, O, N, A, S."
+          },
+          {
+            "skill": "listening",
+            "type": "multiple_choice",
+            "prompt": "Who spells the letters L, E, N, A?",
+            "answer": "Lena",
+            "distractors": [
+              "Anna",
+              "Jonas"
+            ],
+            "accepted_answers": [],
+            "explanation": "Lena says her name and spells it."
+          },
+          {
+            "skill": "listening",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Ich heiße Lena.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Lena says this sentence with ei (like English \"eye\") in heiße."
+          },
+          {
+            "skill": "listening",
+            "type": "multiple_choice",
+            "prompt": "What does Lena say to Anna when she leaves?",
+            "answer": "Tschüs",
+            "distractors": [
+              "Guten Morgen",
+              "Hallo",
+              "Ja"
+            ],
+            "accepted_answers": [],
+            "explanation": "Lena says \"Tschüs, Anna!\" to say goodbye."
+          }
+        ]
+      },
+      "writing": {
+        "task": "Write 5 short sentences. Greet a person, say your name and spell it, ask the other person's name and say goodbye. Use the name Jonas for the other person.",
+        "min_words": 20,
+        "must_include": [
+          "A greeting such as Guten Morgen",
+          "Ich heiße ... with your name",
+          "Ich buchstabiere: ... with your name letter by letter",
+          "Wie heißt du?",
+          "A goodbye such as Tschüs"
+        ],
+        "useful_phrases": [
+          "Guten Morgen",
+          "Ich heiße ...",
+          "Ich buchstabiere:",
+          "Wie heißt du?",
+          "Tschüs!"
+        ],
+        "model_answer": "Guten Morgen, ich heiße Anna. Ich buchstabiere: A, N, N, A. Wie heißt du? Du heißt Jonas: J, O, N, A, S. Tschüs!",
+        "rubric": [
+          "Includes a greeting and a goodbye (Guten Morgen, Tschüs) spelled correctly, with tsch in Tschüs",
+          "Says the name correctly with Ich heiße ...",
+          "Spells a name letter by letter with the correct letters",
+          "Asks the question Wie heißt du? correctly, with ei and ie in the right places",
+          "Writes at least 20 words with capital letters on names and nouns and with correct punctuation"
+        ]
+      },
+      "speaking": {
+        "drill": [
+          {
+            "prompt": "Say hello and ask a friend for the name.",
+            "target": "Hallo! Wie heißt du?",
+            "tip": "ie in Wie sounds like English \"ee\"; ei in heißt sounds like English \"eye\"."
+          },
+          {
+            "prompt": "Say your name is Anna.",
+            "target": "Ich heiße Anna.",
+            "tip": "ch in Ich is a soft sound made at the front of the mouth, not like English \"k\"."
+          },
+          {
+            "prompt": "Ask how to write something.",
+            "target": "Wie schreibt man das?",
+            "tip": "schreibt has sch, said like English \"sh\"; ei in it sounds like English \"eye\"."
+          },
+          {
+            "prompt": "Say goodbye to a friend.",
+            "target": "Tschüs!",
+            "tip": "Tschüs is t + sch + ü + s. The tsch sounds like English \"ch\" in \"church\", not like \"sh\"."
+          },
+          {
+            "prompt": "Say goodbye politely to an adult you do not know well.",
+            "target": "Auf Wiedersehen!",
+            "tip": "W sounds like English \"v\" and ie sounds like English \"ee\": Vee-der-zay-en."
+          }
+        ],
+        "tandem": {
+          "title": "Meeting a new classmate",
+          "setting": "It is the first morning of a German class. Buddy sits next to you and wants to know your name and how to spell it.",
+          "buddy_role": "A friendly new classmate who is also a beginner and speaks slowly in very short sentences.",
+          "learner_role": "A student who greets Buddy, says the name, spells it and says goodbye.",
+          "opening_line": "Guten Morgen! Ich heiße Buddy. Wie heißt du?",
+          "target_phrases": [
+            "Guten Morgen!",
+            "Hallo!",
+            "Ich heiße ...",
+            "Wie schreibt man das?",
+            "Ich buchstabiere: ...",
+            "Tschüs!"
+          ],
+          "target_grammar": "Spelling a name letter by letter, saying ei and ie correctly, and keeping tsch (like English ch) apart from sch (like English sh).",
+          "topics": [
+            "Ask the learner to spell their name letter by letter.",
+            "Spell Buddy as B, U, D, D, Y and ask the learner to say the letters back.",
+            "Ask: Wie schreibt man Anna?",
+            "Say Auf Wiedersehen to a teacher and Tschüs to a friend."
+          ],
+          "end_condition": "The learner has said their name, spelled it and said goodbye with Tschüs or Auf Wiedersehen."
+        }
+      },
+      "culture": {
+        "title": "Hello and goodbye in German-speaking countries",
+        "note": "In Germany, Austria and Switzerland, people often greet each other when they enter a small shop, a waiting room or a lift. A short Guten Tag! or Hallo! is polite. Many people use Guten Morgen! in the morning, and Guten Abend! in the evening. With friends and young people, Hallo! and Tschüs! are very common. With adults you do not know, people use Sie and often say Auf Wiedersehen! when they leave. In Switzerland you may hear different greetings, and in southern Germany and Austria people often say Servus or Grüß Gott. You do not need to use these yet, but it is nice to recognise them. Names are often spelled aloud on the phone, so the alphabet is very useful.",
+        "reflection_question": "How do you usually greet people and say goodbye in your own language, and is it different for friends and for strangers?"
+      },
+      "mission": {
+        "title": "Spell your name like a German speaker",
+        "task": "Practise greeting and spelling your name out loud today, as you would in a real situation, for example on the phone or at a reception desk.",
+        "steps": [
+          "Stand in front of a mirror or record yourself on your phone. Say: Hallo! Ich heiße ... (your name).",
+          "Say the letter names of your first name slowly, one by one. Then say the sentence Wie schreibt man das? and spell your name again.",
+          "Say Guten Morgen!, Guten Tag! or Guten Abend! to match the time of day. Then say Tschüs! and Auf Wiedersehen! and listen carefully: tsch in Tschüs sounds like English \"ch\", not like \"sh\"."
+        ],
+        "report_prompt": "Write or tell Buddy: your name in German (Ich heiße ...), your name spelled letter by letter, and which greeting you used for the time of day.",
+        "success_check": [
+          "I said my name with Ich heiße ...",
+          "I spelled my name letter by letter in German.",
+          "I said Tschüs with the \"ch\" sound and not the \"sh\" sound."
+        ],
+        "safety_note": "Practise only with your own name. Do not share private details such as your address or phone number in recordings or with strangers online."
+      },
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which phrase means \"Goodbye\" in German?",
+            "answer": "Auf Wiedersehen!",
+            "distractors": [
+              "Guten Abend!",
+              "Guten Morgen!",
+              "Hallo!"
+            ],
+            "accepted_answers": [],
+            "explanation": "\"Auf Wiedersehen!\" is the German way to say goodbye."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "It is the evening. You say: Guten ___!",
+            "answer": "Abend",
+            "distractors": [
+              "Morgen",
+              "Nacht",
+              "Lehrer"
+            ],
+            "accepted_answers": [],
+            "explanation": "The evening greeting is \"Guten Abend\"."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which word has sch, which sounds like English \"sh\" in \"shoe\"?",
+            "answer": "Schule",
+            "distractors": [
+              "Tschüs",
+              "Deutsch"
+            ],
+            "accepted_answers": [],
+            "explanation": "Schule has sch (English \"sh\"), but Tschüs and Deutsch have tsch (English \"ch\")."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "How is ie said in the word \"Wie\"?",
+            "answer": "Like English \"ee\" in \"see\"",
+            "distractors": [
+              "Like English \"eye\"",
+              "Like English \"ay\" in \"day\""
+            ],
+            "accepted_answers": [],
+            "explanation": "German ie sounds like English \"ee\", while ei sounds like English \"eye\"."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "How do you write that?",
+            "answer": "Wie schreibt man das?",
+            "distractors": [],
+            "accepted_answers": [
+              "Wie schreibst du das?",
+              "Wie schreiben Sie das?"
+            ],
+            "explanation": "You ask \"Wie schreibt man das?\" when you want to know the spelling."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Auf Wiedersehen, Jonas!",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Write ie in \"Wiedersehen\" and put a comma before the name."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Guten Tag! Ich bin Anna. Ich buchstabiere meinen Namen: A-N-N-A. Tschüs!"
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Anna do in the text?",
+              "answer": "She spells her name.",
+              "distractors": [
+                "She asks for a teacher.",
+                "She says good night."
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says \"Ich buchstabiere meinen Namen\", so she spells her name."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "How does Anna say goodbye?",
+              "answer": "Tschüs!",
+              "distractors": [
+                "Hallo!",
+                "Guten Tag!"
+              ],
+              "accepted_answers": [],
+              "explanation": "The last word of the text is \"Tschüs!\"."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Jonas",
+                "de": "Guten Abend! Wie ist Ihr Name?",
+                "en": "Good evening! What is your name?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Mein Name ist Anna. A-N-N-A.",
+                "en": "My name is Anna. A-N-N-A."
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Ja, Anna. Auf Wiedersehen!",
+                "en": "Yes, Anna. Goodbye!"
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Jonas ask Anna?",
+              "answer": "Her name",
+              "distractors": [
+                "Her teacher",
+                "Her age"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas asks \"Wie ist Ihr Name?\"."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "How does Anna spell her name?",
+              "answer": "A-N-N-A",
+              "distractors": [
+                "A-N-A",
+                "A-N-N-E",
+                "E-N-N-A"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna spells her name A-N-N-A."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 to 3 short sentences in German. Greet someone, say your name and spell it letter by letter, then say goodbye.",
+          "min_words": 15,
+          "rubric": [
+            "Uses a correct greeting such as Hallo or Guten Tag",
+            "Says the name with Ich heiße or Mein Name ist",
+            "Spells the name letter by letter",
+            "Uses a correct goodbye such as Tschüs or Auf Wiedersehen",
+            "Correct spelling and capital letters"
+          ]
+        },
+        "speaking": {
+          "prompt": "Say hello to your teacher, say your name and spell it aloud. Then say goodbye.",
+          "target_hint": "Guten Tag! Ich heiße ... Das schreibt man ... Auf Wiedersehen!"
+        }
+      },
+      "closing": {
+        "covered": [
+          "You can now say the German letters and spell your name letter by letter.",
+          "You can now say ä, ö, ü and ß and hear the difference between ei and ie.",
+          "You can now keep tsch (as in Tschüs, like English \"ch\") apart from sch (as in Schule, like English \"sh\").",
+          "You can now greet people and say goodbye with Hallo, Guten Morgen, Auf Wiedersehen and Tschüs.",
+          "You can now ask Wie heißt du? and Wie heißen Sie? and answer with Ich heiße Anna."
+        ],
+        "review_tomorrow": "Tomorrow, review the letter names and spell your name out loud twice, then say Tschüs and Schule to check tsch and sch."
+      }
+    },
+    "part_status": {
+      "goal": "ok",
+      "warmup": "ok",
+      "grammar": "fixed",
+      "exercises": "fixed",
+      "vocabulary": "ok",
+      "pronunciation": "ok",
+      "reading": "ok",
+      "listening": "ok",
+      "writing": "ok",
+      "speaking": "ok",
+      "culture": "ok",
+      "mission": "ok",
+      "exam": "fixed",
+      "closing": "ok"
+    },
+    "cards": [
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "core",
+        "position": 1,
+        "en": "hello",
+        "article": null,
+        "de": "Hallo",
+        "plural": null,
+        "example": "Hallo, Anna!",
+        "example_en": "Hello, Anna!",
+        "tip": "Informal greeting."
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "core",
+        "position": 2,
+        "en": "bye (informal)",
+        "article": null,
+        "de": "Tschüs",
+        "plural": null,
+        "example": "Tschüs, Jonas!",
+        "example_en": "Bye, Jonas!",
+        "tip": "tsch sounds like English ch."
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "core",
+        "position": 3,
+        "en": "name",
+        "article": "der",
+        "de": "Name",
+        "plural": "die Namen",
+        "example": "Mein Name ist Lena.",
+        "example_en": "My name is Lena.",
+        "tip": null
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "core",
+        "position": 4,
+        "en": "letter (of the alphabet)",
+        "article": "der",
+        "de": "Buchstabe",
+        "plural": "die Buchstaben",
+        "example": "Das ist ein Buchstabe.",
+        "example_en": "That is a letter.",
+        "tip": null
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "core",
+        "position": 5,
+        "en": "alphabet",
+        "article": "das",
+        "de": "Alphabet",
+        "plural": "die Alphabete",
+        "example": "Das Alphabet hat 26 Buchstaben.",
+        "example_en": "The alphabet has 26 letters.",
+        "tip": null
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "core",
+        "position": 6,
+        "en": "to be called",
+        "article": null,
+        "de": "heißen",
+        "plural": "ich heiße · du heißt · er heißt",
+        "example": "Ich heiße Anna.",
+        "example_en": "My name is Anna.",
+        "tip": "du heißt = heiß + t; the ß stays, no extra s."
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "core",
+        "position": 7,
+        "en": "to spell",
+        "article": null,
+        "de": "buchstabieren",
+        "plural": "ich buchstabiere · du buchstabierst · er buchstabiert",
+        "example": "Ich buchstabiere meinen Namen.",
+        "example_en": "I spell my name.",
+        "tip": null
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "core",
+        "position": 8,
+        "en": "I",
+        "article": null,
+        "de": "ich",
+        "plural": null,
+        "example": "Ich heiße Jonas.",
+        "example_en": "My name is Jonas.",
+        "tip": "Only capital at the start of a sentence."
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "core",
+        "position": 9,
+        "en": "you (informal)",
+        "article": null,
+        "de": "du",
+        "plural": null,
+        "example": "Wie heißt du?",
+        "example_en": "What is your name?",
+        "tip": "For friends, family and children."
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "core",
+        "position": 10,
+        "en": "you (formal)",
+        "article": null,
+        "de": "Sie",
+        "plural": null,
+        "example": "Wie heißen Sie?",
+        "example_en": "What is your name?",
+        "tip": "Always a capital S."
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "core",
+        "position": 11,
+        "en": "yes",
+        "article": null,
+        "de": "ja",
+        "plural": null,
+        "example": "Ja, ich heiße Lena.",
+        "example_en": "Yes, my name is Lena.",
+        "tip": null
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "core",
+        "position": 12,
+        "en": "no",
+        "article": null,
+        "de": "nein",
+        "plural": null,
+        "example": "Nein, ich heiße Anna.",
+        "example_en": "No, my name is Anna.",
+        "tip": "ei sounds like English eye."
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 13,
+        "en": "morning",
+        "article": "der",
+        "de": "Morgen",
+        "plural": "die Morgen",
+        "example": "Guten Morgen, Anna!",
+        "example_en": "Good morning, Anna!",
+        "tip": null
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 14,
+        "en": "day",
+        "article": "der",
+        "de": "Tag",
+        "plural": "die Tage",
+        "example": "Guten Tag, Jonas!",
+        "example_en": "Hello, Jonas!",
+        "tip": null
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 15,
+        "en": "evening",
+        "article": "der",
+        "de": "Abend",
+        "plural": "die Abende",
+        "example": "Guten Abend, Lena!",
+        "example_en": "Good evening, Lena!",
+        "tip": null
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 16,
+        "en": "night",
+        "article": "die",
+        "de": "Nacht",
+        "plural": "die Nächte",
+        "example": "Gute Nacht, Anna!",
+        "example_en": "Good night, Anna!",
+        "tip": "Feminine, so Gute Nacht."
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 17,
+        "en": "teacher (male)",
+        "article": "der",
+        "de": "Lehrer",
+        "plural": "die Lehrer",
+        "example": "Der Lehrer heißt Jonas.",
+        "example_en": "The teacher is called Jonas.",
+        "tip": null
+      },
+      {
+        "session_code": "Z1",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 18,
+        "en": "teacher (female)",
+        "article": "die",
+        "de": "Lehrerin",
+        "plural": "die Lehrerinnen",
+        "example": "Die Lehrerin heißt Lena.",
+        "example_en": "The teacher is called Lena.",
+        "tip": "Add -in for a woman."
+      },
+      {
+        "session_code": "Z1",
+        "kind": "say",
+        "tier": "core",
+        "position": 19,
+        "en": "What is your name? (informal)",
+        "article": null,
+        "de": "Wie heißt du?",
+        "plural": null,
+        "example": "Hallo! Wie heißt du?",
+        "example_en": "Hello! What is your name?",
+        "tip": "For friends, children and fellow students."
+      },
+      {
+        "session_code": "Z1",
+        "kind": "say",
+        "tier": "core",
+        "position": 20,
+        "en": "What is your name? (formal)",
+        "article": null,
+        "de": "Wie heißen Sie?",
+        "plural": null,
+        "example": "Guten Tag! Wie heißen Sie?",
+        "example_en": "Hello! What is your name?",
+        "tip": "Sie is for adults you do not know, with a capital S."
+      },
+      {
+        "session_code": "Z1",
+        "kind": "say",
+        "tier": "core",
+        "position": 21,
+        "en": "What is your name? (formal, with Name)",
+        "article": null,
+        "de": "Wie ist Ihr Name?",
+        "plural": null,
+        "example": "Entschuldigung, wie ist Ihr Name?",
+        "example_en": "Excuse me, what is your name?",
+        "tip": "Sie is for adults you do not know, with a capital S."
+      },
+      {
+        "session_code": "Z1",
+        "kind": "say",
+        "tier": "core",
+        "position": 22,
+        "en": "My name is Anna.",
+        "article": null,
+        "de": "Ich heiße Anna.",
+        "plural": null,
+        "example": "Hallo, ich heiße Anna.",
+        "example_en": "Hello, my name is Anna.",
+        "tip": "You can also say: Mein Name ist Anna."
+      },
+      {
+        "session_code": "Z1",
+        "kind": "say",
+        "tier": "core",
+        "position": 23,
+        "en": "How do you spell that?",
+        "article": null,
+        "de": "Wie schreibt man das?",
+        "plural": null,
+        "example": "Jonas? Wie schreibt man das?",
+        "example_en": "Jonas? How do you spell that?",
+        "tip": "Answer with the letter names."
+      },
+      {
+        "session_code": "Z1",
+        "kind": "say",
+        "tier": "core",
+        "position": 24,
+        "en": "Good morning!",
+        "article": null,
+        "de": "Guten Morgen!",
+        "plural": null,
+        "example": "Guten Morgen, Lena!",
+        "example_en": "Good morning, Lena!",
+        "tip": "Guten with Morgen, Tag and Abend."
+      },
+      {
+        "session_code": "Z1",
+        "kind": "say",
+        "tier": "core",
+        "position": 25,
+        "en": "Goodbye!",
+        "article": null,
+        "de": "Auf Wiedersehen!",
+        "plural": null,
+        "example": "Auf Wiedersehen, Anna!",
+        "example_en": "Goodbye, Anna!",
+        "tip": "Polite; with friends you can say Tschüs."
+      }
+    ],
+    "questions": [
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 1,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Ich ___ Anna.",
+        "answer": "heiße",
+        "distractors": [
+          "heißt",
+          "heißen"
+        ],
+        "accepted_answers": [],
+        "explanation": "With ich, the verb ends in -e: ich heiße."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 2,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Wie ___ du?",
+        "answer": "heißt",
+        "distractors": [
+          "heiße",
+          "heißen"
+        ],
+        "accepted_answers": [],
+        "explanation": "With du, the verb ends in -t: du heißt."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 3,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Wie ___ Sie?",
+        "answer": "heißen",
+        "distractors": [
+          "heißt",
+          "heiße"
+        ],
+        "accepted_answers": [],
+        "explanation": "The formal Sie takes the verb form heißen."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 4,
+        "skill": "vocabulary",
+        "type": "gap_fill",
+        "prompt": "___ Morgen!",
+        "answer": "Guten",
+        "distractors": [
+          "Gute",
+          "Guter"
+        ],
+        "accepted_answers": [],
+        "explanation": "Morgen is masculine, so the greeting is Guten Morgen."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 5,
+        "skill": "vocabulary",
+        "type": "gap_fill",
+        "prompt": "Gute ___!",
+        "answer": "Nacht",
+        "distractors": [
+          "Morgen",
+          "Tag",
+          "Abend"
+        ],
+        "accepted_answers": [],
+        "explanation": "Only Nacht goes with Gute."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 6,
+        "skill": "vocabulary",
+        "type": "gap_fill",
+        "prompt": "Mein ___ ist Jonas.",
+        "answer": "Name",
+        "distractors": [
+          "Buchstabe",
+          "Alphabet"
+        ],
+        "accepted_answers": [],
+        "explanation": "Mein Name ist ... means My name is ..."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 7,
+        "skill": "grammar",
+        "type": "multiple_choice",
+        "prompt": "You meet your teacher, an adult you do not know well. What do you ask?",
+        "answer": "Wie heißen Sie?",
+        "distractors": [
+          "Wie heißt du?",
+          "Wie heiße ich?"
+        ],
+        "accepted_answers": [],
+        "explanation": "Use the formal Sie with adults you do not know well."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 8,
+        "skill": "vocabulary",
+        "type": "multiple_choice",
+        "prompt": "Which letter is called veh?",
+        "answer": "W",
+        "distractors": [
+          "V",
+          "F",
+          "B"
+        ],
+        "accepted_answers": [],
+        "explanation": "W is veh; V is fau."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 9,
+        "skill": "vocabulary",
+        "type": "multiple_choice",
+        "prompt": "Which word starts with tsch, like English ch in church?",
+        "answer": "Tschüs",
+        "distractors": [
+          "Schule",
+          "schön"
+        ],
+        "accepted_answers": [],
+        "explanation": "Tschüs has tsch; Schule and schön have sch, like English sh."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 10,
+        "skill": "vocabulary",
+        "type": "multiple_choice",
+        "prompt": "What is the name of the letter ß?",
+        "answer": "Eszett",
+        "distractors": [
+          "ess-Umlaut",
+          "tsett",
+          "Beta"
+        ],
+        "accepted_answers": [],
+        "explanation": "The letter ß is called Eszett."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 11,
+        "skill": "word_order",
+        "type": "ordering",
+        "prompt": "heiße / Ich / Lena",
+        "answer": "Ich heiße Lena.",
+        "distractors": [],
+        "accepted_answers": [
+          "Lena heiße ich."
+        ],
+        "explanation": "The verb is in second position: Ich heiße Lena."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 12,
+        "skill": "word_order",
+        "type": "ordering",
+        "prompt": "heißt / du / Wie",
+        "answer": "Wie heißt du?",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "The question word comes first, then the verb, then du."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 13,
+        "skill": "word_order",
+        "type": "ordering",
+        "prompt": "Sie / heißen / Wie",
+        "answer": "Wie heißen Sie?",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "The question word comes first, then the verb, then Sie."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 14,
+        "skill": "translation",
+        "type": "typing",
+        "prompt": "Greet a friend: Hello!",
+        "answer": "Hallo!",
+        "distractors": [],
+        "accepted_answers": [
+          "Hi!"
+        ],
+        "explanation": "Hallo is the usual informal greeting."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 15,
+        "skill": "translation",
+        "type": "typing",
+        "prompt": "Say with the verb heißen: My name is Anna.",
+        "answer": "Ich heiße Anna.",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "Ich heiße plus your name."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 16,
+        "skill": "translation",
+        "type": "typing",
+        "prompt": "Ask a friend: What is your name?",
+        "answer": "Wie heißt du?",
+        "distractors": [],
+        "accepted_answers": [
+          "Wie ist dein Name?"
+        ],
+        "explanation": "Use du with a friend."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 17,
+        "skill": "dictation",
+        "type": "dictation",
+        "prompt": "Listen and write the sentence.",
+        "answer": "Wie heißt du?",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "Remember ß in heißt."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 18,
+        "skill": "dictation",
+        "type": "dictation",
+        "prompt": "Listen and write the sentence.",
+        "answer": "Ich heiße Jonas.",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "Ich heiße plus the name."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exercises",
+        "position": 19,
+        "skill": "dictation",
+        "type": "dictation",
+        "prompt": "Listen and write the sentence.",
+        "answer": "Guten Morgen, Lena!",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "Guten Morgen is a fixed greeting; names have capitals."
+      },
+      {
+        "session_code": "Z1",
+        "part": "reading",
+        "position": 1,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "Who is the teacher in the text?",
+        "answer": "Anna",
+        "distractors": [
+          "Jonas",
+          "Lena"
+        ],
+        "accepted_answers": [],
+        "explanation": "The text says: \"Ich bin die Lehrerin\" and the speaker is Anna."
+      },
+      {
+        "session_code": "Z1",
+        "part": "reading",
+        "position": 2,
+        "skill": "reading",
+        "type": "typing",
+        "prompt": "Who is new? Write the name in German.",
+        "answer": "Jonas",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "The text says: \"Jonas ist neu.\""
+      },
+      {
+        "session_code": "Z1",
+        "part": "reading",
+        "position": 3,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "What does Anna ask to hear the spelling of a name?",
+        "answer": "Wie schreibt man das?",
+        "distractors": [
+          "Wie heißt du?",
+          "Wie heißen Sie?"
+        ],
+        "accepted_answers": [],
+        "explanation": "\"Wie schreibt man das?\" asks how to write something."
+      },
+      {
+        "session_code": "Z1",
+        "part": "reading",
+        "position": 4,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "Which letters does Jonas say when he spells his name?",
+        "answer": "J, O, N, A, S",
+        "distractors": [
+          "J, O, N, A",
+          "G, O, N, A, S",
+          "J, A, N, A, S"
+        ],
+        "accepted_answers": [],
+        "explanation": "Jonas spells J, O, N, A, S."
+      },
+      {
+        "session_code": "Z1",
+        "part": "reading",
+        "position": 5,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "How do Anna and Jonas say goodbye at the end?",
+        "answer": "Tschüs!",
+        "distractors": [
+          "Guten Morgen!",
+          "Guten Abend!"
+        ],
+        "accepted_answers": [],
+        "explanation": "Tschüs (t + sch + ü + s) starts with tsch, like English \"ch\" in \"church\"."
+      },
+      {
+        "session_code": "Z1",
+        "part": "listening",
+        "position": 1,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "Which greeting does Anna use at the start?",
+        "answer": "Guten Morgen",
+        "distractors": [
+          "Guten Abend",
+          "Guten Tag",
+          "Gute Nacht"
+        ],
+        "accepted_answers": [],
+        "explanation": "Anna says \"Guten Morgen!\" in the first line."
+      },
+      {
+        "session_code": "Z1",
+        "part": "listening",
+        "position": 2,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "Which letters does Jonas say?",
+        "answer": "J, O, N, A, S",
+        "distractors": [
+          "J, O, N, A",
+          "G, O, N, A, S",
+          "J, A, N, A, S"
+        ],
+        "accepted_answers": [],
+        "explanation": "Jonas spells his name J, O, N, A, S."
+      },
+      {
+        "session_code": "Z1",
+        "part": "listening",
+        "position": 3,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "Who spells the letters L, E, N, A?",
+        "answer": "Lena",
+        "distractors": [
+          "Anna",
+          "Jonas"
+        ],
+        "accepted_answers": [],
+        "explanation": "Lena says her name and spells it."
+      },
+      {
+        "session_code": "Z1",
+        "part": "listening",
+        "position": 4,
+        "skill": "listening",
+        "type": "dictation",
+        "prompt": "Listen and write the sentence.",
+        "answer": "Ich heiße Lena.",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "Lena says this sentence with ei (like English \"eye\") in heiße."
+      },
+      {
+        "session_code": "Z1",
+        "part": "listening",
+        "position": 5,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "What does Lena say to Anna when she leaves?",
+        "answer": "Tschüs",
+        "distractors": [
+          "Guten Morgen",
+          "Hallo",
+          "Ja"
+        ],
+        "accepted_answers": [],
+        "explanation": "Lena says \"Tschüs, Anna!\" to say goodbye."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exam",
+        "position": 1,
+        "skill": "vocabulary",
+        "type": "multiple_choice",
+        "prompt": "Which phrase means \"Goodbye\" in German?",
+        "answer": "Auf Wiedersehen!",
+        "distractors": [
+          "Guten Abend!",
+          "Guten Morgen!",
+          "Hallo!"
+        ],
+        "accepted_answers": [],
+        "explanation": "\"Auf Wiedersehen!\" is the German way to say goodbye."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exam",
+        "position": 2,
+        "skill": "vocabulary",
+        "type": "gap_fill",
+        "prompt": "It is the evening. You say: Guten ___!",
+        "answer": "Abend",
+        "distractors": [
+          "Morgen",
+          "Nacht",
+          "Lehrer"
+        ],
+        "accepted_answers": [],
+        "explanation": "The evening greeting is \"Guten Abend\"."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exam",
+        "position": 3,
+        "skill": "grammar",
+        "type": "multiple_choice",
+        "prompt": "Which word has sch, which sounds like English \"sh\" in \"shoe\"?",
+        "answer": "Schule",
+        "distractors": [
+          "Tschüs",
+          "Deutsch"
+        ],
+        "accepted_answers": [],
+        "explanation": "Schule has sch (English \"sh\"), but Tschüs and Deutsch have tsch (English \"ch\")."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exam",
+        "position": 4,
+        "skill": "grammar",
+        "type": "multiple_choice",
+        "prompt": "How is ie said in the word \"Wie\"?",
+        "answer": "Like English \"ee\" in \"see\"",
+        "distractors": [
+          "Like English \"eye\"",
+          "Like English \"ay\" in \"day\""
+        ],
+        "accepted_answers": [],
+        "explanation": "German ie sounds like English \"ee\", while ei sounds like English \"eye\"."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exam",
+        "position": 5,
+        "skill": "translation",
+        "type": "typing",
+        "prompt": "How do you write that?",
+        "answer": "Wie schreibt man das?",
+        "distractors": [],
+        "accepted_answers": [
+          "Wie schreibst du das?",
+          "Wie schreiben Sie das?"
+        ],
+        "explanation": "You ask \"Wie schreibt man das?\" when you want to know the spelling."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exam",
+        "position": 6,
+        "skill": "dictation",
+        "type": "dictation",
+        "prompt": "Listen and write the sentence.",
+        "answer": "Auf Wiedersehen, Jonas!",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "Write ie in \"Wiedersehen\" and put a comma before the name."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exam",
+        "position": 7,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "What does Anna do in the text?",
+        "answer": "She spells her name.",
+        "distractors": [
+          "She asks for a teacher.",
+          "She says good night."
+        ],
+        "accepted_answers": [],
+        "explanation": "Anna says \"Ich buchstabiere meinen Namen\", so she spells her name."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exam",
+        "position": 8,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "How does Anna say goodbye?",
+        "answer": "Tschüs!",
+        "distractors": [
+          "Hallo!",
+          "Guten Tag!"
+        ],
+        "accepted_answers": [],
+        "explanation": "The last word of the text is \"Tschüs!\"."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exam",
+        "position": 9,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "What does Jonas ask Anna?",
+        "answer": "Her name",
+        "distractors": [
+          "Her teacher",
+          "Her age"
+        ],
+        "accepted_answers": [],
+        "explanation": "Jonas asks \"Wie ist Ihr Name?\"."
+      },
+      {
+        "session_code": "Z1",
+        "part": "exam",
+        "position": 10,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "How does Anna spell her name?",
+        "answer": "A-N-N-A",
+        "distractors": [
+          "A-N-A",
+          "A-N-N-E",
+          "E-N-N-A"
+        ],
+        "accepted_answers": [],
+        "explanation": "Anna spells her name A-N-N-A."
+      }
+    ]
+  },
+  "Z2": {
+    "code": "Z2",
+    "parts": {
+      "goal": {
+        "can_do": "I can say my name, where I come from and how I am, and ask a friend the same questions."
+      },
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "You learned Hallo and Tschüs in Z1. What does \"Tschüs\" mean?",
+            "answer": "Goodbye",
+            "distractors": [
+              "Hello",
+              "Thank you",
+              "Good night"
+            ],
+            "accepted_answers": [],
+            "explanation": "Tschüs is a casual way to say goodbye."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ Anna. (heißen: my name is Anna)",
+            "answer": "heiße",
+            "distractors": [
+              "heißt",
+              "heißen",
+              "heiß"
+            ],
+            "accepted_answers": [],
+            "explanation": "With ich, the verb heißen ends in -e: ich heiße."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which word means \"the letter\" (like A, B, C)?",
+            "answer": "der Buchstabe",
+            "distractors": [
+              "der Name",
+              "der Morgen",
+              "die Nacht"
+            ],
+            "accepted_answers": [],
+            "explanation": "Der Buchstabe is a letter of the alphabet."
+          }
+        ]
+      },
+      "grammar": {
+        "intro": {
+          "title": "Personal pronouns + sein; Ich heiße… / Ich bin… / Ich komme aus…",
+          "explanation": [
+            "Personal pronouns tell us who is speaking or who we are talking about: ich (I), du (you, a friend), er (he), sie (she), es (it), wir (we), ihr (you, several friends), sie (they) and Sie (you, formal). The formal Sie always has a capital S.",
+            "The verb sein (to be) is irregular: ich bin, du bist, er/sie/es ist. You use it for names, feelings and states: Ich bin Anna. Ich bin müde.",
+            "To say your name you can use heißen: Ich heiße Jonas. To say where you are from, use kommen + aus: Ich komme aus Deutschland.",
+            "To say how you feel, do not use 'Ich bin gut'. Say Mir geht es gut. The question is Wie geht es dir?"
+          ],
+          "rule_summary": "ich bin / du bist / er ist; Ich heiße… = my name; Ich komme aus… = where I am from; Mir geht es gut = I am fine."
+        },
+        "examples": [
+          {
+            "de": "Ich heiße Anna.",
+            "en": "My name is Anna.",
+            "note": "heißen: ich heiße, du heißt."
+          },
+          {
+            "de": "Ich bin Jonas.",
+            "en": "I am Jonas.",
+            "note": "sein with ich is bin."
+          },
+          {
+            "de": "Ich komme aus Deutschland.",
+            "en": "I come from Germany.",
+            "note": "Use aus for the country or town you come from."
+          },
+          {
+            "de": "Du bist Lena.",
+            "en": "You are Lena.",
+            "note": "sein with du is bist."
+          },
+          {
+            "de": "Wie geht es dir? Mir geht es gut.",
+            "en": "How are you? I am fine.",
+            "note": "Use this for well-being, not Ich bin gut."
+          },
+          {
+            "de": "Er ist müde.",
+            "en": "He is tired.",
+            "note": "A state with sein is fine: er ist."
+          }
+        ],
+        "traps": [
+          {
+            "wrong": "Ich bin gut.",
+            "right": "Mir geht es gut.",
+            "why": "Ich bin gut means I am good at something or a good person; for how you feel say Mir geht es gut."
+          },
+          {
+            "wrong": "Ich komme von Deutschland.",
+            "right": "Ich komme aus Deutschland.",
+            "why": "For the country or town you come from, German uses aus, not von."
+          },
+          {
+            "wrong": "Wie heißen sie? (to a stranger, formal)",
+            "right": "Wie heißen Sie?",
+            "why": "The formal you is always written Sie with a capital S, and the verb is the same as for they."
+          }
+        ],
+        "tables": [
+          {
+            "title": "The verb sein (to be)",
+            "headers": [
+              "Pronoun",
+              "sein"
+            ],
+            "rows": [
+              [
+                "ich",
+                "bin"
+              ],
+              [
+                "du",
+                "bist"
+              ],
+              [
+                "er / sie / es",
+                "ist"
+              ],
+              [
+                "wir",
+                "sind"
+              ],
+              [
+                "ihr",
+                "seid"
+              ],
+              [
+                "sie (they)",
+                "sind"
+              ],
+              [
+                "Sie (formal)",
+                "sind"
+              ]
+            ]
+          },
+          {
+            "title": "heißen and kommen",
+            "headers": [
+              "Pronoun",
+              "heißen",
+              "kommen"
+            ],
+            "rows": [
+              [
+                "ich",
+                "heiße",
+                "komme"
+              ],
+              [
+                "du",
+                "heißt",
+                "kommst"
+              ],
+              [
+                "er / sie / es",
+                "heißt",
+                "kommt"
+              ],
+              [
+                "wir",
+                "heißen",
+                "kommen"
+              ],
+              [
+                "ihr",
+                "heißt",
+                "kommt"
+              ],
+              [
+                "sie / Sie",
+                "heißen",
+                "kommen"
+              ]
+            ]
+          }
+        ]
+      },
+      "exercises": {
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ Anna.",
+            "answer": "heiße",
+            "distractors": [
+              "heißt",
+              "heißen",
+              "kommst"
+            ],
+            "accepted_answers": [],
+            "explanation": "With ich, heißen becomes heiße."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Du ___ aus Deutschland.",
+            "answer": "kommst",
+            "distractors": [
+              "komme",
+              "kommt",
+              "kommen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With du, the verb ends in -st: du kommst."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Er ___ müde.",
+            "answer": "ist",
+            "distractors": [
+              "bin",
+              "bist",
+              "sind"
+            ],
+            "accepted_answers": [],
+            "explanation": "With er, sein is ist."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Wir ___ Freunde.",
+            "answer": "sind",
+            "distractors": [
+              "bin",
+              "ist",
+              "seid"
+            ],
+            "accepted_answers": [],
+            "explanation": "With wir, sein is sind."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Ich komme ___ Deutschland.",
+            "answer": "aus",
+            "distractors": [
+              "in",
+              "von",
+              "nach"
+            ],
+            "accepted_answers": [],
+            "explanation": "We say komme aus for the place we come from."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Mir ___ es gut.",
+            "answer": "geht",
+            "distractors": [
+              "bin",
+              "ist",
+              "heißt"
+            ],
+            "accepted_answers": [],
+            "explanation": "The fixed phrase for well-being is Mir geht es gut."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "How do you say 'I am fine' in German?",
+            "answer": "Mir geht es gut.",
+            "distractors": [
+              "Ich heiße gut.",
+              "Ich komme gut.",
+              "Mir kommt es gut."
+            ],
+            "accepted_answers": [],
+            "explanation": "Well-being uses Mir geht es gut."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which word is the formal 'you'?",
+            "answer": "Sie",
+            "distractors": [
+              "du",
+              "er",
+              "wir"
+            ],
+            "accepted_answers": [],
+            "explanation": "Sie with a capital S is the formal you."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which question asks where someone is from?",
+            "answer": "Woher kommst du?",
+            "distractors": [
+              "Wie heißt du?",
+              "Wie geht es dir?",
+              "Wer bist du?"
+            ],
+            "accepted_answers": [],
+            "explanation": "Woher asks about origin."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence means 'She is tired'?",
+            "answer": "Sie ist müde.",
+            "distractors": [
+              "Sie bin müde.",
+              "Sie bist müde.",
+              "Ich ist müde."
+            ],
+            "accepted_answers": [],
+            "explanation": "With sie (she), sein is ist."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "heiße / Ich / Anna",
+            "answer": "Ich heiße Anna.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "The verb stays in second place."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "kommst / du / Woher",
+            "answer": "Woher kommst du?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "In a question with Woher, the verb comes second, then du."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "aus / Jonas / Deutschland / kommt",
+            "answer": "Jonas kommt aus Deutschland.",
+            "distractors": [],
+            "accepted_answers": [
+              "Aus Deutschland kommt Jonas."
+            ],
+            "explanation": "The verb kommt is in second place."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "My name is Lena.",
+            "answer": "Ich heiße Lena.",
+            "distractors": [],
+            "accepted_answers": [
+              "Mein Name ist Lena.",
+              "Ich bin Lena."
+            ],
+            "explanation": "Ich heiße… is the usual way to say your name."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "I am from Germany.",
+            "answer": "Ich komme aus Deutschland.",
+            "distractors": [],
+            "accepted_answers": [
+              "Ich bin aus Deutschland."
+            ],
+            "explanation": "kommen + aus tells where you come from."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Say to a friend: You are tired.",
+            "answer": "Du bist müde.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "With du, sein is bist."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Ich heiße Jonas.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "heiße ends in -e after ich."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Woher kommst du?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "kommst ends in -st after du."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Mir geht es gut.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "This is the fixed phrase for how you feel."
+          }
+        ]
+      },
+      "vocabulary": {
+        "words": [
+          {
+            "tier": "core",
+            "en": "I",
+            "article": null,
+            "de": "ich",
+            "plural": null,
+            "example": "Ich bin Anna.",
+            "example_en": "I am Anna.",
+            "tip": "Not capitalised inside a sentence."
+          },
+          {
+            "tier": "core",
+            "en": "you (friend)",
+            "article": null,
+            "de": "du",
+            "plural": null,
+            "example": "Du bist Jonas.",
+            "example_en": "You are Jonas.",
+            "tip": "Use du with friends, family and children."
+          },
+          {
+            "tier": "core",
+            "en": "you (formal)",
+            "article": null,
+            "de": "Sie",
+            "plural": null,
+            "example": "Wie heißen Sie?",
+            "example_en": "What is your name?",
+            "tip": "Always a capital S."
+          },
+          {
+            "tier": "core",
+            "en": "name",
+            "article": "der",
+            "de": "Name",
+            "plural": "die Namen",
+            "example": "Mein Name ist Lena.",
+            "example_en": "My name is Lena.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "to be called",
+            "article": null,
+            "de": "heißen",
+            "plural": "ich heiße · du heißt · er heißt",
+            "example": "Ich heiße Anna.",
+            "example_en": "My name is Anna.",
+            "tip": "ß is said like a sharp s."
+          },
+          {
+            "tier": "core",
+            "en": "to come",
+            "article": null,
+            "de": "kommen",
+            "plural": "ich komme · du kommst · er kommt",
+            "example": "Du kommst aus Deutschland.",
+            "example_en": "You come from Germany.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "to be",
+            "article": null,
+            "de": "sein",
+            "plural": "ich bin · du bist · er ist",
+            "example": "Er ist Jonas.",
+            "example_en": "He is Jonas.",
+            "tip": "Irregular: learn the forms by heart."
+          },
+          {
+            "tier": "core",
+            "en": "from, out of",
+            "article": null,
+            "de": "aus",
+            "plural": null,
+            "example": "Ich komme aus Deutschland.",
+            "example_en": "I come from Germany.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "good, well",
+            "article": null,
+            "de": "gut",
+            "plural": null,
+            "example": "Mir geht es gut.",
+            "example_en": "I am fine.",
+            "tip": "For feelings say Mir geht es gut."
+          },
+          {
+            "tier": "core",
+            "en": "country",
+            "article": "das",
+            "de": "Land",
+            "plural": "die Länder",
+            "example": "Mein Land ist Deutschland.",
+            "example_en": "My country is Germany.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "Germany",
+            "article": null,
+            "de": "Deutschland",
+            "plural": "—",
+            "example": "Anna kommt aus Deutschland.",
+            "example_en": "Anna comes from Germany.",
+            "tip": "No article is used with this country."
+          },
+          {
+            "tier": "core",
+            "en": "thank you",
+            "article": null,
+            "de": "danke",
+            "plural": null,
+            "example": "Gut, danke.",
+            "example_en": "Fine, thank you.",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "tired",
+            "article": null,
+            "de": "müde",
+            "plural": null,
+            "example": "Ich bin müde.",
+            "example_en": "I am tired.",
+            "tip": "A state with sein is fine."
+          },
+          {
+            "tier": "bonus",
+            "en": "hungry",
+            "article": null,
+            "de": "hungrig",
+            "plural": null,
+            "example": "Jonas ist hungrig.",
+            "example_en": "Jonas is hungry.",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "happy, glad",
+            "article": null,
+            "de": "froh",
+            "plural": null,
+            "example": "Lena ist froh.",
+            "example_en": "Lena is happy.",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "city, town",
+            "article": "die",
+            "de": "Stadt",
+            "plural": "die Städte",
+            "example": "Ich komme aus einer Stadt.",
+            "example_en": "I come from a city.",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "friend (male)",
+            "article": "der",
+            "de": "Freund",
+            "plural": "die Freunde",
+            "example": "Jonas ist mein Freund.",
+            "example_en": "Jonas is my friend.",
+            "tip": "Add -in for a female friend."
+          },
+          {
+            "tier": "bonus",
+            "en": "friend (female)",
+            "article": "die",
+            "de": "Freundin",
+            "plural": "die Freundinnen",
+            "example": "Lena ist meine Freundin.",
+            "example_en": "Lena is my friend.",
+            "tip": null
+          }
+        ],
+        "phrases": [
+          {
+            "en": "My name is…",
+            "de": "Ich heiße…",
+            "example": "Ich heiße Anna.",
+            "example_en": "My name is Anna.",
+            "tip": "Say your name after heiße."
+          },
+          {
+            "en": "What is your name? (friend / formal)",
+            "de": "Wie heißt du? / Wie heißen Sie?",
+            "example": "Hallo, wie heißt du?",
+            "example_en": "Hello, what is your name?",
+            "tip": "Use Sie with strangers."
+          },
+          {
+            "en": "I come from…",
+            "de": "Ich komme aus…",
+            "example": "Ich komme aus Deutschland.",
+            "example_en": "I come from Germany.",
+            "tip": null
+          },
+          {
+            "en": "Where are you from?",
+            "de": "Woher kommst du?",
+            "example": "Woher kommst du, Jonas?",
+            "example_en": "Where are you from, Jonas?",
+            "tip": "Formal: Woher kommen Sie?"
+          },
+          {
+            "en": "How are you? I am fine.",
+            "de": "Wie geht es dir? Mir geht es gut.",
+            "example": "Wie geht es dir, Lena? Mir geht es gut, danke.",
+            "example_en": "How are you, Lena? I am fine, thank you.",
+            "tip": "Formal: Wie geht es Ihnen?"
+          }
+        ]
+      },
+      "pronunciation": {
+        "focus": "ei and ie",
+        "explanation": "The letters ei sound like English 'eye' (heiße). The letters ie sound like a long English 'ee' (wie). Beginners often mix them up, so check the order of the letters.",
+        "words": [
+          {
+            "de": "heiße",
+            "hint": "h-ei-ß-e: 'HY-suh', ei like 'eye'."
+          },
+          {
+            "de": "heißt",
+            "hint": "ei like 'eye': 'hyst'."
+          },
+          {
+            "de": "nein",
+            "hint": "n-ei-n: 'nine'."
+          },
+          {
+            "de": "drei",
+            "hint": "d-r-ei: 'dry'."
+          },
+          {
+            "de": "wie",
+            "hint": "w-ie: 'vee', ie is a long 'ee'."
+          },
+          {
+            "de": "Sie",
+            "hint": "S-ie: 'zee', ie is a long 'ee'."
+          },
+          {
+            "de": "die",
+            "hint": "d-ie: 'dee', long 'ee'."
+          },
+          {
+            "de": "hier",
+            "hint": "h-ie-r: 'heer', long 'ee'."
+          }
+        ],
+        "sentences": [
+          "Ich heiße Anna.",
+          "Wie heißt du?",
+          "Wie heißen Sie?",
+          "Nein, ich heiße Lena."
+        ]
+      },
+      "reading": {
+        "passage": {
+          "title": "Das ist Anna",
+          "text": "Das ist Anna. Sie kommt aus Hamburg. Hamburg ist eine Stadt in Deutschland. Anna ist müde und froh. Jonas ist ein Freund. Er kommt aus Berlin. Anna fragt: „Wie geht es dir?“ Jonas sagt: „Mir geht es gut, danke!“"
+        },
+        "questions": [
+          {
+            "skill": "reading",
+            "type": "multiple_choice",
+            "prompt": "Woher kommt Anna?",
+            "answer": "Aus Hamburg",
+            "distractors": [
+              "Aus Berlin",
+              "Aus Deutschland und Berlin"
+            ],
+            "accepted_answers": [],
+            "explanation": "The text says: Sie kommt aus Hamburg."
+          },
+          {
+            "skill": "reading",
+            "type": "multiple_choice",
+            "prompt": "What is Hamburg, according to the text?",
+            "answer": "eine Stadt",
+            "distractors": [
+              "ein Freund",
+              "ein Name"
+            ],
+            "accepted_answers": [],
+            "explanation": "The text says: Hamburg ist eine Stadt in Deutschland."
+          },
+          {
+            "skill": "reading",
+            "type": "multiple_choice",
+            "prompt": "How is Anna?",
+            "answer": "müde und froh",
+            "distractors": [
+              "hungrig und froh",
+              "müde und hungrig"
+            ],
+            "accepted_answers": [],
+            "explanation": "The text says: Anna ist müde und froh."
+          },
+          {
+            "skill": "reading",
+            "type": "typing",
+            "prompt": "Woher kommt Jonas? Answer with one or two German words.",
+            "answer": "Aus Berlin",
+            "distractors": [],
+            "accepted_answers": [
+              "Berlin",
+              "Er kommt aus Berlin."
+            ],
+            "explanation": "The text says: Er kommt aus Berlin."
+          },
+          {
+            "skill": "reading",
+            "type": "multiple_choice",
+            "prompt": "What does Jonas answer to “Wie geht es dir?”",
+            "answer": "Mir geht es gut, danke!",
+            "distractors": [
+              "Ich heiße Jonas.",
+              "Ich komme aus Hamburg."
+            ],
+            "accepted_answers": [],
+            "explanation": "Jonas says he is fine with “Mir geht es gut, danke!”"
+          }
+        ]
+      },
+      "listening": {
+        "passage": {
+          "title": "Hallo, ich heiße Anna",
+          "speakers": [
+            "Anna",
+            "Lena"
+          ],
+          "script": [
+            {
+              "speaker": "Anna",
+              "de": "Hallo! Ich heiße Anna. Wie heißt du?",
+              "en": "Hello! My name is Anna. What is your name?"
+            },
+            {
+              "speaker": "Lena",
+              "de": "Hallo, Anna! Ich heiße Lena.",
+              "en": "Hello, Anna! My name is Lena."
+            },
+            {
+              "speaker": "Anna",
+              "de": "Woher kommst du, Lena?",
+              "en": "Where are you from, Lena?"
+            },
+            {
+              "speaker": "Lena",
+              "de": "Ich komme aus Berlin. Und du?",
+              "en": "I am from Berlin. And you?"
+            },
+            {
+              "speaker": "Anna",
+              "de": "Ich komme aus Hamburg. Wie geht es dir?",
+              "en": "I am from Hamburg. How are you?"
+            },
+            {
+              "speaker": "Lena",
+              "de": "Mir geht es gut, danke. Ich bin nur müde.",
+              "en": "I am fine, thanks. I am just tired."
+            },
+            {
+              "speaker": "Anna",
+              "de": "Ich bin hungrig!",
+              "en": "I am hungry!"
+            },
+            {
+              "speaker": "Lena",
+              "de": "Ich auch!",
+              "en": "Me too!"
+            }
+          ]
+        },
+        "questions": [
+          {
+            "skill": "listening",
+            "type": "multiple_choice",
+            "prompt": "What is the second speaker's name?",
+            "answer": "Lena",
+            "distractors": [
+              "Anna",
+              "Jonas"
+            ],
+            "accepted_answers": [],
+            "explanation": "She says: Ich heiße Lena."
+          },
+          {
+            "skill": "listening",
+            "type": "multiple_choice",
+            "prompt": "Where does Lena come from?",
+            "answer": "Berlin",
+            "distractors": [
+              "Hamburg",
+              "Wien"
+            ],
+            "accepted_answers": [],
+            "explanation": "Lena says: Ich komme aus Berlin."
+          },
+          {
+            "skill": "listening",
+            "type": "multiple_choice",
+            "prompt": "How is Lena?",
+            "answer": "She is fine but tired.",
+            "distractors": [
+              "She is hungry.",
+              "She is not fine."
+            ],
+            "accepted_answers": [],
+            "explanation": "Lena says: Mir geht es gut, danke. Ich bin nur müde."
+          },
+          {
+            "skill": "listening",
+            "type": "multiple_choice",
+            "prompt": "What does Anna say she is?",
+            "answer": "hungrig",
+            "distractors": [
+              "müde",
+              "froh"
+            ],
+            "accepted_answers": [],
+            "explanation": "Anna says: Ich bin hungrig!"
+          },
+          {
+            "skill": "listening",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Ich heiße Lena.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Ich heiße means “my name is”; ei sounds like English “eye”."
+          }
+        ]
+      },
+      "writing": {
+        "task": "Introduce yourself in 3 to 5 short sentences. Write your name, where you are from and how you are.",
+        "min_words": 25,
+        "must_include": [
+          "Your name with Ich heiße…",
+          "Where you are from with Ich komme aus…",
+          "How you are with Mir geht es gut or Ich bin müde / hungrig / froh",
+          "A question to a friend, for example Wie heißt du?"
+        ],
+        "useful_phrases": [
+          "Ich heiße …",
+          "Ich komme aus …",
+          "Ich bin müde.",
+          "Mir geht es gut, danke.",
+          "Wie heißt du?"
+        ],
+        "model_answer": "Ich heiße Jonas. Ich komme aus Hamburg in Deutschland. Ich bin müde und hungrig. Mir geht es gut, danke. Wie heißt du?",
+        "rubric": [
+          "Uses Ich heiße… correctly for the name.",
+          "Uses Ich komme aus… once, with a city or country.",
+          "Uses sein correctly (ich bin, du bist) for feelings such as müde, hungrig, froh.",
+          "Says how they are with Mir geht es gut, not Ich bin gut.",
+          "Writes 3 to 5 short, complete sentences with capital letters and full stops."
+        ]
+      },
+      "speaking": {
+        "drill": [
+          {
+            "prompt": "Say: My name is Anna.",
+            "target": "Ich heiße Anna.",
+            "tip": "The ei in heiße sounds like English “eye”."
+          },
+          {
+            "prompt": "Ask a friend: What is your name?",
+            "target": "Wie heißt du?",
+            "tip": "The ie in wie sounds like English “ee”."
+          },
+          {
+            "prompt": "Say: I am from Germany.",
+            "target": "Ich komme aus Deutschland.",
+            "tip": "Deutschland starts with “deu” (like “doy”) and has tsch, said like English “ch”."
+          },
+          {
+            "prompt": "Ask a friend: Where are you from?",
+            "target": "Woher kommst du?",
+            "tip": "Stress the second part: wo-HER."
+          },
+          {
+            "prompt": "Say you are fine and say thanks.",
+            "target": "Mir geht es gut, danke.",
+            "tip": "Say it as one smooth phrase."
+          }
+        ],
+        "tandem": {
+          "title": "Hallo! Wer bist du?",
+          "setting": "You meet Buddy at a language café. You both want to get to know each other.",
+          "buddy_role": "A friendly new acquaintance who asks simple questions and answers slowly.",
+          "learner_role": "Yourself, introducing yourself with your name, where you are from and how you are.",
+          "opening_line": "Hallo! Ich heiße Buddy. Wie heißt du?",
+          "target_phrases": [
+            "Ich heiße …",
+            "Ich komme aus …",
+            "Woher kommst du?",
+            "Wie geht es dir?",
+            "Mir geht es gut, danke."
+          ],
+          "target_grammar": "Personal pronouns with sein (ich bin, du bist) and Ich heiße… / Ich komme aus…",
+          "topics": [
+            "Woher kommst du?",
+            "Wie geht es dir?",
+            "Bist du müde oder hungrig?",
+            "Ist das deine Stadt?",
+            "Ist das dein Freund oder deine Freundin?"
+          ],
+          "end_condition": "The learner has said their name, where they are from and how they are, and has asked Buddy at least one question."
+        }
+      },
+      "culture": {
+        "title": "Du or Sie? Introducing yourself",
+        "note": "In German-speaking countries, people choose between du and Sie. You use du with friends, family, children and fellow students. You use Sie with adults you do not know well, at work and in shops. Sie always has a capital S. When you are not sure, start with Sie. People often say their first name and sometimes their last name when they meet, for example \"Ich heiße Anna.\" Often people shake hands in a formal situation. In Germany, Austria and Switzerland, many people also say where they live or where they are from, but this is not required. If someone says \"Wir können du sagen\", it means you can now use du.",
+        "reflection_question": "In your own country, how do you speak to a person you do not know well? Is there a difference like du and Sie?"
+      },
+      "mission": {
+        "title": "My German introduction",
+        "task": "Introduce yourself in German out loud and in writing, using the sentences from this lesson.",
+        "steps": [
+          "Say out loud three sentences: Ich heiße … Ich komme aus … Mir geht es gut.",
+          "Write the same three sentences in your notebook with your own name and country.",
+          "Now ask a question out loud, as if to a new friend: Wie heißt du? Woher kommst du? Wie geht es dir?",
+          "Say the words with ei and ie slowly: heiße, nein, wie, Sie."
+        ],
+        "report_prompt": "Write your three sentences in German and tell me which one was the hardest to say.",
+        "success_check": [
+          "I can say my name with Ich heiße …",
+          "I can say where I am from with Ich komme aus …",
+          "I can ask Wie geht es dir? and answer Mir geht es gut."
+        ],
+        "safety_note": "Only share your first name and your country. Do not share your address, phone number or other private data."
+      },
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena: Ich ___ Lena.",
+            "answer": "heiße",
+            "distractors": [
+              "heißt",
+              "heißen",
+              "bist"
+            ],
+            "accepted_answers": [],
+            "explanation": "With ich, heißen becomes heiße."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas, du ___ müde.",
+            "answer": "bist",
+            "distractors": [
+              "bin",
+              "ist",
+              "kommst"
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb sein goes with du as bist."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "You meet an adult you do not know. How do you ask for the name?",
+            "answer": "Wie heißen Sie?",
+            "distractors": [
+              "Wie heißt du?",
+              "Wie geht es dir?",
+              "Woher kommst du?"
+            ],
+            "accepted_answers": [],
+            "explanation": "Use Sie with adults you do not know well."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "How do you say that you are fine?",
+            "answer": "Mir geht es gut.",
+            "distractors": [
+              "Ich bin gut.",
+              "Ich heiße gut.",
+              "Ich komme gut."
+            ],
+            "accepted_answers": [],
+            "explanation": "Well-being uses Mir geht es gut, not Ich bin gut."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "aus / Anna / Spanien / kommt",
+            "answer": "Anna kommt aus Spanien.",
+            "distractors": [],
+            "accepted_answers": [
+              "Aus Spanien kommt Anna."
+            ],
+            "explanation": "The verb kommt is in second place, and aus goes before the country."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: I am hungry.",
+            "answer": "Ich bin hungrig.",
+            "distractors": [],
+            "accepted_answers": [
+              "Ich habe Hunger."
+            ],
+            "explanation": "Ich goes with bin, and hungrig is a state with sein."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Hallo! Ich heiße Jonas. Ich komme aus Österreich. Die Stadt heißt Wien. Heute bin ich müde, aber mir geht es gut."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Where does Jonas come from?",
+              "answer": "Österreich",
+              "distractors": [
+                "Deutschland",
+                "Wien ist ein Freund",
+                "Lena"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: Ich komme aus Österreich."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "How is Jonas today?",
+              "answer": "He is tired, but fine.",
+              "distractors": [
+                "He is hungry.",
+                "He is happy and not tired.",
+                "He is not fine."
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: Ich bin müde, aber mir geht es gut."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Lena",
+                "de": "Hallo, ich heiße Lena. Wie heißt du?",
+                "en": "Hello, my name is Lena. What is your name?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Ich heiße Anna. Ich komme aus Deutschland.",
+                "en": "My name is Anna. I come from Germany."
+              },
+              {
+                "speaker": "Lena",
+                "de": "Wie geht es dir?",
+                "en": "How are you?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Danke, mir geht es gut.",
+                "en": "Thanks, I am fine."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Where does Anna come from?",
+              "answer": "Deutschland",
+              "distractors": [
+                "Spanien",
+                "Wien",
+                "Österreich"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says: Ich komme aus Deutschland."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "How is Anna?",
+              "answer": "She is fine.",
+              "distractors": [
+                "She is hungry.",
+                "She is tired.",
+                "She is sad."
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says: Mir geht es gut."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 or 3 simple sentences in German about yourself. Say your name, where you come from, and how you are. Use ich heiße, ich komme aus and mir geht es gut or ich bin müde.",
+          "min_words": 15,
+          "rubric": [
+            "Says the name with Ich heiße…",
+            "Says the country or city with Ich komme aus…",
+            "Says how they are with Mir geht es gut or Ich bin müde/hungrig/froh, and does not use Ich bin gut",
+            "Uses correct verb forms and capital letters for nouns"
+          ]
+        },
+        "speaking": {
+          "prompt": "Say hello to a new friend. Tell your name, where you come from, and how you are.",
+          "target_hint": "Hallo! Ich heiße … Ich komme aus … Mir geht es gut."
+        }
+      },
+      "closing": {
+        "covered": [
+          "You can now say your name with Ich heiße … and ask Wie heißt du? or Wie heißen Sie?",
+          "You can now say where you are from with Ich komme aus … and ask Woher kommst du?",
+          "You can now use ich bin, du bist and er ist, for example Ich bin müde.",
+          "You can now ask Wie geht es dir? and answer Mir geht es gut.",
+          "You can now tell du and Sie apart."
+        ],
+        "review_tomorrow": "Review the forms ich bin / du bist / er ist and the phrase Mir geht es gut, and say the words with ei and ie out loud."
+      }
+    },
+    "part_status": {
+      "goal": "ok",
+      "warmup": "fixed",
+      "grammar": "fixed",
+      "exercises": "fixed",
+      "vocabulary": "ok",
+      "pronunciation": "ok",
+      "reading": "ok",
+      "listening": "fixed",
+      "writing": "ok",
+      "speaking": "ok",
+      "culture": "fixed",
+      "mission": "fixed",
+      "exam": "fixed",
+      "closing": "ok"
+    },
+    "cards": [
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "core",
+        "position": 1,
+        "en": "I",
+        "article": null,
+        "de": "ich",
+        "plural": null,
+        "example": "Ich bin Anna.",
+        "example_en": "I am Anna.",
+        "tip": "Not capitalised inside a sentence."
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "core",
+        "position": 2,
+        "en": "you (friend)",
+        "article": null,
+        "de": "du",
+        "plural": null,
+        "example": "Du bist Jonas.",
+        "example_en": "You are Jonas.",
+        "tip": "Use du with friends, family and children."
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "core",
+        "position": 3,
+        "en": "you (formal)",
+        "article": null,
+        "de": "Sie",
+        "plural": null,
+        "example": "Wie heißen Sie?",
+        "example_en": "What is your name?",
+        "tip": "Always a capital S."
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "core",
+        "position": 4,
+        "en": "name",
+        "article": "der",
+        "de": "Name",
+        "plural": "die Namen",
+        "example": "Mein Name ist Lena.",
+        "example_en": "My name is Lena.",
+        "tip": null
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "core",
+        "position": 5,
+        "en": "to be called",
+        "article": null,
+        "de": "heißen",
+        "plural": "ich heiße · du heißt · er heißt",
+        "example": "Ich heiße Anna.",
+        "example_en": "My name is Anna.",
+        "tip": "ß is said like a sharp s."
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "core",
+        "position": 6,
+        "en": "to come",
+        "article": null,
+        "de": "kommen",
+        "plural": "ich komme · du kommst · er kommt",
+        "example": "Du kommst aus Deutschland.",
+        "example_en": "You come from Germany.",
+        "tip": null
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "core",
+        "position": 7,
+        "en": "to be",
+        "article": null,
+        "de": "sein",
+        "plural": "ich bin · du bist · er ist",
+        "example": "Er ist Jonas.",
+        "example_en": "He is Jonas.",
+        "tip": "Irregular: learn the forms by heart."
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "core",
+        "position": 8,
+        "en": "from, out of",
+        "article": null,
+        "de": "aus",
+        "plural": null,
+        "example": "Ich komme aus Deutschland.",
+        "example_en": "I come from Germany.",
+        "tip": null
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "core",
+        "position": 9,
+        "en": "good, well",
+        "article": null,
+        "de": "gut",
+        "plural": null,
+        "example": "Mir geht es gut.",
+        "example_en": "I am fine.",
+        "tip": "For feelings say Mir geht es gut."
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "core",
+        "position": 10,
+        "en": "country",
+        "article": "das",
+        "de": "Land",
+        "plural": "die Länder",
+        "example": "Mein Land ist Deutschland.",
+        "example_en": "My country is Germany.",
+        "tip": null
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "core",
+        "position": 11,
+        "en": "Germany",
+        "article": null,
+        "de": "Deutschland",
+        "plural": "—",
+        "example": "Anna kommt aus Deutschland.",
+        "example_en": "Anna comes from Germany.",
+        "tip": "No article is used with this country."
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "core",
+        "position": 12,
+        "en": "thank you",
+        "article": null,
+        "de": "danke",
+        "plural": null,
+        "example": "Gut, danke.",
+        "example_en": "Fine, thank you.",
+        "tip": null
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 13,
+        "en": "tired",
+        "article": null,
+        "de": "müde",
+        "plural": null,
+        "example": "Ich bin müde.",
+        "example_en": "I am tired.",
+        "tip": "A state with sein is fine."
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 14,
+        "en": "hungry",
+        "article": null,
+        "de": "hungrig",
+        "plural": null,
+        "example": "Jonas ist hungrig.",
+        "example_en": "Jonas is hungry.",
+        "tip": null
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 15,
+        "en": "happy, glad",
+        "article": null,
+        "de": "froh",
+        "plural": null,
+        "example": "Lena ist froh.",
+        "example_en": "Lena is happy.",
+        "tip": null
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 16,
+        "en": "city, town",
+        "article": "die",
+        "de": "Stadt",
+        "plural": "die Städte",
+        "example": "Ich komme aus einer Stadt.",
+        "example_en": "I come from a city.",
+        "tip": null
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 17,
+        "en": "friend (male)",
+        "article": "der",
+        "de": "Freund",
+        "plural": "die Freunde",
+        "example": "Jonas ist mein Freund.",
+        "example_en": "Jonas is my friend.",
+        "tip": "Add -in for a female friend."
+      },
+      {
+        "session_code": "Z2",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 18,
+        "en": "friend (female)",
+        "article": "die",
+        "de": "Freundin",
+        "plural": "die Freundinnen",
+        "example": "Lena ist meine Freundin.",
+        "example_en": "Lena is my friend.",
+        "tip": null
+      },
+      {
+        "session_code": "Z2",
+        "kind": "say",
+        "tier": "core",
+        "position": 19,
+        "en": "My name is…",
+        "article": null,
+        "de": "Ich heiße…",
+        "plural": null,
+        "example": "Ich heiße Anna.",
+        "example_en": "My name is Anna.",
+        "tip": "Say your name after heiße."
+      },
+      {
+        "session_code": "Z2",
+        "kind": "say",
+        "tier": "core",
+        "position": 20,
+        "en": "What is your name? (friend / formal)",
+        "article": null,
+        "de": "Wie heißt du? / Wie heißen Sie?",
+        "plural": null,
+        "example": "Hallo, wie heißt du?",
+        "example_en": "Hello, what is your name?",
+        "tip": "Use Sie with strangers."
+      },
+      {
+        "session_code": "Z2",
+        "kind": "say",
+        "tier": "core",
+        "position": 21,
+        "en": "I come from…",
+        "article": null,
+        "de": "Ich komme aus…",
+        "plural": null,
+        "example": "Ich komme aus Deutschland.",
+        "example_en": "I come from Germany.",
+        "tip": null
+      },
+      {
+        "session_code": "Z2",
+        "kind": "say",
+        "tier": "core",
+        "position": 22,
+        "en": "Where are you from?",
+        "article": null,
+        "de": "Woher kommst du?",
+        "plural": null,
+        "example": "Woher kommst du, Jonas?",
+        "example_en": "Where are you from, Jonas?",
+        "tip": "Formal: Woher kommen Sie?"
+      },
+      {
+        "session_code": "Z2",
+        "kind": "say",
+        "tier": "core",
+        "position": 23,
+        "en": "How are you? I am fine.",
+        "article": null,
+        "de": "Wie geht es dir? Mir geht es gut.",
+        "plural": null,
+        "example": "Wie geht es dir, Lena? Mir geht es gut, danke.",
+        "example_en": "How are you, Lena? I am fine, thank you.",
+        "tip": "Formal: Wie geht es Ihnen?"
+      }
+    ],
+    "questions": [
+      {
+        "session_code": "Z2",
+        "part": "warmup",
+        "position": 1,
+        "skill": "vocabulary",
+        "type": "multiple_choice",
+        "prompt": "You learned Hallo and Tschüs in Z1. What does \"Tschüs\" mean?",
+        "answer": "Goodbye",
+        "distractors": [
+          "Hello",
+          "Thank you",
+          "Good night"
+        ],
+        "accepted_answers": [],
+        "explanation": "Tschüs is a casual way to say goodbye."
+      },
+      {
+        "session_code": "Z2",
+        "part": "warmup",
+        "position": 2,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Ich ___ Anna. (heißen: my name is Anna)",
+        "answer": "heiße",
+        "distractors": [
+          "heißt",
+          "heißen",
+          "heiß"
+        ],
+        "accepted_answers": [],
+        "explanation": "With ich, the verb heißen ends in -e: ich heiße."
+      },
+      {
+        "session_code": "Z2",
+        "part": "warmup",
+        "position": 3,
+        "skill": "vocabulary",
+        "type": "multiple_choice",
+        "prompt": "Which word means \"the letter\" (like A, B, C)?",
+        "answer": "der Buchstabe",
+        "distractors": [
+          "der Name",
+          "der Morgen",
+          "die Nacht"
+        ],
+        "accepted_answers": [],
+        "explanation": "Der Buchstabe is a letter of the alphabet."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 1,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Ich ___ Anna.",
+        "answer": "heiße",
+        "distractors": [
+          "heißt",
+          "heißen",
+          "kommst"
+        ],
+        "accepted_answers": [],
+        "explanation": "With ich, heißen becomes heiße."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 2,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Du ___ aus Deutschland.",
+        "answer": "kommst",
+        "distractors": [
+          "komme",
+          "kommt",
+          "kommen"
+        ],
+        "accepted_answers": [],
+        "explanation": "With du, the verb ends in -st: du kommst."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 3,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Er ___ müde.",
+        "answer": "ist",
+        "distractors": [
+          "bin",
+          "bist",
+          "sind"
+        ],
+        "accepted_answers": [],
+        "explanation": "With er, sein is ist."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 4,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Wir ___ Freunde.",
+        "answer": "sind",
+        "distractors": [
+          "bin",
+          "ist",
+          "seid"
+        ],
+        "accepted_answers": [],
+        "explanation": "With wir, sein is sind."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 5,
+        "skill": "vocabulary",
+        "type": "gap_fill",
+        "prompt": "Ich komme ___ Deutschland.",
+        "answer": "aus",
+        "distractors": [
+          "in",
+          "von",
+          "nach"
+        ],
+        "accepted_answers": [],
+        "explanation": "We say komme aus for the place we come from."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 6,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Mir ___ es gut.",
+        "answer": "geht",
+        "distractors": [
+          "bin",
+          "ist",
+          "heißt"
+        ],
+        "accepted_answers": [],
+        "explanation": "The fixed phrase for well-being is Mir geht es gut."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 7,
+        "skill": "vocabulary",
+        "type": "multiple_choice",
+        "prompt": "How do you say 'I am fine' in German?",
+        "answer": "Mir geht es gut.",
+        "distractors": [
+          "Ich heiße gut.",
+          "Ich komme gut.",
+          "Mir kommt es gut."
+        ],
+        "accepted_answers": [],
+        "explanation": "Well-being uses Mir geht es gut."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 8,
+        "skill": "vocabulary",
+        "type": "multiple_choice",
+        "prompt": "Which word is the formal 'you'?",
+        "answer": "Sie",
+        "distractors": [
+          "du",
+          "er",
+          "wir"
+        ],
+        "accepted_answers": [],
+        "explanation": "Sie with a capital S is the formal you."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 9,
+        "skill": "vocabulary",
+        "type": "multiple_choice",
+        "prompt": "Which question asks where someone is from?",
+        "answer": "Woher kommst du?",
+        "distractors": [
+          "Wie heißt du?",
+          "Wie geht es dir?",
+          "Wer bist du?"
+        ],
+        "accepted_answers": [],
+        "explanation": "Woher asks about origin."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 10,
+        "skill": "grammar",
+        "type": "multiple_choice",
+        "prompt": "Which sentence means 'She is tired'?",
+        "answer": "Sie ist müde.",
+        "distractors": [
+          "Sie bin müde.",
+          "Sie bist müde.",
+          "Ich ist müde."
+        ],
+        "accepted_answers": [],
+        "explanation": "With sie (she), sein is ist."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 11,
+        "skill": "word_order",
+        "type": "ordering",
+        "prompt": "heiße / Ich / Anna",
+        "answer": "Ich heiße Anna.",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "The verb stays in second place."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 12,
+        "skill": "word_order",
+        "type": "ordering",
+        "prompt": "kommst / du / Woher",
+        "answer": "Woher kommst du?",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "In a question with Woher, the verb comes second, then du."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 13,
+        "skill": "word_order",
+        "type": "ordering",
+        "prompt": "aus / Jonas / Deutschland / kommt",
+        "answer": "Jonas kommt aus Deutschland.",
+        "distractors": [],
+        "accepted_answers": [
+          "Aus Deutschland kommt Jonas."
+        ],
+        "explanation": "The verb kommt is in second place."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 14,
+        "skill": "translation",
+        "type": "typing",
+        "prompt": "My name is Lena.",
+        "answer": "Ich heiße Lena.",
+        "distractors": [],
+        "accepted_answers": [
+          "Mein Name ist Lena.",
+          "Ich bin Lena."
+        ],
+        "explanation": "Ich heiße… is the usual way to say your name."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 15,
+        "skill": "translation",
+        "type": "typing",
+        "prompt": "I am from Germany.",
+        "answer": "Ich komme aus Deutschland.",
+        "distractors": [],
+        "accepted_answers": [
+          "Ich bin aus Deutschland."
+        ],
+        "explanation": "kommen + aus tells where you come from."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 16,
+        "skill": "translation",
+        "type": "typing",
+        "prompt": "Say to a friend: You are tired.",
+        "answer": "Du bist müde.",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "With du, sein is bist."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 17,
+        "skill": "dictation",
+        "type": "dictation",
+        "prompt": "Listen and write the sentence.",
+        "answer": "Ich heiße Jonas.",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "heiße ends in -e after ich."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 18,
+        "skill": "dictation",
+        "type": "dictation",
+        "prompt": "Listen and write the sentence.",
+        "answer": "Woher kommst du?",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "kommst ends in -st after du."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exercises",
+        "position": 19,
+        "skill": "dictation",
+        "type": "dictation",
+        "prompt": "Listen and write the sentence.",
+        "answer": "Mir geht es gut.",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "This is the fixed phrase for how you feel."
+      },
+      {
+        "session_code": "Z2",
+        "part": "reading",
+        "position": 1,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "Woher kommt Anna?",
+        "answer": "Aus Hamburg",
+        "distractors": [
+          "Aus Berlin",
+          "Aus Deutschland und Berlin"
+        ],
+        "accepted_answers": [],
+        "explanation": "The text says: Sie kommt aus Hamburg."
+      },
+      {
+        "session_code": "Z2",
+        "part": "reading",
+        "position": 2,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "What is Hamburg, according to the text?",
+        "answer": "eine Stadt",
+        "distractors": [
+          "ein Freund",
+          "ein Name"
+        ],
+        "accepted_answers": [],
+        "explanation": "The text says: Hamburg ist eine Stadt in Deutschland."
+      },
+      {
+        "session_code": "Z2",
+        "part": "reading",
+        "position": 3,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "How is Anna?",
+        "answer": "müde und froh",
+        "distractors": [
+          "hungrig und froh",
+          "müde und hungrig"
+        ],
+        "accepted_answers": [],
+        "explanation": "The text says: Anna ist müde und froh."
+      },
+      {
+        "session_code": "Z2",
+        "part": "reading",
+        "position": 4,
+        "skill": "reading",
+        "type": "typing",
+        "prompt": "Woher kommt Jonas? Answer with one or two German words.",
+        "answer": "Aus Berlin",
+        "distractors": [],
+        "accepted_answers": [
+          "Berlin",
+          "Er kommt aus Berlin."
+        ],
+        "explanation": "The text says: Er kommt aus Berlin."
+      },
+      {
+        "session_code": "Z2",
+        "part": "reading",
+        "position": 5,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "What does Jonas answer to “Wie geht es dir?”",
+        "answer": "Mir geht es gut, danke!",
+        "distractors": [
+          "Ich heiße Jonas.",
+          "Ich komme aus Hamburg."
+        ],
+        "accepted_answers": [],
+        "explanation": "Jonas says he is fine with “Mir geht es gut, danke!”"
+      },
+      {
+        "session_code": "Z2",
+        "part": "listening",
+        "position": 1,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "What is the second speaker's name?",
+        "answer": "Lena",
+        "distractors": [
+          "Anna",
+          "Jonas"
+        ],
+        "accepted_answers": [],
+        "explanation": "She says: Ich heiße Lena."
+      },
+      {
+        "session_code": "Z2",
+        "part": "listening",
+        "position": 2,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "Where does Lena come from?",
+        "answer": "Berlin",
+        "distractors": [
+          "Hamburg",
+          "Wien"
+        ],
+        "accepted_answers": [],
+        "explanation": "Lena says: Ich komme aus Berlin."
+      },
+      {
+        "session_code": "Z2",
+        "part": "listening",
+        "position": 3,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "How is Lena?",
+        "answer": "She is fine but tired.",
+        "distractors": [
+          "She is hungry.",
+          "She is not fine."
+        ],
+        "accepted_answers": [],
+        "explanation": "Lena says: Mir geht es gut, danke. Ich bin nur müde."
+      },
+      {
+        "session_code": "Z2",
+        "part": "listening",
+        "position": 4,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "What does Anna say she is?",
+        "answer": "hungrig",
+        "distractors": [
+          "müde",
+          "froh"
+        ],
+        "accepted_answers": [],
+        "explanation": "Anna says: Ich bin hungrig!"
+      },
+      {
+        "session_code": "Z2",
+        "part": "listening",
+        "position": 5,
+        "skill": "listening",
+        "type": "dictation",
+        "prompt": "Listen and write the sentence.",
+        "answer": "Ich heiße Lena.",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "Ich heiße means “my name is”; ei sounds like English “eye”."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exam",
+        "position": 1,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Lena: Ich ___ Lena.",
+        "answer": "heiße",
+        "distractors": [
+          "heißt",
+          "heißen",
+          "bist"
+        ],
+        "accepted_answers": [],
+        "explanation": "With ich, heißen becomes heiße."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exam",
+        "position": 2,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Jonas, du ___ müde.",
+        "answer": "bist",
+        "distractors": [
+          "bin",
+          "ist",
+          "kommst"
+        ],
+        "accepted_answers": [],
+        "explanation": "The verb sein goes with du as bist."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exam",
+        "position": 3,
+        "skill": "vocabulary",
+        "type": "multiple_choice",
+        "prompt": "You meet an adult you do not know. How do you ask for the name?",
+        "answer": "Wie heißen Sie?",
+        "distractors": [
+          "Wie heißt du?",
+          "Wie geht es dir?",
+          "Woher kommst du?"
+        ],
+        "accepted_answers": [],
+        "explanation": "Use Sie with adults you do not know well."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exam",
+        "position": 4,
+        "skill": "grammar",
+        "type": "multiple_choice",
+        "prompt": "How do you say that you are fine?",
+        "answer": "Mir geht es gut.",
+        "distractors": [
+          "Ich bin gut.",
+          "Ich heiße gut.",
+          "Ich komme gut."
+        ],
+        "accepted_answers": [],
+        "explanation": "Well-being uses Mir geht es gut, not Ich bin gut."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exam",
+        "position": 5,
+        "skill": "word_order",
+        "type": "ordering",
+        "prompt": "aus / Anna / Spanien / kommt",
+        "answer": "Anna kommt aus Spanien.",
+        "distractors": [],
+        "accepted_answers": [
+          "Aus Spanien kommt Anna."
+        ],
+        "explanation": "The verb kommt is in second place, and aus goes before the country."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exam",
+        "position": 6,
+        "skill": "translation",
+        "type": "typing",
+        "prompt": "Translate: I am hungry.",
+        "answer": "Ich bin hungrig.",
+        "distractors": [],
+        "accepted_answers": [
+          "Ich habe Hunger."
+        ],
+        "explanation": "Ich goes with bin, and hungrig is a state with sein."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exam",
+        "position": 7,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "Where does Jonas come from?",
+        "answer": "Österreich",
+        "distractors": [
+          "Deutschland",
+          "Wien ist ein Freund",
+          "Lena"
+        ],
+        "accepted_answers": [],
+        "explanation": "The text says: Ich komme aus Österreich."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exam",
+        "position": 8,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "How is Jonas today?",
+        "answer": "He is tired, but fine.",
+        "distractors": [
+          "He is hungry.",
+          "He is happy and not tired.",
+          "He is not fine."
+        ],
+        "accepted_answers": [],
+        "explanation": "The text says: Ich bin müde, aber mir geht es gut."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exam",
+        "position": 9,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "Where does Anna come from?",
+        "answer": "Deutschland",
+        "distractors": [
+          "Spanien",
+          "Wien",
+          "Österreich"
+        ],
+        "accepted_answers": [],
+        "explanation": "Anna says: Ich komme aus Deutschland."
+      },
+      {
+        "session_code": "Z2",
+        "part": "exam",
+        "position": 10,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "How is Anna?",
+        "answer": "She is fine.",
+        "distractors": [
+          "She is hungry.",
+          "She is tired.",
+          "She is sad."
+        ],
+        "accepted_answers": [],
+        "explanation": "Anna says: Mir geht es gut."
+      }
+    ]
+  }
+}

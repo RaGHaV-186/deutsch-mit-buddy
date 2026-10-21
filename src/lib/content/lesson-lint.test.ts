@@ -178,6 +178,11 @@ describe("accepted answers", () => {
     expect(lint((l) => (typing(l).accepted_answers = [typing(l).answer.toLowerCase().replace(".", "")])).map((i) => i.rule)).toContain("accepted-distinct");
     expect(lint((l) => (typing(l).accepted_answers = ["Mein Name ist Jonas.", "mein name ist jonas"])).map((i) => i.rule)).toContain("accepted-distinct");
   });
+  it("a dictation does not accept digits for number words (a warning for the reviewer)", () => {
+    const dictation = (l: Lesson) => l.exercises.items.find((q) => q.type === "dictation")!;
+    const issues = lint((l) => ((dictation(l).answer = "Ich bin dreißig Jahre alt."), (dictation(l).accepted_answers = ["Ich bin 30 Jahre alt."])));
+    expect(issues.map((i) => `${i.level}:${i.rule}`)).toEqual(["warn:dictation-digits"]);
+  });
   it("an accepted order uses exactly the words of the question", () => {
     expect(lint((l) => (ordering(l).accepted_answers = ["Ich trinke Wasser."])).map((i) => i.rule)).toContain("accepted-ordering-words");
   });
@@ -229,8 +234,11 @@ describe("the day exam is fresh", () => {
     expect(ruleOf(issues)).toEqual(["Z9#exam.gv2:exam-fresh"]);
   });
   it("the exam reading text may not reuse a sentence of the lesson's reading text", () => {
-    const issues = lint((l) => (l.exam.reading.passage.text = `Neuer Satz hier. ${l.reading.passage.text.split(". ")[0]}.`));
+    const issues = lint((l) => (l.exam.reading.passage.text = `Neuer Satz hier. ${l.reading.passage.text.split(". ")[1]}.`));
     expect(ruleOf(issues)).toEqual(["Z9#exam.reading.passage:exam-fresh"]);
+  });
+  it("short formulaic sentences may be shared (a lesson at A1 and its exam cannot avoid “Das ist Anna.”)", () => {
+    expect(lint((l) => (l.exam.reading.passage.text = "Das ist Anna. Anna ist im Café."))).toEqual([]);
   });
   it("different items are fine", () => {
     expect(lint(() => {})).toEqual([]);

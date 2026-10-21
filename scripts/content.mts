@@ -221,6 +221,9 @@ async function runCommand() {
   }
   const report = costReport(stage, estimate, batchId, outcome, requests.length);
   write(`${stage}.report.json`, report);
+  // The report file holds the latest pass of a stage; the ledger keeps every paid pass, so the run's total cost is never lost when a stage is run again.
+  const ledger = read<unknown[]>("costs.json") ?? [];
+  write("costs.json", [...ledger, { at: new Date().toISOString(), stage, lessons: covered.map((l) => l.code), batchId, actualEur: report.actualEur, estimatedEur: report.estimatedEur }]);
   console.log(`\nThe "${stage}" pass is done. Actual cost €${report.actualEur.toFixed(3)} (estimated €${estimate.expectedEur.toFixed(2)}, worst case €${estimate.ceilingEur.toFixed(2)}). Details: ${file(`${stage}.report.json`)}`);
   if (outcome.failures.length) {
     console.log(`${outcome.failures.length} lesson(s) failed and were not stored:`);

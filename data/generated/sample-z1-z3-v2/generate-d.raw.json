@@ -1,0 +1,209 @@
+{
+  "lessons": {
+    "Z1": {
+      "warmup": {
+        "preview": {
+          "points": [
+            "to say the German letters out loud and spell your name letter by letter (buchstabieren)",
+            "the special letters ä, ö, ü and ß, and how ei and ie sound",
+            "how tsch (like English \"ch\" in \"church\") is different from sch (like English \"sh\"), for example in Tschüs and Schule",
+            "to greet people and say goodbye: Hallo, Guten Morgen, Auf Wiedersehen, Tschüs",
+            "to ask and answer \"What is your name?\" with Wie heißt du? and Ich heiße Anna."
+          ]
+        },
+        "items": []
+      },
+      "culture": {
+        "title": "Hello and goodbye in German-speaking countries",
+        "note": "In Germany, Austria and Switzerland, people often greet each other when they enter a small shop, a waiting room or a lift. A short Guten Tag! or Hallo! is polite. Many people use Guten Morgen! in the morning, and Guten Abend! in the evening. With friends and young people, Hallo! and Tschüs! are very common. With adults you do not know, people use Sie and often say Auf Wiedersehen! when they leave. In Switzerland you may hear different greetings, and in southern Germany and Austria people often say Servus or Grüß Gott. You do not need to use these yet, but it is nice to recognise them. Names are often spelled aloud on the phone, so the alphabet is very useful.",
+        "reflection_question": "How do you usually greet people and say goodbye in your own language, and is it different for friends and for strangers?"
+      },
+      "mission": {
+        "title": "Spell your name like a German speaker",
+        "task": "Practise greeting and spelling your name out loud today, as you would in a real situation, for example on the phone or at a reception desk.",
+        "steps": [
+          "Stand in front of a mirror or record yourself on your phone. Say: Hallo! Ich heiße ... (your name).",
+          "Say the letter names of your first name slowly, one by one. Then say the sentence Wie schreibt man das? and spell your name again.",
+          "Say Guten Morgen!, Guten Tag! or Guten Abend! to match the time of day. Then say Tschüs! and Auf Wiedersehen! and listen carefully: tsch in Tschüs sounds like English \"ch\", not like \"sh\"."
+        ],
+        "report_prompt": "Write or tell Buddy: your name in German (Ich heiße ...), your name spelled letter by letter, and which greeting you used for the time of day.",
+        "success_check": [
+          "I said my name with Ich heiße ...",
+          "I spelled my name letter by letter in German.",
+          "I said Tschüs with the \"ch\" sound and not the \"sh\" sound."
+        ],
+        "safety_note": "Practise only with your own name. Do not share private details such as your address or phone number in recordings or with strangers online."
+      },
+      "closing": {
+        "covered": [
+          "You can now say the German letters and spell your name letter by letter.",
+          "You can now say ä, ö, ü and ß and hear the difference between ei and ie.",
+          "You can now keep tsch (as in Tschüs, like English \"ch\") apart from sch (as in Schule, like English \"sh\").",
+          "You can now greet people and say goodbye with Hallo, Guten Morgen, Auf Wiedersehen and Tschüs.",
+          "You can now ask Wie heißt du? and Wie heißen Sie? and answer with Ich heiße Anna."
+        ],
+        "review_tomorrow": "Tomorrow, review the letter names and spell your name out loud twice, then say Tschüs and Schule to check tsch and sch."
+      }
+    },
+    "Z2": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "You meet a friend in the evening. Which German greeting fits? (Hint: you learned Hallo and Tschüs in Z1.) What does \"Tschüs\" mean?",
+            "answer": "Goodbye",
+            "distractors": [
+              "Hello",
+              "Thank you",
+              "Good night"
+            ],
+            "accepted_answers": [],
+            "explanation": "Tschüs is a casual way to say goodbye."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ Anna. (heißen: my name is Anna)",
+            "answer": "heiße",
+            "distractors": [
+              "heißt",
+              "heißen",
+              "heiß"
+            ],
+            "accepted_answers": [],
+            "explanation": "With ich, the verb heißen ends in -e: ich heiße."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which word means \"the letter\" (like A, B, C)?",
+            "answer": "der Buchstabe",
+            "distractors": [
+              "der Name",
+              "der Morgen",
+              "die Nacht"
+            ],
+            "accepted_answers": [],
+            "explanation": "Der Buchstabe is a letter of the alphabet."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Du or Sie? Introducing yourself",
+        "note": "In German-speaking countries, people choose between du and Sie. You use du with friends, family, children and fellow students. You use Sie with adults you do not know well, at work and in shops. Sie always has a capital S. When you are not sure, start with Sie. People often say their first name and sometimes their last name when they meet, for example \"Ich heiße Anna Weber.\" Often people shake hands in a formal situation. In Germany, Austria and Switzerland, many people also say where they live or where they are from, but this is not required. If someone says \"Wir können du sagen\", it means you can now use du.",
+        "reflection_question": "In your own country, how do you speak to a person you do not know well? Is there a difference like du and Sie?"
+      },
+      "mission": {
+        "title": "My German introduction",
+        "task": "Introduce yourself in German out loud and in writing, using the sentences from this lesson.",
+        "steps": [
+          "Say out loud three sentences: Ich heiße … Ich komme aus … Mir geht es gut.",
+          "Write the same three sentences in your notebook with your own name and country.",
+          "Now ask a question out loud, as if to a new friend: Wie heißt du? Woher kommst du? Wie geht es dir?",
+          "Say the words with ei and ie slowly: heiße, Freund, Freundin, Lehrerin."
+        ],
+        "report_prompt": "Write your three sentences in German and tell me which one was the hardest to say.",
+        "success_check": [
+          "I can say my name with Ich heiße …",
+          "I can say where I am from with Ich komme aus …",
+          "I can ask Wie geht es dir? and answer Mir geht es gut."
+        ],
+        "safety_note": "Only share your first name and your country. Do not share your address, phone number or other private data."
+      },
+      "closing": {
+        "covered": [
+          "You can now say your name with Ich heiße … and ask Wie heißt du? or Wie heißen Sie?",
+          "You can now say where you are from with Ich komme aus … and ask Woher kommst du?",
+          "You can now use ich bin, du bist and er ist, for example Ich bin müde.",
+          "You can now ask Wie geht es dir? and answer Mir geht es gut.",
+          "You can now tell du and Sie apart."
+        ],
+        "review_tomorrow": "Review the forms ich bin / du bist / er ist and the phrase Mir geht es gut, and say the words with ei and ie out loud."
+      }
+    },
+    "Z3": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "You want to spell your name letter by letter. Which German word means \"to spell\"?",
+            "answer": "buchstabieren",
+            "distractors": [
+              "heißen",
+              "kommen",
+              "danke"
+            ],
+            "accepted_answers": [],
+            "explanation": "\"buchstabieren\" means to spell a word letter by letter."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ Anna. (I am called Anna.)",
+            "answer": "heiße",
+            "distractors": [
+              "heißt",
+              "heißen",
+              "bin heiße"
+            ],
+            "accepted_answers": [],
+            "explanation": "With \"ich\" the verb \"heißen\" becomes \"heiße\"."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas ___ aus Deutschland.",
+            "answer": "kommt",
+            "distractors": [
+              "komme",
+              "kommst",
+              "kommen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With \"er\" or a name, the verb \"kommen\" ends in -t: \"kommt\"."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Phone numbers in German-speaking countries",
+        "note": "In Germany, Austria and Switzerland, people often say phone numbers in small groups of digits or in pairs, for example \"fünf-vier\" for 54. Some people say each digit alone. Zero is \"null\". When you give a number, people often repeat it to be sure. Mobile numbers are long, so it is normal to say them slowly. If you do not understand, you can say \"Noch einmal, bitte.\" Many people also write the date and the house number after the street name: \"Lindenstraße 12\". The postcode (Postleitzahl) comes before the city name, for example \"10115 Berlin\". Germany uses the euro. Switzerland uses its own money, the Swiss franc.",
+        "reflection_question": "How do you say your own phone number in your language: digit by digit, in pairs, or in groups? Try it in German today."
+      },
+      "mission": {
+        "title": "My number and my age",
+        "task": "Say your phone number and your age in German out loud, then practise with one other person.",
+        "steps": [
+          "Write your phone number as words, digit by digit, for example 0 = null, 1 = eins, 2 = zwei.",
+          "Say it out loud three times: \"Meine Nummer ist ...\" Then say: \"Ich bin ... Jahre alt.\"",
+          "Ask a friend, a family member or Buddy: \"Wie alt bist du?\" and \"Wie ist deine Telefonnummer?\" Use \"Noch einmal, bitte.\" if you need it."
+        ],
+        "report_prompt": "Write your sentence \"Ich bin ... Jahre alt.\" and tell us which number was hardest to say.",
+        "success_check": [
+          "I can say my age in German.",
+          "I can say my phone number digit by digit.",
+          "I can ask \"Wie alt bist du?\" and \"Noch einmal, bitte.\""
+        ],
+        "safety_note": "Use a made-up or practice phone number if you do not want to share your real one. Never share personal data with people you do not know."
+      },
+      "closing": {
+        "covered": [
+          "You can now count from 0 to 100 and build numbers like einundzwanzig.",
+          "You can now say your age with \"Ich bin ... Jahre alt.\"",
+          "You can now ask \"Wie alt bist du?\" and \"Wie ist deine Telefonnummer?\"",
+          "You can now say a phone number digit by digit and ask for it again with \"Noch einmal, bitte.\"",
+          "You can now say z as ts and zw as tsv, as in zwei and zwanzig."
+        ],
+        "review_tomorrow": "Review the numbers 21 to 99, remembering that the small number comes first: einundzwanzig, zweiunddreißig."
+      }
+    }
+  },
+  "failures": []
+}

@@ -1,0 +1,21 @@
+[
+  {
+    "id": "Z3#exam.gv3",
+    "part": "exam",
+    "unit": "question",
+    "label": "Exam grammar/vocabulary 3",
+    "original": {
+      "skill": "word_order",
+      "type": "ordering",
+      "prompt": "Nummer / Meine / ist / null / acht / drei",
+      "answer": "Meine Nummer ist null acht drei.",
+      "distractors": [],
+      "accepted_answers": [],
+      "explanation": "The phrase starts with Meine Nummer ist, then the digits one by one."
+    },
+    "lint": [],
+    "status": "needs-human",
+    "reason": "Digits null/acht/drei can go in any order; 'Null acht drei ist meine Nummer' also possible. Ambiguous.",
+    "final": null
+  }
+]

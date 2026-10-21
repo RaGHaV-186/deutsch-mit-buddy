@@ -1,0 +1,107 @@
+[
+  {
+    "at": "2026-10-22",
+    "stage": "generate-a",
+    "lessons": [
+      "Z1",
+      "Z2",
+      "Z3"
+    ],
+    "batchId": "msgbatch_01T3TMmEUbtffK9MdQzmut3Q",
+    "actualEur": 0.136,
+    "estimatedEur": 0.16,
+    "note": "backfilled from the console output"
+  },
+  {
+    "at": "2026-10-22",
+    "stage": "generate-b",
+    "lessons": [
+      "Z1",
+      "Z2",
+      "Z3"
+    ],
+    "actualEur": 0.089,
+    "estimatedEur": 0.09,
+    "note": "backfilled from the console output"
+  },
+  {
+    "at": "2026-10-22",
+    "stage": "generate-c",
+    "lessons": [
+      "Z1",
+      "Z2",
+      "Z3"
+    ],
+    "actualEur": 0.045,
+    "estimatedEur": 0.06,
+    "note": "backfilled from the console output"
+  },
+  {
+    "at": "2026-10-22",
+    "stage": "generate-d",
+    "lessons": [
+      "Z1",
+      "Z2",
+      "Z3"
+    ],
+    "actualEur": 0.03,
+    "estimatedEur": 0.06,
+    "note": "backfilled from the console output"
+  },
+  {
+    "at": "2026-10-22",
+    "stage": "generate-b",
+    "lessons": [
+      "Z1"
+    ],
+    "batchId": "msgbatch_011iZ3ScwzVuFSG5wkQcN8ug",
+    "actualEur": 0.034,
+    "estimatedEur": 0.03,
+    "note": "rewrite after the free check; backfilled"
+  },
+  {
+    "at": "2026-10-22",
+    "stage": "generate-c",
+    "lessons": [
+      "Z1",
+      "Z3"
+    ],
+    "batchId": "msgbatch_01PYdXt5uEbZXYtpEbKsLbhg",
+    "actualEur": 0.026,
+    "estimatedEur": 0.04,
+    "note": "rewrite after the free check; backfilled"
+  },
+  {
+    "at": "2026-10-21T23:27:16.285Z",
+    "stage": "generate-c",
+    "lessons": [
+      "Z1",
+      "Z3"
+    ],
+    "batchId": "msgbatch_019fMvbBTTjg9xHcA6Aqhkkg",
+    "actualEur": 0.0332,
+    "estimatedEur": 0.0432
+  },
+  {
+    "at": "2026-10-21T23:29:31.840Z",
+    "stage": "generate-c",
+    "lessons": [
+      "Z3"
+    ],
+    "batchId": "msgbatch_01QsuT6g23ju3VA7Jih61uRC",
+    "actualEur": 0.0124,
+    "estimatedEur": 0.0215
+  },
+  {
+    "at": "2026-10-21T23:32:47.140Z",
+    "stage": "review",
+    "lessons": [
+      "Z1",
+      "Z2",
+      "Z3"
+    ],
+    "batchId": "msgbatch_01L3QSPa626PWfmtnN17dzJV",
+    "actualEur": 0.3516,
+    "estimatedEur": 0.3311
+  }
+]

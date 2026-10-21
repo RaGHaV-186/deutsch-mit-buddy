@@ -75,6 +75,7 @@ function lintQuestion(q: Question, id: string, dictationMax: number, out: LintIs
     if (!(WRITTEN_TYPES as readonly string[]).includes(q.type)) add("error", "accepted-type", "Only typing, ordering and dictation questions have accepted answers; a choice question has exactly one right option.");
     const keys = [q.answer, ...accepted].map(normalise);
     if (new Set(keys).size !== keys.length) add("error", "accepted-distinct", "An accepted answer repeats the answer or another accepted answer (case, punctuation and ß/ss are ignored when answers are checked).");
+    if (q.type === "dictation" && accepted.some((a) => /\d/.test(a) && !/\d/.test(q.answer))) add("warn", "dictation-digits", "A dictation tests spelling: do not accept digits for number words.");
     if (q.type === "ordering") {
       const wanted = tokens(q.answer).sort().join(" ");
       if (accepted.some((a) => tokens(a).sort().join(" ") !== wanted)) add("error", "accepted-ordering-words", "Every accepted order must use exactly the words of the answer sentence.");
@@ -100,9 +101,10 @@ function questionKeys(q: Question): string[] {
   return keys.filter((k) => k.split(" ").length >= 3 || q.type === "multiple_choice");
 }
 
-/** The sentences of a text, normalised, ignoring very short ones. */
+/** The sentences of a text, normalised. Formulaic short ones ("Das ist Jonas.", "Wie heißt du?") are not counted: at A1 a lesson and its exam cannot help sharing them. */
+const MIN_SHARED_SENTENCE_WORDS = 5;
 function sentenceKeys(text: string): string[] {
-  return text.split(/(?<=[.!?])\s+|\n/).map(normalise).filter((k) => k.split(" ").length >= 3);
+  return text.split(/(?<=[.!?])\s+|\n/).map(normalise).filter((k) => k.split(" ").length >= MIN_SHARED_SENTENCE_WORDS);
 }
 
 export interface LintOptions {

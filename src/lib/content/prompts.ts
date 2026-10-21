@@ -28,9 +28,9 @@ GENERAL RULES
 - Instruction language: the text that explains or instructs (goal, grammar explanation, rule summary, tips, exercise explanations, culture note, mission, task descriptions) is written in the instruction language of the request. German examples, words, sentences, dialogues and model answers are always German.
 - Output format: where a field has nothing to say, write an empty string (for an article, write none). This applies to article, plural, tip, note, safety_note, target_hint and the en line of a dialogue.
 - A question has one best answer. Wrong options are plausible but clearly wrong. Explanations are one short sentence in the instruction language.
-- accepted_answers: for typing (translation), ordering and dictation questions, list in accepted_answers every OTHER natural, correct answer a learner could give, for example "Mein Name ist Jonas." next to "Ich heiße Jonas." for the English "My name is Jonas.", or "Aus Deutschland kommt Jonas." next to "Jonas kommt aus Deutschland." for an ordering question. Answers are checked ignoring case, punctuation and ß/ss, so never list spelling variants. For an ordering question every accepted answer uses exactly the words of the question. Use an empty list for multiple_choice and gap_fill questions, and when there is really only one answer. Prefer prompts that leave little room: "Hello!" can be Hallo or Guten Tag, so say "Greet a friend: Hello!" when you want Hallo.
+- accepted_answers: for typing (translation), ordering and dictation questions, list in accepted_answers every OTHER natural, correct answer a learner could give, for example "Mein Name ist Jonas." next to "Ich heiße Jonas." for the English "My name is Jonas.", or "Aus Deutschland kommt Jonas." next to "Jonas kommt aus Deutschland." for an ordering question. Answers are checked ignoring case, punctuation and ß/ss, so never list spelling variants. For an ordering question every accepted answer uses exactly the words of the question. Use an empty list for multiple_choice and gap_fill questions, and when there is really only one answer. For a dictation never accept digits for number words (a dictation tests spelling). Prefer prompts that leave little room: "Hello!" can be Hallo or Guten Tag, so say "Greet a friend: Hello!" when you want Hallo.
 - Pronunciation claims (a hint or tip about how a letter, a letter group or a word sounds): before you write one, spell the word letter by letter and check that the letters you name are really in it (Tschüs = t + sch + ü + s, so it has tsch, which sounds like English "ch", and not plain sch).
-- Question formats: multiple_choice (prompt, answer, 2 to 4 wrong options in distractors); gap_fill (a sentence with ___ where the answer belongs, plus 2 to 4 wrong options); ordering (the words of one sentence in scrambled order separated by " / ", the correct sentence as the answer, no wrong options; only sentences with one natural word order); typing (an English sentence to translate into German, one best German answer, no wrong options); dictation (prompt: a short instruction such as "Listen and write the sentence."; answer: the German sentence that is read aloud, with its punctuation; no wrong options).
+- Question formats: multiple_choice (prompt, answer, 2 to 4 wrong options in distractors); gap_fill (a sentence with ___ where the answer belongs, plus 2 to 4 wrong options); ordering (the prompt is ONLY the words of one sentence in scrambled order separated by " / ", with no instruction text and no colon in it, the correct sentence as the answer, no wrong options); typing (an English sentence to translate into German, one best German answer, no wrong options); dictation (prompt: a short instruction such as "Listen and write the sentence."; answer: the German sentence that is read aloud, with its punctuation; no wrong options).
 
 COMMON TRAPS (known mistakes of learners and of language models). Never teach any of these as correct, anywhere (examples, exercises, model answers, rubrics, missions, exam items). Use the ones that fit the lesson's topic as its "common traps".
 ${trapsForPrompt()}`;
@@ -73,7 +73,7 @@ For every item check what applies:
 - English: accurate; the English translation matches the German; the English meaning is not misleading.
 - Level: words, grammar and text length suit the stated CEFR level and the lesson's grammar point and theme; nothing clearly above the level.
 - Instruction language: explanations and instructions are written in the instruction language stated for the level (German examples and words stay German).
-- Answers: for typing, ordering and dictation questions check accepted_answers: it must list every other natural, correct answer a learner could give (add the missing ones by fixing the item with the whole new list) and nothing wrong. Answers are checked ignoring case, punctuation and ß/ss, so spelling variants must not be listed. Accepted orders of an ordering question use exactly the words of the question. Choice questions have an empty list. A translation prompt whose English has several equally good German answers ("Hello!") must list them all or be made specific.
+- Answers: for typing, ordering and dictation questions check accepted_answers: it must list every other natural, correct answer a learner could give (add the missing ones by fixing the item with the whole new list) and nothing wrong. Answers are checked ignoring case, punctuation and ß/ss, so spelling variants must not be listed. Accepted orders of an ordering question use exactly the words of the question. Choice questions have an empty list. A dictation never accepts digits for number words. An ordering prompt holds only the words separated by " / ", no instruction text. A translation prompt whose English has several equally good German answers ("Hello!") must list them all or be made specific.
 - Pronunciation claims: for EVERY statement about how something sounds (the pronunciation part, card tips, drill tips, grammar explanations, example notes), look at the actual spelling of the word and check the claim against its letters, one by one: Tschüs has tsch (English "ch" as in church), not sch; "buchstabiert" has ch and st, no sch. A wrong claim is a clear error: fix it.
 - Common traps: the list below is known wrong usage. A lesson must never teach it as correct, not in examples, exercises, model answers, rubrics, missions or exam items: fix any occurrence (it is fine inside a trap that shows it as the wrong sentence).
 - Tables: complete and correct (every letter, person or form that belongs in it), cells match their headers.
@@ -157,8 +157,20 @@ export function passBPrompt(lesson: CurriculumRow, passA: PassA): string {
   ].join("\n");
 }
 
+/** The finished sentences of a lesson's exercises: the exam must not repeat any of them. */
+const usedSentences = (passA: PassA) => [...new Set(passA.exercises.items.map((q) => (q.type === "gap_fill" ? q.prompt.replace("___", q.answer) : q.type === "multiple_choice" ? q.prompt : q.answer)))];
+
 export function passCPrompt(lesson: CurriculumRow, passA: PassA): string {
-  return [...lessonSpec(lesson, "C"), "", "Pass A of this lesson (the exam tests its grammar and words):", ...passASummary(passA), "", "Write the day exam of this lesson."].join("\n");
+  return [
+    ...lessonSpec(lesson, "C"),
+    "",
+    "Pass A of this lesson (the exam tests its grammar and words):",
+    ...passASummary(passA),
+    "Already used in this lesson's exercises. Every exam item must be different: other sentences, other names, other numbers, never the same sentence reworded:",
+    ...usedSentences(passA).map((x) => `- ${x}`),
+    "",
+    "Write the day exam of this lesson.",
+  ].join("\n");
 }
 
 export function passDPrompt(lesson: CurriculumRow, passA: PassA, earlier: EarlierContext): string {

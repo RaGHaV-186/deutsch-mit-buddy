@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { COMMON_TRAPS } from "./common-traps.ts";
 import { LESSON_NOTES, notesFor } from "./lesson-notes.ts";
-import { earlierContext, PASS_A_SYSTEM, PASS_B_SYSTEM, PASS_C_SYSTEM, PASS_D_SYSTEM, passAPrompt, passBPrompt, passDPrompt, REVIEW_SYSTEM, reviewPrompt } from "./prompts.ts";
+import { earlierContext, PASS_A_SYSTEM, PASS_B_SYSTEM, PASS_C_SYSTEM, PASS_D_SYSTEM, passAPrompt, passBPrompt, passCPrompt, passDPrompt, REVIEW_SYSTEM, reviewPrompt } from "./prompts.ts";
 import { lessonRow, validLesson, validPassA } from "./test-fixtures.ts";
 
 const plan = Array.from({ length: 9 }, (_, i) => lessonRow({ code: `Z${i + 1}`, seq: i, grammar: `Grammar of Z${i + 1}` }));
@@ -26,6 +26,17 @@ describe("the earlier sessions the warm-up reviews", () => {
   });
   it("go to the reviewer too", () => {
     expect(reviewPrompt(z2, validLesson(), [], earlierContext(z2, plan))).toContain("- Z1: Grammar of Z1");
+  });
+});
+
+describe("the day exam writer", () => {
+  it("is shown the sentences of the exercises, so it does not repeat them", () => {
+    const a = validPassA();
+    const text = passCPrompt(z2, a);
+    expect(text).toContain("Already used in this lesson's exercises");
+    expect(text).toContain("- Ich trinke Kaffee."); // an ordering answer
+    expect(text).toContain("- Ich trinke Kaffee."); // a gap fill, filled in, is the same sentence: listed once
+    expect(text.match(/- Ich trinke Kaffee\./g)).toHaveLength(1);
   });
 });
 

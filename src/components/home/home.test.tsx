@@ -18,13 +18,10 @@ vi.mock("@/lib/auth/guard", () => ({ requireAal2: (...a: unknown[]) => requireAa
 vi.mock("@/lib/profile", () => ({ getProfile: (...a: unknown[]) => getProfile(...a) }));
 vi.mock("@/lib/cards/server", () => ({ getDueCounts: (...a: unknown[]) => getDueCounts(...a) }));
 vi.mock("@/lib/supabase/server", () => ({ createClient: async () => ({}) }));
-vi.mock("@/components/FeedbackButton", () => ({ FeedbackButton: () => <button>Send feedback</button> }));
-vi.mock("@/components/SignOutForm", () => ({ SignOutForm: ({ children }: { children: React.ReactNode }) => <form>{children}</form> }));
 
 import HomePage from "@/app/(app)/home/page";
 import { GAME_PREVIEW } from "@/lib/game-layer";
 import { homeAction } from "@/lib/home-action";
-import { AccountRow } from "./AccountRow";
 import { HomeSkeleton } from "./HomeSkeleton";
 import { HomeView } from "./HomeView";
 import { TabPlaceholder } from "./TabPlaceholder";
@@ -133,13 +130,13 @@ describe("HomePage (server component)", () => {
     expect(screen.getByRole("link", { name: /cards due/ })).toHaveTextContent("0");
   });
 
-  it("offers the account actions that moved off the old header (until Me exists)", async () => {
+  it("has no account actions: those live on the Me screen", async () => {
     vi.stubEnv("NEXT_PUBLIC_GAME_LAYER", "0");
     renderWithIntl(await HomePage());
-    expect(screen.getByRole("button", { name: "Log out" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Send feedback" })).toBeInTheDocument();
-    expect(screen.getByRole("radiogroup", { name: "Theme" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Impressum" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Log out" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Send feedback" })).toBeNull();
+    expect(screen.queryByRole("radiogroup", { name: "Theme" })).toBeNull();
+    expect(screen.getByRole("link", { name: "Me" })).toHaveAttribute("href", "/me");
   });
 });
 
@@ -161,22 +158,12 @@ describe("HomeSkeleton", () => {
 });
 
 describe("tab placeholders", () => {
-  it.each([["learn", "Learn"], ["play", "Play"], ["me", "Me"]] as const)("%s: title, Buddy's „Kommt bald!“, coming soon, tab bar", (tab, label) => {
+  it.each([["learn", "Learn"], ["play", "Play"]] as const)("%s: title, Buddy's „Kommt bald!“, coming soon, tab bar", (tab, label) => {
     const { container } = renderWithIntl(<TabPlaceholder tab={tab} />);
     expect(screen.getByRole("heading", { level: 1, name: label })).toBeInTheDocument();
     expect(container.querySelector("header")).toHaveTextContent("„Kommt bald!“");
     expect(container).toHaveTextContent("Coming soon");
     expect(screen.getByRole("link", { name: label })).toHaveAttribute("aria-current", "page");
-  });
-});
-
-describe("AccountRow", () => {
-  it("log out, feedback, theme switch and legal links in one place", () => {
-    renderWithIntl(<AccountRow />);
-    expect(screen.getByRole("region", { name: "Account and settings" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Log out" })).toBeInTheDocument();
-    expect(screen.getByRole("radiogroup", { name: "Theme" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Datenschutz" })).toHaveAttribute("href", "/datenschutz");
   });
 });
 

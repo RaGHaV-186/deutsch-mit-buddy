@@ -40,6 +40,7 @@ import { buildCardView } from "@/lib/cards/display";
 import { makeCard } from "@/lib/cards/test-helpers";
 import { HomeSkeleton } from "@/components/home/HomeSkeleton";
 import { HomeView } from "@/components/home/HomeView";
+import { MeView } from "@/components/me/MeView";
 import { GAME_PREVIEW } from "@/lib/game-layer";
 import { CodeDemo, ErrorDemo, ToastDemo } from "./demos";
 
@@ -349,6 +350,12 @@ export default function DesignPage() {
         <p className="text-caption text-muted">loading</p>
         <div className="overflow-hidden rounded-[24px]">
           <HomeSkeleton game={false} tabBar="static" />
+        </div>
+      </Section>
+
+      <Section title="Me" note="Theme switch, feedback, legal links and log out. Each row that opens a sheet (feedback, log out) does so on tap.">
+        <div className="overflow-hidden rounded-[24px]">
+          <MeView name="Raghav" tabBar="static" />
         </div>
       </Section>
 

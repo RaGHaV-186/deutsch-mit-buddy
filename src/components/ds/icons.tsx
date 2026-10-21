@@ -181,3 +181,23 @@ export const SpinnerIcon = ({ size = 24, className = "", ...rest }: IconProps) =
     <path d="M12 3a9 9 0 1 0 9 9" />
   </svg>
 );
+
+export const LogOutIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4" />
+    <path d="M15 8l4 4-4 4M19 12H9" />
+  </Svg>
+);
+
+export const ChatIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-5 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" />
+  </Svg>
+);
+
+export const DocIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
+    <path d="M14 3v5h5M9 13h6M9 17h6" />
+  </Svg>
+);

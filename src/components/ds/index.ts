@@ -23,6 +23,7 @@ export { SpeechBubble } from "./SpeechBubble";
 export { Splash } from "./Splash";
 export { SplashGate } from "./SplashGate";
 export { EmptyState, ErrorState, Skeleton, Toast } from "./states";
+export { TextAreaField } from "./TextAreaField";
 export { TextField } from "./TextField";
 export { TreatChip } from "./TreatChip";
 export { TreatFloat } from "./TreatFloat";

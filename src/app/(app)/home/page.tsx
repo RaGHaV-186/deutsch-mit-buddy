@@ -1,6 +1,5 @@
 import { SESSIONS } from "@data/curriculum";
 import { getTranslations } from "next-intl/server";
-import { AccountRow } from "@/components/home/AccountRow";
 import { HomeView } from "@/components/home/HomeView";
 import { requireAal2 } from "@/lib/auth/guard";
 import { homeLine, lessonTitle } from "@/lib/buddy-lines";
@@ -26,8 +25,6 @@ export default async function HomePage() {
       lesson={session ? { day: dayCount, code: session.code, title: lessonTitle(session) } : null}
       due={counts ? counts.due + counts.fresh : 0}
       game={gameDataForHome()}
-    >
-      <AccountRow />
-    </HomeView>
+    />
   );
 }

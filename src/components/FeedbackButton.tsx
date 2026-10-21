@@ -1,12 +1,14 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useRef, useState } from "react";
-import { compactButtonClass, inputClass, primaryButtonClass, secondaryButtonClass } from "./ui";
+import { useState } from "react";
+import { BottomSheet, ChatIcon, PillButton, TextAreaField } from "@/components/ds";
+import { SettingsRow } from "@/components/me/SettingsList";
 
+/** The "Send feedback" row on Me; opens a sheet with a message box. Posts to /api/feedback. */
 export function FeedbackButton() {
   const t = useTranslations("Feedback");
-  const dialog = useRef<HTMLDialogElement>(null);
+  const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   async function send(formData: FormData) {
@@ -25,58 +27,39 @@ export function FeedbackButton() {
 
   return (
     <>
-      <button
-        type="button"
-        className={`${compactButtonClass} min-h-11 whitespace-nowrap px-3 text-sm`}
+      <SettingsRow
+        icon={<ChatIcon size={22} />}
+        label={t("button")}
+        aria-haspopup="dialog"
         onClick={() => {
           setStatus("idle");
-          dialog.current?.showModal();
+          setOpen(true);
         }}
-      >
-        {t("button")}
-      </button>
-      <dialog
-        ref={dialog}
-        className="m-auto w-[calc(100%-32px)] max-w-md rounded-xl border border-foreground/30 bg-background p-5 text-foreground backdrop:bg-black/50"
-      >
+      />
+      <BottomSheet open={open} onClose={() => setOpen(false)} title={t("title")}>
         {status === "sent" ? (
-          <div className="flex flex-col gap-4">
-            <p role="status">{t("thanks")}</p>
-            <button type="button" className={primaryButtonClass} onClick={() => dialog.current?.close()}>
-              {t("cancel")}
-            </button>
-          </div>
+          <>
+            <p role="status" className="text-body">
+              {t("thanks")}
+            </p>
+            <PillButton fullWidth onClick={() => setOpen(false)}>
+              {t("close")}
+            </PillButton>
+          </>
         ) : (
           <form action={send} className="flex flex-col gap-4">
-            <h2 className="font-heading text-xl font-bold">{t("title")}</h2>
-            <label htmlFor="feedback-message" className="font-bold">
-              {t("label")}
-            </label>
-            <textarea
-              id="feedback-message"
-              name="message"
-              required
-              maxLength={2000}
-              rows={5}
-              placeholder={t("placeholder")}
-              className={inputClass}
-            />
+            <TextAreaField label={t("label")} name="message" required maxLength={2000} placeholder={t("placeholder")} />
             {status === "error" ? (
-              <p role="alert" className="text-die">
+              <p role="alert" className="text-caption text-die">
                 {t("error")}
               </p>
             ) : null}
-            <div className="flex gap-3">
-              <button type="button" className={secondaryButtonClass} onClick={() => dialog.current?.close()}>
-                {t("cancel")}
-              </button>
-              <button type="submit" className={primaryButtonClass} disabled={status === "sending"}>
-                {t("send")}
-              </button>
-            </div>
+            <PillButton type="submit" fullWidth loading={status === "sending"}>
+              {t("send")}
+            </PillButton>
           </form>
         )}
-      </dialog>
+      </BottomSheet>
     </>
   );
 }

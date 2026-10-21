@@ -31,8 +31,6 @@ interface Props {
   due: number;
   /** Game layer (streak, level, treats). null = switched off: none of it is rendered. */
   game: GameData | null;
-  /** Content below the cards, above the tab bar (the temporary account row until the Me screen exists). */
-  children?: React.ReactNode;
   /** The big button. Defaults to what is possible today (see lib/home-action.ts). */
   action?: HomeAction;
   /** "static" lets the /design page show the tab bar in place instead of pinned to the screen. */
@@ -40,7 +38,7 @@ interface Props {
 }
 
 /** The Home screen: coat block with today's lesson and Continue, then cards due (and the game layer when it is on). */
-export function HomeView({ name, line, lesson, due, game, children, tabBar = "fixed", action = homeAction() }: Props) {
+export function HomeView({ name, line, lesson, due, game, tabBar = "fixed", action = homeAction() }: Props) {
   const t = useTranslations("App");
   const h = useTranslations("Home");
   const ds = useTranslations("Ds");
@@ -76,7 +74,6 @@ export function HomeView({ name, line, lesson, due, game, children, tabBar = "fi
             <DueCardsTile count={due} />
           </div>
           {game?.preview ? <p className="text-caption text-muted">{h("preview")}</p> : null}
-          {children}
         </div>
       </Screen>
       <FloatingTabBar active="home" position={tabBar} />

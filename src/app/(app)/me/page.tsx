@@ -1,6 +1,9 @@
-import { TabPlaceholder } from "@/components/home/TabPlaceholder";
+import { MeView } from "@/components/me/MeView";
+import { requireAal2 } from "@/lib/auth/guard";
+import { getProfile } from "@/lib/profile";
 
-// Placeholder until this screen is built; the tab bar already links here.
-export default function Page() {
-  return <TabPlaceholder tab="me" />;
+export default async function Page() {
+  const { userId } = await requireAal2();
+  const profile = await getProfile(userId);
+  return <MeView name={profile?.display_name ?? null} />;
 }

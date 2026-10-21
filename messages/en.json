@@ -8,7 +8,6 @@
     "dayLabel": "Day {day} · {code}",
     "continue": "Continue",
     "preview": "Preview data: the game layer is switched on only for testing.",
-    "accountLabel": "Account and settings",
     "reviewCards": "Review cards"
   },
   "Meta": {
@@ -348,6 +347,7 @@
     "placeholder": "A bug, an idea, something confusing…",
     "send": "Send",
     "cancel": "Cancel",
+    "close": "Close",
     "thanks": "Thank you! Buddy wags his tail.",
     "error": "Couldn't send that. Please try again."
   },
@@ -412,6 +412,19 @@
           "body": "You can delete your account at any time. We may remove accounts that break these terms. [To be completed.]"
         }
       }
+    }
+  },
+  "Me": {
+    "appearance": "Appearance",
+    "help": "Help",
+    "legal": "Legal",
+    "account": "Account",
+    "logOut": {
+      "button": "Log out",
+      "title": "Log out?",
+      "body": "Buddy removes the saved cards from this phone. Reviews that haven't synced yet are kept and sent after you log in again.",
+      "confirm": "Log out",
+      "cancel": "Stay logged in"
     }
   },
   "Soon": {

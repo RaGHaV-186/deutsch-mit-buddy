@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { BuddyMascot, CoatHeader, EmptyState, FloatingTabBar, Screen, SpeechBubble, type TabId } from "@/components/ds";
 
-/** A tab whose screen isn't built yet: the coat header, "coming soon", and the tab bar so the app stays navigable. */
-export function TabPlaceholder({ tab }: { tab: Exclude<TabId, "home" | "cards"> }) {
+/** A tab whose screen isn't built yet (Learn and Play): the coat header, "coming soon", and the tab bar so the app stays navigable. */
+export function TabPlaceholder({ tab }: { tab: Extract<TabId, "learn" | "play"> }) {
   const nav = useTranslations("Ds.nav");
   const soon = useTranslations("Soon");
   return (

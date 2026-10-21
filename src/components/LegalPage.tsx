@@ -9,12 +9,12 @@ export async function LegalPage({ doc }: { doc: "impressum" | "privacy" | "terms
   const t = await getTranslations("Legal");
   const sections = Object.values(t.raw(`${doc}.sections`) as Record<string, Section>);
   return (
-    <Screen as="div">
+    <Screen as="div" width="narrow">
       <main className="flex flex-1 flex-col">
         <CoatHeader compact>
-          <h1 className="text-display">{t(`${doc}.title`)}</h1>
+          <h1 className="text-display desk:text-[40px]">{t(`${doc}.title`)}</h1>
         </CoatHeader>
-        <div className="flex flex-col gap-4 px-[22px] pt-8">
+        <div className="flex flex-col gap-4 px-[22px] pt-8 desk:px-0">
           <p role="note" className="rounded-field bg-tint px-4 py-3 text-caption text-on-tint">
             {t("placeholderNotice")}
           </p>

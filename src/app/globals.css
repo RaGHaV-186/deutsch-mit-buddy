@@ -1,5 +1,23 @@
 @import "tailwindcss";
 
+/* Responsive layout (docs/DESIGN_BRIEF.md, desktop): under 768px the phone layout is untouched, 768 to 1023px is the phone layout
+   centred at 560px (`tab:`), 1024px and up is the desktop layout (`desk:`). Both variants switch off inside a `.phone-frame`, so
+   the /design showcase can show phone screens in boxes on a laptop. `tab` must stay defined before `desk` so desk wins. */
+@custom-variant tab {
+  @media (min-width: 768px) {
+    &:where(:not(.phone-frame *)) {
+      @slot;
+    }
+  }
+}
+@custom-variant desk {
+  @media (min-width: 1024px) {
+    &:where(:not(.phone-frame *)) {
+      @slot;
+    }
+  }
+}
+
 /* Design tokens: docs/DESIGN_BRIEF.md. Values mirror src/theme.ts (theme.test.ts keeps them in sync).
    Dark mode follows the system, unless <html data-theme="light|dark"> is set (see src/lib/theme-mode.ts). */
 :root,
@@ -158,6 +176,8 @@
 
   --radius-coat: 0 0 40px 72px;
   --radius-coat-card: 0 0 28px 56px;
+  --radius-hero: 24px 24px 40px 72px;
+  --radius-panel: 0 40px 72px 0;
   --radius-cushion: 28px;
   --radius-field: 16px;
   --radius-tabbar: 34px;
@@ -175,6 +195,12 @@ body {
 :focus-visible {
   outline: 2px solid var(--ring, var(--focus));
   outline-offset: 2px;
+}
+/* A sheet takes focus itself (for Escape and the tab order) but is not a control. Desktop shows no ring around it; phones are left as they were. */
+@media (min-width: 1024px) {
+  .ds-sheet:focus-visible {
+    outline: none;
+  }
 }
 
 /* Shared interaction states. --ring is set by components that sit on the coat block (see PillButton).

@@ -21,7 +21,7 @@ export function TextField({ label, error, hint, trailing, id, ref, ...input }: P
   const messageId = `${fieldId}-message`;
   const hasMessage = Boolean(error || hint);
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-1.5 desk:gap-2">
       <label htmlFor={fieldId} className="text-label normal-case tracking-normal text-text">
         {label}
       </label>

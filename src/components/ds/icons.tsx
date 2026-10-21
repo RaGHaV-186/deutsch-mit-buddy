@@ -201,3 +201,9 @@ export const DocIcon = (p: IconProps) => (
     <path d="M14 3v5h5M9 13h6M9 17h6" />
   </Svg>
 );
+
+/** The Google "G". Brand artwork in four brand colours, so it is an image file rather than a themed icon. */
+export const GoogleIcon = ({ size = 20 }: { size?: number }) => (
+  // eslint-disable-next-line @next/next/no-img-element
+  <img src="/google-g.svg" alt="" width={size} height={size} aria-hidden="true" />
+);

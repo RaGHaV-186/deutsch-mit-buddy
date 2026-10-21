@@ -69,6 +69,9 @@ export const shadows = {
 export const radii = {
   coat: "0 0 40px 72px",
   coatCard: "0 0 28px 56px",
+  // Desktop: the hero card on app screens and the left panel of the auth screens.
+  hero: "24px 24px 40px 72px",
+  panel: "0 40px 72px 0",
   cushion: "28px",
   field: "16px",
   tabBar: "34px",

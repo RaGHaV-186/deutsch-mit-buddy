@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { CoatHeader, FloatingTabBar, Screen, Skeleton } from "@/components/ds";
+import { CoatHeader, AppNav, Screen, Skeleton } from "@/components/ds";
 import { isGameLayerOn } from "@/lib/game-layer";
 
 /**
@@ -35,7 +35,7 @@ export function HomeSkeleton({ game = isGameLayerOn(), tabBar = "fixed" }: { gam
           </div>
         </div>
       </Screen>
-      <FloatingTabBar active="home" position={tabBar} />
+      <AppNav active="home" position={tabBar} />
     </>
   );
 }

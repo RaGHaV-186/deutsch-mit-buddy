@@ -29,15 +29,28 @@ export function AudioBar({ speakView }: { speakView: SpeakView }) {
   if (!speakView.word && !speakView.sentence) return null;
   return (
     <div className="flex flex-col items-end gap-2">
-      <div className="flex flex-wrap justify-end gap-2">
+      <div className="flex flex-wrap justify-end gap-2 desk:flex-nowrap">
         {speakView.word ? (
-          <PillButton variant="blaze" size={44} icon={<SpeakerIcon size={20} />} className="px-4" onClick={() => play("word", false)}>
-            {t("word")}
+          <PillButton variant="blaze" size={44} icon={<SpeakerIcon size={20} />} className="px-4" aria-label={t("word")} onClick={() => play("word", false)}>
+            <span className="desk:hidden">{t("word")}</span>
+            <span className="hidden desk:inline">{t("wordShort")}</span>
           </PillButton>
         ) : null}
         {speakView.sentence ? (
-          <PillButton variant="blaze" size={44} icon={<SpeakerIcon size={20} />} className="px-4" onClick={() => play("sentence", false)}>
-            {t("sentence")}
+          <PillButton
+            variant="blaze"
+            size={44}
+            icon={
+              <span className="desk:hidden">
+                <SpeakerIcon size={20} />
+              </span>
+            }
+            className="px-4 desk:border-2 desk:border-on-coat-muted desk:bg-transparent desk:text-on-coat"
+            aria-label={t("sentence")}
+            onClick={() => play("sentence", false)}
+          >
+            <span className="desk:hidden">{t("sentence")}</span>
+            <span className="hidden desk:inline">{t("sentenceShort")}</span>
           </PillButton>
         ) : null}
         <PillButton variant="outline-on-coat" size={44} className="px-4" onClick={() => play(last, true)}>

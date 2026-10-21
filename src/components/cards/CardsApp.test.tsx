@@ -53,7 +53,7 @@ describe("Cards screen, offline (airplane mode)", () => {
     await screen.findByText("1 card to review");
     expect(screen.getByText("1 new card today")).toBeInTheDocument();
     expect(container.querySelector("header")!.className).toContain("rounded-coat");
-    expect(screen.getByRole("link", { name: "Cards" })).toHaveAttribute("aria-current", "page");
+    expect(screen.getAllByRole("link", { name: "Cards" })[0]).toHaveAttribute("aria-current", "page");
     expect(screen.getByRole("status")).toHaveTextContent("Offline");
 
     fireEvent.click(screen.getByRole("button", { name: "Start review" }));
@@ -151,7 +151,7 @@ describe("Cards screen, offline (airplane mode)", () => {
     await screen.findByText("2 left");
 
     // Flip the direction while the next card (cat) is showing.
-    fireEvent.click(screen.getByRole("button", { name: "Options" }));
+    fireEvent.click(screen.getAllByRole("button", { name: "Options" })[0]);
     const sheet = screen.getByRole("dialog", { name: "Options" });
     expect(within(sheet).getByText(/starts a fresh queue/)).toBeInTheDocument();
     fireEvent.click(within(sheet).getByRole("radio", { name: "German → English" }));
@@ -182,7 +182,7 @@ describe("Cards screen, offline (airplane mode)", () => {
     app();
     expect(await screen.findByText(/No cards on this phone yet/)).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "Start review" })).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Cards" })).toHaveAttribute("aria-current", "page"); // tab bar stays
+    expect(screen.getAllByRole("link", { name: "Cards" })[0]).toHaveAttribute("aria-current", "page"); // tab bar stays
   });
 
   it("never shows another account's cards left on a shared phone", async () => {

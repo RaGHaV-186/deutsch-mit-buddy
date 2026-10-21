@@ -70,6 +70,8 @@ describe("globals.css mirrors src/theme.ts", () => {
     expect(css).toContain("--radius-coat: 0 0 40px 72px;");
     expect(css).toContain("--radius-coat-card: 0 0 28px 56px;");
     expect(css).toContain("--radius-tabbar: 34px;");
+    expect(css).toContain(`--radius-hero: ${radii.hero};`);
+    expect(css).toContain(`--radius-panel: ${radii.panel};`);
   });
 });
 

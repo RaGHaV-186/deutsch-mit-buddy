@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { CloseIcon, PillButton, SlidersIcon, TreatFloat, WedgeProgress } from "@/components/ds";
 import { buildCardView } from "@/lib/cards/display";
 import { requeue, type Direction } from "@/lib/cards/queue";
@@ -21,12 +21,14 @@ interface Props {
   /** Called when the queue is empty or the learner closes the session. `treats` is 0 unless the game layer is on. */
   onFinish: (answered: number, treats: number) => void;
   onOptions: () => void;
+  /** Desktop: the sync status shown top-right (the offline chip). Hidden on phones, where focus mode has none. */
+  status?: ReactNode;
 }
 
 const GRADE_VARIANT = { again: "cushion", hard: "cushion", good: "coat", easy: "cushion" } as const;
 
 /** Focus mode: no tab bar. Progress and Close on top, the flashcard, then Show answer / the four grade buttons. */
-export function ReviewSession({ cards, direction, gameLayer, onAnswer, onFinish, onOptions }: Props) {
+export function ReviewSession({ cards, direction, gameLayer, onAnswer, onFinish, onOptions, status }: Props) {
   const t = useTranslations("Cards");
   const ds = useTranslations("Ds");
   const [queue, setQueue] = useState(cards);
@@ -101,13 +103,13 @@ export function ReviewSession({ cards, direction, gameLayer, onAnswer, onFinish,
   const progress = answered / Math.max(1, answered + queue.length);
 
   return (
-    <main className="mx-auto flex min-h-dvh w-full max-w-[480px] flex-col">
-      <div className="flex items-center gap-3 px-5 pt-[max(20px,calc(env(safe-area-inset-top)+16px))]">
+    <main className="mx-auto flex min-h-dvh w-full max-w-[480px] flex-col tab:max-w-[560px] desk:max-w-none">
+      <div className="relative flex items-center gap-3 px-5 pt-[max(20px,calc(env(safe-area-inset-top)+16px))] desk:mx-auto desk:w-[560px] desk:px-0 desk:pt-[34px]">
         <button
           type="button"
           onClick={() => onFinish(answered, treats)}
           aria-label={t("close")}
-          className="ds-press ds-focus flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-surface shadow-cushion"
+          className="ds-press ds-focus flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-surface shadow-cushion desk:fixed desk:left-8 desk:top-[22px]"
         >
           <CloseIcon size={20} />
         </button>
@@ -119,25 +121,38 @@ export function ReviewSession({ cards, direction, gameLayer, onAnswer, onFinish,
           type="button"
           onClick={onOptions}
           aria-label={t("options.button")}
-          className="ds-press ds-focus flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-surface shadow-cushion"
+          className="ds-press ds-focus flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-surface shadow-cushion desk:hidden"
         >
           <SlidersIcon size={20} />
         </button>
       </div>
 
-      <div className="flex flex-1 flex-col px-5 pb-5 pt-6">
-        <FlashCard view={view} cardId={current.id} flipped={flipped} combo={gameLayer ? combo : null} onFlip={flip} />
+      {status ? <div className="fixed right-6 top-[30px] hidden desk:block">{status}</div> : null}
+
+      <div className="flex flex-1 flex-col px-5 pb-5 pt-6 desk:mx-auto desk:w-[560px] desk:flex-none desk:px-0 desk:pb-6 desk:pt-10">
+        <FlashCard view={view} cardId={current.id} flipped={flipped} combo={gameLayer ? combo : null} onFlip={flip} onOptions={onOptions} />
       </div>
 
-      <div className="relative px-5 pb-[max(34px,env(safe-area-inset-bottom))]">
+      <div className="relative px-5 pb-[max(34px,env(safe-area-inset-bottom))] desk:mx-auto desk:w-[560px] desk:px-0 desk:pb-10">
         {float ? <TreatFloat key={float.key}>{ds("treats", { count: float.amount })}</TreatFloat> : null}
         {flipped ? (
-          <div role="group" aria-label={t("gradeGroup")} className="grid grid-cols-2 gap-[10px]">
+          <>
+          <div role="group" aria-label={t("gradeGroup")} className="grid grid-cols-2 gap-[10px] desk:grid-cols-4">
             {previews.map(([g, preview], i) => (
-              <PillButton key={g} variant={GRADE_VARIANT[g]} size={60} disabled={busy} className="px-3" onClick={() => grade(g)}>
+              <PillButton
+                key={g}
+                variant={GRADE_VARIANT[g]}
+                size={60}
+                disabled={busy}
+                className="px-3 desk:h-[72px] desk:min-h-[72px] desk:rounded-[28px] desk:px-2"
+                onClick={() => grade(g)}
+              >
+                <span aria-hidden="true" className="absolute left-3 top-3 hidden h-5 w-5 items-center justify-center rounded-md border border-current text-[11px] font-bold desk:flex">
+                  {i + 1}
+                </span>
                 <span className="flex flex-col items-center leading-tight">
                   <span className="text-[16px]">{t(`grade.${g}`)}</span>
-                  <span className="text-[12px] font-medium opacity-90">
+                  <span className="text-[12px] font-medium opacity-90 desk:whitespace-nowrap desk:text-[11px]">
                     {t(`gradeHint.${preview.unit}`, { n: preview.value })}
                     {gameLayer ? ` · ${ds("treats", { count: GRADE_TREATS[g] })}` : ""}
                     <span className="sr-only"> ({i + 1})</span>
@@ -146,6 +161,8 @@ export function ReviewSession({ cards, direction, gameLayer, onAnswer, onFinish,
               </PillButton>
             ))}
           </div>
+          <p className="mt-4 hidden text-center text-caption text-muted desk:block">{t("gradeHintDesk")}</p>
+          </>
         ) : (
           <div className="flex flex-col gap-2">
             <PillButton variant="coat" size={60} fullWidth onClick={flip}>

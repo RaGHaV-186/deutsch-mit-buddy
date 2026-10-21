@@ -16,7 +16,11 @@ export default async function HomePage() {
   const session = profile ? SESSIONS[profile.session_seq] : undefined;
   const dayCount = profile?.day_count ?? 1;
   const line = homeLine(session, dayCount);
-  const counts = await getDueCounts(await createClient(), userId, new Date(), safeTimeZone(profile?.timezone));
+  const timeZone = safeTimeZone(profile?.timezone);
+  const now = new Date();
+  const counts = await getDueCounts(await createClient(), userId, now, timeZone);
+  // Only the desktop hero shows it. German, because Buddy greets in German (the interface labels stay English).
+  const dateLabel = new Intl.DateTimeFormat("de-DE", { weekday: "long", day: "numeric", month: "long", timeZone }).format(now);
 
   return (
     <HomeView
@@ -24,6 +28,8 @@ export default async function HomePage() {
       line={b(line.key, { theme: line.theme ?? "" })}
       lesson={session ? { day: dayCount, code: session.code, title: lessonTitle(session) } : null}
       due={counts ? counts.due + counts.fresh : 0}
+      dueDetail={counts ? { reviews: counts.due, fresh: counts.fresh } : undefined}
+      dateLabel={dateLabel}
       game={gameDataForHome()}
     />
   );

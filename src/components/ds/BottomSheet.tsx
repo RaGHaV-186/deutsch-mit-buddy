@@ -40,7 +40,7 @@ export function BottomSheet({ open, onClose, title, children }: Props) {
 
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center">
+    <div className="fixed inset-0 z-50 flex items-end justify-center desk:items-center">
       <button type="button" aria-label={t("sheetClose")} tabIndex={-1} onClick={onClose} className="absolute inset-0 bg-black/45" />
       <div
         ref={sheet}
@@ -49,7 +49,7 @@ export function BottomSheet({ open, onClose, title, children }: Props) {
         aria-label={title}
         tabIndex={-1}
         className={cx(
-          "ds-sheet relative flex w-full max-w-[480px] flex-col gap-5 rounded-t-[32px] bg-surface p-5 text-text shadow-cushion outline-none",
+          "ds-sheet relative flex w-full max-w-[480px] tab:max-w-[560px] flex-col gap-5 rounded-t-[32px] desk:rounded-[32px] bg-surface p-5 text-text shadow-cushion outline-none",
         )}
         style={{ paddingBottom: "max(24px, env(safe-area-inset-bottom))" }}
       >

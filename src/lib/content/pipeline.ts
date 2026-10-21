@@ -1,41 +1,45 @@
 import { createHash } from "node:crypto";
 import type { CurriculumRow } from "./curriculum-rows.ts";
-import { lintLesson, errorIds, type LintIssue } from "./lint.ts";
-import { assertWithinCap, estimateRun, estimateTokens, actualCostUsd, type RunEstimate, type Usage } from "./pricing.ts";
+import { applyFix, enumerateItems, valueOf, type LessonItem, type UnitName } from "./lesson-items.ts";
+import { errorIds, lessonErrors, lintLesson } from "./lesson-lint.ts";
 import {
-  GENERATION_EXPECTED_OUTPUT,
-  GENERATION_MAX_TOKENS,
+  PART_NUMBER,
+  PARTS,
+  PASS_A_JSON_SCHEMA,
+  PASS_B_JSON_SCHEMA,
+  REVIEW_JSON_SCHEMA,
+  lessonSchema,
+  passASchema,
+  passBSchema,
+  reviewResultSchema,
+  type Lesson,
+  type PartName,
+  type PassA,
+  type PassB,
+  type ReviewVerdict,
+} from "./lesson-schema.ts";
+import { actualCostUsd, assertWithinCap, estimateRun, estimateTokens, type RunEstimate, type Usage } from "./pricing.ts";
+import {
+  EXPECTED_OUTPUT,
   GENERATION_MODEL,
-  GENERATION_SYSTEM,
-  generationPrompt,
-  REVIEW_EXPECTED_OUTPUT,
+  PASS_A_MAX_TOKENS,
+  PASS_A_SYSTEM,
+  PASS_B_MAX_TOKENS,
+  PASS_B_SYSTEM,
   REVIEW_MAX_TOKENS,
   REVIEW_MODEL,
   REVIEW_SYSTEM,
+  passAPrompt,
+  passBPrompt,
   reviewPrompt,
 } from "./prompts.ts";
-import {
-  cardId,
-  GENERATION_JSON_SCHEMA,
-  generatedCardSchema,
-  generatedQuestionSchema,
-  isCardId,
-  lessonContentSchema,
-  questionId,
-  REVIEW_JSON_SCHEMA,
-  reviewResultSchema,
-  type GeneratedCard,
-  type GeneratedQuestion,
-  type LessonContent,
-  type Verdict,
-} from "./schema.ts";
 
-// The two-pass pipeline: Sonnet writes a lesson (Batch API), Opus checks every card and question (Batch API).
-// The API client is injected, so everything here is testable with a fake. Relative imports only (runs under plain Node).
+// The three-step pipeline for a lesson: Sonnet pass A (teach), Sonnet pass B (four skills, sees A), Opus review of every item.
+// All three are Batch API runs. The API client is injected, so everything here is testable with a fake.
+// Relative imports only (the scripts run this file with plain Node).
 
-export type Stage = "generate" | "review";
+export type Stage = "generate-a" | "generate-b" | "review";
 
-// ---- Minimal shapes of the Batch API (the real SDK client is assignable to these).
 export interface BatchRequest {
   custom_id: string;
   params: {
@@ -68,37 +72,25 @@ export interface BatchClient {
 /** Batch custom ids allow letters, digits, _ and - only; lesson codes such as W3.2 are mapped to W3_2. */
 export const customId = (stage: Stage, code: string) => `${stage}-${code.replace(/[^A-Za-z0-9_-]/g, "_")}`;
 
-export function buildGenerationRequests(lessons: CurriculumRow[]): BatchRequest[] {
-  return lessons.map((lesson) => ({
-    custom_id: customId("generate", lesson.code),
-    params: {
-      model: GENERATION_MODEL,
-      max_tokens: GENERATION_MAX_TOKENS,
-      system: GENERATION_SYSTEM,
-      messages: [{ role: "user", content: generationPrompt(lesson) }],
-      output_config: { effort: "medium", format: { type: "json_schema", schema: GENERATION_JSON_SCHEMA } },
-    },
-  }));
-}
+const request = (stage: Stage, code: string, model: string, maxTokens: number, system: string, content: string, schema: Record<string, unknown>): BatchRequest => ({
+  custom_id: customId(stage, code),
+  params: { model, max_tokens: maxTokens, system, messages: [{ role: "user", content }], output_config: { effort: "medium", format: { type: "json_schema", schema } } },
+});
 
-export function buildReviewRequests(lessons: CurriculumRow[], contents: Map<string, LessonContent>): BatchRequest[] {
-  return lessons.flatMap((lesson) => {
-    const content = contents.get(lesson.code);
-    if (!content) return [];
-    return [
-      {
-        custom_id: customId("review", lesson.code),
-        params: {
-          model: REVIEW_MODEL,
-          max_tokens: REVIEW_MAX_TOKENS,
-          system: REVIEW_SYSTEM,
-          messages: [{ role: "user" as const, content: reviewPrompt(lesson, content, lintLesson(lesson.code, content)) }],
-          output_config: { effort: "medium" as const, format: { type: "json_schema" as const, schema: REVIEW_JSON_SCHEMA } },
-        },
-      },
-    ];
+export const buildPassARequests = (lessons: CurriculumRow[]): BatchRequest[] =>
+  lessons.map((l) => request("generate-a", l.code, GENERATION_MODEL, PASS_A_MAX_TOKENS, PASS_A_SYSTEM, passAPrompt(l), PASS_A_JSON_SCHEMA));
+
+export const buildPassBRequests = (lessons: CurriculumRow[], passA: Map<string, PassA>): BatchRequest[] =>
+  lessons.flatMap((l) => {
+    const a = passA.get(l.code);
+    return a ? [request("generate-b", l.code, GENERATION_MODEL, PASS_B_MAX_TOKENS, PASS_B_SYSTEM, passBPrompt(l, a), PASS_B_JSON_SCHEMA)] : [];
   });
-}
+
+export const buildReviewRequests = (lessons: CurriculumRow[], contents: Map<string, Lesson>): BatchRequest[] =>
+  lessons.flatMap((l) => {
+    const c = contents.get(l.code);
+    return c ? [request("review", l.code, REVIEW_MODEL, REVIEW_MAX_TOKENS, REVIEW_SYSTEM, reviewPrompt(l, c, lintLesson(l.code, l.phase, c)), REVIEW_JSON_SCHEMA)] : [];
+  });
 
 // ---- Cost estimate (shown before every paid run, and what an approval is bound to)
 export interface StageEstimate extends RunEstimate {
@@ -113,15 +105,8 @@ export function estimateStage(stage: Stage, requests: BatchRequest[], opts: { ra
   const first = requests[0]?.params;
   if (!first) throw new Error("Nothing to estimate: no requests.");
   const inputTokensPerRequest =
-    opts.exactInputTokens ??
-    requests.map((r) => estimateTokens(r.params.system + r.params.messages.map((m) => m.content).join("") + JSON.stringify(r.params.output_config.format.schema)));
-  const estimate = estimateRun({
-    model: first.model,
-    inputTokensPerRequest,
-    expectedOutputPerRequest: stage === "generate" ? GENERATION_EXPECTED_OUTPUT : REVIEW_EXPECTED_OUTPUT,
-    maxTokens: first.max_tokens,
-    rate: opts.rate,
-  });
+    opts.exactInputTokens ?? requests.map((r) => estimateTokens(r.params.system + r.params.messages.map((m) => m.content).join("") + JSON.stringify(r.params.output_config.format.schema)));
+  const estimate = estimateRun({ model: first.model, inputTokensPerRequest, expectedOutputPerRequest: EXPECTED_OUTPUT[stage], maxTokens: first.max_tokens, rate: opts.rate });
   return { ...estimate, stage, id: fingerprint(requests) };
 }
 
@@ -134,7 +119,6 @@ export function assertApproved(requests: BatchRequest[], approvedId: string | un
 
 // ---- Running a batch (resumable: a restarted run polls the batch it already paid for instead of submitting again)
 export interface RunOptions {
-  /** Set when a batch for this stage was already submitted. */
   batchId?: string;
   onSubmitted: (batchId: string) => Promise<void> | void;
   pollMs?: number;
@@ -171,11 +155,11 @@ function replyText(line: BatchResultLine): { text?: string; usage?: Usage; probl
   const { message } = r;
   if (message.stop_reason === "max_tokens") return { usage: message.usage, problem: "the answer was cut off at the token limit" };
   if (message.stop_reason === "refusal") return { usage: message.usage, problem: "the model declined the request" };
-  const text = message.content.filter((b) => b.type === "text").map((b) => b.text ?? "").join("");
-  return { text, usage: message.usage };
+  return { text: message.content.filter((b) => b.type === "text").map((b) => b.text ?? "").join(""), usage: message.usage };
 }
 
-function parseJson<T>(text: string | undefined, parse: (v: unknown) => { success: true; data: T } | { success: false; error: { message: string } }) {
+type Parse<T> = (v: unknown) => { success: true; data: T } | { success: false; error: { message: string } };
+function parseJson<T>(text: string | undefined, parse: Parse<T>) {
   if (!text) return { problem: "no text in the answer" } as const;
   let raw: unknown;
   try {
@@ -193,11 +177,11 @@ export interface StageOutcome<T> {
   usages: Usage[];
 }
 
-export function parseGeneration(lessons: CurriculumRow[], lines: BatchResultLine[]): StageOutcome<LessonContent> {
+function parseStage<T>(stage: Stage, lessons: CurriculumRow[], lines: BatchResultLine[], parse: Parse<T>): StageOutcome<T> {
   const byId = new Map(lines.map((l) => [l.custom_id, l]));
-  const out: StageOutcome<LessonContent> = { results: new Map(), failures: [], usages: [] };
+  const out: StageOutcome<T> = { results: new Map(), failures: [], usages: [] };
   for (const lesson of lessons) {
-    const line = byId.get(customId("generate", lesson.code));
+    const line = byId.get(customId(stage, lesson.code));
     if (!line) {
       out.failures.push({ code: lesson.code, reason: "no result came back" });
       continue;
@@ -208,141 +192,142 @@ export function parseGeneration(lessons: CurriculumRow[], lines: BatchResultLine
       out.failures.push({ code: lesson.code, reason: reply.problem });
       continue;
     }
-    const parsed = parseJson(reply.text, (v) => lessonContentSchema.safeParse(v));
+    const parsed = parseJson(reply.text, parse);
     if ("problem" in parsed) out.failures.push({ code: lesson.code, reason: parsed.problem! });
     else out.results.set(lesson.code, parsed.data);
   }
   return out;
 }
 
-export function itemIds(code: string, content: LessonContent): string[] {
-  return [...content.cards.map((_, i) => cardId(code, i)), ...content.questions.map((_, i) => questionId(code, i))];
+export const parsePassA = (lessons: CurriculumRow[], lines: BatchResultLine[]) => parseStage("generate-a", lessons, lines, (v) => passASchema.safeParse(v));
+export const parsePassB = (lessons: CurriculumRow[], lines: BatchResultLine[]) => parseStage("generate-b", lessons, lines, (v) => passBSchema.safeParse(v));
+
+/** The whole lesson: pass A and pass B together, validated as one. */
+export function combineLesson(a: PassA, b: PassB): Lesson {
+  return lessonSchema.parse({ ...a, ...b });
 }
 
-export function parseReview(lessons: CurriculumRow[], contents: Map<string, LessonContent>, lines: BatchResultLine[]): StageOutcome<Verdict[]> {
-  const byId = new Map(lines.map((l) => [l.custom_id, l]));
-  const out: StageOutcome<Verdict[]> = { results: new Map(), failures: [], usages: [] };
-  for (const lesson of lessons) {
-    const content = contents.get(lesson.code);
-    if (!content) continue;
-    const line = byId.get(customId("review", lesson.code));
-    if (!line) {
-      out.failures.push({ code: lesson.code, reason: "no result came back" });
-      continue;
-    }
-    const reply = replyText(line);
-    if (reply.usage) out.usages.push(reply.usage);
-    if (reply.problem) {
-      out.failures.push({ code: lesson.code, reason: reply.problem });
-      continue;
-    }
-    const parsed = parseJson(reply.text, (v) => reviewResultSchema.safeParse(v));
-    if ("problem" in parsed) {
-      out.failures.push({ code: lesson.code, reason: parsed.problem! });
-      continue;
-    }
+export const itemIdsOf = (code: string, lesson: Lesson) => enumerateItems(code, lesson).map((i) => i.id);
+
+export function parseReview(lessons: CurriculumRow[], contents: Map<string, Lesson>, lines: BatchResultLine[]): StageOutcome<ReviewVerdict[]> {
+  const reviewable = lessons.filter((l) => contents.has(l.code));
+  const raw = parseStage("review", reviewable, lines, (v) => reviewResultSchema.safeParse(v));
+  const out: StageOutcome<ReviewVerdict[]> = { results: new Map(), failures: raw.failures, usages: raw.usages };
+  for (const [code, parsed] of raw.results) {
     // Exactly one verdict per item. A missing verdict is never an "ok": it waits for a human.
-    const first = new Map<string, Verdict>();
-    for (const v of parsed.data.verdicts) if (!first.has(v.id)) first.set(v.id, v);
+    const first = new Map<string, ReviewVerdict>();
+    for (const v of parsed.verdicts) if (!first.has(v.id)) first.set(v.id, v);
     out.results.set(
-      lesson.code,
-      itemIds(lesson.code, content).map(
-        (id) => first.get(id) ?? { id, status: "needs-human" as const, reason: "The reviewer returned no verdict for this item.", fixed_card: null, fixed_question: null },
-      ),
+      code,
+      itemIdsOf(code, contents.get(code)!).map((id) => first.get(id) ?? { id, status: "needs-human" as const, reason: "The reviewer returned no verdict for this item.", fixed_json: null }),
     );
   }
   return out;
 }
 
-// ---- Merging the two passes
+// ---- Merging the passes
 export type ItemStatus = "ok" | "fixed" | "needs-human";
 
 export interface ReviewItem {
   id: string;
-  lesson: string;
-  kind: "card" | "question";
+  part: PartName;
+  unit: UnitName;
+  label: string;
   status: ItemStatus;
   reason: string;
   /** What Sonnet wrote. */
-  original: GeneratedCard | GeneratedQuestion;
-  /** What gets inserted: the original for "ok", the corrected item for "fixed", nothing for "needs-human". */
-  final: GeneratedCard | GeneratedQuestion | null;
+  original: unknown;
+  /** What gets published: the original for "ok", the correction for "fixed", nothing for "needs-human". */
+  final: unknown | null;
   /** Automatic checks that fired on this item. */
   lint: string[];
 }
 
 export interface LessonReview {
   code: string;
-  /** Problems with the lesson as a whole (for example a wrong number of cards). */
+  phase: CurriculumRow["phase"];
+  /** Problems with the lesson as a whole (for example a wrong number of exercises). They block publishing. */
   lessonIssues: string[];
   items: ReviewItem[];
+  /** The lesson with every accepted correction applied (needs-human items stay as written). */
+  final: Lesson;
+  partStatus: Record<PartName, ItemStatus>;
+  /** True only when every item is ok or fixed and the lesson as a whole has no errors. */
+  publishable: boolean;
 }
 
-export function mergeLesson(code: string, content: LessonContent, verdicts: Verdict[]): LessonReview {
-  const lint = lintLesson(code, content);
-  const byItem = (id: string) => lint.filter((l) => l.id === id);
+export function mergeLesson(lesson: CurriculumRow, content: Lesson, verdicts: ReviewVerdict[]): LessonReview {
+  const { code, phase } = lesson;
   const verdictOf = new Map(verdicts.map((v) => [v.id, v]));
+  const initialLint = lintLesson(code, phase, content);
   const items: ReviewItem[] = [];
+  let current = content;
 
-  const settle = <T extends GeneratedCard | GeneratedQuestion>(id: string, kind: "card" | "question", original: T, issuesFor: (item: T) => LintIssue[], pick: (v: Verdict) => T | null, keep: (fixed: T) => T): ReviewItem => {
-    const v = verdictOf.get(id);
-    const base = { id, lesson: code, kind, original, lint: byItem(id).map((l) => l.message) };
-    if (!v) return { ...base, status: "needs-human", reason: "No verdict for this item.", final: null };
-    if (v.status === "needs-human") return { ...base, status: "needs-human", reason: v.reason, final: null };
-    if (v.status === "fixed") {
-      const fixed = pick(v);
-      if (!fixed) return { ...base, status: "needs-human", reason: `Marked fixed but no corrected item came with it. (${v.reason})`, final: null };
-      const kept = keep(fixed);
-      const bad = issuesFor(kept).filter((i) => i.level === "error");
-      if (bad.length) return { ...base, status: "needs-human", reason: `The correction still fails an automatic check (${bad[0].message}) (${v.reason})`, final: null };
-      return { ...base, status: "fixed", reason: v.reason, final: kept };
+  for (const item of enumerateItems(code, content)) {
+    const original = valueOf(content, item);
+    const lintMessages = initialLint.filter((l) => l.id === item.id).map((l) => l.message);
+    const base = { id: item.id, part: item.part, unit: item.unit, label: item.label, original, lint: lintMessages };
+    const needsHuman = (reason: string): ReviewItem => ({ ...base, status: "needs-human", reason, final: null });
+    const v = verdictOf.get(item.id);
+
+    if (!v) items.push(needsHuman("No verdict for this item."));
+    else if (v.status === "needs-human") items.push(needsHuman(v.reason));
+    else if (v.status === "fixed") {
+      const applied = v.fixed_json ? applyFix(current, item as LessonItem, v.fixed_json) : null;
+      if (!applied) items.push(needsHuman(`Marked fixed, but the correction is missing or does not fit this item. (${v.reason})`));
+      else {
+        const remaining = lintLesson(code, phase, applied.lesson).filter((l) => l.id === item.id && l.level === "error");
+        if (remaining.length) items.push(needsHuman(`The correction still fails an automatic check (${remaining[0].message}). (${v.reason})`));
+        else {
+          current = applied.lesson;
+          items.push({ ...base, status: "fixed", reason: v.reason, final: applied.value });
+        }
+      }
+    } else {
+      // "ok" is believed only when the mechanical checks agree.
+      const failing = initialLint.find((l) => l.id === item.id && l.level === "error");
+      items.push(failing ? needsHuman(`The reviewer said ok, but an automatic check failed: ${failing.message}`) : { ...base, status: "ok", reason: v.reason, final: original });
     }
-    // "ok": believed only when the mechanical checks agree.
-    if (errorIds(byItem(id)).has(id)) return { ...base, status: "needs-human", reason: `The reviewer said ok, but an automatic check failed: ${byItem(id).find((l) => l.level === "error")!.message}`, final: null };
-    return { ...base, status: "ok", reason: v.reason, final: original };
-  };
+  }
 
-  content.cards.forEach((card, i) => {
-    const id = cardId(code, i);
-    items.push(
-      settle(id, "card", card, (c) => lintLesson(code, { cards: [c], questions: content.questions }).filter((l) => l.id === cardId(code, 0)), (v) => v.fixed_card, (f) => ({ ...f, tier: card.tier })),
-    );
-  });
-  content.questions.forEach((q, i) => {
-    const id = questionId(code, i);
-    items.push(
-      settle(id, "question", q, (x) => lintLesson(code, { cards: content.cards, questions: [x] }).filter((l) => l.id === questionId(code, 0)), (v) => v.fixed_question, (f) => ({ ...f, skill: q.skill, type: q.type })),
-    );
-  });
-  const lessonIssues = lint.filter((l) => l.id === "lesson").map((l) => l.message);
-  return { code, lessonIssues, items };
+  const lessonIssues = lessonErrors(lintLesson(code, phase, current)).map((l) => l.message);
+  const partStatus = Object.fromEntries(
+    PARTS.map((part) => {
+      const mine = items.filter((i) => i.part === part);
+      return [part, mine.some((i) => i.status === "needs-human") ? "needs-human" : mine.some((i) => i.status === "fixed") ? "fixed" : "ok"];
+    }),
+  ) as Record<PartName, ItemStatus>;
+  const publishable = items.every((i) => i.status !== "needs-human") && lessonIssues.length === 0;
+  return { code, phase, lessonIssues, items, final: current, partStatus, publishable };
 }
 
-// ---- Output files
-export interface ApprovedRows {
+// ---- What gets published
+export interface PublishPayload {
+  code: string;
+  parts: Record<PartName, unknown>;
+  part_status: Record<PartName, "ok" | "fixed">;
   cards: Record<string, unknown>[];
   questions: Record<string, unknown>[];
 }
 
-/** Only "ok" and "fixed" items are inserted; "needs-human" items wait. */
-export function approvedRows(reviews: LessonReview[]): ApprovedRows {
-  const cards: Record<string, unknown>[] = [];
+/** Rows for the publish function. Throws when the lesson is not publishable: nothing incomplete ever goes in. */
+export function publishPayload(review: LessonReview): PublishPayload {
+  if (!review.publishable) throw new Error(`${review.code} is not publishable: ${review.items.filter((i) => i.status === "needs-human").length} item(s) need a human, ${review.lessonIssues.length} lesson-level problem(s).`);
+  const l = review.final;
+  const cards: Record<string, unknown>[] = l.vocabulary.words.map((c, i) => ({
+    session_code: review.code, kind: "word", tier: c.tier, position: i + 1, en: c.en, article: c.article, de: c.de, plural: c.plural, example: c.example, example_en: c.example_en, tip: c.tip,
+  }));
+  l.vocabulary.phrases.forEach((p, i) => cards.push({ session_code: review.code, kind: "say", tier: "core", position: l.vocabulary.words.length + i + 1, en: p.en, article: null, de: p.de, plural: null, example: p.example, example_en: p.example_en, tip: p.tip }));
   const questions: Record<string, unknown>[] = [];
-  for (const lesson of reviews) {
-    let position = 0;
-    for (const item of lesson.items) {
-      if (!item.final) continue;
-      if (item.kind === "card") {
-        const c = generatedCardSchema.parse(item.final);
-        position += 1;
-        cards.push({ session_code: lesson.code, kind: "word", tier: c.tier, position, en: c.en, article: c.article, de: c.de, plural: c.plural, example: c.example, example_en: c.example_en, tip: c.tip });
-      } else {
-        const q = generatedQuestionSchema.parse(item.final);
-        questions.push({ session_code: lesson.code, skill: q.skill, type: q.type, prompt: q.prompt, answer: q.answer, distractors: q.distractors, explanation: q.explanation });
-      }
-    }
-  }
-  return { cards, questions };
+  const push = (part: string, list: Lesson["exercises"]["items"]) =>
+    list.forEach((q, i) => questions.push({ session_code: review.code, part, position: i + 1, skill: q.skill, type: q.type, prompt: q.prompt, answer: q.answer, distractors: q.distractors, explanation: q.explanation }));
+  push("warmup", l.warmup.items);
+  push("exercises", l.exercises.items);
+  push("reading", l.reading.questions);
+  push("listening", l.listening.questions);
+  push("exam", [...l.exam.grammar_vocab, ...l.exam.reading.questions, ...l.exam.listening.questions]);
+  const part_status = Object.fromEntries(PARTS.map((p) => [p, review.partStatus[p] === "fixed" ? "fixed" : "ok"])) as PublishPayload["part_status"];
+  return { code: review.code, parts: Object.fromEntries(PARTS.map((p) => [p, l[p]])) as Record<PartName, unknown>, part_status, cards, questions };
 }
 
 export function summarize(reviews: LessonReview[]) {
@@ -353,7 +338,8 @@ export function summarize(reviews: LessonReview[]) {
     ok: count("ok"),
     fixed: count("fixed"),
     needsHuman: count("needs-human"),
-    lessonsWithIssues: reviews.filter((l) => l.lessonIssues.length > 0).map((l) => l.code),
+    publishable: reviews.filter((l) => l.publishable).map((l) => l.code),
+    blocked: reviews.filter((l) => !l.publishable).map((l) => l.code),
   };
 }
 
@@ -365,7 +351,6 @@ export interface CostReport {
   failedRequests: number;
   inputTokens: number;
   outputTokens: number;
-  /** Actual cost at Batch API prices. */
   actualUsd: number;
   actualEur: number;
   estimatedEur: number;
@@ -376,19 +361,12 @@ export interface CostReport {
 export function costReport(stage: Stage, estimate: StageEstimate, batchId: string, outcome: StageOutcome<unknown>, requests: number): CostReport {
   const usd = actualCostUsd(estimate.model, outcome.usages);
   return {
-    stage,
-    model: estimate.model,
-    batchId,
-    requests,
-    failedRequests: outcome.failures.length,
+    stage, model: estimate.model, batchId, requests, failedRequests: outcome.failures.length,
     inputTokens: outcome.usages.reduce((n, u) => n + u.input_tokens + (u.cache_creation_input_tokens ?? 0) + (u.cache_read_input_tokens ?? 0), 0),
     outputTokens: outcome.usages.reduce((n, u) => n + u.output_tokens, 0),
-    actualUsd: Number(usd.toFixed(4)),
-    actualEur: Number((usd * estimate.usdToEur).toFixed(4)),
-    estimatedEur: Number(estimate.expectedEur.toFixed(4)),
-    ceilingEur: Number(estimate.ceilingEur.toFixed(4)),
-    usdToEur: estimate.usdToEur,
+    actualUsd: Number(usd.toFixed(4)), actualEur: Number((usd * estimate.usdToEur).toFixed(4)),
+    estimatedEur: Number(estimate.expectedEur.toFixed(4)), ceilingEur: Number(estimate.ceilingEur.toFixed(4)), usdToEur: estimate.usdToEur,
   };
 }
 
-export { isCardId };
+export { PART_NUMBER };

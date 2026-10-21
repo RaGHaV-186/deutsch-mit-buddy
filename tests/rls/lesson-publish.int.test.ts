@@ -1,0 +1,148 @@
+import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { mergeLesson, publishPayload, itemIdsOf, type PublishPayload } from "@/lib/content/pipeline.ts";
+import { lessonRow, validLesson } from "@/lib/content/test-fixtures.ts";
+import { PARTS } from "@/lib/content/lesson-schema.ts";
+import { admin, anon, createMember, resetState, type TestUser } from "./helpers";
+
+// The 14-part lesson standard, enforced by the database: a lesson publishes only when every part exists and passed the review.
+const CODE = "TXP1";
+const row = lessonRow({ code: CODE, seq: 9300 });
+const payload = (): PublishPayload => {
+  const lesson = validLesson();
+  const verdicts = itemIdsOf(CODE, lesson).map((id) => ({ id, status: "ok" as const, reason: "fine", fixed_json: null }));
+  return publishPayload(mergeLesson(row, lesson, verdicts));
+};
+const publish = (p: PublishPayload, over: Partial<{ parts: unknown; status: unknown; code: string; cards: unknown; questions: unknown }> = {}) =>
+  admin.rpc("publish_lesson", {
+    p_code: over.code ?? p.code,
+    p_parts: over.parts ?? p.parts,
+    p_status: over.status ?? p.part_status,
+    p_model: "claude-opus-5-5",
+    p_cards: over.cards ?? p.cards,
+    p_questions: over.questions ?? p.questions,
+  });
+
+async function wipe() {
+  await admin.from("lesson_publications").delete().like("session_code", "TXP%");
+  await admin.from("lesson_parts").delete().like("session_code", "TXP%");
+  await admin.from("card_templates").delete().like("session_code", "TXP%");
+  await admin.from("question_bank").delete().like("session_code", "TXP%");
+}
+const counts = async () => {
+  const n = async (table: string) => (await admin.from(table).select("*", { count: "exact", head: true }).eq("session_code", CODE)).count;
+  return { parts: await n("lesson_parts"), cards: await n("card_templates"), questions: await n("question_bank"), published: await n("lesson_publications") };
+};
+
+describe("publish_lesson", () => {
+  let a: TestUser;
+  beforeAll(async () => {
+    await resetState();
+    await admin.from("curriculum_sessions").delete().gte("seq", 9300);
+    await admin.from("curriculum_sessions").insert({ seq: 9300, code: CODE, kind: "lesson", phase: "zero", grammar: "g", theme: "t", word_target: 18 });
+    a = await createMember();
+  });
+  beforeEach(wipe);
+  afterAll(async () => {
+    await wipe();
+    await admin.from("curriculum_sessions").delete().gte("seq", 9300);
+    await resetState();
+  });
+
+  it("publishes a complete lesson in one go: 14 parts, 18 words + 5 phrases, 42 questions, then the publication", async () => {
+    expect((await publish(payload())).error).toBeNull();
+    expect(await counts()).toEqual({ parts: 14, cards: 23, questions: 42, published: 1 });
+    const { data } = await admin.from("lesson_parts").select("part, review_status").eq("session_code", CODE);
+    expect(data!.map((r) => r.part).sort()).toEqual([...PARTS].sort());
+    expect(data!.every((r) => r.review_status === "ok")).toBe(true);
+  });
+
+  it("refuses a lesson with a missing part, and writes nothing", async () => {
+    for (const part of PARTS) {
+      const p = payload();
+      const parts = { ...p.parts } as Record<string, unknown>;
+      delete parts[part];
+      const { error } = await publish(p, { parts });
+      expect(error?.message, part).toMatch(new RegExp(`missing part ${part}`));
+      expect(await counts(), part).toEqual({ parts: 0, cards: 0, questions: 0, published: 0 });
+    }
+  });
+
+  it("refuses a lesson with a part that has not passed the review (needs-human, or no status at all)", async () => {
+    const p = payload();
+    expect((await publish(p, { status: { ...p.part_status, reading: "needs-human" } })).error?.message).toMatch(/Part reading .* has not passed the review/);
+    const { writing: _w, ...without } = p.part_status;
+    expect((await publish(p, { status: without })).error?.message).toMatch(/Part writing/);
+    expect(await counts()).toEqual({ parts: 0, cards: 0, questions: 0, published: 0 });
+  });
+
+  it("refuses an unknown lesson, a part that is not an object, and cards or questions of another lesson", async () => {
+    const p = payload();
+    expect((await publish(p, { code: "NOPE" })).error?.message).toMatch(/Unknown lesson/);
+    expect((await publish(p, { parts: { ...p.parts, goal: "text" } })).error?.message).toMatch(/missing part goal/);
+    expect((await publish(p, { cards: [...p.cards, { ...p.cards[0], session_code: "OTHER" }] })).error?.message).toMatch(/must all belong/);
+    expect(await counts()).toEqual({ parts: 0, cards: 0, questions: 0, published: 0 });
+  });
+
+  it("the database also checks the pools: too many words, too few phrases or too few exercises are refused", async () => {
+    const p = payload();
+    const extra = Array.from({ length: 3 }, (_, i) => ({ ...p.cards[0], de: `Extra${i}`, position: 30 + i }));
+    expect((await publish(p, { cards: [...p.cards, ...extra] })).error?.message).toMatch(/21 words/);
+    expect((await publish(p, { cards: p.cards.filter((c) => c.kind === "word") })).error?.message).toMatch(/0 phrases/);
+    expect((await publish(p, { questions: p.questions.filter((q) => q.part !== "exercises") })).error?.message).toMatch(/too few exercises/);
+    expect(await counts()).toEqual({ parts: 0, cards: 0, questions: 0, published: 0 });
+  });
+
+  it("the publication itself cannot be inserted by hand for an incomplete lesson (trigger)", async () => {
+    const { error } = await admin.from("lesson_publications").insert({ session_code: CODE });
+    expect(error?.code).toBe("23514");
+    expect(error?.message).toMatch(/0 of 14 parts/);
+    await admin.from("lesson_parts").insert({ session_code: CODE, part: "goal", content: {}, review_status: "ok", reviewed_by_model: "x" });
+    expect((await admin.from("lesson_publications").insert({ session_code: CODE })).error?.message).toMatch(/1 of 14 parts/);
+  });
+
+  it("a part cannot be stored as needs-human at all", async () => {
+    const { error } = await admin.from("lesson_parts").insert({ session_code: CODE, part: "goal", content: {}, review_status: "needs-human", reviewed_by_model: "x" });
+    expect(error?.code).toBe("23514");
+    expect((await admin.from("lesson_parts").insert({ session_code: CODE, part: "lunch", content: {}, review_status: "ok", reviewed_by_model: "x" })).error?.code).toBe("23514");
+    expect((await admin.from("lesson_parts").insert({ session_code: CODE, part: "goal", content: [], review_status: "ok", reviewed_by_model: "x" })).error?.code).toBe("23514");
+  });
+
+  it("publishing again after a correction updates the content in place and raises the version", async () => {
+    expect((await publish(payload())).error).toBeNull();
+    const fixed = payload();
+    fixed.cards[0] = { ...fixed.cards[0], example: "Der Kaffee ist heiß." };
+    (fixed.parts.goal as { can_do: string }).can_do = "I can order a drink (corrected).";
+    expect((await publish(fixed)).error).toBeNull();
+    expect(await counts()).toEqual({ parts: 14, cards: 23, questions: 42, published: 1 });
+    const { data: goal } = await admin.from("lesson_parts").select("content, template_version").eq("session_code", CODE).eq("part", "goal").single();
+    expect(goal!.content.can_do).toMatch(/corrected/);
+    expect(goal!.template_version).toBe(2);
+    const { data: card } = await admin.from("card_templates").select("example").eq("session_code", CODE).eq("de", "Kaffee").single();
+    expect(card!.example).toBe("Der Kaffee ist heiß.");
+  });
+
+  it("members read a lesson's parts only once it is published", async () => {
+    await admin.from("lesson_parts").insert({ session_code: CODE, part: "goal", content: { can_do: "hidden" }, review_status: "ok", reviewed_by_model: "x" });
+    expect((await a.aal2.from("lesson_parts").select("part").eq("session_code", CODE)).data).toEqual([]);
+    await wipe();
+    expect((await publish(payload())).error).toBeNull();
+    expect((await a.aal2.from("lesson_parts").select("part").eq("session_code", CODE)).data).toHaveLength(14);
+    expect((await a.aal2.from("lesson_publications").select("session_code").eq("session_code", CODE)).data).toHaveLength(1);
+  });
+
+  it("members, aal1 sessions and anon can neither publish nor write, and aal1/anon read nothing", async () => {
+    const p = payload();
+    for (const client of [a.aal2, a.aal1, anon()]) {
+      const { error } = await client.rpc("publish_lesson", { p_code: CODE, p_parts: p.parts, p_status: p.part_status, p_model: "x", p_cards: p.cards, p_questions: p.questions });
+      expect(error?.code).toBe("42501");
+    }
+    for (const table of ["lesson_parts", "lesson_publications"]) {
+      const row = table === "lesson_parts" ? { session_code: CODE, part: "goal", content: {}, review_status: "ok", reviewed_by_model: "x" } : { session_code: CODE };
+      expect((await a.aal2.from(table).insert(row)).error?.code).toBe("42501");
+      expect((await a.aal2.from(table).delete().eq("session_code", CODE)).error?.code).toBe("42501");
+      expect((await anon().from(table).select("*")).error?.code).toBe("42501");
+    }
+    await publish(p);
+    expect((await a.aal1.from("lesson_parts").select("*")).data).toEqual([]);
+  });
+});

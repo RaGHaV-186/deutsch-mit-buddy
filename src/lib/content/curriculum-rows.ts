@@ -21,10 +21,10 @@ export interface CurriculumRow {
   word_target: number;
 }
 
-/** Words taught in every lesson: 10 core + 5 bonus (BLUEPRINT, teaching format). */
-export const WORDS_PER_LESSON = 15;
-export const CORE_WORDS = 10;
-export const BONUS_WORDS = 5;
+/** Words taught in every lesson: 12 core + 6 bonus (the lesson standard asks for 15 to 20). */
+export const CORE_WORDS = 12;
+export const BONUS_WORDS = 6;
+export const WORDS_PER_LESSON = CORE_WORDS + BONUS_WORDS;
 
 export function toCurriculumRows(sessions: readonly PlanSession[]): CurriculumRow[] {
   return sessions.map((s, seq) => ({

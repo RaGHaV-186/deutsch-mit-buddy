@@ -101,12 +101,14 @@ describe("curriculum content tables", () => {
     });
 
     it("question_bank: skill and type checks, at most 6 distractors that must be an array", async () => {
-      for (const bad of [{ skill: "magic" }, { type: "essay" }, { distractors: "die" }, { distractors: ["a", "b", "c", "d", "e", "f", "g"] }, { prompt: "" }]) {
+      for (const bad of [{ skill: "magic" }, { type: "essay" }, { part: "lunch" }, { distractors: "die" }, { distractors: ["a", "b", "c", "d", "e", "f", "g"] }, { prompt: "" }]) {
         const { error } = await admin.from("question_bank").insert(question({ prompt: "Bad one?", ...bad }));
         expect(error?.code, JSON.stringify(bad)).toBe("23514");
       }
       expect((await admin.from("question_bank").insert(question())).error?.code).toBe("23505");
       expect((await admin.from("question_bank").insert(question({ type: "typing", prompt: "Type it", distractors: [] }))).error).toBeNull();
+      expect((await admin.from("question_bank").insert(question({ type: "dictation", skill: "dictation", prompt: "Listen and write.", distractors: [] }))).error).toBeNull(); // new in the lesson standard
+      expect((await admin.from("question_bank").insert(question({ part: "exam" }))).error).toBeNull(); // the same prompt may appear in another part
     });
   });
 

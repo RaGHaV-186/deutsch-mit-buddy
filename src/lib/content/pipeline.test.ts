@@ -1,107 +1,123 @@
 import { describe, expect, it, vi } from "vitest";
+import { enumerateItems } from "./lesson-items.ts";
+import { PARTS, type ReviewVerdict } from "./lesson-schema.ts";
 import {
-  approvedRows,
   assertApproved,
-  buildGenerationRequests,
+  buildPassARequests,
+  buildPassBRequests,
   buildReviewRequests,
+  combineLesson,
   costReport,
   customId,
   estimateStage,
   fingerprint,
-  itemIds,
+  itemIdsOf,
   mergeLesson,
-  parseGeneration,
+  parsePassA,
+  parsePassB,
   parseReview,
+  publishPayload,
   runBatch,
   summarize,
   type BatchClient,
   type BatchResultLine,
 } from "./pipeline.ts";
-import { GENERATION_MAX_TOKENS, GENERATION_MODEL, REVIEW_MODEL } from "./prompts.ts";
-import { generatedCardSchema, type Verdict } from "./schema.ts";
-import { lessonRow, validContent } from "./test-fixtures.ts";
+import { GENERATION_MODEL, PASS_A_MAX_TOKENS, REVIEW_MODEL } from "./prompts.ts";
+import { lessonRow, validLesson, validPassA, validPassB } from "./test-fixtures.ts";
 
-const usage = { input_tokens: 2000, output_tokens: 4000 };
+const usage = { input_tokens: 5000, output_tokens: 9000 };
 const succeeded = (id: string, body: unknown, over: { stop_reason?: string | null } = {}): BatchResultLine => ({
   custom_id: id,
   result: { type: "succeeded", message: { content: [{ type: "text", text: typeof body === "string" ? body : JSON.stringify(body) }], stop_reason: over.stop_reason ?? "end_turn", usage } },
 });
-const verdict = (id: string, status: Verdict["status"] = "ok", over: Partial<Verdict> = {}): Verdict => ({ id, status, reason: "fine", fixed_card: null, fixed_question: null, ...over });
-const allOk = (code: string, content = validContent()) => itemIds(code, content).map((id) => verdict(id));
+const verdict = (id: string, status: ReviewVerdict["status"] = "ok", over: Partial<ReviewVerdict> = {}): ReviewVerdict => ({ id, status, reason: "fine", fixed_json: null, ...over });
+const row = lessonRow({ code: "Z1", seq: 0 });
+const allOk = (lesson = validLesson()) => itemIdsOf("Z1", lesson).map((id) => verdict(id));
+const withVerdict = (id: string, v: Partial<ReviewVerdict>, lesson = validLesson()) => allOk(lesson).map((x) => (x.id === id ? { ...x, ...v } : x));
 
 describe("requests", () => {
   const lessons = [lessonRow(), lessonRow({ seq: 40, code: "W3.2", phase: "A1", theme: "Freizeit" })];
 
   it("custom ids avoid characters the Batch API rejects", () => {
-    expect(customId("generate", "W3.2")).toBe("generate-W3_2");
-    expect(customId("review", "Z9")).toBe("review-Z9");
-    expect(customId("generate", "W3.2")).toMatch(/^[a-zA-Z0-9_-]{1,64}$/);
+    expect(customId("generate-a", "W3.2")).toBe("generate-a-W3_2");
+    expect(customId("generate-b", "W3.2")).toMatch(/^[a-zA-Z0-9_-]{1,64}$/);
+    expect(customId("review", "W13.5")).toMatch(/^[a-zA-Z0-9_-]{1,64}$/);
   });
 
-  it("generation: one request per lesson, Sonnet, structured output, no sampling parameters", () => {
-    const reqs = buildGenerationRequests(lessons);
-    expect(reqs.map((r) => r.custom_id)).toEqual(["generate-Z9", "generate-W3_2"]);
+  it("pass A: one Sonnet request per lesson with the lesson's level, structured output and no sampling parameters", () => {
+    const reqs = buildPassARequests(lessons);
+    expect(reqs.map((r) => r.custom_id)).toEqual(["generate-a-Z9", "generate-a-W3_2"]);
     for (const r of reqs) {
       expect(r.params.model).toBe(GENERATION_MODEL);
       expect(r.params.model).toBe("claude-sonnet-5-5");
-      expect(r.params.max_tokens).toBe(GENERATION_MAX_TOKENS);
+      expect(r.params.max_tokens).toBe(PASS_A_MAX_TOKENS);
       expect(r.params.output_config.format.type).toBe("json_schema");
       expect(Object.keys(r.params).sort()).toEqual(["max_tokens", "messages", "model", "output_config", "system"]);
     }
-    expect(reqs[1].params.messages[0].content).toContain("W3.2");
     expect(reqs[1].params.messages[0].content).toContain("CEFR level A1");
+    expect(reqs[0].params.messages[0].content).toContain("English only");
+    expect(reqs[0].params.system).toContain("PASS A");
   });
 
-  it("review: Opus, only for lessons that have content, carrying the lesson's items and automatic hints", () => {
-    const contents = new Map([["Z9", validContent()]]);
-    const reqs = buildReviewRequests(lessons, contents);
+  it("pass B only for lessons that have pass A, and it carries pass A's grammar and words", () => {
+    const reqs = buildPassBRequests(lessons, new Map([["Z9", validPassA()]]));
+    expect(reqs).toHaveLength(1);
+    const content = reqs[0].params.messages[0].content;
+    expect(content).toContain("Verbs with ich");
+    expect(content).toContain("der Kaffee");
+    expect(content).toContain("Reading passage length: 25 to 70 words");
+    expect(reqs[0].params.system).toContain("PASS B");
+  });
+
+  it("review: Opus, one request per complete lesson, listing every item with its id", () => {
+    const reqs = buildReviewRequests(lessons, new Map([["Z9", validLesson()]]));
     expect(reqs).toHaveLength(1);
     expect(reqs[0].params.model).toBe(REVIEW_MODEL);
     expect(reqs[0].params.model).toBe("claude-opus-5-5");
-    expect(reqs[0].params.messages[0].content).toContain("Z9#c01");
-    expect(reqs[0].params.messages[0].content).toContain("Z9#q12");
+    expect(reqs[0].params.messages[0].content).toContain("Items to check (93)");
+    expect(reqs[0].params.messages[0].content).toContain("Z9#exam.speaking");
   });
 });
 
 describe("cost estimate and approval", () => {
-  const reqs = buildGenerationRequests([lessonRow(), lessonRow({ code: "Z10", seq: 9 })]);
+  const reqs = buildPassARequests([lessonRow(), lessonRow({ code: "Z10", seq: 9 })]);
 
   it("estimates requests, tokens and euros before anything is paid for", () => {
-    const e = estimateStage("generate", reqs);
-    expect(e).toMatchObject({ stage: "generate", requests: 2, model: "claude-sonnet-5-5" });
-    expect(e.inputTokens).toBeGreaterThan(2000);
+    const e = estimateStage("generate-a", reqs);
+    expect(e).toMatchObject({ stage: "generate-a", requests: 2, model: "claude-sonnet-5-5" });
+    expect(e.inputTokens).toBeGreaterThan(5000);
     expect(e.ceilingEur).toBeGreaterThan(e.expectedEur);
     expect(e.id).toBe(fingerprint(reqs));
   });
 
-  it("uses exact token counts when they are given", () => {
-    expect(estimateStage("generate", reqs, { exactInputTokens: [100, 200] }).inputTokens).toBe(300);
-  });
-
-  it("an approval is bound to the exact requests: no id, a stale id and a changed request are all refused", () => {
-    const e = estimateStage("generate", reqs);
+  it("an approval is bound to the exact requests", () => {
+    const e = estimateStage("generate-a", reqs);
     expect(() => assertApproved(reqs, undefined, e)).toThrow(/approve/);
     expect(() => assertApproved(reqs, "deadbeef", e)).toThrow(/not for these requests/);
     expect(() => assertApproved(reqs, e.id, e)).not.toThrow();
-    const changed = buildGenerationRequests([lessonRow({ grammar: "Something else" }), lessonRow({ code: "Z10", seq: 9 })]);
-    expect(fingerprint(changed)).not.toBe(e.id);
+    const changed = buildPassARequests([lessonRow({ grammar: "Something else" }), lessonRow({ code: "Z10", seq: 9 })]);
     expect(() => assertApproved(changed, e.id, e)).toThrow(/not for these requests/);
   });
 
-  it("hard stop at €10 even with an approval", () => {
-    const many = buildGenerationRequests(Array.from({ length: 600 }, (_, i) => lessonRow({ code: `Z${i}`, seq: i })));
-    const e = estimateStage("generate", many);
+  it("hard stop at €10, even with an approval", () => {
+    const many = buildPassARequests(Array.from({ length: 200 }, (_, i) => lessonRow({ code: `Z${i}`, seq: i })));
+    const e = estimateStage("generate-a", many);
     expect(e.ceilingEur).toBeGreaterThan(10);
     expect(() => assertApproved(many, e.id, e)).toThrow(/Hard stop/);
   });
 
-  it("the whole 90-lesson run stays under the cap pass by pass", () => {
-    const lessons = Array.from({ length: 90 }, (_, i) => lessonRow({ code: `Z${i}`, seq: i }));
-    const gen = estimateStage("generate", buildGenerationRequests(lessons));
-    const review = estimateStage("review", buildReviewRequests(lessons, new Map(lessons.map((l) => [l.code, validContent()]))));
-    expect(gen.ceilingEur).toBeLessThan(10);
-    expect(review.ceilingEur).toBeLessThan(10);
-    expect(gen.expectedEur + review.expectedEur).toBeLessThan(10);
+  it("the tranche plan fits: 30 lessons per pass stays under €10 in the worst case for all three passes", () => {
+    const lessons = Array.from({ length: 30 }, (_, i) => lessonRow({ code: `Z${i}`, seq: i }));
+    const a = estimateStage("generate-a", buildPassARequests(lessons));
+    const b = estimateStage("generate-b", buildPassBRequests(lessons, new Map(lessons.map((l) => [l.code, validPassA()]))));
+    const r = estimateStage("review", buildReviewRequests(lessons, new Map(lessons.map((l) => [l.code, validLesson()]))));
+    for (const e of [a, b, r]) expect(e.ceilingEur, e.stage).toBeLessThan(10);
+  });
+
+  it("the Opus pass is the one that limits a tranche: 45 lessons fit under €10, 60 do not", () => {
+    const review = (n: number) => estimateStage("review", buildReviewRequests(Array.from({ length: n }, (_, i) => lessonRow({ code: `Z${i}`, seq: i })), new Map(Array.from({ length: n }, (_, i) => [`Z${i}`, validLesson()] as const))));
+    expect(review(45).ceilingEur).toBeLessThan(10);
+    expect(review(60).ceilingEur).toBeGreaterThan(10);
   });
 });
 
@@ -114,12 +130,12 @@ describe("runBatch", () => {
         yield* lines;
       })(),
     );
-    return { client: { messages: { batches: { create, retrieve, results } } } as BatchClient, create, retrieve, results };
+    return { client: { messages: { batches: { create, retrieve, results } } } as BatchClient, create, retrieve };
   }
-  const reqs = buildGenerationRequests([lessonRow()]);
+  const reqs = buildPassARequests([lessonRow()]);
 
-  it("submits once, records the batch id, polls until it has ended, then reads every result", async () => {
-    const { client, create, retrieve } = fakeClient(["in_progress", "in_progress", "ended"], [succeeded("generate-Z9", validContent())]);
+  it("submits once, records the batch id first, polls until it has ended, then reads every result", async () => {
+    const { client, create, retrieve } = fakeClient(["in_progress", "in_progress", "ended"], [succeeded("generate-a-Z9", validPassA())]);
     const onSubmitted = vi.fn();
     const sleep = vi.fn(async () => {});
     const out = await runBatch(client, reqs, { onSubmitted, sleep });
@@ -130,157 +146,199 @@ describe("runBatch", () => {
     expect(out.lines).toHaveLength(1);
   });
 
-  it("resuming a run never submits (and so never pays for) the batch again", async () => {
-    const { client, create, retrieve } = fakeClient(["ended"], []);
+  it("resuming never submits (and so never pays for) the batch again", async () => {
+    const { client, create } = fakeClient(["ended"], []);
     const onSubmitted = vi.fn();
     const out = await runBatch(client, reqs, { batchId: "batch_old", onSubmitted });
     expect(create).not.toHaveBeenCalled();
     expect(onSubmitted).not.toHaveBeenCalled();
-    expect(retrieve).toHaveBeenCalledWith("batch_old");
     expect(out.batchId).toBe("batch_old");
   });
 });
 
-describe("parseGeneration", () => {
+describe("reading generation results", () => {
   const lessons = [lessonRow(), lessonRow({ code: "W3.2", seq: 40 })];
 
-  it("reads valid lessons, keyed by lesson code (also dotted ones)", () => {
-    const out = parseGeneration(lessons, [succeeded("generate-Z9", validContent()), succeeded("generate-W3_2", validContent())]);
-    expect([...out.results.keys()]).toEqual(["Z9", "W3.2"]);
-    expect(out.failures).toEqual([]);
-    expect(out.usages).toHaveLength(2);
+  it("pass A and pass B results are read by lesson code and combined into one valid lesson", () => {
+    const a = parsePassA(lessons, [succeeded("generate-a-Z9", validPassA()), succeeded("generate-a-W3_2", validPassA())]);
+    const b = parsePassB([lessons[0]], [succeeded("generate-b-Z9", validPassB())]);
+    expect([...a.results.keys()]).toEqual(["Z9", "W3.2"]);
+    const lesson = combineLesson(a.results.get("Z9")!, b.results.get("Z9")!);
+    expect(Object.keys(lesson)).toEqual([...PARTS]);
+  });
+
+  it("pass A's answer is not accepted as pass B's", () => {
+    expect(parsePassB([lessons[0]], [succeeded("generate-b-Z9", validPassA())]).failures[0].reason).toMatch(/did not match/);
   });
 
   it.each([
-    ["invalid JSON", succeeded("generate-Z9", "not json at all"), /not valid JSON/],
-    ["the wrong shape", succeeded("generate-Z9", { cards: "nope" }), /did not match/],
-    ["a cut-off answer", succeeded("generate-Z9", validContent(), { stop_reason: "max_tokens" }), /cut off/],
-    ["a refusal", succeeded("generate-Z9", validContent(), { stop_reason: "refusal" }), /declined/],
-    ["an errored request", { custom_id: "generate-Z9", result: { type: "errored", error: { type: "overloaded_error" } } } as BatchResultLine, /request failed/],
-    ["an expired request", { custom_id: "generate-Z9", result: { type: "expired" } } as BatchResultLine, /expired/],
-  ])("records %s as a failure for that lesson only", (_name, line, reason) => {
-    const out = parseGeneration([lessons[0]], [line]);
+    ["invalid JSON", succeeded("generate-a-Z9", "not json"), /not valid JSON/],
+    ["the wrong shape", succeeded("generate-a-Z9", { goal: "nope" }), /did not match/],
+    ["a cut-off answer", succeeded("generate-a-Z9", validPassA(), { stop_reason: "max_tokens" }), /cut off/],
+    ["a refusal", succeeded("generate-a-Z9", validPassA(), { stop_reason: "refusal" }), /declined/],
+    ["an errored request", { custom_id: "generate-a-Z9", result: { type: "errored", error: { type: "overloaded_error" } } } as BatchResultLine, /request failed/],
+    ["an expired request", { custom_id: "generate-a-Z9", result: { type: "expired" } } as BatchResultLine, /expired/],
+  ])("%s is a failure for that lesson only", (_n, line, reason) => {
+    const out = parsePassA([lessons[0]], [line]);
     expect(out.results.size).toBe(0);
     expect(out.failures).toEqual([{ code: "Z9", reason: expect.stringMatching(reason) }]);
   });
 
-  it("a lesson with no result at all is a failure", () => {
-    expect(parseGeneration(lessons, [succeeded("generate-Z9", validContent())]).failures).toEqual([{ code: "W3.2", reason: "no result came back" }]);
+  it("a lesson with no result at all is a failure; usage is still counted for the ones that came back", () => {
+    const out = parsePassA(lessons, [succeeded("generate-a-Z9", validPassA())]);
+    expect(out.failures).toEqual([{ code: "W3.2", reason: "no result came back" }]);
+    expect(out.usages).toHaveLength(1);
   });
 });
 
 describe("parseReview", () => {
-  const lessons = [lessonRow()];
-  const contents = new Map([["Z9", validContent()]]);
-  const ids = itemIds("Z9", validContent());
+  const lesson = validLesson();
+  const contents = new Map([["Z1", lesson]]);
+  const ids = itemIdsOf("Z1", lesson);
 
-  it("returns one verdict per item, in item order", () => {
-    const out = parseReview(lessons, contents, [succeeded("review-Z9", { verdicts: [...ids].reverse().map((id) => verdict(id)) })]);
-    expect(out.results.get("Z9")!.map((v) => v.id)).toEqual(ids);
-    expect(ids).toHaveLength(27);
+  it("one verdict per item, in lesson order, whatever order the reviewer used", () => {
+    const out = parseReview([row], contents, [succeeded("review-Z1", { verdicts: [...allOk(lesson)].reverse() })]);
+    expect(out.results.get("Z1")!.map((v) => v.id)).toEqual(ids);
+    expect(ids).toHaveLength(93);
   });
 
   it("an item the reviewer skipped is not an ok: it waits for a human", () => {
-    const out = parseReview(lessons, contents, [succeeded("review-Z9", { verdicts: ids.slice(1).map((id) => verdict(id)) })]);
-    const first = out.results.get("Z9")![0];
-    expect(first).toMatchObject({ id: ids[0], status: "needs-human" });
-    expect(first.reason).toMatch(/no verdict/);
+    const out = parseReview([row], contents, [succeeded("review-Z1", { verdicts: allOk(lesson).slice(1) })]);
+    expect(out.results.get("Z1")![0]).toMatchObject({ id: ids[0], status: "needs-human" });
   });
 
-  it("ignores ids that were never asked about, and takes the first of a repeated id", () => {
-    const out = parseReview(lessons, contents, [
-      succeeded("review-Z9", { verdicts: [verdict("Z9#c99"), verdict(ids[0], "needs-human", { reason: "first" }), verdict(ids[0], "ok"), ...ids.slice(1).map((id) => verdict(id))] }),
-    ]);
-    const verdicts = out.results.get("Z9")!;
-    expect(verdicts).toHaveLength(27);
-    expect(verdicts[0]).toMatchObject({ status: "needs-human", reason: "first" });
+  it("ignores ids that were never asked about and takes the first of a repeated id", () => {
+    const out = parseReview([row], contents, [succeeded("review-Z1", { verdicts: [verdict("Z1#nope"), verdict(ids[0], "needs-human", { reason: "first" }), ...allOk(lesson)] })]);
+    expect(out.results.get("Z1")).toHaveLength(93);
+    expect(out.results.get("Z1")![0]).toMatchObject({ status: "needs-human", reason: "first" });
   });
 
-  it("a failed review request leaves the lesson without verdicts (nothing is approved)", () => {
-    const out = parseReview(lessons, contents, [succeeded("review-Z9", "garbage")]);
+  it("a failed review leaves the lesson without verdicts", () => {
+    const out = parseReview([row], contents, [succeeded("review-Z1", "garbage")]);
     expect(out.results.size).toBe(0);
-    expect(out.failures[0].code).toBe("Z9");
+    expect(out.failures[0].code).toBe("Z1");
   });
 });
 
-describe("mergeLesson: only ok and fixed items get through", () => {
-  const code = "Z9";
-  const content = validContent();
-  const ids = itemIds(code, content);
+describe("mergeLesson: a lesson publishes only when every item is settled", () => {
+  const lesson = validLesson();
 
-  it("everything ok: all 15 cards and 12 questions are approved, in order", () => {
-    const review = mergeLesson(code, content, allOk(code));
+  it("everything ok: publishable, every part ok", () => {
+    const review = mergeLesson(row, lesson, allOk());
+    expect(review.publishable).toBe(true);
     expect(review.lessonIssues).toEqual([]);
-    expect(review.items.every((i) => i.status === "ok" && i.final)).toBe(true);
-    const rows = approvedRows([review]);
-    expect(rows.cards).toHaveLength(15);
-    expect(rows.questions).toHaveLength(12);
-    expect(rows.cards.slice(0, 3).map((c) => c.position)).toEqual([1, 2, 3]);
-    expect(rows.cards[0]).toMatchObject({ session_code: "Z9", kind: "word", tier: "core", de: "Kaffee", article: "der" });
-    expect(rows.cards[14]).toMatchObject({ tier: "bonus" });
+    expect(review.items).toHaveLength(93);
+    expect(Object.values(review.partStatus).every((s) => s === "ok")).toBe(true);
+    expect(Object.keys(review.partStatus)).toEqual([...PARTS]);
   });
 
-  it("needs-human items are listed with their reason but never inserted", () => {
-    const verdicts = allOk(code).map((v) => (v.id === ids[2] ? verdict(v.id, "needs-human", { reason: "Brot: the example is odd for this level" }) : v));
-    const review = mergeLesson(code, content, verdicts);
-    const item = review.items[2];
-    expect(item).toMatchObject({ status: "needs-human", final: null, reason: "Brot: the example is odd for this level" });
-    const rows = approvedRows([review]);
-    expect(rows.cards).toHaveLength(14);
-    expect(rows.cards.some((c) => c.de === "Brot")).toBe(false);
+  it("one needs-human item blocks the lesson (and only its part), with the reason kept", () => {
+    const review = mergeLesson(row, lesson, withVerdict("Z1#reading.q2", { status: "needs-human", reason: "Two answers are possible" }));
+    expect(review.publishable).toBe(false);
+    expect(review.partStatus.reading).toBe("needs-human");
+    expect(review.partStatus.listening).toBe("ok");
+    expect(review.items.find((i) => i.id === "Z1#reading.q2")).toMatchObject({ status: "needs-human", final: null, reason: "Two answers are possible" });
+    expect(() => publishPayload(review)).toThrow(/not publishable/);
   });
 
-  it("a fixed card is inserted in its corrected form, keeping its tier", () => {
-    const fixedCard = generatedCardSchema.parse({ ...content.cards[0], article: "der", plural: "die Kaffees", example: "Ich trinke gern Kaffee.", tier: "bonus" });
-    const verdicts = allOk(code).map((v) => (v.id === ids[0] ? verdict(v.id, "fixed", { reason: "Example was ungrammatical", fixed_card: fixedCard }) : v));
-    const review = mergeLesson(code, content, verdicts);
-    expect(review.items[0]).toMatchObject({ status: "fixed", reason: "Example was ungrammatical" });
-    expect((review.items[0].original as { example: string }).example).toBe("Ich trinke einen Kaffee."); // the original is kept for the review file
-    expect(approvedRows([review]).cards[0]).toMatchObject({ example: "Ich trinke gern Kaffee.", tier: "core" });
+  it("a correction is applied to the lesson, keeps the original for the review file, and marks the part fixed", () => {
+    const fixed = { ...lesson.vocabulary.words[0], plural: "die Kaffees (selten)" };
+    const review = mergeLesson(row, lesson, withVerdict("Z1#vocabulary.w01", { status: "fixed", reason: "plural note", fixed_json: JSON.stringify(fixed) }));
+    expect(review.publishable).toBe(true);
+    const item = review.items.find((i) => i.id === "Z1#vocabulary.w01")!;
+    expect(item.status).toBe("fixed");
+    expect((item.original as { plural: string }).plural).toBe("die Kaffees");
+    expect(review.final.vocabulary.words[0].plural).toBe("die Kaffees (selten)");
+    expect(lesson.vocabulary.words[0].plural).toBe("die Kaffees");
+    expect(review.partStatus.vocabulary).toBe("fixed");
   });
 
-  it("a fix without a replacement item, or whose replacement still fails an automatic check, waits for a human", () => {
-    const noPayload = allOk(code).map((v) => (v.id === ids[0] ? verdict(v.id, "fixed", { reason: "changed it" }) : v));
-    expect(mergeLesson(code, content, noPayload).items[0]).toMatchObject({ status: "needs-human", final: null });
-    const stillBroken = generatedCardSchema.parse({ ...content.cards[0], de: "der Kaffee" });
-    const bad = allOk(code).map((v) => (v.id === ids[0] ? verdict(v.id, "fixed", { reason: "x", fixed_card: stillBroken }) : v));
-    const item = mergeLesson(code, content, bad).items[0];
+  it("a fix with no replacement, an invalid replacement, or one that still fails a check waits for a human", () => {
+    const none = mergeLesson(row, lesson, withVerdict("Z1#goal", { status: "fixed", reason: "changed it" }));
+    expect(none.items[0]).toMatchObject({ status: "needs-human", final: null });
+    const invalid = mergeLesson(row, lesson, withVerdict("Z1#goal", { status: "fixed", reason: "x", fixed_json: '{"can_do": 5}' }));
+    expect(invalid.items[0].status).toBe("needs-human");
+    const stillBroken = mergeLesson(row, lesson, withVerdict("Z1#vocabulary.w01", { status: "fixed", reason: "x", fixed_json: JSON.stringify({ ...lesson.vocabulary.words[0], de: "der Kaffee" }) }));
+    const item = stillBroken.items.find((i) => i.id === "Z1#vocabulary.w01")!;
     expect(item.status).toBe("needs-human");
     expect(item.reason).toMatch(/still fails an automatic check/);
+    expect(stillBroken.publishable).toBe(false);
   });
 
-  it("the reviewer's ok is not enough when a mechanical check fails (a gap question without a gap)", () => {
-    const broken = validContent();
-    broken.questions[6] = { ...broken.questions[6], prompt: "Ich trinke Kaffee." };
-    const review = mergeLesson(code, broken, allOk(code, broken));
-    const item = review.items.find((i) => i.id === "Z9#q07")!;
+  it("the reviewer's ok is not enough when a mechanical check fails", () => {
+    const broken = validLesson();
+    broken.exercises.items[0] = { ...broken.exercises.items[0], prompt: "Ich trinke Kaffee." }; // gap fill without a gap
+    const review = mergeLesson(row, broken, allOk(broken));
+    const item = review.items.find((i) => i.id === "Z1#exercises.01")!;
     expect(item.status).toBe("needs-human");
     expect(item.reason).toMatch(/reviewer said ok, but an automatic check failed/);
-    expect(approvedRows([review]).questions).toHaveLength(11);
+    expect(review.publishable).toBe(false);
   });
 
-  it("a lesson with the wrong number of cards is reported, and its good items are still handled one by one", () => {
-    const short = validContent();
-    short.cards.pop();
-    const review = mergeLesson(code, short, allOk(code, short));
-    expect(review.lessonIssues.join(" ")).toMatch(/Expected 10 core \+ 5 bonus/);
+  it("a lesson of the wrong shape cannot publish even if every item is ok", () => {
+    const short = validLesson();
+    short.exercises.items.pop();
+    const review = mergeLesson(row, short, allOk(short));
+    expect(review.items.every((i) => i.status === "ok")).toBe(true);
+    expect(review.lessonIssues.join(" ")).toMatch(/exercise|19/);
+    expect(review.publishable).toBe(false);
   });
 
-  it("summarises the counts for the review file", () => {
-    const verdicts = allOk(code).map((v, i) => (i === 0 ? verdict(v.id, "needs-human") : i === 1 ? verdict(v.id, "fixed", { fixed_card: content.cards[1] }) : v));
-    expect(summarize([mergeLesson(code, content, verdicts)])).toEqual({ lessons: 1, items: 27, ok: 25, fixed: 1, needsHuman: 1, lessonsWithIssues: [] });
+  it("an item with no verdict waits for a human", () => {
+    const review = mergeLesson(row, lesson, allOk().slice(1));
+    expect(review.items[0]).toMatchObject({ id: "Z1#goal", status: "needs-human" });
+  });
+
+  it("summarises counts and which lessons can publish", () => {
+    const good = mergeLesson(row, lesson, allOk());
+    const blocked = mergeLesson(lessonRow({ code: "Z2", seq: 1 }), lesson, withVerdict("Z1#goal", { status: "needs-human" }).map((v) => ({ ...v, id: v.id.replace("Z1", "Z2") })));
+    expect(summarize([good, blocked])).toEqual({ lessons: 2, items: 186, ok: 185, fixed: 0, needsHuman: 1, publishable: ["Z1"], blocked: ["Z2"] });
+  });
+});
+
+describe("publishPayload", () => {
+  const review = mergeLesson(row, validLesson(), allOk());
+  const payload = publishPayload(review);
+
+  it("carries all 14 parts, each with its review status", () => {
+    expect(Object.keys(payload.parts)).toEqual([...PARTS]);
+    expect(Object.values(payload.part_status).every((s) => s === "ok")).toBe(true);
+    expect(payload.code).toBe("Z1");
+  });
+
+  it("derives the flashcards (18 words as word cards, 5 phrases as speaking cards) and the question pools", () => {
+    expect(payload.cards.filter((c) => c.kind === "word")).toHaveLength(18);
+    expect(payload.cards.filter((c) => c.kind === "say")).toHaveLength(5);
+    expect(payload.cards[0]).toMatchObject({ session_code: "Z1", kind: "word", tier: "core", position: 1, de: "Kaffee", article: "der" });
+    expect(payload.cards.at(-1)).toMatchObject({ kind: "say", article: null, plural: null, position: 23 });
+    const parts = (p: string) => payload.questions.filter((q) => q.part === p).length;
+    expect({ warmup: parts("warmup"), exercises: parts("exercises"), reading: parts("reading"), listening: parts("listening"), exam: parts("exam") }).toEqual({ warmup: 3, exercises: 19, reading: 5, listening: 5, exam: 10 });
+  });
+
+  it("uses the corrected content, not the original", () => {
+    const fixed = { ...validLesson().vocabulary.words[0], en: "coffee (drink)" };
+    const r = mergeLesson(row, validLesson(), withVerdict("Z1#vocabulary.w01", { status: "fixed", reason: "x", fixed_json: JSON.stringify(fixed) }));
+    expect(publishPayload(r).cards[0]).toMatchObject({ en: "coffee (drink)" });
+    expect(publishPayload(r).part_status.vocabulary).toBe("fixed");
   });
 });
 
 describe("costReport", () => {
   it("records the actual cost at Batch prices next to the estimate", () => {
-    const reqs = buildGenerationRequests([lessonRow()]);
-    const estimate = estimateStage("generate", reqs);
-    const outcome = parseGeneration([lessonRow()], [succeeded("generate-Z9", validContent())]);
-    const report = costReport("generate", estimate, "batch_1", outcome, 1);
-    expect(report).toMatchObject({ stage: "generate", batchId: "batch_1", requests: 1, failedRequests: 0, inputTokens: 2000, outputTokens: 4000 });
-    expect(report.actualUsd).toBeCloseTo((2000 * 2 + 4000 * 10) / 1e6 / 2, 4);
+    const reqs = buildPassARequests([lessonRow()]);
+    const estimate = estimateStage("generate-a", reqs);
+    const outcome = parsePassA([lessonRow()], [succeeded("generate-a-Z9", validPassA())]);
+    const report = costReport("generate-a", estimate, "batch_1", outcome, 1);
+    expect(report).toMatchObject({ stage: "generate-a", batchId: "batch_1", requests: 1, failedRequests: 0, inputTokens: 5000, outputTokens: 9000 });
+    expect(report.actualUsd).toBeCloseTo((5000 * 2 + 9000 * 10) / 1e6 / 2, 4);
     expect(report.actualEur).toBeCloseTo(report.actualUsd * estimate.usdToEur, 3);
-    expect(report.ceilingEur).toBeGreaterThan(report.estimatedEur);
+  });
+});
+
+describe("items match what the reviewer is asked about", () => {
+  it("the review prompt lists exactly the lesson's items", () => {
+    const reqs = buildReviewRequests([row], new Map([["Z1", validLesson()]]));
+    const text = reqs[0].params.messages[0].content;
+    for (const item of enumerateItems("Z1", validLesson())) expect(text).toContain(`"id":"${item.id}"`);
   });
 });

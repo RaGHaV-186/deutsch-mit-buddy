@@ -23,9 +23,9 @@ describe("curriculum rows (data/curriculum.ts -> curriculum_sessions)", () => {
     expect(rows.filter((r) => r.code === "SAT").length).toBeGreaterThan(1);
   });
 
-  it("only lessons teach words: 10 core + 5 bonus", () => {
+  it("only lessons teach words: 12 core + 6 bonus", () => {
     for (const r of rows) expect(r.word_target).toBe(r.kind === "lesson" ? WORDS_PER_LESSON : 0);
-    expect(WORDS_PER_LESSON).toBe(15);
+    expect(WORDS_PER_LESSON).toBe(18);
   });
 
   it("every row fits the table's column rules", () => {

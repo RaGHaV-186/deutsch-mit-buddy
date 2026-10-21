@@ -5,6 +5,10 @@ import { beforeEach, describe, expect, it, vi, type Mock } from "vitest";
 // Runs public/sw.js in a sandbox with a fake Cache Storage and fetch, and fires the events the browser would.
 const source = readFileSync("public/sw.js", "utf8");
 const ORIGIN = "https://buddy.test";
+// Cache names carry the worker's VERSION; read it so bumping the version does not break these tests.
+const VERSION = /const VERSION = "([^"]+)"/.exec(source)![1];
+const PAGES = `buddy-pages-${VERSION}`;
+const STATIC = `buddy-static-${VERSION}`;
 
 class FakeCache {
   entries = new Map<string, Response>();
@@ -126,7 +130,7 @@ describe("service worker", () => {
     await sw.fetchEvent(nav("/cards"));
     next = failing;
     await sw.fetchEvent(nav("/home"));
-    expect([...(await caches_(sw, "buddy-pages-v1")).entries.keys()]).toEqual([]);
+    expect([...(await caches_(sw, PAGES)).entries.keys()]).toEqual([]);
   });
 
   it("a slow network falls back to the saved page", async () => {
@@ -148,9 +152,9 @@ describe("service worker", () => {
     await sw.waitFor("message", {
       data: { type: "warm", pages: ["/home", "/cards", "/api/secret"], assets: [`${ORIGIN}/_next/static/media/font.woff2`, "https://evil.test/_next/static/x.js", `${ORIGIN}/login`] },
     });
-    const pages = await caches_(sw, "buddy-pages-v1");
+    const pages = await caches_(sw, PAGES);
     expect([...pages.entries.keys()].sort()).toEqual(["/cards", "/home"]); // not /api/secret
-    const files = [...(await caches_(sw, "buddy-static-v1")).entries.keys()].sort();
+    const files = [...(await caches_(sw, STATIC)).entries.keys()].sort();
     expect(files).toEqual(["/_next/static/chunks/cards-abc.js", "/_next/static/css/app.css", "/_next/static/media/font.woff2"]);
   });
 
@@ -159,12 +163,12 @@ describe("service worker", () => {
     await sw.waitFor("message", { data: { type: "warm", pages: ["/cards"], assets: [] } });
     online = false;
     await expect(sw.waitFor("message", { data: { type: "warm", pages: ["/cards"], assets: [] } })).resolves.toBeUndefined();
-    expect((await caches_(sw, "buddy-pages-v1")).entries.has("/cards")).toBe(true);
+    expect((await caches_(sw, PAGES)).entries.has("/cards")).toBe(true);
   });
 
   it("activation removes caches from older versions, and only ours", async () => {
     const sw = setup(network);
-    sw.stores.set("buddy-static-v0", new FakeCache());
+    sw.stores.set("buddy-static-v0", new FakeCache()); // an older version
     sw.stores.set("somebody-elses", new FakeCache());
     await sw.waitFor("activate", {});
     expect([...sw.stores.keys()]).toEqual(["somebody-elses"]);

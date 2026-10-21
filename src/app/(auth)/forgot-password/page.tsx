@@ -1,12 +1,13 @@
 import { getTranslations } from "next-intl/server";
+import { AuthLayout } from "@/components/auth/AuthLayout";
 import { ForgotPasswordForm } from "@/components/AuthForms";
-import { AuthShell } from "@/components/ui";
 
 export default async function ForgotPasswordPage() {
   const t = await getTranslations("Forgot");
+  const b = await getTranslations("Buddy");
   return (
-    <AuthShell title={t("title")} subtitle={t("subtitle")}>
+    <AuthLayout title={t("title")} line={b("noProblem.de")} helper={b("noProblem.en")} intro={t("subtitle")} pose="curious">
       <ForgotPasswordForm />
-    </AuthShell>
+    </AuthLayout>
   );
 }

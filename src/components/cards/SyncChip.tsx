@@ -31,7 +31,7 @@ export function SyncChip({ sync, pending, onRetry }: { sync: SyncUi; pending: nu
       <span aria-hidden="true">{sync === "offline" ? "○" : sync === "syncing" ? "…" : attention ? "!" : "✓"}</span>
       {text}
       {sync === "failed" ? (
-        <button type="button" onClick={onRetry} className="font-bold text-der underline underline-offset-2 dark:text-sky-300">
+        <button type="button" onClick={onRetry} className="font-bold text-text underline underline-offset-2">
           {t("retry")}
         </button>
       ) : null}

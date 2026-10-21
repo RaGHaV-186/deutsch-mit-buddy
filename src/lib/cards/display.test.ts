@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-import { theme } from "@/theme";
 import { articleColor, articleTone, buildCardView, splitAnswerPrompt } from "./display";
 import { makeCard } from "./test-helpers";
 
@@ -9,11 +8,11 @@ const say = makeCard({ kind: "say", article: null, en: "My name is Raghav.", de:
 const answer = makeCard({ kind: "answer", article: null, en: "Answer (in a café): Was möchten Sie?", de: "Ich möchte einen Tee, bitte.", plural: null, example: null, exampleEn: null, tip: "der → einen" });
 
 describe("article colours", () => {
-  it("uses the theme: der blue, die red, das green, none grey", () => {
-    expect(articleColor(articleTone("der"))).toBe(theme.article.der);
-    expect(articleColor(articleTone("die"))).toBe("#C3303A");
-    expect(articleColor(articleTone("das"))).toBe("#1E8A4C");
-    expect(articleColor(articleTone(null))).toBe(theme.article.none);
+  it("point at the design tokens (so they follow light and dark mode); words without an article are muted", () => {
+    expect(articleColor(articleTone("der"))).toBe("var(--der)");
+    expect(articleColor(articleTone("die"))).toBe("var(--die)");
+    expect(articleColor(articleTone("das"))).toBe("var(--das)");
+    expect(articleColor(articleTone(null))).toBe("var(--muted)");
   });
 });
 

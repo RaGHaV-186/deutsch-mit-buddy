@@ -1,42 +1,42 @@
 import { useTranslations } from "next-intl";
-import type { ArticleTone, CardView } from "@/lib/cards/display";
+import { ArticleWord } from "@/components/ds";
+import type { CardView } from "@/lib/cards/display";
+import { cx } from "@/components/ds/cx";
 
-const toneVar = (tone: ArticleTone) => `var(--article-${tone})`;
-
-/** One side of a card: `front` while guessing, `back` after the flip. Layout follows CLAUDE.md "Card format". */
+/** The white body of a flashcard: the front while guessing, the full back after the flip. Layout follows CLAUDE.md "Card format". */
 export function CardFace({ view, side }: { view: CardView; side: "front" | "back" }) {
   const t = useTranslations("Cards");
   const { front, back } = view;
 
   if (side === "front") {
+    const isWord = Boolean(front.article) || front.text.length <= 22;
     return (
-      <div className="flex flex-col items-center gap-3 text-center">
-        {front.label ? <p className="text-sm font-bold uppercase tracking-wide text-muted">{t(`label.${front.label}`)}</p> : null}
-        <p className="font-heading text-3xl font-bold leading-snug" style={front.article ? { color: toneVar(front.article) } : undefined}>
-          {front.article && front.article !== "none" ? `${front.article} ` : ""}
-          {front.text}
+      <div className="flex flex-col items-center gap-3">
+        {front.label ? <p className="text-label uppercase text-muted">{t(`label.${front.label}`)}</p> : null}
+        <p className={cx("break-words font-extrabold", isWord ? "text-word" : "text-title")} data-testid="front">
+          {front.article && front.article !== "none" ? <ArticleWord article={front.article} word={front.text} /> : front.text}
         </p>
         {front.context ? <p className="text-muted">({front.context})</p> : null}
       </div>
     );
   }
 
-  const color = { color: toneVar(back.article) };
+  const isNoun = Boolean(back.articleText);
+  const headword = back.german.length <= 22 || isNoun;
   return (
-    <div className="flex w-full flex-col items-center gap-3 text-center">
-      <p className="font-heading text-3xl font-bold leading-snug" style={color} data-testid="german">
-        {back.articleText ? `${back.articleText} ` : ""}
-        {back.german}
+    <div className="flex w-full flex-col items-center gap-3">
+      <p className={cx("break-words font-extrabold", headword ? "text-word" : "text-title")} data-testid="german">
+        <ArticleWord article={back.articleText} word={back.german} />
       </p>
-      {back.forms ? <p className="text-lg text-muted">{back.forms}</p> : null}
-      {back.english ? <p className="text-xl">{back.english}</p> : null}
+      {back.forms ? <p className="text-[16px] text-muted">{isNoun ? t("plural", { forms: back.forms }) : back.forms}</p> : null}
+      {back.english ? <p className="text-[22px] font-bold leading-snug">{back.english}</p> : null}
       {back.example ? (
-        <div className="mt-1 flex flex-col gap-0.5 border-t border-foreground/15 pt-3">
-          <p className="text-lg">{back.example}</p>
-          {back.exampleEn ? <p className="text-muted">{back.exampleEn}</p> : null}
+        <div className="flex flex-col gap-0.5">
+          <p className="text-[18px] font-medium">{back.example}</p>
+          {back.exampleEn ? <p className="text-[15px] text-muted">{back.exampleEn}</p> : null}
         </div>
       ) : null}
-      {back.tip ? <p className="mt-1 rounded-lg bg-foreground/5 px-3 py-2 text-sm text-muted">{back.tip}</p> : null}
+      {back.tip ? <p className="mt-1 rounded-field bg-bg px-3 py-2 text-caption text-muted">{back.tip}</p> : null}
     </div>
   );
 }

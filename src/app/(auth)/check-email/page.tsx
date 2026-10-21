@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { AuthShell, linkClass } from "@/components/ui";
+import { AuthLayout } from "@/components/auth/AuthLayout";
+import { PillButton } from "@/components/ds";
 
 export default async function CheckEmailPage({
   searchParams,
@@ -8,14 +8,15 @@ export default async function CheckEmailPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const t = await getTranslations("CheckEmail");
+  const b = await getTranslations("Buddy");
   const { type } = await searchParams;
   return (
-    <AuthShell title={t("title")}>
+    <AuthLayout title={t("title")} line={b("mailForYou.de")} helper={b("mailForYou.en")} pose="happy">
       <p>{type === "reset" ? t("reset") : t("confirm")}</p>
       <p className="text-muted">{t("spam")}</p>
-      <Link href="/login" className={linkClass}>
+      <PillButton href="/login" variant="cushion" fullWidth>
         {t("toLogin")}
-      </Link>
-    </AuthShell>
+      </PillButton>
+    </AuthLayout>
   );
 }

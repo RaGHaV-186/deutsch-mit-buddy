@@ -1,28 +1,32 @@
-import Image from "next/image";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { LegalLinks, primaryButtonClass, secondaryButtonClass } from "@/components/ui";
+import { BuddyMascot, CoatHeader, PillButton, Screen } from "@/components/ds";
+import { LegalLinks } from "@/components/ui";
 
+/** Signed-out landing: Buddy greets you in the coat block, sign up and log in below. */
 export default function Home() {
   const t = useTranslations("Home");
   return (
-    <>
-      <main className="flex flex-1 flex-col items-center justify-center gap-6 px-4 py-12 text-center">
-        <Image src="/buddy/buddy-happy.svg" alt={t("buddyAlt")} width={240} height={244} priority />
-        <h1 className="font-heading text-4xl font-bold sm:text-5xl">{t("greeting")}</h1>
-        <p className="max-w-md text-lg text-muted">{t("tagline")}</p>
-        <div className="flex w-full max-w-xs flex-col gap-3">
-          <Link href="/signup" className={`${primaryButtonClass} text-center`}>
+    <Screen as="div">
+      <main className="flex flex-1 flex-col">
+        <CoatHeader>
+          <div className="flex flex-col items-center gap-4 text-center">
+            <BuddyMascot pose="happy" size={160} priority />
+            <h1 className="text-display">{t("greeting")}</h1>
+            <p className="max-w-xs text-body text-on-coat-muted">{t("tagline")}</p>
+          </div>
+        </CoatHeader>
+        <div className="flex flex-col gap-3 px-[22px] pt-8">
+          <PillButton href="/signup" fullWidth>
             {t("signUp")}
-          </Link>
-          <Link href="/login" className={`${secondaryButtonClass} text-center`}>
+          </PillButton>
+          <PillButton href="/login" variant="cushion" fullWidth>
             {t("logIn")}
-          </Link>
+          </PillButton>
         </div>
       </main>
-      <footer className="px-4 py-6">
+      <footer className="px-[22px] pb-[max(24px,env(safe-area-inset-bottom))] pt-8">
         <LegalLinks />
       </footer>
-    </>
+    </Screen>
   );
 }

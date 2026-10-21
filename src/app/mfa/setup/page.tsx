@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { TotpSetup } from "@/components/MfaForms";
-import { AuthShell } from "@/components/ui";
+import { AuthLayout } from "@/components/auth/AuthLayout";
 import { requireSession } from "@/lib/auth/guard";
 import { safeNextPath } from "@/lib/auth/next-path";
 import { createClient } from "@/lib/supabase/server";
@@ -21,9 +21,10 @@ export default async function MfaSetupPage({
   if ((data?.totp?.length ?? 0) > 0) redirect("/mfa/verify");
 
   const t = await getTranslations("Mfa");
+  const b = await getTranslations("Buddy");
   return (
-    <AuthShell title={t("setupTitle")} subtitle={t("setupIntro")}>
+    <AuthLayout title={t("setupTitle")} line={b("oneMoreStep.de")} helper={b("oneMoreStep.en")} intro={t("setupIntro")} pose="listening">
       <TotpSetup next={next || undefined} />
-    </AuthShell>
+    </AuthLayout>
   );
 }

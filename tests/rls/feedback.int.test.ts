@@ -40,7 +40,7 @@ describe("feedback", () => {
     const r = await a.aal1.from("feedback").select("*");
     expect(r.data).toEqual([]);
     expect((await anon().from("feedback").select("*")).error?.code).toBe("42501");
-    const { count } = await admin.from("feedback").select("*", { count: "exact", head: true });
+    const { count } = await admin.from("feedback").select("*", { count: "exact", head: true }).in("user_id", [a.id, b.id]);
     expect(count).toBe(2);
   });
 });

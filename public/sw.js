@@ -4,7 +4,7 @@
  * Card data itself lives in IndexedDB, not here. This worker never caches the API, login pages or anything else.
  * Bump VERSION to drop every cached file on the next visit. */
 
-const VERSION = "v1";
+const VERSION = "v2";
 const STATIC = "buddy-static-" + VERSION;
 const PAGES = "buddy-pages-" + VERSION;
 const APP_PAGES = ["/home", "/cards"];
@@ -34,7 +34,7 @@ function cacheable(res) {
 }
 
 function isStaticAsset(pathname) {
-  return pathname.startsWith("/_next/static/") || pathname.startsWith("/buddy/") || pathname.startsWith("/icons/");
+  return pathname.startsWith("/_next/static/") || pathname.startsWith("/buddy/");
 }
 
 function offlineResponse() {

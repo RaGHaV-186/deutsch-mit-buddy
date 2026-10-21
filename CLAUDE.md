@@ -24,7 +24,7 @@ Owner: Raghav (admin). Domain: deutschmitbuddy.de. Repo: github.com/RaGHaV-186/d
 - Offline sync conflicts: the latest review timestamp wins.
 - Commit messages: short, imperative, one slice step each.
 - UI strings go through the i18n layer (English now, German later).
-- Design tokens in one theme file: der #2457C5 (blue), die #C3303A (red), das #1E8A4C (green); fonts Atkinson Hyperlegible (body) + Fraunces (headings); light + dark mode; mobile first, 16px side gutter.
+- Design tokens live in one theme file (`src/theme.ts`, mirrored in `src/app/globals.css`) and follow `docs/DESIGN_BRIEF.md`: coat/surface/tint colours, der/die/das article colours (light + dark), font Plus Jakarta Sans; light + dark mode with a manual override; mobile first.
 - Next.js 16: `middleware` is now `proxy.ts`; request APIs (cookies, headers, params) are async. Check node_modules/next/dist/docs when unsure.
 
 ## Teaching format Buddy follows (every lesson, Z1 → C1)
@@ -33,3 +33,11 @@ One section at a time; wait for the learner's answer. Hint first, never write th
 
 ## Card format (keep exactly)
 Front: English (word cards) or "Say it in German" / "Answer out loud" (speaking cards). Back: coloured article + word (der blue / die red / das green / none grey), plural or verb forms line, English meaning, example sentence + English, tip line. Buttons: Play word, Play sentence, Slow; Again / Hard / Got it / Easy. Modes: Words / Speaking / Words + Speaking. Direction: English → German (default) or German → English.
+
+## Design
+- All UI work follows `docs/DESIGN_BRIEF.md` (it replaces any earlier design instructions). Work phase by phase as the brief says.
+- Reference images are in `docs/design/`.
+- Mascot assets (poses, app icons, glyph) are in `public/buddy/`.
+- Auth and 2FA logic must never be changed by design work (restyle the screens only).
+- Every new slice must build its screens from the components in `@/components/ds` and follow `docs/DESIGN_BRIEF.md` (tokens, layout, states). Don't add one-off styles or hard-coded colours.
+- Game-layer UI (treats, level, streak, combo) is already built and hidden behind `NEXT_PUBLIC_GAME_LAYER` (off by default); slice 10 only needs to supply the data and turn the flag on. Never show mock numbers in production.

@@ -4,7 +4,11 @@
     "tagline": "Your German teacher, from zero to C1. Wuff!",
     "buddyAlt": "Buddy, a blue-grey and white dog with a red collar",
     "signUp": "Sign up free",
-    "logIn": "Log in"
+    "logIn": "Log in",
+    "dayLabel": "Day {day} · {code}",
+    "continue": "Continue",
+    "preview": "Preview data: the game layer is switched on only for testing.",
+    "reviewCards": "Review cards"
   },
   "Meta": {
     "title": "Deutsch mit Buddy",
@@ -21,6 +25,125 @@
     "legalPrivacy": "Datenschutz",
     "legalTerms": "Terms",
     "home": "Home"
+  },
+  "Theme": {
+    "label": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "Ds": {
+    "nav": {
+      "label": "Main",
+      "home": "Home",
+      "learn": "Learn",
+      "cards": "Cards",
+      "play": "Play",
+      "me": "Me",
+      "newActivity": "New activity"
+    },
+    "close": "Close",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "codeGroup": "6-digit code",
+    "codeDigit": "Digit {n} of {total}",
+    "treats": "+{count} treats",
+    "streak": {
+      "title": "{count}-day streak",
+      "days": {
+        "mo": "Mo",
+        "di": "Di",
+        "mi": "Mi",
+        "do": "Do",
+        "fr": "Fr",
+        "sa": "Sa",
+        "so": "So"
+      },
+      "dayNames": {
+        "mo": "Monday",
+        "di": "Tuesday",
+        "mi": "Wednesday",
+        "do": "Thursday",
+        "fr": "Friday",
+        "sa": "Saturday",
+        "so": "Sunday"
+      },
+      "status": {
+        "done": "done",
+        "today": "today, not done yet",
+        "upcoming": "upcoming",
+        "missed": "missed"
+      }
+    },
+    "level": {
+      "title": "Level {level}",
+      "toNext": "{count} treats to Level {next}",
+      "progressLabel": "Progress to level {next}",
+      "total": "{count} treats"
+    },
+    "due": {
+      "cards": "{count, plural, one {card due} other {cards due}}",
+      "review": "Review"
+    },
+    "states": {
+      "loading": "Loading",
+      "retry": "Retry",
+      "error": "Something went wrong",
+      "dismiss": "Dismiss"
+    },
+    "progress": {
+      "label": "Progress"
+    },
+    "sheetClose": "Close options"
+  },
+  "Buddy": {
+    "welcomeBack": {
+      "de": "Schön, dich zu sehen!",
+      "en": "Good to see you!"
+    },
+    "letsStart": {
+      "de": "Lass uns anfangen!",
+      "en": "Let's get started!"
+    },
+    "oneMoreStep": {
+      "de": "Nur noch ein Schritt",
+      "en": "Just one more step"
+    },
+    "noProblem": {
+      "de": "Kein Problem!",
+      "en": "No problem!"
+    },
+    "mailForYou": {
+      "de": "Post für dich!",
+      "en": "You've got mail!"
+    },
+    "almostThere": {
+      "de": "Fast geschafft!",
+      "en": "Almost there!"
+    },
+    "soonYourTurn": {
+      "de": "Bald bist du dran!",
+      "en": "Your turn soon!"
+    },
+    "home": {
+      "theme": "Heute geht's um {theme}!",
+      "letsGo": "Los geht's!",
+      "stepByStep": "Schritt für Schritt!",
+      "youCanDoIt": "Du schaffst das!",
+      "wuff": "Wuff! Weiter geht's!",
+      "review": "Heute wiederholen wir!",
+      "test": "Zeit für einen Test!",
+      "catchUp": "Heute holen wir auf!"
+    }
+  },
+  "Auth": {
+    "strength": {
+      "label": "Password strength",
+      "short": "Too short",
+      "fair": "Okay",
+      "strong": "Strong"
+    },
+    "mfaCodeHelper": "Enter the 6-digit code from your authenticator app"
   },
   "Errors": {
     "invalid_input": "Please check what you typed and try again.",
@@ -52,7 +175,8 @@
     "submit": "Create account",
     "google": "Sign up with Google",
     "haveAccount": "Already have an account?",
-    "logIn": "Log in"
+    "logIn": "Log in",
+    "strengthNote": "Length only; we also check it against known data leaks."
   },
   "LogIn": {
     "title": "Welcome back",
@@ -131,7 +255,7 @@
   },
   "Cards": {
     "title": "Cards",
-    "backHome": "Home",
+    "backHome": "Back to Home",
     "due": "{count, plural, one {# card to review} other {# cards to review}}",
     "fresh": "{count, plural, =0 {No new cards} one {# new card} other {# new cards}} today",
     "waiting": "{count, plural, one {# more new card waits for tomorrow} other {# more new cards wait for tomorrow}}",
@@ -178,7 +302,8 @@
     "done": {
       "title": "Wuff! Session done",
       "body": "{count, plural, one {You answered # card.} other {You answered # cards.}}",
-      "back": "Back to cards"
+      "back": "Back to cards",
+      "treats": "+{count} treats"
     },
     "sync": {
       "synced": "Saved",
@@ -203,7 +328,17 @@
       "working": "Importing…",
       "result": "Imported {imported} cards ({seen} already seen, {fresh} new). {alreadyThere} were already there, {duplicatesSkipped} repeats skipped.",
       "forbidden": "Only the admin can import the seed deck."
-    }
+    },
+    "options": {
+      "button": "Options",
+      "title": "Options",
+      "done": "Done",
+      "modeNote": "Changing what to practise starts a fresh queue from today's cards."
+    },
+    "combo": "{count} in a row",
+    "progress": "Session progress",
+    "close": "End session",
+    "plural": "Plural · {forms}"
   },
   "Feedback": {
     "button": "Send feedback",
@@ -212,6 +347,7 @@
     "placeholder": "A bug, an idea, something confusing…",
     "send": "Send",
     "cancel": "Cancel",
+    "close": "Close",
     "thanks": "Thank you! Buddy wags his tail.",
     "error": "Couldn't send that. Please try again."
   },
@@ -277,5 +413,23 @@
         }
       }
     }
+  },
+  "Me": {
+    "appearance": "Appearance",
+    "help": "Help",
+    "legal": "Legal",
+    "account": "Account",
+    "logOut": {
+      "button": "Log out",
+      "title": "Log out?",
+      "body": "Buddy removes the saved cards from this phone. Reviews that haven't synced yet are kept and sent after you log in again.",
+      "confirm": "Log out",
+      "cancel": "Stay logged in"
+    }
+  },
+  "Soon": {
+    "title": "Coming soon",
+    "line": "Kommt bald!",
+    "message": "This part of Buddy is still being built."
   }
 }

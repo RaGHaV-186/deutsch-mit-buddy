@@ -12,7 +12,7 @@ export default async function SignUpPage() {
   // Full: Google and password sign-ups would both be refused by the database, so offer the waitlist instead.
   if (open === false) redirect("/waitlist?full=1");
   return (
-    <AuthLayout title={t("title")} line={b("letsStart.de")} helper={b("letsStart.en")} intro={t("subtitle")} pose="talking">
+    <AuthLayout title={t("title")} line={b("letsStart.de")} helper={b("letsStart.en")} intro={t("subtitle")} formTitle={t("submit")} pose="talking">
       <SignUpForm googleEnabled />
     </AuthLayout>
   );

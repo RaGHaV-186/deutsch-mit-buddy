@@ -17,7 +17,7 @@ export function CardsHub({ counts, onStart, onOptions }: Props) {
   const total = counts ? counts.due + counts.fresh : 0;
   return (
     // min-h = the loaded height (title, counts, buttons), so the content below doesn't jump when the deck arrives.
-    <CoatHeader className="min-h-[293px]">
+    <CoatHeader className="min-h-[293px] desk:min-h-[260px]">
       <div className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 flex-col gap-1">
           <h1 className="text-display">{t("title")}</h1>
@@ -30,7 +30,7 @@ export function CardsHub({ counts, onStart, onOptions }: Props) {
             </>
           ) : null}
         </div>
-        <BuddyMascot pose={counts && total === 0 ? "resting" : "happy"} size={58} className="mt-1 shrink-0" priority />
+        <BuddyMascot pose={counts && total === 0 ? "resting" : "happy"} size={58} className="mt-1 shrink-0 desk:mt-0 desk:h-auto desk:w-[130px]" priority />
       </div>
       {counts ? (
         <div className="mt-5 flex gap-3">

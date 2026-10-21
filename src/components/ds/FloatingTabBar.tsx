@@ -19,16 +19,18 @@ interface Props {
   badges?: Partial<Record<TabId, boolean>>;
   /** "fixed" sits at the bottom of the screen (default); "static" is for showcases. */
   position?: "fixed" | "static";
+  className?: string;
 }
 
 /** Detached pill with the five tabs. The active tab shows its label on a belly-pink pill; the others are icon-only. */
-export function FloatingTabBar({ active, badges = {}, position = "fixed" }: Props) {
+export function FloatingTabBar({ active, badges = {}, position = "fixed", className }: Props) {
   const t = useTranslations("Ds.nav");
   return (
     <div
       className={cx(
-        "pointer-events-none inset-x-0 bottom-0 z-40 mx-auto w-full max-w-[480px] px-4 max-[359px]:px-2",
+        "pointer-events-none inset-x-0 bottom-0 z-40 mx-auto w-full max-w-[480px] px-4 max-[359px]:px-2 tab:max-w-[560px]",
         position === "fixed" ? "fixed" : "relative",
+        className,
       )}
       style={{ paddingBottom: position === "fixed" ? "max(28px, calc(env(safe-area-inset-bottom) + 12px))" : 0 }}
     >

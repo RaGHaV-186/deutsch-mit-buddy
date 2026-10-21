@@ -13,6 +13,7 @@ export default async function OnboardingPage() {
 
   const t = await getTranslations("Onboarding");
   const b = await getTranslations("Buddy");
+  const d = await getTranslations("Desktop");
   const groups = groupByPhase().map((g) => ({
     phase: g.phase,
     options: g.points.map((p) => ({
@@ -21,7 +22,7 @@ export default async function OnboardingPage() {
     })),
   }));
   return (
-    <AuthLayout title={t("title")} line={b("letsStart.de")} helper={b("letsStart.en")} intro={t("intro")} pose="talking">
+    <AuthLayout formTitle={d("heading.onboarding")} title={t("title")} line={b("letsStart.de")} helper={b("letsStart.en")} intro={t("intro")} pose="talking">
       <OnboardingForm groups={groups} defaultSeq={STARTING_POINTS[0].seq} needsTerms={!profile?.terms_accepted_at} />
     </AuthLayout>
   );

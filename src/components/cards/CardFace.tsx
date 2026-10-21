@@ -13,7 +13,7 @@ export function CardFace({ view, side }: { view: CardView; side: "front" | "back
     return (
       <div className="flex flex-col items-center gap-3">
         {front.label ? <p className="text-label uppercase text-muted">{t(`label.${front.label}`)}</p> : null}
-        <p className={cx("break-words font-extrabold", isWord ? "text-word" : "text-title")} data-testid="front">
+        <p className={cx("break-words font-extrabold", isWord ? "text-word desk:text-[56px]" : "text-title desk:text-[32px]")} data-testid="front">
           {front.article && front.article !== "none" ? <ArticleWord article={front.article} word={front.text} /> : front.text}
         </p>
         {front.context ? <p className="text-muted">({front.context})</p> : null}
@@ -25,7 +25,7 @@ export function CardFace({ view, side }: { view: CardView; side: "front" | "back
   const headword = back.german.length <= 22 || isNoun;
   return (
     <div className="flex w-full flex-col items-center gap-3">
-      <p className={cx("break-words font-extrabold", headword ? "text-word" : "text-title")} data-testid="german">
+      <p className={cx("break-words font-extrabold", headword ? "text-word desk:text-[56px]" : "text-title desk:text-[32px]")} data-testid="german">
         <ArticleWord article={back.articleText} word={back.german} />
       </p>
       {back.forms ? <p className="text-[16px] text-muted">{isNoun ? t("plural", { forms: back.forms }) : back.forms}</p> : null}

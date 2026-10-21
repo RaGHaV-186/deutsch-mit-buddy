@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { BuddyMascot, EmptyState, FloatingTabBar, PillButton, Screen, TreatChip } from "@/components/ds";
+import { BuddyMascot, EmptyState, AppNav, PillButton, Screen, TreatChip } from "@/components/ds";
 import { buildQueue, type Direction, type Mode } from "@/lib/cards/queue";
 import type { SnapshotCard } from "@/lib/cards/schema";
 import { useDeck } from "@/lib/cards/use-deck";
@@ -129,6 +129,7 @@ export function CardsApp({ userId, isAdmin, gameLayer }: { userId: string; isAdm
           onAnswer={answerAndRemember}
           onFinish={finish}
           onOptions={() => setOptionsOpen(true)}
+          status={<SyncChip pill sync={deck.sync} pending={deck.pending} onRetry={() => void syncDeck(true)} />}
         />
         {options}
       </>
@@ -137,7 +138,7 @@ export function CardsApp({ userId, isAdmin, gameLayer }: { userId: string; isAdm
 
   if (view.name === "done") {
     return (
-      <main className="mx-auto flex min-h-dvh w-full max-w-[480px] flex-col items-center justify-center gap-4 px-5 py-10 text-center">
+      <main className="mx-auto flex min-h-dvh w-full max-w-[480px] flex-col items-center justify-center gap-4 px-5 py-10 text-center tab:max-w-[560px] desk:max-w-[480px]">
         <BuddyMascot pose="happy" size={140} priority />
         <h1 className="text-display">{t("done.title")}</h1>
         <p className="text-[18px]">{t("done.body", { count: view.answered })}</p>
@@ -161,7 +162,7 @@ export function CardsApp({ userId, isAdmin, gameLayer }: { userId: string; isAdm
     <>
       <Screen withTabBar>
         <CardsHub counts={ready ? queue.counts : null} onStart={start} onOptions={() => setOptionsOpen(true)} />
-        <div className="flex flex-col gap-4 px-5 pt-5">
+        <div className="flex flex-col gap-4 px-5 pt-5 desk:px-0 desk:pt-6">
           <SyncChip sync={deck.sync} pending={deck.pending} onRetry={() => void syncDeck(true)} />
           {deck.status === "no-storage" ? (
             <p role="alert">{t("empty.storage")}</p>
@@ -173,7 +174,7 @@ export function CardsApp({ userId, isAdmin, gameLayer }: { userId: string; isAdm
           {isAdmin && deck.status !== "no-storage" ? <ImportSeedButton onImported={() => void syncDeck(true)} /> : null}
         </div>
       </Screen>
-      <FloatingTabBar active="cards" />
+      <AppNav active="cards" />
       {options}
     </>
   );

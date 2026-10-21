@@ -12,7 +12,7 @@ import {
   signUpAction,
 } from "@/app/(auth)/actions";
 import { EMAIL_ERRORS, PASSWORD_ERRORS, routeError } from "@/lib/auth/error-routing";
-import { CheckboxField, Divider, PasswordField, PasswordStrength, PillButton, StickyActions, TextField } from "./ds";
+import { CheckboxField, Divider, GoogleIcon, PasswordField, PasswordStrength, PillButton, StickyActions, TextField } from "./ds";
 import { FormError, SubmitButton, useBuddyReaction, useErrorMessage, useRetainedValue } from "./FormParts";
 import { TurnstileField } from "./TurnstileField";
 import { linkClass } from "./ui";
@@ -34,6 +34,11 @@ export function GoogleButton({ label }: { label: string }) {
         variant="cushion"
         fullWidth
         loading={busy}
+        icon={
+          <span className="hidden desk:inline-flex">
+            <GoogleIcon />
+          </span>
+        }
         onClick={async () => {
           setBusy(true);
           setError(undefined);
@@ -81,14 +86,14 @@ export function SignUpForm({ googleEnabled }: { googleEnabled: boolean }) {
   const routed = routeError(state?.error, { email: EMAIL_ERRORS, password: PASSWORD_ERRORS });
   useBuddyReaction(Boolean(state?.error));
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 desk:gap-5">
       {googleEnabled ? (
         <>
           <GoogleButton label={t("google")} />
           <Divider>{c("or")}</Divider>
         </>
       ) : null}
-      <form action={action} className="flex flex-col gap-4">
+      <form action={action} className="flex flex-col gap-4 desk:gap-5">
         <FormError code={routed.banner} />
         <TextField label={t("displayName")} name="displayName" maxLength={40} autoComplete="given-name" {...name} />
         <TextField
@@ -144,10 +149,10 @@ export function LoginForm({ next, initialError }: { next?: string; initialError?
   const routed = routeError(error, { email: EMAIL_ERRORS, password: ["invalid_credentials"] });
   useBuddyReaction(Boolean(error));
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 desk:gap-5">
       <GoogleButton label={t("google")} />
       <Divider>{c("or")}</Divider>
-      <form action={action} className="flex flex-col gap-4">
+      <form action={action} className="flex flex-col gap-4 desk:gap-5">
         <FormError code={routed.banner} />
         {next ? <input type="hidden" name="next" value={next} /> : null}
         <TextField
@@ -200,7 +205,7 @@ export function ForgotPasswordForm() {
   const routed = routeError(state?.error, { email: [...EMAIL_ERRORS, "invalid_input"] });
   useBuddyReaction(Boolean(state?.error));
   return (
-    <form action={action} className="flex flex-col gap-4">
+    <form action={action} className="flex flex-col gap-4 desk:gap-5">
       <FormError code={routed.banner} />
       <TextField
         label={c("email")}
@@ -229,7 +234,7 @@ export function ResetPasswordForm() {
   const routed = routeError(state?.error, { password: [...PASSWORD_ERRORS, "invalid_input"] });
   useBuddyReaction(Boolean(state?.error));
   return (
-    <form action={action} className="flex flex-col gap-4">
+    <form action={action} className="flex flex-col gap-4 desk:gap-5">
       <FormError code={routed.banner} />
       <div className="flex flex-col gap-2">
         <PasswordField
@@ -271,7 +276,7 @@ export function WaitlistForm() {
     );
   }
   return (
-    <form action={action} className="flex flex-col gap-4">
+    <form action={action} className="flex flex-col gap-4 desk:gap-5">
       <FormError code={routed.banner} />
       <TextField
         label={c("email")}

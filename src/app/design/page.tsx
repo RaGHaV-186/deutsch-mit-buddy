@@ -54,7 +54,7 @@ function Pair({ children }: { children: ReactNode }) {
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       {MODES.map((mode) => (
-        <div key={mode} data-theme={mode} className="theme-scope flex flex-col gap-4 rounded-[24px] p-5 ring-1 ring-track">
+        <div key={mode} data-theme={mode} className="theme-scope phone-frame flex flex-col gap-4 rounded-[24px] p-5 ring-1 ring-track">
           <p className="text-label uppercase text-muted">{mode}</p>
           {children}
         </div>
@@ -358,6 +358,26 @@ export default function DesignPage() {
           <MeView name="Raghav" tabBar="static" />
         </div>
       </Section>
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-headline">Desktop layouts (1024px and up)</h2>
+        <p className="text-caption text-muted">
+          Everything above is the phone layout (these boxes switch the desktop variants off). The desktop layouts are real full-page screens: open one in a wide window and
+          it responds like the app does (a window of 768 to 1023px shows the phone layout centred at 560px). Add ?theme=dark or ?theme=light, and ?game=0 to hide the game layer.
+        </p>
+        <ul className="flex flex-wrap gap-2">
+          {["landing", "login", "signup", "home", "learn", "play", "me", "flashcard"].map((screen) => (
+            <li key={screen} className="flex gap-1">
+              <a href={`/design/desktop/${screen}?theme=light`} className="rounded-full bg-surface px-4 py-2 text-[14px] font-bold shadow-cushion">
+                {screen} · light
+              </a>
+              <a href={`/design/desktop/${screen}?theme=dark&game=0`} className="rounded-full bg-surface px-4 py-2 text-[14px] font-bold shadow-cushion">
+                dark · no game
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <Section title="Flashcard" note="Front, back, and the back with the combo chip (game layer). Audio sits on the coat strip.">
         {[

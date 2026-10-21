@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { BuddyMascot, CoatHeader, EmptyState, FloatingTabBar, Screen, SpeechBubble, type TabId } from "@/components/ds";
+import { BuddyMascot, CoatHeader, AppNav, Screen, SpeechBubble, type TabId } from "@/components/ds";
 
 /** A tab whose screen isn't built yet (Learn and Play): the coat header, "coming soon", and the tab bar so the app stays navigable. */
 export function TabPlaceholder({ tab }: { tab: Extract<TabId, "learn" | "play"> }) {
@@ -7,21 +7,21 @@ export function TabPlaceholder({ tab }: { tab: Extract<TabId, "learn" | "play"> 
   const soon = useTranslations("Soon");
   return (
     <>
-      <Screen withTabBar>
+      <Screen withTabBar width="narrow">
         <CoatHeader compact>
           <div className="flex items-start justify-between gap-3">
             <div className="flex min-w-0 flex-col items-start gap-3">
-              <h1 className="text-display">{nav(tab)}</h1>
+              <h1 className="text-display desk:text-[40px]">{nav(tab)}</h1>
               <SpeechBubble>{soon("line")}</SpeechBubble>
             </div>
-            <BuddyMascot pose="resting" size={72} className="mt-1 shrink-0" priority />
+            <BuddyMascot pose="resting" size={72} className="mt-1 shrink-0 desk:h-auto desk:w-[120px]" priority />
           </div>
         </CoatHeader>
-        <div className="px-5 pt-6">
-          <EmptyState pose="curious" message={`${soon("title")}. ${soon("message")}`} />
+        <div className="px-5 pt-6 desk:px-0 desk:pt-8">
+          <p className="mx-auto max-w-[28ch] py-10 text-center text-[16px] font-semibold">{`${soon("title")}. ${soon("message")}`}</p>
         </div>
       </Screen>
-      <FloatingTabBar active={tab} />
+      <AppNav active={tab} />
     </>
   );
 }

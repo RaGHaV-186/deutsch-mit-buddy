@@ -4,6 +4,7 @@ import { readdirSync } from "node:fs";
 import { join } from "node:path";
 import { screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { AppChromeProvider, AppNav } from "@/components/ds";
 import { renderWithIntl } from "@/test-utils";
 import messages from "../../../messages/en.json";
 
@@ -68,7 +69,7 @@ describe("HomeView with the game layer off (what production shows)", () => {
 
   it("the tab bar has Home active", () => {
     view();
-    expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("aria-current", "page");
+    expect(screen.getAllByRole("link", { name: "Home" })[0]).toHaveAttribute("aria-current", "page");
   });
 
   it("without a name or a lesson it still works: plain Hallo!, no lesson block", () => {
@@ -136,7 +137,7 @@ describe("HomePage (server component)", () => {
     expect(screen.queryByRole("button", { name: "Log out" })).toBeNull();
     expect(screen.queryByRole("button", { name: "Send feedback" })).toBeNull();
     expect(screen.queryByRole("radiogroup", { name: "Theme" })).toBeNull();
-    expect(screen.getByRole("link", { name: "Me" })).toHaveAttribute("href", "/me");
+    expect(screen.getAllByRole("link", { name: "Me" })[0]).toHaveAttribute("href", "/me");
   });
 });
 
@@ -146,7 +147,7 @@ describe("HomeSkeleton", () => {
     expect(screen.getByRole("status", { name: "Loading" })).toBeInTheDocument();
     expect(container.querySelector("header")!.className).toContain("rounded-coat");
     expect(container.querySelectorAll(".animate-pulse").length).toBeGreaterThan(5);
-    expect(screen.getByRole("link", { name: "Cards" })).toHaveAttribute("href", "/cards");
+    expect(screen.getAllByRole("link", { name: "Cards" })[0]).toHaveAttribute("href", "/cards");
     expect(container.textContent).not.toMatch(/Hallo|streak|treats/i);
   });
 
@@ -163,7 +164,41 @@ describe("tab placeholders", () => {
     expect(screen.getByRole("heading", { level: 1, name: label })).toBeInTheDocument();
     expect(container.querySelector("header")).toHaveTextContent("„Kommt bald!“");
     expect(container).toHaveTextContent("Coming soon");
-    expect(screen.getByRole("link", { name: label })).toHaveAttribute("aria-current", "page");
+    expect(screen.getAllByRole("link", { name: label })[0]).toHaveAttribute("aria-current", "page");
+  });
+});
+
+describe("desktop sidebar (shown from 1024px, hidden on phones by CSS)", () => {
+  it("has the four rows, Cards with its due badge, and Me pinned with the learner's initial", async () => {
+    renderWithIntl(
+      <AppChromeProvider value={{ initial: "R", due: 49 }}>
+        <AppNav active="cards" />
+      </AppChromeProvider>,
+    );
+    const sidebar = document.querySelector("aside")!;
+    expect(sidebar.className).toContain("hidden");
+    expect(sidebar.className).toContain("desk:flex");
+    const links = Array.from(sidebar.querySelectorAll("a")).map((a) => [a.textContent, a.getAttribute("href")]);
+    expect(links).toEqual([
+      ["Home", "/home"],
+      ["Learn", "/learn"],
+      ["Cards4949 cards to review", "/cards"],
+      ["Play", "/play"],
+      ["RMeSettings", "/me"],
+    ]);
+    expect(sidebar.querySelector('a[aria-current="page"]')).toHaveTextContent("Cards");
+    expect(sidebar).toHaveTextContent("Deutsch mit Buddy");
+    // The phone tab bar is still there; CSS hides it on desktop.
+    expect(document.querySelector("nav.desk\\:hidden, div.desk\\:hidden nav")).not.toBeNull();
+  });
+
+  it("no badge when nothing is due", () => {
+    renderWithIntl(
+      <AppChromeProvider value={{ initial: "", due: 0 }}>
+        <AppNav active="home" />
+      </AppChromeProvider>,
+    );
+    expect(document.querySelector("aside")).not.toHaveTextContent("cards to review");
   });
 });
 

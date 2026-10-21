@@ -1,4 +1,6 @@
 export { ArticleWord } from "./ArticleWord";
+export { AppChromeProvider, useAppChrome, type AppChrome } from "./app-chrome";
+export { AppNav } from "./AppNav";
 export { BlazeNotch } from "./BlazeNotch";
 export { BuddyMascot, BUDDY_POSES, type BuddyPose } from "./BuddyMascot";
 export { CoatHeader } from "./CoatHeader";
@@ -18,6 +20,7 @@ export { PillButton, type PillVariant } from "./PillButton";
 export { Screen } from "./Screen";
 export { SegmentedControl } from "./SegmentedControl";
 export { SelectField } from "./SelectField";
+export { Sidebar } from "./Sidebar";
 export { StickyActions } from "./StickyActions";
 export { SpeechBubble } from "./SpeechBubble";
 export { Splash } from "./Splash";

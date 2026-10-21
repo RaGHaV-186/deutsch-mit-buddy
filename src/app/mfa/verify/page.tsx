@@ -24,9 +24,10 @@ export default async function MfaVerifyPage({
 
   const t = await getTranslations("Mfa");
   const b = await getTranslations("Buddy");
+  const d = await getTranslations("Desktop");
   const a = await getTranslations("Auth");
   return (
-    <AuthLayout title={t("verifyTitle")} line={b("oneMoreStep.de")} helper={a("mfaCodeHelper")} intro={t("verifyIntro")} pose="listening">
+    <AuthLayout formTitle={d("heading.mfaVerify")} title={t("verifyTitle")} line={b("oneMoreStep.de")} helper={a("mfaCodeHelper")} intro={t("verifyIntro")} pose="listening">
       <MfaVerifyForm next={next || undefined} />
       <form action={signOutAction} className="flex justify-center">
         <PillButton type="submit" variant="ghost" size={44}>

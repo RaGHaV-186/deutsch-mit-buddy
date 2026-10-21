@@ -58,15 +58,17 @@ describe("BlazeNotch and CoatHeader", () => {
     const header = container.querySelector("header")!;
     expect(header.className).toContain("rounded-coat");
     expect(header.className).toContain("bg-coat");
-    expect(header.style.paddingTop).toContain("safe-area-inset-top");
-    expect(header.style.paddingBottom).toBe("44px");
+    expect(header.className).toContain("pt-[max(58px,calc(env(safe-area-inset-top)+20px))]");
+    expect(header.className).toContain("pb-11");
+    // Desktop: a hero card in the content column.
+    expect(header.className).toContain("desk:rounded-hero");
     expect(screen.getByRole("heading", { name: "Hallo" })).toBeInTheDocument();
     expect(container.querySelector("polygon")).not.toBeNull();
   });
 
   it("compact variant has less bottom padding", () => {
     const { container } = render(<CoatHeader compact>x</CoatHeader>);
-    expect(container.querySelector("header")!.style.paddingBottom).toBe("36px");
+    expect(container.querySelector("header")!.className).toContain("pb-9");
   });
 });
 

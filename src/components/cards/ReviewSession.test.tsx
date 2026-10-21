@@ -51,7 +51,7 @@ describe("layout (focus mode)", () => {
     expect(bar).toHaveAttribute("aria-valuenow", "0");
     expect(bar.querySelector("svg")).not.toBeNull(); // the paw marker
     expect(screen.getByText("2 left")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Options" })).toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: "Options" })[0]).toBeInTheDocument();
     expect(screen.queryByRole("navigation", { name: "Main" })).toBeNull();
     expect(container.querySelector(".rounded-coat-card")).not.toBeNull(); // the coat strip of the card
   });
@@ -73,7 +73,7 @@ describe("layout (focus mode)", () => {
     const onOptions = vi.fn();
     const onFinish = vi.fn();
     session({ onOptions, onFinish });
-    fireEvent.click(screen.getByRole("button", { name: "Options" }));
+    fireEvent.click(screen.getAllByRole("button", { name: "Options" })[0]);
     expect(onOptions).toHaveBeenCalledOnce();
     fireEvent.click(screen.getByRole("button", { name: "End session" }));
     expect(onFinish).toHaveBeenCalledWith(0, 0);

@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Cushion } from "./Cushion";
+import { cx } from "./cx";
 import { WedgeProgress } from "./WedgeProgress";
 
 const fmt = (n: number) => n.toLocaleString("en-US");
@@ -12,27 +13,31 @@ interface Props {
   nextAt: number;
   /** Treats where this level began. Default: 500 below nextAt. */
   levelStart?: number;
+  className?: string;
 }
 
 /** "Level 3", the treat count and a wedge bar to the next level. */
-export function LevelCard({ level, treats, nextAt, levelStart = nextAt - 500 }: Props) {
+export function LevelCard({ level, treats, nextAt, levelStart = nextAt - 500, className }: Props) {
   const t = useTranslations("Ds.level");
   const span = Math.max(1, nextAt - levelStart);
   // The bar and its label both count inside this level: "240 / 500". The running total is the caption under the title.
   const inLevel = Math.min(span, Math.max(0, treats - levelStart));
   return (
-    <Cushion radius={28} className="flex h-full flex-col justify-between gap-2.5 p-[18px]">
+    <Cushion radius={28} className={cx("flex h-full flex-col justify-between gap-2.5 p-[18px] desk:justify-start desk:gap-3 desk:p-6", className)}>
       <div className="flex items-start justify-between gap-2">
         <div>
           <h2 className="text-[16px] font-extrabold leading-tight">{t("title", { level })}</h2>
-          <p className="text-[12px] font-medium text-muted tabular">{t("total", { count: fmt(treats) })}</p>
+          <p className="text-[12px] font-medium text-muted tabular desk:hidden">{t("total", { count: fmt(treats) })}</p>
         </div>
         <p className="text-[12px] font-medium text-muted tabular">
           {fmt(inLevel)} / {fmt(span)}
         </p>
       </div>
       <WedgeProgress value={inLevel / span} height={12} label={t("progressLabel", { next: level + 1 })} />
-      <p className="text-[14px] font-medium text-muted tabular">{t("toNext", { count: fmt(Math.max(0, nextAt - treats)), next: level + 1 })}</p>
+      <p className="text-[14px] font-medium text-muted tabular">
+        <span className="desk:hidden">{t("toNext", { count: fmt(Math.max(0, nextAt - treats)), next: level + 1 })}</span>
+        <span className="hidden desk:inline">{t("deskCaption", { total: fmt(treats), count: fmt(Math.max(0, nextAt - treats)), next: level + 1 })}</span>
+      </p>
     </Cushion>
   );
 }

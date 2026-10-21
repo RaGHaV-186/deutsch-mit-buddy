@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
  */
 export function StickyActions({ children }: { children: ReactNode }) {
   return (
-    <div className="sticky bottom-0 z-10 -mx-[22px] flex flex-col gap-3 bg-bg px-[22px] pb-[max(16px,env(safe-area-inset-bottom))] pt-3">
+    <div className="sticky bottom-0 z-10 -mx-[22px] flex flex-col gap-3 bg-bg px-[22px] pb-[max(16px,env(safe-area-inset-bottom))] pt-3 desk:static desk:mx-0 desk:px-0 desk:pb-0 desk:pt-0">
       {children}
     </div>
   );

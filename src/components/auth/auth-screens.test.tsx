@@ -40,7 +40,8 @@ const layout = (children: React.ReactNode, over: Partial<React.ComponentProps<ty
     </AuthLayout>,
   );
 
-const pose = () => document.querySelector("header img")!.getAttribute("src")!;
+// Buddy himself (the app icon next to the name is a different image and only shows on desktop).
+const pose = () => document.querySelector('header img[src*="/buddy/buddy-"]:not([src*="icon"])')!.getAttribute("src")!;
 const submit = async (container: HTMLElement) => {
   await act(async () => {
     fireEvent.submit(container.querySelector("form")!);
@@ -65,7 +66,7 @@ describe("AuthLayout", () => {
     layout(<p>form here</p>);
     const header = document.querySelector("header")!;
     expect(header.className).toContain("rounded-coat");
-    expect(header.style.paddingBottom).toBe("36px"); // compact
+    expect(header.className).toContain("pb-9"); // compact
     expect(header.querySelector("polygon")).not.toBeNull(); // the blaze notch
     expect(screen.getByRole("heading", { level: 1, name: "Welcome back" })).toBeInTheDocument();
     expect(header).toHaveTextContent("„Schön, dich zu sehen!“");

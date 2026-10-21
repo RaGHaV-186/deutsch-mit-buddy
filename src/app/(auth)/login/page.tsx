@@ -12,11 +12,19 @@ export default async function LoginPage({
 }) {
   const t = await getTranslations("LogIn");
   const b = await getTranslations("Buddy");
+  const d = await getTranslations("Desktop");
   const params = await searchParams;
   const next = typeof params.next === "string" ? safeNextPath(params.next, "") : "";
   const error = typeof params.error === "string" && URL_ERRORS.has(params.error) ? params.error : undefined;
   return (
-    <AuthLayout title={t("title")} line={b("welcomeBack.de")} helper={b("welcomeBack.en")} pose="neutral">
+    <AuthLayout
+      title={t("title")}
+      line={b("welcomeBack.de")}
+      helper={b("welcomeBack.en")}
+      formTitle={t("submit")}
+      formSubtitle={d("loginSubtitle")}
+      pose="neutral"
+    >
       <LoginForm next={next || undefined} initialError={error} />
     </AuthLayout>
   );

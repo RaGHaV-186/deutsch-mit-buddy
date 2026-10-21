@@ -40,6 +40,8 @@
       "cards": "Cards",
       "play": "Play",
       "me": "Me",
+      "settings": "Settings",
+      "due": "{count, plural, one {# card to review} other {# cards to review}}",
       "newActivity": "New activity"
     },
     "close": "Close",
@@ -50,6 +52,7 @@
     "treats": "+{count} treats",
     "streak": {
       "title": "{count}-day streak",
+      "testDay": "Sunday is test day",
       "days": {
         "mo": "Mo",
         "di": "Di",
@@ -78,11 +81,13 @@
     "level": {
       "title": "Level {level}",
       "toNext": "{count} treats to Level {next}",
+      "deskCaption": "{total} treats · {count} to Level {next}",
       "progressLabel": "Progress to level {next}",
       "total": "{count} treats"
     },
     "due": {
       "cards": "{count, plural, one {card due} other {cards due}}",
+      "detail": "{count, plural, one {card due} other {cards due}} · {reviews} reviews, {fresh} new",
       "review": "Review"
     },
     "states": {
@@ -279,6 +284,12 @@
     },
     "flip": "Show answer",
     "flipHint": "Tap the card or press Space",
+    "gradeHintDesk": "Space to play · 1–4 to grade",
+    "prompt": {
+      "enDe": "Wie sagt man das auf Deutsch?",
+      "deEn": "What's that in English?",
+      "answer": "Und was antwortest du?"
+    },
     "grade": {
       "again": "Again",
       "hard": "Hard",
@@ -293,6 +304,8 @@
     "audio": {
       "word": "Play word",
       "sentence": "Play sentence",
+      "wordShort": "Word",
+      "sentenceShort": "Sentence",
       "slow": "Slow",
       "noVoice": "This device has no German voice installed, so audio can't play. Add one in your device's language settings.",
       "unsupported": "This browser can't play speech."
@@ -425,6 +438,19 @@
       "body": "Buddy removes the saved cards from this phone. Reviews that haven't synced yet are kept and sent after you log in again.",
       "confirm": "Log out",
       "cancel": "Stay logged in"
+    }
+  },
+  "Desktop": {
+    "tagline": "German from zero to C1, with your AI teacher dog.",
+    "loginSubtitle": "Pick up where you left off.",
+    "heading": {
+      "forgot": "Reset link",
+      "reset": "New password",
+      "checkEmail": "Check your email",
+      "waitlist": "Waitlist",
+      "mfaSetup": "Two-factor setup",
+      "mfaVerify": "Enter code",
+      "onboarding": "Your start"
     }
   },
   "Soon": {

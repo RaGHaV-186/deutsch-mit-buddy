@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { BuddyMascot, CoatHeader, Cushion, DocIcon, FloatingTabBar, Screen } from "@/components/ds";
+import { BuddyMascot, CoatHeader, Cushion, DocIcon, AppNav, Screen } from "@/components/ds";
 import { FeedbackButton } from "@/components/FeedbackButton";
 import { LogOutRow } from "@/components/me/LogOutRow";
 import { SettingsGroup, SettingsRow } from "@/components/me/SettingsList";
@@ -19,17 +19,17 @@ export function MeView({ name, tabBar = "fixed" }: Props) {
   const common = useTranslations("Common");
   return (
     <>
-      <Screen withTabBar={tabBar === "fixed"}>
+      <Screen withTabBar={tabBar === "fixed"} width="narrow">
         <CoatHeader compact>
           <div className="flex items-start justify-between gap-3">
             <div className="flex min-w-0 flex-col items-start gap-3">
-              <h1 className="text-display">{nav("me")}</h1>
+              <h1 className="text-display desk:text-[40px]">{nav("me")}</h1>
               {name ? <p className="text-headline text-on-coat-muted">{name}</p> : null}
             </div>
-            <BuddyMascot pose="happy" size={72} className="mt-1 shrink-0" priority />
+            <BuddyMascot pose="happy" size={72} className="mt-1 shrink-0 desk:h-auto desk:w-[120px]" priority />
           </div>
         </CoatHeader>
-        <div className="flex flex-col gap-6 px-5 pt-6">
+        <div className="flex flex-col gap-6 px-5 pt-6 desk:px-0 desk:pt-8">
           <section className="flex flex-col gap-2">
             <h2 className="px-1 text-label text-muted">{t("appearance")}</h2>
             <Cushion className="p-4">
@@ -49,7 +49,7 @@ export function MeView({ name, tabBar = "fixed" }: Props) {
           </SettingsGroup>
         </div>
       </Screen>
-      <FloatingTabBar active="me" position={tabBar} />
+      <AppNav active="me" position={tabBar} />
     </>
   );
 }

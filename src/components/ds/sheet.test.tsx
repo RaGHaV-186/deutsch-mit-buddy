@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { fireEvent, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { renderWithIntl } from "@/test-utils";
@@ -54,5 +55,12 @@ describe("TreatFloat", () => {
     const chip = screen.getByRole("status");
     expect(chip).toHaveTextContent("+10 treats");
     expect(chip.className).toContain("ds-float-up");
+  });
+});
+
+describe("sheet focus", () => {
+  it("has no focus ring around the sheet itself, on any screen size", () => {
+    const css = readFileSync("src/app/globals.css", "utf8");
+    expect(css).toMatch(/\.ds-sheet:focus-visible \{\s*outline: none;\s*\}/);
   });
 });

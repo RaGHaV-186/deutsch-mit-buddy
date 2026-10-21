@@ -68,7 +68,7 @@ describe("curriculum content tables", () => {
     });
 
     it(`${table}: a member cannot insert, update or delete`, async () => {
-      const row = table === "curriculum_sessions" ? session(9100) : table === "card_templates" ? template({ de: "Tee", en: "tea" }) : question({ prompt: "x?" });
+      const row: Record<string, unknown> = table === "curriculum_sessions" ? session(9100) : table === "card_templates" ? template({ de: "Tee", en: "tea" }) : question({ prompt: "x?" });
       expect((await a.aal2.from(table).insert(row)).error?.code).toBe("42501");
       expect((await a.aal2.from(table).update({ created_at: new Date().toISOString() }).gte("created_at", "2000-01-01")).error?.code).toBe("42501");
       expect((await a.aal2.from(table).delete().gte("created_at", "2000-01-01")).error?.code).toBe("42501");

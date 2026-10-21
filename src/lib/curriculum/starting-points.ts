@@ -18,7 +18,8 @@ export function findStartingPoint(seq: number): StartingPoint | undefined {
   return STARTING_POINTS.find((p) => p.seq === seq);
 }
 
-export const PHASE_ORDER: Session["phase"][] = ["zero", "A1", "A2", "B1", "exam"];
+// B2 and C1 come last; they only show up in the picker once the plan has lessons for them.
+export const PHASE_ORDER: Session["phase"][] = ["zero", "A1", "A2", "B1", "exam", "B2", "C1"];
 
 export function groupByPhase(points: StartingPoint[] = STARTING_POINTS) {
   return PHASE_ORDER.map((phase) => ({ phase, points: points.filter((p) => p.phase === phase) })).filter(

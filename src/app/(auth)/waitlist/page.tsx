@@ -15,7 +15,7 @@ export default async function WaitlistPage() {
       {open ? (
         <p>
           {t("open")}{" "}
-          <Link href="/signup" className={linkClass}>
+          <Link href="/signup" className={`${linkClass} inline-flex min-h-11 items-center`}>
             {t("toSignUp")}
           </Link>
         </p>

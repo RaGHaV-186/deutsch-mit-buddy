@@ -125,7 +125,7 @@ export function SignUpForm({ googleEnabled }: { googleEnabled: boolean }) {
       </form>
       <p className="text-center">
         {t("haveAccount")}{" "}
-        <Link href="/login" className={linkClass}>
+        <Link href="/login" className={`${linkClass} inline-flex min-h-11 items-center`}>
           {t("logIn")}
         </Link>
       </p>
@@ -182,7 +182,7 @@ export function LoginForm({ next, initialError }: { next?: string; initialError?
       </form>
       <p className="text-center">
         {t("noAccount")}{" "}
-        <Link href="/signup" className={linkClass}>
+        <Link href="/signup" className={`${linkClass} inline-flex min-h-11 items-center`}>
           {t("signUp")}
         </Link>
       </p>

@@ -22,6 +22,8 @@
 
 **Pattern:** works when scripts are slow to arrive (first load, cold cache), fails when everything is cached and scripts run before the boundary's content has streamed, which looks like a race between React's hydration and the streamed `$RC` completion. Worth reproducing in a plain Next 16 app and, if it reproduces, reporting upstream.
 
+**Affects any streamed Suspense, not just `loading.tsx`.** Investigate before slices that load data with streaming: test a fresh Next 16.4 app, and test with `proxy.ts` disabled.
+
 **Rule until fixed:** no route-level `loading.tsx` and no streamed `<Suspense>` around interactive client components. Prefer client-side loading states (the offline-first Cards screen already does this).
 
 ## 2. Stale login redirect loop (auth bug, not part of the redesign)

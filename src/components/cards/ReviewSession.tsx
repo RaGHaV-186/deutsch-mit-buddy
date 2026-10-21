@@ -101,7 +101,7 @@ export function ReviewSession({ cards, direction, gameLayer, onAnswer, onFinish,
   const progress = answered / Math.max(1, answered + queue.length);
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[480px] flex-col">
+    <main className="mx-auto flex min-h-dvh w-full max-w-[480px] flex-col">
       <div className="flex items-center gap-3 px-5 pt-[max(20px,calc(env(safe-area-inset-top)+16px))]">
         <button
           type="button"
@@ -137,7 +137,7 @@ export function ReviewSession({ cards, direction, gameLayer, onAnswer, onFinish,
               <PillButton key={g} variant={GRADE_VARIANT[g]} size={60} disabled={busy} className="px-3" onClick={() => grade(g)}>
                 <span className="flex flex-col items-center leading-tight">
                   <span className="text-[16px]">{t(`grade.${g}`)}</span>
-                  <span className="text-[12px] font-medium opacity-80">
+                  <span className="text-[12px] font-medium opacity-90">
                     {t(`gradeHint.${preview.unit}`, { n: preview.value })}
                     {gameLayer ? ` · ${ds("treats", { count: GRADE_TREATS[g] })}` : ""}
                     <span className="sr-only"> ({i + 1})</span>
@@ -155,6 +155,6 @@ export function ReviewSession({ cards, direction, gameLayer, onAnswer, onFinish,
           </div>
         )}
       </div>
-    </div>
+    </main>
   );
 }

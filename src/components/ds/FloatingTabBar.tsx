@@ -27,14 +27,14 @@ export function FloatingTabBar({ active, badges = {}, position = "fixed" }: Prop
   return (
     <div
       className={cx(
-        "pointer-events-none inset-x-0 bottom-0 z-40 mx-auto w-full max-w-[480px] px-4",
+        "pointer-events-none inset-x-0 bottom-0 z-40 mx-auto w-full max-w-[480px] px-4 max-[359px]:px-2",
         position === "fixed" ? "fixed" : "relative",
       )}
       style={{ paddingBottom: position === "fixed" ? "max(28px, calc(env(safe-area-inset-bottom) + 12px))" : 0 }}
     >
       <nav
         aria-label={t("label")}
-        className="pointer-events-auto flex h-[68px] items-center justify-between rounded-tabbar bg-surface px-2 shadow-cushion"
+        className="pointer-events-auto flex h-[68px] items-center justify-between rounded-tabbar bg-surface px-2 shadow-cushion max-[359px]:px-1.5"
       >
         {TABS.map(({ id, href, Icon }) => {
           const isActive = id === active;
@@ -46,7 +46,7 @@ export function FloatingTabBar({ active, badges = {}, position = "fixed" }: Prop
               aria-label={isActive ? undefined : t(id)}
               className={cx(
                 "ds-press ds-focus relative flex h-[52px] items-center justify-center rounded-full text-[14px] font-bold",
-                isActive ? "gap-2 bg-tint px-4 text-on-tint" : "w-[52px] text-muted",
+                isActive ? "shrink-0 gap-2 bg-tint px-4 text-on-tint max-[359px]:gap-1.5 max-[359px]:px-3" : "w-[52px] min-w-11 shrink text-muted",
               )}
             >
               <Icon size={24} />

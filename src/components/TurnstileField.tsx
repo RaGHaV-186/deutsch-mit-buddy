@@ -44,6 +44,9 @@ export function TurnstileField({
       if (cancelled || !container.current || !window.turnstile || widgetId.current) return;
       widgetId.current = window.turnstile.render(container.current, {
         sitekey: siteKey,
+        // Invisible unless Cloudflare needs the learner to do something. The forms still wait for the token callback,
+        // which fires as soon as the check passes, so submit is enabled the same way as before.
+        appearance: "interaction-only",
         callback: setToken,
         "expired-callback": () => setToken(""),
         "error-callback": () => setToken(""),
@@ -74,5 +77,6 @@ export function TurnstileField({
     onTokenRef.current?.("");
   }, [resetSignal]);
 
-  return <div ref={container} />;
+  // Shown only when a challenge needs interaction: centred, with the corners clipped to the field radius (16px).
+  return <div ref={container} className="flex justify-center overflow-hidden rounded-field" />;
 }

@@ -23,6 +23,10 @@ export const colors = {
     // "Filled / done" on a page surface (progress fill, done paws, level bar). Coat stays for the coat block.
     progress: "#5E6875",
     "on-progress": "#FFFFFF",
+    // The primary action below the coat block (Log in, Show answer, Got it). Light: the coat colour. Dark: blaze, because the
+    // dark coat is nearly the page colour and a coat button would look no stronger than a secondary one.
+    primary: "#5E6875",
+    "on-primary": "#FFFFFF",
     // Focus ring. The brief says --coat; in dark mode coat is nearly the page colour, so the ring uses --on-coat there.
     focus: "#5E6875",
   },
@@ -46,6 +50,8 @@ export const colors = {
     das: "#7CCB9C",
     progress: "#8A95A3",
     "on-progress": "#16191E",
+    primary: "#E9E7E2",
+    "on-primary": "#16191E",
     focus: "#F2F1EE",
   },
 } as const;

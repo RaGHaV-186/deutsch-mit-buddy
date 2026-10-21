@@ -143,7 +143,7 @@ describe("PillButton", () => {
   it("variants map to the brief's colours", () => {
     const cases: [Parameters<typeof PillButton>[0]["variant"], string][] = [
       ["blaze", "bg-blaze"],
-      ["coat", "bg-coat"],
+      ["coat", "bg-primary"],
       ["cushion", "shadow-cushion"],
       ["outline-on-coat", "border-on-coat-muted"],
       ["ghost", "bg-transparent"],

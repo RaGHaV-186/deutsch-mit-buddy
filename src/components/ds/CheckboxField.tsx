@@ -15,7 +15,7 @@ export function CheckboxField({ children, id, ...input }: Props) {
     <div className="flex items-start gap-1">
       {/* The empty label only enlarges the tap target; the accessible name comes from the text. */}
       <label htmlFor={fieldId} className="flex min-h-11 w-11 shrink-0 items-start justify-center pt-2.5">
-        <input id={fieldId} type="checkbox" aria-labelledby={textId} className="ds-focus size-6 cursor-pointer accent-coat" {...input} />
+        <input id={fieldId} type="checkbox" aria-labelledby={textId} className="ds-focus size-6 cursor-pointer accent-primary" {...input} />
       </label>
       <div id={textId} className="min-h-11 flex-1 pt-2.5 text-body">
         {children}

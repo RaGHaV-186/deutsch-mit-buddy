@@ -18,6 +18,13 @@ function block(selector: string): string {
 }
 
 describe("theme tokens match the design brief", () => {
+  it("the primary button is the coat colour in light mode and blaze in dark mode", () => {
+    expect(colors.light.primary).toBe(colors.light.coat);
+    expect(colors.light["on-primary"]).toBe(colors.light["on-coat"]);
+    expect(colors.dark.primary).toBe(colors.dark.blaze);
+    expect(colors.dark["on-primary"]).toBe(colors.dark["on-blaze"]);
+  });
+
   it("has the brief's key values", () => {
     expect(colors.light).toMatchObject({ bg: "#F2F3F5", surface: "#FFFFFF", coat: "#5E6875", tint: "#F1D3CC", der: "#2457A8", die: "#B83A32", das: "#2B7550" });
     expect(colors.dark).toMatchObject({ bg: "#16191E", surface: "#20252B", coat: "#333B46", tint: "#43363A", der: "#8DB4F2", die: "#F29A90", das: "#7CCB9C" });
@@ -94,6 +101,7 @@ const TEXT_PAIRS: [ColorToken, ColorToken][] = [
   ["on-coat", "coat"],
   ["on-coat-muted", "coat"],
   ["on-progress", "progress"],
+  ["on-primary", "primary"],
   ["on-coat", "bubble"],
   ["on-coat-muted", "bubble"],
   ["on-blaze", "blaze"],
@@ -111,6 +119,12 @@ describe("contrast", () => {
       expect(contrast(colors[mode].progress, colors[mode].track)).toBeGreaterThanOrEqual(3);
       expect(contrast(colors[mode].progress, colors[mode].surface)).toBeGreaterThanOrEqual(3);
       expect(contrast(colors[mode].progress, colors[mode].bg)).toBeGreaterThanOrEqual(3);
+    });
+
+    // The primary button sits on the page (and on cards): it must stand out from both, which is why dark mode uses blaze.
+    it(`${mode}: the primary button stands out from the page and from cards (3:1)`, () => {
+      expect(contrast(colors[mode].primary, colors[mode].bg)).toBeGreaterThanOrEqual(3);
+      expect(contrast(colors[mode].primary, colors[mode].surface)).toBeGreaterThanOrEqual(3);
     });
 
     it(`${mode}: progress fill stands out from its track on the coat block (3:1)`, () => {

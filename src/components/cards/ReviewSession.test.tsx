@@ -126,7 +126,7 @@ describe("grading", () => {
     expect(within(group).getAllByRole("button")).toHaveLength(4);
     expect(within(group).getByRole("button", { name: /^Again/ })).toHaveTextContent("10 min");
     expect(within(group).getByRole("button", { name: /^Easy/ })).toHaveTextContent("4 days");
-    expect(within(group).getByRole("button", { name: /^Got it/ }).className).toContain("bg-coat");
+    expect(within(group).getByRole("button", { name: /^Got it/ }).className).toContain("bg-primary");
     expect(within(group).getByRole("button", { name: /^Hard/ }).className).toContain("shadow-cushion");
     expect(group.className).toContain("grid-cols-2");
   });

@@ -8,7 +8,8 @@ export type PillVariant = "blaze" | "coat" | "cushion" | "outline-on-coat" | "gh
 const VARIANT: Record<PillVariant, string> = {
   // On the coat block, rings use --on-coat (the page focus colour would vanish against the coat).
   blaze: "bg-blaze text-on-blaze [--ring:var(--on-coat)]",
-  coat: "bg-coat text-on-coat",
+  // The primary action below the coat block. Coat-coloured in light mode, blaze in dark (where the coat is nearly the page colour).
+  coat: "bg-primary text-on-primary",
   cushion: "bg-surface text-text shadow-cushion",
   "outline-on-coat": "border-2 border-on-coat-muted text-on-coat [--ring:var(--on-coat)]",
   ghost: "bg-transparent text-text hover:underline underline-offset-4",
@@ -27,7 +28,7 @@ interface Props extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className
   className?: string;
 }
 
-/** Fully rounded button. `blaze` sits on the coat block, `coat` below it; `cushion` is secondary. */
+/** Fully rounded button. `blaze` sits on the coat block, `coat` below it (coat-coloured in light mode, blaze in dark); `cushion` is secondary. */
 export function PillButton({
   variant = "coat",
   size = 56,

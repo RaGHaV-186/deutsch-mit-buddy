@@ -8,9 +8,14 @@ export const PARTS = ["goal", "warmup", "grammar", "exercises", "vocabulary", "p
 export type PartName = (typeof PARTS)[number];
 /** Part number in the standard (0 = can-do goal ... 13 = close day). */
 export const PART_NUMBER: Record<PartName, number> = Object.fromEntries(PARTS.map((p, i) => [p, i])) as Record<PartName, number>;
-/** Pass A teaches (parts 0 to 5); pass B tests the four skills and wraps up (parts 6 to 13) and sees pass A's output. */
+/**
+ * A lesson is written in three Sonnet passes (the API's structured-output grammar is too large for the whole lesson at once):
+ * pass A teaches (parts 0 to 5); pass B covers reading, listening, writing and speaking (6 to 9); pass C covers the culture note,
+ * the mission, the day exam and close day (10 to 13). Passes B and C see pass A's grammar and words.
+ */
 export const PASS_A_PARTS = ["goal", "warmup", "grammar", "exercises", "vocabulary", "pronunciation"] as const satisfies readonly PartName[];
-export const PASS_B_PARTS = ["reading", "listening", "writing", "speaking", "culture", "mission", "exam", "closing"] as const satisfies readonly PartName[];
+export const PASS_B_PARTS = ["reading", "listening", "writing", "speaking"] as const satisfies readonly PartName[];
+export const PASS_C_PARTS = ["culture", "mission", "exam", "closing"] as const satisfies readonly PartName[];
 
 export const ARTICLES = ["der", "die", "das"] as const;
 export const TIERS = ["core", "bonus"] as const;
@@ -157,6 +162,8 @@ export const passBSchema = z.object({
   listening: z.object({ passage: listeningPassageSchema, questions: z.array(questionSchema).min(1).max(12) }),
   writing: writingSchema,
   speaking: z.object({ drill: z.array(drillSchema).min(1).max(10), tandem: tandemSchema }),
+});
+export const passCSchema = z.object({
   culture: cultureSchema,
   mission: missionSchema,
   exam: z.object({
@@ -168,10 +175,11 @@ export const passBSchema = z.object({
   }),
   closing: closingSchema,
 });
-export const lessonSchema = passASchema.extend(passBSchema.shape);
+export const lessonSchema = passASchema.extend(passBSchema.shape).extend(passCSchema.shape);
 
 export type PassA = z.output<typeof passASchema>;
 export type PassB = z.output<typeof passBSchema>;
+export type PassC = z.output<typeof passCSchema>;
 export type Lesson = z.output<typeof lessonSchema>;
 export type Question = z.output<typeof questionSchema>;
 export type Card = z.output<typeof cardSchema>;
@@ -188,17 +196,24 @@ export const verdictSchema = z.object({
 export const reviewResultSchema = z.object({ verdicts: z.array(verdictSchema).min(1).max(250) });
 export type ReviewVerdict = z.output<typeof verdictSchema>;
 
-// ---- JSON Schema for the API's structured output. The API accepts only a subset of JSON Schema (no length or count
-// limits), so those are stripped here; they are enforced by the zod schemas and the lint after the answer arrives.
+// ---- JSON Schema for the API's structured output. The API accepts only a subset of JSON Schema (no length or count limits) and
+// refuses grammars that are too large, so: limits are stripped (the zod schemas and the lint enforce them after the answer arrives),
+// and for the generation passes "nullable" is replaced by a plain string where "" (or "none" for an article) means nothing.
 const UNSUPPORTED = new Set(["minLength", "maxLength", "minItems", "maxItems", "minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum", "multipleOf", "pattern", "format", "default", "$schema", "title", "description", "examples"]);
 
-export function toApiSchema(schema: z.ZodType): Record<string, unknown> {
+export function toApiSchema(schema: z.ZodType, options: { simplifyNull?: boolean } = {}): Record<string, unknown> {
   const raw = z.toJSONSchema(schema, { io: "input", reused: "inline", unrepresentable: "throw" }) as Record<string, unknown>;
   const clean = (node: unknown): unknown => {
     if (Array.isArray(node)) return node.map(clean);
     if (node && typeof node === "object") {
+      const obj = node as Record<string, unknown>;
+      const any = obj.anyOf;
+      if (options.simplifyNull && Array.isArray(any) && any.length === 2 && any.some((x) => (x as { type?: string }).type === "null")) {
+        const other = clean(any.find((x) => (x as { type?: string }).type !== "null")) as Record<string, unknown>;
+        return Array.isArray(other.enum) ? { ...other, enum: [...other.enum, "none"] } : other;
+      }
       const out: Record<string, unknown> = {};
-      for (const [k, v] of Object.entries(node)) {
+      for (const [k, v] of Object.entries(obj)) {
         if (UNSUPPORTED.has(k) && typeof v !== "object") continue;
         out[k] = clean(v);
       }
@@ -213,6 +228,26 @@ export function toApiSchema(schema: z.ZodType): Record<string, unknown> {
   return clean(raw) as Record<string, unknown>;
 }
 
-export const PASS_A_JSON_SCHEMA = toApiSchema(passASchema);
-export const PASS_B_JSON_SCHEMA = toApiSchema(passBSchema);
+/** Fields that are nullable in the lesson (empty in the model's plain-string form). */
+const NULLABLE_KEYS = new Set(["article", "plural", "tip", "note", "safety_note", "target_hint"]);
+
+/** Turns the model's answer back into the lesson's shape: "" (or "none" for an article) becomes null. Dialogue lines' `en` too. */
+export function wireToDomain(node: unknown): unknown {
+  if (Array.isArray(node)) return node.map(wireToDomain);
+  if (node && typeof node === "object") {
+    const obj = node as Record<string, unknown>;
+    const isScriptLine = "speaker" in obj && "de" in obj;
+    const out: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(obj)) {
+      const nullable = NULLABLE_KEYS.has(k) || (isScriptLine && k === "en");
+      out[k] = nullable && (v === "" || v === "none" || (typeof v === "string" && v.trim() === "")) ? null : wireToDomain(v);
+    }
+    return out;
+  }
+  return node;
+}
+
+export const PASS_A_JSON_SCHEMA = toApiSchema(passASchema, { simplifyNull: true });
+export const PASS_B_JSON_SCHEMA = toApiSchema(passBSchema, { simplifyNull: true });
+export const PASS_C_JSON_SCHEMA = toApiSchema(passCSchema, { simplifyNull: true });
 export const REVIEW_JSON_SCHEMA = toApiSchema(reviewResultSchema);

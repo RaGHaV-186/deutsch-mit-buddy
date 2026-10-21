@@ -19,8 +19,8 @@ const review = mergeLesson(row, lesson, verdicts);
 const run: RunView = {
   name: "sample-z1-z3",
   generated: { Z1: lesson },
-  review: { run: "sample-z1-z3", builtAt: "2026-10-22T10:00:00Z", summary: summarize([review]), unreviewedLessons: [], failures: { generateA: [], generateB: [], review: [] }, lessons: [review] },
-  reports: { "generate-a": null, "generate-b": null, review: null },
+  review: { run: "sample-z1-z3", builtAt: "2026-10-22T10:00:00Z", summary: summarize([review]), unreviewedLessons: [], failures: { generateA: [], generateB: [], generateC: [], review: [] }, lessons: [review] },
+  reports: { "generate-a": null, "generate-b": null, "generate-c": null, review: null },
 };
 const unreviewed: RunView = { ...run, name: "raw", review: null };
 

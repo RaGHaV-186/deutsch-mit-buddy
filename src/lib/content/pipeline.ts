@@ -7,15 +7,19 @@ import {
   PARTS,
   PASS_A_JSON_SCHEMA,
   PASS_B_JSON_SCHEMA,
+  PASS_C_JSON_SCHEMA,
   REVIEW_JSON_SCHEMA,
   lessonSchema,
   passASchema,
   passBSchema,
+  passCSchema,
   reviewResultSchema,
+  wireToDomain,
   type Lesson,
   type PartName,
   type PassA,
   type PassB,
+  type PassC,
   type ReviewVerdict,
 } from "./lesson-schema.ts";
 import { actualCostUsd, assertWithinCap, estimateRun, estimateTokens, type RunEstimate, type Usage } from "./pricing.ts";
@@ -26,19 +30,22 @@ import {
   PASS_A_SYSTEM,
   PASS_B_MAX_TOKENS,
   PASS_B_SYSTEM,
+  PASS_C_MAX_TOKENS,
+  PASS_C_SYSTEM,
   REVIEW_MAX_TOKENS,
   REVIEW_MODEL,
   REVIEW_SYSTEM,
   passAPrompt,
   passBPrompt,
+  passCPrompt,
   reviewPrompt,
 } from "./prompts.ts";
 
-// The three-step pipeline for a lesson: Sonnet pass A (teach), Sonnet pass B (four skills, sees A), Opus review of every item.
-// All three are Batch API runs. The API client is injected, so everything here is testable with a fake.
+// The pipeline for a lesson: Sonnet pass A (teach), pass B (reading, listening, writing, speaking), pass C (culture, mission, day exam,
+// close day; B and C see A), then an Opus review of every item. All of them are Batch API runs. The API client is injected, so everything here is testable with a fake.
 // Relative imports only (the scripts run this file with plain Node).
 
-export type Stage = "generate-a" | "generate-b" | "review";
+export type Stage = "generate-a" | "generate-b" | "generate-c" | "review";
 
 export interface BatchRequest {
   custom_id: string;
@@ -86,6 +93,12 @@ export const buildPassBRequests = (lessons: CurriculumRow[], passA: Map<string, 
     return a ? [request("generate-b", l.code, GENERATION_MODEL, PASS_B_MAX_TOKENS, PASS_B_SYSTEM, passBPrompt(l, a), PASS_B_JSON_SCHEMA)] : [];
   });
 
+export const buildPassCRequests = (lessons: CurriculumRow[], passA: Map<string, PassA>): BatchRequest[] =>
+  lessons.flatMap((l) => {
+    const a = passA.get(l.code);
+    return a ? [request("generate-c", l.code, GENERATION_MODEL, PASS_C_MAX_TOKENS, PASS_C_SYSTEM, passCPrompt(l, a), PASS_C_JSON_SCHEMA)] : [];
+  });
+
 export const buildReviewRequests = (lessons: CurriculumRow[], contents: Map<string, Lesson>): BatchRequest[] =>
   lessons.flatMap((l) => {
     const c = contents.get(l.code);
@@ -104,8 +117,11 @@ export const fingerprint = (requests: BatchRequest[]) => createHash("sha256").up
 export function estimateStage(stage: Stage, requests: BatchRequest[], opts: { rate?: number; exactInputTokens?: number[] } = {}): StageEstimate {
   const first = requests[0]?.params;
   if (!first) throw new Error("Nothing to estimate: no requests.");
-  const inputTokensPerRequest =
-    opts.exactInputTokens ?? requests.map((r) => estimateTokens(r.params.system + r.params.messages.map((m) => m.content).join("") + JSON.stringify(r.params.output_config.format.schema)));
+  // A JSON Schema costs input tokens too (about 1 token per 1.3 characters, measured with a real request); the token counter does not include it.
+  const schemaTokens = (r: BatchRequest) => Math.ceil(JSON.stringify(r.params.output_config.format.schema).length / 1.3);
+  const inputTokensPerRequest = opts.exactInputTokens
+    ? opts.exactInputTokens.map((n, i) => n + schemaTokens(requests[i]))
+    : requests.map((r) => estimateTokens(r.params.system + r.params.messages.map((m) => m.content).join("")) + schemaTokens(r));
   const estimate = estimateRun({ model: first.model, inputTokensPerRequest, expectedOutputPerRequest: EXPECTED_OUTPUT[stage], maxTokens: first.max_tokens, rate: opts.rate });
   return { ...estimate, stage, id: fingerprint(requests) };
 }
@@ -199,12 +215,14 @@ function parseStage<T>(stage: Stage, lessons: CurriculumRow[], lines: BatchResul
   return out;
 }
 
-export const parsePassA = (lessons: CurriculumRow[], lines: BatchResultLine[]) => parseStage("generate-a", lessons, lines, (v) => passASchema.safeParse(v));
-export const parsePassB = (lessons: CurriculumRow[], lines: BatchResultLine[]) => parseStage("generate-b", lessons, lines, (v) => passBSchema.safeParse(v));
+// The model writes "" for "nothing"; wireToDomain turns that back into null before the lesson's own schema checks it.
+export const parsePassA = (lessons: CurriculumRow[], lines: BatchResultLine[]) => parseStage("generate-a", lessons, lines, (v) => passASchema.safeParse(wireToDomain(v)));
+export const parsePassB = (lessons: CurriculumRow[], lines: BatchResultLine[]) => parseStage("generate-b", lessons, lines, (v) => passBSchema.safeParse(wireToDomain(v)));
+export const parsePassC = (lessons: CurriculumRow[], lines: BatchResultLine[]) => parseStage("generate-c", lessons, lines, (v) => passCSchema.safeParse(wireToDomain(v)));
 
-/** The whole lesson: pass A and pass B together, validated as one. */
-export function combineLesson(a: PassA, b: PassB): Lesson {
-  return lessonSchema.parse({ ...a, ...b });
+/** The whole lesson: the three passes together, validated as one. */
+export function combineLesson(a: PassA, b: PassB, c: PassC): Lesson {
+  return lessonSchema.parse({ ...a, ...b, ...c });
 }
 
 export const itemIdsOf = (code: string, lesson: Lesson) => enumerateItems(code, lesson).map((i) => i.id);

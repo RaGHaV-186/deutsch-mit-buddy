@@ -1,13 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { COUNTS, EXERCISES_PER_LESSON, LEVEL_PROFILES, PARTS, PASS_A_PARTS, PASS_A_JSON_SCHEMA, PASS_B_JSON_SCHEMA, PASS_B_PARTS, REVIEW_JSON_SCHEMA, lessonSchema, passASchema, passBSchema, reviewResultSchema, toApiSchema } from "./lesson-schema.ts";
+import { COUNTS, EXERCISES_PER_LESSON, LEVEL_PROFILES, PARTS, PASS_A_PARTS, PASS_A_JSON_SCHEMA, PASS_B_JSON_SCHEMA, PASS_B_PARTS, PASS_C_JSON_SCHEMA, PASS_C_PARTS, REVIEW_JSON_SCHEMA, lessonSchema, passASchema, passBSchema, passCSchema, reviewResultSchema, toApiSchema, wireToDomain } from "./lesson-schema.ts";
 import { z } from "zod";
-import { validLesson, validPassA, validPassB } from "./test-fixtures.ts";
+import { validLesson, validPassA, validPassB, validPassC } from "./test-fixtures.ts";
 
 describe("the 14 parts", () => {
-  it("are exactly the lesson standard, in order, and split between pass A and pass B", () => {
+  it("are exactly the lesson standard, in order, and split between passes A, B and C", () => {
     expect(PARTS).toEqual(["goal", "warmup", "grammar", "exercises", "vocabulary", "pronunciation", "reading", "listening", "writing", "speaking", "culture", "mission", "exam", "closing"]);
     expect(PARTS).toHaveLength(14);
-    expect([...PASS_A_PARTS, ...PASS_B_PARTS]).toEqual(PARTS);
+    expect([...PASS_A_PARTS, ...PASS_B_PARTS, ...PASS_C_PARTS]).toEqual(PARTS);
+    expect(PASS_B_PARTS).toEqual(["reading", "listening", "writing", "speaking"]);
+    expect(PASS_C_PARTS).toEqual(["culture", "mission", "exam", "closing"]);
   });
 
   it("a lesson is valid only when every part is present", () => {
@@ -17,13 +19,15 @@ describe("the 14 parts", () => {
       delete broken[part];
       expect(lessonSchema.safeParse(broken).success, `without ${part}`).toBe(false);
     }
-    expect(Object.keys(lessonSchema.shape)).toEqual([...PASS_A_PARTS, ...PASS_B_PARTS]);
+    expect(Object.keys(lessonSchema.shape)).toEqual([...PARTS]);
   });
 
-  it("pass A and pass B validate on their own", () => {
+  it("passes A, B and C validate on their own, and not as each other", () => {
     expect(passASchema.safeParse(validPassA()).success).toBe(true);
     expect(passBSchema.safeParse(validPassB()).success).toBe(true);
+    expect(passCSchema.safeParse(validPassC()).success).toBe(true);
     expect(passASchema.safeParse(validPassB()).success).toBe(false);
+    expect(passBSchema.safeParse(validPassC()).success).toBe(false);
   });
 
   it("rejects wrong shapes inside a part", () => {
@@ -73,7 +77,7 @@ describe("JSON Schemas sent to the API", () => {
     }
   };
 
-  for (const [name, schema] of [["pass A", PASS_A_JSON_SCHEMA], ["pass B", PASS_B_JSON_SCHEMA], ["review", REVIEW_JSON_SCHEMA]] as const) {
+  for (const [name, schema] of [["pass A", PASS_A_JSON_SCHEMA], ["pass B", PASS_B_JSON_SCHEMA], ["pass C", PASS_C_JSON_SCHEMA], ["review", REVIEW_JSON_SCHEMA]] as const) {
     it(`${name}: only keywords the API accepts, every object closed and fully required, no $ref`, () => {
       const forbidden = ["minLength", "maxLength", "minItems", "maxItems", "minimum", "maximum", "pattern", "format", "$ref", "$schema", "default"];
       walk(schema, (n) => {
@@ -86,13 +90,31 @@ describe("JSON Schemas sent to the API", () => {
     });
   }
 
-  it("pass A asks for exactly pass A's parts and pass B for pass B's", () => {
+  it("each pass asks for exactly its own parts", () => {
     expect(Object.keys((PASS_A_JSON_SCHEMA as { properties: object }).properties)).toEqual([...PASS_A_PARTS]);
     expect(Object.keys((PASS_B_JSON_SCHEMA as { properties: object }).properties)).toEqual([...PASS_B_PARTS]);
+    expect(Object.keys((PASS_C_JSON_SCHEMA as { properties: object }).properties)).toEqual([...PASS_C_PARTS]);
   });
 
-  it("nullable fields are expressed as anyOf with null (so the model can say 'none')", () => {
-    const words = (PASS_A_JSON_SCHEMA as { properties: { vocabulary: { properties: { words: { items: { properties: Record<string, { anyOf: unknown[] }> } } } } } }).properties.vocabulary.properties.words.items.properties;
+  it("generation schemas have no null unions (the API refused a grammar that was too large): 'nothing' is an empty string, or none for an article", () => {
+    for (const schema of [PASS_A_JSON_SCHEMA, PASS_B_JSON_SCHEMA, PASS_C_JSON_SCHEMA]) expect(JSON.stringify(schema)).not.toContain('"null"');
+    const words = (PASS_A_JSON_SCHEMA as { properties: { vocabulary: { properties: { words: { items: { properties: Record<string, unknown> } } } } } }).properties.vocabulary.properties.words.items.properties;
+    expect(words.article).toEqual({ type: "string", enum: ["der", "die", "das", "none"] });
+    expect(words.tip).toEqual({ type: "string" });
+  });
+
+  it("every generation schema is small enough for the API's grammar compiler (each pass was probed with a real request; the whole lesson in one schema was refused)", () => {
+    expect(JSON.stringify(PASS_A_JSON_SCHEMA).length).toBeLessThan(4000);
+    expect(JSON.stringify(PASS_B_JSON_SCHEMA).length).toBeLessThan(4000);
+    expect(JSON.stringify(PASS_C_JSON_SCHEMA).length).toBeLessThan(4500);
+  });
+
+  it("the review schema keeps its null union (it was accepted as it is)", () => {
+    expect(JSON.stringify(REVIEW_JSON_SCHEMA)).toContain('"null"');
+  });
+
+  it("a normal schema still expresses nullable fields as anyOf with null", () => {
+    const words = (toApiSchema(passASchema) as { properties: { vocabulary: { properties: { words: { items: { properties: Record<string, { anyOf: unknown[] }> } } } } } }).properties.vocabulary.properties.words.items.properties;
     expect(words.article.anyOf).toEqual([{ type: "string", enum: ["der", "die", "das"] }, { type: "null" }]);
     expect(words.tip.anyOf).toContainEqual({ type: "null" });
   });
@@ -106,5 +128,35 @@ describe("JSON Schemas sent to the API", () => {
   it("the review answer carries a correction as a JSON string, and a status from the three verdicts", () => {
     expect(reviewResultSchema.safeParse({ verdicts: [{ id: "Z1#goal", status: "fixed", reason: "x", fixed_json: '{"can_do":"I can."}' }] }).success).toBe(true);
     expect(reviewResultSchema.safeParse({ verdicts: [{ id: "Z1#goal", status: "maybe", reason: "x", fixed_json: null }] }).success).toBe(false);
+  });
+});
+
+describe("wireToDomain: the model's plain strings become the lesson's nulls", () => {
+  it("empty string or none becomes null for the nullable fields, and dialogue lines' en too", () => {
+    const wire = {
+      words: [{ article: "none", plural: "", tip: "  ", de: "gehen", en: "to go" }],
+      script: [{ speaker: "Anna", de: "Hallo", en: "" }, { speaker: "Jonas", de: "Hi", en: "Hi" }],
+      mission: { safety_note: "" },
+      writing: { target_hint: "" },
+      example: { de: "x", en: "y", note: "" },
+    };
+    expect(wireToDomain(wire)).toEqual({
+      words: [{ article: null, plural: null, tip: null, de: "gehen", en: "to go" }],
+      script: [{ speaker: "Anna", de: "Hallo", en: null }, { speaker: "Jonas", de: "Hi", en: "Hi" }],
+      mission: { safety_note: null },
+      writing: { target_hint: null },
+      example: { de: "x", en: "y", note: null },
+    });
+  });
+
+  it("keeps real values, and an English meaning of a card is never turned into null", () => {
+    const out = wireToDomain({ article: "der", plural: "die Namen", de: "Name", en: "" }) as Record<string, unknown>;
+    expect(out).toEqual({ article: "der", plural: "die Namen", de: "Name", en: "" });
+  });
+
+  it("a plain-string pass A round-trips through the lesson schema", () => {
+    const wire = JSON.parse(JSON.stringify(validPassA()).replaceAll("null", '""').replace(/"article":"(?!der|die|das)[^"]*"/g, '"article":"none"'));
+    const back = passASchema.parse(wireToDomain(wire));
+    expect(back).toEqual(passASchema.parse(validPassA())); // (the schema trims text, so compare with the parsed original)
   });
 });

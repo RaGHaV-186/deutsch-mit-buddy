@@ -3,15 +3,17 @@ import { COUNTS, EXERCISES_PER_LESSON, LEVEL_PROFILES, type Lesson, type PassA }
 import { enumerateItems, valueOf } from "./lesson-items.ts";
 import type { LintIssue } from "./lesson-lint.ts";
 
-// Models and settings. Sonnet writes a lesson in two passes (A teaches, B tests the four skills and sees A's output);
+// Models and settings. Sonnet writes a lesson in three passes (A teaches; B covers reading, listening, writing and speaking; C covers the
+// culture note, the mission, the day exam and close day; B and C see A's output);
 // Opus then checks every item (BLUEPRINT section 2). All three are Batch API runs.
 export const GENERATION_MODEL = "claude-sonnet-5-5";
 export const REVIEW_MODEL = "claude-opus-5-5";
 export const PASS_A_MAX_TOKENS = 20_000;
-export const PASS_B_MAX_TOKENS = 16_000;
+export const PASS_B_MAX_TOKENS = 12_000;
+export const PASS_C_MAX_TOKENS = 12_000;
 export const REVIEW_MAX_TOKENS = 20_000;
 /** Typical output per request (thinking included), used for the "expected" cost; the worst case uses max tokens. */
-export const EXPECTED_OUTPUT = { "generate-a": 9_000, "generate-b": 7_000, review: 8_000 } as const;
+export const EXPECTED_OUTPUT = { "generate-a": 9_000, "generate-b": 5_000, "generate-c": 4_000, review: 8_000 } as const;
 
 const SHARED = `You write lesson content for "Deutsch mit Buddy", AI-based personalised German practice for adults who study in English and go from zero to C1. Every lesson follows one fixed standard of 14 parts. You write some of the parts in each request and reply with the JSON object requested and nothing else.
 
@@ -21,6 +23,7 @@ GENERAL RULES
 - Never use real people's names. Use only Anna, Jonas and Lena (and Buddy, the teacher dog, where he speaks). No brands, no politics, no religion, nothing that dates quickly.
 - Match the CEFR level and the instruction language given in the request. Never use grammar or vocabulary clearly above the level, and keep words taught in earlier lessons simple. The lesson's grammar point and theme run through every part.
 - Instruction language: the text that explains or instructs (goal, grammar explanation, rule summary, tips, exercise explanations, culture note, mission, task descriptions) is written in the instruction language of the request. German examples, words, sentences, dialogues and model answers are always German.
+- Output format: where a field has nothing to say, write an empty string (for an article, write none). This applies to article, plural, tip, note, safety_note, target_hint and the en line of a dialogue.
 - A question has exactly one correct answer. Wrong options are plausible but clearly wrong. Explanations are one short sentence in the instruction language.
 - Question formats: multiple_choice (prompt, answer, 2 to 4 wrong options in distractors); gap_fill (a sentence with ___ where the answer belongs, plus 2 to 4 wrong options); ordering (the words of one sentence in scrambled order separated by " / ", the correct sentence as the answer, no wrong options; only sentences with one natural word order); typing (an English sentence to translate into German, one best German answer, no wrong options); dictation (prompt: a short instruction such as "Listen and write the sentence."; answer: the German sentence that is read aloud, with its punctuation; no wrong options).`;
 
@@ -37,14 +40,18 @@ PASS A: parts 0 to 5 of the standard.
 
 export const PASS_B_SYSTEM = `${SHARED}
 
-PASS B: parts 6 to 13 of the standard. The request contains pass A (the lesson's grammar, words and exercises): reuse its grammar point and words so the lesson hangs together, but write new sentences.
+PASS B: parts 6 to 9 of the standard (reading, listening, writing, speaking). The request contains pass A (the lesson's grammar, words and exercises): reuse its grammar point and words so the lesson hangs together, but write new sentences.
 - reading: a passage (title and German text of the requested length) and exactly ${COUNTS.readingQuestions} questions (skill "reading"; mostly multiple_choice, some typing with a short German answer).
-- listening: a dialogue between 2 speakers (from Anna, Jonas, Lena) with ${COUNTS.scriptLines[0]} to ${COUNTS.scriptLines[1]} lines of the requested total length. Each line has speaker, de, and en (an English translation for levels A1 and A2; null at higher levels). Then exactly ${COUNTS.listeningQuestions} questions (skill "listening") that can only be answered by listening.
+- listening: a dialogue between 2 speakers (from Anna, Jonas, Lena) with ${COUNTS.scriptLines[0]} to ${COUNTS.scriptLines[1]} lines of the requested total length. Each line has speaker, de, and en (an English translation for levels A1 and A2; an empty string at higher levels). Then exactly ${COUNTS.listeningQuestions} questions (skill "listening") that can only be answered by listening.
 - writing: the task at the level's kind (what to write, min_words as requested, ${COUNTS.mustInclude[0]} to ${COUNTS.mustInclude[1]} points that must be included, ${COUNTS.usefulPhrases[0]} to ${COUNTS.usefulPhrases[1]} useful phrases, a model_answer in German of at least min_words words, and ${COUNTS.rubric[0]} to ${COUNTS.rubric[1]} rubric criteria for correcting it, which include the lesson's grammar point and vocabulary).
-- speaking: exactly ${COUNTS.drill} drill items (prompt = a cue in the instruction language, target = the German sentence to say, tip optional) practising the lesson's sentences, and a tandem scenario in which Buddy is a conversation PARTNER, not a teacher, on the lesson's theme (title, setting, buddy_role, learner_role, opening_line = Buddy's first German line, target_phrases, target_grammar, topics = follow-up questions or ideas Buddy can raise, end_condition).
+- speaking: exactly ${COUNTS.drill} drill items (prompt = a cue in the instruction language, target = the German sentence to say, tip optional) practising the lesson's sentences, and a tandem scenario in which Buddy is a conversation PARTNER, not a teacher, on the lesson's theme (title, setting, buddy_role, learner_role, opening_line = Buddy's first German line, target_phrases, target_grammar, topics = follow-up questions or ideas Buddy can raise, end_condition).`;
+
+export const PASS_C_SYSTEM = `${SHARED}
+
+PASS C: parts 10 to 13 of the standard (culture note, real-world mission, day exam, close day). The request contains pass A (the lesson's grammar and words): the exam tests them.
 - culture: a short, accurate, neutral note about life in Germany, Austria or Switzerland tied to the theme (80 to 150 words at low levels), with a reflection question. If unsure of a fact, leave it out. No stereotypes.
-- mission: a safe real-world task the learner can do in or around daily life using the lesson (title, task, 2 to 4 steps, report_prompt = what to report back, 2 to 3 success_check lines "I ..."); add a safety_note when the task involves other people or personal data, else null.
-- exam: the day exam, with FRESH items, none repeated from pass A: exactly ${COUNTS.examGrammarVocab} grammar_vocab questions on the day's grammar point and words; a short reading passage (2 to 4 sentences) with exactly ${COUNTS.examReadingQuestions} questions; a short listening script (${COUNTS.examScriptLines[0]} to ${COUNTS.examScriptLines[1]} lines) with exactly ${COUNTS.examListeningQuestions} questions; a short writing task (2 to 3 sentences, min_words 15 to 30, with rubric); a short speaking prompt.
+- mission: a safe real-world task the learner can do in or around daily life using the lesson (title, task, 2 to 4 steps, report_prompt = what to report back, 2 to 3 success_check lines "I ..."); add a safety_note when the task involves other people or personal data, else an empty string.
+- exam: the day exam, with FRESH items, none repeated from pass A: exactly ${COUNTS.examGrammarVocab} grammar_vocab questions on the day's grammar point and words; a short reading passage (2 to 4 sentences) with exactly ${COUNTS.examReadingQuestions} questions (skill "reading"); a short listening script (${COUNTS.examScriptLines[0]} to ${COUNTS.examScriptLines[1]} lines, speakers from Anna, Jonas, Lena, with an English translation per line at A1 and A2, else an empty string) with exactly ${COUNTS.examListeningQuestions} questions (skill "listening"); a short writing task (2 to 3 sentences, min_words 15 to 30, with rubric); a short speaking prompt.
 - closing: ${COUNTS.closingCovered[0]} to ${COUNTS.closingCovered[1]} "You can now ..." lines for what was covered and one line on what to review tomorrow.`;
 
 export const REVIEW_SYSTEM = `You are a meticulous German teacher and editor. Another model wrote one lesson of "Deutsch mit Buddy", a course for adults who study in English and go from zero to C1, following a fixed 14-part standard. You check every item of the lesson and reply with the JSON object requested and nothing else.
@@ -83,9 +90,15 @@ export function passAPrompt(lesson: CurriculumRow): string {
   return [...lessonSpec(lesson), "", "Write parts 0 to 5 of this lesson."].join("\n");
 }
 
+const passASummary = (passA: PassA) => [
+  `Grammar: ${passA.grammar.intro.title}. ${passA.grammar.intro.rule_summary}`,
+  `Words: ${passA.vocabulary.words.map((c) => `${c.article ? c.article + " " : ""}${c.de}`).join(", ")}`,
+  `Phrases: ${passA.vocabulary.phrases.map((x) => x.de).join(" | ")}`,
+  `Pronunciation focus: ${passA.pronunciation.focus}`,
+];
+
 export function passBPrompt(lesson: CurriculumRow, passA: PassA): string {
   const p = LEVEL_PROFILES[lesson.phase];
-  const words = passA.vocabulary.words.map((c) => `${c.article ? c.article + " " : ""}${c.de}`).join(", ");
   return [
     ...lessonSpec(lesson),
     `Reading passage length: ${p.readingWords[0]} to ${p.readingWords[1]} words.`,
@@ -93,13 +106,14 @@ export function passBPrompt(lesson: CurriculumRow, passA: PassA): string {
     `Writing task: ${p.writingKind}, min_words ${p.writingMinWords[0]} to ${p.writingMinWords[1]}.`,
     "",
     "Pass A of this lesson (use its grammar and words):",
-    `Grammar: ${passA.grammar.intro.title}. ${passA.grammar.intro.rule_summary}`,
-    `Words: ${words}`,
-    `Phrases: ${passA.vocabulary.phrases.map((x) => x.de).join(" | ")}`,
-    `Pronunciation focus: ${passA.pronunciation.focus}`,
+    ...passASummary(passA),
     "",
-    "Write parts 6 to 13 of this lesson.",
+    "Write parts 6 to 9 of this lesson (reading, listening, writing, speaking).",
   ].join("\n");
+}
+
+export function passCPrompt(lesson: CurriculumRow, passA: PassA): string {
+  return [...lessonSpec(lesson), "", "Pass A of this lesson (use its grammar and words):", ...passASummary(passA), "", "Write parts 10 to 13 of this lesson (culture, mission, day exam, close day)."].join("\n");
 }
 
 export function reviewPrompt(lesson: CurriculumRow, content: Lesson, lint: LintIssue[]): string {

@@ -1,11 +1,11 @@
-// Lesson content pipeline (slice 3). Sonnet writes each lesson in two passes (A: teaching parts, B: the four skills and the
-// day exam), Opus checks every item, and a lesson is published only when every item is ok or fixed.
+// Lesson content pipeline (slice 3). Sonnet writes each lesson in three passes (A: teaching parts; B: reading, listening, writing,
+// speaking; C: culture, mission, day exam, close day), Opus checks every item, and a lesson is published only when every item is ok or fixed.
 // Every paid step shows an estimate first and needs its id to run.
 //
 //   node --env-file=.env.local --no-warnings scripts/content.mts <command> --run <name> [options]
 //
-//   estimate --stage generate-a|generate-b|review [--lessons Z1,Z2,Z3 | --all] [--exact]   cost estimate, nothing is paid
-//   run      --stage generate-a|generate-b|review --approve <estimate id>                   the paid Batch run (resumable)
+//   estimate --stage generate-a|generate-b|generate-c|review [--lessons Z1,Z2,Z3 | --all] [--exact]   cost estimate, nothing is paid
+//   run      --stage generate-a|generate-b|generate-c|review --approve <estimate id>                   the paid Batch run (resumable)
 //   build                                         merge the passes into the review file (review.json, review.md, ...)
 //   markdown --lesson Z1 [--out path.md]          one lesson as readable Markdown, with the review notes
 //   publish  [--yes]                              publish every lesson that has no open item (writes to the database)
@@ -18,11 +18,12 @@ import { join, resolve } from "node:path";
 import { SESSIONS } from "../data/curriculum.ts";
 import { lessonsOf, type CurriculumRow } from "../src/lib/content/curriculum-rows.ts";
 import { lessonToMarkdown } from "../src/lib/content/lesson-text.ts";
-import type { Lesson, PassA, PassB, ReviewVerdict } from "../src/lib/content/lesson-schema.ts";
+import type { Lesson, PassA, PassB, PassC, ReviewVerdict } from "../src/lib/content/lesson-schema.ts";
 import {
   assertApproved,
   buildPassARequests,
   buildPassBRequests,
+  buildPassCRequests,
   buildReviewRequests,
   combineLesson,
   costReport,
@@ -30,6 +31,7 @@ import {
   mergeLesson,
   parsePassA,
   parsePassB,
+  parsePassC,
   parseReview,
   publishPayload,
   runBatch,
@@ -62,7 +64,7 @@ const file = (name: string) => join(dir, name);
 const read = <T,>(name: string): T | undefined => (existsSync(file(name)) ? (JSON.parse(readFileSync(file(name), "utf8")) as T) : undefined);
 const write = (name: string, data: unknown) => writeFileSync(file(name), JSON.stringify(data, null, 2) + "\n");
 const rate = process.env.USD_TO_EUR ? Number(process.env.USD_TO_EUR) : DEFAULT_USD_TO_EUR;
-const STAGES: Stage[] = ["generate-a", "generate-b", "review"];
+const STAGES: Stage[] = ["generate-a", "generate-b", "generate-c", "review"];
 
 const allLessons = lessonsOf(SESSIONS);
 function runLessons(): CurriculumRow[] {
@@ -90,17 +92,19 @@ interface State {
 const completeLessons = (): Map<string, Lesson> => {
   const a = read<Raw<PassA>>("generate-a.raw.json")?.lessons ?? {};
   const b = read<Raw<PassB>>("generate-b.raw.json")?.lessons ?? {};
-  return new Map(Object.keys(a).filter((c) => b[c]).map((c) => [c, combineLesson(a[c], b[c])]));
+  const c = read<Raw<PassC>>("generate-c.raw.json")?.lessons ?? {};
+  return new Map(Object.keys(a).filter((k) => b[k] && c[k]).map((k) => [k, combineLesson(a[k], b[k], c[k])]));
 };
 
 function requestsFor(stage: Stage, lessons: CurriculumRow[]): BatchRequest[] {
   if (stage === "generate-a") return buildPassARequests(lessons);
-  if (stage === "generate-b") {
+  if (stage === "generate-b" || stage === "generate-c") {
     const a = read<Raw<PassA>>("generate-a.raw.json") ?? fail("Run generate-a first (generate-a.raw.json is missing).");
-    return buildPassBRequests(lessons, new Map(Object.entries(a.lessons)));
+    const passA = new Map(Object.entries(a.lessons));
+    return stage === "generate-b" ? buildPassBRequests(lessons, passA) : buildPassCRequests(lessons, passA);
   }
   const complete = completeLessons();
-  if (complete.size === 0) fail("Run generate-a and generate-b first: no complete lesson yet.");
+  if (complete.size === 0) fail("Run generate-a, generate-b and generate-c first: no complete lesson yet.");
   return buildReviewRequests(lessons, complete);
 }
 
@@ -172,8 +176,8 @@ async function runCommand() {
 
   const covered = lessons.filter((l) => requests.some((r) => r.custom_id.endsWith(`-${l.code.replace(/[^A-Za-z0-9_-]/g, "_")}`)));
   let outcome;
-  if (stage === "generate-a" || stage === "generate-b") {
-    const parsed = stage === "generate-a" ? parsePassA(covered, lines) : parsePassB(covered, lines);
+  if (stage !== "review") {
+    const parsed = stage === "generate-a" ? parsePassA(covered, lines) : stage === "generate-b" ? parsePassB(covered, lines) : parsePassC(covered, lines);
     const raw = read<Raw<unknown>>(`${stage}.raw.json`) ?? { lessons: {}, failures: [] };
     for (const [code, content] of parsed.results) raw.lessons[code] = content;
     raw.failures = parsed.failures;
@@ -214,10 +218,10 @@ function buildReviews(): { reviews: LessonReview[]; unreviewed: string[] } {
 function buildCommand() {
   const { reviews, unreviewed } = buildReviews();
   const summary = summarize(reviews);
-  const gen = { a: read<Raw<PassA>>("generate-a.raw.json"), b: read<Raw<PassB>>("generate-b.raw.json"), review: read<ReviewRaw>("review.raw.json") };
+  const gen = { a: read<Raw<PassA>>("generate-a.raw.json"), b: read<Raw<PassB>>("generate-b.raw.json"), c: read<Raw<PassC>>("generate-c.raw.json"), review: read<ReviewRaw>("review.raw.json") };
   write("review.json", {
     run: runName, builtAt: new Date().toISOString(), summary, unreviewedLessons: unreviewed,
-    failures: { generateA: gen.a?.failures ?? [], generateB: gen.b?.failures ?? [], review: gen.review?.failures ?? [] },
+    failures: { generateA: gen.a?.failures ?? [], generateB: gen.b?.failures ?? [], generateC: gen.c?.failures ?? [], review: gen.review?.failures ?? [] },
     lessons: reviews,
   });
   write("publish-payloads.json", Object.fromEntries(reviews.filter((r) => r.publishable).map((r) => [r.code, publishPayload(r)])));

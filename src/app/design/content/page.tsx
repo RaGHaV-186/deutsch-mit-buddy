@@ -152,7 +152,7 @@ function Totals({ run }: { run: RunView }) {
             <span className="font-bold text-die">{r.summary.needsHuman} need a human</span>
           </p>
           <p className="text-caption text-muted">Can be published: {r.summary.publishable.join(", ") || "none"} · Blocked: {r.summary.blocked.join(", ") || "none"}</p>
-          {[...r.failures.generateA, ...r.failures.generateB, ...r.failures.review].map((f) => (
+          {[...r.failures.generateA, ...r.failures.generateB, ...r.failures.generateC, ...r.failures.review].map((f) => (
             <p key={f.code + f.reason} className="text-caption text-die">{f.code}: {f.reason}</p>
           ))}
         </Cushion>
@@ -160,7 +160,7 @@ function Totals({ run }: { run: RunView }) {
         <p className="text-muted">Not reviewed yet: only the generated lessons exist.</p>
       )}
       <div className="flex flex-wrap gap-x-4 gap-y-1 text-caption text-muted">
-        {(["generate-a", "generate-b", "review"] as const).map((s) =>
+        {(["generate-a", "generate-b", "generate-c", "review"] as const).map((s) =>
           run.reports[s] ? (
             <span key={s}>{s}: {run.reports[s]!.model}, actual €{run.reports[s]!.actualEur.toFixed(3)} (estimated €{run.reports[s]!.estimatedEur.toFixed(2)})</span>
           ) : null,

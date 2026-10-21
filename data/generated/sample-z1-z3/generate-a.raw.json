@@ -1,0 +1,17 @@
+{
+  "lessons": {},
+  "failures": [
+    {
+      "code": "Z1",
+      "reason": "request failed: {\"type\":\"error\",\"error\":{\"details\":null,\"type\":\"invalid_request_error\",\"message\":\"The compiled grammar is too large, which would cause performance issues. Simplify your tool schemas or reduce the numb"
+    },
+    {
+      "code": "Z2",
+      "reason": "request failed: {\"type\":\"error\",\"error\":{\"details\":null,\"type\":\"invalid_request_error\",\"message\":\"The compiled grammar is too large, which would cause performance issues. Simplify your tool schemas or reduce the numb"
+    },
+    {
+      "code": "Z3",
+      "reason": "request failed: {\"type\":\"error\",\"error\":{\"details\":null,\"type\":\"invalid_request_error\",\"message\":\"The compiled grammar is too large, which would cause performance issues. Simplify your tool schemas or reduce the numb"
+    }
+  ]
+}

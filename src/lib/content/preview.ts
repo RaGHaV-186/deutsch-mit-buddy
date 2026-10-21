@@ -15,7 +15,7 @@ export interface ReviewFile {
   builtAt: string;
   summary: { lessons: number; items: number; ok: number; fixed: number; needsHuman: number; publishable: string[]; blocked: string[] };
   unreviewedLessons: string[];
-  failures: { generateA: { code: string; reason: string }[]; generateB: { code: string; reason: string }[]; review: { code: string; reason: string }[] };
+  failures: { generateA: { code: string; reason: string }[]; generateB: { code: string; reason: string }[]; generateC: { code: string; reason: string }[]; review: { code: string; reason: string }[] };
   lessons: LessonReview[];
 }
 
@@ -24,7 +24,7 @@ export interface RunView {
   review: ReviewFile | null;
   /** Complete lessons (pass A + pass B) as Sonnet wrote them; shown when there is no review file yet. */
   generated: Record<string, Lesson> | null;
-  reports: { "generate-a": CostReport | null; "generate-b": CostReport | null; review: CostReport | null };
+  reports: { "generate-a": CostReport | null; "generate-b": CostReport | null; "generate-c": CostReport | null; review: CostReport | null };
 }
 
 function readJson<T>(path: string): T | null {
@@ -50,7 +50,8 @@ export function loadRun(name: string, base = GENERATED_DIR): RunView | null {
   if (!existsSync(/* turbopackIgnore: true */ dir)) return null;
   const a = readJson<{ lessons: Record<string, object> }>(join(dir, "generate-a.raw.json"));
   const b = readJson<{ lessons: Record<string, object> }>(join(dir, "generate-b.raw.json"));
-  const generated = a ? Object.fromEntries(Object.keys(a.lessons).filter((c) => b?.lessons[c]).map((c) => [c, { ...a.lessons[c], ...b!.lessons[c] } as Lesson])) : null;
+  const c = readJson<{ lessons: Record<string, object> }>(join(dir, "generate-c.raw.json"));
+  const generated = a ? Object.fromEntries(Object.keys(a.lessons).filter((k) => b?.lessons[k] && c?.lessons[k]).map((k) => [k, { ...a.lessons[k], ...b!.lessons[k], ...c!.lessons[k] } as Lesson])) : null;
   return {
     name,
     review: readJson<ReviewFile>(join(dir, "review.json")),
@@ -58,6 +59,7 @@ export function loadRun(name: string, base = GENERATED_DIR): RunView | null {
     reports: {
       "generate-a": readJson<CostReport>(join(dir, "generate-a.report.json")),
       "generate-b": readJson<CostReport>(join(dir, "generate-b.report.json")),
+      "generate-c": readJson<CostReport>(join(dir, "generate-c.report.json")),
       review: readJson<CostReport>(join(dir, "review.report.json")),
     },
   };

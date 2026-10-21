@@ -1,5 +1,5 @@
 import type { CurriculumRow } from "./curriculum-rows.ts";
-import type { Card, Lesson, PassA, PassB, Question } from "./lesson-schema.ts";
+import type { Card, Lesson, PassA, PassB, PassC, Question } from "./lesson-schema.ts";
 
 // A complete, valid zero-phase lesson for tests: every part present, every count right, no lint errors or warnings.
 
@@ -111,6 +111,11 @@ export function validPassB(): PassB {
         end_condition: "The learner has ordered a drink and a snack.",
       },
     },
+  };
+}
+
+export function validPassC(): PassC {
+  return {
     culture: { title: "Coffee in Germany", note: "Many people in Germany drink coffee in the morning and in the afternoon, and a cake is often part of it.", reflection_question: "What do you usually drink in the morning?" },
     mission: {
       title: "Order in German",
@@ -143,4 +148,4 @@ export function validPassB(): PassB {
   };
 }
 
-export const validLesson = (): Lesson => ({ ...validPassA(), ...validPassB() });
+export const validLesson = (): Lesson => ({ ...validPassA(), ...validPassB(), ...validPassC() });

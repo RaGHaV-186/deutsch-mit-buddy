@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { listRuns, loadRun, RUN_NAME } from "./preview";
-import { validPassA, validPassB } from "./test-fixtures";
+import { validPassA, validPassB, validPassC } from "./test-fixtures";
 
 let base: string;
 beforeEach(() => {
@@ -23,6 +23,7 @@ describe("loadRun", () => {
     mkdirSync(join(base, "sample"));
     writeFileSync(join(base, "sample", "generate-a.raw.json"), JSON.stringify({ lessons: { Z1: validPassA(), Z2: validPassA() }, failures: [] }));
     writeFileSync(join(base, "sample", "generate-b.raw.json"), JSON.stringify({ lessons: { Z1: validPassB() }, failures: [] }));
+    writeFileSync(join(base, "sample", "generate-c.raw.json"), JSON.stringify({ lessons: { Z1: validPassC() }, failures: [] }));
     writeFileSync(join(base, "sample", "review.json"), JSON.stringify({ run: "sample", summary: { items: 93 }, lessons: [] }));
     writeFileSync(join(base, "sample", "generate-a.report.json"), JSON.stringify({ stage: "generate-a", actualEur: 0.05 }));
     const run = loadRun("sample", base)!;

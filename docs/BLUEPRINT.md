@@ -275,6 +275,8 @@ Pricing (Claude API, checked 19 Oct 2026): Opus 5.5 $4 / $20, Sonnet 5.5 $2 / $1
 
 ## 8. Build order
 
+**Status (21 Oct 2026):** slices 0, 1, 2 and the redesign (design-v1.1) are done and live. Slice 3a (lesson standard, generator, preview) is built; its Z1–Z3 sample is waiting for the Opus review batch and Raghav's approval (Checkpoint A). Next: 3b, 3c, then the daily lesson loop 4a–4e. Details and resume steps: CLAUDE.md, "Where we are".
+
 The app is built in 14 slices (3 and 4 split into small steps), each one working end to end and deployed before the next starts. At 1–2 slices per evening the whole v1 takes about two weeks.
 
 0. **Setup** — git repo (remote github.com/RaGHaV-186/deutsch-mit-buddy), Next.js + Supabase connected, theme, `.env.example`, GitHub Actions CI (lint, test, build on every push and PR), Vercel previews, a live "Hallo! Ich bin Buddy." page on Vercel. Done when the URL loads on Raghav's phone and CI is green.

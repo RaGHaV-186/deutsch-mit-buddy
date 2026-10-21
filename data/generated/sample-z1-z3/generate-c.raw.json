@@ -1,0 +1,581 @@
+{
+  "lessons": {
+    "Z1": {
+      "culture": {
+        "title": "Saying hello and goodbye",
+        "note": "In Germany, Austria and Switzerland, people greet each other in different ways. \"Hallo\" is common with friends and in relaxed situations. \"Guten Tag\" is a polite greeting for the daytime, for example in a shop or an office. In the evening, people say \"Guten Abend\". When you leave, \"Tschüs\" is informal and \"Auf Wiedersehen\" is more polite. Many regions also have their own greetings. In Switzerland you often hear \"Grüezi\", and in southern Germany and Austria you may hear \"Servus\". In polite situations, people often shake hands. Spelling a name aloud is very normal, for example on the phone or at a desk.",
+        "reflection_question": "How do you greet people in your language, and when do you use a polite greeting instead of a relaxed one?"
+      },
+      "mission": {
+        "title": "Spell your name like a pro",
+        "task": "Practise greeting and spelling your name aloud in German, in front of a mirror or with a friend.",
+        "steps": [
+          "Say a greeting for the time of day: Guten Morgen, Guten Tag or Guten Abend.",
+          "Say: \"Ich heiße ...\" with your first name.",
+          "Spell your first name letter by letter in German, then spell your last name.",
+          "Say \"Auf Wiedersehen!\" or \"Tschüs!\" at the end."
+        ],
+        "report_prompt": "Write down the greeting you used, your name as you spelled it in German letters, and one letter that was difficult to say.",
+        "success_check": [
+          "I said a greeting and my name in German.",
+          "I spelled my first name and my last name with German letter names.",
+          "I said goodbye in German."
+        ],
+        "safety_note": "Only share your name if you feel comfortable. Do not share private details such as your address or phone number."
+      },
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does \"der Abend\" mean?",
+            "answer": "evening",
+            "distractors": [
+              "morning",
+              "night",
+              "day"
+            ],
+            "explanation": "Der Abend is the evening; the morning is der Morgen."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "How is the letter Z pronounced in German?",
+            "answer": "ts",
+            "distractors": [
+              "z as in \"zoo\"",
+              "s",
+              "sh"
+            ],
+            "explanation": "German Z sounds like \"ts\"."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "How does \"ie\" sound in the word \"Wie\"?",
+            "answer": "ee",
+            "distractors": [
+              "eye",
+              "eh",
+              "ih-eh"
+            ],
+            "explanation": "The letters ie sound like \"ee\" in German."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ Anna.",
+            "answer": "heiße",
+            "distractors": [
+              "heißt",
+              "heißen"
+            ],
+            "explanation": "With \"ich\" the verb ends in -e: ich heiße."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "heißt / du / Wie",
+            "answer": "Wie heißt du?",
+            "distractors": [],
+            "explanation": "The question word comes first, then the verb, then du."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate into German: My name is Jonas.",
+            "answer": "Ich heiße Jonas.",
+            "distractors": [],
+            "explanation": "Use \"Ich heiße\" plus your name to say your name."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Hallo! Ich heiße Jonas Berg. Jonas ist der Vorname. Berg ist der Nachname."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What is Jonas's first name?",
+              "answer": "Jonas",
+              "distractors": [
+                "Berg",
+                "Hallo"
+              ],
+              "explanation": "The text says Jonas is the Vorname, which means first name."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What is \"Berg\"?",
+              "answer": "the last name",
+              "distractors": [
+                "the first name",
+                "a greeting"
+              ],
+              "explanation": "The text says Berg is der Nachname, the last name."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Anna",
+                "de": "Guten Abend! Wie heißt du?",
+                "en": "Good evening! What is your name?"
+              },
+              {
+                "speaker": "Lena",
+                "de": "Ich heiße Lena.",
+                "en": "My name is Lena."
+              },
+              {
+                "speaker": "Anna",
+                "de": "Wie buchstabiert man das?",
+                "en": "How do you spell that?"
+              },
+              {
+                "speaker": "Lena",
+                "de": "L-E-N-A.",
+                "en": "L-E-N-A."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Which greeting does Anna use?",
+              "answer": "Guten Abend",
+              "distractors": [
+                "Guten Morgen",
+                "Guten Tag"
+              ],
+              "explanation": "Anna says \"Guten Abend\", which means good evening."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "How does Lena spell her name?",
+              "answer": "L-E-N-A",
+              "distractors": [
+                "L-E-N-E",
+                "A-N-N-A"
+              ],
+              "explanation": "Lena spells her name L-E-N-A."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 3 short sentences in German. Greet a person, say your name, and say goodbye. Then write your first name letter by letter, like L-E-N-A.",
+          "min_words": 15,
+          "rubric": [
+            "I used a greeting, for example Guten Tag or Hallo.",
+            "I wrote Ich heiße ... with my name.",
+            "I wrote a goodbye, for example Tschüs or Auf Wiedersehen.",
+            "I spelled my name letter by letter."
+          ]
+        },
+        "speaking": {
+          "prompt": "Say hello, say your name and spell it aloud in German. Then say goodbye.",
+          "target_hint": "Hallo! Ich heiße ... Das buchstabiert man so: ... Tschüs!"
+        }
+      },
+      "closing": {
+        "covered": [
+          "You can now say the German letters and the sounds ei, ie, ch, sch, z, w and ß.",
+          "You can now greet people with Hallo, Guten Tag and Guten Abend.",
+          "You can now say your name with \"Ich heiße ...\" and ask \"Wie heißt du?\".",
+          "You can now spell a name letter by letter and say goodbye with Tschüs or Auf Wiedersehen."
+        ],
+        "review_tomorrow": "Review the sounds ei and ie, and practise spelling your first and last name aloud."
+      }
+    },
+    "Z2": {
+      "culture": {
+        "title": "Saying hello and your name",
+        "note": "In Germany, Austria and Switzerland, people often say hello and their name when they meet. In shops, people often say \"Hallo\" or \"Guten Tag\". With friends and young people, \"Hallo\" is very common. Adults who do not know each other often use \"Sie\", but in this lesson you learn \"du\". People often shake hands when they meet for the first time, and they look at the other person. It is normal to say your first name first: \"Ich heiße Anna.\" Many people also say where they are from, because it is an easy way to start a conversation.",
+        "reflection_question": "How do people say hello and their name in your country? Is it the same or different?"
+      },
+      "mission": {
+        "title": "Introduce yourself out loud",
+        "task": "Say three short sentences about yourself in German: your name, your country and how you are. Say them out loud to a mirror, your phone or a friend.",
+        "steps": [
+          "Say: \"Hallo! Ich heiße ...\" with your own name.",
+          "Say: \"Ich komme aus ...\" with your country (for example Deutschland).",
+          "Say: \"Ich bin ...\" with one word, for example gut, müde or super.",
+          "Say all three sentences again without looking at your notes."
+        ],
+        "report_prompt": "Write your three German sentences and tell me which sound was hardest (ich, ei or ß).",
+        "success_check": [
+          "I can say my name in German.",
+          "I can say where I come from.",
+          "I can say how I am."
+        ],
+        "safety_note": "Only share your first name and your country. Do not share your address, phone number or other private data."
+      },
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ müde.",
+            "answer": "bin",
+            "distractors": [
+              "bist",
+              "ist",
+              "sind"
+            ],
+            "explanation": "With \"ich\" we use \"bin\"."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Du ___ super.",
+            "answer": "bist",
+            "distractors": [
+              "bin",
+              "ist",
+              "sind"
+            ],
+            "explanation": "With \"du\" we use \"bist\"."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which German word means \"woman\"?",
+            "answer": "die Frau",
+            "distractors": [
+              "der Mann",
+              "die Stadt",
+              "das Land"
+            ],
+            "explanation": "\"Die Frau\" means woman."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Choose the correct sentence: \"I come from Germany.\"",
+            "answer": "Ich komme aus Deutschland.",
+            "distractors": [
+              "Ich heiße aus Deutschland.",
+              "Ich bin aus Deutschland komme.",
+              "Ich kommst aus Deutschland."
+            ],
+            "explanation": "With \"ich\" the verb is \"komme\", and \"aus\" comes before the country."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Put the words in order: heiße / Ich / Lena",
+            "answer": "Ich heiße Lena.",
+            "distractors": [],
+            "explanation": "The sentence starts with \"Ich\" and the verb is second."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate into German: What is your name?",
+            "answer": "Wie heißt du?",
+            "distractors": [],
+            "explanation": "\"Wie heißt du?\" asks for a name."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Hallo! Ich heiße Jonas. Ich komme aus Deutschland. Ich bin super. Anna ist meine Freundin."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Where does Jonas come from?",
+              "answer": "Deutschland",
+              "distractors": [
+                "Anna",
+                "Lena"
+              ],
+              "explanation": "The text says \"Ich komme aus Deutschland.\""
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "How is Jonas?",
+              "answer": "super",
+              "distractors": [
+                "müde",
+                "gut, danke"
+              ],
+              "explanation": "The text says \"Ich bin super.\""
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Anna",
+                "de": "Hallo! Wie heißt du?",
+                "en": "Hello! What is your name?"
+              },
+              {
+                "speaker": "Lena",
+                "de": "Ich heiße Lena. Und du?",
+                "en": "I am called Lena. And you?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Ich bin Anna. Ich bin müde.",
+                "en": "I am Anna. I am tired."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What is the name of the first speaker?",
+              "answer": "Anna",
+              "distractors": [
+                "Lena",
+                "Jonas"
+              ],
+              "explanation": "The first speaker says \"Ich bin Anna.\""
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "How is Anna?",
+              "answer": "tired",
+              "distractors": [
+                "good",
+                "super"
+              ],
+              "explanation": "Anna says \"Ich bin müde.\""
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 3 to 4 short sentences to introduce yourself in German. Say your name, where you come from and how you are.",
+          "min_words": 15,
+          "rubric": [
+            "I wrote my name with \"Ich heiße ...\".",
+            "I wrote my country with \"Ich komme aus ...\".",
+            "I used \"Ich bin ...\" with a word like gut, müde or super.",
+            "My sentences start with a capital letter and end with a full stop."
+          ]
+        },
+        "speaking": {
+          "prompt": "Say hello and introduce yourself: your name, your country and how you are.",
+          "target_hint": "Hallo! Ich heiße ... Ich komme aus ... Ich bin ..."
+        }
+      },
+      "closing": {
+        "covered": [
+          "You can now say your name with \"Ich heiße ...\".",
+          "You can now say where you are from with \"Ich komme aus ...\".",
+          "You can now use ich bin, du bist and er/sie ist to say how someone is.",
+          "You can now ask \"Wie heißt du?\" and \"Woher kommst du?\"."
+        ],
+        "review_tomorrow": "Review the forms of sein (ich bin, du bist, er/sie ist, wir sind) and practise the ich-sound."
+      }
+    },
+    "Z3": {
+      "culture": {
+        "title": "Phone numbers and numbers in everyday life",
+        "note": "In Germany, Austria and Switzerland people often say phone numbers in pairs of digits, for example 'dreiundzwanzig, vierzig, fünfzehn'. Some people say each digit one by one instead. Both ways are normal. Germans usually write the day before the month in dates, for example 3.5. means the third of May. Addresses are written with the street name first and then the house number: Lindenstraße 12. The postcode (die Postleitzahl) has five digits in Germany and comes before the city name. If you do not understand a number, you can always say: 'Noch einmal, bitte.'",
+        "reflection_question": "How do you say your phone number in your own language: in single digits or in pairs? Which way is easier for you in German?"
+      },
+      "mission": {
+        "title": "My number card",
+        "task": "Make a small card with your German contact details and say the numbers aloud.",
+        "steps": [
+          "Write on a piece of paper: Ich bin ... Jahre alt. Meine Nummer ist ... Write the numbers as words, for example einundzwanzig.",
+          "Say your age and your phone number aloud three times. Say the phone number in pairs of digits.",
+          "Look around your home and find five numbers, for example on a clock, a package or a house number. Say each number in German.",
+          "Record yourself on your phone saying 'Wie alt bist du? Ich bin ... Jahre alt.' and listen to it once."
+        ],
+        "report_prompt": "Report back: Which five numbers did you find? Write them in German words. Which number was hardest to say?",
+        "success_check": [
+          "I can say my age in German.",
+          "I can say my phone number in pairs of digits.",
+          "I can say five numbers between 21 and 99 in German."
+        ],
+        "safety_note": "Use a made-up phone number or only practise alone. Do not share your real phone number, address or other personal data online."
+      },
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which number is 30?",
+            "answer": "dreißig",
+            "distractors": [
+              "dreizehn",
+              "dreiundzwanzig",
+              "dreihundert"
+            ],
+            "explanation": "30 is dreißig, the tens word for three tens."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich bin ___ Jahre alt. (25)",
+            "answer": "fünfundzwanzig",
+            "distractors": [
+              "zwanzigfünf",
+              "fünfzwanzig",
+              "fünfundzwanzigste"
+            ],
+            "explanation": "In 21–99 the unit comes first: fünf + und + zwanzig."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Put the words in the correct order.",
+            "answer": "Wie ist deine Telefonnummer?",
+            "distractors": [],
+            "explanation": "The question word comes first, then the verb ist."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate into German: I am 40 years old.",
+            "answer": "Ich bin vierzig Jahre alt.",
+            "distractors": [],
+            "explanation": "Age is said with Ich bin ... Jahre alt."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does 'die Postleitzahl' mean?",
+            "answer": "postcode",
+            "distractors": [
+              "house number",
+              "email address",
+              "birthday"
+            ],
+            "explanation": "Die Postleitzahl is the number code of a place in an address."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Meine Nummer ist null eins sieben sechs.",
+            "distractors": [],
+            "explanation": "Say each number word and write null as the first digit word."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Das ist Anna. Anna ist achtundzwanzig Jahre alt. Ihre Handynummer ist null eins fünf eins, drei vier fünf. Ihre Adresse ist Lindenstraße zwölf."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "How old is Anna?",
+              "answer": "28",
+              "distractors": [
+                "22",
+                "38",
+                "18"
+              ],
+              "explanation": "Achtundzwanzig means 28."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What is Anna's house number?",
+              "answer": "12",
+              "distractors": [
+                "2",
+                "20",
+                "15"
+              ],
+              "explanation": "The text says Lindenstraße zwölf, so 12."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Jonas",
+                "de": "Hallo Lena, wie alt bist du?",
+                "en": "Hello Lena, how old are you?"
+              },
+              {
+                "speaker": "Lena",
+                "de": "Ich bin sechsunddreißig Jahre alt.",
+                "en": "I am thirty-six years old."
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Wie ist deine Telefonnummer?",
+                "en": "What is your phone number?"
+              },
+              {
+                "speaker": "Lena",
+                "de": "Meine Nummer ist null eins sieben neun.",
+                "en": "My number is zero one seven nine."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "How old is Lena?",
+              "answer": "36",
+              "distractors": [
+                "26",
+                "63",
+                "46"
+              ],
+              "explanation": "Sechsunddreißig means 36."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Jonas ask Lena for?",
+              "answer": "Her phone number",
+              "distractors": [
+                "Her address",
+                "Her email address",
+                "Her birthday"
+              ],
+              "explanation": "Jonas asks: Wie ist deine Telefonnummer?"
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 or 3 short sentences about yourself in German. Say how old you are and give a made-up phone number. Write the numbers as words.",
+          "min_words": 15,
+          "rubric": [
+            "I say my age with Ich bin ... Jahre alt.",
+            "I write numbers from 21 to 99 correctly as one word.",
+            "I give a phone number with Meine Nummer ist ..."
+          ]
+        },
+        "speaking": {
+          "prompt": "Answer aloud: Wie alt bist du? Wie ist deine Telefonnummer?",
+          "target_hint": "Ich bin ... Jahre alt. Meine Nummer ist ..."
+        }
+      },
+      "closing": {
+        "covered": [
+          "You can now count from 0 to 100 in German.",
+          "You can now build numbers like einundzwanzig and say them correctly.",
+          "You can now say how old you are with Ich bin ... Jahre alt.",
+          "You can now ask for and say a phone number.",
+          "You can now ask someone to repeat with Noch einmal, bitte."
+        ],
+        "review_tomorrow": "Review the numbers 21 to 99 and practise saying your phone number in pairs of digits."
+      }
+    }
+  },
+  "failures": []
+}

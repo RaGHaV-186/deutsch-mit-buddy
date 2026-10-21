@@ -1,14 +1,14 @@
 {
   "stage": "generate-a",
   "model": "claude-sonnet-5-5",
-  "batchId": "msgbatch_01K5NWy9W163RgQ1EgwgMJUj",
+  "batchId": "msgbatch_01PuN5bhwBpwnGqmYfAp7d1J",
   "requests": 3,
-  "failedRequests": 3,
-  "inputTokens": 0,
-  "outputTokens": 0,
-  "actualUsd": 0,
-  "actualEur": 0,
-  "estimatedEur": 0.1362,
-  "ceilingEur": 0.2929,
+  "failedRequests": 0,
+  "inputTokens": 12277,
+  "outputTokens": 21671,
+  "actualUsd": 0.1206,
+  "actualEur": 0.1146,
+  "estimatedEur": 0.1406,
+  "ceilingEur": 0.2973,
   "usdToEur": 0.95
 }

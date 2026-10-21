@@ -41,4 +41,29 @@ Front: English (word cards) or "Say it in German" / "Answer out loud" (speaking 
 - Auth and 2FA logic must never be changed by design work (restyle the screens only).
 - Every new slice must build its screens from the components in `@/components/ds` and follow `docs/DESIGN_BRIEF.md` (tokens, layout, states). Don't add one-off styles or hard-coded colours.
 - Game-layer UI (treats, level, streak, combo) is already built and hidden behind `NEXT_PUBLIC_GAME_LAYER` (off by default); slice 10 only needs to supply the data and turn the flag on. Never show mock numbers in production.
-- Every new screen must work at 390px, 820px and 1440px (phone, tablet, desktop layouts from docs/DESIGN_BRIEF.md and docs/design/desktop/), in light and dark, using @/components/ds. Before finishing a slice, save screenshots at those three widths.
+- Every new screen must work at 390px, 820px and 1440px (phone, tablet, desktop layouts from docs/DESIGN_BRIEF.md and docs/design/desktop/), in light and dark, using @/components/ds. Screenshots are taken only at checkpoints, and only at 390px light + 1440px dark unless Raghav asks for more (see Working rules).
+
+## Working rules (to save Raghav's plan usage)
+- Use Sonnet for routine building, tests and fixes. Say when a task needs Opus (hard design, tricky debugging, writing or changing the content-review prompts).
+- Screenshots only at checkpoints, only 390px light + 1440px dark, unless Raghav asks for more.
+- Batch jobs: submit, save the batch id (`data/generated/<run>/state.json`), then stop and tell Raghav. He says "continue"; resume with the same `npm run content -- run ...` command (it polls the saved batch and never submits or pays twice).
+- Paid AI runs: show an estimate (requests, tokens, euros, worst case) and wait for a yes; no pass may be able to cost more than €10; `ANTHROPIC_API_KEY` only in `.env.local`, never in Vercel or a NEXT_PUBLIC variable.
+- Keep "Where we are" below and the status line in BLUEPRINT section 8 current at every stopping point, so Raghav can /clear between steps without losing context.
+
+## Where we are (update at every stop)
+Updated 21 Oct 2026. Branch `slice-3-curriculum` (commits only, not pushed, no PR yet). Slices 0–2 and the redesign (design-v1.1) are merged and live.
+
+**Slice 3a (lesson standard) is built and tested** (`src/lib/content/*`, `scripts/content.mts`, migration `20261021100000_curriculum_content.sql`): 14-part lesson schema, three Sonnet passes (A: parts 0–5, B: 6–9, C: 10–13), an Opus review of every item (ok / fixed / needs-human), automatic lint, a `publish_lesson` function plus trigger that refuses an incomplete lesson, Markdown export, and a preview page at `/design/content?run=<name>` (run the app with `SHOW_DESIGN_PAGE=1`). How to run it: `docs/SETUP-CURRICULUM.md`.
+
+**In flight (Z1–Z3 sample, run `sample-z1-z3`)**: passes A, B and C are done for Z1, Z2, Z3 (actual cost about €0.21). The Opus review batch is submitted at Anthropic: batch `msgbatch_01G3Rk1zNB3GRVQT1p6kKYgE`, estimate id `b83b296ff55facbd` (exact estimate €0.30 expected, €0.65 worst case). Raghav pre-approved the whole sample while the combined actual cost stays under €1.20 (worst case so far about €0.88).
+
+**When Raghav says "continue"**:
+1. `npm run content -- run --run sample-z1-z3 --stage review --approve b83b296ff55facbd` (resumes the saved batch), then `npm run content -- build --run sample-z1-z3`.
+2. Export Z1 to `~/Downloads/z1-lesson.md`: `npm run content -- markdown --run sample-z1-z3 --lesson Z1 --out ~/Downloads/z1-lesson.md`.
+3. Screenshots of `/design/content?run=sample-z1-z3` at 390px light and 1440px dark only.
+4. Checkpoint A report: review summary (ok / fixed / needs-human with reasons), actual cost of all four passes, screenshots, the Markdown file.
+5. Do not run any further tranche until Raghav has reviewed the sample and topped up his API credits (about $19 left; Z1 → B1 needs roughly $16 expected, more with retries; run it in tranches, each pass under €10).
+
+**Next after Checkpoint A (slice 3b)**: generate the rest in tranches, publish, unlock cards per lesson with `template_id`, propagate template fixes to every user's copy without touching SRS or user-edited cards, a generic dedupe test with a fixture user who already owns the Z2–Z9 seed cards, set Raghav's pointer to Day 11 · Z9 in the admin seed-import action, then 3c (report a mistake, content_reports, admin screen, AI label, B2/C1 "coming soon" in the picker).
+
+**Local setup notes**: `npm run test:rls` deletes every local user, so recreate a test user before using the app in a browser. API schemas for structured output must stay small (the whole lesson in one schema was refused: that is why there are three passes). Known issues: `docs/known-issues.md` (no streamed Suspense / `loading.tsx`).

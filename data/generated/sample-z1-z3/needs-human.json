@@ -1,0 +1,204 @@
+[
+  {
+    "id": "Z1#exercises.13",
+    "part": "exercises",
+    "unit": "question",
+    "label": "Exercise 13",
+    "original": {
+      "skill": "word_order",
+      "type": "ordering",
+      "prompt": "Nacht! / Gute",
+      "answer": "Gute Nacht!",
+      "distractors": [],
+      "explanation": "The greeting is 'Gute Nacht'."
+    },
+    "lint": [
+      "The scrambled words must be exactly the words of the answer sentence."
+    ],
+    "status": "needs-human",
+    "reason": "The reviewer said ok, but an automatic check failed: The scrambled words must be exactly the words of the answer sentence.",
+    "final": null
+  },
+  {
+    "id": "Z1#exercises.14",
+    "part": "exercises",
+    "unit": "question",
+    "label": "Exercise 14",
+    "original": {
+      "skill": "translation",
+      "type": "typing",
+      "prompt": "Hello!",
+      "answer": "Hallo!",
+      "distractors": [],
+      "explanation": "'Hallo' is the usual informal greeting."
+    },
+    "lint": [],
+    "status": "needs-human",
+    "reason": "'Guten Tag!' is also a valid translation of 'Hello!' (lesson glosses it so); typing may reject it.",
+    "final": null
+  },
+  {
+    "id": "Z1#exercises.15",
+    "part": "exercises",
+    "unit": "question",
+    "label": "Exercise 15",
+    "original": {
+      "skill": "translation",
+      "type": "typing",
+      "prompt": "My name is Jonas.",
+      "answer": "Ich heiße Jonas.",
+      "distractors": [],
+      "explanation": "Literally 'I am called Jonas'."
+    },
+    "lint": [],
+    "status": "needs-human",
+    "reason": "'Mein Name ist Jonas.' is also correct and taught; check typing accepts alternatives.",
+    "final": null
+  },
+  {
+    "id": "Z2#exercises.12",
+    "part": "exercises",
+    "unit": "question",
+    "label": "Exercise 12",
+    "original": {
+      "skill": "word_order",
+      "type": "ordering",
+      "prompt": "kommt / Jonas / aus / Deutschland",
+      "answer": "Jonas kommt aus Deutschland.",
+      "distractors": [],
+      "explanation": "Subject first, then the verb in second place."
+    },
+    "lint": [],
+    "status": "needs-human",
+    "reason": "\"Aus Deutschland kommt Jonas.\" is also a natural, correct word order.",
+    "final": null
+  },
+  {
+    "id": "Z2#vocabulary.w11",
+    "part": "vocabulary",
+    "unit": "card",
+    "label": "Word: gut",
+    "original": {
+      "tier": "core",
+      "en": "good, fine",
+      "article": null,
+      "de": "gut",
+      "plural": null,
+      "example": "Ich bin gut.",
+      "example_en": "I am fine.",
+      "tip": null
+    },
+    "lint": [],
+    "status": "needs-human",
+    "reason": "\"Ich bin gut\" does not mean \"I am fine\". Natives say \"Mir geht es gut\". The same usage recurs in the writing rubric and mission.",
+    "final": null
+  },
+  {
+    "id": "Z2#writing",
+    "part": "writing",
+    "unit": "writing",
+    "label": "Writing task",
+    "original": {
+      "task": "Introduce yourself in 3 to 5 short sentences. Say your name, where you come from and how you are.",
+      "min_words": 20,
+      "must_include": [
+        "Hallo",
+        "Ich heiße ...",
+        "Ich komme aus ...",
+        "Ich bin ... (for example gut or müde)"
+      ],
+      "useful_phrases": [
+        "Hallo!",
+        "Ich heiße ...",
+        "Ich komme aus ...",
+        "Ich bin müde.",
+        "Mir geht es gut, danke."
+      ],
+      "model_answer": "Hallo! Ich heiße Lena. Ich bin eine Frau. Ich komme aus Deutschland. Ich komme aus Hamburg. Ich bin heute müde, aber es geht mir gut. Danke!",
+      "rubric": [
+        "Uses Ich heiße + name correctly",
+        "Uses Ich komme aus + country or city correctly",
+        "Uses ich bin with a feeling word such as gut or müde",
+        "Verb forms are correct (heiße, komme, bin) and sentences are short and clear",
+        "Reaches at least 20 words and begins sentences with capital letters"
+      ]
+    },
+    "lint": [],
+    "status": "needs-human",
+    "reason": "Task asks for 3–5 sentences but the model answer has 7 and repeats \"Ich komme aus\" awkwardly. The rubric also promotes \"ich bin gut\".",
+    "final": null
+  },
+  {
+    "id": "Z2#exam.gv1",
+    "part": "exam",
+    "unit": "question",
+    "label": "Exam grammar/vocabulary 1",
+    "original": {
+      "skill": "grammar",
+      "type": "gap_fill",
+      "prompt": "Ich ___ müde.",
+      "answer": "bin",
+      "distractors": [
+        "bist",
+        "ist",
+        "sind"
+      ],
+      "explanation": "With \"ich\" we use \"bin\"."
+    },
+    "lint": [],
+    "status": "needs-human",
+    "reason": "Same prompt as warmup.q01; the exam item is not fresh.",
+    "final": null
+  },
+  {
+    "id": "Z2#exam.gv5",
+    "part": "exam",
+    "unit": "question",
+    "label": "Exam grammar/vocabulary 5",
+    "original": {
+      "skill": "word_order",
+      "type": "ordering",
+      "prompt": "Put the words in order: heiße / Ich / Lena",
+      "answer": "Ich heiße Lena.",
+      "distractors": [],
+      "explanation": "The sentence starts with \"Ich\" and the verb is second."
+    },
+    "lint": [
+      "The scrambled words must be exactly the words of the answer sentence."
+    ],
+    "status": "needs-human",
+    "reason": "Same sentence as exercises.11, so not fresh. The words match the answer; the hint was triggered by the prompt prefix.",
+    "final": null
+  },
+  {
+    "id": "Z3#speaking.tandem",
+    "part": "speaking",
+    "unit": "tandem",
+    "label": "Tandem scenario",
+    "original": {
+      "title": "Numbers and contact details",
+      "setting": "You meet Buddy at a dog club and want to swap contact details.",
+      "buddy_role": "A friendly new contact who asks for age and phone number",
+      "learner_role": "Yourself, giving your age and phone number",
+      "opening_line": "Hallo! Ich bin Buddy. Wie alt bist du?",
+      "target_phrases": [
+        "Ich bin ... Jahre alt.",
+        "Meine Nummer ist ...",
+        "Wie ist deine Telefonnummer?",
+        "Noch einmal, bitte."
+      ],
+      "target_grammar": "Numbers 0–100 (einundzwanzig order), phone numbers and age",
+      "topics": [
+        "Wie ist deine Telefonnummer?",
+        "Wie ist deine Hausnummer?",
+        "Wann ist dein Geburtstag?",
+        "Wie ist deine E-Mail-Adresse?"
+      ],
+      "end_condition": "The learner has said their age and phone number and Buddy has repeated the number back correctly."
+    },
+    "lint": [],
+    "status": "needs-human",
+    "reason": "Topic Wann ist dein Geburtstag? needs dates/ordinals not taught; e-mail needs spelling. Possibly above level.",
+    "final": null
+  }
+]

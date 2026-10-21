@@ -1,4 +1,5 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import manifest from "@/app/manifest";
 import { decodePng } from "./png";
@@ -93,5 +94,32 @@ describe("maskable safe zone", () => {
     expect(headPixels).toBeGreaterThan(20000); // the head really was found
     expect(outside).toBe(0);
     expect(farthest).toBeLessThanOrEqual(safeRadius);
+  });
+});
+
+describe("there is exactly one manifest, and nothing refers to the old icons", () => {
+  const walk = (dir: string): string[] =>
+    readdirSync(dir, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(join(dir, e.name)) : [join(dir, e.name)]));
+  const text = (f: string) => /\.(tsx?|js|json|webmanifest|css|svg)$/.test(f) && !f.includes(".test.");
+
+  it("the only manifest source is src/app/manifest.ts (no static manifest in public/ or elsewhere in src/)", () => {
+    const manifests = [...walk("src"), ...walk("public")].filter((f) => /(^|\/)(manifest(\.[\w-]+)?\.(json|webmanifest)|site\.webmanifest|manifest\.ts)$/.test(f));
+    expect(manifests).toEqual(["src/app/manifest.ts"]);
+  });
+
+  it("no manifest, icon list or service worker refers to /icons/ or to the old colours", () => {
+    for (const file of [...walk("src"), ...walk("public")].filter(text)) {
+      const source = readFileSync(file, "utf8");
+      expect(source, `${file} refers to the old /icons/ folder`).not.toMatch(/["'`(]\/icons\//);
+      expect(source.toLowerCase(), `${file} has an old manifest colour`).not.toMatch(/#2457c5|#fbf9f5/);
+    }
+    for (const icon of manifest().icons!) expect(icon.src.startsWith("/icons/")).toBe(false);
+  });
+
+  it("the head links to that manifest and to icons under /buddy/", () => {
+    const layout = readFileSync("src/app/layout.tsx", "utf8");
+    expect(layout).toMatch(/PWA\.|manifest/);
+    expect(PWA.appleTouchIcon.startsWith("/buddy/")).toBe(true);
+    expect(PWA.icons.every((i) => i.src.startsWith("/buddy/"))).toBe(true);
   });
 });

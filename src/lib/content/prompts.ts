@@ -1,19 +1,22 @@
+import { trapsForPrompt } from "./common-traps.ts";
 import { cefrOf, type CurriculumRow } from "./curriculum-rows.ts";
 import { COUNTS, EXERCISES_PER_LESSON, LEVEL_PROFILES, type Lesson, type PassA } from "./lesson-schema.ts";
 import { enumerateItems, valueOf } from "./lesson-items.ts";
 import type { LintIssue } from "./lesson-lint.ts";
+import { notesFor, type NotePass } from "./lesson-notes.ts";
 
-// Models and settings. Sonnet writes a lesson in three passes (A teaches; B covers reading, listening, writing and speaking; C covers the
-// culture note, the mission, the day exam and close day; B and C see A's output);
+// Models and settings. Sonnet writes a lesson in four passes (A teaches; B covers reading, listening, writing and speaking; C is the day exam; D covers the
+// warm-up, the culture note, the mission and close day; B, C and D see A's output, D also sees the earlier sessions);
 // Opus then checks every item (BLUEPRINT section 2). All three are Batch API runs.
 export const GENERATION_MODEL = "claude-sonnet-5-5";
 export const REVIEW_MODEL = "claude-opus-5-5";
 export const PASS_A_MAX_TOKENS = 20_000;
 export const PASS_B_MAX_TOKENS = 12_000;
-export const PASS_C_MAX_TOKENS = 12_000;
+export const PASS_C_MAX_TOKENS = 8_000;
+export const PASS_D_MAX_TOKENS = 8_000;
 export const REVIEW_MAX_TOKENS = 20_000;
 /** Typical output per request (thinking included), used for the "expected" cost; the worst case uses max tokens. */
-export const EXPECTED_OUTPUT = { "generate-a": 9_000, "generate-b": 5_000, "generate-c": 4_000, review: 8_000 } as const;
+export const EXPECTED_OUTPUT = { "generate-a": 10_000, "generate-b": 5_000, "generate-c": 3_500, "generate-d": 3_000, review: 9_000 } as const;
 
 const SHARED = `You write lesson content for "Deutsch mit Buddy", AI-based personalised German practice for adults who study in English and go from zero to C1. Every lesson follows one fixed standard of 14 parts. You write some of the parts in each request and reply with the JSON object requested and nothing else.
 
@@ -24,17 +27,21 @@ GENERAL RULES
 - Match the CEFR level and the instruction language given in the request. Never use grammar or vocabulary clearly above the level, and keep words taught in earlier lessons simple. The lesson's grammar point and theme run through every part.
 - Instruction language: the text that explains or instructs (goal, grammar explanation, rule summary, tips, exercise explanations, culture note, mission, task descriptions) is written in the instruction language of the request. German examples, words, sentences, dialogues and model answers are always German.
 - Output format: where a field has nothing to say, write an empty string (for an article, write none). This applies to article, plural, tip, note, safety_note, target_hint and the en line of a dialogue.
-- A question has exactly one correct answer. Wrong options are plausible but clearly wrong. Explanations are one short sentence in the instruction language.
-- Question formats: multiple_choice (prompt, answer, 2 to 4 wrong options in distractors); gap_fill (a sentence with ___ where the answer belongs, plus 2 to 4 wrong options); ordering (the words of one sentence in scrambled order separated by " / ", the correct sentence as the answer, no wrong options; only sentences with one natural word order); typing (an English sentence to translate into German, one best German answer, no wrong options); dictation (prompt: a short instruction such as "Listen and write the sentence."; answer: the German sentence that is read aloud, with its punctuation; no wrong options).`;
+- A question has one best answer. Wrong options are plausible but clearly wrong. Explanations are one short sentence in the instruction language.
+- accepted_answers: for typing (translation), ordering and dictation questions, list in accepted_answers every OTHER natural, correct answer a learner could give, for example "Mein Name ist Jonas." next to "Ich heiße Jonas." for the English "My name is Jonas.", or "Aus Deutschland kommt Jonas." next to "Jonas kommt aus Deutschland." for an ordering question. Answers are checked ignoring case, punctuation and ß/ss, so never list spelling variants. For an ordering question every accepted answer uses exactly the words of the question. Use an empty list for multiple_choice and gap_fill questions, and when there is really only one answer. Prefer prompts that leave little room: "Hello!" can be Hallo or Guten Tag, so say "Greet a friend: Hello!" when you want Hallo.
+- Pronunciation claims (a hint or tip about how a letter, a letter group or a word sounds): before you write one, spell the word letter by letter and check that the letters you name are really in it (Tschüs = t + sch + ü + s, so it has tsch, which sounds like English "ch", and not plain sch).
+- Question formats: multiple_choice (prompt, answer, 2 to 4 wrong options in distractors); gap_fill (a sentence with ___ where the answer belongs, plus 2 to 4 wrong options); ordering (the words of one sentence in scrambled order separated by " / ", the correct sentence as the answer, no wrong options; only sentences with one natural word order); typing (an English sentence to translate into German, one best German answer, no wrong options); dictation (prompt: a short instruction such as "Listen and write the sentence."; answer: the German sentence that is read aloud, with its punctuation; no wrong options).
+
+COMMON TRAPS (known mistakes of learners and of language models). Never teach any of these as correct, anywhere (examples, exercises, model answers, rubrics, missions, exam items). Use the ones that fit the lesson's topic as its "common traps".
+${trapsForPrompt()}`;
 
 export const PASS_A_SYSTEM = `${SHARED}
 
-PASS A: parts 0 to 5 of the standard.
+PASS A: the teaching parts of the standard (goal, grammar, exercises, vocabulary, pronunciation). The warm-up comes later, in another request.
 - goal: one "can-do" sentence (I can ...) for this lesson.
-- warmup: exactly ${COUNTS.warmup} short recall items (gap_fill or multiple_choice) on THIS lesson's grammar point, for use as spaced review in later weeks. They must stand on their own without the lesson text.
-- grammar: intro (title; explanation as ${COUNTS.examples[0] - 3} to 4 short paragraphs; rule_summary as one line), exactly ${COUNTS.examples[1]} examples (German sentence, English translation, optional note) that show the rule clearly, and ${COUNTS.traps[0]} to 3 common traps (a typical wrong sentence, the right sentence, and why).
+- grammar: intro (title; explanation as ${COUNTS.examples[0] - 3} to 4 short paragraphs; rule_summary as one line), exactly ${COUNTS.examples[1]} examples (German sentence, English translation, optional note) that show the rule clearly, ${COUNTS.traps[0]} to 3 common traps (a typical wrong sentence, the right sentence, and why), and tables: ${COUNTS.tables[0]} to ${COUNTS.tables[1]} support tables. Use a table whenever the grammar point has a list or a paradigm the learner needs to see at a glance (the alphabet with the letter names, verb endings per person, the articles, a number list, a chart of endings). A table has a title, column headers, and rows with one cell per header; no table is fine when the point has no such list. Do not repeat the table's content in the paragraphs.
 - exercises: exactly ${EXERCISES_PER_LESSON} items: ${Object.entries(COUNTS.exercises).map(([t, n]) => `${n} ${t}`).join(", ")}. They practise the grammar point and the lesson's words. Give each a skill: grammar, vocabulary, articles, word_order, translation or dictation.
-- vocabulary: exactly ${COUNTS.wordsCore} core and ${COUNTS.wordsBonus} bonus words (tier "core" / "bonus") for the theme, and exactly ${COUNTS.phrases} useful phrases (Redemittel: complete spoken phrases for real situations, with en = what the learner wants to say, de = the phrase, an example sentence in context with its translation, and an optional tip).
+- vocabulary: exactly ${COUNTS.wordsCore} core and ${COUNTS.wordsBonus} bonus words (tier "core" / "bonus") for the theme, and exactly ${COUNTS.phrases} useful phrases (more only when the course owner's requirements for this lesson ask for specific extra phrases, never more than ${COUNTS.phrasesMax}) (Redemittel: complete spoken phrases for real situations, with en = what the learner wants to say, de = the phrase, an example sentence in context with its translation, and an optional tip).
   Word cards: de = the German word only with no article (nouns capitalised); article = der, die or das for nouns, null for everything else; plural = for nouns "die Namen" (write "—" when there is no usual plural), for verbs the present-tense line "ich komme · du kommst · er kommt" (show irregular forms), otherwise null; en = the short English meaning (add a note in brackets when two German words share one English word, e.g. "student (male)"); example = one natural sentence with the word in the form taught, simple enough for the level; example_en = its translation; tip = optional hint of at most 80 characters about gender patterns, spelling or usage, else null. No word twice.
 - pronunciation: the sound or pattern of the day (focus, a short explanation, 6 to 8 practice words each with a hint on how to say it, and 3 to 4 practice sentences to read aloud). Choose a focus the lesson's own words and sentences let the learner practise.`;
 
@@ -48,10 +55,15 @@ PASS B: parts 6 to 9 of the standard (reading, listening, writing, speaking). Th
 
 export const PASS_C_SYSTEM = `${SHARED}
 
-PASS C: parts 10 to 13 of the standard (culture note, real-world mission, day exam, close day). The request contains pass A (the lesson's grammar and words): the exam tests them.
+PASS C: the day exam. The request contains pass A (the lesson's grammar, words and phrases): the exam tests them.
+- exam: the day exam, with FRESH items: no question, sentence or text may repeat anything else of this lesson (the same sentence with one word changed counts as a repeat; use new names, numbers and situations): exactly ${COUNTS.examGrammarVocab} grammar_vocab questions on the day's grammar point and words; a short reading passage (2 to 4 sentences) with exactly ${COUNTS.examReadingQuestions} questions (skill "reading"); a short listening script (${COUNTS.examScriptLines[0]} to ${COUNTS.examScriptLines[1]} lines, speakers from Anna, Jonas, Lena, with an English translation per line at A1 and A2, else an empty string) with exactly ${COUNTS.examListeningQuestions} questions (skill "listening"); a short writing task (2 to 3 sentences, min_words 15 to 30, with rubric); a short speaking prompt.`;
+
+export const PASS_D_SYSTEM = `${SHARED}
+
+PASS D: the warm-up, culture note, real-world mission and close day. The request contains pass A (the lesson's grammar and words) and lists the grammar and words of the EARLIER sessions: the warm-up reviews those.
+- warmup: the warm-up reviews EARLIER sessions, never this lesson's own content. If the request says this is the first lesson, write the preview: 3 to 5 short points in the instruction language, each completing the sentence "Today you'll learn ..." (preview.points), and no items (an empty list). Otherwise write an empty preview (points = an empty list) and exactly ${COUNTS.warmup} short recall items (gap_fill or multiple_choice) on the earlier grammar points and words listed in the request (one per different earlier session when you can), which stand on their own without any lesson text.
 - culture: a short, accurate, neutral note about life in Germany, Austria or Switzerland tied to the theme (80 to 150 words at low levels), with a reflection question. If unsure of a fact, leave it out. No stereotypes.
 - mission: a safe real-world task the learner can do in or around daily life using the lesson (title, task, 2 to 4 steps, report_prompt = what to report back, 2 to 3 success_check lines "I ..."); add a safety_note when the task involves other people or personal data, else an empty string.
-- exam: the day exam, with FRESH items, none repeated from pass A: exactly ${COUNTS.examGrammarVocab} grammar_vocab questions on the day's grammar point and words; a short reading passage (2 to 4 sentences) with exactly ${COUNTS.examReadingQuestions} questions (skill "reading"); a short listening script (${COUNTS.examScriptLines[0]} to ${COUNTS.examScriptLines[1]} lines, speakers from Anna, Jonas, Lena, with an English translation per line at A1 and A2, else an empty string) with exactly ${COUNTS.examListeningQuestions} questions (skill "listening"); a short writing task (2 to 3 sentences, min_words 15 to 30, with rubric); a short speaking prompt.
 - closing: ${COUNTS.closingCovered[0]} to ${COUNTS.closingCovered[1]} "You can now ..." lines for what was covered and one line on what to review tomorrow.`;
 
 export const REVIEW_SYSTEM = `You are a meticulous German teacher and editor. Another model wrote one lesson of "Deutsch mit Buddy", a course for adults who study in English and go from zero to C1, following a fixed 14-part standard. You check every item of the lesson and reply with the JSON object requested and nothing else.
@@ -61,9 +73,18 @@ For every item check what applies:
 - English: accurate; the English translation matches the German; the English meaning is not misleading.
 - Level: words, grammar and text length suit the stated CEFR level and the lesson's grammar point and theme; nothing clearly above the level.
 - Instruction language: explanations and instructions are written in the instruction language stated for the level (German examples and words stay German).
-- Questions: exactly one answer is right; wrong options are clearly wrong and not also acceptable; for ordering questions the scrambled words are exactly the words of the answer and no other natural word order is also correct; for dictation the answer is a natural sentence that can be read aloud; explanations are true.
+- Answers: for typing, ordering and dictation questions check accepted_answers: it must list every other natural, correct answer a learner could give (add the missing ones by fixing the item with the whole new list) and nothing wrong. Answers are checked ignoring case, punctuation and ß/ss, so spelling variants must not be listed. Accepted orders of an ordering question use exactly the words of the question. Choice questions have an empty list. A translation prompt whose English has several equally good German answers ("Hello!") must list them all or be made specific.
+- Pronunciation claims: for EVERY statement about how something sounds (the pronunciation part, card tips, drill tips, grammar explanations, example notes), look at the actual spelling of the word and check the claim against its letters, one by one: Tschüs has tsch (English "ch" as in church), not sch; "buchstabiert" has ch and st, no sch. A wrong claim is a clear error: fix it.
+- Common traps: the list below is known wrong usage. A lesson must never teach it as correct, not in examples, exercises, model answers, rubrics, missions or exam items: fix any occurrence (it is fine inside a trap that shows it as the wrong sentence).
+- Tables: complete and correct (every letter, person or form that belongs in it), cells match their headers.
+- Warm-up: in the first lesson a preview of what the lesson really teaches ("Today you'll learn ..."), without questions; in every other lesson recall items on the earlier sessions' grammar and words listed in the request, not on this lesson's own content.
+- Course owner's requirements: when the request lists requirements for this lesson, every one must be met by the lesson as written; an item that breaks one is fixed, or needs-human when you cannot fix it alone.
+- Questions: exactly one answer is right (apart from the accepted answers); wrong options are clearly wrong and not also acceptable; for ordering questions the scrambled words are exactly the words of the answer and no other natural word order is also correct; for dictation the answer is a natural sentence that can be read aloud; explanations are true.
 - Passages, tasks, scenario, culture note, mission: coherent, useful for learning, original, safe, accurate (a doubtful cultural fact is a problem), neutral; reading and listening questions can only be answered from the text or dialogue; the exam items are fresh and cover the day's grammar and words; the writing rubric covers the lesson's grammar and vocabulary; the Tandem scenario makes Buddy a conversation partner.
 - Names: only Anna, Jonas, Lena and Buddy; no real people, brands or politics.
+
+COMMON TRAPS
+${trapsForPrompt()}
 
 Give every item exactly one verdict, in the order given, using its id:
 - "ok": nothing needs changing. Reason of at most 12 words.
@@ -73,7 +94,8 @@ Do not rewrite items for style or taste; fix only errors. For "ok" and "needs-hu
 
 const phaseLabel = (phase: CurriculumRow["phase"]) => (phase === "zero" ? "zero phase, before A1" : phase === "exam" ? "B1 exam preparation" : phase);
 
-function lessonSpec(lesson: CurriculumRow): string[] {
+/** What the pass or the review is told about this lesson, including the course owner's requirements for it (lesson-notes.ts). */
+function lessonSpec(lesson: CurriculumRow, pass?: NotePass): string[] {
   const profile = LEVEL_PROFILES[lesson.phase];
   const lines = [
     `Lesson ${lesson.code} (${phaseLabel(lesson.phase)}; CEFR level ${cefrOf(lesson.phase)})`,
@@ -83,11 +105,34 @@ function lessonSpec(lesson: CurriculumRow): string[] {
   if (lesson.goal) lines.push(`Goal: ${lesson.goal}`);
   lines.push(`Instruction language: ${profile.instructionLanguage}.`);
   if (lesson.phase === "zero") lines.push("This is the zero phase: absolute beginners. Keep every word and sentence very simple (present tense, short sentences).");
+  const notes = notesFor(lesson.code, pass);
+  if (notes.length) lines.push("", "Requirements from the course owner for this lesson (all of them must be met exactly):", ...notes.map((n) => `- ${n}`));
   return lines;
 }
 
+// ---- What came before: the warm-up reviews the earlier sessions.
+export const EARLIER_SESSIONS = 6;
+export const EARLIER_WORDS = 60;
+export interface EarlierContext {
+  /** True for the very first lesson of the course (nothing to review). */
+  first: boolean;
+  grammar: string[];
+  words: string[];
+}
+
+/** The grammar points of the last few lessons before this one, and their words when those lessons are already written (in this run). */
+export function earlierContext(lesson: CurriculumRow, plan: readonly CurriculumRow[], wordsOf: (code: string) => string[] | undefined = () => undefined): EarlierContext {
+  const earlier = plan.filter((l) => l.seq < lesson.seq).slice(-EARLIER_SESSIONS);
+  return { first: lesson.seq === 0, grammar: earlier.map((l) => `${l.code}: ${l.grammar}`), words: earlier.flatMap((l) => wordsOf(l.code) ?? []).slice(-EARLIER_WORDS) };
+}
+
+const earlierLines = (e: EarlierContext): string[] =>
+  e.first
+    ? ["This is the FIRST lesson of the course: there is nothing earlier to review. The warm-up is the preview."]
+    : ["Earlier sessions (the warm-up reviews THESE, not this lesson):", ...e.grammar.map((g) => `- ${g}`), ...(e.words.length ? [`Words from them: ${e.words.join(", ")}`] : [])];
+
 export function passAPrompt(lesson: CurriculumRow): string {
-  return [...lessonSpec(lesson), "", "Write parts 0 to 5 of this lesson."].join("\n");
+  return [...lessonSpec(lesson, "A"), "", "Write the teaching parts of this lesson (goal, grammar, exercises, vocabulary, pronunciation)."].join("\n");
 }
 
 const passASummary = (passA: PassA) => [
@@ -100,7 +145,7 @@ const passASummary = (passA: PassA) => [
 export function passBPrompt(lesson: CurriculumRow, passA: PassA): string {
   const p = LEVEL_PROFILES[lesson.phase];
   return [
-    ...lessonSpec(lesson),
+    ...lessonSpec(lesson, "B"),
     `Reading passage length: ${p.readingWords[0]} to ${p.readingWords[1]} words.`,
     `Dialogue length: ${p.listeningWords[0]} to ${p.listeningWords[1]} words in total.`,
     `Writing task: ${p.writingKind}, min_words ${p.writingMinWords[0]} to ${p.writingMinWords[1]}.`,
@@ -113,15 +158,31 @@ export function passBPrompt(lesson: CurriculumRow, passA: PassA): string {
 }
 
 export function passCPrompt(lesson: CurriculumRow, passA: PassA): string {
-  return [...lessonSpec(lesson), "", "Pass A of this lesson (use its grammar and words):", ...passASummary(passA), "", "Write parts 10 to 13 of this lesson (culture, mission, day exam, close day)."].join("\n");
+  return [...lessonSpec(lesson, "C"), "", "Pass A of this lesson (the exam tests its grammar and words):", ...passASummary(passA), "", "Write the day exam of this lesson."].join("\n");
 }
 
-export function reviewPrompt(lesson: CurriculumRow, content: Lesson, lint: LintIssue[]): string {
+export function passDPrompt(lesson: CurriculumRow, passA: PassA, earlier: EarlierContext): string {
+  return [
+    ...lessonSpec(lesson, "D"),
+    "",
+    ...earlierLines(earlier),
+    "",
+    "Pass A of this lesson (use its grammar and words):",
+    ...passASummary(passA),
+    "",
+    "Write the warm-up, culture note, mission and close day of this lesson.",
+  ].join("\n");
+}
+
+export function reviewPrompt(lesson: CurriculumRow, content: Lesson, lint: LintIssue[], earlier: EarlierContext): string {
   const p = LEVEL_PROFILES[lesson.phase];
   const items = enumerateItems(lesson.code, content).map((i) => ({ id: i.id, unit: i.unit, value: valueOf(content, i) }));
   const hints = lint.length ? lint.map((l) => `- ${l.id}: ${l.message}`).join("\n") : "- none";
   return [
     ...lessonSpec(lesson),
+    "",
+    ...earlierLines(earlier),
+    "",
     `Expected: reading ${p.readingWords[0]} to ${p.readingWords[1]} words; dialogue ${p.listeningWords[0]} to ${p.listeningWords[1]} words; writing task ${p.writingKind} with min_words ${p.writingMinWords[0]} to ${p.writingMinWords[1]}.`,
     "",
     "Automatic checks (hints only, they can be wrong):",

@@ -6,6 +6,7 @@ import {
   buildPassARequests,
   buildPassBRequests,
   buildPassCRequests,
+  buildPassDRequests,
   buildReviewRequests,
   combineLesson,
   costReport,
@@ -17,6 +18,7 @@ import {
   parsePassA,
   parsePassB,
   parsePassC,
+  parsePassD,
   parseReview,
   publishPayload,
   runBatch,
@@ -25,7 +27,7 @@ import {
   type BatchResultLine,
 } from "./pipeline.ts";
 import { GENERATION_MODEL, PASS_A_MAX_TOKENS, REVIEW_MODEL } from "./prompts.ts";
-import { lessonRow, validLesson, validPassA, validPassB, validPassC } from "./test-fixtures.ts";
+import { lessonRow, validLesson, validPassA, validPassB, validPassC, validPassD } from "./test-fixtures.ts";
 
 const usage = { input_tokens: 5000, output_tokens: 9000 };
 const succeeded = (id: string, body: unknown, over: { stop_reason?: string | null } = {}): BatchResultLine => ({
@@ -33,7 +35,7 @@ const succeeded = (id: string, body: unknown, over: { stop_reason?: string | nul
   result: { type: "succeeded", message: { content: [{ type: "text", text: typeof body === "string" ? body : JSON.stringify(body) }], stop_reason: over.stop_reason ?? "end_turn", usage } },
 });
 const verdict = (id: string, status: ReviewVerdict["status"] = "ok", over: Partial<ReviewVerdict> = {}): ReviewVerdict => ({ id, status, reason: "fine", fixed_json: null, ...over });
-const row = lessonRow({ code: "Z1", seq: 0 });
+const row = lessonRow({ code: "Z1", seq: 1 }); // not the first lesson of the course: the first one has a preview instead of warm-up questions
 const allOk = (lesson = validLesson()) => itemIdsOf("Z1", lesson).map((id) => verdict(id));
 const withVerdict = (id: string, v: Partial<ReviewVerdict>, lesson = validLesson()) => allOk(lesson).map((x) => (x.id === id ? { ...x, ...v } : x));
 
@@ -72,25 +74,39 @@ describe("requests", () => {
     expect(reqs[0].custom_id).toBe("generate-b-Z9");
   });
 
-  it("pass C (culture, mission, day exam, close day) also sees pass A, and has its own limits", () => {
+  it("pass C (the day exam) sees pass A and has its own limits", () => {
     const reqs = buildPassCRequests(lessons, new Map([["Z9", validPassA()]]));
     expect(reqs).toHaveLength(1);
     expect(reqs[0].custom_id).toBe("generate-c-Z9");
     expect(reqs[0].params.system).toContain("PASS C");
     expect(reqs[0].params.messages[0].content).toContain("der Kaffee");
-    expect(reqs[0].params.messages[0].content).toContain("parts 10 to 13");
+    expect(reqs[0].params.messages[0].content).toContain("Write the day exam of this lesson");
     expect(buildPassCRequests(lessons, new Map())).toEqual([]);
   });
 
+  it("pass D (warm-up, culture, mission, close day) sees pass A and the earlier sessions", () => {
+    const plan = [lessonRow({ code: "Z8", seq: 7, grammar: "Telling time" }), lessons[0]];
+    const reqs = buildPassDRequests([plan[1]], new Map([["Z9", validPassA()], ["Z8", { ...validPassA(), vocabulary: { ...validPassA().vocabulary, words: [{ ...validPassA().vocabulary.words[0], de: "Uhr", article: "die" as const }] } }]]), plan);
+    expect(reqs).toHaveLength(1);
+    expect(reqs[0].custom_id).toBe("generate-d-Z9");
+    expect(reqs[0].params.system).toContain("PASS D");
+    const content = reqs[0].params.messages[0].content;
+    expect(content).toContain("der Kaffee");
+    expect(content).toContain("- Z8: Telling time");
+    expect(content).toContain("die Uhr");
+    expect(content).toContain("Write the warm-up, culture note, mission and close day");
+    expect(buildPassDRequests(lessons, new Map(), lessons)).toEqual([]);
+  });
+
   it("every generation request tells the model how to write 'nothing' (empty string, none for an article)", () => {
-    for (const r of [...buildPassARequests(lessons), ...buildPassBRequests(lessons, new Map([["Z9", validPassA()]])), ...buildPassCRequests(lessons, new Map([["Z9", validPassA()]]))]) {
+    for (const r of [...buildPassARequests(lessons), ...buildPassBRequests(lessons, new Map([["Z9", validPassA()]])), ...buildPassCRequests(lessons, new Map([["Z9", validPassA()]])), ...buildPassDRequests(lessons, new Map([["Z9", validPassA()]]), lessons)]) {
       expect(r.params.system).toContain("empty string");
       expect(JSON.stringify(r.params.output_config.format.schema)).not.toContain('"null"');
     }
   });
 
   it("review: Opus, one request per complete lesson, listing every item with its id", () => {
-    const reqs = buildReviewRequests(lessons, new Map([["Z9", validLesson()]]));
+    const reqs = buildReviewRequests(lessons, new Map([["Z9", validLesson()]]), lessons);
     expect(reqs).toHaveLength(1);
     expect(reqs[0].params.model).toBe(REVIEW_MODEL);
     expect(reqs[0].params.model).toBe("claude-opus-5-5");
@@ -131,12 +147,12 @@ describe("cost estimate and approval", () => {
     const a = estimateStage("generate-a", buildPassARequests(lessons));
     const b = estimateStage("generate-b", buildPassBRequests(lessons, new Map(lessons.map((l) => [l.code, validPassA()]))));
     const c = estimateStage("generate-c", buildPassCRequests(lessons, new Map(lessons.map((l) => [l.code, validPassA()]))));
-    const r = estimateStage("review", buildReviewRequests(lessons, new Map(lessons.map((l) => [l.code, validLesson()]))));
+    const r = estimateStage("review", buildReviewRequests(lessons, new Map(lessons.map((l) => [l.code, validLesson()])), lessons));
     for (const e of [a, b, c, r]) expect(e.ceilingEur, e.stage).toBeLessThan(10);
   });
 
   it("the Opus pass is the one that limits a tranche: 45 lessons fit under €10, 60 do not", () => {
-    const review = (n: number) => estimateStage("review", buildReviewRequests(Array.from({ length: n }, (_, i) => lessonRow({ code: `Z${i}`, seq: i })), new Map(Array.from({ length: n }, (_, i) => [`Z${i}`, validLesson()] as const))));
+    const review = (n: number) => estimateStage("review", buildReviewRequests(Array.from({ length: n }, (_, i) => lessonRow({ code: `Z${i}`, seq: i })), new Map(Array.from({ length: n }, (_, i) => [`Z${i}`, validLesson()] as const)), []));
     expect(review(45).ceilingEur).toBeLessThan(10);
     expect(review(60).ceilingEur).toBeGreaterThan(10);
   });
@@ -180,12 +196,13 @@ describe("runBatch", () => {
 describe("reading generation results", () => {
   const lessons = [lessonRow(), lessonRow({ code: "W3.2", seq: 40 })];
 
-  it("the three passes are read by lesson code and combined into one valid lesson with all 14 parts", () => {
+  it("the four passes are read by lesson code and combined into one valid lesson with all 14 parts", () => {
     const a = parsePassA(lessons, [succeeded("generate-a-Z9", validPassA()), succeeded("generate-a-W3_2", validPassA())]);
     const b = parsePassB([lessons[0]], [succeeded("generate-b-Z9", validPassB())]);
     const c = parsePassC([lessons[0]], [succeeded("generate-c-Z9", validPassC())]);
+    const d = parsePassD([lessons[0]], [succeeded("generate-d-Z9", validPassD())]);
     expect([...a.results.keys()]).toEqual(["Z9", "W3.2"]);
-    const lesson = combineLesson(a.results.get("Z9")!, b.results.get("Z9")!, c.results.get("Z9")!);
+    const lesson = combineLesson(a.results.get("Z9")!, b.results.get("Z9")!, c.results.get("Z9")!, d.results.get("Z9")!);
     expect(Object.keys(lesson)).toEqual([...PARTS]);
   });
 
@@ -370,7 +387,7 @@ describe("costReport", () => {
 
 describe("items match what the reviewer is asked about", () => {
   it("the review prompt lists exactly the lesson's items", () => {
-    const reqs = buildReviewRequests([row], new Map([["Z1", validLesson()]]));
+    const reqs = buildReviewRequests([row], new Map([["Z1", validLesson()]]), [row]);
     const text = reqs[0].params.messages[0].content;
     for (const item of enumerateItems("Z1", validLesson())) expect(text).toContain(`"id":"${item.id}"`);
   });

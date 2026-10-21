@@ -11,6 +11,7 @@ const bullets = (items: string[]) => items.map((x) => `- ${x}`);
 function question(q: V): string[] {
   const out = [`${q.prompt}`, `  Answer: ${q.answer}`];
   if (q.distractors?.length) out.push(`  Wrong options: ${q.distractors.join(" | ")}`);
+  if (q.accepted_answers?.length) out.push(`  Also accepted: ${q.accepted_answers.join(" | ")}`);
   out.push(`  (${q.skill} · ${String(q.type).replace("_", " ")}) Why: ${q.explanation}`);
   return out;
 }
@@ -31,6 +32,10 @@ export function unitLines(unit: UnitName, v: V): string[] {
       return [`${v.de}   =   ${v.en}`, `  ${v.example}`, `  ${v.example_en}`, ...(v.tip ? [`  Tip: ${v.tip}`] : [])];
     case "example":
       return [`${v.de}`, `  ${v.en}${v.note ? "   (" + v.note + ")" : ""}`];
+    case "table":
+      return [`${v.title}`, `| ${v.headers.join(" | ")} |`, `| ${v.headers.map(() => "---").join(" | ")} |`, ...v.rows.map((r: string[]) => `| ${r.join(" | ")} |`)];
+    case "warmupPreview":
+      return ["Today you'll learn:", ...bullets(v.points)];
     case "trap":
       return [`Wrong: ${v.wrong}`, `Right: ${v.right}`, `Why: ${v.why}`];
     case "grammarIntro":

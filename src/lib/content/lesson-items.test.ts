@@ -71,3 +71,18 @@ describe("applyFix", () => {
     expect(out.lesson.writing.min_words).toBe(35);
   });
 });
+
+describe("tables and the warm-up preview are items too", () => {
+  it("each table and the preview get an id and are reviewed like everything else", () => {
+    const base = validLesson();
+    const lesson = {
+      ...base,
+      grammar: { ...base.grammar, tables: [{ title: "The alphabet", headers: ["Letter", "Name"], rows: [["A", "ah"]] }] },
+      warmup: { preview: { points: ["say the letters", "spell your name", "greet people"] }, items: [] },
+    };
+    const items = enumerateItems("Z1", lesson);
+    expect(items.find((i) => i.id === "Z1#grammar.tbl1")).toMatchObject({ unit: "table", label: "Table: The alphabet" });
+    expect(items.find((i) => i.id === "Z1#warmup.preview")).toMatchObject({ unit: "warmupPreview" });
+    expect(items.some((i) => i.id.startsWith("Z1#warmup.q"))).toBe(false);
+  });
+});

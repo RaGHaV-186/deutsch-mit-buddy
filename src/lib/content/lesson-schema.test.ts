@@ -1,15 +1,18 @@
 import { describe, expect, it } from "vitest";
-import { COUNTS, EXERCISES_PER_LESSON, LEVEL_PROFILES, PARTS, PASS_A_PARTS, PASS_A_JSON_SCHEMA, PASS_B_JSON_SCHEMA, PASS_B_PARTS, PASS_C_JSON_SCHEMA, PASS_C_PARTS, REVIEW_JSON_SCHEMA, lessonSchema, passASchema, passBSchema, passCSchema, reviewResultSchema, toApiSchema, wireToDomain } from "./lesson-schema.ts";
+import { COUNTS, EXERCISES_PER_LESSON, LEVEL_PROFILES, PARTS, PASS_A_PARTS, PASS_A_JSON_SCHEMA, PASS_B_JSON_SCHEMA, PASS_B_PARTS, PASS_C_JSON_SCHEMA, PASS_C_PARTS, PASS_D_PARTS, PASS_D_JSON_SCHEMA, REVIEW_JSON_SCHEMA, lessonSchema, passASchema, passBSchema, passCSchema, passDSchema, reviewResultSchema, toApiSchema, wireToDomain } from "./lesson-schema.ts";
 import { z } from "zod";
-import { validLesson, validPassA, validPassB, validPassC } from "./test-fixtures.ts";
+import { validLesson, validPassA, validPassB, validPassC, validPassD } from "./test-fixtures.ts";
 
 describe("the 14 parts", () => {
   it("are exactly the lesson standard, in order, and split between passes A, B and C", () => {
     expect(PARTS).toEqual(["goal", "warmup", "grammar", "exercises", "vocabulary", "pronunciation", "reading", "listening", "writing", "speaking", "culture", "mission", "exam", "closing"]);
     expect(PARTS).toHaveLength(14);
-    expect([...PASS_A_PARTS, ...PASS_B_PARTS, ...PASS_C_PARTS]).toEqual(PARTS);
+    expect([...PASS_A_PARTS, ...PASS_B_PARTS, ...PASS_C_PARTS, ...PASS_D_PARTS].sort()).toEqual([...PARTS].sort());
+    expect(PASS_A_PARTS).toEqual(["goal", "grammar", "exercises", "vocabulary", "pronunciation"]);
     expect(PASS_B_PARTS).toEqual(["reading", "listening", "writing", "speaking"]);
-    expect(PASS_C_PARTS).toEqual(["culture", "mission", "exam", "closing"]);
+    expect(PASS_C_PARTS).toEqual(["exam"]);
+    // The warm-up is written in pass D because it reviews the EARLIER sessions.
+    expect(PASS_D_PARTS).toEqual(["warmup", "culture", "mission", "closing"]);
   });
 
   it("a lesson is valid only when every part is present", () => {
@@ -27,7 +30,9 @@ describe("the 14 parts", () => {
     expect(passBSchema.safeParse(validPassB()).success).toBe(true);
     expect(passCSchema.safeParse(validPassC()).success).toBe(true);
     expect(passASchema.safeParse(validPassB()).success).toBe(false);
+    expect(passDSchema.safeParse(validPassD()).success).toBe(true);
     expect(passBSchema.safeParse(validPassC()).success).toBe(false);
+    expect(passCSchema.safeParse(validPassD()).success).toBe(false);
   });
 
   it("rejects wrong shapes inside a part", () => {
@@ -77,7 +82,7 @@ describe("JSON Schemas sent to the API", () => {
     }
   };
 
-  for (const [name, schema] of [["pass A", PASS_A_JSON_SCHEMA], ["pass B", PASS_B_JSON_SCHEMA], ["pass C", PASS_C_JSON_SCHEMA], ["review", REVIEW_JSON_SCHEMA]] as const) {
+  for (const [name, schema] of [["pass A", PASS_A_JSON_SCHEMA], ["pass B", PASS_B_JSON_SCHEMA], ["pass C", PASS_C_JSON_SCHEMA], ["pass D", PASS_D_JSON_SCHEMA], ["review", REVIEW_JSON_SCHEMA]] as const) {
     it(`${name}: only keywords the API accepts, every object closed and fully required, no $ref`, () => {
       const forbidden = ["minLength", "maxLength", "minItems", "maxItems", "minimum", "maximum", "pattern", "format", "$ref", "$schema", "default"];
       walk(schema, (n) => {
@@ -94,19 +99,21 @@ describe("JSON Schemas sent to the API", () => {
     expect(Object.keys((PASS_A_JSON_SCHEMA as { properties: object }).properties)).toEqual([...PASS_A_PARTS]);
     expect(Object.keys((PASS_B_JSON_SCHEMA as { properties: object }).properties)).toEqual([...PASS_B_PARTS]);
     expect(Object.keys((PASS_C_JSON_SCHEMA as { properties: object }).properties)).toEqual([...PASS_C_PARTS]);
+    expect(Object.keys((PASS_D_JSON_SCHEMA as { properties: object }).properties)).toEqual([...PASS_D_PARTS]);
   });
 
   it("generation schemas have no null unions (the API refused a grammar that was too large): 'nothing' is an empty string, or none for an article", () => {
-    for (const schema of [PASS_A_JSON_SCHEMA, PASS_B_JSON_SCHEMA, PASS_C_JSON_SCHEMA]) expect(JSON.stringify(schema)).not.toContain('"null"');
+    for (const schema of [PASS_A_JSON_SCHEMA, PASS_B_JSON_SCHEMA, PASS_C_JSON_SCHEMA, PASS_D_JSON_SCHEMA]) expect(JSON.stringify(schema)).not.toContain('"null"');
     const words = (PASS_A_JSON_SCHEMA as { properties: { vocabulary: { properties: { words: { items: { properties: Record<string, unknown> } } } } } }).properties.vocabulary.properties.words.items.properties;
     expect(words.article).toEqual({ type: "string", enum: ["der", "die", "das", "none"] });
     expect(words.tip).toEqual({ type: "string" });
   });
 
-  it("every generation schema is small enough for the API's grammar compiler (each pass was probed with a real request; the whole lesson in one schema was refused)", () => {
-    expect(JSON.stringify(PASS_A_JSON_SCHEMA).length).toBeLessThan(4000);
-    expect(JSON.stringify(PASS_B_JSON_SCHEMA).length).toBeLessThan(4000);
-    expect(JSON.stringify(PASS_C_JSON_SCHEMA).length).toBeLessThan(4500);
+  it("every generation schema is small enough for the API's grammar compiler", () => {
+    // Probed with real requests on 22 Oct 2026: schemas of 3,251 to 3,694 characters were accepted; 3,937 (pass C with accepted_answers) and
+    // 4,812 (pass C with the warm-up as well) were refused with "compiled grammar is too large". That is why a lesson is written in four passes.
+    // Adding a field to a pass can push it over: probe it with a real request first (a tiny call), then move parts to another pass if it is refused.
+    for (const schema of [PASS_A_JSON_SCHEMA, PASS_B_JSON_SCHEMA, PASS_C_JSON_SCHEMA, PASS_D_JSON_SCHEMA]) expect(JSON.stringify(schema).length).toBeLessThan(3800);
   });
 
   it("the review schema keeps its null union (it was accepted as it is)", () => {

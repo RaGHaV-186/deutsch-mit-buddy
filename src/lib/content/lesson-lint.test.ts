@@ -162,3 +162,88 @@ describe("items", () => {
     expect(ids.has("Z9#vocabulary.w02")).toBe(false);
   });
 });
+
+describe("accepted answers", () => {
+  const typing = (l: Lesson) => l.exercises.items.find((q) => q.type === "typing")!;
+  const ordering = (l: Lesson) => l.exercises.items.find((q) => q.type === "ordering")!;
+  it("are fine on typing, ordering and dictation questions", () => {
+    expect(lint((l) => (typing(l).accepted_answers = ["Ich trinke den Kaffee."]))).toEqual([]);
+    expect(lint((l) => (ordering(l).accepted_answers = [ordering(l).prompt.split(" / ").reverse().join(" ") + "."]))).toEqual([]);
+  });
+  it("are an error on a choice question", () => {
+    const issues = lint((l) => (l.exercises.items.find((q) => q.type === "multiple_choice")!.accepted_answers = ["x"]));
+    expect(issues.map((i) => i.rule)).toContain("accepted-type");
+  });
+  it("must differ from the answer once case, punctuation and ß/ss are ignored", () => {
+    expect(lint((l) => (typing(l).accepted_answers = [typing(l).answer.toLowerCase().replace(".", "")])).map((i) => i.rule)).toContain("accepted-distinct");
+    expect(lint((l) => (typing(l).accepted_answers = ["Mein Name ist Jonas.", "mein name ist jonas"])).map((i) => i.rule)).toContain("accepted-distinct");
+  });
+  it("an accepted order uses exactly the words of the question", () => {
+    expect(lint((l) => (ordering(l).accepted_answers = ["Ich trinke Wasser."])).map((i) => i.rule)).toContain("accepted-ordering-words");
+  });
+});
+
+describe("the warm-up", () => {
+  const lintFirst = (mutate: (l: Lesson) => void) => {
+    const l = validLesson();
+    mutate(l);
+    return lintLesson("Z1", "zero", l, { first: true });
+  };
+  const points = ["say the letters", "spell your name", "greet people"];
+  it("the first lesson has a preview and no questions", () => {
+    expect(lintFirst((l) => ((l.warmup.preview.points = points), (l.warmup.items = [])))).toEqual([]);
+  });
+  it("the first lesson without a preview, or with questions, is an error", () => {
+    expect(lintFirst(() => {}).map((i) => i.rule)).toEqual(expect.arrayContaining(["warmup-preview", "warmup-count"]));
+    expect(lintFirst((l) => (l.warmup.preview.points = points)).map((i) => i.rule)).toEqual(["warmup-count"]);
+  });
+  it("every other lesson has three questions and no preview", () => {
+    expect(lint((l) => (l.warmup.preview.points = points)).map((i) => i.rule)).toEqual(["warmup-preview"]);
+  });
+});
+
+describe("support tables", () => {
+  it("must have one cell per header in every row", () => {
+    const issues = lint((l) => (l.grammar.tables = [{ title: "Alphabet", headers: ["Letter", "Name"], rows: [["A", "ah"], ["B"]] }]));
+    expect(ruleOf(issues)).toEqual(["Z9#grammar.tbl1:table-shape"]);
+    expect(lint((l) => (l.grammar.tables = [{ title: "Alphabet", headers: ["Letter", "Name"], rows: [["A", "ah"], ["B", "beh"]] }]))).toEqual([]);
+  });
+  it("at most three", () => {
+    const t = { title: "T", headers: ["a"], rows: [["x"]] };
+    expect(lint((l) => (l.grammar.tables = [t, t, t, t])).map((i) => i.rule)).toContain("table-count");
+  });
+});
+
+describe("the day exam is fresh", () => {
+  it("an exam item that repeats an exercise (same filled sentence) is an error", () => {
+    const issues = lint((l) => (l.exam.grammar_vocab[0] = { ...l.exercises.items[0] }));
+    expect(ruleOf(issues)).toEqual(["Z9#exam.gv1:exam-fresh"]);
+  });
+  it("so is one that repeats a warm-up item, even with a different gap prompt", () => {
+    const issues = lint((l) => (l.exam.grammar_vocab[0] = { ...l.warmup.items[0], prompt: l.warmup.items[0].prompt.trim() + "  ", distractors: ["x", "y"] }));
+    expect(ruleOf(issues)).toEqual(["Z9#exam.gv1:exam-fresh"]);
+  });
+  it("a dictation or ordering item is the same when its answer sentence is the same (case and punctuation ignored)", () => {
+    const dictation = (l: Lesson) => l.exercises.items.find((q) => q.type === "dictation")!;
+    const issues = lint((l) => (l.exam.grammar_vocab[1] = { ...dictation(l), answer: dictation(l).answer.toLowerCase().replace(".", "!") }));
+    expect(ruleOf(issues)).toEqual(["Z9#exam.gv2:exam-fresh"]);
+  });
+  it("the exam reading text may not reuse a sentence of the lesson's reading text", () => {
+    const issues = lint((l) => (l.exam.reading.passage.text = `Neuer Satz hier. ${l.reading.passage.text.split(". ")[0]}.`));
+    expect(ruleOf(issues)).toEqual(["Z9#exam.reading.passage:exam-fresh"]);
+  });
+  it("different items are fine", () => {
+    expect(lint(() => {})).toEqual([]);
+  });
+});
+
+describe("known traps are flagged for the reviewer (a warning, not an error)", () => {
+  it("“Ich bin gut” outside a trap", () => {
+    const issues = lint((l) => (l.speaking.drill[0].target = "Ich bin gut."));
+    expect(issues).toHaveLength(1);
+    expect(issues[0]).toMatchObject({ level: "warn", rule: "trap-ich-bin-gut" });
+  });
+  it("but not inside a trap that marks it as wrong", () => {
+    expect(lint((l) => (l.grammar.traps[0] = { wrong: "Ich bin gut.", right: "Mir geht es gut.", why: "Ich bin gut means I am good at something." }))).toEqual([]);
+  });
+});

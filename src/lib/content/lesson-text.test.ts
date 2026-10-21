@@ -5,7 +5,13 @@ import { lessonToMarkdown, PART_TITLES, unitLines } from "./lesson-text.ts";
 import { validLesson } from "./test-fixtures.ts";
 
 describe("unitLines", () => {
-  const lesson = validLesson();
+  // One lesson that has every kind of unit: a support table and a warm-up preview as well.
+  const base = validLesson();
+  const lesson = {
+    ...base,
+    grammar: { ...base.grammar, tables: [{ title: "The alphabet", headers: ["Letter", "Name"], rows: [["A", "ah"], ["B", "beh"]] }] },
+    warmup: { preview: { points: ["say the letters", "spell your name", "greet people"] }, items: [] },
+  };
   it("has a readable form for every kind of unit that occurs in a lesson", () => {
     const kinds = new Set(enumerateItems("Z1", lesson).map((i) => i.unit));
     expect([...kinds].sort()).toEqual(Object.keys(UNIT_SCHEMAS).sort());
@@ -22,6 +28,16 @@ describe("unitLines", () => {
     expect(text).toContain("die Kaffees");
     expect(text).toContain("coffee");
     expect(text).toContain("Das ist Kaffee.");
+  });
+});
+
+describe("tables and answers", () => {
+  it("a table is a Markdown table", () => {
+    expect(unitLines("table", { title: "The alphabet", headers: ["Letter", "Name"], rows: [["A", "ah"]] })).toEqual(["The alphabet", "| Letter | Name |", "| --- | --- |", "| A | ah |"]);
+  });
+  it("a question shows its accepted answers", () => {
+    const q = { skill: "translation", type: "typing", prompt: "My name is Jonas.", answer: "Ich heiße Jonas.", distractors: [], accepted_answers: ["Mein Name ist Jonas."], explanation: "x" };
+    expect(unitLines("question", q).join("\n")).toContain("Also accepted: Mein Name ist Jonas.");
   });
 });
 

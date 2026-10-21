@@ -1,5 +1,7 @@
-import { COUNTS, LEVEL_PROFILES, type Card, type Lesson, type Phase, type Question } from "./lesson-schema.ts";
-import { enumerateItems, type LessonItem } from "./lesson-items.ts";
+import { normalise } from "./answer-check.ts";
+import { COMMON_TRAPS } from "./common-traps.ts";
+import { COUNTS, LEVEL_PROFILES, WRITTEN_TYPES, type Card, type Lesson, type Phase, type Question } from "./lesson-schema.ts";
+import { enumerateItems, valueOf, type LessonItem } from "./lesson-items.ts";
 
 // Free, mechanical checks that run before the paid review and again after every correction. They catch broken structure
 // (a gap question with no gap, a scrambled sentence missing a word, a lesson with 4 exercises instead of 19) and flag what the
@@ -68,6 +70,16 @@ function lintQuestion(q: Question, id: string, dictationMax: number, out: LintIs
     if (d.length > 0) add("warn", "ordering-options", "An ordering question has no wrong options.");
   }
   if ((q.type === "typing" || q.type === "dictation") && d.length > 0) add("warn", "no-options", "A typing or dictation question has no wrong options.");
+  const accepted = q.accepted_answers;
+  if (accepted.length) {
+    if (!(WRITTEN_TYPES as readonly string[]).includes(q.type)) add("error", "accepted-type", "Only typing, ordering and dictation questions have accepted answers; a choice question has exactly one right option.");
+    const keys = [q.answer, ...accepted].map(normalise);
+    if (new Set(keys).size !== keys.length) add("error", "accepted-distinct", "An accepted answer repeats the answer or another accepted answer (case, punctuation and ß/ss are ignored when answers are checked).");
+    if (q.type === "ordering") {
+      const wanted = tokens(q.answer).sort().join(" ");
+      if (accepted.some((a) => tokens(a).sort().join(" ") !== wanted)) add("error", "accepted-ordering-words", "Every accepted order must use exactly the words of the answer sentence.");
+    }
+  }
   if (q.type === "dictation" && wordCount(q.answer) > dictationMax) add("warn", "dictation-length", `A dictation sentence at this level has at most ${dictationMax} words.`);
   if (q.skill === "articles") {
     if (!["der", "die", "das"].includes(q.answer.toLowerCase())) add("error", "article-answer", "An article question is answered with der, die or das.");
@@ -78,7 +90,27 @@ function lintQuestion(q: Question, id: string, dictationMax: number, out: LintIs
 const range = (n: number, [lo, hi]: readonly [number, number]) => n >= lo && n <= hi;
 const rangeText = ([lo, hi]: readonly [number, number]) => (lo === hi ? `${lo}` : `${lo} to ${hi}`);
 
-export function lintLesson(code: string, phase: Phase, lesson: Lesson): LintIssue[] {
+/** What makes a question "the same" as another one: the finished sentence (gap filled in), or the answer, or the English prompt of a translation. */
+function questionKeys(q: Question): string[] {
+  const keys: string[] = [];
+  if (q.type === "gap_fill") keys.push(normalise(q.prompt.replace("___", q.answer)));
+  else if (q.type === "ordering" || q.type === "dictation") keys.push(normalise(q.answer));
+  else if (q.type === "typing") keys.push(normalise(q.answer), normalise(q.prompt));
+  else keys.push(normalise(`${q.prompt} ${q.answer}`));
+  return keys.filter((k) => k.split(" ").length >= 3 || q.type === "multiple_choice");
+}
+
+/** The sentences of a text, normalised, ignoring very short ones. */
+function sentenceKeys(text: string): string[] {
+  return text.split(/(?<=[.!?])\s+|\n/).map(normalise).filter((k) => k.split(" ").length >= 3);
+}
+
+export interface LintOptions {
+  /** True for the very first lesson of the course: nothing to review yet, so the warm-up is a preview. */
+  first?: boolean;
+}
+
+export function lintLesson(code: string, phase: Phase, lesson: Lesson, options: LintOptions = {}): LintIssue[] {
   const profile = LEVEL_PROFILES[phase];
   const out: LintIssue[] = [];
   const items = enumerateItems(code, lesson);
@@ -90,8 +122,19 @@ export function lintLesson(code: string, phase: Phase, lesson: Lesson): LintIssu
   const w = lesson.vocabulary.words;
   if (!range(w.length, COUNTS.wordsTotal)) lessonIssue("error", "word-count", `Expected ${rangeText(COUNTS.wordsTotal)} words, got ${w.length}.`);
   if (w.filter((c) => c.tier === "core").length < 10 || w.filter((c) => c.tier === "bonus").length < 4) lessonIssue("warn", "word-tiers", `Expected about ${COUNTS.wordsCore} core and ${COUNTS.wordsBonus} bonus words.`);
-  if (lesson.vocabulary.phrases.length !== COUNTS.phrases) lessonIssue("error", "phrase-count", `Expected ${COUNTS.phrases} useful phrases, got ${lesson.vocabulary.phrases.length}.`);
-  if (lesson.warmup.items.length !== COUNTS.warmup) lessonIssue("error", "warmup-count", `Expected ${COUNTS.warmup} warm-up items, got ${lesson.warmup.items.length}.`);
+  if (!range(lesson.vocabulary.phrases.length, [COUNTS.phrases, COUNTS.phrasesMax])) lessonIssue("error", "phrase-count", `Expected ${COUNTS.phrases} useful phrases (up to ${COUNTS.phrasesMax} when a lesson note asks for more), got ${lesson.vocabulary.phrases.length}.`);
+  const preview = lesson.warmup.preview.points.length;
+  if (options.first) {
+    if (!range(preview, COUNTS.warmupPreview)) lessonIssue("error", "warmup-preview", `The first lesson has nothing to review: its warm-up is a preview of ${rangeText(COUNTS.warmupPreview)} points “Today you'll learn ...”, got ${preview}.`);
+    if (lesson.warmup.items.length) lessonIssue("error", "warmup-count", "The first lesson has no warm-up questions (there is nothing earlier to review).");
+  } else {
+    if (lesson.warmup.items.length !== COUNTS.warmup) lessonIssue("error", "warmup-count", `Expected ${COUNTS.warmup} warm-up items, got ${lesson.warmup.items.length}.`);
+    if (preview) lessonIssue("error", "warmup-preview", "Only the first lesson has a preview; every other warm-up reviews earlier sessions.");
+  }
+  if (lesson.grammar.tables.length > COUNTS.tables[1]) lessonIssue("error", "table-count", `At most ${COUNTS.tables[1]} support tables, got ${lesson.grammar.tables.length}.`);
+  lesson.grammar.tables.forEach((t, i) => {
+    if (t.rows.some((r) => r.length !== t.headers.length)) out.push({ id: id("grammar", "tables", i), level: "error", rule: "table-shape", message: "Every table row needs one cell per column header." });
+  });
   if (!range(lesson.grammar.examples.length, COUNTS.examples)) lessonIssue("error", "example-count", `Expected ${rangeText(COUNTS.examples)} grammar examples, got ${lesson.grammar.examples.length}.`);
   if (!range(lesson.grammar.traps.length, COUNTS.traps)) lessonIssue("error", "trap-count", `Expected ${rangeText(COUNTS.traps)} common traps, got ${lesson.grammar.traps.length}.`);
   for (const [type, n] of Object.entries(COUNTS.exercises)) {
@@ -158,6 +201,31 @@ export function lintLesson(code: string, phase: Phase, lesson: Lesson): LintIssu
   lesson.exam.grammar_vocab.forEach((q, i) => lintQuestion(q, id("exam", "grammar_vocab", i), profile.dictationMaxWords, out));
   lesson.exam.reading.questions.forEach((q, i) => lintQuestion(q, id("exam", "reading", "questions", i), profile.dictationMaxWords, out));
   lesson.exam.listening.questions.forEach((q, i) => lintQuestion(q, id("exam", "listening", "questions", i), profile.dictationMaxWords, out));
+  // ---- the day exam is fresh: nothing in it repeats the warm-up, the exercises or the reading and listening texts
+  const lessonQuestions = [...lesson.warmup.items, ...lesson.exercises.items, ...lesson.reading.questions, ...lesson.listening.questions];
+  const seenKeys = new Set(lessonQuestions.flatMap(questionKeys));
+  const examQuestions: [Question, (string | number)[]][] = [
+    ...lesson.exam.grammar_vocab.map((q, i) => [q, ["exam", "grammar_vocab", i]] as [Question, (string | number)[]]),
+    ...lesson.exam.reading.questions.map((q, i) => [q, ["exam", "reading", "questions", i]] as [Question, (string | number)[]]),
+    ...lesson.exam.listening.questions.map((q, i) => [q, ["exam", "listening", "questions", i]] as [Question, (string | number)[]]),
+  ];
+  for (const [q, pointer] of examQuestions) {
+    if (questionKeys(q).some((k) => seenKeys.has(k))) out.push({ id: id(...pointer), level: "error", rule: "exam-fresh", message: "This exam item repeats a warm-up, exercise or reading/listening question of the lesson. Exam items must be new." });
+  }
+  const lessonSentences = new Set([
+    ...sentenceKeys(lesson.reading.passage.text),
+    ...lesson.listening.passage.script.flatMap((l) => sentenceKeys(l.de)),
+    ...lesson.grammar.examples.map((e) => normalise(e.de)),
+  ]);
+  if (sentenceKeys(lesson.exam.reading.passage.text).some((k) => lessonSentences.has(k))) out.push({ id: id("exam", "reading", "passage"), level: "error", rule: "exam-fresh", message: "The exam reading text repeats a sentence from the lesson. Exam texts must be new." });
+  if (lesson.exam.listening.passage.script.flatMap((l) => sentenceKeys(l.de)).some((k) => lessonSentences.has(k))) out.push({ id: id("exam", "listening", "passage"), level: "error", rule: "exam-fresh", message: "The exam dialogue repeats a sentence from the lesson. Exam texts must be new." });
+
+  // ---- common traps (hints for the reviewer: the same text is fine inside a trap that explains why it is wrong)
+  for (const item of items) {
+    if (item.unit === "trap") continue;
+    const text = JSON.stringify(valueOf(lesson, item));
+    for (const trap of COMMON_TRAPS) if (trap.detect?.test(text)) out.push({ id: item.id, level: "warn", rule: `trap-${trap.id}`, message: `Contains a known trap (${trap.wrong}). Right: ${trap.right}` });
+  }
   lesson.grammar.traps.forEach((t, i) => {
     if (same(t.wrong, t.right)) out.push({ id: id("grammar", "traps", i), level: "error", rule: "trap-same", message: "The wrong and the right version are the same." });
   });

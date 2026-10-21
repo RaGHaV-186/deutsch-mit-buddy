@@ -1,18 +1,20 @@
 import { createHash } from "node:crypto";
 import type { CurriculumRow } from "./curriculum-rows.ts";
 import { applyFix, enumerateItems, valueOf, type LessonItem, type UnitName } from "./lesson-items.ts";
-import { lessonErrors, lintLesson } from "./lesson-lint.ts";
+import { lessonErrors, lintLesson, type LintIssue } from "./lesson-lint.ts";
 import {
   PART_NUMBER,
   PARTS,
   PASS_A_JSON_SCHEMA,
   PASS_B_JSON_SCHEMA,
   PASS_C_JSON_SCHEMA,
+  PASS_D_JSON_SCHEMA,
   REVIEW_JSON_SCHEMA,
   lessonSchema,
   passASchema,
   passBSchema,
   passCSchema,
+  passDSchema,
   reviewResultSchema,
   wireToDomain,
   type Lesson,
@@ -20,32 +22,37 @@ import {
   type PassA,
   type PassB,
   type PassC,
+  type PassD,
   type ReviewVerdict,
 } from "./lesson-schema.ts";
 import { actualCostUsd, assertWithinCap, estimateRun, estimateTokens, type RunEstimate, type Usage } from "./pricing.ts";
 import {
   EXPECTED_OUTPUT,
   GENERATION_MODEL,
+  earlierContext,
   PASS_A_MAX_TOKENS,
   PASS_A_SYSTEM,
   PASS_B_MAX_TOKENS,
   PASS_B_SYSTEM,
   PASS_C_MAX_TOKENS,
   PASS_C_SYSTEM,
+  PASS_D_MAX_TOKENS,
+  PASS_D_SYSTEM,
   REVIEW_MAX_TOKENS,
   REVIEW_MODEL,
   REVIEW_SYSTEM,
   passAPrompt,
   passBPrompt,
   passCPrompt,
+  passDPrompt,
   reviewPrompt,
 } from "./prompts.ts";
 
-// The pipeline for a lesson: Sonnet pass A (teach), pass B (reading, listening, writing, speaking), pass C (culture, mission, day exam,
-// close day; B and C see A), then an Opus review of every item. All of them are Batch API runs. The API client is injected, so everything here is testable with a fake.
+// The pipeline for a lesson: Sonnet pass A (teach), pass B (reading, listening, writing, speaking), pass C (day exam), pass D (warm-up, culture, mission,
+// close day; B, C and D see A), then an Opus review of every item. All of them are Batch API runs. The API client is injected, so everything here is testable with a fake.
 // Relative imports only (the scripts run this file with plain Node).
 
-export type Stage = "generate-a" | "generate-b" | "generate-c" | "review";
+export type Stage = "generate-a" | "generate-b" | "generate-c" | "generate-d" | "review";
 
 export interface BatchRequest {
   custom_id: string;
@@ -99,11 +106,31 @@ export const buildPassCRequests = (lessons: CurriculumRow[], passA: Map<string, 
     return a ? [request("generate-c", l.code, GENERATION_MODEL, PASS_C_MAX_TOKENS, PASS_C_SYSTEM, passCPrompt(l, a), PASS_C_JSON_SCHEMA)] : [];
   });
 
-export const buildReviewRequests = (lessons: CurriculumRow[], contents: Map<string, Lesson>): BatchRequest[] =>
+/** `plan` is every lesson of the course in order: pass D and the review need the earlier sessions (the warm-up reviews them). */
+export const buildPassDRequests = (lessons: CurriculumRow[], passA: Map<string, PassA>, plan: readonly CurriculumRow[]): BatchRequest[] =>
+  lessons.flatMap((l) => {
+    const a = passA.get(l.code);
+    const earlier = earlierContext(l, plan, (code) => wordsOf(passA.get(code)));
+    return a ? [request("generate-d", l.code, GENERATION_MODEL, PASS_D_MAX_TOKENS, PASS_D_SYSTEM, passDPrompt(l, a, earlier), PASS_D_JSON_SCHEMA)] : [];
+  });
+
+const wordsOf = (lesson: { vocabulary: { words: { article: string | null; de: string }[] } } | undefined) => lesson?.vocabulary.words.map((c) => `${c.article ? c.article + " " : ""}${c.de}`);
+
+export const buildReviewRequests = (lessons: CurriculumRow[], contents: Map<string, Lesson>, plan: readonly CurriculumRow[]): BatchRequest[] =>
   lessons.flatMap((l) => {
     const c = contents.get(l.code);
-    return c ? [request("review", l.code, REVIEW_MODEL, REVIEW_MAX_TOKENS, REVIEW_SYSTEM, reviewPrompt(l, c, lintLesson(l.code, l.phase, c)), REVIEW_JSON_SCHEMA)] : [];
+    const earlier = earlierContext(l, plan, (code) => wordsOf(contents.get(code)));
+    return c ? [request("review", l.code, REVIEW_MODEL, REVIEW_MAX_TOKENS, REVIEW_SYSTEM, reviewPrompt(l, c, lintLesson(l.code, l.phase, c, { first: l.seq === 0 }), earlier), REVIEW_JSON_SCHEMA)] : [];
   });
+
+/** The free check that runs before any Opus money is spent: the lessons whose automatic checks find an error. */
+export function lintErrors(lessons: CurriculumRow[], contents: Map<string, Lesson>): { code: string; issues: LintIssue[] }[] {
+  return lessons.flatMap((l) => {
+    const c = contents.get(l.code);
+    const issues = c ? lintLesson(l.code, l.phase, c, { first: l.seq === 0 }).filter((i) => i.level === "error") : [];
+    return issues.length ? [{ code: l.code, issues }] : [];
+  });
+}
 
 // ---- Cost estimate (shown before every paid run, and what an approval is bound to)
 export interface StageEstimate extends RunEstimate {
@@ -219,10 +246,11 @@ function parseStage<T>(stage: Stage, lessons: CurriculumRow[], lines: BatchResul
 export const parsePassA = (lessons: CurriculumRow[], lines: BatchResultLine[]) => parseStage("generate-a", lessons, lines, (v) => passASchema.safeParse(wireToDomain(v)));
 export const parsePassB = (lessons: CurriculumRow[], lines: BatchResultLine[]) => parseStage("generate-b", lessons, lines, (v) => passBSchema.safeParse(wireToDomain(v)));
 export const parsePassC = (lessons: CurriculumRow[], lines: BatchResultLine[]) => parseStage("generate-c", lessons, lines, (v) => passCSchema.safeParse(wireToDomain(v)));
+export const parsePassD = (lessons: CurriculumRow[], lines: BatchResultLine[]) => parseStage("generate-d", lessons, lines, (v) => passDSchema.safeParse(wireToDomain(v)));
 
-/** The whole lesson: the three passes together, validated as one. */
-export function combineLesson(a: PassA, b: PassB, c: PassC): Lesson {
-  return lessonSchema.parse({ ...a, ...b, ...c });
+/** The whole lesson: the four passes together, validated as one. */
+export function combineLesson(a: PassA, b: PassB, c: PassC, d: PassD): Lesson {
+  return lessonSchema.parse({ ...a, ...b, ...c, ...d });
 }
 
 export const itemIdsOf = (code: string, lesson: Lesson) => enumerateItems(code, lesson).map((i) => i.id);
@@ -276,8 +304,9 @@ export interface LessonReview {
 
 export function mergeLesson(lesson: CurriculumRow, content: Lesson, verdicts: ReviewVerdict[]): LessonReview {
   const { code, phase } = lesson;
+  const first = lesson.seq === 0;
   const verdictOf = new Map(verdicts.map((v) => [v.id, v]));
-  const initialLint = lintLesson(code, phase, content);
+  const initialLint = lintLesson(code, phase, content, { first });
   const items: ReviewItem[] = [];
   let current = content;
 
@@ -294,7 +323,7 @@ export function mergeLesson(lesson: CurriculumRow, content: Lesson, verdicts: Re
       const applied = v.fixed_json ? applyFix(current, item as LessonItem, v.fixed_json) : null;
       if (!applied) items.push(needsHuman(`Marked fixed, but the correction is missing or does not fit this item. (${v.reason})`));
       else {
-        const remaining = lintLesson(code, phase, applied.lesson).filter((l) => l.id === item.id && l.level === "error");
+        const remaining = lintLesson(code, phase, applied.lesson, { first }).filter((l) => l.id === item.id && l.level === "error");
         if (remaining.length) items.push(needsHuman(`The correction still fails an automatic check (${remaining[0].message}). (${v.reason})`));
         else {
           current = applied.lesson;
@@ -308,7 +337,7 @@ export function mergeLesson(lesson: CurriculumRow, content: Lesson, verdicts: Re
     }
   }
 
-  const lessonIssues = lessonErrors(lintLesson(code, phase, current)).map((l) => l.message);
+  const lessonIssues = lessonErrors(lintLesson(code, phase, current, { first })).map((l) => l.message);
   const partStatus = Object.fromEntries(
     PARTS.map((part) => {
       const mine = items.filter((i) => i.part === part);
@@ -338,7 +367,7 @@ export function publishPayload(review: LessonReview): PublishPayload {
   l.vocabulary.phrases.forEach((p, i) => cards.push({ session_code: review.code, kind: "say", tier: "core", position: l.vocabulary.words.length + i + 1, en: p.en, article: null, de: p.de, plural: null, example: p.example, example_en: p.example_en, tip: p.tip }));
   const questions: Record<string, unknown>[] = [];
   const push = (part: string, list: Lesson["exercises"]["items"]) =>
-    list.forEach((q, i) => questions.push({ session_code: review.code, part, position: i + 1, skill: q.skill, type: q.type, prompt: q.prompt, answer: q.answer, distractors: q.distractors, explanation: q.explanation }));
+    list.forEach((q, i) => questions.push({ session_code: review.code, part, position: i + 1, skill: q.skill, type: q.type, prompt: q.prompt, answer: q.answer, distractors: q.distractors, accepted_answers: q.accepted_answers, explanation: q.explanation }));
   push("warmup", l.warmup.items);
   push("exercises", l.exercises.items);
   push("reading", l.reading.questions);

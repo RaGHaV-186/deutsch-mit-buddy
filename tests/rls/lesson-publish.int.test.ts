@@ -56,6 +56,38 @@ describe("publish_lesson", () => {
     expect(data!.every((r) => r.review_status === "ok")).toBe(true);
   });
 
+  it("stores accepted answers with the question (a payload without them stores none)", async () => {
+    const p = payload();
+    const typing = p.questions.find((q) => q.part === "exercises" && q.type === "typing")!;
+    typing.accepted_answers = ["Mein Name ist Jonas.", "Ich bin Jonas."];
+    const old = p.questions.find((q) => q.part === "exercises" && q.type === "dictation")!;
+    delete old.accepted_answers;
+    expect((await publish(p)).error).toBeNull();
+    const { data } = await admin.from("question_bank").select("type, prompt, accepted_answers").eq("session_code", CODE).eq("part", "exercises");
+    expect(data!.find((q) => q.prompt === typing.prompt)!.accepted_answers).toEqual(["Mein Name ist Jonas.", "Ich bin Jonas."]);
+    expect(data!.find((q) => q.type === "dictation" && q.prompt === old.prompt)!.accepted_answers).toEqual([]);
+    expect(data!.filter((q) => q.type === "multiple_choice").every((q) => (q.accepted_answers as unknown[]).length === 0)).toBe(true);
+    const tooMany = await admin.from("question_bank").update({ accepted_answers: Array.from({ length: 9 }, (_, i) => `x${i}`) }).eq("session_code", CODE).eq("prompt", typing.prompt);
+    expect(tooMany.error?.code).toBe("23514");
+  });
+
+  it("needs 3 warm-up questions, except in the very first lesson, whose warm-up is a preview", async () => {
+    const noWarmup = (p: PublishPayload) => p.questions.filter((q) => q.part !== "warmup");
+    expect((await publish(payload(), { questions: noWarmup(payload()) })).error?.message).toMatch(/too few exercises or questions/);
+    expect(await counts()).toEqual({ parts: 0, cards: 0, questions: 0, published: 0 });
+    // Make TXP1 the first lesson for a moment (the real first lesson steps aside), then restore everything.
+    const { data: first } = await admin.from("curriculum_sessions").select("code").eq("seq", 0).maybeSingle();
+    if (first) await admin.from("curriculum_sessions").update({ seq: 9301 }).eq("code", first.code);
+    try {
+      await admin.from("curriculum_sessions").update({ seq: 0 }).eq("code", CODE);
+      expect((await publish(payload(), { questions: noWarmup(payload()) })).error).toBeNull();
+      expect((await counts()).questions).toBe(39);
+    } finally {
+      await admin.from("curriculum_sessions").update({ seq: 9300 }).eq("code", CODE);
+      if (first) await admin.from("curriculum_sessions").update({ seq: 0 }).eq("code", first.code);
+    }
+  });
+
   it("refuses a lesson with a missing part, and writes nothing", async () => {
     for (const part of PARTS) {
       const p = payload();

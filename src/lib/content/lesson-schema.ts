@@ -9,13 +9,16 @@ export type PartName = (typeof PARTS)[number];
 /** Part number in the standard (0 = can-do goal ... 13 = close day). */
 export const PART_NUMBER: Record<PartName, number> = Object.fromEntries(PARTS.map((p, i) => [p, i])) as Record<PartName, number>;
 /**
- * A lesson is written in three Sonnet passes (the API's structured-output grammar is too large for the whole lesson at once):
- * pass A teaches (parts 0 to 5); pass B covers reading, listening, writing and speaking (6 to 9); pass C covers the culture note,
- * the mission, the day exam and close day (10 to 13). Passes B and C see pass A's grammar and words.
+ * A lesson is written in four Sonnet passes (the API's structured-output grammar is too large for more parts at once; each schema was
+ * probed against the real API and pass C with the warm-up in it was refused):
+ * pass A teaches (goal, grammar, exercises, vocabulary, pronunciation); pass B covers reading, listening, writing and speaking;
+ * pass C is the day exam; pass D covers the warm-up, the culture note, the mission and close day. Passes B, C and D see pass A's grammar
+ * and words; pass D also sees the grammar and words of the EARLIER sessions, because the warm-up reviews those, never this lesson's own content.
  */
-export const PASS_A_PARTS = ["goal", "warmup", "grammar", "exercises", "vocabulary", "pronunciation"] as const satisfies readonly PartName[];
+export const PASS_A_PARTS = ["goal", "grammar", "exercises", "vocabulary", "pronunciation"] as const satisfies readonly PartName[];
 export const PASS_B_PARTS = ["reading", "listening", "writing", "speaking"] as const satisfies readonly PartName[];
-export const PASS_C_PARTS = ["culture", "mission", "exam", "closing"] as const satisfies readonly PartName[];
+export const PASS_C_PARTS = ["exam"] as const satisfies readonly PartName[];
+export const PASS_D_PARTS = ["warmup", "culture", "mission", "closing"] as const satisfies readonly PartName[];
 
 export const ARTICLES = ["der", "die", "das"] as const;
 export const TIERS = ["core", "bonus"] as const;
@@ -31,7 +34,12 @@ export const COUNTS = {
   wordsBonus: 6,
   wordsTotal: [15, 20] as const,
   phrases: 5,
+  /** A lesson note (lesson-notes.ts) may ask for extra phrases, never more than this. */
+  phrasesMax: 7,
   warmup: 3,
+  /** Lesson 1 has nothing to review yet: it opens with a short "Today you'll learn ..." preview instead. */
+  warmupPreview: [3, 5] as const,
+  tables: [0, 3] as const,
   examples: [5, 6] as const,
   traps: [2, 4] as const,
   exercises: { gap_fill: 6, multiple_choice: 4, ordering: 3, typing: 3, dictation: 3 } as Record<string, number>,
@@ -80,12 +88,21 @@ export const LEVEL_PROFILES: Record<Phase, LevelProfile> = {
 const text = (max: number) => z.string().trim().min(1).max(max);
 const maybe = (max: number) => z.string().trim().max(max).nullable();
 
+/** Question types whose answer the learner writes or arranges: only these may list accepted_answers. */
+export const WRITTEN_TYPES = ["typing", "ordering", "dictation"] as const;
+
 export const questionSchema = z.object({
   skill: z.enum(SKILLS),
   type: z.enum(QUESTION_TYPES),
   prompt: text(500),
   answer: text(300),
   distractors: z.array(text(300)).max(6),
+  /**
+   * Other natural, correct answers for typing, translation, dictation and ordering questions (the checker in answer-check.ts normalises
+   * case, punctuation and ß/ss, so these are only real alternatives such as "Mein Name ist Jonas." next to "Ich heiße Jonas.").
+   * Empty for choice questions. Defaults to empty so content written before this field existed still parses.
+   */
+  accepted_answers: z.array(text(300)).max(8).default([]),
   explanation: text(400),
 });
 export const cardSchema = z.object({
@@ -100,6 +117,9 @@ export const cardSchema = z.object({
 });
 export const phraseSchema = z.object({ en: text(300), de: text(300), example: text(300), example_en: text(300), tip: maybe(300) });
 export const exampleSchema = z.object({ de: text(300), en: text(300), note: maybe(300) });
+/** A support table in a grammar part: the alphabet, a conjugation, the articles, an endings chart. */
+export const tableSchema = z.object({ title: text(120), headers: z.array(text(60)).min(1).max(6), rows: z.array(z.array(text(120)).min(1).max(6)).min(1).max(40) });
+export const warmupPreviewSchema = z.object({ points: z.array(text(200)).max(6) });
 export const trapSchema = z.object({ wrong: text(300), right: text(300), why: text(400) });
 export const scriptLineSchema = z.object({ speaker: text(30), de: text(400), en: maybe(400) });
 
@@ -151,8 +171,7 @@ export const closingSchema = z.object({ covered: z.array(text(200)).min(1).max(8
 // ---- Parts
 export const passASchema = z.object({
   goal: goalSchema,
-  warmup: z.object({ items: z.array(questionSchema).min(1).max(8) }),
-  grammar: z.object({ intro: grammarIntroSchema, examples: z.array(exampleSchema).min(1).max(10), traps: z.array(trapSchema).min(1).max(6) }),
+  grammar: z.object({ intro: grammarIntroSchema, examples: z.array(exampleSchema).min(1).max(10), traps: z.array(trapSchema).min(1).max(6), tables: z.array(tableSchema).max(4).default([]) }),
   exercises: z.object({ items: z.array(questionSchema).min(1).max(40) }),
   vocabulary: z.object({ words: z.array(cardSchema).min(1).max(40), phrases: z.array(phraseSchema).min(1).max(12) }),
   pronunciation: pronunciationSchema,
@@ -164,8 +183,6 @@ export const passBSchema = z.object({
   speaking: z.object({ drill: z.array(drillSchema).min(1).max(10), tandem: tandemSchema }),
 });
 export const passCSchema = z.object({
-  culture: cultureSchema,
-  mission: missionSchema,
   exam: z.object({
     grammar_vocab: z.array(questionSchema).min(1).max(12),
     reading: z.object({ passage: examPassageSchema, questions: z.array(questionSchema).min(1).max(6) }),
@@ -173,13 +190,21 @@ export const passCSchema = z.object({
     writing: examWritingSchema,
     speaking: examSpeakingSchema,
   }),
+});
+export const passDSchema = z.object({
+  warmup: z.object({ preview: warmupPreviewSchema, items: z.array(questionSchema).max(8) }),
+  culture: cultureSchema,
+  mission: missionSchema,
   closing: closingSchema,
 });
-export const lessonSchema = passASchema.extend(passBSchema.shape).extend(passCSchema.shape);
+const partShapes = { ...passASchema.shape, ...passBSchema.shape, ...passCSchema.shape, ...passDSchema.shape };
+// The parts in lesson order (goal ... close day), whichever pass wrote them.
+export const lessonSchema = z.object(Object.fromEntries(PARTS.map((part) => [part, partShapes[part]])) as typeof partShapes);
 
 export type PassA = z.output<typeof passASchema>;
 export type PassB = z.output<typeof passBSchema>;
 export type PassC = z.output<typeof passCSchema>;
+export type PassD = z.output<typeof passDSchema>;
 export type Lesson = z.output<typeof lessonSchema>;
 export type Question = z.output<typeof questionSchema>;
 export type Card = z.output<typeof cardSchema>;
@@ -215,6 +240,7 @@ export function toApiSchema(schema: z.ZodType, options: { simplifyNull?: boolean
       const out: Record<string, unknown> = {};
       for (const [k, v] of Object.entries(obj)) {
         if (UNSUPPORTED.has(k) && typeof v !== "object") continue;
+        if (k === "default") continue; // the API refuses it; the zod schema applies the default after the answer arrives
         out[k] = clean(v);
       }
       if (out.type === "object" && out.properties) {
@@ -250,4 +276,5 @@ export function wireToDomain(node: unknown): unknown {
 export const PASS_A_JSON_SCHEMA = toApiSchema(passASchema, { simplifyNull: true });
 export const PASS_B_JSON_SCHEMA = toApiSchema(passBSchema, { simplifyNull: true });
 export const PASS_C_JSON_SCHEMA = toApiSchema(passCSchema, { simplifyNull: true });
+export const PASS_D_JSON_SCHEMA = toApiSchema(passDSchema, { simplifyNull: true });
 export const REVIEW_JSON_SCHEMA = toApiSchema(reviewResultSchema);

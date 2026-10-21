@@ -1,11 +1,12 @@
-// Lesson content pipeline (slice 3). Sonnet writes each lesson in three passes (A: teaching parts; B: reading, listening, writing,
-// speaking; C: culture, mission, day exam, close day), Opus checks every item, and a lesson is published only when every item is ok or fixed.
+// Lesson content pipeline (slice 3). Sonnet writes each lesson in four passes (A: teaching parts; B: reading, listening, writing,
+// speaking; C: day exam; D: warm-up, culture, mission, close day), Opus checks every item, and a lesson is published only when every item is ok or fixed.
 // Every paid step shows an estimate first and needs its id to run.
 //
 //   node --env-file=.env.local --no-warnings scripts/content.mts <command> --run <name> [options]
 //
-//   estimate --stage generate-a|generate-b|generate-c|review [--lessons Z1,Z2,Z3 | --all] [--exact]   cost estimate, nothing is paid
-//   run      --stage generate-a|generate-b|generate-c|review --approve <estimate id>                   the paid Batch run (resumable)
+//   estimate --stage generate-a|generate-b|generate-c|generate-d|review [--lessons Z1,Z2,Z3 | --all] [--exact]   cost estimate, nothing is paid
+//   run      --stage generate-a|generate-b|generate-c|generate-d|review --approve <estimate id>                   the paid Batch run (resumable)
+//   check                                         free: automatic checks on the lessons written so far (run before the review pass)
 //   build                                         merge the passes into the review file (review.json, review.md, ...)
 //   markdown --lesson Z1 [--out path.md]          one lesson as readable Markdown, with the review notes
 //   publish  [--yes]                              publish every lesson that has no open item (writes to the database)
@@ -18,20 +19,23 @@ import { join, resolve } from "node:path";
 import { SESSIONS } from "../data/curriculum.ts";
 import { lessonsOf, type CurriculumRow } from "../src/lib/content/curriculum-rows.ts";
 import { lessonToMarkdown } from "../src/lib/content/lesson-text.ts";
-import type { Lesson, PassA, PassB, PassC, ReviewVerdict } from "../src/lib/content/lesson-schema.ts";
+import type { Lesson, PassA, PassB, PassC, PassD, ReviewVerdict } from "../src/lib/content/lesson-schema.ts";
 import {
   assertApproved,
   buildPassARequests,
   buildPassBRequests,
   buildPassCRequests,
+  buildPassDRequests,
   buildReviewRequests,
   combineLesson,
   costReport,
   estimateStage,
+  lintErrors,
   mergeLesson,
   parsePassA,
   parsePassB,
   parsePassC,
+  parsePassD,
   parseReview,
   publishPayload,
   runBatch,
@@ -64,7 +68,7 @@ const file = (name: string) => join(dir, name);
 const read = <T,>(name: string): T | undefined => (existsSync(file(name)) ? (JSON.parse(readFileSync(file(name), "utf8")) as T) : undefined);
 const write = (name: string, data: unknown) => writeFileSync(file(name), JSON.stringify(data, null, 2) + "\n");
 const rate = process.env.USD_TO_EUR ? Number(process.env.USD_TO_EUR) : DEFAULT_USD_TO_EUR;
-const STAGES: Stage[] = ["generate-a", "generate-b", "generate-c", "review"];
+const STAGES: Stage[] = ["generate-a", "generate-b", "generate-c", "generate-d", "review"];
 
 const allLessons = lessonsOf(SESSIONS);
 function runLessons(): CurriculumRow[] {
@@ -93,19 +97,29 @@ const completeLessons = (): Map<string, Lesson> => {
   const a = read<Raw<PassA>>("generate-a.raw.json")?.lessons ?? {};
   const b = read<Raw<PassB>>("generate-b.raw.json")?.lessons ?? {};
   const c = read<Raw<PassC>>("generate-c.raw.json")?.lessons ?? {};
-  return new Map(Object.keys(a).filter((k) => b[k] && c[k]).map((k) => [k, combineLesson(a[k], b[k], c[k])]));
+  const d = read<Raw<PassD>>("generate-d.raw.json")?.lessons ?? {};
+  return new Map(Object.keys(a).filter((k) => b[k] && c[k] && d[k]).map((k) => [k, combineLesson(a[k], b[k], c[k], d[k])]));
 };
 
 function requestsFor(stage: Stage, lessons: CurriculumRow[]): BatchRequest[] {
   if (stage === "generate-a") return buildPassARequests(lessons);
-  if (stage === "generate-b" || stage === "generate-c") {
+  if (stage === "generate-b" || stage === "generate-c" || stage === "generate-d") {
     const a = read<Raw<PassA>>("generate-a.raw.json") ?? fail("Run generate-a first (generate-a.raw.json is missing).");
     const passA = new Map(Object.entries(a.lessons));
-    return stage === "generate-b" ? buildPassBRequests(lessons, passA) : buildPassCRequests(lessons, passA);
+    return stage === "generate-b" ? buildPassBRequests(lessons, passA) : stage === "generate-c" ? buildPassCRequests(lessons, passA) : buildPassDRequests(lessons, passA, allLessons);
   }
   const complete = completeLessons();
-  if (complete.size === 0) fail("Run generate-a, generate-b and generate-c first: no complete lesson yet.");
-  return buildReviewRequests(lessons, complete);
+  if (complete.size === 0) fail("Run generate-a, generate-b, generate-c and generate-d first: no complete lesson yet.");
+  // The free automatic checks come first: Opus is not paid to find what a script can find. Regenerate those lessons, or override with --allow-lint-errors.
+  const broken = lintErrors(lessons, complete);
+  if (broken.length && !flag("allow-lint-errors")) {
+    for (const b of broken) {
+      console.error(`\n${b.code} fails ${b.issues.length} automatic check(s):`);
+      for (const i of b.issues) console.error(`  ${i.id}: ${i.message}`);
+    }
+    fail(`Not sent to the review: ${broken.map((b) => b.code).join(", ")}. Write those lessons again (estimate + run generate-a to generate-d with --lessons ${broken.map((b) => b.code).join(",")}), or add --allow-lint-errors to let Opus try to fix them.`);
+  }
+  return buildReviewRequests(lessons, complete, allLessons);
 }
 
 function printEstimate(e: ReturnType<typeof estimateStage>, lessons: CurriculumRow[]) {
@@ -122,6 +136,20 @@ Estimate for the "${e.stage}" pass of run "${runName}" (${lessons.map((l) => l.c
   Hard cap:         €10 per pass
   Estimate id:      ${e.id}
 `);
+}
+
+/** Free: the automatic checks on every complete lesson of the run, so problems are found before the paid review. */
+function checkCommand() {
+  const complete = completeLessons();
+  if (complete.size === 0) fail("No complete lesson in this run yet (generate-a to generate-d).");
+  const lessons = [...complete.keys()].map((c) => allLessons.find((l) => l.code === c)!);
+  const broken = lintErrors(lessons, complete);
+  for (const l of lessons) {
+    const b = broken.find((x) => x.code === l.code);
+    console.log(`${l.code}: ${b ? `${b.issues.length} error(s)` : "no errors"}`);
+    for (const i of b?.issues ?? []) console.log(`  ${i.id}: ${i.message}`);
+  }
+  console.log(broken.length ? "\nFix these (write the lessons again) before the review pass." : "\nOK to send to the review.");
 }
 
 function stageArg(): Stage {
@@ -177,7 +205,7 @@ async function runCommand() {
   const covered = lessons.filter((l) => requests.some((r) => r.custom_id.endsWith(`-${l.code.replace(/[^A-Za-z0-9_-]/g, "_")}`)));
   let outcome;
   if (stage !== "review") {
-    const parsed = stage === "generate-a" ? parsePassA(covered, lines) : stage === "generate-b" ? parsePassB(covered, lines) : parsePassC(covered, lines);
+    const parsed = stage === "generate-a" ? parsePassA(covered, lines) : stage === "generate-b" ? parsePassB(covered, lines) : stage === "generate-c" ? parsePassC(covered, lines) : parsePassD(covered, lines);
     const raw = read<Raw<unknown>>(`${stage}.raw.json`) ?? { lessons: {}, failures: [] };
     for (const [code, content] of parsed.results) raw.lessons[code] = content;
     raw.failures = parsed.failures;
@@ -218,10 +246,10 @@ function buildReviews(): { reviews: LessonReview[]; unreviewed: string[] } {
 function buildCommand() {
   const { reviews, unreviewed } = buildReviews();
   const summary = summarize(reviews);
-  const gen = { a: read<Raw<PassA>>("generate-a.raw.json"), b: read<Raw<PassB>>("generate-b.raw.json"), c: read<Raw<PassC>>("generate-c.raw.json"), review: read<ReviewRaw>("review.raw.json") };
+  const gen = { a: read<Raw<PassA>>("generate-a.raw.json"), b: read<Raw<PassB>>("generate-b.raw.json"), c: read<Raw<PassC>>("generate-c.raw.json"), d: read<Raw<PassD>>("generate-d.raw.json"), review: read<ReviewRaw>("review.raw.json") };
   write("review.json", {
     run: runName, builtAt: new Date().toISOString(), summary, unreviewedLessons: unreviewed,
-    failures: { generateA: gen.a?.failures ?? [], generateB: gen.b?.failures ?? [], generateC: gen.c?.failures ?? [], review: gen.review?.failures ?? [] },
+    failures: { generateA: gen.a?.failures ?? [], generateB: gen.b?.failures ?? [], generateC: gen.c?.failures ?? [], generateD: gen.d?.failures ?? [], review: gen.review?.failures ?? [] },
     lessons: reviews,
   });
   write("publish-payloads.json", Object.fromEntries(reviews.filter((r) => r.publishable).map((r) => [r.code, publishPayload(r)])));
@@ -270,10 +298,11 @@ async function publishCommand() {
 try {
   if (command === "estimate") await estimateCommand();
   else if (command === "run") await runCommand();
+  else if (command === "check") checkCommand();
   else if (command === "build") buildCommand();
   else if (command === "markdown") markdownCommand();
   else if (command === "publish") await publishCommand();
-  else fail("Commands: estimate, run, build, markdown, publish. See the header of scripts/content.mts.");
+  else fail("Commands: estimate, run, check, build, markdown, publish. See the header of scripts/content.mts.");
 } catch (error) {
   if (error instanceof Anthropic.APIError) fail(`Anthropic API error ${error.status}: ${error.message}`);
   throw error;

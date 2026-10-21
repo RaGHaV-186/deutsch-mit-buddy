@@ -18,7 +18,9 @@ import {
   pronunciationSchema,
   questionSchema,
   tandemSchema,
+  tableSchema,
   trapSchema,
+  warmupPreviewSchema,
   writingSchema,
   type Lesson,
   type PartName,
@@ -34,6 +36,8 @@ export const UNIT_SCHEMAS = {
   phrase: phraseSchema,
   example: exampleSchema,
   trap: trapSchema,
+  table: tableSchema,
+  warmupPreview: warmupPreviewSchema,
   grammarIntro: grammarIntroSchema,
   pronunciation: pronunciationSchema,
   readingPassage: passageSchema,
@@ -80,8 +84,10 @@ export function enumerateItems(code: string, lesson: Lesson): LessonItem[] {
   const add = (part: PartName, suffix: string, unit: UnitName, pointer: Pointer, label: string) => items.push({ id: `${code}#${part}${suffix ? "." + suffix : ""}`, part, unit, pointer, label });
 
   add("goal", "", "goal", ["goal"], "Can-do goal");
+  if (lesson.warmup.preview.points.length) add("warmup", "preview", "warmupPreview", ["warmup", "preview"], "Today you'll learn");
   lesson.warmup.items.forEach((_, i) => add("warmup", `q${pad(i)}`, "question", ["warmup", "items", i], `Warm-up ${i + 1}`));
   add("grammar", "intro", "grammarIntro", ["grammar", "intro"], "Grammar explanation");
+  lesson.grammar.tables.forEach((t, i) => add("grammar", `tbl${i + 1}`, "table", ["grammar", "tables", i], `Table: ${t.title}`));
   lesson.grammar.examples.forEach((_, i) => add("grammar", `ex${i + 1}`, "example", ["grammar", "examples", i], `Example ${i + 1}`));
   lesson.grammar.traps.forEach((_, i) => add("grammar", `trap${i + 1}`, "trap", ["grammar", "traps", i], `Trap ${i + 1}`));
   lesson.exercises.items.forEach((_, i) => add("exercises", pad(i), "question", ["exercises", "items", i], `Exercise ${i + 1}`));

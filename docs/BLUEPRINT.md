@@ -275,7 +275,7 @@ Pricing (Claude API, checked 19 Oct 2026): Opus 5.5 $4 / $20, Sonnet 5.5 $2 / $1
 
 ## 8. Build order
 
-**Status (22 Oct 2026):** slices 0, 1, 2 and the redesign (design-v1.1) are done and live. Slice 3a (lesson standard, generator v2, preview) is built and the Z1–Z3 sample is approved to publish (Checkpoint A: 261 ok, 24 fixed, 0 needs-human; sample cost €1.36 in total). Next: tranche 1 of 3b (Z4 → W4.5, about €7.5, waits for Raghav's yes), then 3b/3c, then the daily lesson loop 4a–4e. Details and resume steps: CLAUDE.md, "Where we are".
+**Status (22 Oct 2026):** slices 0, 1, 2 and the redesign (design-v1.1) are done and live. Slice 3a (lesson standard, generator v2, preview) is built and the Z1–Z3 sample is approved to publish (Checkpoint A: 261 ok, 24 fixed, 0 needs-human; sample cost €1.36 in total). Tranche 1 of 3b (Z4 → W4.5) is generated and reviewed (€6.39 in total): 19 of 30 lessons including Z1–Z3 are publishable, 11 are blocked on 13 items that wait for Raghav (names rule, a few corrections). Next: finish those 13 items, publish, then 3b/3c, then the daily lesson loop 4a–4e. Details and resume steps: CLAUDE.md, "Where we are".
 
 The app is built in 14 slices (3 and 4 split into small steps), each one working end to end and deployed before the next starts. At 1–2 slices per evening the whole v1 takes about two weeks.
 
@@ -317,6 +317,6 @@ The app is built in 14 slices (3 and 4 split into small steps), each one working
 12. **Hardening + launch** — extra security tests (account deletion and data export tests), Playwright browser tests, final legal texts (Impressum re-check, AI and exam wording), final Buddy artwork, custom domain deutschmitbuddy.de, then the LinkedIn post.
 13. **B2–C1 content** — starts with the B2 and C1 lesson outlines (grammar, theme, goal) for Raghav's review, and nothing is generated before he approves them. Then the same 14-part template and two-pass pipeline (instructions fully German from B2). Until then B2 and C1 are visible but not selectable in the starting-lesson picker ("coming soon").
 
-**Later (not in v1):** Azure Pronunciation Assessment as a per-user flag (consent first, no stored recordings); Tandem with real people.
+**Later (not in v1):** Azure Pronunciation Assessment as a per-user flag (consent first, no stored recordings); Tandem with real people; a noun-gender check against a German noun dictionary in the free content lint (today the lint cannot tell that "die Lampe" is right and "der Lampe" as a card article is wrong; only the Opus review catches a wrong gender), with a licence-friendly word list and its plural forms, so a wrong article on a vocabulary card, example or exercise is an error before any review money is spent.
 
 Design can change at any time: colours, fonts and spacing live in one theme file.

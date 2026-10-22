@@ -203,6 +203,2147 @@
         ],
         "review_tomorrow": "Review the numbers 21 to 99, remembering that the small number comes first: einundzwanzig, zweiunddreißig."
       }
+    },
+    "Z4": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which letter is an umlaut, like in \"Tschüs\"?",
+            "answer": "ü",
+            "distractors": [
+              "u",
+              "s",
+              "b"
+            ],
+            "accepted_answers": [],
+            "explanation": "An umlaut is a vowel with two dots: ä, ö or ü."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Du ___ müde.",
+            "answer": "bist",
+            "distractors": [
+              "bin",
+              "ist",
+              "sind"
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb sein goes with du as \"du bist\"."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which number is \"einundzwanzig\"?",
+            "answer": "21",
+            "distractors": [
+              "12",
+              "20",
+              "31"
+            ],
+            "accepted_answers": [],
+            "explanation": "In German you say the one first: ein-und-zwanzig is 21."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Living and studying in Germany",
+        "note": "Many students in Germany do not live with their family. Some students live in a Wohnung with other students. This is called a WG (say: \"Weh-Geh\"), short for Wohngemeinschaft. Each person has their own Zimmer, and they share the kitchen and the bathroom. Other students live in a student residence or alone. Many cities have a big Universität, and students often come from different towns and countries. Students often ride a bike or take the bus to the Kurs. At many universities, students pay a small fee every semester, but often no high course fees. A WG is popular because rooms in big cities can be expensive.",
+        "reflection_question": "Where do students usually live in your country: with family, alone, or with other students?"
+      },
+      "mission": {
+        "title": "My city, my work, my German",
+        "task": "Write and say five short German sentences about where you live and what you do. Use the new verbs with ich, and one sentence with du or Sie for a question.",
+        "steps": [
+          "Write three sentences about yourself, for example: Ich wohne in ... Ich lerne Deutsch. Ich arbeite hier. (Use studiere if you are a student.)",
+          "Write two questions, for example: Wo wohnst du? Was studierst du?",
+          "Say all five sentences out loud two times. Pay attention to w (like English v), ie (long ee) and st at the start of a word (sht).",
+          "Ask a friend or family member one question, or say it to yourself in the mirror."
+        ],
+        "report_prompt": "Write your five sentences and tell Buddy which verb ending was hardest for you.",
+        "success_check": [
+          "I can say where I live with Ich wohne in ...",
+          "I can say what I do with lernen, arbeiten or studieren.",
+          "I can ask Wo wohnst du? or Wo wohnen Sie?"
+        ],
+        "safety_note": "Only use the name of your city. Do not share your street, house number or other private details in your sentences."
+      },
+      "closing": {
+        "covered": [
+          "You can now use the verb endings -e, -st, -t and -en in the present tense.",
+          "You can now say where you live with wohnen: Ich wohne in ...",
+          "You can now say what you do with lernen, arbeiten, studieren and spielen.",
+          "You can now ask Wo wohnst du? and Wo wohnen Sie?",
+          "You can now say w, ie and st at the start of a word in German."
+        ],
+        "review_tomorrow": "Review the endings of wohnen for ich, du, er/sie and wir, and practise arbeiten, which needs an extra e: du arbeitest."
+      }
+    },
+    "Z5": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna ___ aus Deutschland. (Anna comes from Germany.)",
+            "answer": "kommt",
+            "distractors": [
+              "komme",
+              "kommst",
+              "kommen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With er/sie/es the verb ends in -t: sie kommt."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which number is 34?",
+            "answer": "vierunddreißig",
+            "distractors": [
+              "dreiunddreißig",
+              "vierzig",
+              "vierundzwanzig"
+            ],
+            "accepted_answers": [],
+            "explanation": "In German the ones come first: vier + und + dreißig = 34."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas ___ Jonas. (Say: Jonas is called Jonas.) Ich ___ Lena. (I am called Lena.)",
+            "answer": "heißt",
+            "distractors": [
+              "heiße",
+              "heißen",
+              "heißst"
+            ],
+            "accepted_answers": [],
+            "explanation": "Jonas is er, so the verb ends in -t: Jonas heißt."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Everyday things and the German house key",
+        "note": "In Germany, Austria and Switzerland many people carry a bunch of keys (Schlüssel) every day: for the front door of the building, for the flat and for the letterbox. Doors in apartment buildings are often locked at night or all day, so you need your key to get in. Many people also use a small bag or a hook by the door so that the Schlüssel is always in the same place. Another everyday habit is to bring your own bag (die Tasche) when you go shopping, because shops often charge a small fee for plastic bags. Learning the article with each noun, like der Schlüssel or die Tasche, helps you in all these daily situations.",
+        "reflection_question": "Which three things do you take with you when you leave your home? Do you know their German names yet?"
+      },
+      "mission": {
+        "title": "Label your room",
+        "task": "Find 6 objects at home and name each one in German with its article. Use the words from this lesson, for example der Tisch, die Lampe, das Buch.",
+        "steps": [
+          "Walk around your room and choose 6 objects from today's word list.",
+          "Write a small note for each object, for example: der Stuhl, die Tür, das Fenster. Stick the notes on the objects if you like.",
+          "Say out loud for each object: Das ist ein Stuhl. or Das ist eine Lampe.",
+          "Ask yourself: Hast du ein Handy? Answer: Ja, ich habe ein Handy."
+        ],
+        "report_prompt": "Tell Buddy which 6 objects you labelled, with the article for each one (for example: die Lampe), and write one sentence with Ich habe ...",
+        "success_check": [
+          "I named 6 objects with der, die or das.",
+          "I said at least two sentences with Das ist ein / eine ...",
+          "I wrote one sentence with Ich habe ..."
+        ],
+        "safety_note": null
+      },
+      "closing": {
+        "covered": [
+          "You can now name everyday objects with der, die or das.",
+          "You can now say Das ist ein ... or Das ist eine ... for things around you.",
+          "You can now use haben: ich habe, du hast, er/sie hat.",
+          "You can now ask Was ist das? and Wie heißt das auf Deutsch?",
+          "You can now understand that the plural always uses die."
+        ],
+        "review_tomorrow": "Review the 18 object words with their articles (der, die, das) and say each one aloud, especially the St sound in Stuhl and Stift."
+      }
+    },
+    "Z6": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna ___ in Berlin. (Anna lives in Berlin.)",
+            "answer": "wohnt",
+            "distractors": [
+              "wohne",
+              "wohnst",
+              "wohnen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With er/sie/Anna the verb ends in -t: sie wohnt."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct for saying your age?",
+            "answer": "Ich bin 25.",
+            "distractors": [
+              "Ich habe 25.",
+              "Ich heiße 25.",
+              "Ich komme 25."
+            ],
+            "accepted_answers": [],
+            "explanation": "In German you say your age with sein: Ich bin 25."
+          },
+          {
+            "skill": "articles",
+            "type": "gap_fill",
+            "prompt": "Das ist ___ Tasche. (This is a bag.)",
+            "answer": "eine",
+            "distractors": [
+              "ein",
+              "einen",
+              "der"
+            ],
+            "accepted_answers": [],
+            "explanation": "Tasche is feminine (die Tasche), so you say eine Tasche."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Du or Sie when you meet someone",
+        "note": "In Germany, Austria and Switzerland, people choose between du and Sie when they ask questions. Children, family, friends and most students say du to each other. Adults who do not know each other well, for example in a shop, in an office or at work, usually say Sie. With Sie, the question sounds like this: Wie heißen Sie? Woher kommen Sie? Sie always has a capital S. If you are not sure, start with Sie. Often the other person then says: Wir können du sagen. That means you can both use du. At a language course, people often ask the same first questions: name, country, city and languages. It is normal and friendly to ask them.",
+        "reflection_question": "In your country, how do people ask each other's name when they meet for the first time? Is there a difference between friends and strangers?"
+      },
+      "mission": {
+        "title": "Ask three questions",
+        "task": "Practise the question words from today. Write three personal questions in German and ask them to a real person or say them aloud to yourself.",
+        "steps": [
+          "Write three questions with du: Wie heißt du? Woher kommst du? Wo wohnst du?",
+          "Ask them to a friend, a classmate or a family member. If nobody is near, say them aloud in front of a mirror and answer them yourself.",
+          "Write down the answers in short sentences, for example: Anna kommt aus Deutschland. Sie wohnt in Berlin.",
+          "Add one yes/no question with the verb first, for example: Lernst du Deutsch?"
+        ],
+        "report_prompt": "Tell Buddy your three questions, the answers you got and your yes/no question. Write the answers in German.",
+        "success_check": [
+          "I asked or said three W-questions in German.",
+          "I asked one yes/no question with the verb first.",
+          "I wrote down the answers in short German sentences."
+        ],
+        "safety_note": "Only ask people you already know or meet in a safe place, such as a class. Do not share a phone number, an address or other private data with strangers."
+      },
+      "closing": {
+        "covered": [
+          "You can now ask W-questions with wer, was, wo, woher, wie and wann.",
+          "You can now ask yes/no questions with the verb first, for example: Lernst du Deutsch?",
+          "You can now ask Wie heißt du? Woher kommst du? Wo wohnst du?",
+          "You can now answer and ask back with Und du? and say Freut mich!",
+          "You can now say the German W and the long ie sound in question words."
+        ],
+        "review_tomorrow": "Tomorrow, review the three main questions (Wie heißt du? Woher kommst du? Wo wohnst du?) and practise saying the verb in the right place."
+      }
+    },
+    "Z7": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Fill in the correct verb ending: Anna ___ in Berlin. (to live)",
+            "answer": "wohnt",
+            "distractors": [
+              "wohne",
+              "wohnst",
+              "wohnen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With er/sie/Anna, the verb ends in -t: sie wohnt."
+          },
+          {
+            "skill": "articles",
+            "type": "multiple_choice",
+            "prompt": "Which article goes with Buch? ___ Buch",
+            "answer": "das",
+            "distractors": [
+              "der",
+              "die"
+            ],
+            "accepted_answers": [],
+            "explanation": "Buch is a neuter noun, so it takes das."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which question word asks about a place? ___ wohnst du?",
+            "answer": "Wo",
+            "distractors": [
+              "Wer",
+              "Wann",
+              "Wie"
+            ],
+            "accepted_answers": [],
+            "explanation": "Wo asks where someone lives; wer asks who, wann asks when, wie asks how."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Weekdays, weekends and the four seasons",
+        "note": "In Germany, the week starts on Monday, and most calendars show Monday as the first day. Many people work from Monday to Friday, so Samstag and Sonntag are the Wochenende. On Sundays most shops are closed, so people often rest, walk, or meet family and friends. Germany has four clear seasons: Frühling, Sommer, Herbst and Winter. Summer is usually warm and winter is often cold. Many people use a paper or phone Kalender to plan their days. When you say goodbye on Friday, you can say: Schönes Wochenende!",
+        "reflection_question": "In your country, which day does the week start on, and which days are the weekend?"
+      },
+      "mission": {
+        "title": "My week in German",
+        "task": "Look at a calendar and say short German sentences about your week, with the day or season first and the verb second.",
+        "steps": [
+          "Open a calendar on your phone or look at a paper one, and find today. Say: Heute ist ... (for example Heute ist Montag).",
+          "Choose two days of this week. Say one sentence for each, for example: Am Freitag lerne ich Deutsch. Remember: the verb is always in position 2.",
+          "Say which season it is now, for example: Im Sommer ist es warm. Then say the sentence again starting with a different word, for example: Heute lerne ich Deutsch."
+        ],
+        "report_prompt": "Write or tell Buddy your three sentences. Which day and which season did you use?",
+        "success_check": [
+          "I can say which day it is today in German.",
+          "I can build a sentence with the verb in position 2.",
+          "I can name the current season in German."
+        ],
+        "safety_note": null
+      },
+      "closing": {
+        "covered": [
+          "You can now name the days, months and seasons you learned, like Montag, Freitag, Januar, Sommer and Winter.",
+          "You can now build sentences with the verb in position 2, like Heute lerne ich Deutsch.",
+          "You can now ask Welcher Tag ist heute? and answer Heute ist Montag.",
+          "You can now say goodbye with Bis Freitag! and Schönes Wochenende!"
+        ],
+        "review_tomorrow": "Review the days of the week in order and practise two sentences that start with a time word, like Heute or Im Sommer, followed by the verb."
+      }
+    },
+    "Z8": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna ___ in Berlin.",
+            "answer": "wohnt",
+            "distractors": [
+              "wohne",
+              "wohnst",
+              "wohnen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With Anna (she), the verb ending is -t: Anna wohnt."
+          },
+          {
+            "skill": "articles",
+            "type": "gap_fill",
+            "prompt": "Das ist ___ Tasche.",
+            "answer": "eine",
+            "distractors": [
+              "ein",
+              "der"
+            ],
+            "accepted_answers": [],
+            "explanation": "Tasche is a feminine noun (die Tasche), so it takes eine."
+          },
+          {
+            "skill": "word_order",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Heute lerne ich Deutsch.",
+            "distractors": [
+              "Heute ich lerne Deutsch.",
+              "Heute Deutsch lerne ich.",
+              "Heute ich Deutsch lerne."
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb is always in position 2, so after Heute comes lerne."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Clocks and being on time",
+        "note": "In Germany, Austria and Switzerland, punctuality is important. People usually arrive on time for work, school, doctor's appointments and trains. If you will be late, it is polite to call or write a message. In writing, on timetables and in formal situations, people often use the 24-hour clock, for example 14:30. In everyday speech, many people use the 12-hour clock and say 'halb drei'. Be careful: halb drei does not mean 2:30 in English thinking. It means half way to three, so it is 2:30. Many people also say 'Viertel nach' or 'Viertel vor' for quarter past and quarter to. Listening to how people say the time at the station or on the radio is great practice.",
+        "reflection_question": "How important is being on time in your country, and what is different from what you read here?"
+      },
+      "mission": {
+        "title": "My day in German",
+        "task": "Use German to say the time and write a short plan of your day.",
+        "steps": [
+          "Look at a clock three times today. Each time, say aloud: Es ist ... Uhr.",
+          "Write three sentences about your day, for example: Um sieben Uhr frühstücke ich. Am Abend lerne ich Deutsch.",
+          "Say your three sentences aloud and listen to the long sounds in Uhr, früh and spät."
+        ],
+        "report_prompt": "Tell Buddy your three sentences about your day and write one time you said aloud today.",
+        "success_check": [
+          "I can say what time it is in German.",
+          "I can use um with a clock time.",
+          "I can use am with a part of the day."
+        ],
+        "safety_note": null
+      },
+      "closing": {
+        "covered": [
+          "You can now ask Wie spät ist es? and answer Es ist ... Uhr.",
+          "You can now say halb and Viertel to tell the time.",
+          "You can now use um with a clock time to say when you do something.",
+          "You can now use am with a part of the day, like am Morgen or am Abend.",
+          "You can now talk about your day with words like frühstücken, arbeiten, lernen and schlafen."
+        ],
+        "review_tomorrow": "Review the difference between um (a clock time) and am (a part of the day), and practise saying halb with different hours."
+      }
+    },
+    "W1.4": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Complete the sentence: Er ___ Fisch. (he eats fish)",
+            "answer": "isst",
+            "distractors": [
+              "esse",
+              "essen",
+              "esst"
+            ],
+            "accepted_answers": [],
+            "explanation": "Essen is irregular: the e changes to i for er/sie/es, so it is er isst."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct? (I do not have a sister.)",
+            "answer": "Ich habe keine Schwester.",
+            "distractors": [
+              "Ich habe nicht Schwester.",
+              "Ich habe kein Schwester.",
+              "Ich bin keine Schwester."
+            ],
+            "accepted_answers": [],
+            "explanation": "Kein/keine negates a noun with ein/eine or no article, and Schwester is feminine, so keine."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Complete the sentence: Ich ___ einen Kaffee, bitte. (I would like a coffee, please.)",
+            "answer": "möchte",
+            "distractors": [
+              "möchtest",
+              "möchten",
+              "mag"
+            ],
+            "accepted_answers": [],
+            "explanation": "With ich, möchten becomes möchte."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Paying at the table",
+        "note": "In many German restaurants, you do not pay at the counter. You stay at your table and say to the waiter or waitress: \"Ich möchte bezahlen, bitte.\" Then the person comes to your table with the bill. Often the server asks: \"Zusammen oder getrennt?\" This means: together or separately? Paying separately is normal and not rude. Many people also add a small tip. They often round up the amount, for example from 18 euros to 20 euros, and say \"Stimmt so.\" Before the meal, people often say \"Guten Appetit!\" to each other. In many places you can also ask for tap water, but it is not always free, and some restaurants bring only bottled water. Look at the Speisekarte for prices.",
+        "reflection_question": "How do you usually pay in a restaurant in your country, and what is similar or different in Germany?"
+      },
+      "mission": {
+        "title": "My kitchen in German",
+        "task": "Use modal verbs with food and drinks in your daily life. Write or say five true sentences about what you can, must, want or may do with food and drinks.",
+        "steps": [
+          "Look at your kitchen or your meals today and choose five foods or drinks, for example das Brot, der Tee, die Suppe, der Apfel or das Wasser.",
+          "Write one sentence with each modal verb: Ich kann ... kochen. Ich muss ... essen. Ich will ... trinken. Darf ich ... probieren?",
+          "Check that the modal verb is in position 2 and the second verb is in the infinitive at the end.",
+          "Say your sentences aloud and practise the ö and ü in können, müssen and dürfen."
+        ],
+        "report_prompt": "Write your five German sentences and tell Buddy which sentence is the most true for you.",
+        "success_check": [
+          "I wrote sentences with können, müssen, wollen and dürfen.",
+          "I put the modal verb in position 2 and the main verb at the end.",
+          "I said können, müssen and dürfen aloud with ö and ü."
+        ],
+        "safety_note": null
+      },
+      "closing": {
+        "covered": [
+          "You can now say what you can, must and want to do with food and drinks, for example: Ich kann Suppe kochen.",
+          "You can now ask for permission with Darf ich das probieren?",
+          "You can now order and pay politely: Ich möchte einen Kaffee, bitte. Ich möchte bezahlen, bitte.",
+          "You can now put the modal verb in position 2 and the infinitive at the end.",
+          "You can now say können, müssen and dürfen with the sounds ö and ü."
+        ],
+        "review_tomorrow": "Review the forms of können, müssen, wollen and dürfen with ich, du and er/sie, and make five sentences about food."
+      }
+    },
+    "W1.5": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna ___ gern Fisch und Gemüse. (Anna eats fish and vegetables.)",
+            "answer": "isst",
+            "distractors": [
+              "esse",
+              "esst",
+              "essen"
+            ],
+            "accepted_answers": [],
+            "explanation": "Essen changes to isst with er/sie/es, and Anna is one person."
+          },
+          {
+            "skill": "articles",
+            "type": "multiple_choice",
+            "prompt": "Choose the correct sentence: You see a table in the living room.",
+            "answer": "Ich sehe einen Tisch im Wohnzimmer.",
+            "distractors": [
+              "Ich sehe ein Tisch im Wohnzimmer.",
+              "Ich sehe einer Tisch im Wohnzimmer.",
+              "Ich sehe eine Tisch im Wohnzimmer."
+            ],
+            "accepted_answers": [],
+            "explanation": "Der Tisch is masculine, so the object takes einen in the Akkusativ."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas ___ heute nicht kochen. Er hat keine Zeit. (Jonas cannot cook today.)",
+            "answer": "kann",
+            "distractors": [
+              "kannst",
+              "können",
+              "kanne"
+            ],
+            "accepted_answers": [],
+            "explanation": "Können is kann with er/sie/es, and the second verb stays in the infinitive at the end."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Daily rhythm in German-speaking countries",
+        "note": "In Germany, Austria and Switzerland, many people start work or school fairly early, often between seven and nine in the morning. Many people eat a quick breakfast at home, for example bread with cheese or jam. The main hot meal is often at midday, but many adults who work have a lighter lunch in a short break and eat a warm meal in the evening. The evening meal is often simpler and is sometimes called Abendbrot, which refers to bread with cold food. Punctuality is valued: arriving on time for an appointment or a course is normal and polite. If you will be late, it is common to call or write a message. Shops often close in the evening, and in many places they are closed on Sundays, so people often go shopping on Saturday or during the week.",
+        "reflection_question": "What does your typical day look like, and which part is different from the daily rhythm described here?"
+      },
+      "mission": {
+        "title": "My day in separable verbs",
+        "task": "Describe your own day with at least five separable verbs. Write short German sentences that show what you do from morning to evening, and say them aloud once.",
+        "steps": [
+          "Think of five things you do every day, for example getting up, shopping, watching TV, calling someone or tidying up.",
+          "Write five sentences in German with a time, for example: Ich stehe um sieben Uhr auf. Put the prefix at the end of each sentence.",
+          "Read your sentences aloud and stress the prefix, for example AUF-stehen and EIN-kaufen.",
+          "Add one question for a friend, for example: Wann stehst du auf?"
+        ],
+        "report_prompt": "Report your five German sentences and your question for a friend. Tell us which separable verb was hardest to place correctly.",
+        "success_check": [
+          "I wrote five sentences with separable verbs.",
+          "I put the prefix at the end of the main clause.",
+          "I asked one question with Wann."
+        ],
+        "safety_note": null
+      },
+      "closing": {
+        "covered": [
+          "You can now say that a verb has a separable prefix, such as aufstehen or einkaufen.",
+          "You can now put the prefix at the end of a main clause: Ich stehe um sieben Uhr auf.",
+          "You can now talk about your day with words such as Morgen, Abend, Uhr and Pause.",
+          "You can now ask and answer questions like Wann stehst du auf? and Kommst du mit?",
+          "You can now stress the prefix and say the sounds au, ei and äu."
+        ],
+        "review_tomorrow": "Review the separable verbs aufstehen, einkaufen, anrufen and anfangen, and say one sentence with each verb out loud."
+      }
+    },
+    "W2.1": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ morgen um sieben Uhr auf. (aufstehen)",
+            "answer": "stehe",
+            "distractors": [
+              "aufstehe",
+              "steht",
+              "stehst"
+            ],
+            "accepted_answers": [],
+            "explanation": "With a separable verb the prefix goes to the end: Ich stehe ... auf."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Choose the correct sentence: I do not have a car at the market, I have no money.",
+            "answer": "Ich habe kein Geld.",
+            "distractors": [
+              "Ich habe nicht Geld.",
+              "Ich habe keine Geld.",
+              "Ich bin kein Geld."
+            ],
+            "accepted_answers": [],
+            "explanation": "Kein negates a noun without an article, and Geld is neuter, so it is kein Geld."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "In the restaurant you want to pay. You ask for: ___",
+            "answer": "die Rechnung",
+            "distractors": [
+              "die Speisekarte",
+              "das Eis",
+              "das Bett"
+            ],
+            "accepted_answers": [],
+            "explanation": "Die Rechnung is the bill that you ask for when you want to pay."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Shopping in Germany",
+        "note": "In Germany many people buy bread at a Bäcker and fresh fruit and vegetables at a market or in a supermarket. Most shops close on Sundays, so people often shop on Saturday. At the supermarket checkout, you usually put your things on the belt and pack them yourself, often in your own Tasche, because plastic bags usually cost extra. Many shops accept a Karte, but some small bakeries and market stalls prefer cash, so it is useful to ask: Kann ich mit der Karte bezahlen? Greeting the Verkäufer or the Verkäuferin with Guten Tag and saying Bitte and Danke is polite and normal.",
+        "reflection_question": "How are shops where you live different from this? Do you usually pay with Geld or with a Karte?"
+      },
+      "mission": {
+        "title": "Shopping words around you",
+        "task": "Practise the shopping phrases in real life or by speaking aloud, and use the dative article after mit and bei.",
+        "steps": [
+          "Next time you are in a shop, a bakery or at a market, look for three things and say their names in German, for example: der Apfel, das Brot, die Tasche.",
+          "Say aloud or write three short sentences with the dative, for example: Ich bezahle mit der Karte. Ich bin bei dem Bäcker. Ich gebe dem Verkäufer das Geld.",
+          "Practise the phrases Ich möchte ein Brot, bitte. and Was kostet das? by speaking them aloud as if you were in a shop. If you are in a German-speaking place, try one phrase in a real shop."
+        ],
+        "report_prompt": "Write the three things you found, your three dative sentences, and which phrase you practised or used.",
+        "success_check": [
+          "I named three shopping items in German.",
+          "I wrote three sentences with dem, der or einem.",
+          "I said Was kostet das? or Kann ich mit der Karte bezahlen? aloud."
+        ],
+        "safety_note": "Do not share personal data such as card numbers or PINs with anyone, and do not photograph people in shops without asking."
+      },
+      "closing": {
+        "covered": [
+          "You can now use the dative articles dem, der, dem and den.",
+          "You can now say ein → einem and eine → einer after mit, bei, von, zu and aus.",
+          "You can now use shopping words such as der Supermarkt, die Kasse, der Preis and das Geld.",
+          "You can now ask Was kostet das? and Kann ich mit der Karte bezahlen?",
+          "You can now order politely with Ich möchte ein Brot, bitte."
+        ],
+        "review_tomorrow": "Review the dative forms of der, die, das and the plural, and practise the sound ä in words like Bäcker and Verkäufer."
+      }
+    },
+    "W2.2": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich habe ___ Hunger, aber ich esse heute kein Brot.",
+            "answer": "keinen",
+            "distractors": [
+              "nicht",
+              "kein",
+              "keine"
+            ],
+            "accepted_answers": [],
+            "explanation": "Hunger is masculine, so the negative form is keinen."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct? Anna is shopping at the market (einkaufen).",
+            "answer": "Anna kauft auf dem Markt ein.",
+            "distractors": [
+              "Anna einkauft auf dem Markt.",
+              "Anna kauft ein auf dem Markt nicht.",
+              "Anna ein kauft auf dem Markt."
+            ],
+            "accepted_answers": [],
+            "explanation": "The separable prefix ein goes to the end of the sentence."
+          },
+          {
+            "skill": "articles",
+            "type": "gap_fill",
+            "prompt": "Jonas gibt ___ Verkäuferin das Geld.",
+            "answer": "der",
+            "distractors": [
+              "die",
+              "den",
+              "dem"
+            ],
+            "accepted_answers": [],
+            "explanation": "Feminine nouns take der in the dative."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Buying clothes in Germany",
+        "note": "In Germany, many people buy clothes in shops, in markets and online. In shops, staff often say Kann ich Ihnen helfen? and you can answer Danke, ich schaue nur. Clothes sizes are numbers, for example 38 or 42, and often letters like S, M and L. Most shops let you try things on in a changing room, die Umkleidekabine. If you buy something and keep the receipt, der Kassenbon, you can often bring it back within a certain time, but each shop has its own rules, so ask at the till. In many places people like practical clothes for changing weather, such as a jacket for rain. Being polite helps: say Guten Tag when you enter and Danke and Tschüs when you leave.",
+        "reflection_question": "How do people usually greet each other and say thank you when they enter a clothes shop in your country?"
+      },
+      "mission": {
+        "title": "Clothes at home",
+        "task": "Look at your own clothes and practise the dative verbs with them, speaking German aloud.",
+        "steps": [
+          "Choose three things you wear, for example die Jacke, die Hose and der Schal.",
+          "Say for each one: Die Jacke gefällt mir. or Die Jacke gefällt mir nicht.",
+          "Imagine an item belongs to a friend, for example Anna, and say: Der Schal gehört ihr.",
+          "Say Kannst du mir helfen? and Ich danke dir. as if you were in a shop."
+        ],
+        "report_prompt": "Write three German sentences about your clothes with gefallen or gehören, and tell which one you liked saying most.",
+        "success_check": [
+          "I said what I like with gefallen and mir.",
+          "I used gehören with ihm, ihr or mir.",
+          "I asked for help with Kannst du mir helfen?"
+        ],
+        "safety_note": null
+      },
+      "closing": {
+        "covered": [
+          "You can now say that you like or dislike clothes with Das gefällt mir.",
+          "You can now ask Wem gehört das? and say who owns something.",
+          "You can now ask for help with Kannst du mir helfen?",
+          "You can now thank people with Ich danke Ihnen.",
+          "You can now name common clothes like die Jacke, die Hose and das Kleid."
+        ],
+        "review_tomorrow": "Review the dative pronouns mir, dir, ihm, ihr and Ihnen, and say the umlauts ö, ü and ä aloud in words like schön, Rock and Mütze."
+      }
+    },
+    "W2.3": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich habe ___ Hunger. (I am not hungry.)",
+            "answer": "keinen",
+            "distractors": [
+              "nicht",
+              "kein",
+              "keine"
+            ],
+            "accepted_answers": [],
+            "explanation": "Hunger is masculine here and takes the Akkusativ, so the negative is keinen."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Die Jacke gehört ___ Frau. (The jacket belongs to the woman.)",
+            "answer": "der",
+            "distractors": [
+              "die",
+              "dem",
+              "den"
+            ],
+            "accepted_answers": [],
+            "explanation": "gehören takes the Dativ, and feminine Dativ is der."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which verb is separable and means \"to get up\"?",
+            "answer": "aufstehen",
+            "distractors": [
+              "bestellen",
+              "bezahlen",
+              "frühstücken"
+            ],
+            "accepted_answers": [],
+            "explanation": "aufstehen splits in a main clause: Ich stehe um sieben Uhr auf."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Getting around the city",
+        "note": "In many German, Austrian and Swiss cities, people use buses, trams, trains and bicycles every day. You often buy a ticket at a machine or in an app, and at many stops you must validate it before you ride, for example in some cities. Cities usually have a Bahnhof in the centre, and many streets have bike lanes. Many people live in flats, so they often tell friends their street and house number, for example: Ich wohne in der Bahnhofstraße 5. Shops such as a Bäcker or an Apotheke are often close to a Haltestelle, so you can do errands on foot. Public transport timetables are often very precise, and people like to be on time when they meet a friend at a stop.",
+        "reflection_question": "How do you usually travel in your city, and which places (Bahnhof, Park, Café) do you visit most?"
+      },
+      "mission": {
+        "title": "My city in German",
+        "task": "Look around your own town or street and name five places and things using possessive articles, for example: mein Bus, meine Schule, mein Park. Then write three short sentences about them.",
+        "steps": [
+          "Choose five places or things from your daily life, such as a Haltestelle, a Café or a Supermarkt.",
+          "Write each one with mein or meine, for example: meine Haltestelle, mein Café.",
+          "Write three sentences, for example: Ich treffe meinen Freund am Bahnhof. Ich gehe mit meiner Freundin ins Café.",
+          "Say your sentences aloud and focus on the sounds in mein, dein and Freund."
+        ],
+        "report_prompt": "Report your five places with mein/meine and write your three sentences in German.",
+        "success_check": [
+          "I named five places or things with the correct form of mein.",
+          "I wrote three German sentences with a possessive article.",
+          "I said mein, dein and Freund aloud with the ei and eu sounds."
+        ],
+        "safety_note": "Do not share real addresses, full names or other personal data of friends or neighbours when you report back."
+      },
+      "closing": {
+        "covered": [
+          "You can now use mein, dein, sein and ihr for the owner of a thing or person.",
+          "You can now choose the right ending for the gender and case: mein, meinen, meiner, meinem.",
+          "You can now name places in town such as der Bahnhof, die Apotheke and die Haltestelle.",
+          "You can now say simple sentences like Ich treffe meinen Freund am Bahnhof."
+        ],
+        "review_tomorrow": "Review the Akkusativ and Dativ endings of mein (meinen, meiner, meinem) with five town words."
+      }
+    },
+    "W2.4": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich habe ___ Hunger, aber ich habe Durst.",
+            "answer": "keinen",
+            "distractors": [
+              "nicht",
+              "kein",
+              "keine"
+            ],
+            "accepted_answers": [],
+            "explanation": "Use \"kein\" to negate a noun, and \"Hunger\" is masculine, so the accusative form is \"keinen\"."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct? (\"The jacket belongs to my friend.\")",
+            "answer": "Die Jacke gehört meinem Freund.",
+            "distractors": [
+              "Die Jacke gehört mein Freund.",
+              "Die Jacke gehört meinen Freund.",
+              "Die Jacke gehört meiner Freund."
+            ],
+            "accepted_answers": [],
+            "explanation": "\"gehören\" takes the dative, and \"mein Freund\" (masculine) becomes \"meinem Freund\"."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Anna steht um sieben Uhr ___.",
+            "answer": "auf",
+            "distractors": [
+              "ein",
+              "mit",
+              "ab"
+            ],
+            "accepted_answers": [],
+            "explanation": "\"aufstehen\" is a separable verb, so \"auf\" goes to the end of the sentence."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Asking for directions in German-speaking countries",
+        "note": "In Germany, Austria and Switzerland, people are usually happy to help if you ask politely. Start with \"Entschuldigung\" and use \"Sie\" with adults you do not know. Many people will explain the way with \"geradeaus\", \"links\" and \"rechts\", and often name landmarks such as a traffic light (die Ampel) or a crossing (die Kreuzung). Street signs show the street name on the corner of buildings. Many towns have a train station (der Bahnhof) near the centre, and it is a good starting point for directions. Most people also use a map app on their phone, but asking a person is still normal and friendly. At the end, say \"Vielen Dank für Ihre Hilfe.\"",
+        "reflection_question": "How do you usually ask a stranger for directions in your own language, and what is similar or different in German?"
+      },
+      "mission": {
+        "title": "Show the way",
+        "task": "Practise giving and asking for directions with the pronouns ihn, ihm, mir, Ihnen in a real or imagined place near you.",
+        "steps": [
+          "Choose a place near your home, for example a pharmacy (die Apotheke) or a station (der Bahnhof), and look at it on a map.",
+          "Say out loud: \"Entschuldigung, wo ist die Apotheke? Können Sie mir helfen?\"",
+          "Now answer as the helper in German: \"Gehen Sie geradeaus. Dann links. Ich zeige Ihnen den Weg.\"",
+          "Finish with: \"Vielen Dank für Ihre Hilfe.\""
+        ],
+        "report_prompt": "Write or say the directions you gave, from your home to one place, in 3 to 4 short German sentences.",
+        "success_check": [
+          "I asked for help with \"Können Sie mir helfen?\".",
+          "I used geradeaus, links or rechts in my directions.",
+          "I used Ihnen or mir correctly in at least one sentence."
+        ],
+        "safety_note": "Practise alone or with a friend. Do not share your home address or other personal data with strangers."
+      },
+      "closing": {
+        "covered": [
+          "You can now use accusative pronouns such as mich, dich and ihn.",
+          "You can now use dative pronouns such as mir, ihm, ihr and Ihnen.",
+          "You can now ask for help: \"Können Sie mir helfen?\"",
+          "You can now understand and give simple directions with links, rechts and geradeaus.",
+          "You can now thank someone: \"Vielen Dank für Ihre Hilfe.\""
+        ],
+        "review_tomorrow": "Review which verbs take the dative (helfen, danken, gefallen, gehören) and say aloud: ihn, ihm, ihnen, dir, mir."
+      }
+    },
+    "W2.5": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ heute nicht kommen. Ich muss arbeiten.",
+            "answer": "kann",
+            "distractors": [
+              "kannst",
+              "können",
+              "muss"
+            ],
+            "accepted_answers": [],
+            "explanation": "With ich, the modal verb können becomes kann, and the meaning \"can\" fits the sentence."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Choose the correct sentence with a separable verb: \"I get up at six.\"",
+            "answer": "Ich stehe um sechs Uhr auf.",
+            "distractors": [
+              "Ich aufstehe um sechs Uhr.",
+              "Ich stehe auf um sechs Uhr nicht.",
+              "Ich auf stehe um sechs Uhr."
+            ],
+            "accepted_answers": [],
+            "explanation": "The prefix auf goes to the end of the sentence: stehe ... auf."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Der Pullover gefällt ___. (to him)",
+            "answer": "ihm",
+            "distractors": [
+              "ihn",
+              "er",
+              "sein"
+            ],
+            "accepted_answers": [],
+            "explanation": "Gefallen takes the dative, and \"to him\" is ihm."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Being on time in German-speaking countries",
+        "note": "In Germany, Austria and Switzerland, being on time is usually seen as a sign of respect. For a doctor's appointment, a meeting at work or a train, people try to arrive a few minutes early. If you will be late, it is polite to call or write a message before the appointment. In daily life, people often say a time like \"um halb drei\". Careful: halb drei means 2:30, not 3:30, because it is half an hour before three. Many people also use the 24-hour clock in writing and official announcements, for example 14:30 on a train timetable, but in speech they often say \"halb drei\". Among friends, a small delay of a few minutes can be fine at a private party, but for appointments it is better to be punctual.",
+        "reflection_question": "How do people in your country usually handle appointments, and how would you tell someone that you will be late?"
+      },
+      "mission": {
+        "title": "Make a time plan",
+        "task": "Write three short imperative messages to a friend (du), a group (ihr) and a stranger or teacher (Sie) about an appointment tomorrow, using times in German.",
+        "steps": [
+          "Think of one appointment or meeting tomorrow and choose a time, for example halb drei or Viertel nach vier.",
+          "Write one message for a friend with du, for example: Sei bitte pünktlich.",
+          "Write one message for two or more friends with ihr, for example: Kommt um halb drei.",
+          "Write one polite message with Sie, for example: Warten Sie bitte einen Moment. Say each message aloud once and pay attention to ü and the -t ending."
+        ],
+        "report_prompt": "Write your three German messages and tell me which time you chose.",
+        "success_check": [
+          "I used the du form without -st for one command.",
+          "I used the ihr form and the Sie form correctly in the other commands.",
+          "I said a time in German, such as halb drei."
+        ],
+        "safety_note": "Use only made-up appointments and do not share real names, addresses or phone numbers."
+      },
+      "closing": {
+        "covered": [
+          "You can now give commands to one person with du, for example: Komm! or Sei pünktlich!",
+          "You can now give commands to a group with ihr, for example: Kommt um halb drei.",
+          "You can now give polite commands with Sie, for example: Warten Sie bitte einen Moment.",
+          "You can now talk about appointments and time words like Termin, Uhrzeit, heute, morgen and halb.",
+          "You can now say a negative command, for example: Vergiss den Termin nicht!"
+        ],
+        "review_tomorrow": "Review the three imperative forms of kommen, warten and sein: Komm/Kommt/Kommen Sie, Warte/Wartet/Warten Sie, Sei/Seid/Seien Sie."
+      }
+    },
+    "W3.1": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Du bist nett! Ich danke ___ . (Dativ pronoun: you, informal)",
+            "answer": "dir",
+            "distractors": [
+              "dich",
+              "du",
+              "dein"
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb danken takes the Dativ, and the Dativ of du is dir."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Komm bitte pünktlich und ___ nicht! (Imperativ du of vergessen: don't forget)",
+            "answer": "vergiss",
+            "distractors": [
+              "vergisst",
+              "vergessen",
+              "vergesst"
+            ],
+            "accepted_answers": [],
+            "explanation": "The du-Imperativ of vergessen is vergiss, without the ending -st."
+          },
+          {
+            "skill": "word_order",
+            "type": "multiple_choice",
+            "prompt": "Which sentence uses the separable verb einkaufen correctly?",
+            "answer": "Ich kaufe heute im Supermarkt ein.",
+            "distractors": [
+              "Ich einkaufe heute im Supermarkt.",
+              "Ich kaufe ein heute im Supermarkt.",
+              "Ich kaufe heute im Supermarkt einkaufen."
+            ],
+            "accepted_answers": [],
+            "explanation": "The prefix ein goes to the end of the sentence while the verb stays in position 2."
+          }
+        ]
+      },
+      "culture": {
+        "title": "The weekend in Germany",
+        "note": "In Germany, Austria and Switzerland, Sunday is a quiet day. Most shops, supermarkets and many other businesses are closed on Sundays, so people often buy what they need on Saturday. On Sunday many people go for a walk in a park, meet friends or family for coffee and cake (Kaffee und Kuchen), or cook a big meal at home. Many people also play sports. Football clubs, for example, often play their games on the weekend. Because of the Sunday quiet, many people plan their weekend: Saturday for shopping and errands, Sunday for rest. Cafés, cinemas and restaurants are usually open, so they are popular places on Sunday.",
+        "reflection_question": "How is your Sunday different from a Sunday in Germany? What do you usually do on the weekend?"
+      },
+      "mission": {
+        "title": "My weekend in German",
+        "task": "Write three short sentences in German about your last weekend, using the Perfekt with haben. Then ask a friend or a family member the question Was hast du am Wochenende gemacht? and note down their answer.",
+        "steps": [
+          "Think of three things you did last weekend, for example sleeping, cooking, watching a film or playing football.",
+          "Write three sentences like Ich habe lange geschlafen. Put haben in position 2 and the participle at the end.",
+          "Ask someone Was hast du am Wochenende gemacht? Write down one sentence of their answer, in German or in your own language."
+        ],
+        "report_prompt": "Report your three German sentences and the answer of the person you asked.",
+        "success_check": [
+          "I wrote three sentences with haben and a participle at the end.",
+          "I used the question Was hast du am Wochenende gemacht?",
+          "I can say what I did on Saturday or Sunday."
+        ],
+        "safety_note": "Only ask people you know well and do not share private details such as addresses or phone numbers."
+      },
+      "closing": {
+        "covered": [
+          "You can now say what you did at the weekend with the Perfekt with haben.",
+          "You can now build sentences like Ich habe Kuchen gekocht, with haben in position 2 and the participle at the end.",
+          "You can now ask and answer Was hast du am Wochenende gemacht? and Und du?",
+          "You can now use weekend words such as Samstag, Sonntag, Film, Fußball, Musik and gestern."
+        ],
+        "review_tomorrow": "Review the participles of spielen, kochen, schlafen, sehen, kaufen and trinken, and say each one in a full sentence."
+      }
+    },
+    "W3.2": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna hat Hunger. Jonas gibt ___ einen Kuchen. (Complete with the correct pronoun.)",
+            "answer": "ihr",
+            "distractors": [
+              "sie",
+              "er",
+              "ihm"
+            ],
+            "accepted_answers": [],
+            "explanation": "Geben takes the dative, and the dative of the feminine \"sie\" is \"ihr\"."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is the correct Perfekt with haben? (Yesterday I watched a film.)",
+            "answer": "Ich habe gestern einen Film gesehen.",
+            "distractors": [
+              "Ich habe gestern einen Film sehen.",
+              "Ich bin gestern einen Film gesehen.",
+              "Ich habe gestern einen Film gesehe."
+            ],
+            "accepted_answers": [],
+            "explanation": "Perfekt with haben uses haben in position 2 and the past participle \"gesehen\" at the end."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Du suchst den Bahnhof. Die Frau sagt: \"Gehen Sie ___ und dann links!\" (straight on)",
+            "answer": "geradeaus",
+            "distractors": [
+              "rechts",
+              "früh",
+              "pünktlich"
+            ],
+            "accepted_answers": [],
+            "explanation": "\"Geradeaus\" means straight on, as in directions."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Free time in Germany: Vereine and the weekend",
+        "note": "Many people in Germany spend their free time in a Verein, which is a club. There are clubs for football, music, swimming, cycling and many other hobbies. People often meet there once or twice a week. On Sundays most shops are closed, so the weekend is a quiet time. Many people go for a walk in the park, take a bike ride to a lake, visit a museum or meet friends in a café. In summer, lakes and outdoor pools (Freibäder) are popular. Many families also plan a short Ausflug on a Saturday or Sunday. Of course, not everybody does the same thing: some people just stay at home and relax.",
+        "reflection_question": "What do you usually do on the weekend, and where do people in your country go in their free time?"
+      },
+      "mission": {
+        "title": "My weekend in German",
+        "task": "Tell a friend, a family member or Buddy what you did last weekend or last Sunday. Use the Perfekt with sein and at least three different verbs.",
+        "steps": [
+          "Think of three places you went to or things you did, for example the park, the cinema, a lake or home.",
+          "Write three sentences in German with sein, for example: Ich bin ins Kino gegangen. Ich bin zum See gefahren. Ich bin zu Hause geblieben.",
+          "Add one sentence with haben, for example: Ich habe einen Film gesehen.",
+          "Say your sentences out loud and pay attention to the sounds ie and ei."
+        ],
+        "report_prompt": "Write your four German sentences and tell us which one was the hardest to say.",
+        "success_check": [
+          "I used a form of sein in position 2 and the participle at the end.",
+          "I used at least three different movement verbs, such as gehen, fahren or bleiben.",
+          "I said ie and ei correctly out loud."
+        ],
+        "safety_note": "Do not share private details such as your address or exact places where you live when you talk to other people."
+      },
+      "closing": {
+        "covered": [
+          "You can now say where you went with the Perfekt with sein: Ich bin ins Kino gegangen.",
+          "You can now use verbs such as gehen, fahren, bleiben, laufen and fliegen in the past.",
+          "You can now ask Was hast du am Wochenende gemacht? and Wie war dein Wochenende?",
+          "You can now talk about free-time places such as der Park, das Schwimmbad, der See and das Museum."
+        ],
+        "review_tomorrow": "Review which verbs take sein (gehen, fahren, bleiben) and which take haben (machen, sehen, kaufen), and practise the sounds ie and ei."
+      }
+    },
+    "W3.3": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich habe gestern lange gewartet, aber Jonas hat ___ nicht angerufen. (Complete with the pronoun for \"me\".)",
+            "answer": "mich",
+            "distractors": [
+              "mir",
+              "ich",
+              "mein"
+            ],
+            "accepted_answers": [],
+            "explanation": "Anrufen takes the accusative, so \"me\" is mich."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct? Anna went to the park yesterday.",
+            "answer": "Anna ist gestern in den Park gegangen.",
+            "distractors": [
+              "Anna hat gestern in den Park gegangen.",
+              "Anna ist gestern in den Park gehen.",
+              "Anna gegangen ist gestern in den Park."
+            ],
+            "accepted_answers": [],
+            "explanation": "Movement verbs like gehen form the Perfekt with sein, and the Partizip II goes to the end."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Der Film hat Lena gut gefallen. Er gefällt ___ sehr. (Complete with the pronoun for \"her\".)",
+            "answer": "ihr",
+            "distractors": [
+              "sie",
+              "ihn",
+              "ihre"
+            ],
+            "accepted_answers": [],
+            "explanation": "Gefallen takes the dative, so \"her\" is ihr."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Travelling by train",
+        "note": "Trains are a very common way to travel in Germany, Austria and Switzerland. Many cities have a Bahnhof in the centre, and you can often walk or take a bus from there to your hotel. Timetables show the Gleis, which is the platform number where your train leaves. It is a good idea to check it before you go, because it can change. Many people buy a Fahrkarte on a phone or at a machine in the station. Trains are often on time, but sometimes they are late, so many travellers plan some extra minutes for changing trains. On long journeys, people read, listen to music or look at the landscape through the window.",
+        "reflection_question": "How do people usually travel for a short trip or a holiday in your country, and how is it different from travelling by train in Germany?"
+      },
+      "mission": {
+        "title": "My little travel story",
+        "task": "Think of a real or imagined trip. Write 4 short German sentences in the Perfekt about it, using irregular Partizip II verbs such as gefahren, geflogen, gesehen, geschlafen or geblieben.",
+        "steps": [
+          "Choose a trip, for example to the sea, to a city or to a lake, and pick 4 verbs from today's lesson.",
+          "Write 4 sentences, for example: Ich bin mit dem Zug gefahren. Ich habe das Meer gesehen.",
+          "Check each sentence: is haben or sein correct, and is the Partizip II at the end?",
+          "Say your sentences out loud once and listen to the ei and ie sounds."
+        ],
+        "report_prompt": "Write your 4 German sentences and tell Buddy which verbs took sein and which took haben.",
+        "success_check": [
+          "I wrote 4 sentences in the Perfekt about a trip.",
+          "I used haben or sein correctly and put the Partizip II at the end.",
+          "I used at least two irregular Partizip II forms."
+        ],
+        "safety_note": null
+      },
+      "closing": {
+        "covered": [
+          "You can now form the Perfekt with irregular Partizip II verbs like gesehen, gefahren and geflogen.",
+          "You can now choose sein for movement verbs and bleiben, and haben for most other verbs.",
+          "You can now talk about a trip with words like der Zug, der Bahnhof, der Flughafen and das Hotel.",
+          "You can now ask and answer: Wie war die Reise? Wo hast du übernachtet?",
+          "You can now hear the difference between ei (like \"eye\") and ie (like a long \"ee\")."
+        ],
+        "review_tomorrow": "Review the irregular Partizip II list and say five sentences about a trip, checking haben or sein each time."
+      }
+    },
+    "W3.4": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Complete the sentence: Gestern ___ wir lange geschlafen.",
+            "answer": "haben",
+            "distractors": [
+              "sind",
+              "bist",
+              "hat"
+            ],
+            "accepted_answers": [],
+            "explanation": "Schlafen forms the Perfekt with haben, and wir goes with haben."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct? (We went to the park yesterday.)",
+            "answer": "Wir sind gestern in den Park gegangen.",
+            "distractors": [
+              "Wir haben gestern in den Park gegangen.",
+              "Wir sind gestern in den Park gehen.",
+              "Wir haben gestern in den Park gegeht."
+            ],
+            "accepted_answers": [],
+            "explanation": "Gehen is a movement verb, so it takes sein and the irregular Partizip II gegangen."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna ruft Jonas an. Jonas sagt: Ich höre ___ gut. (Anna, 'her' as an object: Dative/Accusative pronoun) Which fits: Anna, ich kann ___ gut verstehen.",
+            "answer": "dich",
+            "distractors": [
+              "du",
+              "dir",
+              "dein"
+            ],
+            "accepted_answers": [],
+            "explanation": "Jonas talks to Anna, and verstehen takes the accusative: dich."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Working hours and punctuality in German-speaking countries",
+        "note": "In Germany, Austria and Switzerland, being on time at work is very important. If you have an appointment (ein Termin) or a meeting (eine Besprechung), you usually arrive a few minutes early. If you are going to be late, you call or write an e-mail and say so. Many offices also offer flexible working hours, but a fixed time for meetings is still normal. Colleagues often greet each other in the morning with Guten Morgen or Hallo. In many companies, colleagues use du with each other, but with customers and with the boss people often use Sie. If you are not sure, start with Sie. Breaks are also common: many people take a short break for lunch or coffee with colleagues.",
+        "reflection_question": "How is it in your country when you have a meeting at work: do people arrive early, on time or later? What do you do if you are late?"
+      },
+      "mission": {
+        "title": "My work day in German",
+        "task": "Write a short report in German about what you did at work (or at home or at school) yesterday. Use at least four Perfekt sentences, two with separable verbs and one with an inseparable verb.",
+        "steps": [
+          "Think of four things you did yesterday, for example: call someone, tidy up, visit someone, pay, arrive, understand something.",
+          "Write four sentences in the Perfekt, for example: Ich habe den Kunden angerufen. Ich habe das Büro aufgeräumt. Ich bin um acht Uhr angekommen. Ich habe die E-Mail verstanden.",
+          "Check each sentence: separable verbs have ge- between prefix and stem (angerufen), inseparable verbs have no ge- (besucht, bezahlt).",
+          "Read your sentences aloud and stress the prefix in separable verbs: ANgerufen. Do not stress the prefix in inseparable verbs: beSUCHT."
+        ],
+        "report_prompt": "Write your four German sentences and tell Buddy which verb was separable and which was inseparable.",
+        "success_check": [
+          "I wrote four sentences in the Perfekt.",
+          "I used ge- correctly in separable verbs and no ge- in inseparable verbs.",
+          "I chose haben or sein correctly."
+        ],
+        "safety_note": "Do not use real names of colleagues or customers, and do not share private company information. Use Anna, Jonas or Lena, or just write about yourself."
+      },
+      "closing": {
+        "covered": [
+          "You can now form the Perfekt with separable verbs: Ich habe den Kunden angerufen.",
+          "You can now form the Perfekt with inseparable verbs without ge-: Ich habe das nicht verstanden.",
+          "You can now use sein with ankommen: Ich bin gerade angekommen.",
+          "You can now talk about work with words like Büro, Kollege, Chef, Termin and E-Mail.",
+          "You can now hear and say the stress in separable and inseparable verbs."
+        ],
+        "review_tomorrow": "Review the Partizip II of anrufen, aufräumen, besuchen, verstehen, ankommen and bezahlen, and say whether each one takes haben or sein."
+      }
+    },
+    "W3.5": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Gestern habe ich Anna im Park gesehen. Ich habe ___ eine Einladung gegeben. (Complete with the correct pronoun: to her.)",
+            "answer": "ihr",
+            "distractors": [
+              "sie",
+              "ihm",
+              "dir"
+            ],
+            "accepted_answers": [],
+            "explanation": "Geben takes the dative, and \"to her\" is \"ihr\"."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Wir sind gestern ins Kino ___.",
+            "answer": "gegangen",
+            "distractors": [
+              "gegehen",
+              "gehabt",
+              "gegeht"
+            ],
+            "accepted_answers": [],
+            "explanation": "Gehen is irregular and forms its Perfekt with sein: ist gegangen."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct in the Perfekt with a separable verb (to call someone)?",
+            "answer": "Ich habe den Kollegen angerufen.",
+            "distractors": [
+              "Ich habe den Kollegen geanruft.",
+              "Ich habe den Kollegen gerufen an.",
+              "Ich habe den Kollegen anrufen."
+            ],
+            "accepted_answers": [],
+            "explanation": "With separable verbs, ge- goes between the prefix and the verb: angerufen."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Silvester and Karneval",
+        "note": "In Germany, people celebrate Silvester on the evening of 31 December. Many meet friends, eat together and watch the Feuerwerk at midnight. Some people also say \"Guten Rutsch!\", which means a good start into the new year. Another big party time is Karneval, which is especially popular in some regions in the west and south of Germany. It takes place in winter or early spring. People wear costumes, dance in the streets and watch parades. Not every region celebrates Karneval, and in some places it is called Fasching or Fastnacht. For a birthday, many people invite friends and family and often bring a small Geschenk. The birthday person often brings the Kuchen or the drinks to work or school.",
+        "reflection_question": "Which Fest do you like best in your country, and when does it take place (am, im, um)?"
+      },
+      "mission": {
+        "title": "My Party Calendar",
+        "task": "Write a short party plan in German for a real or imaginary celebration. Use the time expressions am, um, im, seit and vor in your sentences.",
+        "steps": [
+          "Choose a celebration, for example a Geburtstag, a Hochzeit or Silvester.",
+          "Write 4 short German sentences: one with am (day or date), one with um (clock time), one with im (month or season) and one with vor or seit.",
+          "Read your sentences aloud once and check the ei and ie sounds, for example in Feier, Silvester and Kuchen."
+        ],
+        "report_prompt": "Write your 4 German sentences and tell Buddy which celebration you chose.",
+        "success_check": [
+          "I used am, um and im correctly with a day, a clock time and a month.",
+          "I wrote one sentence with vor or seit.",
+          "I used at least two new party words, such as Geschenk or Einladung."
+        ],
+        "safety_note": "Do not use real names or personal data of other people. Use Anna, Jonas or Lena, or only say ich."
+      },
+      "closing": {
+        "covered": [
+          "You can now say when a party takes place with am, um and im.",
+          "You can now say how long something has lasted with seit and how long ago it was with vor.",
+          "You can now talk about celebrations with words like die Party, der Geburtstag, das Geschenk and der Kuchen.",
+          "You can now congratulate someone with Alles Gute zum Geburtstag! and Herzlichen Glückwunsch!"
+        ],
+        "review_tomorrow": "Review which time expression goes with which kind of time: am with days and dates, um with clock times, im with months and seasons."
+      }
+    },
+    "W4.1": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Gestern ___ ich mit dem Zug nach Berlin gefahren.",
+            "answer": "bin",
+            "distractors": [
+              "habe",
+              "hat",
+              "ist"
+            ],
+            "accepted_answers": [],
+            "explanation": "Fahren is a movement verb, so the Perfekt uses sein: ich bin gefahren."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which time expression is correct? Das Konzert beginnt ___ acht Uhr.",
+            "answer": "um",
+            "distractors": [
+              "am",
+              "im",
+              "seit"
+            ],
+            "accepted_answers": [],
+            "explanation": "Clock times use um: um acht Uhr."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct? Say to a friend (du): Come to the party!",
+            "answer": "Komm zur Party!",
+            "distractors": [
+              "Kommt zur Party!",
+              "Kommen Sie zur Party!",
+              "Du kommst zur Party!"
+            ],
+            "accepted_answers": [],
+            "explanation": "The du-imperative is the verb stem without an ending: Komm!"
+          }
+        ]
+      },
+      "culture": {
+        "title": "Living in a German-speaking country: rooms and furniture",
+        "note": "Many people in Germany, Austria and Switzerland rent their home instead of buying it. Rented flats are often unfurnished. Sometimes there is not even a kitchen, so tenants bring their own Küche, lamps and Schränke. Because of this, many people take their furniture with them when they move. Flats are often described by the number of rooms, such as a Zwei-Zimmer-Wohnung. Kitchen and bathroom are usually not counted. Many people also open the window wide for a few minutes every day to let in fresh air. Used furniture is popular too, and people sell or give away things like a Sessel, a Regal or a Tisch to others.",
+        "reflection_question": "Is it normal in your country to rent a flat with or without a kitchen? What furniture would you take with you when you move?"
+      },
+      "mission": {
+        "title": "My room in German",
+        "task": "Look at one room in your home and describe it with the new furniture words and the prepositions für, durch, ohne, gegen and um.",
+        "steps": [
+          "Choose one room and name five things in it, for example: der Tisch, die Lampe, das Regal.",
+          "Write three sentences with für, ohne or gegen, for example: Der Stuhl ist für den Schreibtisch. Ohne die Lampe ist es dunkel.",
+          "Write one sentence with durch or um, for example: Ich gehe durch den Flur. Der Stuhl steht um den Tisch.",
+          "Say your sentences aloud and check that der becomes den after these prepositions."
+        ],
+        "report_prompt": "Write your three to four best German sentences about your room and tell us which preposition was hardest to use.",
+        "success_check": [
+          "I named at least five pieces of furniture in German.",
+          "I used den correctly after a preposition with a der-word.",
+          "I said ü, ö and ä words aloud."
+        ],
+        "safety_note": null
+      },
+      "closing": {
+        "covered": [
+          "You can now use für, durch, ohne, gegen and um with the accusative.",
+          "You can now change der to den and ein to einen after these prepositions.",
+          "You can now name furniture and rooms such as der Tisch, das Bett and die Küche.",
+          "You can now say Das ist für dich and Ohne ... geht es nicht.",
+          "You can now say the vowels ü, ö and ä in furniture words."
+        ],
+        "review_tomorrow": "Review the Perfekt with haben and sein and say five sentences about what you did at home yesterday."
+      }
+    },
+    "W4.2": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Gestern ___ ich meine Kollegin angerufen.",
+            "answer": "habe",
+            "distractors": [
+              "bin",
+              "hat",
+              "sind"
+            ],
+            "accepted_answers": [],
+            "explanation": "Anrufen forms the Perfekt with haben, and ich goes with habe."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Das Geschenk ist für ___ Freund.",
+            "answer": "einen",
+            "distractors": [
+              "einem",
+              "einer",
+              "ein"
+            ],
+            "accepted_answers": [],
+            "explanation": "The preposition für always takes the Akkusativ, and Freund is masculine: einen."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct? Ich wohne ___ drei Jahren in Berlin.",
+            "answer": "seit",
+            "distractors": [
+              "am",
+              "um",
+              "im"
+            ],
+            "accepted_answers": [],
+            "explanation": "Seit is used for something that started in the past and still continues."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Moving day with friends",
+        "note": "In Germany, many people rent their flat rather than buy it, so moving is quite common. Friends often help carry boxes and furniture, and the helpers are often thanked with pizza and a drink afterwards. A flat is often rented empty, so you may even have to bring your own kitchen. Many tenants also tell the neighbours about a loud moving day, and it is polite to say hello to your new neighbours soon after you arrive. In many buildings, you also have to register your new address at the local office within a short time after moving in. Quiet hours in the evening and on Sundays are taken seriously, so heavy furniture is best moved during the day.",
+        "reflection_question": "Who helps you when you move, and how do you thank them?"
+      },
+      "mission": {
+        "title": "My moving story",
+        "task": "Write three short German sentences about a move (your own, a friend's or an imaginary one) using aus, mit, nach, zu, bei or seit with the Dativ.",
+        "steps": [
+          "Think of a move: Who moves, and where to?",
+          "Write three sentences, for example: Ich ziehe nach Berlin um. Ich komme mit dem Auto. Das ist der Schlüssel zur Wohnung.",
+          "Check each Dativ word after the preposition: dem, der, dem, den + -n, or short forms such as zum, zur, beim.",
+          "Read your sentences aloud and pay attention to the z in zur and zum, which sounds like ts."
+        ],
+        "report_prompt": "Write your three German sentences and tell which preposition you used in each one.",
+        "success_check": [
+          "I used at least three of the prepositions aus, bei, mit, nach, seit, von, zu.",
+          "I used the correct Dativ form after each preposition.",
+          "I said the z in zum or zur like ts."
+        ],
+        "safety_note": "Do not share a real address, a house key or other personal data. Use an imaginary or general example."
+      },
+      "closing": {
+        "covered": [
+          "You can now use aus, bei, mit, nach, seit, von and zu with the Dativ.",
+          "You can now say dem, der, dem and den + -n after these prepositions.",
+          "You can now use the short forms zum, zur, vom and beim.",
+          "You can now talk about a move with words like der Umzug, die Wohnung and der Umzugskarton."
+        ],
+        "review_tomorrow": "Review the Dativ forms dem, der, dem, den + -n after the seven prepositions, and compare them with the Akkusativ prepositions from the last lesson."
+      }
+    },
+    "W4.3": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Gestern ___ Anna mit dem Bus zur Arbeit gefahren.",
+            "answer": "ist",
+            "distractors": [
+              "hat",
+              "wird",
+              "war"
+            ],
+            "accepted_answers": [],
+            "explanation": "Fahren is a movement verb, so the Perfekt uses sein: ist gefahren."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas fährt mit ___ Fahrrad zum Bahnhof.",
+            "answer": "dem",
+            "distractors": [
+              "den",
+              "das",
+              "der"
+            ],
+            "accepted_answers": [],
+            "explanation": "The preposition mit always takes the Dativ: mit dem Fahrrad."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct? Lena kauft Blumen ...",
+            "answer": "für ihre Freundin.",
+            "distractors": [
+              "mit ihre Freundin.",
+              "von ihre Freundin.",
+              "für ihrer Freundin."
+            ],
+            "accepted_answers": [],
+            "explanation": "The preposition für takes the Akkusativ, so the feminine form stays ihre."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Tickets and Trust on German Public Transport",
+        "note": "In many German cities, buses, trams and trains work with a ticket system that relies on trust. Often there is no barrier at the stop, and you can simply walk onto the platform or into the vehicle. However, there are random ticket checks, and people without a valid ticket must pay a fine. So you should buy your ticket before you travel, or validate it if it needs a stamp. Many people use a monthly ticket or a ticket on their phone. Timetables are shown at the stop, and trains often leave from a numbered Gleis. Punctuality is valued, but delays can happen, so it is useful to check the display at the Haltestelle or the Bahnhof.",
+        "reflection_question": "How does paying for public transport work in your city, and what is different from the system in Germany?"
+      },
+      "mission": {
+        "title": "Where is it? Where to?",
+        "task": "Look at a bus stop, a station or a street (in real life or in a map app) and describe places and movements using Wo? and Wohin?",
+        "steps": [
+          "Find three places or objects, for example a bus stop, a bench and a traffic light, and write one sentence about each with Wo?, for example: Der Bus steht an der Haltestelle.",
+          "Find three movements and write one sentence about each with Wohin?, for example: Ich gehe in die U-Bahn.",
+          "Underline the article in each sentence and check: dative for Wo?, accusative for Wohin?",
+          "Say two of your sentences out loud and practise the long a in Bahn and the ä in fährt."
+        ],
+        "report_prompt": "Report your six German sentences and tell which sentences use Wo? and which use Wohin?.",
+        "success_check": [
+          "I wrote three correct Wo? sentences with the dative.",
+          "I wrote three correct Wohin? sentences with the accusative.",
+          "I said two sentences out loud."
+        ],
+        "safety_note": "Stay on the pavement and wait at a safe place. Do not take photos of strangers and do not write down personal data."
+      },
+      "closing": {
+        "covered": [
+          "You can now ask Wo? and Wohin? and choose between dative and accusative with in, auf and an.",
+          "You can now talk about transport words like Bus, Zug, Bahnhof, Haltestelle and Fahrkarte.",
+          "You can now ask for help with phrases like Entschuldigung, wo ist die Haltestelle?",
+          "You can now buy a ticket with Eine Fahrkarte, bitte."
+        ],
+        "review_tomorrow": "Review the two-way prepositions: Wo? uses the dative (in der Stadt), Wohin? uses the accusative (in die Stadt)."
+      }
+    },
+    "W4.4": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Wohin stellst du den Stuhl? Ich stelle den Stuhl an ___ Tisch.",
+            "answer": "den",
+            "distractors": [
+              "dem",
+              "der",
+              "das"
+            ],
+            "accepted_answers": [],
+            "explanation": "Wohin? needs the accusative, and Tisch is masculine, so it is den Tisch."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Choose the correct Perfekt: Gestern ___ Anna die Wohnung angesehen.",
+            "answer": "hat",
+            "distractors": [
+              "ist",
+              "wird",
+              "war"
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb ansehen forms its Perfekt with haben: Anna hat die Wohnung angesehen."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas fährt mit ___ Bus zum Bahnhof.",
+            "answer": "dem",
+            "distractors": [
+              "den",
+              "der",
+              "einen"
+            ],
+            "accepted_answers": [],
+            "explanation": "The preposition mit always takes the dative, and Bus is masculine, so it is dem Bus."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Anmeldung at the Einwohnermeldeamt",
+        "note": "In Germany, people who move into a new home must register their address, usually within two weeks. This is called die Anmeldung. You go to a local office, often called Einwohnermeldeamt or Bürgeramt. In many cities you need an Termin, so you book a time online or by phone. Often you bring your Ausweis or passport, a filled-in Formular and a confirmation from your landlord. At the Schalter or in an office, an employee checks your documents and enters your new Adresse. Rules and details can differ between cities and countries, so check the website of your local office first. Austria and Switzerland also have registration, but the offices and the deadlines are different.",
+        "reflection_question": "Do you have to register your address in your country? How is it similar to or different from Germany?"
+      },
+      "mission": {
+        "title": "My Anmeldung desk",
+        "task": "Prepare a small practice desk at home for an imaginary Anmeldung and describe where each item is, using German.",
+        "steps": [
+          "Take a Formular (or a piece of paper), an Ausweis (or a card), and a pen. Say aloud: Ich lege das Formular auf den Tisch. Ich stelle die Tasche auf den Stuhl.",
+          "Now look at where things are and say: Das Formular liegt auf dem Tisch. Die Tasche steht auf dem Stuhl.",
+          "Hang a note on the Wand and say: Ich hänge den Termin an die Wand. Then say: Der Termin hängt an der Wand."
+        ],
+        "report_prompt": "Write 3 short German sentences: one with legen or liegen, one with stellen or stehen, and one with hängen. Say which items you used.",
+        "success_check": [
+          "I can say Wohin? with stellen, legen and hängen plus the accusative.",
+          "I can say Wo? with stehen, liegen and hängen plus the dative.",
+          "I can say one phrase for an office visit, for example Ich habe einen Termin."
+        ],
+        "safety_note": "Use a fake or blank card and paper. Do not write or share your real ID number or other personal data."
+      },
+      "closing": {
+        "covered": [
+          "You can now name office words such as die Behörde, das Formular, der Ausweis and der Termin.",
+          "You can now use stellen, legen and hängen with the accusative to say where something goes.",
+          "You can now use stehen, liegen and hängen with the dative to say where something is.",
+          "You can now say useful phrases like Ich möchte mich anmelden and Wo unterschreibe ich?"
+        ],
+        "review_tomorrow": "Review the pairs stellen/stehen and legen/liegen and say one Wohin? and one Wo? sentence for each."
+      }
+    },
+    "W4.5": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Wir haben die Wohnung gestern ___. (We moved out of the flat yesterday.) Choose the correct Perfekt form of \"ausziehen\".",
+            "answer": "ausgezogen",
+            "distractors": [
+              "gezogen aus",
+              "ausgeziehen",
+              "geausgezogen"
+            ],
+            "accepted_answers": [],
+            "explanation": "Separable verbs put \"ge\" between the prefix and the stem: aus + ge + zogen."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich fahre mit ___ Bus zum Bahnhof.",
+            "answer": "dem",
+            "distractors": [
+              "den",
+              "der",
+              "einen"
+            ],
+            "accepted_answers": [],
+            "explanation": "\"mit\" always takes the Dativ, and der Bus becomes dem Bus."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "The lamp is hanging on the wall now. Which sentence asks about the place (Wo?) correctly? Choose the right answer: Die Tasche ___ auf dem Stuhl.",
+            "answer": "liegt",
+            "distractors": [
+              "legt",
+              "stellt",
+              "stehen"
+            ],
+            "accepted_answers": [],
+            "explanation": "\"liegen\" describes where something lies (Wo?), while \"legen\" describes putting it somewhere (Wohin?)."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Registering your address in Germany",
+        "note": "In Germany, people who move into a new flat usually have to register their new address at the local registration office. This is called the \"Anmeldung\". It normally has to be done within two weeks of moving in. Many offices ask you to book an appointment (einen Termin) first. You often bring your ID (der Ausweis), a filled-in form (das Formular) and a confirmation from your landlord. Rules and details can differ between cities and between countries such as Austria and Switzerland, so check the website of your local office. Because of this step, German forms often ask for your name, your address and your signature (die Unterschrift). At the counter, officials are usually addressed with Sie, so the polite form is a good habit from day one.",
+        "reflection_question": "How do people register their address in your country, and what documents do they need?"
+      },
+      "mission": {
+        "title": "My German mini-profile",
+        "task": "Write and say a short introduction of yourself in German using the building blocks of this review. Practise it aloud, as if you were at a registration desk or meeting a new neighbour.",
+        "steps": [
+          "Write 5 short German sentences: your name, where you come from, where you live, what you do and one thing you like (for example: Ich heiße ... Ich komme aus ... Ich wohne in ... Ich arbeite ... Ich trinke gern Wasser.).",
+          "Add one sentence with \"kein\" or \"nicht\" (for example: Ich habe heute keine Zeit. or Ich arbeite heute nicht.).",
+          "Say your sentences aloud twice. Practise the first sounds of sch, tsch and st/sp in words such as Schule, Deutsch, Stadt and sprechen.",
+          "Then say them again in the polite form, as if someone asked you: Woher kommen Sie?"
+        ],
+        "report_prompt": "Write your 5 to 6 German sentences and tell us which one was hardest to say aloud and why.",
+        "success_check": [
+          "I wrote sentences with the verb in second position.",
+          "I used the correct verb endings for ich and for Sie.",
+          "I used kein with a noun or nicht correctly in one sentence."
+        ],
+        "safety_note": "Do not share private data such as your full address, phone number or ID number in your report. Use a general city name only."
+      },
+      "closing": {
+        "covered": [
+          "You can now introduce yourself and say where you come from and live with Ich komme aus ... and Ich wohne in ...",
+          "You can now put the verb in second position and match the ending to the person.",
+          "You can now use kein for nouns and nicht for other negations, for example Ich habe keine Zeit.",
+          "You can now choose between du and Sie and ask Woher kommen Sie?",
+          "You can now ask politely: Können Sie das bitte wiederholen?"
+        ],
+        "review_tomorrow": "Review the Dativ prepositions (mit, bei, nach, von, zu) and the pairs legen/liegen and stellen/stehen."
+      }
+    },
+    "Z9": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna ___ in Berlin.",
+            "answer": "wohnt",
+            "distractors": [
+              "wohne",
+              "wohnst",
+              "wohnen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With Anna (she), the regular verb ends in -t: sie wohnt."
+          },
+          {
+            "skill": "articles",
+            "type": "gap_fill",
+            "prompt": "Das ist ___ Flasche.",
+            "answer": "die",
+            "distractors": [
+              "der",
+              "das"
+            ],
+            "accepted_answers": [],
+            "explanation": "Flasche is feminine, so it takes die (or eine)."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Der Kurs beginnt ___ acht Uhr.",
+            "answer": "um",
+            "distractors": [
+              "am",
+              "im"
+            ],
+            "accepted_answers": [],
+            "explanation": "For a clock time we use um; am is for days like am Montag."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Coffee and cake in the café",
+        "note": "In Germany, Austria and Switzerland, many people like to meet friends in a café. A common tradition is \"Kaffee und Kuchen\" in the afternoon. Many people eat a Brötchen with cheese for breakfast, often from a bakery. In a café you usually sit down first and wait for the waiter. You often pay at the table and say \"Die Rechnung, bitte.\" It is common to round up the bill a little as a tip. In restaurants, tap water is usually not free, so you often order water as a drink. Remember: use Sie with the waiter, not du.",
+        "reflection_question": "What do you usually eat or drink in a café in your country, and is it the same in Germany?"
+      },
+      "mission": {
+        "title": "My café order",
+        "task": "Prepare and say your own café order in German. If you can, order in a real café or bakery.",
+        "steps": [
+          "Write three German sentences for your order, for example: Ich möchte einen Kaffee, bitte. Ich nehme den Kuchen. Die Rechnung, bitte.",
+          "Say your sentences out loud three times. Listen to the sounds ö and ä in möchte and Käse.",
+          "Write one more sentence about what you eat or drink every day, for example: Ich esse Brot und ich trinke Tee.",
+          "Optional: order in a café or bakery in a German-speaking place, or act it out at home with Sie."
+        ],
+        "report_prompt": "Tell Buddy your three order sentences and what you eat or drink every day. Say whether it was easy or hard to say ö and ä.",
+        "success_check": [
+          "I can order a drink with Ich möchte ... , bitte.",
+          "I can say what I take with Ich nehme ... .",
+          "I can ask for the bill with Die Rechnung, bitte."
+        ],
+        "safety_note": "Only practise with people you know or in public places such as a café. Do not share personal data like your address or phone number."
+      },
+      "closing": {
+        "covered": [
+          "You can now use the verbs essen, nehmen and sprechen with ich, du and er/sie/es, for example er isst and du nimmst.",
+          "You can now order a drink or food with Ich möchte einen Kaffee, bitte.",
+          "You can now say what you take with Ich nehme die Suppe.",
+          "You can now name common food and drinks like Brot, Käse, Kuchen, Tee and Wasser.",
+          "You can now ask for the menu and the bill politely."
+        ],
+        "review_tomorrow": "Review the verb forms with du and er/sie/es (du isst, er isst, du nimmst, er nimmt) and say five sentences with möchten and a second verb at the end."
+      }
+    },
+    "Z10": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna ___ Deutsch. (Anna learns German.)",
+            "answer": "lernt",
+            "distractors": [
+              "lernen",
+              "lerne",
+              "lernst"
+            ],
+            "accepted_answers": [],
+            "explanation": "With er/sie/es (Anna), a regular verb ends in -t."
+          },
+          {
+            "skill": "word_order",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct? You want to start with the word \"Heute\".",
+            "answer": "Heute lerne ich Deutsch.",
+            "distractors": [
+              "Heute ich lerne Deutsch.",
+              "Heute Deutsch ich lerne.",
+              "Heute ich Deutsch lerne."
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb is always in position 2, so it comes right after \"Heute\"."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Jonas möchte einen Kaffee ___. (Jonas wants to order a coffee.)",
+            "answer": "bestellen",
+            "distractors": [
+              "lernen",
+              "schlafen",
+              "arbeiten"
+            ],
+            "accepted_answers": [],
+            "explanation": "\"Bestellen\" means to order, for example in a café."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Coffee and cake in a German café",
+        "note": "In Germany, Austria and Switzerland, many people enjoy coffee and cake in the afternoon. Friends often meet in a café and stay for a long time. When you come into a small café, you can ask \"Ist hier noch frei?\" before you sit at a table with other people. Often you pay at the table: the waiter or waitress comes and asks \"Zusammen oder getrennt?\" (together or separately?). Many people also add a small tip, for example by rounding up the bill. With waiters and waitresses you do not know, use Sie. Among friends, use du.",
+        "reflection_question": "Where do you meet friends for a drink or a snack, and would you use du or Sie with the staff there?"
+      },
+      "mission": {
+        "title": "Two small talks",
+        "task": "Write and say aloud two short café dialogues: one informal (du) with a friend and one formal (Sie) with a stranger or a waiter. Each one should take about one minute.",
+        "steps": [
+          "Write a du dialogue with a friend: greet, ask \"Wie geht es dir?\", answer, and ask \"Und dir?\".",
+          "Write a Sie dialogue with a waiter: ask \"Ist hier noch frei?\", say \"Einen Kaffee, bitte.\" and ask for \"die Rechnung\".",
+          "Check that each dialogue uses only one form (du or Sie) from start to end.",
+          "Read both dialogues aloud. Pay attention to ie and ei in words like Kaffee, Freundin and Rechnung."
+        ],
+        "report_prompt": "Write your two dialogues in German and tell me which one was easier, du or Sie, and why (in English is fine).",
+        "success_check": [
+          "I can use du with a friend and Sie with a stranger.",
+          "I can order a drink and ask for the bill politely.",
+          "I kept one form (du or Sie) in each whole dialogue."
+        ],
+        "safety_note": "Do not use real names or private details of other people. Practise alone or with a friend, and only share what you are happy to share."
+      },
+      "closing": {
+        "covered": [
+          "You can now choose between du and Sie in a café.",
+          "You can now use the verb endings -st (du) and -en (Sie).",
+          "You can now order a drink and ask for the bill politely.",
+          "You can now ask \"Ist hier noch frei?\" and \"Wie geht es Ihnen?\".",
+          "You can now hold a short informal and formal introduction dialogue."
+        ],
+        "review_tomorrow": "Review the verb endings for du (-st) and Sie (-en) and say both dialogues aloud once more."
+      }
+    },
+    "W1.1": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Heute ___ ich Deutsch. (Today I learn German. Verb in position 2.)",
+            "answer": "lerne",
+            "distractors": [
+              "lernst",
+              "lernen",
+              "lernt"
+            ],
+            "accepted_answers": [],
+            "explanation": "With ich the verb ends in -e, and it stands in second position after Heute."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "You are in a café and want to pay. What do you ask for? Ich möchte bitte die ___.",
+            "answer": "Rechnung",
+            "distractors": [
+              "Speisekarte",
+              "Milch",
+              "Uhr"
+            ],
+            "accepted_answers": [],
+            "explanation": "Die Rechnung is the bill you ask for when you want to pay."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "You meet an adult you do not know. Which question is correct?",
+            "answer": "Wie heißen Sie?",
+            "distractors": [
+              "Wie heißt du?",
+              "Wie heiße ich?",
+              "Wie heißen du?"
+            ],
+            "accepted_answers": [],
+            "explanation": "Sie (capital S) is the formal you for adults you do not know well."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Du or Sie? Introducing yourself",
+        "note": "In German-speaking countries, people usually shake hands when they meet for the first time in a formal situation, and they often say their name: \"Guten Tag, ich heiße Anna Weber.\" With adults you do not know, at work or in shops, you use Sie and often the last name, for example \"Frau Weber\" or \"Herr Weber\". Friends, family, children and many fellow students say du and use first names. Among young people and in many workplaces, people switch to du quickly, but it is polite to wait until the other person offers it. When in doubt, start with Sie. A small, friendly \"Freut mich!\" is a good answer after you hear someone's name.",
+        "reflection_question": "How do people in your country greet each other when they meet for the first time, and does your language also have a formal and an informal \"you\"?"
+      },
+      "mission": {
+        "title": "Introduce yourself out loud",
+        "task": "Practise a short self-introduction in German, first for a friend (du) and then for a stranger (Sie), and say it out loud three times.",
+        "steps": [
+          "Write four sentences: your name, where you come from, where you live and one language you speak or learn. Use: Ich heiße ..., Ich komme aus ..., Ich wohne in ..., Ich lerne Deutsch.",
+          "Add one question for the other person: Wie heißt du? / Woher kommst du? Then change it to the Sie form: Wie heißen Sie? / Woher kommen Sie?",
+          "Say your introduction out loud in front of a mirror or record it on your phone. Listen for the sounds ei (in heiße) and ie (in Wie)."
+        ],
+        "report_prompt": "Write your four sentences and your two questions in German (du and Sie), and tell us which sound, ei or ie, was harder for you.",
+        "success_check": [
+          "I can say my name, where I come from and where I live in German.",
+          "I can ask Wie heißt du? and Wie heißen Sie? correctly.",
+          "I can say Freut mich! after I hear a name."
+        ],
+        "safety_note": "Do not share private data such as your address, phone number or other personal details. Use only your first name, your country and your city."
+      },
+      "closing": {
+        "covered": [
+          "You can now say your name, country and city: Ich heiße ..., Ich komme aus ..., Ich wohne in ...",
+          "You can now ask Wie heißt du? and Woher kommst du? and use the formal Sie form with strangers.",
+          "You can now put the verb in second position in statements and W-questions.",
+          "You can now use sein and haben and the regular verb endings when you introduce yourself.",
+          "You can now tell ei (heißen) and ie (wie) apart when you say words."
+        ],
+        "review_tomorrow": "Review the verb endings of heißen, kommen, wohnen and lernen with ich, du and Sie, and the forms of sein and haben."
+      }
+    },
+    "W1.2": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "word_order",
+            "type": "gap_fill",
+            "prompt": "Complete the sentence (verb in position 2): Heute ___ ich Kaffee.",
+            "answer": "trinke",
+            "distractors": [
+              "trinken",
+              "Kaffee",
+              "ich"
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb stays in position 2, and with ich it ends in -e: Heute trinke ich Kaffee."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Choose the correct sentence: Anna reads a menu.",
+            "answer": "Anna liest die Speisekarte.",
+            "distractors": [
+              "Anna lesst die Speisekarte.",
+              "Anna lese die Speisekarte.",
+              "Anna lesen die Speisekarte."
+            ],
+            "accepted_answers": [],
+            "explanation": "Lesen is irregular: er/sie/es liest."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "You ask an adult you do not know in a café: What is your name?",
+            "answer": "Wie heißen Sie?",
+            "distractors": [
+              "Wie heißt du?",
+              "Wie heiße ich?",
+              "Wo wohnen Sie?"
+            ],
+            "accepted_answers": [],
+            "explanation": "With a stranger you use the formal Sie: Wie heißen Sie?"
+          }
+        ]
+      },
+      "culture": {
+        "title": "Family in German-speaking countries",
+        "note": "In Germany, Austria and Switzerland, many people live in small households: a single person, a couple, or parents with one or two children. Grandparents often live in another town, so families often meet on weekends, on birthdays and at holidays. Many families have coffee and cake together on Sunday afternoon. When Germans talk about the family, they often say die Familie for parents and children, and die Verwandten for relatives such as Onkel, Tante, Cousin and Cousine. Families are very different, and many children also have step-parents or live with one parent. In everyday speech, many people say Oma and Opa for grandparents, and Mama and Papa for parents.",
+        "reflection_question": "How do you call your grandparents in your language, and who do you meet most often in your family?"
+      },
+      "mission": {
+        "title": "My family in German",
+        "task": "Introduce a family (yours or an imaginary one) in German using today's words and the article change der to den and ein to einen.",
+        "steps": [
+          "Write or find 4 family members (for example: Vater, Mutter, Bruder, Schwester) and say their names, for example: Das ist mein Vater. Er heißt Jonas.",
+          "Write 3 sentences with haben: Ich habe einen Bruder. Ich habe eine Schwester. Ich habe einen Onkel.",
+          "Ask a question aloud, as if to a friend: Hast du Geschwister? Then answer it yourself in German.",
+          "Say all your sentences aloud once and check that you say einen with Bruder, Vater, Onkel, Cousin and Opa."
+        ],
+        "report_prompt": "Report back: write your 3 to 5 German sentences about the family, and tell which sentence with einen was the hardest.",
+        "success_check": [
+          "I can say who someone is with Das ist mein/meine ...",
+          "I can say what I have with Ich habe einen/eine ...",
+          "I can ask Hast du Geschwister?"
+        ],
+        "safety_note": "Use an imaginary family or only first names of people who agree. Do not share private details such as addresses or phone numbers."
+      },
+      "closing": {
+        "covered": [
+          "You can now name family members such as Vater, Mutter, Bruder and Schwester.",
+          "You can now say Das ist meine Familie and Das ist mein Vater.",
+          "You can now use the Nominativ for the subject and the Akkusativ for the object after haben.",
+          "You can now say einen Bruder and eine Schwester, because only the masculine article changes.",
+          "You can now ask Hast du Geschwister? and Wie heißt deine Mutter?"
+        ],
+        "review_tomorrow": "Review the masculine change der to den and ein to einen with haben and sehen, and say the plural forms with umlauts such as Brüder, Töchter and Mütter."
+      }
+    },
+    "W1.3": {
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "word_order",
+            "type": "gap_fill",
+            "prompt": "Heute ___ ich Deutsch.",
+            "answer": "lerne",
+            "distractors": [
+              "lernst",
+              "lernt",
+              "lernen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With ich the verb ends in -e, and it stays in position 2 after Heute."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Der Kurs beginnt ___ acht Uhr.",
+            "answer": "um",
+            "distractors": [
+              "am",
+              "im",
+              "in"
+            ],
+            "accepted_answers": [],
+            "explanation": "Use um with a clock time; am is for days."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas ___ den Kaffee.",
+            "answer": "nimmt",
+            "distractors": [
+              "nehmt",
+              "nehme",
+              "nimmst"
+            ],
+            "accepted_answers": [],
+            "explanation": "Nehmen is irregular: er/sie nimmt."
+          }
+        ]
+      },
+      "culture": {
+        "title": "Renting a flat in Germany",
+        "note": "Many people in Germany, Austria and Switzerland rent their home instead of buying it. The monthly rent is called die Miete. You often see two prices: Kaltmiete (rent only) and Warmmiete (rent plus costs such as heating). Some empty flats come without a kitchen, so tenants bring or buy their own. In many buildings, names are written next to the doorbell at the front door. Most buildings also have quiet hours, often at night and on Sundays, when people try not to make noise. Rules differ between buildings, so it is polite to check the house rules (die Hausordnung).",
+        "reflection_question": "What is the first thing you look at when you search for a flat: the rent, the rooms or something else?"
+      },
+      "mission": {
+        "title": "My home in German",
+        "task": "Walk around your home or room and name what you see and what you do not have, using nicht and kein.",
+        "steps": [
+          "Choose five things at home, for example das Bett, der Stuhl, die Lampe, das Fenster, der Schrank, and write each with its article.",
+          "Write two sentences with kein/keine/keinen, for example: Ich habe keinen Balkon. Ich habe keine Lampe im Flur.",
+          "Write two sentences with nicht, for example: Das Zimmer ist nicht groß. Das gefällt mir nicht.",
+          "Read all your sentences aloud and focus on the ei in kein and the soft ch in nicht."
+        ],
+        "report_prompt": "Report your four sentences (two with kein and two with nicht) and say which one was hardest to choose.",
+        "success_check": [
+          "I named five things in my home with the correct article.",
+          "I used kein/keine/keinen with a noun and nicht with an adjective or a verb.",
+          "I said kein and nicht aloud."
+        ],
+        "safety_note": "Write only about things in your home. Do not share your address or photos of your home with strangers."
+      },
+      "closing": {
+        "covered": [
+          "You can now say no with kein, keine or keinen before a noun with ein or no article.",
+          "You can now use nicht with adjectives, verbs and nouns with der/die/das.",
+          "You can now name rooms and furniture such as das Zimmer, die Küche, das Bett and der Schrank.",
+          "You can now say phrases like Kein Problem! and Es gibt keinen Balkon.",
+          "You can now pronounce ei in kein and the soft ch in nicht."
+        ],
+        "review_tomorrow": "Review the rule: ein-noun or no article takes kein, while verbs, adjectives and der/die/das nouns take nicht."
+      }
     }
   },
   "failures": []

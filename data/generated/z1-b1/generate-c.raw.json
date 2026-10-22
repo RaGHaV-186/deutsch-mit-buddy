@@ -516,6 +516,4751 @@
           "target_hint": "Ich bin ... Jahre alt. Meine Nummer ist ..."
         }
       }
+    },
+    "Z4": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena ___ in einem Büro.",
+            "answer": "arbeitet",
+            "distractors": [
+              "arbeite",
+              "arbeitest",
+              "arbeiten"
+            ],
+            "accepted_answers": [],
+            "explanation": "With er/sie/es the ending is -t, and arbeiten needs an extra -e- before it."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ in einer Wohnung.",
+            "answer": "wohne",
+            "distractors": [
+              "wohnst",
+              "wohnt",
+              "wohnen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With ich the verb ends in -e."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does die Schule mean?",
+            "answer": "the school",
+            "distractors": [
+              "the city",
+              "the office",
+              "the room"
+            ],
+            "accepted_answers": [],
+            "explanation": "Die Schule is the place where children learn."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Ihr spielt hier.",
+            "distractors": [
+              "Ihr spielen hier.",
+              "Ihr spiele hier.",
+              "Ihr spielst hier."
+            ],
+            "accepted_answers": [],
+            "explanation": "With ihr the ending is -t."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "in / Sie / der / wohnen / Stadt",
+            "answer": "Sie wohnen in der Stadt.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "The verb comes in second place, after Sie."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: I study at the university. (use studieren)",
+            "answer": "Ich studiere an der Universität.",
+            "distractors": [],
+            "accepted_answers": [
+              "Ich studiere in der Universität."
+            ],
+            "explanation": "Ich takes the ending -e: studiere."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Ich heiße Lena. Ich bin Studentin. Ich wohne in einer Wohnung in Bonn. Dort lerne ich Spanisch."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What is Lena?",
+              "answer": "A student",
+              "distractors": [
+                "A teacher",
+                "A doctor",
+                "A child"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: Ich bin Studentin."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Lena learn in Bonn?",
+              "answer": "Spanish",
+              "distractors": [
+                "German",
+                "English",
+                "French"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: Dort lerne ich Spanisch."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Jonas",
+                "de": "Wo wohnst du, Anna?",
+                "en": "Where do you live, Anna?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Ich wohne hier in Dresden. Und du?",
+                "en": "I live here in Dresden. And you?"
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Ich wohne in Leipzig und arbeite im Büro.",
+                "en": "I live in Leipzig and work in an office."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Where does Anna live?",
+              "answer": "In Dresden",
+              "distractors": [
+                "In Leipzig",
+                "In Berlin",
+                "In Bonn"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says she lives here in Dresden."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Where does Jonas work?",
+              "answer": "In an office",
+              "distractors": [
+                "At a school",
+                "At a university",
+                "At home"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas says he works in an office (im Büro)."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 or 3 short sentences about yourself. Say where you live (Ich wohne in ...), what you learn or study (Ich lerne ... / Ich studiere ...) and where you work or learn.",
+          "min_words": 15,
+          "rubric": [
+            "Uses correct verb endings, for example ich wohne, ich lerne, ich arbeite.",
+            "Says where you live with Ich wohne in ...",
+            "Says what you learn or study.",
+            "Sentences are short, start with a capital letter and end with a full stop."
+          ]
+        },
+        "speaking": {
+          "prompt": "Say out loud: where you live, what you learn and where you work or study. Start with: Ich wohne in ...",
+          "target_hint": "Remember: w sounds like English v (wohne), ie sounds like a long ee (studieren), and st at the start of a word sounds like sht (Student)."
+        }
+      }
+    },
+    "Z5": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "articles",
+            "type": "multiple_choice",
+            "prompt": "Which article is correct? ___ Stuhl",
+            "answer": "der",
+            "distractors": [
+              "die",
+              "das"
+            ],
+            "accepted_answers": [],
+            "explanation": "Stuhl is a masculine noun, so it takes der."
+          },
+          {
+            "skill": "articles",
+            "type": "gap_fill",
+            "prompt": "Das ist ___ Brille.",
+            "answer": "eine",
+            "distractors": [
+              "ein",
+              "der",
+              "das"
+            ],
+            "accepted_answers": [],
+            "explanation": "Brille is feminine (die Brille), so it takes eine."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena ___ einen Koffer. Choose the correct form of haben: Lena ___ ein Glas.",
+            "answer": "hat",
+            "distractors": [
+              "habe",
+              "hast",
+              "haben"
+            ],
+            "accepted_answers": [],
+            "explanation": "With er/sie (Lena) the form is hat."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "How do you say \"a key\" in German?",
+            "answer": "ein Schlüssel",
+            "distractors": [
+              "eine Schlüssel",
+              "ein Schlüssel ist",
+              "eine Flasche"
+            ],
+            "accepted_answers": [],
+            "explanation": "Schlüssel is masculine (der Schlüssel), so it takes ein."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Do you have a computer? (Ask a friend.)",
+            "answer": "Hast du einen Computer?",
+            "distractors": [],
+            "accepted_answers": [
+              "Hast du ein Computer?"
+            ],
+            "explanation": "With du the form of haben is hast, and Computer is masculine."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Tür / ist / Wo / die / ?",
+            "answer": "Wo ist die Tür?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "A question with Wo puts the verb ist in second place."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Das ist Jonas. Er hat ein Bett, einen Stuhl und einen Tisch. Auf dem Tisch ist ein Computer. Die Lampe ist auch da."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What is on the table?",
+              "answer": "A computer",
+              "distractors": [
+                "A bed",
+                "A bottle",
+                "A key"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: Auf dem Tisch ist ein Computer."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Who has a bed, a chair and a table?",
+              "answer": "Jonas",
+              "distractors": [
+                "Anna",
+                "Lena",
+                "Buddy"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: Er hat ein Bett, einen Stuhl und einen Tisch, and Er is Jonas."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Lena",
+                "de": "Anna, hast du einen Stift?",
+                "en": "Anna, do you have a pen?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Ja, ich habe einen Stift.",
+                "en": "Yes, I have a pen."
+              },
+              {
+                "speaker": "Lena",
+                "de": "Und hast du auch ein Heft?",
+                "en": "And do you also have a notebook?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Nein, das Heft ist in der Tasche.",
+                "en": "No, the notebook is in the bag."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Lena ask Anna for first?",
+              "answer": "A pen",
+              "distractors": [
+                "A key",
+                "A phone",
+                "A glass"
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena asks: Hast du einen Stift?"
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Where is the notebook?",
+              "answer": "In the bag",
+              "distractors": [
+                "On the table",
+                "In the window",
+                "In the bed"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says the notebook is in der Tasche."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 or 3 simple sentences about things in your room. Use haben and say what you have, for example a chair or a lamp. Use the right article for each noun.",
+          "min_words": 15,
+          "rubric": [
+            "Uses ich habe (or du hast / er hat) correctly",
+            "Uses der/die/das or ein/eine correctly with at least three nouns",
+            "Uses simple, complete sentences with correct spelling and capital letters for nouns"
+          ]
+        },
+        "speaking": {
+          "prompt": "Point to three things near you and say what they are, for example: Das ist ein ... or Das ist eine ... Then say one thing you have: Ich habe ...",
+          "target_hint": "Say St at the start of a word like Stuhl or Stift as \"sht\"."
+        }
+      }
+    },
+    "Z6": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Choose the correct question word: ___ heißt dein Freund?",
+            "answer": "Wie",
+            "distractors": [
+              "Wo",
+              "Woher",
+              "Wann"
+            ],
+            "accepted_answers": [],
+            "explanation": "\"Wie heißt ...?\" asks for a name."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "___ kommt deine Freundin? – Aus Polen.",
+            "answer": "Woher",
+            "distractors": [
+              "Wer",
+              "Wie",
+              "Wann"
+            ],
+            "accepted_answers": [],
+            "explanation": "\"Woher\" asks where someone comes from."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "wohnt / Wo / Peters / Freundin",
+            "answer": "Wo wohnt Peters Freundin?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "A W-question has the order question word, verb, subject."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is a yes/no question?",
+            "answer": "Sprichst du Englisch?",
+            "distractors": [
+              "Was sprichst du?",
+              "Wie heißt du?",
+              "Ich spreche Englisch."
+            ],
+            "accepted_answers": [],
+            "explanation": "A yes/no question starts with the verb and has no question word."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "du / Spanisch / Sprichst",
+            "answer": "Sprichst du Spanisch?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "A yes/no question puts the verb first, then the subject."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Where does Anna live?",
+            "answer": "Wo wohnt Anna?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Use Wo + verb + subject."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Das ist Marta. Sie ist 20 Jahre alt. Sie kommt aus Polen und wohnt in Köln. Sie lernt Deutsch."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Woher kommt Marta?",
+              "answer": "Aus Polen",
+              "distractors": [
+                "Aus Köln",
+                "Aus Spanien",
+                "Aus Italien"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says she comes from Polen."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Was lernt Marta?",
+              "answer": "Deutsch",
+              "distractors": [
+                "Polnisch",
+                "Englisch",
+                "Spanisch"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says she learns Deutsch."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Lena",
+                "de": "Hallo, ich bin Lena. Wie heißt du?",
+                "en": "Hello, I am Lena. What is your name?"
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Ich heiße Jonas. Freut mich!",
+                "en": "My name is Jonas. Nice to meet you!"
+              },
+              {
+                "speaker": "Lena",
+                "de": "Woher kommst du, Jonas?",
+                "en": "Where do you come from, Jonas?"
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Ich komme aus Österreich.",
+                "en": "I come from Austria."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Where does Jonas come from?",
+              "answer": "Österreich",
+              "distractors": [
+                "Deutschland",
+                "Italien",
+                "Spanien"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas says he comes from Österreich."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Lena ask first?",
+              "answer": "Wie heißt du?",
+              "distractors": [
+                "Wo wohnst du?",
+                "Wer bist du?",
+                "Wann kommst du?"
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena first asks for his name."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 to 3 simple sentences about a new friend. Say his or her name, where he or she comes from and where he or she lives. Then write one question to your friend.",
+          "min_words": 15,
+          "rubric": [
+            "Uses heißen, kommen and wohnen correctly",
+            "Writes at least one correct question with the verb in the right place",
+            "Uses capital letters for nouns and names and ends sentences with correct punctuation"
+          ]
+        },
+        "speaking": {
+          "prompt": "Imagine you meet a new person. Ask for the name, the country and the city. Say your own answers, too.",
+          "target_hint": "Wie heißt du? Woher kommst du? Wo wohnst du?"
+        }
+      }
+    },
+    "Z7": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "word_order",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Im Frühling lernt Lena viel.",
+            "distractors": [
+              "Im Frühling Lena lernt viel.",
+              "Lena im Frühling lernt viel.",
+              "Im Frühling viel lernt Lena."
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb must be in position 2, right after the time phrase."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Dienstag / Anna / lernt / Am / Deutsch",
+            "answer": "Am Dienstag lernt Anna Deutsch.",
+            "distractors": [],
+            "accepted_answers": [
+              "Anna lernt am Dienstag Deutsch."
+            ],
+            "explanation": "Position 1 is \"Am Dienstag\" and the verb \"lernt\" comes second."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What is \"Herbst\" in English?",
+            "answer": "autumn",
+            "distractors": [
+              "spring",
+              "winter",
+              "summer"
+            ],
+            "accepted_answers": [],
+            "explanation": "Der Herbst is the season between summer and winter."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Der Januar ist ein ___ im Kalender.",
+            "answer": "Monat",
+            "distractors": [
+              "Tag",
+              "Samstag",
+              "Sommer"
+            ],
+            "accepted_answers": [],
+            "explanation": "January is a month, and \"Monat\" means month."
+          },
+          {
+            "skill": "word_order",
+            "type": "gap_fill",
+            "prompt": "Im Mai ___ Jonas viel.",
+            "answer": "arbeitet",
+            "distractors": [
+              "Jonas",
+              "arbeiten",
+              "viel"
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb \"arbeitet\" goes in position 2, after \"Im Mai\"."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: In winter I learn German at home.",
+            "answer": "Im Winter lerne ich zu Hause Deutsch.",
+            "distractors": [],
+            "accepted_answers": [
+              "Im Winter lerne ich Deutsch zu Hause.",
+              "Im Winter lerne ich zuhause Deutsch.",
+              "Im Winter lerne ich Deutsch zuhause."
+            ],
+            "explanation": "The verb \"lerne\" stays in position 2 after \"Im Winter\"."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Lena hat einen Kalender. Am Samstag kommt Anna. Am Sonntag lernen Anna und Lena Deutsch. Im Mai ist das Wochenende schön."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Who comes on Saturday?",
+              "answer": "Anna",
+              "distractors": [
+                "Jonas",
+                "Buddy"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says \"Am Samstag kommt Anna.\""
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What do Anna and Lena do on Sunday?",
+              "answer": "They learn German.",
+              "distractors": [
+                "They go to work.",
+                "They buy a calendar.",
+                "They sleep."
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says they learn German on Sunday."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Jonas",
+                "de": "Welcher Tag ist heute, Lena?",
+                "en": "Which day is it today, Lena?"
+              },
+              {
+                "speaker": "Lena",
+                "de": "Heute ist Dienstag.",
+                "en": "Today is Tuesday."
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Am Freitag kommt Anna.",
+                "en": "Anna is coming on Friday."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Which day is it today?",
+              "answer": "Tuesday",
+              "distractors": [
+                "Monday",
+                "Friday",
+                "Sunday"
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena says \"Heute ist Dienstag.\""
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "When does Anna come?",
+              "answer": "On Friday",
+              "distractors": [
+                "On Tuesday",
+                "On Saturday",
+                "On Monday"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas says Anna comes on Friday."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 or 3 short German sentences about your week. Say what you do on a day, for example: Am Montag ... ich. Start each sentence with a day, a season or a month, and put the verb in position 2.",
+          "min_words": 15,
+          "rubric": [
+            "Each sentence has the verb in position 2.",
+            "Uses at least two words for days, months or seasons.",
+            "Sentences are short, simple and correctly spelled."
+          ]
+        },
+        "speaking": {
+          "prompt": "Say two short German sentences about a season and a day. Start with the time, then the verb, for example with \"Im ...\" and \"Am ...\".",
+          "target_hint": "Im Winter ist es kalt. Am Samstag lerne ich."
+        }
+      }
+    },
+    "Z8": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence means 5:30?",
+            "answer": "Es ist halb sechs.",
+            "distractors": [
+              "Es ist halb fünf.",
+              "Es ist Viertel vor sechs.",
+              "Es ist sechs Uhr."
+            ],
+            "accepted_answers": [],
+            "explanation": "Halb means half to the next hour, so 5:30 is halb sechs."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena schläft ___ Nacht.",
+            "answer": "in der",
+            "distractors": [
+              "um",
+              "am",
+              "bis"
+            ],
+            "accepted_answers": [],
+            "explanation": "This is a trap-free check: with Nacht German says in der Nacht, so only this option fits."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas lernt ___ Mittag Deutsch.",
+            "answer": "am",
+            "distractors": [
+              "um",
+              "bis",
+              "halb"
+            ],
+            "accepted_answers": [],
+            "explanation": "Use am with a part of the day such as Mittag."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Uhr / Anna / um / acht / isst",
+            "answer": "Anna isst um acht Uhr.",
+            "distractors": [],
+            "accepted_answers": [
+              "Um acht Uhr isst Anna."
+            ],
+            "explanation": "The verb is in second position and um acht Uhr tells the time."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "It is a quarter past nine.",
+            "answer": "Es ist Viertel nach neun.",
+            "distractors": [],
+            "accepted_answers": [
+              "Es ist ein Viertel nach neun."
+            ],
+            "explanation": "A quarter past is Viertel nach."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which word means \"alarm clock\"?",
+            "answer": "der Wecker",
+            "distractors": [
+              "die Minute",
+              "die Stunde",
+              "der Abend"
+            ],
+            "accepted_answers": [],
+            "explanation": "Der Wecker is the alarm clock."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Lena hat einen Wecker. Er klingelt um sechs Uhr. Lena frühstückt um halb sieben. Am Morgen ist sie pünktlich."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "When does Lena have breakfast?",
+              "answer": "At 6:30",
+              "distractors": [
+                "At 6:00",
+                "At 7:30",
+                "At 7:00"
+              ],
+              "accepted_answers": [],
+              "explanation": "Halb sieben means 6:30."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does the alarm clock do at six o'clock?",
+              "answer": "It rings.",
+              "distractors": [
+                "It sleeps.",
+                "It is late.",
+                "It eats."
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says the Wecker klingelt um sechs Uhr."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Jonas",
+                "de": "Hallo Anna, wie spät ist es jetzt?",
+                "en": "Hello Anna, what time is it now?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Es ist Viertel vor zehn.",
+                "en": "It is a quarter to ten."
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Danke! Ich lerne um zehn Uhr.",
+                "en": "Thanks! I study at ten o'clock."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What time is it now?",
+              "answer": "9:45",
+              "distractors": [
+                "10:15",
+                "9:15",
+                "10:00"
+              ],
+              "accepted_answers": [],
+              "explanation": "Viertel vor zehn is 9:45."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Jonas do at ten o'clock?",
+              "answer": "He studies.",
+              "distractors": [
+                "He works.",
+                "He sleeps.",
+                "He eats."
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas says: Ich lerne um zehn Uhr."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 or 3 simple sentences in German about your day. Say when you have breakfast and when you work or study. Use um and am.",
+          "min_words": 15,
+          "rubric": [
+            "Uses um with a clock time correctly",
+            "Uses am with a part of the day correctly",
+            "Verbs are in the correct form and in second position",
+            "Spelling and capital letters for nouns are correct"
+          ]
+        },
+        "speaking": {
+          "prompt": "Ask someone politely for the time. Then say when you sleep and when you work.",
+          "target_hint": "Entschuldigung, wie spät ist es? Ich schlafe um elf Uhr. Ich arbeite am Morgen."
+        }
+      }
+    },
+    "Z10": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "You talk to Lena, your friend. Which question is right?",
+            "answer": "Was trinkst du?",
+            "distractors": [
+              "Was trinken Sie?",
+              "Was trinkt du?",
+              "Was trinke du?"
+            ],
+            "accepted_answers": [],
+            "explanation": "With a friend you use du, and the verb ends in -st."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Guten Tag, Frau Weiß. Was ___ Sie?",
+            "answer": "bestellen",
+            "distractors": [
+              "bestellst",
+              "bestellt",
+              "bestelle"
+            ],
+            "accepted_answers": [],
+            "explanation": "The formal Sie takes the verb ending -en."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "You want to pay at the end. What do you ask for?",
+            "answer": "Die Rechnung, bitte.",
+            "distractors": [
+              "Der Zucker, bitte.",
+              "Die Milch, bitte.",
+              "Der Kuchen, bitte."
+            ],
+            "accepted_answers": [],
+            "explanation": "Die Rechnung is the bill."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Ich möchte Kaffee mit Milch und ___.",
+            "answer": "Zucker",
+            "distractors": [
+              "Tisch",
+              "Kellner",
+              "Name"
+            ],
+            "accepted_answers": [],
+            "explanation": "Zucker is sugar, which you can put in coffee."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "trinkt / Jonas / Tee / einen",
+            "answer": "Jonas trinkt einen Tee.",
+            "distractors": [],
+            "accepted_answers": [
+              "Einen Tee trinkt Jonas."
+            ],
+            "explanation": "The verb stays in second place in a German sentence."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Ask a stranger politely: Is it still free here?",
+            "answer": "Ist hier noch frei?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "This is the fixed phrase for asking about a free seat."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Jonas ist im Café. Er sitzt am Tisch. Die Kellnerin kommt. Jonas sagt: \"Einen Tee, bitte.\""
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Jonas order?",
+              "answer": "A tea",
+              "distractors": [
+                "A coffee",
+                "A water",
+                "A cake"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas says: Einen Tee, bitte."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Who comes to the table?",
+              "answer": "The waitress",
+              "distractors": [
+                "The waiter",
+                "A friend",
+                "A teacher"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says die Kellnerin kommt."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Lena",
+                "de": "Guten Tag, Herr Braun. Wie geht es Ihnen?",
+                "en": "Good day, Mr Braun. How are you?"
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Gut, danke. Und Ihnen?",
+                "en": "Fine, thank you. And you?"
+              },
+              {
+                "speaker": "Lena",
+                "de": "Mir geht es auch gut. Freut mich!",
+                "en": "I am fine too. Nice to meet you!"
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Do the two people use du or Sie?",
+              "answer": "Sie",
+              "distractors": [
+                "du",
+                "Both du and Sie"
+              ],
+              "accepted_answers": [],
+              "explanation": "They say Herr Braun and Ihnen, which is formal."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "How is Lena?",
+              "answer": "She is fine.",
+              "distractors": [
+                "She is tired.",
+                "She is hungry.",
+                "She is cold."
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena says: Mir geht es auch gut."
+            }
+          ]
+        },
+        "writing": {
+          "task": "You are in a café with a friend. Write 2 or 3 short sentences. Say your name, say what you drink, and ask your friend a question with du.",
+          "min_words": 15,
+          "rubric": [
+            "Uses ich heiße or a similar short sentence correctly",
+            "Uses the verb trinken with the right ending",
+            "Asks a question with du and the ending -st",
+            "Spelling and capital letters for nouns are correct"
+          ]
+        },
+        "speaking": {
+          "prompt": "You meet an adult in a café. Greet this person, say your name, and ask: How are you? Use Sie.",
+          "target_hint": "Guten Tag, ich heiße Anna. Wie geht es Ihnen?"
+        }
+      }
+    },
+    "W1.1": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena ___ Lehrerin in Berlin.",
+            "answer": "ist",
+            "distractors": [
+              "bin",
+              "sind",
+              "bist"
+            ],
+            "accepted_answers": [],
+            "explanation": "With Lena (she) the verb sein is ist."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ zwei Freunde und eine Schwester.",
+            "answer": "habe",
+            "distractors": [
+              "hast",
+              "hat",
+              "haben"
+            ],
+            "accepted_answers": [],
+            "explanation": "With ich the verb haben is habe."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "in / Anna / Bonn / arbeitet",
+            "answer": "Anna arbeitet in Bonn.",
+            "distractors": [],
+            "accepted_answers": [
+              "In Bonn arbeitet Anna."
+            ],
+            "explanation": "The conjugated verb stands in second position."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which word means \"job, profession\"?",
+            "answer": "der Beruf",
+            "distractors": [
+              "die Sprache",
+              "das Hobby",
+              "die Stadt"
+            ],
+            "accepted_answers": [],
+            "explanation": "Der Beruf is a person's job."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Ask a friend: What is your name?",
+            "answer": "Wie heißt du?",
+            "distractors": [],
+            "accepted_answers": [
+              "Wie ist dein Name?"
+            ],
+            "explanation": "You ask a friend with du: Wie heißt du?"
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Ihr lernt Deutsch.",
+            "distractors": [
+              "Ihr lernen Deutsch.",
+              "Ihr lerne Deutsch.",
+              "Ihr lernst Deutsch."
+            ],
+            "accepted_answers": [],
+            "explanation": "With ihr the verb ending is -t: ihr lernt."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Hallo, ich bin Jonas. Ich bin Student und wohne in Leipzig. Meine Familie wohnt in Dresden. Mein Hobby ist Musik."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Where does Jonas live?",
+              "answer": "In Leipzig",
+              "distractors": [
+                "In Dresden",
+                "In Köln",
+                "In Bonn"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: Ich wohne in Leipzig."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What is Jonas's hobby?",
+              "answer": "Music",
+              "distractors": [
+                "Sport",
+                "Books",
+                "Cooking"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: Mein Hobby ist Musik."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Anna",
+                "de": "Hallo, ich heiße Anna. Und du?",
+                "en": "Hello, my name is Anna. And you?"
+              },
+              {
+                "speaker": "Lena",
+                "de": "Ich bin Lena. Ich komme aus Wien.",
+                "en": "I am Lena. I come from Vienna."
+              },
+              {
+                "speaker": "Anna",
+                "de": "Freut mich! Ich bin Lehrerin.",
+                "en": "Nice to meet you! I am a teacher."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Where does Lena come from?",
+              "answer": "From Vienna",
+              "distractors": [
+                "From Berlin",
+                "From Zurich",
+                "From Munich"
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena says: Ich komme aus Wien."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What is Anna's job?",
+              "answer": "Teacher",
+              "distractors": [
+                "Student",
+                "Doctor",
+                "Cook"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says: Ich bin Lehrerin."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Introduce yourself in 2 to 3 sentences. Write your name, where you come from, where you live and one language you speak or learn. Use the present tense.",
+          "min_words": 15,
+          "rubric": [
+            "Gives name with Ich heiße ... or Ich bin ...",
+            "Says where they come from and live (komme aus ..., wohne in ...)",
+            "Verb forms match the person and the verb is in second position",
+            "Spelling, capital letters and punctuation are correct"
+          ]
+        },
+        "speaking": {
+          "prompt": "Introduce yourself to a new classmate. Say your name, your country, your city and your job or hobby. Then ask one W-question.",
+          "target_hint": "Ich heiße ... Ich komme aus ... Ich wohne in ... Und du? Woher kommst du?"
+        }
+      }
+    },
+    "W1.2": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "articles",
+            "type": "gap_fill",
+            "prompt": "Jonas hat ___ Onkel in Berlin.",
+            "answer": "einen",
+            "distractors": [
+              "ein",
+              "eine",
+              "der"
+            ],
+            "accepted_answers": [],
+            "explanation": "Onkel is masculine and the object after haben, so ein becomes einen."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena sieht ___ Cousin im Garten.",
+            "answer": "den",
+            "distractors": [
+              "der",
+              "die",
+              "das"
+            ],
+            "accepted_answers": [],
+            "explanation": "Cousin is masculine and the object after sehen, so der becomes den."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which word means \"grandparents\"?",
+            "answer": "die Großeltern",
+            "distractors": [
+              "die Eltern",
+              "die Geschwister",
+              "die Cousine"
+            ],
+            "accepted_answers": [],
+            "explanation": "Großeltern means grandparents; Eltern means parents."
+          },
+          {
+            "skill": "articles",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Das Baby ist klein.",
+            "distractors": [
+              "Der Baby ist klein.",
+              "Die Baby ist klein.",
+              "Den Baby ist klein."
+            ],
+            "accepted_answers": [],
+            "explanation": "Baby is neuter, so the Nominativ article is das."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: Do you have siblings?",
+            "answer": "Hast du Geschwister?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Hast du Geschwister? is the fixed question for asking about siblings."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "habe / eine / Ich / Tochter",
+            "answer": "Ich habe eine Tochter.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "The verb stays in second position, and the feminine eine does not change."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Das ist Tom. Tom hat einen Sohn und eine Tochter. Der Sohn heißt Max. Die Tochter heißt Mia."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Who does Tom have?",
+              "answer": "A son and a daughter",
+              "distractors": [
+                "Two brothers",
+                "A sister and a cousin",
+                "Only a baby"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says Tom has a son and a daughter."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What is the daughter called?",
+              "answer": "Mia",
+              "distractors": [
+                "Max",
+                "Tom",
+                "Lena"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says the daughter is called Mia."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Lena",
+                "de": "Hast du Geschwister, Jonas?",
+                "en": "Do you have siblings, Jonas?"
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Ja, ich habe eine Schwester und einen Cousin.",
+                "en": "Yes, I have a sister and a cousin."
+              },
+              {
+                "speaker": "Lena",
+                "de": "Wie heißt deine Schwester?",
+                "en": "What is your sister called?"
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Sie heißt Anna.",
+                "en": "She is called Anna."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Jonas have?",
+              "answer": "A sister and a cousin",
+              "distractors": [
+                "A brother and an uncle",
+                "Two sisters",
+                "A baby and an aunt"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas says he has a sister and a cousin."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What is Jonas's sister called?",
+              "answer": "Anna",
+              "distractors": [
+                "Lena",
+                "Mia",
+                "Julia"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas says his sister is called Anna."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 to 3 sentences about your family in German. Say who is in your family and name one person. Use a form of haben with one object, for example: Ich habe einen Onkel.",
+          "min_words": 15,
+          "rubric": [
+            "Uses at least two family words correctly",
+            "Uses einen with a masculine object and eine with a feminine one",
+            "Writes complete sentences with the verb in second position",
+            "Uses correct capital letters for nouns"
+          ]
+        },
+        "speaking": {
+          "prompt": "Tell Buddy about your family. Say Das ist mein ... or Ich habe ... and name two family members.",
+          "target_hint": "Ich habe einen Onkel und eine Tante."
+        }
+      }
+    },
+    "W1.3": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna hat ___ Schrank im Flur.",
+            "answer": "keinen",
+            "distractors": [
+              "kein",
+              "keine",
+              "nicht"
+            ],
+            "accepted_answers": [],
+            "explanation": "Schrank is masculine (ein Schrank), so the negative is keinen in the accusative."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Das Schlafzimmer hat ___ Lampe.",
+            "answer": "keine",
+            "distractors": [
+              "kein",
+              "keinen",
+              "nicht"
+            ],
+            "accepted_answers": [],
+            "explanation": "Lampe is feminine (eine Lampe), so the negative is keine."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Choose the correct sentence.",
+            "answer": "Der Aufzug ist nicht neu.",
+            "distractors": [
+              "Der Aufzug ist kein neu.",
+              "Der Aufzug ist keinen neu.",
+              "Der Aufzug ist keine neu."
+            ],
+            "accepted_answers": [],
+            "explanation": "An adjective (neu) is negated with nicht."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "hat / keinen / Die Wohnung / Balkon",
+            "answer": "Die Wohnung hat keinen Balkon.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Keinen comes before the masculine noun Balkon."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: The door is not open.",
+            "answer": "Die Tür ist nicht offen.",
+            "distractors": [],
+            "accepted_answers": [
+              "Die Tür ist nicht auf."
+            ],
+            "explanation": "The adjective offen is negated with nicht."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which word means the monthly rent for a flat?",
+            "answer": "die Miete",
+            "distractors": [
+              "der Flur",
+              "die Tür",
+              "der Stuhl"
+            ],
+            "accepted_answers": [],
+            "explanation": "Die Miete is the money you pay for a flat."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Lena hat eine neue Wohnung. Das Wohnzimmer ist hell, aber die Küche ist nicht groß. Es gibt keinen Aufzug, aber die Miete ist nicht hoch."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What is not big in Lena's flat?",
+              "answer": "The kitchen",
+              "distractors": [
+                "The living room",
+                "The rent",
+                "The door"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: die Küche ist nicht groß."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does the building not have?",
+              "answer": "A lift",
+              "distractors": [
+                "A balcony",
+                "A bathroom",
+                "A window"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: Es gibt keinen Aufzug."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Jonas",
+                "de": "Hast du ein Sofa im Zimmer?",
+                "en": "Do you have a sofa in the room?"
+              },
+              {
+                "speaker": "Lena",
+                "de": "Nein, ich habe kein Sofa, aber ich habe ein Bett.",
+                "en": "No, I do not have a sofa, but I have a bed."
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Gefällt dir das Zimmer?",
+                "en": "Do you like the room?"
+              },
+              {
+                "speaker": "Lena",
+                "de": "Ja, kein Problem! Es ist nicht klein.",
+                "en": "Yes, no problem! It is not small."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Lena not have in her room?",
+              "answer": "A sofa",
+              "distractors": [
+                "A bed",
+                "A table",
+                "A lamp"
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena says: ich habe kein Sofa."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Lena say about the room?",
+              "answer": "It is not small.",
+              "distractors": [
+                "It is not clean.",
+                "It is not new.",
+                "It is not cheap."
+              ],
+              "accepted_answers": [],
+              "explanation": "She says: Es ist nicht klein."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Describe your flat or your dream flat in 2 to 3 sentences. Say what rooms it has and what it does not have. Use nicht and kein/keine/keinen at least once each.",
+          "min_words": 20,
+          "rubric": [
+            "Uses kein/keine/keinen correctly before a noun",
+            "Uses nicht correctly with an adjective or verb",
+            "Uses room or furniture words from the lesson",
+            "Sentences are clear with correct word order"
+          ]
+        },
+        "speaking": {
+          "prompt": "Tell a friend about a room you do not like. Say two sentences, for example what it does not have and that it is not big.",
+          "target_hint": "Das Zimmer hat keinen Schrank. Es ist nicht groß."
+        }
+      }
+    },
+    "W1.4": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas ___ heute Fisch kochen.",
+            "answer": "will",
+            "distractors": [
+              "willst",
+              "wollen",
+              "wollt"
+            ],
+            "accepted_answers": [],
+            "explanation": "With er/sie/es, wollen becomes \"will\" (no -t ending)."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena, du ___ die Rechnung bezahlen.",
+            "answer": "musst",
+            "distractors": [
+              "muss",
+              "müssen",
+              "müsst"
+            ],
+            "accepted_answers": [],
+            "explanation": "With du, müssen becomes \"musst\"."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "kann / Wasser / Anna / trinken / jetzt",
+            "answer": "Anna kann jetzt Wasser trinken.",
+            "distractors": [],
+            "accepted_answers": [
+              "Jetzt kann Anna Wasser trinken."
+            ],
+            "explanation": "The modal verb is in position 2 and the infinitive goes to the end."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "We must order tea.",
+            "answer": "Wir müssen Tee bestellen.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "müssen with wir is \"müssen\", and the infinitive \"bestellen\" stands at the end."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does \"die Speisekarte\" mean?",
+            "answer": "the menu",
+            "distractors": [
+              "the bill",
+              "the glass",
+              "the soup"
+            ],
+            "accepted_answers": [],
+            "explanation": "\"Die Speisekarte\" is the menu in a restaurant."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Ihr könnt hier Brot kaufen.",
+            "distractors": [
+              "Ihr können hier Brot kaufen.",
+              "Ihr könnt hier kaufen Brot.",
+              "Ihr kaufen hier Brot können."
+            ],
+            "accepted_answers": [],
+            "explanation": "With ihr, können becomes \"könnt\" and the infinitive \"kaufen\" stands at the end."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Jonas und Lena sind im Restaurant. Jonas möchte einen Tee und Fisch bestellen. Lena kann den Fisch nicht essen, aber sie will Gemüse und ein Eis. Danach muss Jonas bezahlen."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Jonas want to order?",
+              "answer": "Tea and fish",
+              "distractors": [
+                "Coffee and cake",
+                "Soup and bread",
+                "Water and an apple"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says Jonas wants tea and fish."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Who must pay at the end?",
+              "answer": "Jonas",
+              "distractors": [
+                "Lena",
+                "Anna",
+                "Buddy"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says \"Danach muss Jonas bezahlen.\""
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Anna",
+                "de": "Hallo Lena, was willst du essen?",
+                "en": "Hello Lena, what do you want to eat?"
+              },
+              {
+                "speaker": "Lena",
+                "de": "Ich will Suppe und Brot. Und du?",
+                "en": "I want soup and bread. And you?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Ich muss heute Gemüse essen. Ich bestelle einen Salat.",
+                "en": "I have to eat vegetables today. I am ordering a salad."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Lena want to eat?",
+              "answer": "Soup and bread",
+              "distractors": [
+                "Fish and vegetables",
+                "Ice cream and cake",
+                "An apple and tea"
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena says: \"Ich will Suppe und Brot.\""
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What must Anna eat today?",
+              "answer": "Vegetables",
+              "distractors": [
+                "Fish",
+                "Ice cream",
+                "Bread"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says she must eat vegetables today."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 to 3 sentences about a meal in a restaurant. Say what you want to eat and drink, what you can cook at home, and what you must do at the end. Use können, müssen or wollen.",
+          "min_words": 20,
+          "rubric": [
+            "Uses at least two modal verbs (können, müssen, wollen, dürfen) with correct endings",
+            "Modal verb is in position 2 and the infinitive is at the end",
+            "Uses food and drink words from the lesson correctly",
+            "Sentences are understandable, with correct capitals and punctuation"
+          ]
+        },
+        "speaking": {
+          "prompt": "You are in a restaurant. Ask for the menu, order a drink and a food, and ask to pay. Speak in German with 3 or 4 sentences.",
+          "target_hint": "Kann ich die Speisekarte haben, bitte? Ich möchte einen Tee, bitte. Ich möchte bezahlen, bitte."
+        }
+      }
+    },
+    "W1.5": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Lena wacht um halb acht auf.",
+            "distractors": [
+              "Lena aufwacht um halb acht.",
+              "Lena wacht auf um halb acht.",
+              "Lena auf wacht um halb acht."
+            ],
+            "accepted_answers": [],
+            "explanation": "The conjugated verb is in position 2 and the prefix goes to the end."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas holt Anna am Bahnhof ___.",
+            "answer": "ab",
+            "distractors": [
+              "an",
+              "auf",
+              "mit"
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb is abholen, so the prefix ab goes to the end."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "fängt / Die Arbeit / um acht Uhr / an",
+            "answer": "Die Arbeit fängt um acht Uhr an.",
+            "distractors": [],
+            "accepted_answers": [
+              "Um acht Uhr fängt die Arbeit an."
+            ],
+            "explanation": "The verb stays in position 2 and the prefix an goes to the end."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does einschlafen mean?",
+            "answer": "to fall asleep",
+            "distractors": [
+              "to wake up",
+              "to tidy up",
+              "to have breakfast"
+            ],
+            "accepted_answers": [],
+            "explanation": "Einschlafen means to fall asleep."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: Do you want to come along, Lena?",
+            "answer": "Kommst du mit, Lena?",
+            "distractors": [],
+            "accepted_answers": [
+              "Lena, kommst du mit?"
+            ],
+            "explanation": "Mitkommen is separable, so mit goes to the end."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Am Abend räume ich die Wohnung ___.",
+            "answer": "auf",
+            "distractors": [
+              "ein",
+              "fern",
+              "an"
+            ],
+            "accepted_answers": [],
+            "explanation": "Aufräumen means to tidy up, so the prefix auf goes to the end."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Jonas wacht um sechs Uhr auf. Er frühstückt um sieben Uhr. Um acht Uhr fängt seine Arbeit an. Am Abend kauft er im Supermarkt ein."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "When does Jonas have breakfast?",
+              "answer": "At seven o'clock",
+              "distractors": [
+                "At six o'clock",
+                "At eight o'clock",
+                "In the evening"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says he has breakfast at seven."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Jonas do in the evening?",
+              "answer": "He goes shopping.",
+              "distractors": [
+                "He starts work.",
+                "He wakes up.",
+                "He has breakfast."
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says he shops in the evening."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Lena",
+                "de": "Anna, kommst du heute Abend mit?",
+                "en": "Anna, are you coming along tonight?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Ja, gern. Wann fängt es an?",
+                "en": "Yes, gladly. When does it start?"
+              },
+              {
+                "speaker": "Lena",
+                "de": "Um neun Uhr. Ich hole dich um halb neun ab.",
+                "en": "At nine o'clock. I'll pick you up at half past eight."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "When does it start?",
+              "answer": "At nine o'clock",
+              "distractors": [
+                "At half past eight",
+                "At eight o'clock",
+                "At ten o'clock"
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena says it starts at nine."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Who picks up Anna?",
+              "answer": "Lena",
+              "distractors": [
+                "Jonas",
+                "Buddy",
+                "Nobody"
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena says she will pick Anna up."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 to 3 sentences about your morning. Use at least two separable verbs, for example aufstehen, frühstücken or anfangen, and say the time.",
+          "min_words": 15,
+          "rubric": [
+            "Uses at least two separable verbs correctly",
+            "Puts the prefix at the end of the main clause",
+            "Verb is in position 2",
+            "Gives at least one time with Uhr"
+          ]
+        },
+        "speaking": {
+          "prompt": "Tell Buddy about your day: When do you wake up and when does your work or course start? Speak in two or three sentences.",
+          "target_hint": "Ich wache um ... Uhr auf. Mein Kurs fängt um ... Uhr an."
+        }
+      }
+    },
+    "W2.1": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "articles",
+            "type": "gap_fill",
+            "prompt": "Jonas fährt mit ___ Bus zum Markt.",
+            "answer": "dem",
+            "distractors": [
+              "der",
+              "den",
+              "die"
+            ],
+            "accepted_answers": [],
+            "explanation": "Bus is masculine, and mit takes the dative: der Bus becomes dem Bus."
+          },
+          {
+            "skill": "articles",
+            "type": "gap_fill",
+            "prompt": "Anna kommt von ___ Kasse.",
+            "answer": "der",
+            "distractors": [
+              "dem",
+              "den",
+              "die"
+            ],
+            "accepted_answers": [],
+            "explanation": "Kasse is feminine, and von takes the dative: die Kasse becomes der Kasse."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Lena gibt einer Kundin die Tasche.",
+            "distractors": [
+              "Lena gibt eine Kundin die Tasche.",
+              "Lena gibt einem Kundin die Tasche.",
+              "Lena gibt ein Kundin die Tasche."
+            ],
+            "accepted_answers": [],
+            "explanation": "The person who receives is dative, and feminine eine becomes einer."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "mit / Jonas / der / Tasche / geht / zum Markt",
+            "answer": "Jonas geht mit der Tasche zum Markt.",
+            "distractors": [],
+            "accepted_answers": [
+              "Mit der Tasche geht Jonas zum Markt."
+            ],
+            "explanation": "The verb is in second position, and mit is followed by the dative der Tasche."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: Can I speak with the teacher?",
+            "answer": "Kann ich mit dem Lehrer sprechen?",
+            "distractors": [],
+            "accepted_answers": [
+              "Kann ich mit dem Lehrer reden?"
+            ],
+            "explanation": "Mit takes the dative, so der Lehrer becomes dem Lehrer."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does \"der Preis\" mean?",
+            "answer": "the price",
+            "distractors": [
+              "the bread",
+              "the cash register",
+              "the shop"
+            ],
+            "accepted_answers": [],
+            "explanation": "Der Preis is how much something costs."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Lena ist auf dem Markt. Sie kauft zwei Äpfel bei dem Verkäufer. Der Preis ist gut. Lena bezahlt mit Geld und sagt: \"Danke!\""
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Lena buy?",
+              "answer": "Two apples",
+              "distractors": [
+                "Two loaves of bread",
+                "A bag",
+                "A phone"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says she buys two Äpfel."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "How does Lena pay?",
+              "answer": "With cash",
+              "distractors": [
+                "With a card",
+                "With a phone",
+                "She does not pay"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says she pays mit Geld."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Jonas",
+                "de": "Guten Tag! Ein Brot, bitte.",
+                "en": "Hello! A loaf of bread, please."
+              },
+              {
+                "speaker": "Anna",
+                "de": "Bitte schön. Das ist ein Euro.",
+                "en": "Here you are. That is one euro."
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Kann ich mit dem Handy bezahlen?",
+                "en": "Can I pay with the phone?"
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Jonas want?",
+              "answer": "A loaf of bread",
+              "distractors": [
+                "An apple",
+                "A bag",
+                "A card"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas asks for ein Brot."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "How does Jonas want to pay?",
+              "answer": "With the phone",
+              "distractors": [
+                "With the card",
+                "With cash",
+                "With a bag"
+              ],
+              "accepted_answers": [],
+              "explanation": "He asks to pay mit dem Handy."
+            }
+          ]
+        },
+        "writing": {
+          "task": "You are at a bakery. Write 2 or 3 sentences in German. Say what you buy, ask if you can pay with the card, and say who you give the money to. Use dative articles.",
+          "min_words": 15,
+          "rubric": [
+            "Uses at least two correct dative articles (dem, der, einem, einer)",
+            "Includes a shopping phrase such as Ich möchte ... or Kann ich mit der Karte bezahlen?",
+            "Sentences are clear with correct verb position, capital letters and punctuation"
+          ]
+        },
+        "speaking": {
+          "prompt": "Imagine you are at the market. Say what you want to buy and ask if you can pay with the card.",
+          "target_hint": "Ich möchte einen Apfel, bitte. Kann ich mit der Karte bezahlen?"
+        }
+      }
+    },
+    "W2.2": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena braucht Hilfe. Jonas hilft ___.",
+            "answer": "ihr",
+            "distractors": [
+              "sie",
+              "er",
+              "ihn"
+            ],
+            "accepted_answers": [],
+            "explanation": "helfen is followed by the dative, and the dative of sie (she) is ihr."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Der Mantel gefällt mir.",
+            "distractors": [
+              "Der Mantel gefällt ich.",
+              "Der Mantel gefällt mich.",
+              "Der Mantel gefalle mir."
+            ],
+            "accepted_answers": [],
+            "explanation": "gefallen takes the dative, so you say mir, not ich or mich."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What do you wear on your hands in winter?",
+            "answer": "die Handschuhe",
+            "distractors": [
+              "die Socken",
+              "die Schuhe",
+              "der Gürtel"
+            ],
+            "accepted_answers": [],
+            "explanation": "Handschuhe are gloves, worn on the hands."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Wem gehört der Schal? Er gehört ___.",
+            "answer": "mir",
+            "distractors": [
+              "ich",
+              "mich",
+              "meine"
+            ],
+            "accepted_answers": [],
+            "explanation": "gehören is followed by the dative, so you use mir."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Ihnen / Ich / danke / sehr",
+            "answer": "Ich danke Ihnen sehr.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "The verb is in second position, followed by the dative Ihnen and then sehr."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: Can you help me?",
+            "answer": "Kannst du mir helfen?",
+            "distractors": [],
+            "accepted_answers": [
+              "Kannst du mir bitte helfen?"
+            ],
+            "explanation": "helfen needs the dative, so you say mir."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Lena kauft einen Gürtel und eine Tasche. Der Gürtel gefällt ihr sehr. Die Tasche gehört ihrer Mutter, aber Lena trägt sie heute."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Lena buy?",
+              "answer": "A belt",
+              "distractors": [
+                "A coat",
+                "A scarf",
+                "A skirt"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says Lena buys a belt (Gürtel) and a bag."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Who does the bag belong to?",
+              "answer": "Lena's mother",
+              "distractors": [
+                "Lena",
+                "Anna",
+                "Jonas"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says the bag belongs to her mother."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Anna",
+                "de": "Jonas, wem gehören die Handschuhe?",
+                "en": "Jonas, who do the gloves belong to?"
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Sie gehören mir. Danke, Anna!",
+                "en": "They belong to me. Thank you, Anna!"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Gern. Der Schal gefällt mir auch.",
+                "en": "You're welcome. I like the scarf too."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Who do the gloves belong to?",
+              "answer": "Jonas",
+              "distractors": [
+                "Anna",
+                "Lena",
+                "Nobody"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas says the gloves belong to him."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Anna like?",
+              "answer": "The scarf",
+              "distractors": [
+                "The belt",
+                "The sock",
+                "The shirt"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says the scarf pleases her."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 to 3 sentences about your clothes. Say which piece of clothing you like (gefallen), who something belongs to (gehören) and whom you thank or help (danken or helfen).",
+          "min_words": 15,
+          "rubric": [
+            "Uses at least two of the verbs helfen, gefallen, gehören, danken correctly with the dative",
+            "Uses at least two clothing words with the correct article",
+            "Uses correct verb forms and word order",
+            "Spelling, capitals and punctuation are correct"
+          ]
+        },
+        "speaking": {
+          "prompt": "Show a piece of clothing, such as a jacket or a bag. Say whether you like it and who it belongs to. Use gefallen and gehören.",
+          "target_hint": "Die Jacke gefällt mir. Sie gehört mir."
+        }
+      }
+    },
+    "W2.3": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas trifft ___ Nachbarn an der Haltestelle. (his neighbour)",
+            "answer": "seinen",
+            "distractors": [
+              "sein",
+              "seinem",
+              "seine"
+            ],
+            "accepted_answers": [],
+            "explanation": "Nachbar is masculine and in the accusative, so sein takes the ending -en."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich fahre mit ___ Fahrrad zur Bibliothek. (my bike)",
+            "answer": "meinem",
+            "distractors": [
+              "mein",
+              "meinen",
+              "meiner"
+            ],
+            "accepted_answers": [],
+            "explanation": "After mit the dative is used, and Fahrrad (neuter) takes -em."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Where do you buy medicine?",
+            "answer": "in der Apotheke",
+            "distractors": [
+              "in der Bibliothek",
+              "im Kino",
+              "im Supermarkt"
+            ],
+            "accepted_answers": [],
+            "explanation": "A pharmacy (die Apotheke) is where you buy medicine."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct? (Lena talks about her friend, a woman.)",
+            "answer": "Lena geht mit ihrer Freundin ins Kino.",
+            "distractors": [
+              "Lena geht mit ihre Freundin ins Kino.",
+              "Lena geht mit ihrem Freundin ins Kino.",
+              "Lena geht mit ihren Freundin ins Kino."
+            ],
+            "accepted_answers": [],
+            "explanation": "Freundin is feminine and after mit takes the dative, so ihr becomes ihrer."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "dein / ist / Hund / das / ?",
+            "answer": "Ist das dein Hund?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "A yes/no question starts with the verb."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: This is not my café.",
+            "answer": "Das ist nicht mein Café.",
+            "distractors": [],
+            "accepted_answers": [
+              "Das ist mein Café nicht."
+            ],
+            "explanation": "Café is neuter, so in the nominative it is mein, and nicht comes before it."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Das ist Jonas. Er wohnt in einer Stadt mit einem Park. Sein Haus ist neben der Schule. Jeden Tag geht er mit seinem Hund in den Park."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Where is Jonas's house?",
+              "answer": "Next to the school.",
+              "distractors": [
+                "Next to the park.",
+                "Next to the station.",
+                "Next to the café."
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says his house is next to the school."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Who goes to the park with Jonas?",
+              "answer": "His dog",
+              "distractors": [
+                "His neighbour",
+                "His girlfriend",
+                "His sister"
+              ],
+              "accepted_answers": [],
+              "explanation": "He goes to the park with his dog."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Lena",
+                "de": "Wo ist deine Bibliothek, Anna?",
+                "en": "Where is your library, Anna?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Meine Bibliothek ist in der Schillerstraße, neben dem Supermarkt.",
+                "en": "My library is on Schillerstraße, next to the supermarket."
+              },
+              {
+                "speaker": "Lena",
+                "de": "Ich gehe mit meinem Freund dorthin.",
+                "en": "I am going there with my friend."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Where is Anna's library?",
+              "answer": "Next to the supermarket",
+              "distractors": [
+                "Next to the pharmacy",
+                "Next to the cinema",
+                "Next to the bus stop"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says it is next to the supermarket."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Who does Lena go with?",
+              "answer": "Her friend (a man)",
+              "distractors": [
+                "Her friend (a woman)",
+                "Her dog",
+                "Her neighbour"
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena says she goes with meinem Freund, a male friend."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 or 3 sentences about your town. Say where your house is and who you meet there. Use mein, meine, meinen, meinem or meiner.",
+          "min_words": 20,
+          "rubric": [
+            "Uses at least two possessive articles with correct endings",
+            "Names at least two places in the city",
+            "Sentences are complete, with correct word order and punctuation"
+          ]
+        },
+        "speaking": {
+          "prompt": "Tell Buddy about your day in the city. Where do you go, and with whom? Say two sentences with mein or meine.",
+          "target_hint": "Ich gehe mit meiner Freundin in die Bibliothek."
+        }
+      }
+    },
+    "W2.4": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas sucht die Karte. Lena sieht ___ auf dem Tisch.",
+            "answer": "sie",
+            "distractors": [
+              "ihn",
+              "ihr",
+              "ihm"
+            ],
+            "accepted_answers": [],
+            "explanation": "Die Karte is feminine, so the accusative pronoun is sie."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna hilft ihrem Freund. Sie geht mit ___ zur Ampel.",
+            "answer": "ihm",
+            "distractors": [
+              "ihn",
+              "ihr",
+              "ihnen"
+            ],
+            "accepted_answers": [],
+            "explanation": "The preposition mit always takes the dative, and the dative of er is ihm."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Lena dankt mir für die Hilfe.",
+            "distractors": [
+              "Lena dankt mich für die Hilfe.",
+              "Lena dankt ich für die Hilfe.",
+              "Lena dankt mein für die Hilfe."
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb danken takes the dative, so you need mir."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "zeige / Ihnen / Ich / die Apotheke / auf der Karte",
+            "answer": "Ich zeige Ihnen die Apotheke auf der Karte.",
+            "distractors": [],
+            "accepted_answers": [
+              "Auf der Karte zeige ich Ihnen die Apotheke."
+            ],
+            "explanation": "The verb is in second position, and the dative Ihnen comes before the accusative noun."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: Jonas, I am looking for you. (Jonas is a friend.)",
+            "answer": "Jonas, ich suche dich.",
+            "distractors": [],
+            "accepted_answers": [
+              "Ich suche dich, Jonas."
+            ],
+            "explanation": "Suchen takes the accusative, and the accusative of du is dich."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which word means 'far'?",
+            "answer": "weit",
+            "distractors": [
+              "nah",
+              "links",
+              "rechts"
+            ],
+            "accepted_answers": [],
+            "explanation": "Weit means far, while nah means near."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Lena sucht die Post. Sie hat eine Karte, aber sie findet die Straße nicht. Ein Mann sagt: \"Gehen Sie geradeaus bis zur Ampel. Dann gehen Sie rechts. Die Post ist nicht weit.\" Lena sagt: \"Vielen Dank für Ihre Hilfe!\""
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Lena look for?",
+              "answer": "The post office",
+              "distractors": [
+                "The pharmacy",
+                "The station",
+                "The traffic light"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says Lena sucht die Post."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Where does Lena turn right?",
+              "answer": "At the traffic light",
+              "distractors": [
+                "At the corner",
+                "At the station",
+                "At the pharmacy"
+              ],
+              "accepted_answers": [],
+              "explanation": "The man says to go straight to the Ampel and then turn right."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Jonas",
+                "de": "Anna, ich suche die Apotheke. Kannst du mir helfen?",
+                "en": "Anna, I am looking for the pharmacy. Can you help me?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Ja, klar. Ich gehe mit dir. Sie ist an der Ecke.",
+                "en": "Yes, of course. I will go with you. It is at the corner."
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Danke, Anna. Ich danke dir!",
+                "en": "Thanks, Anna. I thank you!"
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Jonas look for?",
+              "answer": "The pharmacy",
+              "distractors": [
+                "The post office",
+                "The station",
+                "The map"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas says he is looking for die Apotheke."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Who goes with Jonas?",
+              "answer": "Anna",
+              "distractors": [
+                "Lena",
+                "A stranger",
+                "Nobody"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says Ich gehe mit dir."
+            }
+          ]
+        },
+        "writing": {
+          "task": "You meet a tourist on the street. Write 2 or 3 sentences in German. Ask if you can help, say that you show him or her the way to the station, and say where to go (left, right or straight on). Use Sie and at least one pronoun such as Ihnen.",
+          "min_words": 15,
+          "rubric": [
+            "Uses the formal Sie correctly with a capital S",
+            "Uses at least one dative or accusative pronoun correctly (for example Ihnen, Sie)",
+            "Gives a clear direction (links, rechts or geradeaus)",
+            "Sentences are correct, with the verb in the right place and correct spelling"
+          ]
+        },
+        "speaking": {
+          "prompt": "Imagine you meet a stranger who is lost. Politely offer help and tell him or her the way to the pharmacy. Use Ihnen and a direction word.",
+          "target_hint": "Ich zeige Ihnen den Weg. Gehen Sie geradeaus."
+        }
+      }
+    },
+    "W2.5": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena, ___ bitte nicht den Termin am Montag!",
+            "answer": "vergiss",
+            "distractors": [
+              "vergisst",
+              "vergessen",
+              "vergesst"
+            ],
+            "accepted_answers": [],
+            "explanation": "The du-imperative of vergessen is vergiss (the stem changes from e to i)."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna und Jonas, ___ um halb vier zum Termin!",
+            "answer": "kommt",
+            "distractors": [
+              "komm",
+              "kommen",
+              "kommst"
+            ],
+            "accepted_answers": [],
+            "explanation": "The ihr-imperative is the ihr-form without ihr: kommt."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "You speak to a customer you do not know. Which sentence is correct?",
+            "answer": "Warten Sie bitte eine Stunde.",
+            "distractors": [
+              "Wartet bitte eine Stunde.",
+              "Warte bitte eine Stunde.",
+              "Sie warten bitte eine Stunde."
+            ],
+            "accepted_answers": [],
+            "explanation": "The formal imperative is the infinitive followed by Sie."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does \"früh\" mean?",
+            "answer": "early",
+            "distractors": [
+              "late",
+              "short",
+              "on time"
+            ],
+            "accepted_answers": [],
+            "explanation": "früh means early; spät means late."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "ruft / mich / heute / bitte / an / Lena",
+            "answer": "Lena, ruft mich heute bitte an",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "placeholder"
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: Jonas, be on time, please!",
+            "answer": "Jonas, sei bitte pünktlich!",
+            "distractors": [],
+            "accepted_answers": [
+              "Sei bitte pünktlich, Jonas!",
+              "Jonas, sei pünktlich, bitte!",
+              "Sei pünktlich, bitte, Jonas!"
+            ],
+            "explanation": "The du-imperative of sein is sei."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Lena hat heute einen Termin um Viertel nach zehn. Sie ist früh da und wartet eine Minute. Dann sagt die Frau: \"Kommen Sie bitte herein.\""
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "When is Lena's appointment?",
+              "answer": "At a quarter past ten",
+              "distractors": [
+                "At half past ten",
+                "At a quarter to ten",
+                "At ten o'clock sharp"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says Viertel nach zehn, which is a quarter past ten."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Lena do first?",
+              "answer": "She waits a minute.",
+              "distractors": [
+                "She calls the woman.",
+                "She forgets the appointment.",
+                "She goes home."
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says she is early and waits one minute."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Anna",
+                "de": "Jonas, der Termin beginnt um halb neun.",
+                "en": "Jonas, the appointment begins at half past eight."
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Oh, das ist früh!",
+                "en": "Oh, that is early!"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Ja. Sei bitte pünktlich und vergiss die Uhr nicht.",
+                "en": "Yes. Please be on time and do not forget the watch."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "When does the appointment begin?",
+              "answer": "At half past eight",
+              "distractors": [
+                "At half past nine",
+                "At eight o'clock",
+                "At a quarter past eight"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says halb neun, which is half past eight."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Anna tell Jonas?",
+              "answer": "To be on time",
+              "distractors": [
+                "To come late",
+                "To call her tomorrow",
+                "To wait an hour"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says: Sei bitte pünktlich."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 to 3 sentences to a friend (du) about an appointment next week. Tell your friend the time and give two instructions with the imperative, for example about being on time or calling you.",
+          "min_words": 20,
+          "rubric": [
+            "Uses du-imperatives correctly (for example Komm, Sei, Ruf an)",
+            "Names a day or a time with Uhr, halb or Viertel",
+            "Uses correct word order, capital letters and punctuation",
+            "Completes the task with 2 to 3 sentences and at least 20 words"
+          ]
+        },
+        "speaking": {
+          "prompt": "Your friend has a doctor's appointment tomorrow. Say three short things to your friend with the du-imperative, for example about the time and about being on time.",
+          "target_hint": "Sei bitte pünktlich. Komm um halb neun. Vergiss den Termin nicht!"
+        }
+      }
+    },
+    "W3.1": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena ___ am Samstag Kuchen gebacken.",
+            "answer": "hat",
+            "distractors": [
+              "haben",
+              "bin",
+              "hast"
+            ],
+            "accepted_answers": [],
+            "explanation": "With er/sie/es, haben becomes hat in the Perfekt."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does der Sonntag mean?",
+            "answer": "Sunday",
+            "distractors": [
+              "Saturday",
+              "Monday",
+              "weekend"
+            ],
+            "accepted_answers": [],
+            "explanation": "Der Sonntag is Sunday; Saturday is der Samstag."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "What is the Partizip II of trinken?",
+            "answer": "getrunken",
+            "distractors": [
+              "getrinkt",
+              "trinkt",
+              "getrinken"
+            ],
+            "accepted_answers": [],
+            "explanation": "Trinken is a strong verb, so its Partizip II is getrunken."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "hat / Lena / gestern / einen Film / gesehen",
+            "answer": "Lena hat gestern einen Film gesehen.",
+            "distractors": [],
+            "accepted_answers": [
+              "Gestern hat Lena einen Film gesehen."
+            ],
+            "explanation": "Hat stays in position 2 and the Partizip II goes to the end."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: I played football in the park.",
+            "answer": "Ich habe im Park Fußball gespielt.",
+            "distractors": [],
+            "accepted_answers": [
+              "Im Park habe ich Fußball gespielt."
+            ],
+            "explanation": "Use habe in position 2 and gespielt at the end."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Am Samstag war eine Party. Wir haben viel Musik ___.",
+            "answer": "gehört",
+            "distractors": [
+              "gekocht",
+              "geschlafen",
+              "gekauft"
+            ],
+            "accepted_answers": [],
+            "explanation": "At a party you listen to music, so gehört fits."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Am Samstag hat Jonas im Café Kaffee getrunken. Dann hat er im Park Musik gehört. Am Sonntag hat er lange geschlafen und Kuchen gegessen."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Where did Jonas drink coffee on Saturday?",
+              "answer": "In a café",
+              "distractors": [
+                "In the park",
+                "At a party",
+                "At home"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says he drank coffee im Café."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What did Jonas do on Sunday?",
+              "answer": "He slept for a long time.",
+              "distractors": [
+                "He played football.",
+                "He listened to music.",
+                "He watched a film."
+              ],
+              "accepted_answers": [],
+              "explanation": "On Sunday he hat lange geschlafen."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Lena",
+                "de": "Hallo Anna! Was hast du gestern gemacht?",
+                "en": "Hello Anna! What did you do yesterday?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Ich habe Pizza gekocht und einen Film gesehen.",
+                "en": "I cooked pizza and watched a film."
+              },
+              {
+                "speaker": "Lena",
+                "de": "Toll! Ich habe nur lange geschlafen.",
+                "en": "Great! I only slept for a long time."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What did Anna cook?",
+              "answer": "Pizza",
+              "distractors": [
+                "Cake",
+                "Coffee",
+                "Bread"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says she cooked pizza."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What did Lena do yesterday?",
+              "answer": "She slept for a long time.",
+              "distractors": [
+                "She cooked pizza.",
+                "She watched a film.",
+                "She played football."
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena says she slept for a long time."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 to 3 sentences about your last weekend. Say what you did on Saturday and on Sunday. Use the Perfekt with haben, for example: Ich habe ... gespielt.",
+          "min_words": 20,
+          "rubric": [
+            "Uses haben in position 2 and a correct Partizip II at the end",
+            "Mentions Samstag and Sonntag with at least two activities",
+            "Spelling, capital letters and punctuation are correct"
+          ]
+        },
+        "speaking": {
+          "prompt": "Answer the question: Was hast du am Wochenende gemacht? Say two things you did and ask Und du?",
+          "target_hint": "Ich habe ... gekauft / gespielt. Und du?"
+        }
+      }
+    },
+    "W3.2": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena ___ am Sonntag ins Museum gegangen.",
+            "answer": "ist",
+            "distractors": [
+              "hat",
+              "bin",
+              "sind"
+            ],
+            "accepted_answers": [],
+            "explanation": "Gehen uses sein in the Perfekt, and Lena takes the form ist."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "What is the past participle of laufen?",
+            "answer": "gelaufen",
+            "distractors": [
+              "gelauft",
+              "gelaufst",
+              "laufgen"
+            ],
+            "accepted_answers": [],
+            "explanation": "Laufen has the irregular participle gelaufen and uses sein."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Im Sommer fahren wir mit dem Fahrrad zum ___ und schwimmen.",
+            "answer": "See",
+            "distractors": [
+              "Konzert",
+              "Museum",
+              "Kino"
+            ],
+            "accepted_answers": [],
+            "explanation": "You swim in a lake, der See."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "bin / Urlaub / im / ich / geflogen / nach / Spanien",
+            "answer": "Ich bin im Urlaub nach Spanien geflogen.",
+            "distractors": [],
+            "accepted_answers": [
+              "Im Urlaub bin ich nach Spanien geflogen."
+            ],
+            "explanation": "Sein stays in position 2 and the participle goes to the end."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: Jonas stayed at home on Friday.",
+            "answer": "Jonas ist am Freitag zu Hause geblieben.",
+            "distractors": [],
+            "accepted_answers": [
+              "Am Freitag ist Jonas zu Hause geblieben.",
+              "Jonas ist am Freitag zuhause geblieben.",
+              "Am Freitag ist Jonas zuhause geblieben."
+            ],
+            "explanation": "Bleiben uses sein, so it is ist plus geblieben at the end."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Wir sind mit dem Fahrrad zum See gefahren.",
+            "distractors": [
+              "Wir haben mit dem Fahrrad zum See gefahren.",
+              "Wir sind mit dem Fahrrad zum See fahren.",
+              "Wir sind mit dem Fahrrad zum See gefahrt."
+            ],
+            "accepted_answers": [],
+            "explanation": "Fahren needs sein and the participle gefahren."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Am Wochenende ist Anna mit dem Fahrrad zu einem See gefahren. Dort ist sie im Wasser geschwommen und danach im Park gelaufen. Am Abend ist sie zu Hause geblieben."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "How did Anna go to the lake?",
+              "answer": "By bike",
+              "distractors": [
+                "By plane",
+                "On foot",
+                "By train"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says she went mit dem Fahrrad."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Where was Anna in the evening?",
+              "answer": "At home",
+              "distractors": [
+                "In the park",
+                "At the lake",
+                "At a concert"
+              ],
+              "accepted_answers": [],
+              "explanation": "The last sentence says she stayed zu Hause."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Jonas",
+                "de": "Lena, wie war dein Urlaub?",
+                "en": "Lena, how was your holiday?"
+              },
+              {
+                "speaker": "Lena",
+                "de": "Sehr schön! Ich bin nach Italien geflogen.",
+                "en": "Very nice! I flew to Italy."
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Und was hast du dort gemacht?",
+                "en": "And what did you do there?"
+              },
+              {
+                "speaker": "Lena",
+                "de": "Ich bin jeden Tag zum See gegangen.",
+                "en": "I went to the lake every day."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Where did Lena fly to?",
+              "answer": "Italy",
+              "distractors": [
+                "Spain",
+                "Austria",
+                "Berlin"
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena says she flew nach Italien."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Where did Lena go every day?",
+              "answer": "To the lake",
+              "distractors": [
+                "To the museum",
+                "To the cinema",
+                "To a concert"
+              ],
+              "accepted_answers": [],
+              "explanation": "She says she went zum See every day."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 or 3 sentences about your last weekend. Say where you went and where you stayed. Use the Perfekt with sein, for example: Ich bin ... gegangen.",
+          "min_words": 20,
+          "rubric": [
+            "Uses at least two Perfekt sentences with a form of sein and a correct past participle at the end",
+            "Uses weekend or free-time words such as Park, Kino, See or Museum correctly",
+            "Sein is in position 2 and the sentences are clear, with correct spelling and capital letters"
+          ]
+        },
+        "speaking": {
+          "prompt": "Answer aloud: Wie war dein Wochenende? Wo bist du gewesen? Was hast du gemacht?",
+          "target_hint": "Ich bin am Samstag ... gegangen. Am Sonntag bin ich zu Hause geblieben."
+        }
+      }
+    },
+    "W3.3": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "What is the Partizip II of \"sehen\"?",
+            "answer": "gesehen",
+            "distractors": [
+              "gesehnt",
+              "gesah",
+              "gesieht"
+            ],
+            "accepted_answers": [],
+            "explanation": "Sehen is irregular and its Partizip II is gesehen."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena ___ am Strand ein Eis gegessen.",
+            "answer": "hat",
+            "distractors": [
+              "ist",
+              "sind",
+              "bin"
+            ],
+            "accepted_answers": [],
+            "explanation": "Essen is not a movement verb, so it takes haben."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas ist mit dem Bus zum Flughafen ___.",
+            "answer": "gefahren",
+            "distractors": [
+              "gefahrt",
+              "gefahren hat",
+              "fahren"
+            ],
+            "accepted_answers": [],
+            "explanation": "The Partizip II of fahren is gefahren and it stands at the end."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Where do you wait for a train? Choose the right word.",
+            "answer": "das Gleis",
+            "distractors": [
+              "das Meer",
+              "der Strand",
+              "der Koffer"
+            ],
+            "accepted_answers": [],
+            "explanation": "Das Gleis is the platform or track where the train stops."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "hat / Anna / ihre Fahrkarte / gefunden / gestern",
+            "answer": "Anna hat gestern ihre Fahrkarte gefunden.",
+            "distractors": [],
+            "accepted_answers": [
+              "Gestern hat Anna ihre Fahrkarte gefunden."
+            ],
+            "explanation": "The auxiliary is in second position and the Partizip II is at the end."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "We stayed in Italy for a week. (use bleiben)",
+            "answer": "Wir sind eine Woche in Italien geblieben.",
+            "distractors": [],
+            "accepted_answers": [
+              "Wir sind in Italien eine Woche geblieben."
+            ],
+            "explanation": "Bleiben takes sein and the Partizip II geblieben goes at the end."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Jonas hat eine Woche Urlaub gehabt. Er ist mit dem Zug nach Italien gefahren und hat zwei Tage in einem Hotel am Meer übernachtet. Er hat viele Fotos gemacht."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "How did Jonas travel to Italy?",
+              "answer": "By train",
+              "distractors": [
+                "By plane",
+                "By bus",
+                "By car"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says he went mit dem Zug."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Where was the hotel?",
+              "answer": "By the sea",
+              "distractors": [
+                "At the station",
+                "At the airport",
+                "In the mountains"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says the hotel was am Meer."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Lena",
+                "de": "Hallo Jonas, wie war die Reise?",
+                "en": "Hello Jonas, how was the trip?"
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Sehr schön! Wir sind mit dem Flugzeug nach Wien geflogen.",
+                "en": "Very nice! We flew to Vienna by plane."
+              },
+              {
+                "speaker": "Lena",
+                "de": "Und wo habt ihr übernachtet?",
+                "en": "And where did you stay overnight?"
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Wir haben im Hotel am Bahnhof geschlafen.",
+                "en": "We slept in the hotel at the station."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "How did Jonas and his friends travel?",
+              "answer": "By plane",
+              "distractors": [
+                "By train",
+                "By bus",
+                "By ship"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas says they flew by plane."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Where was their hotel?",
+              "answer": "At the station",
+              "distractors": [
+                "At the beach",
+                "At the airport",
+                "In the city center"
+              ],
+              "accepted_answers": [],
+              "explanation": "The hotel was am Bahnhof."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 or 3 sentences about a trip you made. Say where you went, how you travelled and what you saw. Use haben or sein with a Partizip II.",
+          "min_words": 20,
+          "rubric": [
+            "Uses at least two perfect tense sentences with the Partizip II at the end",
+            "Uses haben and sein correctly (for example ist gefahren, hat gesehen)",
+            "Uses at least two travel words from the lesson",
+            "Spelling, capital letters and punctuation are correct"
+          ]
+        },
+        "speaking": {
+          "prompt": "Tell Buddy about your last trip. Say where you went, how you travelled and what you saw.",
+          "target_hint": "Ich bin nach ... gefahren. Ich habe ... gesehen."
+        }
+      }
+    },
+    "W3.4": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena hat gestern ihren Kollegen ___.",
+            "answer": "angerufen",
+            "distractors": [
+              "gerufen an",
+              "anrufen",
+              "geanrufen"
+            ],
+            "accepted_answers": [],
+            "explanation": "anrufen is separable, so the Partizip II is prefix + ge + stem: angerufen."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas hat den Kunden in der Firma ___.",
+            "answer": "besucht",
+            "distractors": [
+              "gebesucht",
+              "besuchen",
+              "bebesucht"
+            ],
+            "accepted_answers": [],
+            "explanation": "besuchen is inseparable (be-), so it gets no ge- in the Perfekt."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna ___ um neun Uhr im Büro angekommen.",
+            "answer": "ist",
+            "distractors": [
+              "hat",
+              "habe",
+              "haben"
+            ],
+            "accepted_answers": [],
+            "explanation": "ankommen is a movement verb, so it takes sein in the Perfekt."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "hat / Jonas / die Rechnung / bezahlt",
+            "answer": "Jonas hat die Rechnung bezahlt.",
+            "distractors": [],
+            "accepted_answers": [
+              "Die Rechnung hat Jonas bezahlt."
+            ],
+            "explanation": "The helping verb is in position 2 and the Partizip II goes at the end."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: I did not understand the appointment.",
+            "answer": "Ich habe den Termin nicht verstanden.",
+            "distractors": [],
+            "accepted_answers": [
+              "Den Termin habe ich nicht verstanden."
+            ],
+            "explanation": "verstehen is inseparable, so the Partizip II is verstanden with haben."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which word means \"boss\"?",
+            "answer": "der Chef",
+            "distractors": [
+              "der Kunde",
+              "die Pause",
+              "der Computer"
+            ],
+            "accepted_answers": [],
+            "explanation": "der Chef is the boss; der Kunde is the customer."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Lena arbeitet in einer Firma. Heute hat sie einen Termin mit einem Kunden. Sie ist um zehn Uhr im Büro angekommen und hat gleich den Kunden angerufen. Danach hat sie eine Pause gemacht."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What did Lena do right after she arrived at the office?",
+              "answer": "She called the customer.",
+              "distractors": [
+                "She tidied the office.",
+                "She wrote an email.",
+                "She visited her boss."
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says she called the customer right away."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What did Lena do afterwards?",
+              "answer": "She took a break.",
+              "distractors": [
+                "She paid a bill.",
+                "She had a meeting.",
+                "She went home."
+              ],
+              "accepted_answers": [],
+              "explanation": "The last sentence says she took a break."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Jonas",
+                "de": "Hallo Anna, hast du meine E-Mail bekommen?",
+                "en": "Hello Anna, did you get my email?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Nein, ich bin gerade erst angekommen.",
+                "en": "No, I have only just arrived."
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Wir haben um drei Uhr eine Besprechung.",
+                "en": "We have a meeting at three o'clock."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Why has Anna not read the email?",
+              "answer": "She has only just arrived.",
+              "distractors": [
+                "She is on a break.",
+                "She called the customer.",
+                "She lost her computer."
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says she has only just arrived."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "When is the meeting?",
+              "answer": "At three o'clock.",
+              "distractors": [
+                "At two o'clock.",
+                "At eight o'clock.",
+                "At ten o'clock."
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas says the meeting is at three o'clock."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 to 3 sentences in German about your workday yesterday. Use the Perfekt with at least one separable verb (for example anrufen or aufräumen) and one inseparable verb (for example besuchen or verstehen).",
+          "min_words": 20,
+          "rubric": [
+            "Uses the Perfekt with haben or sein correctly",
+            "Separable verbs have ge- in the middle (angerufen, aufgeräumt)",
+            "Inseparable verbs have no ge- (besucht, verstanden)",
+            "Partizip II is at the end of the sentence",
+            "Spelling and punctuation are correct"
+          ]
+        },
+        "speaking": {
+          "prompt": "Tell Buddy what you did at work or at school yesterday. Say two sentences in the Perfekt, for example with anrufen and besuchen.",
+          "target_hint": "Ich habe gestern einen Kunden angerufen. Ich habe meine Kollegin besucht."
+        }
+      }
+    },
+    "W3.5": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Die Hochzeit ist ___ Sonntag.",
+            "answer": "am",
+            "distractors": [
+              "um",
+              "im",
+              "seit"
+            ],
+            "accepted_answers": [],
+            "explanation": "We use am with days of the week."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Der Karneval beginnt ___ elf Uhr.",
+            "answer": "um",
+            "distractors": [
+              "am",
+              "im",
+              "vor"
+            ],
+            "accepted_answers": [],
+            "explanation": "We use um with clock times."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena hat ___ Dezember Geburtstag.",
+            "answer": "im",
+            "distractors": [
+              "am",
+              "um",
+              "vor"
+            ],
+            "accepted_answers": [],
+            "explanation": "We use im with months."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna tanzt ___ drei Stunden auf der Party.",
+            "answer": "seit",
+            "distractors": [
+              "um",
+              "am",
+              "im"
+            ],
+            "accepted_answers": [],
+            "explanation": "Seit means for or since, and the action is still going on."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does \"die Kerze\" mean?",
+            "answer": "candle",
+            "distractors": [
+              "balloon",
+              "cake",
+              "guest"
+            ],
+            "accepted_answers": [],
+            "explanation": "Die Kerze is a candle, for example on a birthday cake."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: The party was three days ago.",
+            "answer": "Die Party war vor drei Tagen.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Vor means ago and is followed by the dative: vor drei Tagen."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Lena hat am 12. März Geburtstag. Die Party beginnt um sechs Uhr. Jonas schenkt ihr eine Torte und viele Luftballons. Er kennt Lena seit zwei Jahren."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "When does Lena's party begin?",
+              "answer": "At six o'clock",
+              "distractors": [
+                "At twelve o'clock",
+                "In March",
+                "Two years ago"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: Die Party beginnt um sechs Uhr."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Jonas give Lena?",
+              "answer": "A cake and balloons",
+              "distractors": [
+                "A candle and fireworks",
+                "An invitation and a gift",
+                "A ticket and a book"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas gives her a Torte and many Luftballons."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Anna",
+                "de": "Wann ist die Hochzeit?",
+                "en": "When is the wedding?"
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Sie ist im August, am Samstag um vier Uhr.",
+                "en": "It is in August, on Saturday at four o'clock."
+              },
+              {
+                "speaker": "Anna",
+                "de": "Danke für die Einladung!",
+                "en": "Thanks for the invitation!"
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "In which month is the wedding?",
+              "answer": "August",
+              "distractors": [
+                "Saturday",
+                "April",
+                "Summer at four"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas says the wedding is im August."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "At what time does the wedding take place?",
+              "answer": "At four o'clock",
+              "distractors": [
+                "At eight o'clock",
+                "At two o'clock",
+                "At noon"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas says um vier Uhr."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 or 3 sentences about a celebration you know. Say what you celebrate, when it is (use am, um or im) and who you invite. You can also say how long you have celebrated it (seit) or when the last one was (vor).",
+          "min_words": 20,
+          "rubric": [
+            "Uses at least two time expressions correctly (am, um, im, seit, vor)",
+            "Uses words from the lesson such as Fest, Geburtstag, Gast or Kuchen",
+            "Sentences have correct verb position and are easy to understand"
+          ]
+        },
+        "speaking": {
+          "prompt": "Tell Buddy about your birthday: In which month is it, and what do you do on that day? Use im, am or um.",
+          "target_hint": "Mein Geburtstag ist im ... Am Geburtstag feiere ich ..."
+        }
+      }
+    },
+    "W4.1": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena braucht einen Teppich für ___ Flur.",
+            "answer": "den",
+            "distractors": [
+              "der",
+              "dem",
+              "die"
+            ],
+            "accepted_answers": [],
+            "explanation": "Für takes the accusative, so der Flur becomes den Flur."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas geht ohne ___ Sessel ins Zimmer.",
+            "answer": "den",
+            "distractors": [
+              "der",
+              "das",
+              "dem"
+            ],
+            "accepted_answers": [],
+            "explanation": "Ohne takes the accusative, so der Sessel becomes den Sessel."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does 'der Spiegel' mean?",
+            "answer": "mirror",
+            "distractors": [
+              "window",
+              "wall",
+              "carpet"
+            ],
+            "accepted_answers": [],
+            "explanation": "Der Spiegel is a mirror."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Anna / die Wand / geht / gegen / nicht",
+            "answer": "Anna geht nicht gegen die Wand.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "The verb is in second place and the preposition phrase gegen die Wand stays together."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: This pillow is for you.",
+            "answer": "Das Kissen ist für dich.",
+            "distractors": [],
+            "accepted_answers": [
+              "Dieses Kissen ist für dich."
+            ],
+            "explanation": "Für takes the accusative, so you becomes dich."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Lena läuft um den Tisch.",
+            "distractors": [
+              "Lena läuft um der Tisch.",
+              "Lena läuft um dem Tisch.",
+              "Lena läuft um einen Tisch der."
+            ],
+            "accepted_answers": [],
+            "explanation": "Um takes the accusative, so der Tisch becomes den Tisch."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Lena hat ein neues Zimmer. Sie braucht noch eine Lampe für den Schreibtisch. Ohne Lampe geht es abends nicht. Aber das Sofa ist leider zu groß für den Raum."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Lena still need?",
+              "answer": "A lamp",
+              "distractors": [
+                "A mirror",
+                "A shelf",
+                "A bed"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says she needs a lamp for the desk."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What is too big for the room?",
+              "answer": "The sofa",
+              "distractors": [
+                "The desk",
+                "The lamp",
+                "The door"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says the sofa is too big for the room."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Jonas",
+                "de": "Entschuldigung, Anna. Wo ist die Küche?",
+                "en": "Excuse me, Anna. Where is the kitchen?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Gehe durch den Flur. Die Küche ist links.",
+                "en": "Go through the hallway. The kitchen is on the left."
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Danke! Ich brauche einen Stuhl für mein Zimmer.",
+                "en": "Thanks! I need a chair for my room."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Where does Jonas go to reach the kitchen?",
+              "answer": "Through the hallway",
+              "distractors": [
+                "Through the window",
+                "Around the table",
+                "Against the wall"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says to go through the hallway."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Jonas need for his room?",
+              "answer": "A chair",
+              "distractors": [
+                "A carpet",
+                "A cupboard",
+                "A mirror"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas says he needs a chair for his room."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Describe your room in 2 to 3 sentences. Say which furniture you have and what you need. Use at least two of the words für, durch, ohne, gegen, um with the accusative, for example: Ich brauche ein Regal für das Zimmer.",
+          "min_words": 15,
+          "rubric": [
+            "Uses at least two prepositions from für, durch, ohne, gegen, um",
+            "Uses the accusative correctly (den, einen) with masculine nouns",
+            "Uses furniture words from the lesson correctly with the right article",
+            "Sentences have correct word order and spelling"
+          ]
+        },
+        "speaking": {
+          "prompt": "Say what you need for your room. Use für and a furniture word, for example: Ich brauche einen Spiegel für die Wand.",
+          "target_hint": "Ich brauche einen Schrank für das Zimmer."
+        }
+      }
+    },
+    "W4.2": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena trägt den Tisch ___ der Küche ins Zimmer.",
+            "answer": "aus",
+            "distractors": [
+              "mit",
+              "seit",
+              "zu"
+            ],
+            "accepted_answers": [],
+            "explanation": "\"aus\" means \"out of\" and always takes the Dativ (aus der Küche)."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct? \"Jonas helps his friend with the move.\"",
+            "answer": "Jonas hilft seinem Freund beim Umzug.",
+            "distractors": [
+              "Jonas hilft seinem Freund bei der Umzug.",
+              "Jonas hilft seinem Freund mit Umzug.",
+              "Jonas hilft seinem Freund nach dem Umzug in."
+            ],
+            "accepted_answers": [],
+            "explanation": "\"bei dem\" becomes \"beim\", and bei takes the Dativ."
+          },
+          {
+            "skill": "articles",
+            "type": "gap_fill",
+            "prompt": "Jonas fährt mit ___ Zug nach Hamburg.",
+            "answer": "dem",
+            "distractors": [
+              "den",
+              "der",
+              "die"
+            ],
+            "accepted_answers": [],
+            "explanation": "Mit always takes the dative, and der Zug becomes dem Zug."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which word means \"rent\"?",
+            "answer": "die Miete",
+            "distractors": [
+              "der Schlüssel",
+              "die Möbel",
+              "der Nachbar"
+            ],
+            "accepted_answers": [],
+            "explanation": "\"Die Miete\" is the money you pay for a flat."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: The key is for the flat. (Use zu.)",
+            "answer": "Das ist der Schlüssel zur Wohnung.",
+            "distractors": [],
+            "accepted_answers": [
+              "Der Schlüssel zur Wohnung ist das.",
+              "Das ist der Schlüssel zu der Wohnung."
+            ],
+            "explanation": "\"zu\" + der becomes \"zur\" for a feminine noun."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Jonas / mit / seinem / fährt / Freund / nach / Hamburg",
+            "answer": "Jonas fährt mit seinem Freund nach Hamburg.",
+            "distractors": [],
+            "accepted_answers": [
+              "Mit seinem Freund fährt Jonas nach Hamburg.",
+              "Nach Hamburg fährt Jonas mit seinem Freund."
+            ],
+            "explanation": "The verb is in second position and mit takes the Dativ (seinem Freund)."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Lena zieht nach Köln um. Sie wohnt seit drei Jahren in einer kleinen Wohnung. Morgen hilft ihr Jonas beim Umzug. Er kommt mit dem Auto und bringt zehn Umzugskartons."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "How does Jonas come to Lena?",
+              "answer": "By car",
+              "distractors": [
+                "By train",
+                "On foot",
+                "By bus"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says he comes \"mit dem Auto\"."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "How long has Lena lived in her flat?",
+              "answer": "Three years",
+              "distractors": [
+                "Three months",
+                "Ten years",
+                "One week"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says \"seit drei Jahren\"."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Jonas",
+                "de": "Hallo Anna! Wo ist der Schlüssel zum Haus?",
+                "en": "Hello Anna! Where is the key to the house?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Er ist beim Nachbarn. Ich gehe zu ihm.",
+                "en": "It is at the neighbour's. I am going to him."
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Danke! Ich trage die Möbel aus dem Zimmer.",
+                "en": "Thanks! I am carrying the furniture out of the room."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Who has the key?",
+              "answer": "The neighbour",
+              "distractors": [
+                "Jonas",
+                "Lena",
+                "The friend"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says the key is \"beim Nachbarn\"."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Jonas carry out of the room?",
+              "answer": "The furniture",
+              "distractors": [
+                "The boxes",
+                "The car",
+                "The rent"
+              ],
+              "accepted_answers": [],
+              "explanation": "He says \"die Möbel aus dem Zimmer\"."
+            }
+          ]
+        },
+        "writing": {
+          "task": "You are moving to a new flat. Write 2 or 3 sentences in German. Say where you move to (nach ...), who helps you (mit/bei ...) and how long you live in your old flat (seit ...).",
+          "min_words": 15,
+          "rubric": [
+            "Uses at least three of the prepositions aus, bei, mit, nach, seit, von, zu correctly with the Dativ",
+            "Uses correct articles after the prepositions (dem, der, den, einem, einer)",
+            "Words are spelled correctly and sentences have the verb in second position"
+          ]
+        },
+        "speaking": {
+          "prompt": "Tell Buddy about your move. Say with whom or how you come to the new flat and since when you live in the city. Use mit and seit.",
+          "target_hint": "Ich komme mit dem Auto. Ich wohne seit einem Jahr in der Stadt."
+        }
+      }
+    },
+    "W4.3": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Das Taxi wartet vor dem Flughafen. Jonas steht ___ Ampel.",
+            "answer": "an der",
+            "distractors": [
+              "an die",
+              "an den",
+              "an dem"
+            ],
+            "accepted_answers": [],
+            "explanation": "Wo? (place, no movement) takes the dative: die Ampel becomes an der Ampel."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena geht ___ Ausgang.",
+            "answer": "an den",
+            "distractors": [
+              "an dem",
+              "an der",
+              "an das"
+            ],
+            "accepted_answers": [],
+            "explanation": "Wohin? (movement) takes the accusative: der Ausgang becomes an den Ausgang."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which question fits this sentence? Die Straßenbahn fährt in die Stadt.",
+            "answer": "Wohin fährt die Straßenbahn?",
+            "distractors": [
+              "Wo fährt die Straßenbahn?",
+              "Woher fährt die Straßenbahn?",
+              "Wann fährt die Straßenbahn?"
+            ],
+            "accepted_answers": [],
+            "explanation": "The tram moves toward a destination, so we ask Wohin?"
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which word means \"ticket\"?",
+            "answer": "die Fahrkarte",
+            "distractors": [
+              "das Gleis",
+              "die Tasche",
+              "das Fahrrad"
+            ],
+            "accepted_answers": [],
+            "explanation": "Die Fahrkarte is the ticket for bus and train."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Tasche / liegt / auf / Die / dem / Sitz",
+            "answer": "Die Tasche liegt auf dem Sitz.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "The bag is in a fixed place (Wo?), so auf takes the dative: auf dem Sitz."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: I am waiting at the station.",
+            "answer": "Ich warte am Bahnhof.",
+            "distractors": [],
+            "accepted_answers": [
+              "Ich warte an dem Bahnhof."
+            ],
+            "explanation": "Waiting is a place without movement (Wo?), so an takes the dative: am Bahnhof."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Jonas steht am Gleis zwei. Seine Tasche liegt auf dem Boden. Der Zug kommt, und Jonas geht in den Zug."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Where is Jonas's bag?",
+              "answer": "On the floor.",
+              "distractors": [
+                "On the train.",
+                "At the taxi.",
+                "In the city."
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says the bag is auf dem Boden."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Where does Jonas go at the end?",
+              "answer": "Into the train.",
+              "distractors": [
+                "To the exit.",
+                "Onto the bike.",
+                "Into the station shop."
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says Jonas geht in den Zug."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Lena",
+                "de": "Entschuldigung, wohin fährt dieser Bus?",
+                "en": "Excuse me, where does this bus go?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Er fährt zum Flughafen.",
+                "en": "It goes to the airport."
+              },
+              {
+                "speaker": "Lena",
+                "de": "Danke. Ich steige hier ein.",
+                "en": "Thanks. I am getting on here."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Where does the bus go?",
+              "answer": "To the airport.",
+              "distractors": [
+                "To the station.",
+                "To the city.",
+                "To the platform."
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says the bus goes zum Flughafen."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Lena ask about?",
+              "answer": "The destination of the bus.",
+              "distractors": [
+                "The price of a ticket.",
+                "The time of the train.",
+                "The way to the exit."
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena asks Wohin fährt dieser Bus?"
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 to 3 sentences about your way to the city. Say where you wait (Wo?) and where you go (Wohin?). Use the words Haltestelle, Bus or U-Bahn, and Stadt.",
+          "min_words": 15,
+          "rubric": [
+            "Uses a two-way preposition with the dative for Wo? (for example an der Haltestelle).",
+            "Uses a two-way preposition with the accusative for Wohin? (for example in die Stadt).",
+            "Uses at least two words from the lesson, with correct verb forms and capital letters for nouns."
+          ]
+        },
+        "speaking": {
+          "prompt": "You are at a bus stop. Ask where a bus goes and say where you wait. Use Entschuldigung and Wohin fährt dieser Bus?",
+          "target_hint": "Pronounce the long a in Bahn and the ä in fährt clearly."
+        }
+      }
+    },
+    "W4.4": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Jonas ___ das Formular auf den Schalter. (Wohin?)",
+            "answer": "legt",
+            "distractors": [
+              "liegt",
+              "steht",
+              "hängt"
+            ],
+            "accepted_answers": [],
+            "explanation": "Wohin? with an object being put flat uses legen, so \"legt\"."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Der Stempel ___ auf dem Schalter. (Wo?)",
+            "answer": "liegt",
+            "distractors": [
+              "legt",
+              "stellt",
+              "stehen"
+            ],
+            "accepted_answers": [],
+            "explanation": "Wo? with something lying flat uses liegen, so \"liegt\"."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna legt das Buch auf ___ Tisch.",
+            "answer": "den",
+            "distractors": [
+              "dem",
+              "der",
+              "die"
+            ],
+            "accepted_answers": [],
+            "explanation": "Wohin? needs the accusative, and der Tisch becomes den Tisch."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does \"die Unterschrift\" mean?",
+            "answer": "signature",
+            "distractors": [
+              "address",
+              "appointment",
+              "stamp"
+            ],
+            "accepted_answers": [],
+            "explanation": "Die Unterschrift is your name written by hand on a document."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "stellt / Anna / den Stuhl / an / den Tisch",
+            "answer": "Anna stellt den Stuhl an den Tisch.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "The verb is in second position, followed by the accusative object and the place."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: The address is on the form.",
+            "answer": "Die Adresse steht auf dem Formular.",
+            "distractors": [],
+            "accepted_answers": [
+              "Die Adresse ist auf dem Formular."
+            ],
+            "explanation": "Wo? uses a dative: auf dem Formular."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Jonas hat heute einen Termin bei der Behörde. Er stellt seine Tasche auf den Stuhl und legt den Ausweis auf den Schalter. Das Formular liegt schon dort."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Wohin stellt Jonas die Tasche?",
+              "answer": "Auf den Stuhl.",
+              "distractors": [
+                "Auf den Schalter.",
+                "An die Wand.",
+                "In die Behörde."
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says he puts the bag on the chair."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Where is the form?",
+              "answer": "On the counter.",
+              "distractors": [
+                "In the bag.",
+                "On the chair.",
+                "On the wall."
+              ],
+              "accepted_answers": [],
+              "explanation": "The form is already lying there, at the counter."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Lena",
+                "de": "Wo ist mein Ausweis?",
+                "en": "Where is my ID?"
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Er liegt in deiner Tasche.",
+                "en": "It is in your bag."
+              },
+              {
+                "speaker": "Lena",
+                "de": "Danke! Ich hänge die Jacke an die Wand.",
+                "en": "Thanks! I am hanging the jacket on the wall."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Where is the ID?",
+              "answer": "In the bag.",
+              "distractors": [
+                "On the chair.",
+                "On the wall.",
+                "On the counter."
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas says the ID is in her bag."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Lena do with the jacket?",
+              "answer": "She hangs it on the wall.",
+              "distractors": [
+                "She puts it on the chair.",
+                "She puts it in the bag.",
+                "She lays it on the table."
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena says she hangs the jacket on the wall."
+            }
+          ]
+        },
+        "writing": {
+          "task": "You are at a Behörde with an appointment. Write 2 to 3 sentences: say that you have an appointment, where you put your ID and your bag, and where the form is. Use stellen, legen or liegen.",
+          "min_words": 20,
+          "rubric": [
+            "Uses at least two verbs from stellen/stehen, legen/liegen, hängen correctly",
+            "Uses accusative after Wohin? and dative after Wo?",
+            "Includes words from the theme such as Termin, Ausweis or Formular",
+            "Correct word order, capital letters and punctuation"
+          ]
+        },
+        "speaking": {
+          "prompt": "You are at the counter. Say that you have an appointment and ask where you put the form.",
+          "target_hint": "Ich habe einen Termin. Wohin lege ich das Formular?"
+        }
+      }
+    },
+    "W4.5": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena ___ in einer Stadt am Meer.",
+            "answer": "arbeitet",
+            "distractors": [
+              "arbeite",
+              "arbeiten",
+              "arbeitest"
+            ],
+            "accepted_answers": [],
+            "explanation": "With Lena (she) the verb ends in -t: arbeitet."
+          },
+          {
+            "skill": "articles",
+            "type": "multiple_choice",
+            "prompt": "Which article is correct? ___ Brot ist frisch.",
+            "answer": "Das",
+            "distractors": [
+              "Der",
+              "Die",
+              "Den"
+            ],
+            "accepted_answers": [],
+            "explanation": "Brot is a neuter noun, so it takes das."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Wir haben heute ___ Brot.",
+            "answer": "kein",
+            "distractors": [
+              "keine",
+              "nicht",
+              "keinen"
+            ],
+            "accepted_answers": [],
+            "explanation": "Brot is neuter, so the negation of a noun is kein."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "oft / Jonas / Freunde / besucht / seine",
+            "answer": "Jonas besucht oft seine Freunde.",
+            "distractors": [],
+            "accepted_answers": [
+              "Oft besucht Jonas seine Freunde."
+            ],
+            "explanation": "The verb stays in second position."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Ask an adult stranger: Where do you come from?",
+            "answer": "Woher kommen Sie?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "With an adult stranger you use the formal Sie and the verb kommen."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Anna ist heute nicht zu Hause.",
+            "distractors": [
+              "Anna ist heute kein zu Hause.",
+              "Anna nicht ist heute zu Hause.",
+              "Anna sind heute nicht zu Hause."
+            ],
+            "accepted_answers": [],
+            "explanation": "Nicht negates the rest of the sentence, and ist matches Anna."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Das ist Jonas. Er wohnt in einem Haus in Köln. Jonas hat eine große Familie, aber er hat heute keine Zeit. Er arbeitet gern."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Where does Jonas live?",
+              "answer": "In Köln",
+              "distractors": [
+                "In Berlin",
+                "In Hamburg",
+                "In Wien"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says he lives in a house in Köln."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Jonas not have today?",
+              "answer": "Time",
+              "distractors": [
+                "A family",
+                "A house",
+                "Bread"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: er hat heute keine Zeit."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Lena",
+                "de": "Guten Tag, Anna. Wie geht es dir?",
+                "en": "Hello, Anna. How are you?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Gut, danke! Ich habe Durst.",
+                "en": "Fine, thanks! I am thirsty."
+              },
+              {
+                "speaker": "Lena",
+                "de": "Hier ist Wasser.",
+                "en": "Here is water."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Anna need?",
+              "answer": "Water",
+              "distractors": [
+                "Bread",
+                "Time",
+                "A house"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna is thirsty and Lena offers water."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "How is Anna?",
+              "answer": "She is fine.",
+              "distractors": [
+                "She is tired.",
+                "She is hungry.",
+                "She is sick."
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says: Gut, danke!"
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 or 3 sentences about a friend. Say his or her name, where he or she lives and works, and what he or she does often.",
+          "min_words": 20,
+          "rubric": [
+            "Verb is in second position in every sentence",
+            "Verb endings match the person (wohnt, arbeitet)",
+            "Nouns have the correct article",
+            "Uses at least one of: oft, gern, heute"
+          ]
+        },
+        "speaking": {
+          "prompt": "Imagine you meet an adult at work. Greet the person formally, ask where he or she comes from and say where you live.",
+          "target_hint": "Guten Tag! Woher kommen Sie? Ich wohne in ..."
+        }
+      }
+    },
+    "Z9": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena ___ ein Stück Kuchen.",
+            "answer": "isst",
+            "distractors": [
+              "esse",
+              "essen",
+              "esst"
+            ],
+            "accepted_answers": [],
+            "explanation": "Essen changes to isst with er/sie/es."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Was ___ du, Jonas?",
+            "answer": "liest",
+            "distractors": [
+              "lese",
+              "lesen",
+              "lest"
+            ],
+            "accepted_answers": [],
+            "explanation": "Lesen changes to liest with du."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "möchte / Ich / Saft / einen / trinken",
+            "answer": "Ich möchte einen Saft trinken.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "With möchten, the second verb goes to the end."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does \"der Kellner\" mean?",
+            "answer": "the waiter",
+            "distractors": [
+              "the bill",
+              "the cheese",
+              "the menu"
+            ],
+            "accepted_answers": [],
+            "explanation": "Der Kellner is the person who serves you in a café."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Ask politely for a coffee.",
+            "answer": "Einen Kaffee, bitte.",
+            "distractors": [],
+            "accepted_answers": [
+              "Ich möchte einen Kaffee, bitte."
+            ],
+            "explanation": "Einen Kaffee, bitte is the polite way to order a coffee."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which word is food, not a drink?",
+            "answer": "der Käse",
+            "distractors": [
+              "die Milch",
+              "der Tee",
+              "das Wasser"
+            ],
+            "accepted_answers": [],
+            "explanation": "Der Käse is cheese, which you eat."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Lena ist im Café. Sie liest die Speisekarte. Sie nimmt eine Milch und ein Brötchen mit Käse."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Lena read?",
+              "answer": "the menu",
+              "distractors": [
+                "a book",
+                "the bill",
+                "a letter"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says she reads die Speisekarte, the menu."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Lena take to drink?",
+              "answer": "milk",
+              "distractors": [
+                "tea",
+                "juice",
+                "coffee"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says she takes eine Milch."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Jonas",
+                "de": "Guten Tag. Was möchten Sie trinken?",
+                "en": "Hello. What would you like to drink?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Ich möchte einen Saft, bitte.",
+                "en": "I would like a juice, please."
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Und was möchten Sie essen?",
+                "en": "And what would you like to eat?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Dann nehme ich die Suppe.",
+                "en": "Then I will take the soup."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Anna want to drink?",
+              "answer": "juice",
+              "distractors": [
+                "water",
+                "milk",
+                "tea"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says she would like einen Saft."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Anna take to eat?",
+              "answer": "the soup",
+              "distractors": [
+                "the cake",
+                "the bread",
+                "the cheese"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says Dann nehme ich die Suppe."
+            }
+          ]
+        },
+        "writing": {
+          "task": "You are in a café. Write 2 or 3 simple sentences in German. Say what you would like to drink and what you eat or take. Use möchten and one verb like essen or nehmen.",
+          "min_words": 15,
+          "rubric": [
+            "Uses möchten correctly (Ich möchte ...) with the second verb at the end if there are two verbs",
+            "Uses one vowel-change verb correctly (for example er isst, du nimmst)",
+            "Uses at least two food or drink words from the lesson with correct articles",
+            "Sentences are short, clear and spelled correctly, with capital letters for nouns"
+          ]
+        },
+        "speaking": {
+          "prompt": "You are in a café. Greet the waiter and order a drink and something to eat. Then ask for the bill.",
+          "target_hint": "Ich möchte einen Tee und ein Brötchen, bitte. Die Rechnung, bitte."
+        }
+      }
     }
   },
   "failures": []

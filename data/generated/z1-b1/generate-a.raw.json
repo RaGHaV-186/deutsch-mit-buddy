@@ -11581,9 +11581,9 @@
             "why": "In the du-imperative you normally do not say du; the verb comes first."
           },
           {
-            "wrong": "Kommen sie bitte um neun!",
+            "wrong": "Sie kommen bitte um neun!",
             "right": "Kommen Sie bitte um neun!",
-            "why": "The formal Sie always has a capital S and stays in the sentence after the verb."
+            "why": "The formal imperative puts the verb first and Sie right after it: Kommen Sie ... (and Sie has a capital S)."
           },
           {
             "wrong": "Lese den Text!",
@@ -11729,7 +11729,7 @@
             "distractors": [
               "Warte bitte hier.",
               "Wartet bitte hier.",
-              "Warten sie bitte hier."
+              "Wartest Sie bitte hier."
             ],
             "accepted_answers": [],
             "explanation": "A boss gets the formal Sie, written with a capital S."
@@ -11830,8 +11830,7 @@
             "distractors": [],
             "accepted_answers": [
               "Bitte kommen Sie um acht Uhr.",
-              "Kommen Sie um acht Uhr, bitte.",
-              "Kommen Sie um acht Uhr bitte."
+              "Kommen Sie um acht Uhr, bitte."
             ],
             "explanation": "Sie-imperative: verb first, then Sie."
           },
@@ -17024,9 +17023,7 @@
             "prompt": "Lena is waiting on the platform.",
             "answer": "Lena wartet auf dem Bahnsteig.",
             "distractors": [],
-            "accepted_answers": [
-              "Lena wartet auf dem Bahnsteig."
-            ],
+            "accepted_answers": [],
             "explanation": "Waiting is Wo?, so you use the dative: auf dem."
           },
           {
@@ -18551,12 +18548,661 @@
           "Wir sprechen Deutsch in der Schule."
         ]
       }
+    },
+    "Z9": {
+      "goal": {
+        "can_do": "I can order food and drinks in a café and say what I eat and drink."
+      },
+      "grammar": {
+        "intro": {
+          "title": "Verbs that change a vowel (essen, nehmen, ...) and möchten",
+          "explanation": [
+            "Most German verbs follow a fixed pattern. A few common verbs change their vowel, but only with du and er/sie/es. With ich, wir, ihr and sie/Sie they stay normal. Examples: essen → du isst, er isst. fahren → du fährst, er fährt. sprechen → du sprichst, er spricht. lesen → du liest, er liest. nehmen → du nimmst, er nimmt. sehen → du siehst, er sieht.",
+            "To order politely, use möchten (would like). It is very useful in a café: Ich möchte einen Kaffee, bitte. Its forms are regular: ich möchte, du möchtest, er möchte, wir möchten, ihr möchtet, sie/Sie möchten.",
+            "With möchten, the second verb goes to the end in its basic form (infinitive): Ich möchte einen Kaffee trinken. For now, learn einen Kaffee, einen Tee, einen Saft, einen Apfel as fixed chunks. Learn ein Wasser, ein Brot, eine Suppe, eine Milch in the same way."
+          ],
+          "rule_summary": "Vowel-change verbs change only with du and er/sie/es (er isst, du nimmst); möchten is regular and the second verb goes to the end: Ich möchte einen Tee trinken."
+        },
+        "examples": [
+          {
+            "de": "Anna isst einen Apfel.",
+            "en": "Anna eats an apple.",
+            "note": "essen: er/sie isst."
+          },
+          {
+            "de": "Du nimmst einen Tee.",
+            "en": "You take a tea.",
+            "note": "nehmen: du nimmst, with an m and no h."
+          },
+          {
+            "de": "Jonas liest die Speisekarte.",
+            "en": "Jonas reads the menu.",
+            "note": "lesen: e becomes ie."
+          },
+          {
+            "de": "Lena spricht Deutsch.",
+            "en": "Lena speaks German.",
+            "note": "sprechen: e becomes i."
+          },
+          {
+            "de": "Ich möchte einen Kaffee, bitte.",
+            "en": "I would like a coffee, please.",
+            "note": "A polite way to order."
+          },
+          {
+            "de": "Was möchtest du trinken?",
+            "en": "What would you like to drink?",
+            "note": "The second verb, trinken, goes to the end."
+          }
+        ],
+        "traps": [
+          {
+            "wrong": "Du essst einen Apfel.",
+            "right": "Du isst einen Apfel.",
+            "why": "essen changes e to i with du and er/sie/es, and the ending is just -t after the s: du isst, er isst."
+          },
+          {
+            "wrong": "Er nehmt einen Tee.",
+            "right": "Er nimmt einen Tee.",
+            "why": "nehmen changes its stem to nimm- with du and er/sie/es: du nimmst, er nimmt."
+          },
+          {
+            "wrong": "Ich möchte einen Kaffee trinke.",
+            "right": "Ich möchte einen Kaffee trinken.",
+            "why": "After möchte the second verb stays in the basic form (infinitive) and goes to the end."
+          }
+        ],
+        "tables": [
+          {
+            "title": "Vowel-change verbs in the present tense",
+            "headers": [
+              "Person",
+              "fahren",
+              "essen",
+              "sprechen",
+              "lesen",
+              "nehmen",
+              "sehen"
+            ],
+            "rows": [
+              [
+                "ich",
+                "fahre",
+                "esse",
+                "spreche",
+                "lese",
+                "nehme",
+                "sehe"
+              ],
+              [
+                "du",
+                "fährst",
+                "isst",
+                "sprichst",
+                "liest",
+                "nimmst",
+                "siehst"
+              ],
+              [
+                "er/sie/es",
+                "fährt",
+                "isst",
+                "spricht",
+                "liest",
+                "nimmt",
+                "sieht"
+              ],
+              [
+                "wir",
+                "fahren",
+                "essen",
+                "sprechen",
+                "lesen",
+                "nehmen",
+                "sehen"
+              ],
+              [
+                "ihr",
+                "fahrt",
+                "esst",
+                "sprecht",
+                "lest",
+                "nehmt",
+                "seht"
+              ],
+              [
+                "sie/Sie",
+                "fahren",
+                "essen",
+                "sprechen",
+                "lesen",
+                "nehmen",
+                "sehen"
+              ]
+            ]
+          },
+          {
+            "title": "möchten (would like)",
+            "headers": [
+              "Person",
+              "möchten"
+            ],
+            "rows": [
+              [
+                "ich",
+                "möchte"
+              ],
+              [
+                "du",
+                "möchtest"
+              ],
+              [
+                "er/sie/es",
+                "möchte"
+              ],
+              [
+                "wir",
+                "möchten"
+              ],
+              [
+                "ihr",
+                "möchtet"
+              ],
+              [
+                "sie/Sie",
+                "möchten"
+              ]
+            ]
+          }
+        ]
+      },
+      "exercises": {
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Du ___ einen Apfel.",
+            "answer": "isst",
+            "distractors": [
+              "esst",
+              "esse",
+              "essen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With du, essen becomes isst."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna ___ einen Tee.",
+            "answer": "nimmt",
+            "distractors": [
+              "nehmt",
+              "nehme",
+              "nimmst"
+            ],
+            "accepted_answers": [],
+            "explanation": "With er/sie, nehmen becomes nimmt."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas ___ die Speisekarte.",
+            "answer": "liest",
+            "distractors": [
+              "lest",
+              "lese",
+              "lesen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With er, lesen becomes liest."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Du ___ Deutsch.",
+            "answer": "sprichst",
+            "distractors": [
+              "sprecht",
+              "spreche",
+              "sprechen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With du, sprechen becomes sprichst."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ ein Wasser, bitte.",
+            "answer": "möchte",
+            "distractors": [
+              "möchtest",
+              "möchten",
+              "möchtet"
+            ],
+            "accepted_answers": [],
+            "explanation": "With ich, möchten becomes möchte."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Wir ___ einen Kaffee.",
+            "answer": "möchten",
+            "distractors": [
+              "möchte",
+              "möchtet",
+              "möchtest"
+            ],
+            "accepted_answers": [],
+            "explanation": "With wir, the verb ends in -en."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Lena nimmt eine Suppe.",
+            "distractors": [
+              "Lena nehmt eine Suppe.",
+              "Lena nehmen eine Suppe.",
+              "Lena nehme eine Suppe."
+            ],
+            "accepted_answers": [],
+            "explanation": "With sie (Lena), nehmen becomes nimmt."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does \"die Speisekarte\" mean?",
+            "answer": "the menu",
+            "distractors": [
+              "the bill",
+              "the waiter",
+              "the table"
+            ],
+            "accepted_answers": [],
+            "explanation": "Die Speisekarte is the list of food and drinks."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "You want to order a coffee politely. What do you say?",
+            "answer": "Ich möchte einen Kaffee, bitte.",
+            "distractors": [
+              "Die Rechnung, bitte.",
+              "Entschuldigung, wo ist die Toilette?",
+              "Ich lese einen Kaffee, bitte."
+            ],
+            "accepted_answers": [],
+            "explanation": "Ich möchte ... is the polite way to order."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which word is a drink?",
+            "answer": "der Saft",
+            "distractors": [
+              "das Brot",
+              "der Apfel",
+              "der Kuchen"
+            ],
+            "accepted_answers": [],
+            "explanation": "Saft is juice, so it is a drink."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "ich / möchte / einen / Tee",
+            "answer": "Ich möchte einen Tee.",
+            "distractors": [],
+            "accepted_answers": [
+              "Einen Tee möchte ich."
+            ],
+            "explanation": "In a normal statement, the verb is in second position."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Anna / ein / Brötchen / isst",
+            "answer": "Anna isst ein Brötchen.",
+            "distractors": [],
+            "accepted_answers": [
+              "Ein Brötchen isst Anna."
+            ],
+            "explanation": "The verb isst is in second position."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "du / was / nimmst",
+            "answer": "Was nimmst du?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "In a question with was, the verb comes second, then du."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "I would like a water.",
+            "answer": "Ich möchte ein Wasser.",
+            "distractors": [],
+            "accepted_answers": [
+              "Ich möchte bitte ein Wasser."
+            ],
+            "explanation": "Wasser is neuter, so use ein, and möchte goes with ich."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Jonas eats bread.",
+            "answer": "Jonas isst Brot.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "With er/Jonas, essen becomes isst."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Do you speak German? (to a friend)",
+            "answer": "Sprichst du Deutsch?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "With du, sprechen becomes sprichst, and it comes first in a yes/no question."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Ich möchte einen Kaffee, bitte.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Remember ö in möchte and the comma before bitte."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Anna nimmt eine Suppe.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Nimmt is written with mm."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Du isst einen Apfel.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Isst has a double s and ends in -t."
+          }
+        ]
+      },
+      "vocabulary": {
+        "words": [
+          {
+            "tier": "core",
+            "en": "coffee",
+            "article": "der",
+            "de": "Kaffee",
+            "plural": "die Kaffees",
+            "example": "Ich möchte einen Kaffee.",
+            "example_en": "I would like a coffee.",
+            "tip": "Stress is on the second part: Kaf-FEE."
+          },
+          {
+            "tier": "core",
+            "en": "tea",
+            "article": "der",
+            "de": "Tee",
+            "plural": "die Tees",
+            "example": "Anna nimmt einen Tee.",
+            "example_en": "Anna has a tea.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "water",
+            "article": "das",
+            "de": "Wasser",
+            "plural": "—",
+            "example": "Ich möchte ein Wasser.",
+            "example_en": "I would like a water.",
+            "tip": "W is said like English v."
+          },
+          {
+            "tier": "core",
+            "en": "juice",
+            "article": "der",
+            "de": "Saft",
+            "plural": "die Säfte",
+            "example": "Jonas trinkt einen Saft.",
+            "example_en": "Jonas drinks a juice.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "milk",
+            "article": "die",
+            "de": "Milch",
+            "plural": "—",
+            "example": "Lena nimmt Milch.",
+            "example_en": "Lena takes milk.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "bread",
+            "article": "das",
+            "de": "Brot",
+            "plural": "die Brote",
+            "example": "Du isst Brot.",
+            "example_en": "You eat bread.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "apple",
+            "article": "der",
+            "de": "Apfel",
+            "plural": "die Äpfel",
+            "example": "Anna isst einen Apfel.",
+            "example_en": "Anna eats an apple.",
+            "tip": "The plural adds an umlaut: Äpfel."
+          },
+          {
+            "tier": "core",
+            "en": "soup",
+            "article": "die",
+            "de": "Suppe",
+            "plural": "die Suppen",
+            "example": "Ich nehme die Suppe.",
+            "example_en": "I take the soup.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "cake",
+            "article": "der",
+            "de": "Kuchen",
+            "plural": "die Kuchen",
+            "example": "Jonas isst einen Kuchen.",
+            "example_en": "Jonas eats a cake.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "menu",
+            "article": "die",
+            "de": "Speisekarte",
+            "plural": "die Speisekarten",
+            "example": "Lena liest die Speisekarte.",
+            "example_en": "Lena reads the menu.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "to eat",
+            "article": null,
+            "de": "essen",
+            "plural": "ich esse · du isst · er isst",
+            "example": "Du isst einen Apfel.",
+            "example_en": "You eat an apple.",
+            "tip": "Vowel change: e becomes i."
+          },
+          {
+            "tier": "core",
+            "en": "to take",
+            "article": null,
+            "de": "nehmen",
+            "plural": "ich nehme · du nimmst · er nimmt",
+            "example": "Was nimmst du?",
+            "example_en": "What are you having?",
+            "tip": "Used a lot when ordering."
+          },
+          {
+            "tier": "bonus",
+            "en": "bill",
+            "article": "die",
+            "de": "Rechnung",
+            "plural": "die Rechnungen",
+            "example": "Die Rechnung, bitte.",
+            "example_en": "The bill, please.",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "waiter",
+            "article": "der",
+            "de": "Kellner",
+            "plural": "die Kellner",
+            "example": "Der Kellner bringt den Kaffee.",
+            "example_en": "The waiter brings the coffee.",
+            "tip": "A female waiter is die Kellnerin."
+          },
+          {
+            "tier": "bonus",
+            "en": "bread roll",
+            "article": "das",
+            "de": "Brötchen",
+            "plural": "die Brötchen",
+            "example": "Anna isst ein Brötchen.",
+            "example_en": "Anna eats a bread roll.",
+            "tip": "-chen words are always neuter."
+          },
+          {
+            "tier": "bonus",
+            "en": "cheese",
+            "article": "der",
+            "de": "Käse",
+            "plural": "—",
+            "example": "Jonas isst Käse.",
+            "example_en": "Jonas eats cheese.",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "to drink",
+            "article": null,
+            "de": "trinken",
+            "plural": "ich trinke · du trinkst · er trinkt",
+            "example": "Lena trinkt einen Tee.",
+            "example_en": "Lena drinks a tea.",
+            "tip": "Regular verb, no vowel change."
+          },
+          {
+            "tier": "bonus",
+            "en": "to order",
+            "article": null,
+            "de": "bestellen",
+            "plural": "ich bestelle · du bestellst · er bestellt",
+            "example": "Ich bestelle einen Saft.",
+            "example_en": "I order a juice.",
+            "tip": null
+          }
+        ],
+        "phrases": [
+          {
+            "en": "I would like a coffee, please.",
+            "de": "Ich möchte einen Kaffee, bitte.",
+            "example": "Guten Tag! Ich möchte einen Kaffee, bitte.",
+            "example_en": "Hello! I would like a coffee, please.",
+            "tip": "Use bitte at the end to sound polite."
+          },
+          {
+            "en": "What would you like to drink? (formal)",
+            "de": "Was möchten Sie trinken?",
+            "example": "Der Kellner fragt: Was möchten Sie trinken?",
+            "example_en": "The waiter asks: What would you like to drink?",
+            "tip": "Waiters use Sie. With friends say: Was möchtest du trinken?"
+          },
+          {
+            "en": "The menu, please.",
+            "de": "Die Speisekarte, bitte.",
+            "example": "Entschuldigung, die Speisekarte, bitte.",
+            "example_en": "Excuse me, the menu, please.",
+            "tip": null
+          },
+          {
+            "en": "I'll take the soup.",
+            "de": "Ich nehme die Suppe.",
+            "example": "Ich nehme die Suppe und ein Wasser.",
+            "example_en": "I'll take the soup and a water.",
+            "tip": "Ich nehme ... is a very common way to order."
+          },
+          {
+            "en": "The bill, please.",
+            "de": "Die Rechnung, bitte.",
+            "example": "Wir möchten zahlen. Die Rechnung, bitte.",
+            "example_en": "We would like to pay. The bill, please.",
+            "tip": null
+          }
+        ]
+      },
+      "pronunciation": {
+        "focus": "The umlauts ö and ä",
+        "explanation": "For ö, make your lips round as if to say \"oh\", but say \"eh\" instead. The letter ä sounds like English \"e\" in \"bed\" when short (Äpfel, Säfte) and like \"ai\" in \"air\" when long (Käse, fährt).",
+        "words": [
+          {
+            "de": "möchte",
+            "hint": "ö with round lips, then a soft ch like in \"hue\": MÖCH-te"
+          },
+          {
+            "de": "Brötchen",
+            "hint": "ö with round lips, then t and a soft ch: BRÖT-chen"
+          },
+          {
+            "de": "Käse",
+            "hint": "long ä like \"air\": KÄ-se"
+          },
+          {
+            "de": "Äpfel",
+            "hint": "short ä like \"e\" in \"bed\": EP-fel"
+          },
+          {
+            "de": "Säfte",
+            "hint": "short ä like \"e\" in \"bed\": ZEF-te"
+          },
+          {
+            "de": "fährt",
+            "hint": "long ä like \"air\": FÄRT"
+          },
+          {
+            "de": "möchtest",
+            "hint": "ö with round lips, soft ch, then -test"
+          },
+          {
+            "de": "nimmt",
+            "hint": "short i, long m sound, then t: NIMT"
+          }
+        ],
+        "sentences": [
+          "Ich möchte einen Käse.",
+          "Anna isst einen Apfel.",
+          "Jonas möchte ein Brötchen.",
+          "Lena fährt und trinkt Säfte."
+        ]
+      }
     }
   },
-  "failures": [
-    {
-      "code": "Z9",
-      "reason": "the answer did not match the format: [\n  {\n    \"origin\": \"array\",\n    \"code\": \"too_big\",\n    \"maximum\": 6,\n    \"inclusive\": true,\n    \"path\": [\n      \"grammar\",\n      \"tables\",\n      0,\n      \"headers\"\n    ],\n    \"message\": \"Too big: expected array to have <=6 items\"\n  },\n  {\n    \"origin\": \"array\",\n    \"code\": \"too_big\",\n    \"maximum\":"
-    }
-  ]
+  "failures": []
 }

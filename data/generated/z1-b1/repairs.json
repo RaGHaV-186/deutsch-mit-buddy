@@ -1,0 +1,333 @@
+[
+  {
+    "id": "Z5#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Ich habe einen Tisch und eine Lampe. Das ist das Buch. Ich habe zwei Stifte. Hast du ein Handy?",
+    "new": "Ich habe einen Tisch und eine Lampe. Das ist das Buch. Ich habe zwei Bücher und zwei Stifte. Hast du auch ein Handy?"
+  },
+  {
+    "id": "Z6#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Hallo! Ich heiße Anna. Ich komme aus Spanien. Ich wohne in Berlin. Ich lerne Deutsch. Und du? Woher kommst du?",
+    "new": "Hallo, ich heiße Anna und ich komme aus Spanien. Ich wohne jetzt in Berlin und ich lerne Deutsch. Ich bin neu hier. Und du, woher kommst du?"
+  },
+  {
+    "id": "Z7#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Heute ist Montag. Am Dienstag lerne ich Deutsch. Am Samstag spiele ich mit Jonas. Im Sommer ist es warm. Ich mag den Sommer.",
+    "new": "Heute ist Montag. Am Dienstag lerne ich Deutsch. Am Samstag spiele ich mit Jonas Fußball. Im Sommer ist es warm."
+  },
+  {
+    "id": "Z9#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Ich esse Brot und Käse. Ich trinke Wasser. Ich möchte einen Kuchen und einen Kaffee, bitte. Die Rechnung, bitte.",
+    "new": "Ich esse gern Brot und Käse. Ich trinke Wasser und Tee. Ich möchte einen Kuchen und einen Kaffee, bitte. Die Rechnung, bitte."
+  },
+  {
+    "id": "Z10#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Hallo Jonas! Ich heiße Anna und ich komme aus Berlin. Wie geht es dir? Einen Kaffee, bitte.",
+    "new": "Hallo Jonas! Ich heiße Anna und ich komme aus Berlin. Wie geht es dir? Einen Kaffee und einen Tee, bitte."
+  },
+  {
+    "id": "W1.1#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Hallo! Ich heiße Anna und ich bin 25 Jahre alt. Ich komme aus Spanien, aber ich wohne in Köln. Ich bin Studentin und ich lerne Deutsch. Mein Hobby ist Musik. Woher kommst du?",
+    "new": "Hallo, ich heiße Anna und ich bin 25 Jahre alt. Ich komme aus Spanien, aber ich wohne in Köln. Ich bin Studentin und ich lerne Deutsch. Mein Hobby ist Musik. Woher kommst du?"
+  },
+  {
+    "id": "W1.2#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Liebe Lena, das ist meine Familie. Mein Vater heißt Peter und meine Mutter heißt Eva. Ich habe einen Bruder und eine Schwester. Mein Bruder ist zehn und meine Schwester ist ein Baby. Viele Grüße, Anna",
+    "new": "Liebe Lena, das ist meine Familie. Mein Vater heißt Peter und meine Mutter heißt Eva. Ich habe einen Bruder und eine Schwester. Mein Bruder ist zehn und meine Schwester ist ein Baby."
+  },
+  {
+    "id": "W1.3#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Hallo Jonas! Ich habe eine neue Wohnung. Sie hat ein Wohnzimmer, ein Schlafzimmer und eine Küche. Es gibt keinen Balkon und keinen Aufzug. Das Bad ist nicht groß, aber schön. Ich habe noch keinen Tisch. Kein Problem! Die Wohnung gefällt mir.",
+    "new": "Hallo Jonas! Ich habe eine neue Wohnung. Sie hat ein Wohnzimmer, ein Schlafzimmer und eine Küche. Es gibt keinen Balkon und keinen Aufzug. Das Bad ist nicht groß, aber die Wohnung gefällt mir."
+  },
+  {
+    "id": "W2.2#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Liebe Anna, ich bin im Kleiderladen und kaufe eine Jacke. Die Jacke gefällt mir sehr gut. Lena hilft mir und ich danke ihr. Der blaue Schal gehört dir, er ist ein Geschenk. Bis bald!",
+    "new": "Liebe Anna, ich bin im Kleiderladen und kaufe eine Jacke. Die Jacke gefällt mir sehr gut. Lena hilft mir und ich danke ihr. Der blaue Schal gehört dir, er ist ein Geschenk."
+  },
+  {
+    "id": "W2.4#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Liebe Anna, ich bin in Berlin. Heute suche ich die Post, aber ich finde sie nicht. Ein Mann hilft mir. Er zeigt mir den Weg und ich danke ihm. Die Post ist nicht weit, sie ist an der Ecke. Ich schicke dir viele Grüße. Dein Jonas",
+    "new": "Liebe Anna, ich bin in Berlin. Heute suche ich die Post, aber ich finde sie nicht. Ein Mann hilft mir und ich danke ihm. Er zeigt mir den Weg und sagt: Die Post ist nicht weit. Ich schicke dir viele Grüße."
+  },
+  {
+    "id": "W2.5#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Hallo Jonas! Wir haben morgen einen Termin. Er beginnt um halb drei. Sei bitte pünktlich und komm nicht spät! Vergiss den Termin nicht und ruf mich heute Abend kurz an.",
+    "new": "Hallo Jonas! Wir haben morgen einen Termin beim Arzt. Er beginnt um halb drei in der Stadt. Sei bitte pünktlich und komm nicht zu spät! Vergiss den Termin nicht und ruf mich heute Abend kurz an."
+  },
+  {
+    "id": "W3.1#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Hallo Lena! Am Samstag habe ich lange geschlafen. Dann habe ich im Park Fußball gespielt. Am Sonntag habe ich Kuchen gekocht und Kaffee getrunken. Es war toll! Und du?",
+    "new": "Hallo Lena, am Samstag habe ich lange geschlafen und dann im Park Fußball gespielt. Am Sonntag habe ich Kuchen gekocht und Kaffee getrunken. Es war toll! Und du, was hast du am Wochenende gemacht?"
+  },
+  {
+    "id": "W3.3#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Liebe Anna, ich bin mit dem Zug ans Meer gefahren. Wir sind gestern am Bahnhof angekommen und haben im Hotel übernachtet. Ich habe den Strand und viele Schiffe gesehen. Das Wetter war schön und ich bin drei Tage geblieben. Viele Grüße, Lena",
+    "new": "Liebe Anna, ich bin mit dem Zug ans Meer gefahren. Wir sind gestern am Bahnhof angekommen und haben im Hotel übernachtet. Ich habe den Strand und viele Schiffe gesehen. Das Wetter war schön und ich bin drei Tage geblieben."
+  },
+  {
+    "id": "W3.4#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Hallo Lena, gestern war ein langer Tag im Büro. Ich bin um acht Uhr angekommen und habe zuerst den Kunden angerufen. Dann habe ich eine Besprechung mit dem Chef gehabt, aber ich habe nicht alles verstanden. Am Abend habe ich den Schreibtisch aufgeräumt. Hast du meine E-Mail bekommen?",
+    "new": "Hallo Lena, gestern war ein langer Tag im Büro. Ich bin um acht Uhr angekommen und habe zuerst den Kunden angerufen. Dann habe ich eine Besprechung mit dem Chef gehabt, aber ich habe nicht alles verstanden. Am Abend habe ich den Schreibtisch aufgeräumt."
+  },
+  {
+    "id": "W4.2#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Liebe Lena, ich wohne seit einem Monat in Hamburg. Die Wohnung ist klein, aber schön. Mein Freund Jonas hilft mir beim Umzug. Er kommt mit dem Auto zur Wohnung und trägt den Tisch. Kommst du bald zu mir? Viele Grüße, Anna",
+    "new": "Liebe Lena, ich ziehe nach Hamburg um. Mein Freund Jonas hilft mir beim Umzug. Er kommt mit dem Auto zu mir und trägt den Tisch aus der Wohnung. Seit einem Monat wohne ich bei Jonas."
+  },
+  {
+    "id": "W4.3#writing",
+    "field": "model_answer",
+    "reason": "model answer did not meet its own sentence/word limits",
+    "old": "Liebe Lena, ich bin jetzt in der Stadt. Ich warte an der Haltestelle auf den Bus. Der Bus fährt in die Stadt und zum Bahnhof. Meine Fahrkarte ist in der Tasche, und ich gehe in den Bus. Bis bald, Anna",
+    "new": "Liebe Lena, ich bin jetzt am Bahnhof. Ich warte an der Haltestelle auf den Bus. Der Bus fährt in die Stadt. Meine Fahrkarte ist in der Tasche, und ich gehe gleich in den Bus."
+  },
+  {
+    "id": "Z6#exam.gv3",
+    "reason": "scrambled words must equal the answer words (Peter's -> Peters)",
+    "old": "wohnt / Wo / Peter's / Freundin",
+    "new": "wohnt / Wo / Peters / Freundin"
+  },
+  {
+    "id": "Z10#exam.listening.q1",
+    "reason": "multiple choice needs 2 to 4 wrong options",
+    "old": [
+      "du"
+    ],
+    "new": [
+      "du",
+      "Both du and Sie"
+    ]
+  },
+  {
+    "id": "W1.1#warmup.q01",
+    "reason": "a wrong option (Lerne) equalled the answer ignoring case",
+    "old": [
+      "lernst",
+      "lernen",
+      "Lerne"
+    ],
+    "new": [
+      "lernst",
+      "lernen",
+      "lernt"
+    ]
+  },
+  {
+    "id": "W2.2#warmup.q01",
+    "reason": "placeholder item (\"this item is replaced below\"): dropped, warm-up has 3 items again",
+    "old": {
+      "skill": "grammar",
+      "type": "gap_fill",
+      "prompt": "Ich ___ keinen Kaffee, aber ich trinke Tee.",
+      "answer": "möchte",
+      "distractors": [
+        "muss",
+        "bin",
+        "habe"
+      ],
+      "accepted_answers": [],
+      "explanation": "Wait: this item is replaced below."
+    },
+    "new": null
+  },
+  {
+    "id": "W2.5#exercises.07",
+    "reason": "a wrong option (Warten sie) equalled the answer ignoring case",
+    "old": [
+      "Warte bitte hier.",
+      "Wartet bitte hier.",
+      "Warten sie bitte hier."
+    ],
+    "new": [
+      "Warte bitte hier.",
+      "Wartet bitte hier.",
+      "Wartest Sie bitte hier."
+    ]
+  },
+  {
+    "id": "W2.5#grammar.trap2",
+    "reason": "wrong and right were the same ignoring case; trap is now the verb position of the formal imperative",
+    "old": "Kommen sie bitte um neun!",
+    "new": "Sie kommen bitte um neun!"
+  },
+  {
+    "id": "W2.5#grammar.trap2.why",
+    "reason": "matches the new wrong version",
+    "old": "The formal Sie always has a capital S and stays in the sentence after the verb.",
+    "new": "The formal imperative puts the verb first and Sie right after it: Kommen Sie ... (and Sie has a capital S)."
+  },
+  {
+    "id": "W4.2#exam.gv3",
+    "reason": "gap-fill answer was two words (\"über die\") and the explanation called itself a trap; replaced",
+    "old": {
+      "skill": "articles",
+      "type": "gap_fill",
+      "prompt": "Anna geht ___ Straße zum Haus von Lena.",
+      "answer": "über die",
+      "distractors": [
+        "mit der",
+        "aus dem",
+        "bei den"
+      ],
+      "accepted_answers": [],
+      "explanation": "This is a trap: \"über\" is not one of the Dativ prepositions here, so the learner must pick the form that fits the sentence."
+    },
+    "new": {
+      "skill": "articles",
+      "type": "gap_fill",
+      "prompt": "Jonas fährt mit ___ Zug nach Hamburg.",
+      "answer": "dem",
+      "distractors": [
+        "den",
+        "der",
+        "die"
+      ],
+      "accepted_answers": [],
+      "explanation": "Mit always takes the dative, and der Zug becomes dem Zug."
+    }
+  },
+  {
+    "id": "Z8#exam.listening.passage",
+    "reason": "exam text repeated a sentence of the lesson",
+    "old": "Entschuldigung, wie spät ist es?",
+    "new": "Hallo Anna, wie spät ist es jetzt?"
+  },
+  {
+    "id": "W2.1#exam.listening.passage",
+    "reason": "exam text repeated a sentence of the lesson",
+    "old": "Guten Tag! Ich möchte ein Brot, bitte.",
+    "new": "Guten Tag! Ein Brot, bitte."
+  },
+  {
+    "id": "W3.1#exam.listening.passage",
+    "reason": "exam text repeated a sentence of the lesson",
+    "old": "Hallo Anna! Was hast du am Wochenende gemacht?",
+    "new": "Hallo Anna! Was hast du gestern gemacht?"
+  },
+  {
+    "id": "W4.1#exam.reading.passage",
+    "reason": "exam text repeated a sentence of the lesson",
+    "old": "Lena hat ein neues Zimmer. Sie braucht noch eine Lampe für den Schreibtisch. Ohne Lampe geht es abends nicht. Das Sofa ist zu groß für das Zimmer.",
+    "new": "Lena hat ein neues Zimmer. Sie braucht noch eine Lampe für den Schreibtisch. Ohne Lampe geht es abends nicht. Aber das Sofa ist leider zu groß für den Raum."
+  },
+  {
+    "id": "W4.5#exam.listening.passage",
+    "reason": "exam text repeated a sentence of the lesson",
+    "old": "Mir geht es gut, danke. Ich habe Durst.",
+    "new": "Gut, danke! Ich habe Durst."
+  },
+  {
+    "id": "Z9#exam.listening.passage",
+    "reason": "exam text repeated a sentence of the lesson",
+    "old": "Ich nehme die Suppe.",
+    "new": "Dann nehme ich die Suppe."
+  },
+  {
+    "id": "W2.1#exam.gv5",
+    "reason": "exam item repeated a lesson question",
+    "old": {
+      "skill": "translation",
+      "type": "typing",
+      "prompt": "Translate: Can I pay with the card?",
+      "answer": "Kann ich mit der Karte bezahlen?",
+      "distractors": [],
+      "accepted_answers": [],
+      "explanation": "Mit takes the dative, so die Karte becomes der Karte."
+    },
+    "new": {
+      "skill": "translation",
+      "type": "typing",
+      "prompt": "Translate: Can I speak with the teacher?",
+      "answer": "Kann ich mit dem Lehrer sprechen?",
+      "distractors": [],
+      "accepted_answers": [
+        "Kann ich mit dem Lehrer reden?"
+      ],
+      "explanation": "Mit takes the dative, so der Lehrer becomes dem Lehrer."
+    }
+  },
+  {
+    "id": "W4.4#exam.gv3",
+    "reason": "exam item repeated a lesson question",
+    "old": {
+      "skill": "grammar",
+      "type": "gap_fill",
+      "prompt": "Lena stellt die Tasche neben ___ Stuhl.",
+      "answer": "den",
+      "distractors": [
+        "dem",
+        "der",
+        "die"
+      ],
+      "accepted_answers": [],
+      "explanation": "Wohin? needs the accusative, and der Stuhl becomes \"den Stuhl\"."
+    },
+    "new": {
+      "skill": "grammar",
+      "type": "gap_fill",
+      "prompt": "Anna legt das Buch auf ___ Tisch.",
+      "answer": "den",
+      "distractors": [
+        "dem",
+        "der",
+        "die"
+      ],
+      "accepted_answers": [],
+      "explanation": "Wohin? needs the accusative, and der Tisch becomes den Tisch."
+    }
+  },
+  {
+    "id": "Z9#exam.gv5",
+    "reason": "exam item repeated a lesson question",
+    "old": {
+      "skill": "translation",
+      "type": "typing",
+      "prompt": "Ask politely for the bill.",
+      "answer": "Die Rechnung, bitte.",
+      "distractors": [],
+      "accepted_answers": [],
+      "explanation": "Die Rechnung, bitte is the polite phrase for asking for the bill."
+    },
+    "new": {
+      "skill": "translation",
+      "type": "typing",
+      "prompt": "Ask politely for a coffee.",
+      "answer": "Einen Kaffee, bitte.",
+      "distractors": [],
+      "accepted_answers": [
+        "Ich möchte einen Kaffee, bitte."
+      ],
+      "explanation": "Einen Kaffee, bitte is the polite way to order a coffee."
+    }
+  }
+]

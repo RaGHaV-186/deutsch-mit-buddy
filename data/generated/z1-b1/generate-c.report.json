@@ -1,0 +1,14 @@
+{
+  "stage": "generate-c",
+  "model": "claude-sonnet-5-5",
+  "batchId": "msgbatch_01LY9a9AuVfptJHv1mtpHFeL",
+  "requests": 1,
+  "failedRequests": 0,
+  "inputTokens": 5677,
+  "outputTokens": 1532,
+  "actualUsd": 0.0133,
+  "actualEur": 0.0127,
+  "estimatedEur": 0.0217,
+  "ceilingEur": 0.043,
+  "usdToEur": 0.95
+}

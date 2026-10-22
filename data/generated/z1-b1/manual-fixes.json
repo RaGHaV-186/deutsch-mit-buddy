@@ -498,5 +498,13 @@
       ],
       "end_condition": "The learner has used at least three of the seven prepositions correctly, always with Sie, and the chat ends with Auf Wiedersehen."
     }
+  },
+  "Z9#culture": {
+    "reason": "Tap water: the old sentence generalised Germany to Austria and Switzerland. Now it says what is true for Germany and for Austrian cafés (Raghav's wording).",
+    "value": {
+      "title": "Coffee and cake in the café",
+      "note": "In Germany, Austria and Switzerland, many people like to meet friends in a café. A common tradition is \"Kaffee und Kuchen\" in the afternoon. Many people eat a Brötchen with cheese for breakfast, often from a bakery. In a café you usually sit down first and wait for the waiter. You often pay at the table and say \"Die Rechnung, bitte.\" It is common to round up the bill a little as a tip. In Germany, restaurants often charge for water, so people usually order a drink; in many Austrian cafés a glass of tap water comes with your coffee. Remember: use Sie with the waiter, not du.",
+      "reflection_question": "What do you usually eat or drink in a café in your country, and is it the same in Germany?"
+    }
   }
 }

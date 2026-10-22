@@ -1,8 +1,11 @@
 import { execSync } from "node:child_process";
+import { assertLocalSupabase } from "../../src/lib/dev/local-only";
 
 // Reads the local stack's URL and keys from `supabase status` unless they are already set (CI can export them).
 export default async function setup() {
   loadEnv();
+  // Before anything is read or written: these tests reset and delete data, so they never run against a hosted project.
+  assertLocalSupabase(process.env);
   // The cap tests change the member cap; remember the real value so every file (and the teardown) puts it back.
   const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/app_config?key=eq.member_cap&select=value`, {
     headers: { apikey: process.env.SUPABASE_SERVICE_ROLE_KEY!, Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}` },

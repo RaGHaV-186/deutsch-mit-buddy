@@ -16,6 +16,7 @@ export interface LintIssue {
 }
 
 const words = (s: string) => s.split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w));
+const ARTICLE_WORDS = new Set(["der", "die", "das", "den", "dem", "des", "ein", "eine", "einen", "einem", "einer", "eines", "kein", "keine", "keinen", "keinem", "keiner", "keines", "vom", "zum", "zur", "im", "am", "ans", "ins", "beim"]);
 const tokens = (s: string) => s.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, " ").split(/\s+/).filter(Boolean);
 const same = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLowerCase();
 const wordCount = (s: string) => words(s).length;
@@ -52,7 +53,7 @@ export function germanShare(text: string): number | null {
 
 function lintCard(c: Card, id: string, out: LintIssue[]) {
   const add = (level: LintIssue["level"], rule: string, message: string) => out.push({ id, level, rule, message });
-  if (/^(der|die|das)\s/i.test(c.de)) add("error", "article-in-de", "The article is part of the German word; it belongs in the article field.");
+  if (/^(der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines)\s/i.test(c.de)) add("error", "article-in-de", "The article is part of the German word; it belongs in the article field.");
   if (c.article) {
     if (!/^\p{Lu}/u.test(c.de)) add("error", "noun-capital", "A noun starts with a capital letter.");
     if (!c.plural) add("warn", "plural-missing", "A noun needs a plural line (or a note that it has none).");
@@ -68,7 +69,7 @@ function lintCard(c: Card, id: string, out: LintIssue[]) {
   if (!/[.!?]$/.test(c.example.trim())) add("warn", "example-punctuation", "The example sentence should end with . ! or ?");
 }
 
-function lintQuestion(q: Question, id: string, dictationMax: number, out: LintIssue[]) {
+function lintQuestion(q: Question, id: string, dictationMax: number, out: LintIssue[], articleForms: ReadonlySet<string>) {
   const add = (level: LintIssue["level"], rule: string, message: string) => out.push({ id, level, rule, message });
   const d = q.distractors;
   if (new Set(d.map((x) => x.toLowerCase())).size !== d.length) add("error", "distractors-distinct", "Wrong options must all differ.");
@@ -99,8 +100,10 @@ function lintQuestion(q: Question, id: string, dictationMax: number, out: LintIs
   }
   if (q.type === "dictation" && wordCount(q.answer) > dictationMax) add("warn", "dictation-length", `A dictation sentence at this level has at most ${dictationMax} words.`);
   if (q.skill === "articles") {
-    if (!["der", "die", "das"].includes(q.answer.toLowerCase())) add("error", "article-answer", "An article question is answered with der, die or das.");
-    if (q.type === "multiple_choice" && !d.every((x) => ["der", "die", "das"].includes(x.toLowerCase()))) add("error", "article-options", "Wrong options of an article question are the other articles.");
+    // der/die/das always; any other article form (den, dem, ein, keiner, vom ...) only where the lesson's own grammar teaches it (articleForms).
+    const hasArticle = (t: string) => tokens(t).some((w) => articleForms.has(w));
+    if (!hasArticle(q.answer) || (q.type === "gap_fill" && tokens(q.answer).length !== 1)) add("error", "article-answer", "An article question is answered with an article form the lesson's grammar teaches (der, die, das, and the other forms of this lesson's grammar point).");
+    if (q.type === "multiple_choice" && !d.every((x) => tokens(x).some((w) => ARTICLE_WORDS.has(w)))) add("error", "article-options", "Wrong options of an article question are other article forms (wrong forms of the same paradigm are fine).");
   }
 }
 
@@ -220,13 +223,16 @@ export function lintLesson(code: string, phase: Phase, lesson: Lesson, options: 
     seen.set(key, i);
     lintCard(c, id("vocabulary", "words", i), out);
   });
-  lesson.warmup.items.forEach((q, i) => lintQuestion(q, id("warmup", "items", i), profile.dictationMaxWords, out));
-  lesson.exercises.items.forEach((q, i) => lintQuestion(q, id("exercises", "items", i), profile.dictationMaxWords, out));
-  lesson.reading.questions.forEach((q, i) => lintQuestion(q, id("reading", "questions", i), profile.dictationMaxWords, out));
-  lesson.listening.questions.forEach((q, i) => lintQuestion(q, id("listening", "questions", i), profile.dictationMaxWords, out));
-  lesson.exam.grammar_vocab.forEach((q, i) => lintQuestion(q, id("exam", "grammar_vocab", i), profile.dictationMaxWords, out));
-  lesson.exam.reading.questions.forEach((q, i) => lintQuestion(q, id("exam", "reading", "questions", i), profile.dictationMaxWords, out));
-  lesson.exam.listening.questions.forEach((q, i) => lintQuestion(q, id("exam", "listening", "questions", i), profile.dictationMaxWords, out));
+  // Article forms a question may use: der/die/das, plus the forms this lesson's grammar section shows. A warm-up recalls EARLIER grammar, so any form is fine there.
+  const grammarWords = new Set(tokens(JSON.stringify(lesson.grammar)));
+  const lessonForms = new Set(["der", "die", "das", ...[...ARTICLE_WORDS].filter((w) => grammarWords.has(w))]);
+  lesson.warmup.items.forEach((q, i) => lintQuestion(q, id("warmup", "items", i), profile.dictationMaxWords, out, ARTICLE_WORDS));
+  lesson.exercises.items.forEach((q, i) => lintQuestion(q, id("exercises", "items", i), profile.dictationMaxWords, out, lessonForms));
+  lesson.reading.questions.forEach((q, i) => lintQuestion(q, id("reading", "questions", i), profile.dictationMaxWords, out, lessonForms));
+  lesson.listening.questions.forEach((q, i) => lintQuestion(q, id("listening", "questions", i), profile.dictationMaxWords, out, lessonForms));
+  lesson.exam.grammar_vocab.forEach((q, i) => lintQuestion(q, id("exam", "grammar_vocab", i), profile.dictationMaxWords, out, lessonForms));
+  lesson.exam.reading.questions.forEach((q, i) => lintQuestion(q, id("exam", "reading", "questions", i), profile.dictationMaxWords, out, lessonForms));
+  lesson.exam.listening.questions.forEach((q, i) => lintQuestion(q, id("exam", "listening", "questions", i), profile.dictationMaxWords, out, lessonForms));
   // ---- the day exam is fresh: nothing in it repeats the warm-up, the exercises or the reading and listening texts
   const lessonQuestions = [...lesson.warmup.items, ...lesson.exercises.items, ...lesson.reading.questions, ...lesson.listening.questions];
   const seenKeys = new Set(lessonQuestions.flatMap(questionKeys));

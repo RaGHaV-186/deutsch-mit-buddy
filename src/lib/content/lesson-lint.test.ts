@@ -171,6 +171,34 @@ describe("items", () => {
     expect(issues.some((i) => i.rule === "ordering-words")).toBe(true);
   });
 
+  it("article questions: a case form is allowed only where the lesson's grammar teaches it", () => {
+    const gap = { skill: "articles", type: "gap_fill", prompt: "Wir fahren mit ___ Auto.", answer: "dem", distractors: ["das", "der", "den"], accepted_answers: [] } as const;
+    // the grammar section shows "dem": fine
+    const taught = lint((l) => {
+      l.grammar.traps[0].right = "Wir fahren mit dem Auto.";
+      Object.assign(l.exercises.items[0], gap);
+    });
+    expect(ruleOf(taught)).not.toContain("Z9#exercises.01:article-answer");
+    // the grammar section never shows "dem" (or "den"): the same question is an error; so is a non-article answer
+    const untaught = lint((l) => {
+      l.grammar.traps[0].right = "Das ist ein Kaffee.";
+      Object.assign(l.exercises.items[0], gap);
+      Object.assign(l.exercises.items[1], { ...gap, answer: "Auto", distractors: ["das", "der"] });
+    });
+    expect(ruleOf(untaught)).toEqual(expect.arrayContaining(["Z9#exercises.01:article-answer", "Z9#exercises.02:article-answer"]));
+    // a plain der/die/das question is always fine
+    const plain = lint((l) => Object.assign(l.exercises.items[0], { ...gap, answer: "das", distractors: ["der", "die"] }));
+    expect(ruleOf(plain)).not.toContain("Z9#exercises.01:article-answer");
+  });
+
+  it("a vocabulary card whose word carries an article or case form (\"der Lampe\", \"dem Auto\") is an error", () => {
+    const rules = ruleOf(lint((l) => {
+      l.vocabulary.words[0].de = "der Lampe";
+      l.vocabulary.words[1].de = "dem Auto";
+    }));
+    expect(rules).toEqual(expect.arrayContaining(["Z9#vocabulary.w01:article-in-de", "Z9#vocabulary.w02:article-in-de"]));
+  });
+
   it("a trap whose wrong and right versions are the same is an error", () => {
     expect(ruleOf(lint((l) => (l.grammar.traps[0].wrong = l.grammar.traps[0].right)))).toContain("Z9#grammar.trap1:trap-same");
   });

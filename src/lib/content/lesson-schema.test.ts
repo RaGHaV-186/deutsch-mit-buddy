@@ -138,6 +138,13 @@ describe("JSON Schemas sent to the API", () => {
   });
 });
 
+describe("wireToDomain: accepted answers", () => {
+  it("drops accepted answers the checker cannot tell apart from the answer or from each other", () => {
+    const out = wireToDomain({ answer: "Ich heiße Anna.", accepted_answers: ["ich heisse anna", "Ich bin Anna.", "ich bin anna!", "Ich heiße Anna"] }) as { accepted_answers: string[] };
+    expect(out.accepted_answers).toEqual(["Ich bin Anna."]);
+  });
+});
+
 describe("wireToDomain: the model's plain strings become the lesson's nulls", () => {
   it("empty string or none becomes null for the nullable fields, and dialogue lines' en too", () => {
     const wire = {

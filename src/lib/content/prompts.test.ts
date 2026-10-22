@@ -103,4 +103,12 @@ describe("the rules of the generator", () => {
     expect(PASS_B_SYSTEM).toContain("exactly the number of sentences the task names");
     expect(REVIEW_SYSTEM).toContain("the model answer meets its own task");
   });
+
+  it("the writer is told how to count a model answer, and how to keep the exam fresh", () => {
+    expect(PASS_B_SYSTEM).toContain("count before you answer");
+    expect(PASS_B_SYSTEM).toContain("A greeting (\"Hallo Lena!\"), a closing");
+    expect(PASS_B_SYSTEM).toContain("min_words + 3");
+    expect(PASS_C_SYSTEM).toContain("must not reuse any sentence of the lesson's reading text");
+    expect(PASS_D_SYSTEM).toContain("never a draft, a placeholder");
+  });
 });

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { normalise } from "./answer-check.ts";
 
 // The lesson standard (BLUEPRINT section 1): every session has all 14 parts. These schemas are the single description of a
 // lesson. They are used to (1) tell the model what to write (as a JSON Schema), (2) check what came back, and
@@ -267,6 +268,11 @@ export function wireToDomain(node: unknown): unknown {
     for (const [k, v] of Object.entries(obj)) {
       const nullable = NULLABLE_KEYS.has(k) || (isScriptLine && k === "en");
       out[k] = nullable && (v === "" || v === "none" || (typeof v === "string" && v.trim() === "")) ? null : wireToDomain(v);
+    }
+    // An accepted answer that the checker would not tell apart from the answer (or from an earlier accepted answer) is dropped: it changes nothing for the learner.
+    if (typeof out.answer === "string" && Array.isArray(out.accepted_answers)) {
+      const seen = new Set([normalise(out.answer)]);
+      out.accepted_answers = out.accepted_answers.filter((a) => typeof a !== "string" || (!seen.has(normalise(a)) && seen.add(normalise(a))));
     }
     return out;
   }

@@ -80,3 +80,16 @@ Typing, translation, dictation and ordering questions list `accepted_answers` ne
 
 ## The warm-up
 Lesson 1 has a preview ("Today you'll learn ...") and no questions. Every other lesson has 3 recall questions on the **earlier** lessons' grammar and words (the last 6 lessons' grammar points; their words come from the same run, so write a whole stretch under one run name). Never on the lesson's own content.
+
+## Publishing, unlocking cards, and corrections (slice 3b)
+**Publish** (step 5 above) writes a lesson's 14 parts, its card templates and its question bank in one transaction, and only for lessons without an open item. Against the hosted project, first push the migrations (`npx supabase db push`), seed the plan (`npm run seed:curriculum -- --yes`), then `npm run content -- publish --run z1-b1 --yes`. The local database needs no flag. Run `npm run test:rls` only on a local stack: it deletes every local user AND all published lesson content (publish again afterwards).
+
+**Identity.** A card template is identified by its slot (lesson, kind, position) and a question by its slot (lesson, part, position), never by its words or prompt. So a corrected word or prompt replaces the old row, a slot the new payload no longer has is removed, and dictation questions (which all share one prompt) publish fine.
+
+**Corrections reach every learner.** Publish a corrected lesson again (`build`, then `publish`): the template is updated in place, and every learner's copy of that card (source "lesson", linked by `template_id`) takes the new text. Their schedule (`card_srs`) and reviews are never touched, and a card they edited (`user_edited`) is left alone.
+
+**Unlocking.** A learner's deck gets the cards of every PUBLISHED lesson up to today's lesson (`src/lib/cards/unlock.ts`): at onboarding, in the app layout and on Home and Learn (one shared promise per request, because the layout and the page render in parallel), and in the admin seed import. Lessons before the learner's starting lesson count as already seen and are spread over days; the starting lesson and later ones are new. A card is never added twice: the same kind and German (case ignored) from any source (Raghav's seed deck, an earlier lesson) is skipped. `profiles.deck_unlocked_seq` remembers the highest published lesson already copied, so lessons published later are picked up the next time the learner opens the app.
+
+**Raghav's pointer.** The admin "Import seed deck" button also puts him on Day 11 · Z9 (never backwards) and unlocks the published lessons up to there. Z9 itself needs to be published for the Learn tab to show its text.
+
+**Learn tab.** `/learn` shows today's lesson (goal, grammar, cards, the parts) and `/learn/<code>` reads a published lesson: the teaching parts only. Warm-up questions, exercises and the day exam arrive with the lesson player (slice 4a).

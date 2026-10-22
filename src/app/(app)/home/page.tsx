@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { HomeView } from "@/components/home/HomeView";
 import { requireAal2 } from "@/lib/auth/guard";
 import { homeLine, lessonTitle } from "@/lib/buddy-lines";
+import { ensureLessonCards } from "@/lib/cards/ensure-unlocked";
 import { getDueCounts } from "@/lib/cards/server";
 import { gameDataForHome } from "@/lib/game-layer";
 import { getProfile } from "@/lib/profile";
@@ -18,6 +19,8 @@ export default async function HomePage() {
   const line = homeLine(session, dayCount);
   const timeZone = safeTimeZone(profile?.timezone);
   const now = new Date();
+  // The layout unlocks too; this shares its promise, so the counts below see the new cards.
+  await ensureLessonCards(userId);
   const counts = await getDueCounts(await createClient(), userId, now, timeZone);
   // Only the desktop hero shows it. German, because Buddy greets in German (the interface labels stay English).
   const dateLabel = new Intl.DateTimeFormat("de-DE", { weekday: "long", day: "numeric", month: "long", timeZone }).format(now);

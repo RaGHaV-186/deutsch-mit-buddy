@@ -341,7 +341,8 @@
       "body": "Adds your 213 seed cards (Days 2–11). Safe to press again: nothing is duplicated and progress is kept.",
       "button": "Import seed deck",
       "working": "Importing…",
-      "result": "Imported {imported} cards ({seen} already seen, {fresh} new). {alreadyThere} were already there, {duplicatesSkipped} repeats skipped.",
+      "result": "Imported {imported} cards ({seen} already seen, {fresh} new). {alreadyThere} were already there, {duplicatesSkipped} repeats skipped. {lessonCards} cards of the lessons were added. {pointer}",
+      "pointerMoved": "You are on Day 11 · Z9 now.",
       "forbidden": "Only the admin can import the seed deck."
     },
     "options": {
@@ -459,5 +460,52 @@
     "title": "Coming soon",
     "line": "Kommt bald!",
     "message": "This part of Buddy is still being built."
+  },
+  "Learn": {
+    "dayLabel": "Day {day} · {code}",
+    "grammarLabel": "Today's grammar",
+    "openLesson": "Read today's lesson",
+    "cardsLabel": "Your cards for this lesson",
+    "cardsCount": "{total} cards, {fresh} still new",
+    "noCards": "No cards from this lesson yet",
+    "reviewCards": "Review cards",
+    "partsLabel": "The lesson, part by part",
+    "playerLater": "Exercises, warm-up and the day exam arrive with the lesson player.",
+    "notReadyLine": "Kommt bald!",
+    "notReady": "This lesson is not ready yet. Your cards are waiting meanwhile.",
+    "restDayLine": "Heute ist Pause oder Wiederholung.",
+    "restDay": "Today is a review, test or rest day. Your cards are a good start.",
+    "back": "Back to Learn",
+    "parts": {
+      "goal": "Can-do goal",
+      "warmup": "Warm-up",
+      "grammar": "Grammar",
+      "exercises": "Exercises",
+      "vocabulary": "Words and phrases",
+      "pronunciation": "Pronunciation",
+      "reading": "Reading",
+      "listening": "Listening",
+      "writing": "Writing task",
+      "speaking": "Speaking",
+      "culture": "Culture note",
+      "mission": "Real-world mission",
+      "exam": "Day exam",
+      "closing": "Close day"
+    },
+    "reader": {
+      "note": "This is the teaching part of the lesson. The questions (warm-up, exercises, day exam) come with the lesson player.",
+      "todayYouLearn": "Today you'll learn:",
+      "warmupLater": "{count} recall questions on earlier lessons come with the lesson player.",
+      "examples": "Examples",
+      "traps": "Common traps",
+      "phrases": "Useful phrases",
+      "minWords": "At least {count} words.",
+      "mustInclude": "Include",
+      "usefulPhrases": "Useful phrases",
+      "modelAnswer": "Show a model answer",
+      "drill": "Say it out loud",
+      "tandemNote": "You can practise this scene with Buddy once Tandem opens.",
+      "covered": "You can now:"
+    }
   }
 }

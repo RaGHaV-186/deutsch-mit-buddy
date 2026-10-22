@@ -43,14 +43,14 @@ describe("HomeView with the game layer off (what production shows)", () => {
     expect(header.querySelector("img")!.getAttribute("src")).toContain("buddy-happy");
     expect(header).toHaveTextContent("Day 11 · Z9");
     expect(screen.getByRole("heading", { level: 2, name: "Essen & Trinken" })).toBeInTheDocument();
-    // Lessons don't exist yet, so the button leads to today's cards, not to a "coming soon" page.
-    expect(screen.getByRole("link", { name: "Review cards" })).toHaveAttribute("href", "/cards");
-    expect(screen.queryByRole("link", { name: "Continue" })).toBeNull();
+    // Lessons are published, so the button opens the Learn tab.
+    expect(screen.getByRole("link", { name: "Continue" })).toHaveAttribute("href", "/learn");
+    expect(screen.queryByRole("link", { name: "Review cards" })).toBeNull();
   });
 
-  it("once lessons exist the button says Continue and opens the lesson", () => {
-    view({ action: homeAction(true) });
-    expect(screen.getByRole("link", { name: "Continue" })).toHaveAttribute("href", "/learn");
+  it("with lesson content switched off the button leads to today's cards, not to a coming-soon page", () => {
+    view({ action: homeAction(false) });
+    expect(screen.getByRole("link", { name: "Review cards" })).toHaveAttribute("href", "/cards");
   });
 
   it("cards due is a link to the deck", () => {
@@ -76,7 +76,7 @@ describe("HomeView with the game layer off (what production shows)", () => {
     view({ name: null, lesson: null });
     expect(screen.getByRole("heading", { level: 1, name: "Hallo!" })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { level: 2 })).toBeNull();
-    expect(screen.getByRole("link", { name: "Review cards" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Continue" })).toBeInTheDocument();
   });
 });
 

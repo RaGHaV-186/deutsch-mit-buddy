@@ -7,3 +7,6 @@ node_modules
 next-env.d.ts
 coverage
 .DS_Store
+
+# Claude Code: personal settings stay on this machine
+.claude/settings.local.json

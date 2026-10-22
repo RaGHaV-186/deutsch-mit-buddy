@@ -118,7 +118,7 @@ export const cardSchema = z.object({
 export const phraseSchema = z.object({ en: text(300), de: text(300), example: text(300), example_en: text(300), tip: maybe(300) });
 export const exampleSchema = z.object({ de: text(300), en: text(300), note: maybe(300) });
 /** A support table in a grammar part: the alphabet, a conjugation, the articles, an endings chart. */
-export const tableSchema = z.object({ title: text(120), headers: z.array(text(60)).min(1).max(6), rows: z.array(z.array(text(120)).min(1).max(6)).min(1).max(40) });
+export const tableSchema = z.object({ title: text(120), headers: z.array(text(60)).min(1).max(8), rows: z.array(z.array(text(120)).min(1).max(8)).min(1).max(40) });
 export const warmupPreviewSchema = z.object({ points: z.array(text(200)).max(6) });
 export const trapSchema = z.object({ wrong: text(300), right: text(300), why: text(400) });
 export const scriptLineSchema = z.object({ speaker: text(30), de: text(400), en: maybe(400) });

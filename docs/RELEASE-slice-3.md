@@ -1,6 +1,8 @@
 # Release plan: slice 3 (lesson content, card unlock, Learn tab) → production
 
 **Status: written, NOT run. Nothing in this file has touched the hosted database or Vercel. Each step waits for Raghav's explicit go.**
+**Progress log:** (a) backup done 23 Oct 2026 (schema 20 KB with 9 tables and 12 policies, data 113 KB, auth 15 KB; profiles and cards present; a3 query results saved). The project is on the **Supabase Free plan, which has no automatic backups**, so this manual dump is the backup for the release. (b) re-checked 23 Oct (see b). Next: c.
+
 Branch `slice-3-curriculum`, PR #12. Run the steps in this order, one at a time, and stop at the first surprise (each step says what "surprise" means).
 
 ## What changes in production
@@ -20,23 +22,23 @@ Branch `slice-3-curriculum`, PR #12. Run the steps in this order, one at a time,
 4. `npm run test:rls` refuses to run unless `SUPABASE_URL` is localhost or 127.0.0.1 (and it no longer touches published lessons or any account that is not an `rls-…@example.test` test user). Never point it anywhere else.
 
 ## a) Backup (and write down what you will need to undo)
-1. Dashboard → Database → Backups: note the newest backup, and whether point-in-time recovery is available on your plan. Daily backups are not enough on their own if you want to undo only this release, so also do 2 and 3.
-2. Dump the hosted database to a file **outside the repo** (it holds personal data; never commit it). With Docker running and the project linked (`npx supabase link`; it asks for the database password, which you type yourself):
-   ```bash
-   mkdir -p ~/backups/deutschmitbuddy
-   npx supabase db dump --linked -f ~/backups/deutschmitbuddy/schema-$(date +%F).sql
-   npx supabase db dump --linked --data-only -f ~/backups/deutschmitbuddy/data-$(date +%F).sql
+1. **Free plan: there are no automatic backups** (Dashboard → Database → Backups shows none), so a manual dump is the only backup. **Run one before every release.** Point-in-time recovery and daily backups need the Pro plan.
+2. Run `npm run backup` in Terminal (Docker running, project linked with `npx supabase link`). It writes three dumps, never into the repo, owner-only (chmod 600), and refuses to overwrite one:
    ```
-   Check both files are not empty (`ls -lh`) and that the data file contains `INSERT INTO "public"."profiles"`.
+   ~/backups/deutschmitbuddy/schema-<date>.sql   the tables, policies, functions
+   ~/backups/deutschmitbuddy/data-<date>.sql     the rows (profiles, cards, reviews, …)
+   ~/backups/deutschmitbuddy/auth-<date>.sql     the accounts, with password hashes: keep private
+   ```
+   The CLI asks for the database password: type it at the prompt (Dashboard → Project settings → Database if you need to reset it); it is never printed or saved. The script then checks each file (not empty, has the profiles/cards tables, not cut off) and prints `ok` or `PROBLEM`. Check by hand as well: `ls -lh ~/backups/deutschmitbuddy/`, and that your own user id (from `select user_id from public.profiles where role = 'admin';`) appears in the data file (`grep -c '<user id>' data-<date>.sql`). Never commit these files.
 3. In the dashboard SQL editor, copy these results somewhere safe (they are what step "Rollback" needs):
    ```sql
    select user_id, role, start_code, session_seq, day_count from public.profiles;
    select count(*) as cards, count(*) filter (where source = 'seed') as seed_cards from public.cards;
    select count(*) as members from public.profiles where onboarded_at is not null;
    ```
-4. Read-only: `npx supabase migration list --linked`. Expect the five migrations of slices 1 and 2 applied (`20261019100000` to `20261020100000`) and the four below pending. If one of the four is already applied, say so before going on.
+4. Read-only: `npx supabase migration list --linked`. Expect the five migrations of slices 1 and 2 applied (`20261019100000` to `20261020100000`) and **exactly four pending: `20261021100000`, `20261022100000`, `20261023100000`, `20261023100100`**. If fewer than four are pending, STOP (see below).
 
-**Surprise = stop:** an empty or tiny dump, no recent backup, or migrations applied that you do not recognise.
+**Surprise = stop:** an empty or tiny dump, no recent backup, migrations applied that you do not recognise, or **fewer than four pending**: pushing only three would leave the old `publish_lesson` and the old unique index on `question_bank` (prompt-based), and every lesson fails to publish (all of them contain several dictation questions with the same prompt: "ON CONFLICT DO UPDATE command cannot affect row a second time"). Check `ls supabase/migrations | wc -l` is 9 and `git log -1 --format=%h` matches the PR head before pushing.
 
 ## b) Confirm the migrations are additive and today's production code keeps working
 The four new migrations (everything between `origin/main` and this branch):
@@ -48,7 +50,7 @@ The four new migrations (everything between `origin/main` and this branch):
 | `20261023100000_lesson_card_links` | adds `cards.template_id` (nullable) and `cards.user_edited` (not null, default false) and two indexes; swaps a unique index on the new `card_templates`; replaces `publish_lesson` | Only adds columns/indexes to `cards`: existing rows get `false` / `null` |
 | `20261023100100_question_slots` | swaps a unique index on the new `question_bank`; replaces `publish_lesson` | No |
 
-Checked on 23 Oct 2026, and worth repeating if the migrations change:
+Checked on 23 Oct 2026, twice (when the plan was written and again right before step c, with `origin/main` unchanged at `f366725`), and worth repeating if the migrations change:
 - A scan of the four files for `drop`, `alter`, `truncate`, `delete`, `update`, `rename`: `alter table … add column` and `enable row level security` on new tables; two `drop index` statements, both on indexes that the same release creates (on new tables); `delete`/`update` appear only inside the body of `publish_lesson`, which runs only when a lesson is published, by the service role.
 - Today's production code (`origin/main`) was run against the migrated database: its own database tests (7 files, 54 tests: accounts, 2FA, member cap, feedback, flashcards, sync, server-only tables) all pass. Repeat with:
   ```bash

@@ -14,6 +14,7 @@
     "db:reset": "supabase db reset",
     "seed:curriculum": "node --env-file=.env.local --no-warnings scripts/seed-curriculum.mts",
     "content": "node --env-file=.env.local --no-warnings scripts/content.mts",
+    "backup": "node --no-warnings scripts/backup.mts",
     "check:bundle": "node --no-warnings scripts/check-client-bundle.mts"
   },
   "dependencies": {

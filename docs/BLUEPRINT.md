@@ -221,7 +221,7 @@ The rule: the browser is never trusted. Every permission is checked in the datab
 - Automated tests check that account deletion removes every row and that data export is complete.
 - Guests in games get a random ID, store nothing, and can only send moves and emoji.
 - Dependabot alerts on the GitHub repo; secrets scanning on.
-- Daily automatic database backups (Supabase).
+- Backups: the Supabase Free plan has NO automatic backups, so a manual `npm run backup` (three dumps in ~/backups/deutschmitbuddy, never in the repo) runs before every release; daily backups and point-in-time recovery come with the Pro plan.
 
 **GDPR and German law (to set up before going public)**
 

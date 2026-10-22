@@ -25,8 +25,10 @@ import {
   parseReview,
   publishPayload,
   runBatch,
+  runDirect,
   summarize,
   type BatchClient,
+  type BatchRequest,
   type BatchResultLine,
 } from "./pipeline.ts";
 import { GENERATION_MODEL, PASS_A_MAX_TOKENS, REVIEW_MODEL } from "./prompts.ts";
@@ -138,6 +140,18 @@ describe("cost estimate and approval", () => {
     expect(() => assertApproved(changed, e.id, e)).toThrow(/not for these requests/);
   });
 
+  it("a direct run costs twice the batch price and needs its own approval", () => {
+    const batch = estimateStage("generate-a", reqs);
+    const direct = estimateStage("generate-a", reqs, { mode: "direct" });
+    expect(direct.expectedUsd).toBeCloseTo(batch.expectedUsd * 2);
+    expect(direct.ceilingUsd).toBeCloseTo(batch.ceilingUsd * 2);
+    expect(direct.id).toBe(`${batch.id}-direct`);
+    // approving the cheap batch is not approving the direct run, and the other way round
+    expect(() => assertApproved(reqs, batch.id, direct)).toThrow(/not for these requests/);
+    expect(() => assertApproved(reqs, direct.id, batch)).toThrow(/not for these requests/);
+    expect(() => assertApproved(reqs, direct.id, direct)).not.toThrow();
+  });
+
   it("hard stop at €10, even with an approval", () => {
     const many = buildPassARequests(Array.from({ length: 200 }, (_, i) => lessonRow({ code: `Z${i}`, seq: i })));
     const e = estimateStage("generate-a", many);
@@ -158,6 +172,45 @@ describe("cost estimate and approval", () => {
     const review = (n: number) => estimateStage("review", buildReviewRequests(Array.from({ length: n }, (_, i) => lessonRow({ code: `Z${i}`, seq: i })), new Map(Array.from({ length: n }, (_, i) => [`Z${i}`, validLesson()] as const)), []));
     expect(review(45).ceilingEur).toBeLessThan(10);
     expect(review(60).ceilingEur).toBeGreaterThan(10);
+  });
+});
+
+describe("runDirect", () => {
+  const message = (text: string) => ({ content: [{ type: "text", text }], stop_reason: "end_turn", usage: { input_tokens: 10, output_tokens: 5 } });
+  const clientOf = (calls: string[], fail: string[] = []) => ({
+    messages: {
+      stream: (params: { messages: { content: string }[] }) => ({
+        finalMessage: async () => {
+          calls.push(params.messages[0].content);
+          if (fail.includes(params.messages[0].content)) throw new Error("overloaded");
+          return message(`answer to ${params.messages[0].content}`);
+        },
+      }),
+    },
+  });
+  const req = (id: string): BatchRequest => ({ custom_id: id, params: { model: "m", max_tokens: 10, system: "s", messages: [{ role: "user", content: id }], output_config: { effort: "medium", format: { type: "json_schema", schema: {} } } } });
+
+  it("asks once per request, stores every answer at once, and reuses stored answers instead of paying again", async () => {
+    const calls: string[] = [];
+    const stored: string[] = [];
+    const first = await runDirect(clientOf(calls) as never, [req("a"), req("b"), req("c")], { store: (l) => stored.push(l.custom_id) });
+    expect(first.map((l) => l.custom_id)).toEqual(["a", "b", "c"]);
+    expect(stored.sort()).toEqual(["a", "b", "c"]);
+    expect(calls.sort()).toEqual(["a", "b", "c"]);
+
+    const again: string[] = [];
+    const done = new Map(first.map((l) => [l.custom_id, l]));
+    const second = await runDirect(clientOf(again) as never, [req("a"), req("b"), req("c"), req("d")], { done });
+    expect(again).toEqual(["d"]); // only the new request is asked (and paid)
+    expect(second).toHaveLength(4);
+  });
+
+  it("a failed request becomes an errored line that is not stored (so a rerun asks again), and the others still finish", async () => {
+    const stored: string[] = [];
+    const lines = await runDirect(clientOf([], ["b"]) as never, [req("a"), req("b")], { store: (l) => stored.push(l.custom_id) });
+    expect(lines.find((l) => l.custom_id === "b")!.result.type).toBe("errored");
+    expect(lines.find((l) => l.custom_id === "a")!.result.type).toBe("succeeded");
+    expect(stored).toEqual(["a"]);
   });
 });
 

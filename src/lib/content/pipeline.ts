@@ -25,7 +25,7 @@ import {
   type PassD,
   type ReviewVerdict,
 } from "./lesson-schema.ts";
-import { actualCostUsd, assertWithinCap, estimateRun, estimateTokens, type RunEstimate, type Usage } from "./pricing.ts";
+import { actualCostUsd, assertWithinCap, estimateRun, estimateTokens, type RunEstimate, type RunMode, type Usage } from "./pricing.ts";
 import {
   EXPECTED_OUTPUT,
   GENERATION_MODEL,
@@ -139,13 +139,14 @@ export function lintErrors(lessons: CurriculumRow[], contents: Map<string, Lesso
 // ---- Cost estimate (shown before every paid run, and what an approval is bound to)
 export interface StageEstimate extends RunEstimate {
   stage: Stage;
-  /** Fingerprint of the exact requests. An approval of this id is an approval of these requests and no others. */
+  /** Fingerprint of the exact requests (plus "-direct" for a direct run, which costs twice as much). An approval of this id is an approval of these requests, paid this way, and no others. */
   id: string;
+  mode: RunMode;
 }
 
 export const fingerprint = (requests: BatchRequest[]) => createHash("sha256").update(JSON.stringify(requests)).digest("hex").slice(0, 16);
 
-export function estimateStage(stage: Stage, requests: BatchRequest[], opts: { rate?: number; exactInputTokens?: number[]; expectedOutput?: number } = {}): StageEstimate {
+export function estimateStage(stage: Stage, requests: BatchRequest[], opts: { rate?: number; exactInputTokens?: number[]; expectedOutput?: number; mode?: RunMode } = {}): StageEstimate {
   const first = requests[0]?.params;
   if (!first) throw new Error("Nothing to estimate: no requests.");
   // A JSON Schema costs input tokens too (about 1 token per 1.3 characters, measured with a real request); the token counter does not include it.
@@ -153,14 +154,17 @@ export function estimateStage(stage: Stage, requests: BatchRequest[], opts: { ra
   const inputTokensPerRequest = opts.exactInputTokens
     ? opts.exactInputTokens.map((n, i) => n + schemaTokens(requests[i]))
     : requests.map((r) => estimateTokens(r.params.system + r.params.messages.map((m) => m.content).join("")) + schemaTokens(r));
-  const estimate = estimateRun({ model: first.model, inputTokensPerRequest, expectedOutputPerRequest: opts.expectedOutput ?? EXPECTED_OUTPUT[stage], maxTokens: first.max_tokens, rate: opts.rate });
-  return { ...estimate, stage, id: fingerprint(requests) };
+  const estimate = estimateRun({ model: first.model, inputTokensPerRequest, expectedOutputPerRequest: opts.expectedOutput ?? EXPECTED_OUTPUT[stage], maxTokens: first.max_tokens, rate: opts.rate, mode: opts.mode });
+  const mode = opts.mode ?? "batch";
+  return { ...estimate, stage, mode, id: fingerprint(requests) + (mode === "direct" ? "-direct" : "") };
 }
 
 /** Throws unless `approvedId` matches these exact requests and the worst case stays under the cap. */
 export function assertApproved(requests: BatchRequest[], approvedId: string | undefined, estimate: StageEstimate) {
   if (!approvedId) throw new Error("This run is paid. Show the estimate first and pass --approve <estimate id> once it has been approved.");
-  if (approvedId !== fingerprint(requests)) throw new Error(`The approved estimate (${approvedId}) is not for these requests (${fingerprint(requests)}). Run the estimate again.`);
+  // The id is the fingerprint of the requests plus how they are paid ("-direct" costs twice as much): an approval matches both, and the estimate must be for these requests.
+  const expected = fingerprint(requests) + (estimate.mode === "direct" ? "-direct" : "");
+  if (approvedId !== expected || estimate.id !== expected) throw new Error(`The approved estimate (${approvedId}) is not for these requests, paid this way (${expected}). Run the estimate again.`);
   assertWithinCap(estimate);
 }
 
@@ -196,6 +200,45 @@ export async function runBatch(client: BatchClient, requests: BatchRequest[], op
   const lines: BatchResultLine[] = [];
   for await (const line of await client.messages.batches.results(batchId)) lines.push(line);
   return { batchId, lines, pending: false };
+}
+
+/**
+ * The direct way: one ordinary (streamed) Messages API call per request, at list price, instead of a Batch. For when a batch is stuck or the
+ * answer is needed now. Every finished answer is handed to `store` at once and `done` gives back the ones stored earlier, so a crash or a
+ * second run never pays for the same request twice. Requests run `concurrency` at a time; a failed request becomes an "errored" line.
+ */
+export interface DirectClient {
+  messages: { stream(body: BatchRequest["params"]): { finalMessage(): Promise<{ content: { type: string; text?: string }[]; stop_reason: string | null; usage: Usage }> } };
+}
+export async function runDirect(
+  client: DirectClient,
+  requests: BatchRequest[],
+  opts: { done?: Map<string, BatchResultLine>; store?: (line: BatchResultLine) => void; concurrency?: number; log?: (m: string) => void } = {},
+): Promise<BatchResultLine[]> {
+  const log = opts.log ?? (() => {});
+  const lines = new Map<string, BatchResultLine>(opts.done ?? []);
+  const todo = requests.filter((r) => !lines.has(r.custom_id));
+  if (lines.size) log(`${lines.size} answer(s) from an earlier run are reused (not paid again).`);
+  let next = 0;
+  const worker = async () => {
+    for (;;) {
+      const r = todo[next++];
+      if (!r) return;
+      let line: BatchResultLine;
+      try {
+        const message = await client.messages.stream(r.params).finalMessage();
+        line = { custom_id: r.custom_id, result: { type: "succeeded", message } };
+        log(`${r.custom_id}: done`);
+      } catch (error) {
+        line = { custom_id: r.custom_id, result: { type: "errored", error: { message: (error as Error).message } } };
+        log(`${r.custom_id}: failed (${(error as Error).message.slice(0, 120)})`);
+      }
+      lines.set(r.custom_id, line);
+      if (line.result.type === "succeeded") opts.store?.(line);
+    }
+  };
+  await Promise.all(Array.from({ length: Math.max(1, Math.min(opts.concurrency ?? 3, todo.length)) }, worker));
+  return requests.map((r) => lines.get(r.custom_id)!).filter(Boolean);
 }
 
 // ---- Reading results
@@ -453,7 +496,7 @@ export interface CostReport {
 }
 
 export function costReport(stage: Stage, estimate: StageEstimate, batchId: string, outcome: StageOutcome<unknown>, requests: number): CostReport {
-  const usd = actualCostUsd(estimate.model, outcome.usages);
+  const usd = actualCostUsd(estimate.model, outcome.usages, estimate.mode);
   return {
     stage, model: estimate.model, batchId, requests, failedRequests: outcome.failures.length,
     inputTokens: outcome.usages.reduce((n, u) => n + u.input_tokens + (u.cache_creation_input_tokens ?? 0) + (u.cache_read_input_tokens ?? 0), 0),

@@ -35,6 +35,160 @@
         "reason": "Both natural orders accepted; chunks match exactly; explanation is true.",
         "fixed_json": null
       }
+    ],
+    "Z5": [
+      {
+        "id": "Z5#reading.passage",
+        "status": "fixed",
+        "reason": "Direct speech after 'Anna sagt:' lacked German quotation marks; added „…“.",
+        "fixed_json": "{\"title\":\"Annas Zimmer\",\"text\":\"Das ist Annas Zimmer. Anna hat ein Bett. Sie hat auch eine Lampe, ein Buch und ein Handy. Das Handy ist neu. Das Fenster ist groß und die Tür ist klein. Anna hat zwei Stifte. Anna sagt: „Das ist mein Zimmer!“\"}"
+      },
+      {
+        "id": "Z5#reading.q1",
+        "status": "ok",
+        "reason": "Only the bed is mentioned first; distractors plausible.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z5#reading.q2",
+        "status": "ok",
+        "reason": "Clear single answer from text; distractors plausible.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z5#reading.q3",
+        "status": "ok",
+        "reason": "Correct answer matches text; distractors clearly false but plausible.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z5#reading.q4",
+        "status": "ok",
+        "reason": "Correct answer; accepted variant harmless and correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z5#reading.q5",
+        "status": "ok",
+        "reason": "Answer clear from text; distractors are course names.",
+        "fixed_json": null
+      }
+    ],
+    "Z9": [
+      {
+        "id": "Z9#culture",
+        "status": "ok",
+        "reason": "Accurate, simple cultural facts; English instructions; no names or traps.",
+        "fixed_json": null
+      }
+    ],
+    "W1.4": [
+      {
+        "id": "W1.4#writing",
+        "status": "fixed",
+        "reason": "The model answer had only four real sentences plus the closing, but the task asks for exactly 5. I split the long und-sentence into two, so there are now 5 sentences plus the greeting.",
+        "fixed_json": "{\"task\":\"Write a short postcard to a friend. You are on holiday. Tell your friend what you can eat there, what you must or want to try, and what you want to drink. Write exactly 5 sentences.\",\"min_words\":30,\"must_include\":[\"one sentence with können\",\"one sentence with wollen\",\"one sentence with müssen\",\"one food or drink word from the lesson\",\"a greeting at the end\"],\"useful_phrases\":[\"Ich kann ... essen.\",\"Ich will ... probieren.\",\"Ich muss ... bestellen.\",\"Ich möchte einen Kaffee.\",\"Viele Grüße\"],\"model_answer\":\"Liebe Lena, ich bin im Urlaub und das Essen ist super. Ich kann hier jeden Tag Fisch und Gemüse essen. Ich will heute den Kuchen probieren. Ich muss unbedingt Wasser bestellen. Zum Trinken möchte ich einen Kaffee. Viele Grüße, Anna\",\"rubric\":[\"Uses exactly 5 sentences and at least 30 words\",\"Uses können, wollen and müssen correctly conjugated in position 2\",\"Main verb is in the infinitive at the end of the sentence\",\"Uses food and drink words from the lesson with correct articles\",\"Has a greeting and correct spelling of ö and ü\"]}"
+      }
+    ],
+    "W1.5": [
+      {
+        "id": "W1.5#reading.q5",
+        "status": "fixed",
+        "reason": "accepted_answers lacked natural variants (Anna + both actions, 'isst Mittagessen', mittags word orders); added them.",
+        "fixed_json": "{\"skill\":\"reading\",\"type\":\"typing\",\"prompt\":\"Was macht Anna mittags? Answer in German with one short sentence.\",\"answer\":\"Sie macht eine Pause.\",\"distractors\":[],\"accepted_answers\":[\"Anna macht eine Pause.\",\"Sie macht Pause.\",\"Anna macht Pause.\",\"Sie isst das Mittagessen.\",\"Anna isst das Mittagessen.\",\"Sie isst Mittagessen.\",\"Anna isst Mittagessen.\",\"Sie macht eine Pause und isst das Mittagessen.\",\"Anna macht eine Pause und isst das Mittagessen.\",\"Sie macht eine Pause und isst Mittagessen.\",\"Anna macht eine Pause und isst Mittagessen.\",\"Sie macht mittags eine Pause.\",\"Anna macht mittags eine Pause.\",\"Mittags macht sie eine Pause.\",\"Mittags macht Anna eine Pause.\",\"Mittags macht sie eine Pause und isst das Mittagessen.\",\"Mittags macht Anna eine Pause und isst das Mittagessen.\"],\"explanation\":\"At noon she takes a break and eats lunch.\"}"
+      }
+    ],
+    "W2.2": [
+      {
+        "id": "W2.2#writing",
+        "status": "ok",
+        "reason": "Model answer has 32 words, four sentences, and meets all requirements.",
+        "fixed_json": null
+      }
+    ],
+    "W3.1": [
+      {
+        "id": "W3.1#writing",
+        "status": "fixed",
+        "reason": "The task asked for 4 Perfekt sentences, but the required 'Es war toll!' is not Perfekt, so the model has only 3. Task reworded to match.",
+        "fixed_json": "{\"task\":\"Write a short postcard or message to a friend about your weekend. Write 4 sentences: three in the Perfekt with haben, plus the phrase Es war toll!\",\"min_words\":30,\"must_include\":[\"One thing you did on Saturday\",\"One thing you did on Sunday\",\"One food or drink\",\"The phrase Es war toll!\"],\"useful_phrases\":[\"Am Samstag habe ich ... gespielt.\",\"Am Sonntag habe ich ... gesehen.\",\"Ich habe lange geschlafen.\",\"Es war toll!\",\"Und du?\"],\"model_answer\":\"Hallo Lena, am Samstag habe ich lange geschlafen und dann im Park Fußball gespielt. Am Sonntag habe ich Suppe gekocht und Tee getrunken. Es war toll! Und du, was hast du am Wochenende gemacht?\",\"rubric\":[\"Uses haben in position 2 and the participle at the end of the sentence\",\"Forms participles correctly (gespielt, geschlafen, getrunken)\",\"Uses weekend vocabulary such as Samstag, Sonntag, Kuchen, Park\",\"Includes all required points and reaches the minimum word count\",\"Spelling, capital letters and punctuation are correct\"]}"
+      }
+    ],
+    "W4.2": [
+      {
+        "id": "W4.2#speaking.tandem",
+        "status": "fixed",
+        "reason": "Incoherent with moving day: Buddy asks a newcomer whether they have lived here long, and the phrase 'seit einem Monat hier' contradicts moving in today. I changed the opening question to 'Woher kommen Sie?' and the phrase to 'Ich arbeite seit einem Jahr bei einer Firma hier.'",
+        "fixed_json": "{\"title\":\"Dein Umzug\",\"setting\":\"Buddy and you meet in front of your new flat on moving day. You do not know each other, so you both say Sie and talk politely while you carry boxes.\",\"buddy_role\":\"A friendly neighbour you do not know yet; he speaks formally (Sie, Ihnen) and offers to help.\",\"learner_role\":\"A person who has just moved into a new flat and speaks formally (Sie, Ihnen) to the neighbour.\",\"opening_line\":\"Guten Tag! Sie sind neu hier, oder? Woher kommen Sie?\",\"target_phrases\":[\"Guten Tag! Ich ziehe nach ... um.\",\"Ich arbeite seit einem Jahr bei einer Firma hier.\",\"Können Sie mir beim Umzug helfen?\",\"Ich komme mit dem Auto.\",\"Auf Wiedersehen!\"],\"target_grammar\":\"Prepositions with the Dativ: aus, bei, mit, nach, seit, von, zu\",\"topics\":[\"Woher kommen Sie?\",\"Wie viele Zimmer hat die Wohnung?\",\"Haben Sie Möbel von einem Freund?\",\"Wie kommen Sie zur Arbeit?\"],\"end_condition\":\"The learner has used at least three of the seven prepositions correctly, always with Sie, and the chat ends with Auf Wiedersehen.\"}"
+      }
+    ],
+    "Z10": [
+      {
+        "id": "Z10#vocabulary.w08",
+        "status": "ok",
+        "reason": "Article, plural, example and tip are correct; the surname is allowed.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z10#vocabulary.w09",
+        "status": "ok",
+        "reason": "Article, plural, example and tip are correct; the surname is allowed.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z10#exam.gv2",
+        "status": "ok",
+        "reason": "Only 'bestellen' fits formal Sie; the distractors are plausible.",
+        "fixed_json": null
+      }
+    ],
+    "W1.1": [
+      {
+        "id": "W1.1#culture",
+        "status": "fixed",
+        "reason": "The surname Weber appeared outside formal Herr/Frau address ('ich heiße Anna Weber'), which breaks the names rule. Changed the example to 'ich heiße Anna.' The rest is accurate.",
+        "fixed_json": "{\"title\":\"Du or Sie? Introducing yourself\",\"note\":\"In German-speaking countries, people usually shake hands when they meet for the first time in a formal situation, and they often say their name: \\\"Guten Tag, ich heiße Anna.\\\" With adults you do not know, at work or in shops, you use Sie and often the last name, for example \\\"Frau Weber\\\" or \\\"Herr Weber\\\". Friends, family, children and many fellow students say du and use first names. Among young people and in many workplaces, people switch to du quickly, but it is polite to wait until the other person offers it. When in doubt, start with Sie. A small, friendly \\\"Freut mich!\\\" is a good answer after you hear someone's name.\",\"reflection_question\":\"How do people in your country greet each other when they meet for the first time, and does your language also have a formal and an informal \\\"you\\\"?\"}"
+      }
+    ],
+    "W2.4": [
+      {
+        "id": "W2.4#writing",
+        "status": "ok",
+        "reason": "Model answer has 5 sentences, 41 words, and meets every requirement.",
+        "fixed_json": null
+      }
+    ],
+    "W3.2": [
+      {
+        "id": "W3.2#reading.passage",
+        "status": "ok",
+        "reason": "Correct Perfekt with sein, natural German, 50 words, on theme.",
+        "fixed_json": null
+      },
+      {
+        "id": "W3.2#reading.q3",
+        "status": "ok",
+        "reason": "One correct answer from the text; distractors plausible and false.",
+        "fixed_json": null
+      },
+      {
+        "id": "W3.2#listening.passage",
+        "status": "ok",
+        "reason": "Natural dialogue, correct Perfekt with sein, suitable length.",
+        "fixed_json": null
+      },
+      {
+        "id": "W3.2#listening.q4",
+        "status": "ok",
+        "reason": "Answer matches the script; distractors are clearly false.",
+        "fixed_json": null
+      },
+      {
+        "id": "W3.2#listening.q5",
+        "status": "ok",
+        "reason": "Answer matches the script; distractors plausible and false.",
+        "fixed_json": null
+      }
     ]
   },
   "failures": []

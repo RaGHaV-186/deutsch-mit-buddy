@@ -9,6 +9,7 @@
 //   check                                         free: automatic checks on the lessons written so far (run before the review pass)
 //   estimate|run --stage review --fixes           Opus re-checks ONLY the items corrected in manual-fixes.json (item id -> { value, reason }); the rest of the lesson keeps its verdicts
 //   run ... --submit-only                         submit the batch, save its id and stop (run the same command later to collect the result)
+//   estimate|run ... --direct                     no batch: ordinary Messages API calls at list price (twice the batch price), answers at once; finished answers are saved in <stage>.direct.json so a rerun never pays twice. Its estimate has its own id (…-direct)
 //   build                                         merge the passes into the review file (review.json, review.md, ...)
 //   markdown --lesson Z1 [--out path.md]          one lesson as readable Markdown, with the review notes
 //   publish  [--yes]                              publish every lesson that has no open item (writes to the database)
@@ -45,6 +46,7 @@ import {
   parseReview,
   publishPayload,
   runBatch,
+  runDirect,
   summarize,
   type BatchClient,
   type BatchRequest,
@@ -75,6 +77,7 @@ const file = (name: string) => join(dir, name);
 const read = <T,>(name: string): T | undefined => (existsSync(file(name)) ? (JSON.parse(readFileSync(file(name), "utf8")) as T) : undefined);
 const write = (name: string, data: unknown) => writeFileSync(file(name), JSON.stringify(data, null, 2) + "\n");
 const rate = process.env.USD_TO_EUR ? Number(process.env.USD_TO_EUR) : DEFAULT_USD_TO_EUR;
+const modeOf = (): "batch" | "direct" => (flag("direct") ? "direct" : "batch");
 const STAGES: Stage[] = ["generate-a", "generate-b", "generate-c", "generate-d", "review"];
 
 const allLessons = lessonsOf(SESSIONS);
@@ -150,7 +153,7 @@ function printEstimate(e: ReturnType<typeof estimateStage>, lessons: CurriculumR
   const eur = (n: number) => `€${n.toFixed(2)}`;
   console.log(`
 Estimate for the "${e.stage}" pass of run "${runName}" (${lessons.map((l) => l.code).join(", ")})
-  Model:            ${e.model} (Batch API, 50% off list price)
+  Model:            ${e.model} (${e.mode === "direct" ? "direct Messages API calls, full list price" : "Batch API, 50% off list price"})
   Requests:         ${e.requests}
   Input tokens:     ~${e.inputTokens.toLocaleString("en")}
   Output tokens:    ~${e.expectedOutputTokens.toLocaleString("en")} expected, at most ${e.ceilingOutputTokens.toLocaleString("en")}
@@ -212,7 +215,7 @@ async function estimateCommand() {
       exactInputTokens.push(counted.input_tokens);
     }
   }
-  const estimate = estimateStage(stage, requests, { rate, exactInputTokens, expectedOutput: expectedOutputFor(stage) });
+  const estimate = estimateStage(stage, requests, { rate, exactInputTokens, expectedOutput: expectedOutputFor(stage), mode: modeOf() });
   write(`${tagOf(stage)}.estimate.json`, { ...estimate, lessons: lessons.map((l) => l.code), exactTokenCount: Boolean(exactInputTokens) });
   printEstimate(estimate, lessons);
 }
@@ -221,7 +224,7 @@ async function runCommand() {
   const stage = stageArg();
   const lessons = runLessons();
   const requests = requestsFor(stage, lessons);
-  const estimate = estimateStage(stage, requests, { rate, expectedOutput: expectedOutputFor(stage) });
+  const estimate = estimateStage(stage, requests, { rate, expectedOutput: expectedOutputFor(stage), mode: modeOf() });
   try {
     assertApproved(requests, flag("approve"), estimate);
   } catch (error) {
@@ -233,16 +236,35 @@ async function runCommand() {
   const state = read<State>("state.json") ?? { batches: [] };
   const existing = state.batches.find((b) => b.stage === stage && b.fingerprint === estimate.id);
 
-  const { batchId, lines, pending } = await runBatch(client as unknown as BatchClient, requests, {
-    submitOnly: Boolean(flag("submit-only")),
-    batchId: existing?.id,
-    onSubmitted: (id) => {
-      state.batches.push({ stage, id, fingerprint: estimate.id, submittedAt: new Date().toISOString() });
-      write("state.json", state); // saved before waiting, so a crash never leads to paying twice
-    },
-    log: (m) => console.log(m),
-    pollMs: 30_000,
-  });
+  let batchId: string;
+  let lines: Awaited<ReturnType<typeof runBatch>>["lines"];
+  let pending = false;
+  if (modeOf() === "direct") {
+    // No batch: every finished answer is written to <stage>.direct.json at once, and a rerun reuses them instead of paying again.
+    const cacheName = `${tagOf(stage)}.direct.json`;
+    const cache = read<Record<string, (typeof lines)[number]>>(cacheName) ?? {};
+    batchId = "direct";
+    lines = await runDirect(client as unknown as Parameters<typeof runDirect>[0], requests, {
+      done: new Map(Object.entries(cache)),
+      store: (line) => {
+        cache[line.custom_id] = line;
+        write(cacheName, cache);
+      },
+      concurrency: 3,
+      log: (m) => console.log(m),
+    });
+  } else {
+    ({ batchId, lines, pending } = await runBatch(client as unknown as BatchClient, requests, {
+      submitOnly: Boolean(flag("submit-only")),
+      batchId: existing?.id,
+      onSubmitted: (id) => {
+        state.batches.push({ stage, id, fingerprint: estimate.id, submittedAt: new Date().toISOString() });
+        write("state.json", state); // saved before waiting, so a crash never leads to paying twice
+      },
+      log: (m) => console.log(m),
+      pollMs: 30_000,
+    }));
+  }
 
   if (pending) {
     console.log(`\nBatch ${batchId} (${stage}, ${requests.length} requests) is saved in ${file("state.json")} and is not finished yet. Nothing more is paid or submitted. Say "continue" later and I run the same command again to collect it.`);

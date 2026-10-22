@@ -35,17 +35,23 @@ export function priceFor(model: string): ModelPrice {
   return price;
 }
 
-/** Cost in USD of the given token counts through the Batch API. */
-export function batchCostUsd(model: string, inputTokens: number, outputTokens: number): number {
+/** How a request is paid: in a Batch (half price, but it can take hours) or directly through the Messages API (list price, answers at once). */
+export type RunMode = "batch" | "direct";
+
+/** Cost in USD of the given token counts. */
+export function costUsd(model: string, inputTokens: number, outputTokens: number, mode: RunMode = "batch"): number {
   const p = priceFor(model);
-  return ((inputTokens * p.input + outputTokens * p.output) / 1_000_000) * BATCH_DISCOUNT;
+  return ((inputTokens * p.input + outputTokens * p.output) / 1_000_000) * (mode === "batch" ? BATCH_DISCOUNT : 1);
 }
 
-export function actualCostUsd(model: string, usages: Usage[]): number {
+/** Cost in USD of the given token counts through the Batch API. */
+export const batchCostUsd = (model: string, inputTokens: number, outputTokens: number) => costUsd(model, inputTokens, outputTokens, "batch");
+
+export function actualCostUsd(model: string, usages: Usage[], mode: RunMode = "batch"): number {
   // Cache tokens are billed at different rates; these runs don't use caching, so any that show up are counted as input (a safe over-count).
   const input = usages.reduce((n, u) => n + u.input_tokens + (u.cache_creation_input_tokens ?? 0) + (u.cache_read_input_tokens ?? 0), 0);
   const output = usages.reduce((n, u) => n + u.output_tokens, 0);
-  return batchCostUsd(model, input, output);
+  return costUsd(model, input, output, mode);
 }
 
 export interface RunEstimate {
@@ -68,14 +74,16 @@ export function estimateRun(opts: {
   expectedOutputPerRequest: number;
   maxTokens: number;
   rate?: number;
+  mode?: RunMode;
 }): RunEstimate {
   const rate = opts.rate ?? DEFAULT_USD_TO_EUR;
   const requests = opts.inputTokensPerRequest.length;
   const inputTokens = opts.inputTokensPerRequest.reduce((a, b) => a + b, 0);
   const expectedOutputTokens = requests * opts.expectedOutputPerRequest;
   const ceilingOutputTokens = requests * opts.maxTokens;
-  const expectedUsd = batchCostUsd(opts.model, inputTokens, expectedOutputTokens);
-  const ceilingUsd = batchCostUsd(opts.model, inputTokens, ceilingOutputTokens);
+  const mode = opts.mode ?? "batch";
+  const expectedUsd = costUsd(opts.model, inputTokens, expectedOutputTokens, mode);
+  const ceilingUsd = costUsd(opts.model, inputTokens, ceilingOutputTokens, mode);
   return {
     model: opts.model,
     requests,

@@ -50,6 +50,8 @@ npm run content -- publish  --run sample-z1-z3
 
 Add `--exact` to an estimate to count tokens with the API (free) instead of estimating them.
 
+Add `--direct` (to the estimate and to the run) to skip the Batch API: ordinary Messages API calls at list price, which is twice the batch price, with the answers at once. For when a batch is stuck (a batch can take many hours; cancel it with the API, collect what finished, and run the rest direct). The direct estimate has its own id (`…-direct`), and every finished answer is saved in `<stage>.direct.json` so a rerun never pays for the same request twice.
+
 ## Cost rules
 - Every paid pass prints an estimate first: requests, tokens, expected cost and the **worst case** (every request using its whole token limit), in euros at `$1 = €0.95` (override with `USD_TO_EUR`).
 - A pass whose worst case is above **€10** is refused, even with an approval. At most about 60 lessons fit in a Sonnet pass and 45 in an Opus pass, so run big batches in tranches (for example Z1 to A1 first, then A2, then B1).

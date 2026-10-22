@@ -170,6 +170,8 @@ export interface RunOptions {
   onSubmitted: (batchId: string) => Promise<void> | void;
   pollMs?: number;
   sleep?: (ms: number) => Promise<void>;
+  /** Submit (or look at an already submitted batch once) and return without waiting: `pending` is then true unless the batch has ended. */
+  submitOnly?: boolean;
   log?: (message: string) => void;
 }
 
@@ -188,11 +190,12 @@ export async function runBatch(client: BatchClient, requests: BatchRequest[], op
     const status = await client.messages.batches.retrieve(batchId);
     if (status.processing_status === "ended") break;
     log(`Batch ${batchId}: ${status.processing_status}`);
+    if (opts.submitOnly) return { batchId, lines: [] as BatchResultLine[], pending: true };
     await sleep(opts.pollMs ?? 30_000);
   }
   const lines: BatchResultLine[] = [];
   for await (const line of await client.messages.batches.results(batchId)) lines.push(line);
-  return { batchId, lines };
+  return { batchId, lines, pending: false };
 }
 
 // ---- Reading results

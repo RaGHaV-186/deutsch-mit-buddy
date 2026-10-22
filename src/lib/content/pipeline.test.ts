@@ -194,6 +194,23 @@ describe("runBatch", () => {
     expect(onSubmitted).not.toHaveBeenCalled();
     expect(out.batchId).toBe("batch_old");
   });
+
+  it("submit-only saves the batch id and returns without waiting; a later call collects it once it has ended", async () => {
+    const { client, create, retrieve } = fakeClient(["in_progress", "in_progress", "ended"], [succeeded("generate-a-Z9", validPassA())]);
+    const onSubmitted = vi.fn();
+    const sleep = vi.fn(async () => {});
+    const first = await runBatch(client, reqs, { onSubmitted, sleep, submitOnly: true });
+    expect(first).toMatchObject({ batchId: "batch_1", pending: true, lines: [] });
+    expect(onSubmitted).toHaveBeenCalledWith("batch_1");
+    expect(sleep).not.toHaveBeenCalled();
+    const again = await runBatch(client, reqs, { batchId: "batch_1", onSubmitted, sleep, submitOnly: true });
+    expect(again.pending).toBe(true); // still running: no waiting, no second submit
+    const done = await runBatch(client, reqs, { batchId: "batch_1", onSubmitted, sleep, submitOnly: true });
+    expect(done).toMatchObject({ pending: false });
+    expect(done.lines).toHaveLength(1);
+    expect(create).toHaveBeenCalledTimes(1);
+    expect(retrieve).toHaveBeenCalledTimes(3);
+  });
 });
 
 describe("reading generation results", () => {

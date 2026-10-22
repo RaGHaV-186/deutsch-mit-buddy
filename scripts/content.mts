@@ -8,6 +8,7 @@
 //   run      --stage generate-a|generate-b|generate-c|generate-d|review --approve <estimate id>                   the paid Batch run (resumable)
 //   check                                         free: automatic checks on the lessons written so far (run before the review pass)
 //   estimate|run --stage review --fixes           Opus re-checks ONLY the items corrected in manual-fixes.json (item id -> { value, reason }); the rest of the lesson keeps its verdicts
+//   run ... --submit-only                         submit the batch, save its id and stop (run the same command later to collect the result)
 //   build                                         merge the passes into the review file (review.json, review.md, ...)
 //   markdown --lesson Z1 [--out path.md]          one lesson as readable Markdown, with the review notes
 //   publish  [--yes]                              publish every lesson that has no open item (writes to the database)
@@ -232,7 +233,8 @@ async function runCommand() {
   const state = read<State>("state.json") ?? { batches: [] };
   const existing = state.batches.find((b) => b.stage === stage && b.fingerprint === estimate.id);
 
-  const { batchId, lines } = await runBatch(client as unknown as BatchClient, requests, {
+  const { batchId, lines, pending } = await runBatch(client as unknown as BatchClient, requests, {
+    submitOnly: Boolean(flag("submit-only")),
     batchId: existing?.id,
     onSubmitted: (id) => {
       state.batches.push({ stage, id, fingerprint: estimate.id, submittedAt: new Date().toISOString() });
@@ -242,6 +244,10 @@ async function runCommand() {
     pollMs: 30_000,
   });
 
+  if (pending) {
+    console.log(`\nBatch ${batchId} (${stage}, ${requests.length} requests) is saved in ${file("state.json")} and is not finished yet. Nothing more is paid or submitted. Say "continue" later and I run the same command again to collect it.`);
+    return;
+  }
   const covered = lessons.filter((l) => requests.some((r) => r.custom_id.endsWith(`-${l.code.replace(/[^A-Za-z0-9_-]/g, "_")}`)));
   let outcome;
   if (stage !== "review") {

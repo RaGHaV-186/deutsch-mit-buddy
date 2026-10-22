@@ -35,6 +35,42 @@
     "final": null
   },
   {
+    "id": "W1.4#writing",
+    "part": "writing",
+    "unit": "writing",
+    "label": "Writing task",
+    "original": {
+      "task": "Write a short postcard to a friend. You are on holiday. Tell your friend what you can eat there, what you must or want to try, and what you want to drink. Write exactly 5 sentences.",
+      "min_words": 30,
+      "must_include": [
+        "one sentence with können",
+        "one sentence with wollen",
+        "one sentence with müssen",
+        "one food or drink word from the lesson",
+        "a greeting at the end"
+      ],
+      "useful_phrases": [
+        "Ich kann ... essen.",
+        "Ich will ... probieren.",
+        "Ich muss ... bestellen.",
+        "Ich möchte einen Kaffee.",
+        "Viele Grüße"
+      ],
+      "model_answer": "Liebe Lena, ich bin im Urlaub und das Essen ist super. Ich kann hier jeden Tag Fisch und Gemüse essen. Ich will heute den Kuchen probieren. Ich muss ein Glas Wasser bestellen, denn mir ist heiß. Zum Trinken möchte ich einen Kaffee. Viele Grüße, Anna",
+      "rubric": [
+        "Uses exactly 5 sentences and at least 30 words",
+        "Uses können, wollen and müssen correctly conjugated in position 2",
+        "Main verb is in the infinitive at the end of the sentence",
+        "Uses food and drink words from the lesson with correct articles",
+        "Has a greeting and correct spelling of ö and ü"
+      ]
+    },
+    "lint": [],
+    "status": "needs-human",
+    "reason": "No verdict for this item.",
+    "final": null
+  },
+  {
     "id": "W1.5#reading.q5",
     "part": "reading",
     "unit": "question",

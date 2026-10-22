@@ -191,5 +191,33 @@
       }
     ]
   },
-  "failures": []
+  "failures": [],
+  "fixHashes": {
+    "Z1#writing": "88b8f30fcac5",
+    "Z2#vocabulary.w16": "fe616cdb3059",
+    "Z2#writing": "34b5fbdc3140",
+    "Z2#exam.reading.q1": "dd77085b8d86",
+    "Z3#exam.gv3": "ae657e5b43d0",
+    "Z5#reading.passage": "1f8f329ff7c9",
+    "Z5#reading.q1": "f91b25904b67",
+    "Z5#reading.q2": "42d160e1e79c",
+    "Z5#reading.q3": "5d07b786254e",
+    "Z5#reading.q4": "cbfc134cad5e",
+    "Z5#reading.q5": "583848856486",
+    "Z9#culture": "6dd0765f4e0a",
+    "W1.5#reading.q5": "923c98845322",
+    "W2.2#writing": "7d1c0de6e7be",
+    "W3.1#writing": "1cd18a34e07c",
+    "W4.2#speaking.tandem": "6ee65ddec9e5",
+    "Z10#vocabulary.w08": "4d2acd2076e5",
+    "Z10#vocabulary.w09": "9d6e4ddcaef0",
+    "Z10#exam.gv2": "93515b84aff7",
+    "W1.1#culture": "1900e111d67c",
+    "W2.4#writing": "c8c8ee95918f",
+    "W3.2#reading.passage": "2d0446759b54",
+    "W3.2#reading.q3": "c3845b71cf4d",
+    "W3.2#listening.passage": "f2717996859e",
+    "W3.2#listening.q4": "d25188dd0abc",
+    "W3.2#listening.q5": "e91541c9dbfb"
+  }
 }

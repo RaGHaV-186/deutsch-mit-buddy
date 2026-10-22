@@ -12,6 +12,7 @@ import {
   combineLesson,
   costReport,
   currentVerdicts,
+  fixHash,
   customId,
   estimateStage,
   fingerprint,
@@ -495,6 +496,22 @@ describe("manual corrections and the re-review of just those items", () => {
     expect(done.items.find((i) => i.id === "Z1#writing")).toMatchObject({ status: "ok", reason: "re-checked" });
     expect(done.items.filter((i) => i.status === "ok")).toHaveLength(93);
     expect(done.publishable).toBe(true);
+  });
+
+  it("a re-review verdict is only valid for the exact text it checked: edit the correction afterwards and the item waits for a human again", () => {
+    const first = allOk(lesson);
+    const checked = [verdict("Z1#writing", "ok", { reason: "re-checked" })];
+    const hashes = { "Z1#writing": fixHash(fixes["Z1#writing"].value) };
+    // same text: the verdict counts
+    expect(currentVerdicts("Z1", first, checked, fixes, hashes)!.find((v) => v.id === "Z1#writing")).toMatchObject({ reason: "re-checked" });
+    // the correction was edited after the re-check: the verdict is stale, nothing counts for it
+    const edited = { ...fixes, "Z1#writing": { ...fixes["Z1#writing"], value: { ...(fixes["Z1#writing"].value as object), model_answer: "Ein neuer Text." } } };
+    expect(currentVerdicts("Z1", first, checked, edited, hashes)!.some((v) => v.id === "Z1#writing")).toBe(false);
+    const waiting = mergeLesson(row, applyManualFixes("Z1", lesson, edited), currentVerdicts("Z1", first, checked, edited, hashes)!);
+    expect(waiting.items.find((i) => i.id === "Z1#writing")).toMatchObject({ status: "needs-human" });
+    expect(waiting.publishable).toBe(false);
+    // no recorded hash at all counts as stale too
+    expect(currentVerdicts("Z1", first, checked, fixes, {})!.some((v) => v.id === "Z1#writing")).toBe(false);
   });
 
   it("a re-review verdict for an item that was not corrected is ignored", () => {

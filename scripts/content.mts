@@ -37,6 +37,7 @@ import {
   lintErrors,
   applyManualFixes,
   currentVerdicts,
+  fixHash,
   manualFixIds,
   mergeLesson,
   parsePassA,
@@ -97,6 +98,8 @@ interface Raw<T> {
 }
 interface ReviewRaw {
   verdicts: Record<string, ReviewVerdict[]>;
+  /** Re-review only: item id -> fixHash of the correction text that was re-checked (a verdict counts only for that exact text). */
+  fixHashes?: Record<string, string>;
   failures: { code: string; reason: string }[];
 }
 interface State {
@@ -283,6 +286,11 @@ async function runCommand() {
     const parsed = parseReview(covered, completeLessons(), lines, reviewOnly());
     const raw = read<ReviewRaw>(`${tagOf(stage)}.raw.json`) ?? { verdicts: {}, failures: [] };
     for (const [code, verdicts] of parsed.results) raw.verdicts[code] = verdicts;
+    if (flag("fixes")) {
+      // The re-check looked at exactly these correction texts (the requests, and so the approval, were built from them): remember which.
+      raw.fixHashes ??= {};
+      for (const code of parsed.results.keys()) for (const id of manualFixIds(code, manualFixes())) raw.fixHashes[id] = fixHash(manualFixes()[id].value);
+    }
     raw.failures = parsed.failures;
     write(`${tagOf(stage)}.raw.json`, raw);
     outcome = parsed;
@@ -309,7 +317,7 @@ function buildReviews(): { reviews: LessonReview[]; unreviewed: string[] } {
   const unreviewed: string[] = [];
   for (const [code, lesson] of complete) {
     // A corrected item counts only with the verdict of the re-review; before that it waits for a human.
-    const verdicts = currentVerdicts(code, rev.verdicts[code], rereview?.verdicts[code], fixes);
+    const verdicts = currentVerdicts(code, rev.verdicts[code], rereview?.verdicts[code], fixes, rereview?.fixHashes ?? {});
     const row = allLessons.find((l) => l.code === code)!;
     if (!verdicts) unreviewed.push(code);
     else reviews.push(mergeLesson(row, lesson, verdicts));

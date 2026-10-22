@@ -348,11 +348,25 @@ export function applyManualFixes(code: string, lesson: Lesson, fixes: ManualFixe
   return current;
 }
 
-/** The verdicts that count: the first review's, except for corrected items, whose only valid verdict is the one from the re-review (none yet = waits for a human). */
-export function currentVerdicts(code: string, first: ReviewVerdict[] | undefined, rereviewed: ReviewVerdict[] | undefined, fixes: ManualFixes): ReviewVerdict[] | undefined {
+/** Short fingerprint of a manual correction's value: a re-review verdict is only valid for the exact text it looked at. */
+export const fixHash = (value: unknown) => createHash("sha256").update(JSON.stringify(value)).digest("hex").slice(0, 12);
+
+/**
+ * The verdicts that count: the first review's, except for corrected items, whose only valid verdict is the one from the re-review (none yet =
+ * waits for a human). With `reviewedHashes` (item id -> fixHash of the text the re-review looked at) a re-review verdict also has to be for
+ * the CURRENT text of the correction: edit a correction after its re-review and the item waits for a human again.
+ */
+export function currentVerdicts(
+  code: string,
+  first: ReviewVerdict[] | undefined,
+  rereviewed: ReviewVerdict[] | undefined,
+  fixes: ManualFixes,
+  reviewedHashes?: Record<string, string>,
+): ReviewVerdict[] | undefined {
   if (!first) return undefined;
   const corrected = new Set(manualFixIds(code, fixes));
-  return [...first.filter((v) => !corrected.has(v.id)), ...(rereviewed ?? []).filter((v) => corrected.has(v.id))];
+  const current = (v: ReviewVerdict) => corrected.has(v.id) && (!reviewedHashes || reviewedHashes[v.id] === fixHash(fixes[v.id].value));
+  return [...first.filter((v) => !corrected.has(v.id)), ...(rereviewed ?? []).filter(current)];
 }
 
 // ---- Merging the passes

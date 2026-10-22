@@ -1,7 +1,7 @@
 # Review of run z1-b1
 
-2853 items in 30 lessons: **2539 ok**, **309 fixed**, **5 need a human**.
-Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, W1.1, W1.2, W1.3, W1.4, W2.1, W2.2, W2.3, W2.4, W3.1, W3.3, W3.4, W3.5, W4.1, W4.2, W4.3, W4.4, Z9. Blocked: Z10, W1.5, W2.5, W3.2, W4.5.
+2853 items in 30 lessons: **2539 ok**, **308 fixed**, **6 need a human**.
+Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, W1.1, W1.2, W1.3, W2.1, W2.2, W2.3, W2.4, W3.1, W3.3, W3.4, W3.5, W4.1, W4.2, W4.3, W4.4, Z9. Blocked: Z10, W1.4, W1.5, W2.5, W3.2, W4.5.
 
 ## Z1 (can be published)
 - **CORRECTED BY THE COURSE OWNER** Z1#writing: The model answer asked and answered its own question (Wie heißt du? Du heißt Jonas). Now Jonas answers in the text; the task and the points to include say so.
@@ -164,11 +164,11 @@ Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, W1.1, W1.2, W1.3, W1.4, W2.1, 
 - **FIXED** W1.3#exam.listening.passage (Exam listening dialogue): 'Ja, kein Problem!' is an unnatural answer to 'Do you like the room?'; changed it to 'Ja, sehr!'
 - **FIXED** W1.3#exam.listening.q1 (Exam listening question 1): Table and lamp are never mentioned; the prompt now asks what Lena says she does not have.
 
-## W1.4 (can be published)
+## W1.4 (blocked)
 - **CORRECTED BY THE COURSE OWNER** W1.4#writing: New counting rule (Raghav): a salutation on its own and a closing formula do not count as sentences. The model answer now has the exact number of real sentences the task asks for, and keeps the closing (5 real sentences + the closing).
 - **FIXED** W1.4#vocabulary.w05 (Word: Kaffee): In Germany Kaffee is stressed on the first syllable (KAF-fee); end stress is Austrian. Tip corrected.
 - **FIXED** W1.4#reading.q4 (Reading question 4): "Dein Brot" is the wrong perspective as an answer; replaced with "Ihr Brot".
-- **FIXED** W1.4#writing (Writing task): The model answer had only four real sentences plus the closing, but the task asks for exactly 5. I split the long und-sentence into two, so there are now 5 sentences plus the greeting.
+- **NEEDS-HUMAN** W1.4#writing (Writing task): No verdict for this item.
 - **FIXED** W1.4#speaking.d2 (Speaking drill 2): Target has muss (plain u, no ü), and ü is not made with lips as for ee; tip corrected.
 - **FIXED** W1.4#speaking.d4 (Speaking drill 4): Target has darf (plain a), no ü; tip about dürfen's ü misleading, corrected.
 - **FIXED** W1.4#speaking.d5 (Speaking drill 5): Short ö in können is a rounded short e (as in bed), not 'ay'; tip corrected.

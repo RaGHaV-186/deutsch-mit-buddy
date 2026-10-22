@@ -104,6 +104,13 @@ describe("the rules of the generator", () => {
     expect(REVIEW_SYSTEM).toContain("the model answer meets its own task");
   });
 
+  it("the names rule lists the fixed surnames for the writers and the reviewer", () => {
+    for (const system of [PASS_A_SYSTEM, REVIEW_SYSTEM]) {
+      expect(system).toContain("Braun, Weber, Lang, Schmidt, Müller");
+      expect(system).toContain("only Anna, Jonas and Lena");
+    }
+  });
+
   it("the writer is told how to count a model answer, and how to keep the exam fresh", () => {
     expect(PASS_B_SYSTEM).toContain("count before you answer");
     expect(PASS_B_SYSTEM).toContain("A greeting (\"Hallo Lena!\"), a closing");

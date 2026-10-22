@@ -4,6 +4,7 @@ import { COUNTS, EXERCISES_PER_LESSON, LEVEL_PROFILES, type Lesson, type PassA }
 import { enumerateItems, valueOf } from "./lesson-items.ts";
 import type { LintIssue } from "./lesson-lint.ts";
 import { notesFor, type NotePass } from "./lesson-notes.ts";
+import { NAMES_RULE } from "./names.ts";
 
 // Models and settings. Sonnet writes a lesson in four passes (A teaches; B covers reading, listening, writing and speaking; C is the day exam; D covers the
 // warm-up, the culture note, the mission and close day; B, C and D see A's output, D also sees the earlier sessions);
@@ -27,7 +28,7 @@ const SHARED = `You write lesson content for "Deutsch mit Buddy", AI-based perso
 GENERAL RULES
 - All German must be correct, natural, modern standard German (Germany), spelled correctly with correct capitals and punctuation. English must be accurate and clear.
 - Everything is original. Never copy or closely paraphrase published texts, textbooks, songs or exams. Never claim anything is official, certified or from a language institute.
-- Never use real people's names. Use only Anna, Jonas and Lena (and Buddy, the teacher dog, where he speaks). No brands, no politics, no religion, nothing that dates quickly.
+- Names: ${NAMES_RULE} No religion, nothing that dates quickly.
 - Match the CEFR level and the instruction language given in the request. Never use grammar or vocabulary clearly above the level, and keep words taught in earlier lessons simple. The lesson's grammar point and theme run through every part.
 - Instruction language: the text that explains or instructs (goal, grammar explanation, rule summary, tips, exercise explanations, culture note, mission, task descriptions) is written in the instruction language of the request. German examples, words, sentences, dialogues and model answers are always German.
 - Output format: where a field has nothing to say, write an empty string (for an article, write none). This applies to article, plural, tip, note, safety_note, target_hint and the en line of a dialogue.
@@ -87,7 +88,7 @@ For every item check what applies:
 - Questions: exactly one answer is right (apart from the accepted answers); wrong options (distractors) are clearly false but plausible: real words or phrases of the same kind as the right answer that a learner who did not understand could pick. Nonsense or a joke ("Wien ist ein Freund" for a country), an option of the wrong kind (a name when a country is asked) and an option that is also correct, or could be taken from the text as correct, are errors: replace such an option and keep exactly one right answer; for ordering questions the scrambled words are exactly the words of the answer and no other natural word order is also correct; for dictation the answer is a natural sentence that can be read aloud; explanations are true.
 - Writing task: the model answer meets its own task: at least min_words words and the number of sentences the task names.
 - Passages, tasks, scenario, culture note, mission: coherent, useful for learning, original, safe, accurate (a doubtful cultural fact is a problem), neutral; reading and listening questions can only be answered from the text or dialogue; the exam items are fresh and cover the day's grammar and words; the writing rubric covers the lesson's grammar and vocabulary; the Tandem scenario makes Buddy a conversation partner.
-- Names: only Anna, Jonas, Lena and Buddy; no real people, brands or politics.
+- Names: ${NAMES_RULE}
 
 COMMON TRAPS
 ${trapsForPrompt()}

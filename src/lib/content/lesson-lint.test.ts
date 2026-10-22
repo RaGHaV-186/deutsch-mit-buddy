@@ -199,6 +199,16 @@ describe("items", () => {
     expect(rules).toEqual(expect.arrayContaining(["Z9#vocabulary.w01:article-in-de", "Z9#vocabulary.w02:article-in-de"]));
   });
 
+  it("a surname after Herr/Frau must be on the fixed list", () => {
+    const ok = lint((l) => (l.vocabulary.words[0].example = "Guten Tag, Herr Lang."));
+    expect(ruleOf(ok).filter((r) => r.endsWith(":surname"))).toEqual([]);
+    const bad = lint((l) => {
+      l.vocabulary.words[0].example = "Guten Tag, Herr Meier.";
+      l.vocabulary.words[1].example_en = "Hello, Mrs Kowalski.";
+    });
+    expect(ruleOf(bad)).toEqual(expect.arrayContaining(["Z9#vocabulary.w01:surname", "Z9#vocabulary.w02:surname"]));
+  });
+
   it("a trap whose wrong and right versions are the same is an error", () => {
     expect(ruleOf(lint((l) => (l.grammar.traps[0].wrong = l.grammar.traps[0].right)))).toContain("Z9#grammar.trap1:trap-same");
   });

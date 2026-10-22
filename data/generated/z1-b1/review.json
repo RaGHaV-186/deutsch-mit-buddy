@@ -1,12 +1,12 @@
 {
   "run": "z1-b1",
-  "builtAt": "2026-10-22T13:52:40.044Z",
+  "builtAt": "2026-10-22T14:08:41.556Z",
   "summary": {
     "lessons": 30,
     "items": 2853,
-    "ok": 2533,
-    "fixed": 307,
-    "needsHuman": 13,
+    "ok": 2525,
+    "fixed": 306,
+    "needsHuman": 22,
     "publishable": [
       "Z1",
       "Z2",
@@ -48,7 +48,28 @@
     "Z2#writing",
     "Z2#exam.reading.q1",
     "Z2#vocabulary.w16",
-    "Z3#exam.gv3"
+    "Z3#exam.gv3",
+    "Z10#vocabulary.w08",
+    "Z10#vocabulary.w09",
+    "Z10#exam.gv2",
+    "W1.1#culture",
+    "Z5#reading.passage",
+    "Z5#reading.q1",
+    "Z5#reading.q2",
+    "Z5#reading.q3",
+    "Z5#reading.q4",
+    "Z5#reading.q5",
+    "W1.4#writing",
+    "W2.2#writing",
+    "W2.4#writing",
+    "W3.1#writing",
+    "W1.5#reading.q5",
+    "W3.2#reading.passage",
+    "W3.2#reading.q3",
+    "W3.2#listening.passage",
+    "W3.2#listening.q4",
+    "W3.2#listening.q5",
+    "W4.2#speaking.tandem"
   ],
   "failures": {
     "generateA": [],
@@ -18993,11 +19014,11 @@
           "label": "Reading text",
           "original": {
             "title": "Annas Zimmer",
-            "text": "Das ist Annas Zimmer. Anna hat einen Tisch und einen Stuhl. Auf dem Tisch ist eine Lampe. Anna hat auch ein Buch und ein Handy. Die Tasche ist am Bett. Anna hat zwei Stifte. Jonas hat keine Brille. Anna sagt: Das ist mein Zimmer!"
+            "text": "Das ist Annas Zimmer. Anna hat ein Bett. Sie hat auch eine Lampe, ein Buch und ein Handy. Das Handy ist neu. Das Fenster ist groß und die Tür ist klein. Anna hat zwei Stifte. Anna sagt: Das ist mein Zimmer!"
           },
           "lint": [],
           "status": "needs-human",
-          "reason": "'Jonas hat keine Brille.' does not fit a text about Anna's room. The passage also uses einen and keine, which the intro defers. reading.q5 depends on that sentence, so a human should decide.",
+          "reason": "No verdict for this item.",
           "final": null
         },
         {
@@ -19008,32 +19029,20 @@
           "original": {
             "skill": "reading",
             "type": "multiple_choice",
-            "prompt": "What does Anna have?",
-            "answer": "a table and a chair",
+            "prompt": "What is the first thing Anna has?",
+            "answer": "a bed",
             "distractors": [
-              "a car and a bike",
-              "a dog and a cat",
-              "a door and a window only"
+              "a lamp",
+              "a book",
+              "a pen"
             ],
             "accepted_answers": [],
-            "explanation": "The text says Anna hat einen Tisch und einen Stuhl."
+            "explanation": "The text says: Anna hat ein Bett."
           },
           "lint": [],
-          "status": "ok",
-          "reason": "Answerable from the text.",
-          "final": {
-            "skill": "reading",
-            "type": "multiple_choice",
-            "prompt": "What does Anna have?",
-            "answer": "a table and a chair",
-            "distractors": [
-              "a car and a bike",
-              "a dog and a cat",
-              "a door and a window only"
-            ],
-            "accepted_answers": [],
-            "explanation": "The text says Anna hat einen Tisch und einen Stuhl."
-          }
+          "status": "needs-human",
+          "reason": "No verdict for this item.",
+          "final": null
         },
         {
           "id": "Z5#reading.q2",
@@ -19043,32 +19052,20 @@
           "original": {
             "skill": "reading",
             "type": "multiple_choice",
-            "prompt": "What is on the table?",
-            "answer": "a lamp",
+            "prompt": "What is new?",
+            "answer": "the phone",
             "distractors": [
-              "a bag",
-              "a key",
-              "a glass"
+              "the book",
+              "the lamp",
+              "the window"
             ],
             "accepted_answers": [],
-            "explanation": "The text says: Auf dem Tisch ist eine Lampe."
+            "explanation": "The text says: Das Handy ist neu."
           },
           "lint": [],
-          "status": "ok",
-          "reason": "Answerable from the text.",
-          "final": {
-            "skill": "reading",
-            "type": "multiple_choice",
-            "prompt": "What is on the table?",
-            "answer": "a lamp",
-            "distractors": [
-              "a bag",
-              "a key",
-              "a glass"
-            ],
-            "accepted_answers": [],
-            "explanation": "The text says: Auf dem Tisch ist eine Lampe."
-          }
+          "status": "needs-human",
+          "reason": "No verdict for this item.",
+          "final": null
         },
         {
           "id": "Z5#reading.q3",
@@ -19078,32 +19075,20 @@
           "original": {
             "skill": "reading",
             "type": "multiple_choice",
-            "prompt": "Where is the bag?",
-            "answer": "at the bed",
+            "prompt": "What else does Anna have besides the bed?",
+            "answer": "a lamp, a book and a phone",
             "distractors": [
-              "on the table",
-              "at the door",
-              "on the chair"
+              "a table and a chair",
+              "a car and a bike",
+              "a dog and a cat"
             ],
             "accepted_answers": [],
-            "explanation": "The text says: Die Tasche ist am Bett."
+            "explanation": "The text says: Sie hat auch eine Lampe, ein Buch und ein Handy."
           },
           "lint": [],
-          "status": "ok",
-          "reason": "Answerable from the text.",
-          "final": {
-            "skill": "reading",
-            "type": "multiple_choice",
-            "prompt": "Where is the bag?",
-            "answer": "at the bed",
-            "distractors": [
-              "on the table",
-              "at the door",
-              "on the chair"
-            ],
-            "accepted_answers": [],
-            "explanation": "The text says: Die Tasche ist am Bett."
-          }
+          "status": "needs-human",
+          "reason": "No verdict for this item.",
+          "final": null
         },
         {
           "id": "Z5#reading.q4",
@@ -19122,19 +19107,9 @@
             "explanation": "The text says: Anna hat zwei Stifte."
           },
           "lint": [],
-          "status": "ok",
-          "reason": "Correct; accepted answers fine.",
-          "final": {
-            "skill": "reading",
-            "type": "typing",
-            "prompt": "How many pens does Anna have? Answer in German with one word.",
-            "answer": "zwei",
-            "distractors": [],
-            "accepted_answers": [
-              "zwei Stifte"
-            ],
-            "explanation": "The text says: Anna hat zwei Stifte."
-          }
+          "status": "needs-human",
+          "reason": "No verdict for this item.",
+          "final": null
         },
         {
           "id": "Z5#reading.q5",
@@ -19144,32 +19119,20 @@
           "original": {
             "skill": "reading",
             "type": "multiple_choice",
-            "prompt": "Who does not have glasses?",
-            "answer": "Jonas",
+            "prompt": "Who says: Das ist mein Zimmer?",
+            "answer": "Anna",
             "distractors": [
-              "Anna",
+              "Jonas",
               "Lena",
               "Buddy"
             ],
             "accepted_answers": [],
-            "explanation": "The text says: Jonas hat keine Brille."
+            "explanation": "The last sentence says: Anna sagt: Das ist mein Zimmer!"
           },
           "lint": [],
-          "status": "ok",
-          "reason": "Answerable from the text as written.",
-          "final": {
-            "skill": "reading",
-            "type": "multiple_choice",
-            "prompt": "Who does not have glasses?",
-            "answer": "Jonas",
-            "distractors": [
-              "Anna",
-              "Lena",
-              "Buddy"
-            ],
-            "accepted_answers": [],
-            "explanation": "The text says: Jonas hat keine Brille."
-          }
+          "status": "needs-human",
+          "reason": "No verdict for this item.",
+          "final": null
         },
         {
           "id": "Z5#listening.passage",
@@ -20905,47 +20868,47 @@
         "reading": {
           "passage": {
             "title": "Annas Zimmer",
-            "text": "Das ist Annas Zimmer. Anna hat einen Tisch und einen Stuhl. Auf dem Tisch ist eine Lampe. Anna hat auch ein Buch und ein Handy. Die Tasche ist am Bett. Anna hat zwei Stifte. Jonas hat keine Brille. Anna sagt: Das ist mein Zimmer!"
+            "text": "Das ist Annas Zimmer. Anna hat ein Bett. Sie hat auch eine Lampe, ein Buch und ein Handy. Das Handy ist neu. Das Fenster ist groß und die Tür ist klein. Anna hat zwei Stifte. Anna sagt: Das ist mein Zimmer!"
           },
           "questions": [
             {
               "skill": "reading",
               "type": "multiple_choice",
-              "prompt": "What does Anna have?",
-              "answer": "a table and a chair",
+              "prompt": "What is the first thing Anna has?",
+              "answer": "a bed",
               "distractors": [
+                "a lamp",
+                "a book",
+                "a pen"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: Anna hat ein Bett."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What is new?",
+              "answer": "the phone",
+              "distractors": [
+                "the book",
+                "the lamp",
+                "the window"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: Das Handy ist neu."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What else does Anna have besides the bed?",
+              "answer": "a lamp, a book and a phone",
+              "distractors": [
+                "a table and a chair",
                 "a car and a bike",
-                "a dog and a cat",
-                "a door and a window only"
+                "a dog and a cat"
               ],
               "accepted_answers": [],
-              "explanation": "The text says Anna hat einen Tisch und einen Stuhl."
-            },
-            {
-              "skill": "reading",
-              "type": "multiple_choice",
-              "prompt": "What is on the table?",
-              "answer": "a lamp",
-              "distractors": [
-                "a bag",
-                "a key",
-                "a glass"
-              ],
-              "accepted_answers": [],
-              "explanation": "The text says: Auf dem Tisch ist eine Lampe."
-            },
-            {
-              "skill": "reading",
-              "type": "multiple_choice",
-              "prompt": "Where is the bag?",
-              "answer": "at the bed",
-              "distractors": [
-                "on the table",
-                "at the door",
-                "on the chair"
-              ],
-              "accepted_answers": [],
-              "explanation": "The text says: Die Tasche ist am Bett."
+              "explanation": "The text says: Sie hat auch eine Lampe, ein Buch und ein Handy."
             },
             {
               "skill": "reading",
@@ -20961,15 +20924,15 @@
             {
               "skill": "reading",
               "type": "multiple_choice",
-              "prompt": "Who does not have glasses?",
-              "answer": "Jonas",
+              "prompt": "Who says: Das ist mein Zimmer?",
+              "answer": "Anna",
               "distractors": [
-                "Anna",
+                "Jonas",
                 "Lena",
                 "Buddy"
               ],
               "accepted_answers": [],
-              "explanation": "The text says: Jonas hat keine Brille."
+              "explanation": "The last sentence says: Anna sagt: Das ist mein Zimmer!"
             }
           ]
         },
@@ -35584,7 +35547,7 @@
           "label": "Word: Herr",
           "original": {
             "tier": "core",
-            "en": "Mr / man",
+            "en": "Mr (with a name) / gentleman",
             "article": "der",
             "de": "Herr",
             "plural": "die Herren",
@@ -35594,7 +35557,7 @@
           },
           "lint": [],
           "status": "needs-human",
-          "reason": "The surname Lang breaks the names rule (only Anna/Jonas/Lena/Buddy), but Herr needs a surname. 'man' is also misleading (Mann); 'gentleman' fits better.",
+          "reason": "No verdict for this item.",
           "final": null
         },
         {
@@ -35604,7 +35567,7 @@
           "label": "Word: Frau",
           "original": {
             "tier": "core",
-            "en": "Mrs / woman",
+            "en": "Mrs (with a name) / woman",
             "article": "die",
             "de": "Frau",
             "plural": "die Frauen",
@@ -35614,7 +35577,7 @@
           },
           "lint": [],
           "status": "needs-human",
-          "reason": "The surname Lang breaks the names rule, but Frau needs a surname. Owner should decide.",
+          "reason": "No verdict for this item.",
           "final": null
         },
         {
@@ -36868,7 +36831,7 @@
           "original": {
             "skill": "grammar",
             "type": "gap_fill",
-            "prompt": "Guten Tag, Frau Weiß. Was ___ Sie?",
+            "prompt": "Guten Tag, Frau Weber. Was ___ Sie?",
             "answer": "bestellen",
             "distractors": [
               "bestellst",
@@ -36879,21 +36842,9 @@
             "explanation": "The formal Sie takes the verb ending -en."
           },
           "lint": [],
-          "status": "fixed",
-          "reason": "The surname Weiß broke the names rule. Removed it from the prompt.",
-          "final": {
-            "skill": "grammar",
-            "type": "gap_fill",
-            "prompt": "Guten Tag! Was ___ Sie?",
-            "answer": "bestellen",
-            "distractors": [
-              "bestellst",
-              "bestellt",
-              "bestelle"
-            ],
-            "accepted_answers": [],
-            "explanation": "The formal Sie takes the verb ending -en."
-          }
+          "status": "needs-human",
+          "reason": "No verdict for this item.",
+          "final": null
         },
         {
           "id": "Z10#exam.gv3",
@@ -37778,7 +37729,7 @@
             },
             {
               "tier": "core",
-              "en": "Mr / man",
+              "en": "Mr (with a name) / gentleman",
               "article": "der",
               "de": "Herr",
               "plural": "die Herren",
@@ -37788,7 +37739,7 @@
             },
             {
               "tier": "core",
-              "en": "Mrs / woman",
+              "en": "Mrs (with a name) / woman",
               "article": "die",
               "de": "Frau",
               "plural": "die Frauen",
@@ -38271,7 +38222,7 @@
             {
               "skill": "grammar",
               "type": "gap_fill",
-              "prompt": "Guten Tag! Was ___ Sie?",
+              "prompt": "Guten Tag, Frau Weber. Was ___ Sie?",
               "answer": "bestellen",
               "distractors": [
                 "bestellst",
@@ -38453,7 +38404,7 @@
         "speaking": "fixed",
         "culture": "ok",
         "mission": "fixed",
-        "exam": "fixed",
+        "exam": "needs-human",
         "closing": "ok"
       },
       "publishable": false
@@ -41003,7 +40954,7 @@
           },
           "lint": [],
           "status": "needs-human",
-          "reason": "Uses surname 'Weber' (Anna Weber, Frau/Herr Weber); names rule allows only Anna, Jonas, Lena, Buddy. Owner should decide if surnames are allowed.",
+          "reason": "No verdict for this item.",
           "final": null
         },
         {
@@ -53374,7 +53325,7 @@
               "Ich möchte einen Kaffee.",
               "Viele Grüße"
             ],
-            "model_answer": "Liebe Lena, ich bin im Urlaub und das Essen ist super. Ich kann hier jeden Tag Fisch und Gemüse essen. Ich will heute den Kuchen probieren. Ich muss ein Glas Wasser bestellen, denn mir ist heiß. Viele Grüße, Anna",
+            "model_answer": "Liebe Lena, ich bin im Urlaub und das Essen ist super. Ich kann hier jeden Tag Fisch und Gemüse essen. Ich will heute den Kuchen probieren und ich muss unbedingt Wasser bestellen. Zum Trinken möchte ich einen Kaffee. Viele Grüße, Anna",
             "rubric": [
               "Uses exactly 5 sentences and at least 30 words",
               "Uses können, wollen and müssen correctly conjugated in position 2",
@@ -53385,7 +53336,7 @@
           },
           "lint": [],
           "status": "needs-human",
-          "reason": "The correction still fails an automatic check (The model answer has 6 sentences; its own task asks for 5.). (Model had only 4 real sentences plus closing and no 'want to drink' sentence; rewritten to 5 sentences meeting the task.)",
+          "reason": "No verdict for this item.",
           "final": null
         },
         {
@@ -54967,7 +54918,7 @@
             "Ich möchte einen Kaffee.",
             "Viele Grüße"
           ],
-          "model_answer": "Liebe Lena, ich bin im Urlaub und das Essen ist super. Ich kann hier jeden Tag Fisch und Gemüse essen. Ich will heute den Kuchen probieren. Ich muss ein Glas Wasser bestellen, denn mir ist heiß. Viele Grüße, Anna",
+          "model_answer": "Liebe Lena, ich bin im Urlaub und das Essen ist super. Ich kann hier jeden Tag Fisch und Gemüse essen. Ich will heute den Kuchen probieren und ich muss unbedingt Wasser bestellen. Zum Trinken möchte ich einen Kaffee. Viele Grüße, Anna",
           "rubric": [
             "Uses exactly 5 sentences and at least 30 words",
             "Uses können, wollen and müssen correctly conjugated in position 2",
@@ -57251,14 +57202,16 @@
             "accepted_answers": [
               "Anna macht eine Pause.",
               "Sie macht Pause.",
+              "Anna macht Pause.",
               "Sie isst das Mittagessen.",
+              "Anna isst das Mittagessen.",
               "Sie macht eine Pause und isst das Mittagessen."
             ],
             "explanation": "At noon she takes a break and eats lunch."
           },
           "lint": [],
           "status": "needs-human",
-          "reason": "Marked fixed, but the correction is missing or does not fit this item. (Correct variants with Anna as subject, or 'Pause' without 'eine', were missing; added them.)",
+          "reason": "No verdict for this item.",
           "final": null
         },
         {
@@ -59036,7 +58989,9 @@
               "accepted_answers": [
                 "Anna macht eine Pause.",
                 "Sie macht Pause.",
+                "Anna macht Pause.",
                 "Sie isst das Mittagessen.",
+                "Anna isst das Mittagessen.",
                 "Sie macht eine Pause und isst das Mittagessen."
               ],
               "explanation": "At noon she takes a break and eats lunch."
@@ -66182,12 +66137,12 @@
               "Uses at least two clothing words with the correct article.",
               "Writes the requested number of sentences with at least 30 words.",
               "Verb in second position and correct spelling, including capital letters for nouns.",
-              "Message has a greeting and a closing."
+              "Message has a friendly greeting (for example Liebe Anna,)."
             ]
           },
           "lint": [],
           "status": "needs-human",
-          "reason": "The correction still fails an automatic check (The model answer has 5 sentences; its own task asks for 4.). (The model answer had no closing, which its own rubric requires. Added 'Viele Grüße, dein Jonas'.)",
+          "reason": "No verdict for this item.",
           "final": null
         },
         {
@@ -67797,7 +67752,7 @@
             "Uses at least two clothing words with the correct article.",
             "Writes the requested number of sentences with at least 30 words.",
             "Verb in second position and correct spelling, including capital letters for nouns.",
-            "Message has a greeting and a closing."
+            "Message has a friendly greeting (for example Liebe Anna,)."
           ]
         },
         "speaking": {
@@ -74688,7 +74643,7 @@
               "Ich danke ihm.",
               "Viele Grüße"
             ],
-            "model_answer": "Liebe Anna, ich bin in Berlin. Heute suche ich die Post, aber ich finde sie nicht. Ein Mann hilft mir und ich danke ihm. Er zeigt mir den Weg und sagt: Die Post ist nicht weit. Ich schicke dir viele Grüße.",
+            "model_answer": "Liebe Anna, ich bin in Berlin. Heute suche ich die Post, aber ich finde sie nicht. Ein Mann hilft mir und ich danke ihm. Er zeigt mir den Weg, und die Post ist gar nicht weit. Ich schicke dir viele Grüße.",
             "rubric": [
               "Uses accusative pronouns correctly (ihn, sie, es, dich)",
               "Uses dative pronouns after helfen and danken (mir, ihm, ihr)",
@@ -74699,7 +74654,7 @@
           },
           "lint": [],
           "status": "needs-human",
-          "reason": "The correction still fails an automatic check (The model answer has 4 sentences; its own task asks for 5.). (The model answer's direct speech lacked quotation marks, although the rubric requires correct punctuation. Added „…“.)",
+          "reason": "No verdict for this item.",
           "final": null
         },
         {
@@ -76294,7 +76249,7 @@
             "Ich danke ihm.",
             "Viele Grüße"
           ],
-          "model_answer": "Liebe Anna, ich bin in Berlin. Heute suche ich die Post, aber ich finde sie nicht. Ein Mann hilft mir und ich danke ihm. Er zeigt mir den Weg und sagt: Die Post ist nicht weit. Ich schicke dir viele Grüße.",
+          "model_answer": "Liebe Anna, ich bin in Berlin. Heute suche ich die Post, aber ich finde sie nicht. Ein Mann hilft mir und ich danke ihm. Er zeigt mir den Weg, und die Post ist gar nicht weit. Ich schicke dir viele Grüße.",
           "rubric": [
             "Uses accusative pronouns correctly (ihn, sie, es, dich)",
             "Uses dative pronouns after helfen and danken (mir, ihm, ihr)",
@@ -83116,7 +83071,7 @@
               "Es war toll!",
               "Und du?"
             ],
-            "model_answer": "Hallo Lena, am Samstag habe ich lange geschlafen und dann im Park Fußball gespielt. Am Sonntag habe ich Kuchen gekocht und Kaffee getrunken. Es war toll! Und du, was hast du am Wochenende gemacht?",
+            "model_answer": "Hallo Lena, am Samstag habe ich lange geschlafen und dann im Park Fußball gespielt. Am Sonntag habe ich Suppe gekocht und Tee getrunken. Es war toll! Und du, was hast du am Wochenende gemacht?",
             "rubric": [
               "Uses haben in position 2 and the participle at the end of the sentence",
               "Forms participles correctly (gespielt, geschlafen, getrunken)",
@@ -83127,7 +83082,7 @@
           },
           "lint": [],
           "status": "needs-human",
-          "reason": "The correction still fails an automatic check (The model answer has 5 sentences; its own task asks for 4.). (Model said 'Kuchen gekocht' (cake is baked, not cooked) and had only 3 Perfekt sentences; changed to Suppe and added a Perfekt sentence.)",
+          "reason": "No verdict for this item.",
           "final": null
         },
         {
@@ -84702,7 +84657,7 @@
             "Es war toll!",
             "Und du?"
           ],
-          "model_answer": "Hallo Lena, am Samstag habe ich lange geschlafen und dann im Park Fußball gespielt. Am Sonntag habe ich Kuchen gekocht und Kaffee getrunken. Es war toll! Und du, was hast du am Wochenende gemacht?",
+          "model_answer": "Hallo Lena, am Samstag habe ich lange geschlafen und dann im Park Fußball gespielt. Am Sonntag habe ich Suppe gekocht und Tee getrunken. Es war toll! Und du, was hast du am Wochenende gemacht?",
           "rubric": [
             "Uses haben in position 2 and the participle at the end of the sentence",
             "Forms participles correctly (gespielt, geschlafen, getrunken)",
@@ -86842,11 +86797,11 @@
           "label": "Reading text",
           "original": {
             "title": "Annas Wochenende",
-            "text": "Am Samstag bin ich mit dem Fahrrad zum See gefahren. Das Wetter war schön. Ich bin im See geschwommen und dann in den Park gegangen. Am Sonntag bin ich zu Hause geblieben. Ich habe ein Buch gelesen. Gestern bin ich ins Kino gegangen. Der Film war lang, aber gut."
+            "text": "Am Samstag bin ich mit dem Fahrrad zum See gefahren. Das Wetter war schön. Ich bin im See geschwommen und dann in den Park gegangen. Am Abend bin ich ins Kino gegangen. Der Film war lang, aber gut. Am Sonntag bin ich zu Hause geblieben. Ich habe ein Buch gelesen."
           },
           "lint": [],
           "status": "needs-human",
-          "reason": "The weekend is Saturday and Sunday, with Sunday at home, but 'Gestern bin ich ins Kino gegangen' clashes if the text is read on Monday. Please check the timeline.",
+          "reason": "No verdict for this item.",
           "final": null
         },
         {
@@ -86927,7 +86882,7 @@
           "original": {
             "skill": "reading",
             "type": "multiple_choice",
-            "prompt": "Where did Anna go yesterday?",
+            "prompt": "Where did Anna go on Saturday evening?",
             "answer": "To the cinema",
             "distractors": [
               "To the museum",
@@ -86935,24 +86890,12 @@
               "To a concert"
             ],
             "accepted_answers": [],
-            "explanation": "She says \"Gestern bin ich ins Kino gegangen.\""
+            "explanation": "The text says: Am Abend bin ich ins Kino gegangen."
           },
           "lint": [],
-          "status": "ok",
-          "reason": "The answer comes from the text.",
-          "final": {
-            "skill": "reading",
-            "type": "multiple_choice",
-            "prompt": "Where did Anna go yesterday?",
-            "answer": "To the cinema",
-            "distractors": [
-              "To the museum",
-              "To the swimming pool",
-              "To a concert"
-            ],
-            "accepted_answers": [],
-            "explanation": "She says \"Gestern bin ich ins Kino gegangen.\""
-          }
+          "status": "needs-human",
+          "reason": "No verdict for this item.",
+          "final": null
         },
         {
           "id": "W3.2#reading.q4",
@@ -87057,18 +87000,18 @@
               },
               {
                 "speaker": "Jonas",
-                "de": "Cool! Ich bin zu Hause geblieben.",
-                "en": "Cool! I stayed at home."
+                "de": "Cool! Am Sonntag bin ich zu Hause geblieben.",
+                "en": "Cool! On Sunday I stayed at home."
               },
               {
                 "speaker": "Lena",
-                "de": "Und gestern? Wo bist du gewesen?",
-                "en": "And yesterday? Where were you?"
+                "de": "Und am Samstag? Wo bist du gewesen?",
+                "en": "And on Saturday? Where were you?"
               },
               {
                 "speaker": "Jonas",
-                "de": "Gestern bin ich ins Schwimmbad gegangen.",
-                "en": "Yesterday I went to the swimming pool."
+                "de": "Am Samstag bin ich ins Schwimmbad gegangen.",
+                "en": "On Saturday I went to the swimming pool."
               },
               {
                 "speaker": "Lena",
@@ -87079,7 +87022,7 @@
           },
           "lint": [],
           "status": "needs-human",
-          "reason": "Jonas stayed home at the weekend, yet 'gestern' he went swimming; this contradicts if the talk is on Monday. Please check the timeline.",
+          "reason": "No verdict for this item.",
           "final": null
         },
         {
@@ -87195,7 +87138,7 @@
           "original": {
             "skill": "listening",
             "type": "multiple_choice",
-            "prompt": "What did Jonas do at the weekend?",
+            "prompt": "What did Jonas do on Sunday?",
             "answer": "He stayed at home.",
             "distractors": [
               "He went to the lake.",
@@ -87203,24 +87146,12 @@
               "He went to a concert."
             ],
             "accepted_answers": [],
-            "explanation": "Jonas says \"Ich bin zu Hause geblieben.\""
+            "explanation": "Jonas says: Am Sonntag bin ich zu Hause geblieben."
           },
           "lint": [],
-          "status": "ok",
-          "reason": "The answer comes from the dialogue.",
-          "final": {
-            "skill": "listening",
-            "type": "multiple_choice",
-            "prompt": "What did Jonas do at the weekend?",
-            "answer": "He stayed at home.",
-            "distractors": [
-              "He went to the lake.",
-              "He flew on holiday.",
-              "He went to a concert."
-            ],
-            "accepted_answers": [],
-            "explanation": "Jonas says \"Ich bin zu Hause geblieben.\""
-          }
+          "status": "needs-human",
+          "reason": "No verdict for this item.",
+          "final": null
         },
         {
           "id": "W3.2#listening.q5",
@@ -87230,7 +87161,7 @@
           "original": {
             "skill": "listening",
             "type": "multiple_choice",
-            "prompt": "Where did Jonas go yesterday?",
+            "prompt": "Where did Jonas go on Saturday?",
             "answer": "To the swimming pool",
             "distractors": [
               "To the museum",
@@ -87238,24 +87169,12 @@
               "To the cinema"
             ],
             "accepted_answers": [],
-            "explanation": "He says \"ins Schwimmbad gegangen\"."
+            "explanation": "He says: Am Samstag bin ich ins Schwimmbad gegangen."
           },
           "lint": [],
-          "status": "ok",
-          "reason": "The answer comes from the dialogue.",
-          "final": {
-            "skill": "listening",
-            "type": "multiple_choice",
-            "prompt": "Where did Jonas go yesterday?",
-            "answer": "To the swimming pool",
-            "distractors": [
-              "To the museum",
-              "To the lake",
-              "To the cinema"
-            ],
-            "accepted_answers": [],
-            "explanation": "He says \"ins Schwimmbad gegangen\"."
-          }
+          "status": "needs-human",
+          "reason": "No verdict for this item.",
+          "final": null
         },
         {
           "id": "W3.2#writing",
@@ -88703,7 +88622,7 @@
         "reading": {
           "passage": {
             "title": "Annas Wochenende",
-            "text": "Am Samstag bin ich mit dem Fahrrad zum See gefahren. Das Wetter war schön. Ich bin im See geschwommen und dann in den Park gegangen. Am Sonntag bin ich zu Hause geblieben. Ich habe ein Buch gelesen. Gestern bin ich ins Kino gegangen. Der Film war lang, aber gut."
+            "text": "Am Samstag bin ich mit dem Fahrrad zum See gefahren. Das Wetter war schön. Ich bin im See geschwommen und dann in den Park gegangen. Am Abend bin ich ins Kino gegangen. Der Film war lang, aber gut. Am Sonntag bin ich zu Hause geblieben. Ich habe ein Buch gelesen."
           },
           "questions": [
             {
@@ -88735,7 +88654,7 @@
             {
               "skill": "reading",
               "type": "multiple_choice",
-              "prompt": "Where did Anna go yesterday?",
+              "prompt": "Where did Anna go on Saturday evening?",
               "answer": "To the cinema",
               "distractors": [
                 "To the museum",
@@ -88743,7 +88662,7 @@
                 "To a concert"
               ],
               "accepted_answers": [],
-              "explanation": "She says \"Gestern bin ich ins Kino gegangen.\""
+              "explanation": "The text says: Am Abend bin ich ins Kino gegangen."
             },
             {
               "skill": "reading",
@@ -88802,18 +88721,18 @@
               },
               {
                 "speaker": "Jonas",
-                "de": "Cool! Ich bin zu Hause geblieben.",
-                "en": "Cool! I stayed at home."
+                "de": "Cool! Am Sonntag bin ich zu Hause geblieben.",
+                "en": "Cool! On Sunday I stayed at home."
               },
               {
                 "speaker": "Lena",
-                "de": "Und gestern? Wo bist du gewesen?",
-                "en": "And yesterday? Where were you?"
+                "de": "Und am Samstag? Wo bist du gewesen?",
+                "en": "And on Saturday? Where were you?"
               },
               {
                 "speaker": "Jonas",
-                "de": "Gestern bin ich ins Schwimmbad gegangen.",
-                "en": "Yesterday I went to the swimming pool."
+                "de": "Am Samstag bin ich ins Schwimmbad gegangen.",
+                "en": "On Saturday I went to the swimming pool."
               },
               {
                 "speaker": "Lena",
@@ -88865,7 +88784,7 @@
             {
               "skill": "listening",
               "type": "multiple_choice",
-              "prompt": "What did Jonas do at the weekend?",
+              "prompt": "What did Jonas do on Sunday?",
               "answer": "He stayed at home.",
               "distractors": [
                 "He went to the lake.",
@@ -88873,12 +88792,12 @@
                 "He went to a concert."
               ],
               "accepted_answers": [],
-              "explanation": "Jonas says \"Ich bin zu Hause geblieben.\""
+              "explanation": "Jonas says: Am Sonntag bin ich zu Hause geblieben."
             },
             {
               "skill": "listening",
               "type": "multiple_choice",
-              "prompt": "Where did Jonas go yesterday?",
+              "prompt": "Where did Jonas go on Saturday?",
               "answer": "To the swimming pool",
               "distractors": [
                 "To the museum",
@@ -88886,7 +88805,7 @@
                 "To the cinema"
               ],
               "accepted_answers": [],
-              "explanation": "He says \"ins Schwimmbad gegangen\"."
+              "explanation": "He says: Am Samstag bin ich ins Schwimmbad gegangen."
             }
           ]
         },
@@ -108991,29 +108910,29 @@
           "label": "Tandem scenario",
           "original": {
             "title": "Dein Umzug",
-            "setting": "Buddy and you meet in front of your new flat on moving day and chat while you carry boxes.",
-            "buddy_role": "A friendly neighbour who is curious about the new person and offers to help.",
-            "learner_role": "A person who has just moved into a new flat.",
-            "opening_line": "Hallo! Du bist neu hier, oder? Wohnst du schon lange in der Straße?",
+            "setting": "Buddy and you meet in front of your new flat on moving day. You do not know each other, so you both say Sie and talk politely while you carry boxes.",
+            "buddy_role": "A friendly neighbour you do not know yet; he speaks formally (Sie, Ihnen) and offers to help.",
+            "learner_role": "A person who has just moved into a new flat and speaks formally (Sie, Ihnen) to the neighbour.",
+            "opening_line": "Guten Tag! Sie sind neu hier, oder? Wohnen Sie schon lange in der Straße?",
             "target_phrases": [
-              "Ich ziehe nach ... um.",
+              "Guten Tag! Ich ziehe nach ... um.",
               "Ich wohne seit einem Monat hier.",
-              "Kannst du mir beim Umzug helfen?",
+              "Können Sie mir beim Umzug helfen?",
               "Ich komme mit dem Auto.",
-              "Das ist der Schlüssel zur Wohnung."
+              "Auf Wiedersehen!"
             ],
             "target_grammar": "Prepositions with the Dativ: aus, bei, mit, nach, seit, von, zu",
             "topics": [
-              "Woher kommst du?",
+              "Woher kommen Sie?",
               "Wie viele Zimmer hat die Wohnung?",
-              "Hast du Möbel von einem Freund?",
-              "Wie kommst du zur Arbeit?"
+              "Haben Sie Möbel von einem Freund?",
+              "Wie kommen Sie zur Arbeit?"
             ],
-            "end_condition": "The learner has used at least three of the seven prepositions correctly and the chat ends with a friendly goodbye."
+            "end_condition": "The learner has used at least three of the seven prepositions correctly, always with Sie, and the chat ends with Auf Wiedersehen."
           },
           "lint": [],
           "status": "needs-human",
-          "reason": "A new neighbour (stranger) using du conflicts with the Sie rule; target phrases are du-form, so role or register needs redesign.",
+          "reason": "No verdict for this item.",
           "final": null
         },
         {
@@ -110490,25 +110409,25 @@
           ],
           "tandem": {
             "title": "Dein Umzug",
-            "setting": "Buddy and you meet in front of your new flat on moving day and chat while you carry boxes.",
-            "buddy_role": "A friendly neighbour who is curious about the new person and offers to help.",
-            "learner_role": "A person who has just moved into a new flat.",
-            "opening_line": "Hallo! Du bist neu hier, oder? Wohnst du schon lange in der Straße?",
+            "setting": "Buddy and you meet in front of your new flat on moving day. You do not know each other, so you both say Sie and talk politely while you carry boxes.",
+            "buddy_role": "A friendly neighbour you do not know yet; he speaks formally (Sie, Ihnen) and offers to help.",
+            "learner_role": "A person who has just moved into a new flat and speaks formally (Sie, Ihnen) to the neighbour.",
+            "opening_line": "Guten Tag! Sie sind neu hier, oder? Wohnen Sie schon lange in der Straße?",
             "target_phrases": [
-              "Ich ziehe nach ... um.",
+              "Guten Tag! Ich ziehe nach ... um.",
               "Ich wohne seit einem Monat hier.",
-              "Kannst du mir beim Umzug helfen?",
+              "Können Sie mir beim Umzug helfen?",
               "Ich komme mit dem Auto.",
-              "Das ist der Schlüssel zur Wohnung."
+              "Auf Wiedersehen!"
             ],
             "target_grammar": "Prepositions with the Dativ: aus, bei, mit, nach, seit, von, zu",
             "topics": [
-              "Woher kommst du?",
+              "Woher kommen Sie?",
               "Wie viele Zimmer hat die Wohnung?",
-              "Hast du Möbel von einem Freund?",
-              "Wie kommst du zur Arbeit?"
+              "Haben Sie Möbel von einem Freund?",
+              "Wie kommen Sie zur Arbeit?"
             ],
-            "end_condition": "The learner has used at least three of the seven prepositions correctly and the chat ends with a friendly goodbye."
+            "end_condition": "The learner has used at least three of the seven prepositions correctly, always with Sie, and the chat ends with Auf Wiedersehen."
           }
         },
         "culture": {

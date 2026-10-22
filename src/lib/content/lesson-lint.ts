@@ -2,6 +2,7 @@ import { normalise } from "./answer-check.ts";
 import { COMMON_TRAPS } from "./common-traps.ts";
 import { COUNTS, LEVEL_PROFILES, WRITTEN_TYPES, type Card, type Lesson, type Phase, type Question } from "./lesson-schema.ts";
 import { enumerateItems, valueOf, type LessonItem } from "./lesson-items.ts";
+import { foreignSurnames, SURNAMES } from "./names.ts";
 
 // Free, mechanical checks that run before the paid review and again after every correction. They catch broken structure
 // (a gap question with no gap, a scrambled sentence missing a word, a lesson with 4 exercises instead of 19) and flag what the
@@ -257,6 +258,11 @@ export function lintLesson(code: string, phase: Phase, lesson: Lesson, options: 
     if (item.unit === "trap") continue;
     const text = JSON.stringify(valueOf(lesson, item));
     for (const trap of COMMON_TRAPS) if (trap.detect?.test(text)) out.push({ id: item.id, level: "warn", rule: `trap-${trap.id}`, message: `Contains a known trap (${trap.wrong}). Right: ${trap.right}` });
+  }
+  // ---- names: a surname after Herr/Frau/Mr/Mrs must be one of the fixed generic surnames
+  for (const item of items) {
+    const odd = foreignSurnames(JSON.stringify(valueOf(lesson, item)));
+    if (odd.length) out.push({ id: item.id, level: "error", rule: "surname", message: `Surname ${odd.join(", ")} is not allowed: formal address uses only ${SURNAMES.join(", ")}.` });
   }
   lesson.grammar.traps.forEach((t, i) => {
     if (same(t.wrong, t.right)) out.push({ id: id("grammar", "traps", i), level: "error", rule: "trap-same", message: "The wrong and the right version are the same." });

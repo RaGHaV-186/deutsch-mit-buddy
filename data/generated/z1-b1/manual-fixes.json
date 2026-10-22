@@ -98,5 +98,405 @@
       ],
       "explanation": "The digits stay in the order null acht drei, as in a phone number; the sentence can start with Meine Nummer or with Null acht drei."
     }
+  },
+  "Z10#vocabulary.w08": {
+    "reason": "Names rule now allows the generic surname Lang for formal address; \"Mr / man\" was misleading (Mann).",
+    "value": {
+      "tier": "core",
+      "en": "Mr (with a name) / gentleman",
+      "article": "der",
+      "de": "Herr",
+      "plural": "die Herren",
+      "example": "Guten Tag, Herr Lang.",
+      "example_en": "Hello, Mr Lang.",
+      "tip": "Used before a last name in formal speech."
+    }
+  },
+  "Z10#vocabulary.w09": {
+    "reason": "Names rule now allows the generic surname Lang for formal address; same wording as the Herr card.",
+    "value": {
+      "tier": "core",
+      "en": "Mrs (with a name) / woman",
+      "article": "die",
+      "de": "Frau",
+      "plural": "die Frauen",
+      "example": "Guten Tag, Frau Lang.",
+      "example_en": "Hello, Mrs Lang.",
+      "tip": "Also means 'woman' and 'wife'."
+    }
+  },
+  "Z10#exam.gv2": {
+    "reason": "Frau Weiß -> Frau Weber: formal address uses only the fixed generic surnames (Braun, Weber, Lang, Schmidt, Müller).",
+    "value": {
+      "skill": "grammar",
+      "type": "gap_fill",
+      "prompt": "Guten Tag, Frau Weber. Was ___ Sie?",
+      "answer": "bestellen",
+      "distractors": [
+        "bestellst",
+        "bestellt",
+        "bestelle"
+      ],
+      "accepted_answers": [],
+      "explanation": "The formal Sie takes the verb ending -en."
+    }
+  },
+  "W1.1#culture": {
+    "reason": "Names rule now allows the generic surname Weber for formal address: same text, re-checked under the new rule.",
+    "value": {
+      "title": "Du or Sie? Introducing yourself",
+      "note": "In German-speaking countries, people usually shake hands when they meet for the first time in a formal situation, and they often say their name: \"Guten Tag, ich heiße Anna Weber.\" With adults you do not know, at work or in shops, you use Sie and often the last name, for example \"Frau Weber\" or \"Herr Weber\". Friends, family, children and many fellow students say du and use first names. Among young people and in many workplaces, people switch to du quickly, but it is polite to wait until the other person offers it. When in doubt, start with Sie. A small, friendly \"Freut mich!\" is a good answer after you hear someone's name.",
+      "reflection_question": "How do people in your country greet each other when they meet for the first time, and does your language also have a formal and an informal \"you\"?"
+    }
+  },
+  "Z5#reading.passage": {
+    "reason": "\"Jonas hat keine Brille.\" did not fit a text about Anna's room, and the text used einen/keine, which Z5 defers. Rewritten with ein/eine, der/die/das and haben only.",
+    "value": {
+      "title": "Annas Zimmer",
+      "text": "Das ist Annas Zimmer. Anna hat ein Bett. Sie hat auch eine Lampe, ein Buch und ein Handy. Das Handy ist neu. Das Fenster ist groß und die Tür ist klein. Anna hat zwei Stifte. Anna sagt: Das ist mein Zimmer!"
+    }
+  },
+  "Z5#reading.q1": {
+    "reason": "The passage was rewritten (see Z5#reading.passage); the question follows the new text.",
+    "value": {
+      "skill": "reading",
+      "type": "multiple_choice",
+      "prompt": "What is the first thing Anna has?",
+      "answer": "a bed",
+      "distractors": [
+        "a lamp",
+        "a book",
+        "a pen"
+      ],
+      "accepted_answers": [],
+      "explanation": "The text says: Anna hat ein Bett."
+    }
+  },
+  "Z5#reading.q2": {
+    "reason": "The passage was rewritten (see Z5#reading.passage); the question follows the new text.",
+    "value": {
+      "skill": "reading",
+      "type": "multiple_choice",
+      "prompt": "What is new?",
+      "answer": "the phone",
+      "distractors": [
+        "the book",
+        "the lamp",
+        "the window"
+      ],
+      "accepted_answers": [],
+      "explanation": "The text says: Das Handy ist neu."
+    }
+  },
+  "Z5#reading.q3": {
+    "reason": "The passage was rewritten (see Z5#reading.passage); the question follows the new text.",
+    "value": {
+      "skill": "reading",
+      "type": "multiple_choice",
+      "prompt": "What else does Anna have besides the bed?",
+      "answer": "a lamp, a book and a phone",
+      "distractors": [
+        "a table and a chair",
+        "a car and a bike",
+        "a dog and a cat"
+      ],
+      "accepted_answers": [],
+      "explanation": "The text says: Sie hat auch eine Lampe, ein Buch und ein Handy."
+    }
+  },
+  "Z5#reading.q4": {
+    "reason": "The passage was rewritten (see Z5#reading.passage); the question follows the new text.",
+    "value": {
+      "skill": "reading",
+      "type": "typing",
+      "prompt": "How many pens does Anna have? Answer in German with one word.",
+      "answer": "zwei",
+      "distractors": [],
+      "accepted_answers": [
+        "zwei Stifte"
+      ],
+      "explanation": "The text says: Anna hat zwei Stifte."
+    }
+  },
+  "Z5#reading.q5": {
+    "reason": "The passage was rewritten (see Z5#reading.passage); the question follows the new text.",
+    "value": {
+      "skill": "reading",
+      "type": "multiple_choice",
+      "prompt": "Who says: Das ist mein Zimmer?",
+      "answer": "Anna",
+      "distractors": [
+        "Jonas",
+        "Lena",
+        "Buddy"
+      ],
+      "accepted_answers": [],
+      "explanation": "The last sentence says: Anna sagt: Das ist mein Zimmer!"
+    }
+  },
+  "W1.4#writing": {
+    "reason": "Model answer has exactly the 5 sentences of its task (the greeting at the end is the fifth), covers können, wollen, müssen, food and a drink.",
+    "value": {
+      "task": "Write a short postcard to a friend. You are on holiday. Tell your friend what you can eat there, what you must or want to try, and what you want to drink. Write exactly 5 sentences.",
+      "min_words": 30,
+      "must_include": [
+        "one sentence with können",
+        "one sentence with wollen",
+        "one sentence with müssen",
+        "one food or drink word from the lesson",
+        "a greeting at the end"
+      ],
+      "useful_phrases": [
+        "Ich kann ... essen.",
+        "Ich will ... probieren.",
+        "Ich muss ... bestellen.",
+        "Ich möchte einen Kaffee.",
+        "Viele Grüße"
+      ],
+      "model_answer": "Liebe Lena, ich bin im Urlaub und das Essen ist super. Ich kann hier jeden Tag Fisch und Gemüse essen. Ich will heute den Kuchen probieren und ich muss unbedingt Wasser bestellen. Zum Trinken möchte ich einen Kaffee. Viele Grüße, Anna",
+      "rubric": [
+        "Uses exactly 5 sentences and at least 30 words",
+        "Uses können, wollen and müssen correctly conjugated in position 2",
+        "Main verb is in the infinitive at the end of the sentence",
+        "Uses food and drink words from the lesson with correct articles",
+        "Has a greeting and correct spelling of ö and ü"
+      ]
+    }
+  },
+  "W2.2#writing": {
+    "reason": "Task asks for 4 sentences; the model answer has 4, so the rubric no longer demands a closing (which would be a fifth sentence).",
+    "value": {
+      "task": "Write a short postcard to a friend from a clothes shop trip. Write 4 sentences. Say what you bought, what you like, who helped you and who something belongs to.",
+      "min_words": 30,
+      "must_include": [
+        "a verb with the dative: gefallen",
+        "a verb with the dative: helfen",
+        "gehören with a person",
+        "two clothing words"
+      ],
+      "useful_phrases": [
+        "Liebe Anna,",
+        "Die Jacke gefällt mir.",
+        "Jonas hilft mir.",
+        "Der Schal gehört dir.",
+        "Danke für alles!"
+      ],
+      "model_answer": "Liebe Anna, ich bin im Kleiderladen und kaufe eine Jacke. Die Jacke gefällt mir sehr gut. Lena hilft mir und ich danke ihr. Der blaue Schal gehört dir, er ist ein Geschenk.",
+      "rubric": [
+        "Uses gefallen, helfen, gehören or danken with the dative (mir, dir, ihr, ihm).",
+        "Uses at least two clothing words with the correct article.",
+        "Writes the requested number of sentences with at least 30 words.",
+        "Verb in second position and correct spelling, including capital letters for nouns.",
+        "Message has a friendly greeting (for example Liebe Anna,)."
+      ]
+    }
+  },
+  "W2.4#writing": {
+    "reason": "Model answer has exactly 5 sentences, no direct speech, greeting and closing as the rubric asks.",
+    "value": {
+      "task": "Write a short postcard to a friend (about 5 sentences). Tell your friend about a person who helped you find the way in a new city. Use pronouns like ihn, ihr, ihm, mir, dir and Ihnen.",
+      "min_words": 30,
+      "must_include": [
+        "where you are (a city)",
+        "what place you looked for",
+        "who helped you (use ihm or ihr)",
+        "a thank you with danken",
+        "a greeting to your friend with dir"
+      ],
+      "useful_phrases": [
+        "Liebe Anna,",
+        "Ich suche den Bahnhof.",
+        "Ein Mann hilft mir.",
+        "Ich danke ihm.",
+        "Viele Grüße"
+      ],
+      "model_answer": "Liebe Anna, ich bin in Berlin. Heute suche ich die Post, aber ich finde sie nicht. Ein Mann hilft mir und ich danke ihm. Er zeigt mir den Weg, und die Post ist gar nicht weit. Ich schicke dir viele Grüße.",
+      "rubric": [
+        "Uses accusative pronouns correctly (ihn, sie, es, dich)",
+        "Uses dative pronouns after helfen and danken (mir, ihm, ihr)",
+        "Uses theme words (Weg, Post, links, rechts, weit)",
+        "Has a greeting and a closing, like a real postcard",
+        "Spelling, capitals and punctuation are correct"
+      ]
+    }
+  },
+  "W3.1#writing": {
+    "reason": "Model answer has exactly 4 sentences, Perfekt with haben, a sensible food (Suppe gekocht, not Kuchen gekocht), and Es war toll!",
+    "value": {
+      "task": "Write a short postcard or message to a friend about your weekend. Write 4 sentences in the Perfekt with haben.",
+      "min_words": 30,
+      "must_include": [
+        "One thing you did on Saturday",
+        "One thing you did on Sunday",
+        "One food or drink",
+        "The phrase Es war toll!"
+      ],
+      "useful_phrases": [
+        "Am Samstag habe ich ... gespielt.",
+        "Am Sonntag habe ich ... gesehen.",
+        "Ich habe lange geschlafen.",
+        "Es war toll!",
+        "Und du?"
+      ],
+      "model_answer": "Hallo Lena, am Samstag habe ich lange geschlafen und dann im Park Fußball gespielt. Am Sonntag habe ich Suppe gekocht und Tee getrunken. Es war toll! Und du, was hast du am Wochenende gemacht?",
+      "rubric": [
+        "Uses haben in position 2 and the participle at the end of the sentence",
+        "Forms participles correctly (gespielt, geschlafen, getrunken)",
+        "Uses weekend vocabulary such as Samstag, Sonntag, Kuchen, Park",
+        "Includes all required points and reaches the minimum word count",
+        "Spelling, capital letters and punctuation are correct"
+      ]
+    }
+  },
+  "W1.5#reading.q5": {
+    "reason": "The question has two true answers from the text (break, lunch): both are listed, with and without Anna and eine.",
+    "value": {
+      "skill": "reading",
+      "type": "typing",
+      "prompt": "Was macht Anna mittags? Answer in German with one short sentence.",
+      "answer": "Sie macht eine Pause.",
+      "distractors": [],
+      "accepted_answers": [
+        "Anna macht eine Pause.",
+        "Sie macht Pause.",
+        "Anna macht Pause.",
+        "Sie isst das Mittagessen.",
+        "Anna isst das Mittagessen.",
+        "Sie macht eine Pause und isst das Mittagessen."
+      ],
+      "explanation": "At noon she takes a break and eats lunch."
+    }
+  },
+  "W3.2#reading.passage": {
+    "reason": "Timeline: no \"Gestern\" (the text is about the weekend). Saturday evening cinema now follows Saturday; Sunday at home comes last.",
+    "value": {
+      "title": "Annas Wochenende",
+      "text": "Am Samstag bin ich mit dem Fahrrad zum See gefahren. Das Wetter war schön. Ich bin im See geschwommen und dann in den Park gegangen. Am Abend bin ich ins Kino gegangen. Der Film war lang, aber gut. Am Sonntag bin ich zu Hause geblieben. Ich habe ein Buch gelesen."
+    }
+  },
+  "W3.2#reading.q3": {
+    "reason": "Follows the new passage (cinema on Saturday evening).",
+    "value": {
+      "skill": "reading",
+      "type": "multiple_choice",
+      "prompt": "Where did Anna go on Saturday evening?",
+      "answer": "To the cinema",
+      "distractors": [
+        "To the museum",
+        "To the swimming pool",
+        "To a concert"
+      ],
+      "accepted_answers": [],
+      "explanation": "The text says: Am Abend bin ich ins Kino gegangen."
+    }
+  },
+  "W3.2#listening.passage": {
+    "reason": "Timeline: Jonas stayed at home on Sunday and went swimming on Saturday (no \"gestern\").",
+    "value": {
+      "title": "Was hast du am Wochenende gemacht?",
+      "speakers": [
+        "Jonas",
+        "Lena"
+      ],
+      "script": [
+        {
+          "speaker": "Jonas",
+          "de": "Hallo Lena! Wie war dein Wochenende?",
+          "en": "Hello Lena! How was your weekend?"
+        },
+        {
+          "speaker": "Lena",
+          "de": "Sehr schön! Ich bin zum See gefahren.",
+          "en": "Very nice! I went to the lake."
+        },
+        {
+          "speaker": "Jonas",
+          "de": "Mit dem Fahrrad?",
+          "en": "By bike?"
+        },
+        {
+          "speaker": "Lena",
+          "de": "Ja, und am Sonntag bin ich ins Museum gegangen.",
+          "en": "Yes, and on Sunday I went to the museum."
+        },
+        {
+          "speaker": "Jonas",
+          "de": "Cool! Am Sonntag bin ich zu Hause geblieben.",
+          "en": "Cool! On Sunday I stayed at home."
+        },
+        {
+          "speaker": "Lena",
+          "de": "Und am Samstag? Wo bist du gewesen?",
+          "en": "And on Saturday? Where were you?"
+        },
+        {
+          "speaker": "Jonas",
+          "de": "Am Samstag bin ich ins Schwimmbad gegangen.",
+          "en": "On Saturday I went to the swimming pool."
+        },
+        {
+          "speaker": "Lena",
+          "de": "Super!",
+          "en": "Great!"
+        }
+      ]
+    }
+  },
+  "W3.2#listening.q4": {
+    "reason": "Follows the new dialogue.",
+    "value": {
+      "skill": "listening",
+      "type": "multiple_choice",
+      "prompt": "What did Jonas do on Sunday?",
+      "answer": "He stayed at home.",
+      "distractors": [
+        "He went to the lake.",
+        "He flew on holiday.",
+        "He went to a concert."
+      ],
+      "accepted_answers": [],
+      "explanation": "Jonas says: Am Sonntag bin ich zu Hause geblieben."
+    }
+  },
+  "W3.2#listening.q5": {
+    "reason": "Follows the new dialogue.",
+    "value": {
+      "skill": "listening",
+      "type": "multiple_choice",
+      "prompt": "Where did Jonas go on Saturday?",
+      "answer": "To the swimming pool",
+      "distractors": [
+        "To the museum",
+        "To the lake",
+        "To the cinema"
+      ],
+      "accepted_answers": [],
+      "explanation": "He says: Am Samstag bin ich ins Schwimmbad gegangen."
+    }
+  },
+  "W4.2#speaking.tandem": {
+    "reason": "Kept the stranger neighbour and made the whole scene formal: Sie forms, Ihnen, Guten Tag / Auf Wiedersehen.",
+    "value": {
+      "title": "Dein Umzug",
+      "setting": "Buddy and you meet in front of your new flat on moving day. You do not know each other, so you both say Sie and talk politely while you carry boxes.",
+      "buddy_role": "A friendly neighbour you do not know yet; he speaks formally (Sie, Ihnen) and offers to help.",
+      "learner_role": "A person who has just moved into a new flat and speaks formally (Sie, Ihnen) to the neighbour.",
+      "opening_line": "Guten Tag! Sie sind neu hier, oder? Wohnen Sie schon lange in der Straße?",
+      "target_phrases": [
+        "Guten Tag! Ich ziehe nach ... um.",
+        "Ich wohne seit einem Monat hier.",
+        "Können Sie mir beim Umzug helfen?",
+        "Ich komme mit dem Auto.",
+        "Auf Wiedersehen!"
+      ],
+      "target_grammar": "Prepositions with the Dativ: aus, bei, mit, nach, seit, von, zu",
+      "topics": [
+        "Woher kommen Sie?",
+        "Wie viele Zimmer hat die Wohnung?",
+        "Haben Sie Möbel von einem Freund?",
+        "Wie kommen Sie zur Arbeit?"
+      ],
+      "end_condition": "The learner has used at least three of the seven prepositions correctly, always with Sie, and the chat ends with Auf Wiedersehen."
+    }
   }
 }

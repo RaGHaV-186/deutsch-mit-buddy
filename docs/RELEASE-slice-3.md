@@ -10,7 +10,7 @@ Branch `slice-3-curriculum`, PR #12. Run the steps in this order, one at a time,
 
 ## Before you start
 1. PR #12: CI green (lint, unit tests, build, database tests). Review the diff once.
-2. Content is final: the re-review of the corrected items is collected, `npm run content -- build --run z1-b1` shows which lessons are publishable, and Raghav has said which ones go live (today 19; Z5, Z9, Z10, W1.1, W1.4, W1.5, W2.2, W2.4, W3.1, W3.2, W4.2 only after the re-review). `npm run content -- check --run z1-b1` has no error for them.
+2. Content is final: the re-review of the corrected items is collected, `npm run content -- build --run z1-b1` shows which lessons are publishable, and Raghav has said which ones go live. **Decision (23 Oct): go live with the 24 lessons that are publishable now** (Z1–Z9, W1.1–W1.3, W2.1–W2.4, W3.1, W3.3–W3.5, W4.1–W4.4; `publish-payloads.json` holds exactly these). W1.4, W1.5, Z10, W2.5, W3.2 and W4.5 are published later, with the same `publish` command, when their re-checks pass (publishing is safe to repeat). `npm run content -- check --run z1-b1` has no error for them.
 3. Create `.env.hosted` (git-ignored, never committed or pasted into chat) with exactly these two lines, from the Supabase dashboard (Project settings → API):
    ```
    NEXT_PUBLIC_SUPABASE_URL=https://<project-ref>.supabase.co

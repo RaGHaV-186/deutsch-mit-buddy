@@ -47,6 +47,7 @@ Front: English (word cards) or "Say it in German" / "Answer out loud" (speaking 
 - Use Sonnet for routine building, tests and fixes. Say when a task needs Opus (hard design, tricky debugging, writing or changing the content-review prompts).
 - Screenshots only at checkpoints, only 390px light + 1440px dark, unless Raghav asks for more.
 - Batch jobs: submit, save the batch id (`data/generated/<run>/state.json`), then stop and tell Raghav. He says "continue"; resume with the same `npm run content -- run ...` command (it polls the saved batch and never submits or pays twice).
+- **Approval means Raghav's explicit "yes" in this chat, for that exact spend** (what it buys and the amount). A small estimate, a limit he gave earlier for something else, or my own judgement never counts. If an estimate is above what he approved, or nothing was approved yet, stop, ask, and wait for his answer in his next message, even for a few cents. The same goes for anything on the hosted database, the production deploy and other outward-facing steps: only his explicit go for that step.
 - Paid AI runs: show an estimate (requests, tokens, euros, worst case) and wait for a yes; no pass may be able to cost more than €10; `ANTHROPIC_API_KEY` only in `.env.local`, never in Vercel or a NEXT_PUBLIC variable.
 - Keep "Where we are" below and the status line in BLUEPRINT section 8 current at every stopping point, so Raghav can /clear between steps without losing context.
 

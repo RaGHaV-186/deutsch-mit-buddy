@@ -294,6 +294,21 @@ The app is built in 14 slices (3 and 4 split into small steps), each one working
    - **4e** Tandem with Buddy, text mode: partner not teacher, no interruptions, feedback list into the mistake log.
 5. **Tracker** — **5a** logs, weak spots, test scores, curriculum map, skill meter, morning summary in the app, "What Buddy knows about me", export tracker.md, Raghav's history imported from data/seed-tracker.ts (done when the export matches his Project tracker). **5b** placement test at onboarding (sets the starting lesson) and graded short stories.
 6. **Voice + Tandem voice** — starts with an iOS voice spike (TTS playback, speech recognition, Azure Speech-to-Text fallback), then Buddy's neural voice, audio for listening and dictation, pronunciation focus with browser speech recognition (consent first, recordings never stored), voice Tandem. Done when a 10-minute voice Tandem works on a phone.
+   Plan for slice 6 (plan only, nothing is built before the slice starts):
+   - **Tandem = Claude live as Buddy**: text in slice 4e, voice in slice 6. The voice version reuses the same Tandem engine; only the input (speech to text) and output (text to speech) change.
+   - **Speech-to-text must be VERBATIM.** It has to keep the learner's grammar mistakes ("Ich bin gehen", wrong endings, wrong word order) so Buddy can correct them; a service that silently "fixes" the sentence makes the feedback useless. Spike: test 2 to 3 services with Raghav's own recordings that contain deliberate mistakes: the browser's Web Speech API, plus e.g. OpenAI transcription, Deepgram, Google or Azure STT. Compare how many mistakes each keeps (and word error rate on correct speech), latency, iOS support and cost; pick the one that preserves mistakes best at a reasonable price. Recordings made for the test are not stored in the repo.
+   - **Two tiers as a per-user flag**: premium STT + a natural German neural TTS voice (on for Raghav); the browser's STT/TTS for everyone else. A daily speaking cap per user (minutes, set in the admin page) protects the budget. Recordings are never stored: only the text and the scores are kept. A typed fallback stays everywhere voice is used.
+   - **Cost table** (10 minutes of speaking a day = 300 minutes a month per user; Buddy's spoken replies about 6,000 characters a day = 180,000 a month; Tandem text model Haiku ≈ $0.09 a month; approximate list prices from memory, to be re-checked in the spike):
+
+     | Setup | STT | TTS | Model | Per user / month | 30 users / month |
+     | --- | --- | --- | --- | --- | --- |
+     | Browser STT + browser TTS (everyone, default) | $0 | $0 | $0.09 | **≈ $0.1** | **≈ $3** |
+     | Premium: OpenAI transcription ($0.006/min) + Azure neural TTS ($16 per 1M chars) | $1.80 | $2.88 | $0.09 | **≈ $4.8** | ≈ $143 if all 30 had it |
+     | Premium: Deepgram ($0.0052/min) + Azure neural TTS | $1.56 | $2.88 | $0.09 | ≈ $4.5 | ≈ $136 |
+     | Premium: Azure STT ($1/hour) + Azure neural TTS | $5.00 | $2.88 | $0.09 | ≈ $8.0 | ≈ $239 |
+     | **Plan: Raghav premium, 29 members on the browser** | | | | | **≈ $7.4** (4.8 + 29 × 0.09) |
+
+     So premium for everyone is not affordable inside the €15 to 20 budget: it stays a per-user flag (on for Raghav) with the daily cap, and could later be switched on for individual members.
 7. **Tests** — Sunday tests assembled from the week's lessons, original mock exams every 4 weeks (generated with the same two-pass pipeline, "modelled on the Goethe/telc format"), checkpoint tests, Mistake Grind, scores saved. Done when a test result lands in the tracker.
 8. **Practice** — typing quiz, Diktat, numbers & time drill, word-order builder, Hörverstehen (the lesson exercise engines, available on their own).
 9. **Games** — rooms with codes, guests, live sync via Supabase Realtime, Hangman, der/die/das race (the article-drill engine), quiz battle; server validates scores. Done when two phones play one game.

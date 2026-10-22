@@ -7,6 +7,7 @@
 //   estimate --stage generate-a|generate-b|generate-c|generate-d|review [--lessons Z1,Z2,Z3 | --all] [--exact]   cost estimate, nothing is paid
 //   run      --stage generate-a|generate-b|generate-c|generate-d|review --approve <estimate id>                   the paid Batch run (resumable)
 //   check                                         free: automatic checks on the lessons written so far (run before the review pass)
+//   estimate|run --stage review --fixes           Opus re-checks ONLY the items corrected in manual-fixes.json (item id -> { value, reason }); the rest of the lesson keeps its verdicts
 //   build                                         merge the passes into the review file (review.json, review.md, ...)
 //   markdown --lesson Z1 [--out path.md]          one lesson as readable Markdown, with the review notes
 //   publish  [--yes]                              publish every lesson that has no open item (writes to the database)
@@ -18,6 +19,7 @@ import { homedir } from "node:os";
 import { join, resolve } from "node:path";
 import { SESSIONS } from "../data/curriculum.ts";
 import { lessonsOf, type CurriculumRow } from "../src/lib/content/curriculum-rows.ts";
+import { lintLesson } from "../src/lib/content/lesson-lint.ts";
 import { lessonToMarkdown } from "../src/lib/content/lesson-text.ts";
 import type { Lesson, PassA, PassB, PassC, PassD, ReviewVerdict } from "../src/lib/content/lesson-schema.ts";
 import {
@@ -31,6 +33,9 @@ import {
   costReport,
   estimateStage,
   lintErrors,
+  applyManualFixes,
+  currentVerdicts,
+  manualFixIds,
   mergeLesson,
   parsePassA,
   parsePassB,
@@ -43,10 +48,11 @@ import {
   type BatchClient,
   type BatchRequest,
   type LessonReview,
+  type ManualFixes,
   type Stage,
 } from "../src/lib/content/pipeline.ts";
 import { DEFAULT_USD_TO_EUR } from "../src/lib/content/pricing.ts";
-import { REVIEW_MODEL } from "../src/lib/content/prompts.ts";
+import { partialReviewExpectedOutput, REVIEW_MODEL } from "../src/lib/content/prompts.ts";
 import { adminClient } from "./lib/supabase-admin.mts";
 
 const args = process.argv.slice(2);
@@ -93,12 +99,25 @@ interface State {
   batches: { stage: Stage; id: string; fingerprint: string; submittedAt: string }[];
 }
 
+const manualFixes = () => read<ManualFixes>("manual-fixes.json") ?? {};
+/** With --fixes the review covers only the corrected items (lesson code -> item ids). */
+const reviewOnly = (): Map<string, string[]> | undefined => {
+  if (!flag("fixes")) return undefined;
+  const fixes = manualFixes();
+  const codes = [...new Set(Object.keys(fixes).map((id) => id.split("#")[0]))];
+  if (!codes.length) fail("manual-fixes.json holds no corrections: nothing to re-review.");
+  return new Map(codes.map((c) => [c, manualFixIds(c, fixes)]));
+};
+/** The file name of a stage's results: the re-review of corrections keeps its own files, so the first review stays untouched. */
+const tagOf = (stage: Stage) => (stage === "review" && flag("fixes") ? "review-fixes" : stage);
+
 const completeLessons = (): Map<string, Lesson> => {
   const a = read<Raw<PassA>>("generate-a.raw.json")?.lessons ?? {};
   const b = read<Raw<PassB>>("generate-b.raw.json")?.lessons ?? {};
   const c = read<Raw<PassC>>("generate-c.raw.json")?.lessons ?? {};
   const d = read<Raw<PassD>>("generate-d.raw.json")?.lessons ?? {};
-  return new Map(Object.keys(a).filter((k) => b[k] && c[k] && d[k]).map((k) => [k, combineLesson(a[k], b[k], c[k], d[k])]));
+  const fixes = manualFixes();
+  return new Map(Object.keys(a).filter((k) => b[k] && c[k] && d[k]).map((k) => [k, applyManualFixes(k, combineLesson(a[k], b[k], c[k], d[k]), fixes)]));
 };
 
 function requestsFor(stage: Stage, lessons: CurriculumRow[]): BatchRequest[] {
@@ -111,7 +130,11 @@ function requestsFor(stage: Stage, lessons: CurriculumRow[]): BatchRequest[] {
   const complete = completeLessons();
   if (complete.size === 0) fail("Run generate-a, generate-b, generate-c and generate-d first: no complete lesson yet.");
   // The free automatic checks come first: Opus is not paid to find what a script can find. Regenerate those lessons, or override with --allow-lint-errors.
-  const broken = lintErrors(lessons, complete);
+  // A re-review looks at the corrected items only; what the first review settled (Opus corrections) is not blocked by the writers' raw text.
+  const only = reviewOnly();
+  const broken = lintErrors(lessons, complete)
+    .map((b) => ({ ...b, issues: only ? b.issues.filter((i) => only.get(b.code)?.includes(i.id)) : b.issues }))
+    .filter((b) => b.issues.length);
   if (broken.length && !flag("allow-lint-errors")) {
     for (const b of broken) {
       console.error(`\n${b.code} fails ${b.issues.length} automatic check(s):`);
@@ -119,7 +142,7 @@ function requestsFor(stage: Stage, lessons: CurriculumRow[]): BatchRequest[] {
     }
     fail(`Not sent to the review: ${broken.map((b) => b.code).join(", ")}. Write those lessons again (estimate + run generate-a to generate-d with --lessons ${broken.map((b) => b.code).join(",")}), or add --allow-lint-errors to let Opus try to fix them.`);
   }
-  return buildReviewRequests(lessons, complete, allLessons);
+  return buildReviewRequests(only ? lessons.filter((l) => only.has(l.code)) : lessons, complete, allLessons, only);
 }
 
 function printEstimate(e: ReturnType<typeof estimateStage>, lessons: CurriculumRow[]) {
@@ -150,7 +173,24 @@ function checkCommand() {
     for (const i of b?.issues ?? []) console.log(`  ${i.id}: ${i.message}`);
   }
   console.log(broken.length ? "\nFix these (write the lessons again) before the review pass." : "\nOK to send to the review.");
+  // After a review: the same checks on the lessons as they would be published (writers' text + Opus corrections + the course owner's corrections).
+  if (existsSync(file("review.raw.json"))) {
+    const { reviews } = buildReviews();
+    console.log("\nAfter the review (the lessons as they would be published):");
+    for (const r of reviews) {
+      const row = allLessons.find((l) => l.code === r.code)!;
+      const errors = lintLesson(r.code, row.phase, r.final, { first: row.seq === 0 }).filter((i) => i.level === "error");
+      console.log(`${r.code}: ${errors.length ? `${errors.length} error(s)` : "no errors"}${r.publishable ? ", publishable" : ", blocked"}`);
+      for (const i of errors) console.log(`  ${i.id}: ${i.message}`);
+    }
+  }
 }
+
+/** A re-review of a few corrected items is far smaller than a whole-lesson review. */
+const expectedOutputFor = (stage: Stage) => {
+  const only = stage === "review" ? reviewOnly() : undefined;
+  return only ? partialReviewExpectedOutput(Math.max(...[...only.values()].map((ids) => ids.length))) : undefined;
+};
 
 function stageArg(): Stage {
   const stage = flag("stage") as Stage | undefined;
@@ -171,8 +211,8 @@ async function estimateCommand() {
       exactInputTokens.push(counted.input_tokens);
     }
   }
-  const estimate = estimateStage(stage, requests, { rate, exactInputTokens });
-  write(`${stage}.estimate.json`, { ...estimate, lessons: lessons.map((l) => l.code), exactTokenCount: Boolean(exactInputTokens) });
+  const estimate = estimateStage(stage, requests, { rate, exactInputTokens, expectedOutput: expectedOutputFor(stage) });
+  write(`${tagOf(stage)}.estimate.json`, { ...estimate, lessons: lessons.map((l) => l.code), exactTokenCount: Boolean(exactInputTokens) });
   printEstimate(estimate, lessons);
 }
 
@@ -180,7 +220,7 @@ async function runCommand() {
   const stage = stageArg();
   const lessons = runLessons();
   const requests = requestsFor(stage, lessons);
-  const estimate = estimateStage(stage, requests, { rate });
+  const estimate = estimateStage(stage, requests, { rate, expectedOutput: expectedOutputFor(stage) });
   try {
     assertApproved(requests, flag("approve"), estimate);
   } catch (error) {
@@ -212,19 +252,19 @@ async function runCommand() {
     write(`${stage}.raw.json`, raw);
     outcome = parsed;
   } else {
-    const parsed = parseReview(covered, completeLessons(), lines);
-    const raw = read<ReviewRaw>("review.raw.json") ?? { verdicts: {}, failures: [] };
+    const parsed = parseReview(covered, completeLessons(), lines, reviewOnly());
+    const raw = read<ReviewRaw>(`${tagOf(stage)}.raw.json`) ?? { verdicts: {}, failures: [] };
     for (const [code, verdicts] of parsed.results) raw.verdicts[code] = verdicts;
     raw.failures = parsed.failures;
-    write("review.raw.json", raw);
+    write(`${tagOf(stage)}.raw.json`, raw);
     outcome = parsed;
   }
   const report = costReport(stage, estimate, batchId, outcome, requests.length);
-  write(`${stage}.report.json`, report);
+  write(`${tagOf(stage)}.report.json`, report);
   // The report file holds the latest pass of a stage; the ledger keeps every paid pass, so the run's total cost is never lost when a stage is run again.
   const ledger = read<unknown[]>("costs.json") ?? [];
-  write("costs.json", [...ledger, { at: new Date().toISOString(), stage, lessons: covered.map((l) => l.code), batchId, actualEur: report.actualEur, estimatedEur: report.estimatedEur }]);
-  console.log(`\nThe "${stage}" pass is done. Actual cost €${report.actualEur.toFixed(3)} (estimated €${estimate.expectedEur.toFixed(2)}, worst case €${estimate.ceilingEur.toFixed(2)}). Details: ${file(`${stage}.report.json`)}`);
+  write("costs.json", [...ledger, { at: new Date().toISOString(), stage: tagOf(stage), lessons: covered.map((l) => l.code), batchId, actualEur: report.actualEur, estimatedEur: report.estimatedEur }]);
+  console.log(`\nThe "${stage}" pass is done. Actual cost €${report.actualEur.toFixed(3)} (estimated €${estimate.expectedEur.toFixed(2)}, worst case €${estimate.ceilingEur.toFixed(2)}). Details: ${file(`${tagOf(stage)}.report.json`)}`);
   if (outcome.failures.length) {
     console.log(`${outcome.failures.length} lesson(s) failed and were not stored:`);
     for (const f of outcome.failures) console.log(`  ${f.code}: ${f.reason}`);
@@ -235,10 +275,13 @@ async function runCommand() {
 function buildReviews(): { reviews: LessonReview[]; unreviewed: string[] } {
   const complete = completeLessons();
   const rev = read<ReviewRaw>("review.raw.json") ?? fail("review.raw.json is missing. Run the review pass first.");
+  const rereview = read<ReviewRaw>("review-fixes.raw.json");
+  const fixes = manualFixes();
   const reviews: LessonReview[] = [];
   const unreviewed: string[] = [];
   for (const [code, lesson] of complete) {
-    const verdicts = rev.verdicts[code];
+    // A corrected item counts only with the verdict of the re-review; before that it waits for a human.
+    const verdicts = currentVerdicts(code, rev.verdicts[code], rereview?.verdicts[code], fixes);
     const row = allLessons.find((l) => l.code === code)!;
     if (!verdicts) unreviewed.push(code);
     else reviews.push(mergeLesson(row, lesson, verdicts));
@@ -252,6 +295,7 @@ function buildCommand() {
   const gen = { a: read<Raw<PassA>>("generate-a.raw.json"), b: read<Raw<PassB>>("generate-b.raw.json"), c: read<Raw<PassC>>("generate-c.raw.json"), d: read<Raw<PassD>>("generate-d.raw.json"), review: read<ReviewRaw>("review.raw.json") };
   write("review.json", {
     run: runName, builtAt: new Date().toISOString(), summary, unreviewedLessons: unreviewed,
+    manualFixes: Object.keys(manualFixes()),
     failures: { generateA: gen.a?.failures ?? [], generateB: gen.b?.failures ?? [], generateC: gen.c?.failures ?? [], generateD: gen.d?.failures ?? [], review: gen.review?.failures ?? [] },
     lessons: reviews,
   });
@@ -263,6 +307,7 @@ function buildCommand() {
   for (const l of reviews) {
     lines.push(`## ${l.code} ${l.publishable ? "(can be published)" : "(blocked)"}`);
     for (const issue of l.lessonIssues) lines.push(`- LESSON: ${issue}`);
+    for (const id of manualFixIds(l.code, manualFixes())) lines.push(`- **CORRECTED BY THE COURSE OWNER** ${id}: ${manualFixes()[id].reason}`);
     for (const i of l.items.filter((x) => x.status !== "ok")) lines.push(`- **${i.status.toUpperCase()}** ${i.id} (${i.label}): ${i.reason}`);
     lines.push("");
   }

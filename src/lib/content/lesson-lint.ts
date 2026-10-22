@@ -20,6 +20,22 @@ const tokens = (s: string) => s.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, " ").
 const same = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLowerCase();
 const wordCount = (s: string) => words(s).length;
 
+const NUMBER_WORDS: Record<string, number> = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, zwei: 2, drei: 3, vier: 4, fünf: 5, sechs: 6, sieben: 7, acht: 8, neun: 9, zehn: 10 };
+const NUMBER = `\\d+|${Object.keys(NUMBER_WORDS).join("|")}`;
+const SENTENCES_ASKED = new RegExp(`(at least|mindestens)?\\s*\\b(${NUMBER})(?:\\s*(?:to|or|bis|oder|-|–)\\s*(${NUMBER}))?\\s+(?:[\\p{L}-]+\\s+){0,2}?(?:sentences|Sätze)\\b`, "iu");
+const asNumber = (n: string) => NUMBER_WORDS[n.toLowerCase()] ?? Number(n);
+
+/** How many sentences a writing task asks for, as [min, max] ("5 short sentences", "3 to 5 sentences", "at least 4 Sätze"), or null when it names no number. */
+export function sentencesAsked(task: string): [number, number] | null {
+  const m = SENTENCES_ASKED.exec(task);
+  if (!m) return null;
+  const lo = asNumber(m[2]);
+  return [lo, m[1] ? Infinity : m[3] ? asNumber(m[3]) : lo];
+}
+
+/** Sentences in a text: the pieces between . ! ? … (a spelled name "A, N, N, A." or a dash dialogue still counts by its full stops). */
+export const sentenceCount = (text: string) => text.split(/[.!?…]+(?:\s+|$)/).filter((s) => /\p{L}/u.test(s)).length;
+
 const DE = new Set("der die das und ist nicht ich du wir sie er es ein eine einen einem mit für auf zu von den dem im auch aber wie wo wer ja nein bitte danke sind haben hat bin bist wird werden kann können muss dass wenn oder nach bei aus über unter sich mein dein".split(" "));
 const EN = new Set("the and is not you we they he it a an with for on to of at also but how what where who yes no please thank are have has be this that your my his her can must will would should or if when from about into your our their".split(" "));
 
@@ -163,7 +179,15 @@ export function lintLesson(code: string, phase: Phase, lesson: Lesson, options: 
   const listeningWords = lesson.listening.passage.script.reduce((n, l) => n + wordCount(l.de), 0);
   if (!range(listeningWords, profile.listeningWords)) lessonIssue("warn", "listening-length", `The dialogue has ${listeningWords} words; at ${profile.cefr} it should have ${rangeText(profile.listeningWords)}.`, id("listening", "passage"));
   if (!range(lesson.writing.min_words, profile.writingMinWords)) lessonIssue("warn", "writing-length", `The writing task asks for ${lesson.writing.min_words} words; at ${profile.cefr} it should ask for ${rangeText(profile.writingMinWords)} (${profile.writingKind}).`, id("writing"));
-  if (wordCount(lesson.writing.model_answer) < lesson.writing.min_words * 0.8) lessonIssue("warn", "model-answer-length", "The model answer is shorter than the task asks for.", id("writing"));
+  // The model answer is what a learner is shown as the example: it must meet its own task, in every lesson.
+  const answerWords = wordCount(lesson.writing.model_answer);
+  if (answerWords < lesson.writing.min_words) lessonIssue("error", "model-answer-length", `The model answer has ${answerWords} words; its own task asks for at least ${lesson.writing.min_words}.`, id("writing"));
+  const asked = sentencesAsked(lesson.writing.task);
+  const answerSentences = sentenceCount(lesson.writing.model_answer);
+  if (asked && (answerSentences < asked[0] || answerSentences > asked[1])) {
+    const wanted = asked[1] === Infinity ? `at least ${asked[0]}` : asked[0] === asked[1] ? `${asked[0]}` : `${asked[0]} to ${asked[1]}`;
+    lessonIssue("error", "model-answer-sentences", `The model answer has ${answerSentences} sentences; its own task asks for ${wanted}.`, id("writing"));
+  }
 
   // ---- instruction language grows more German with the level
   const instruction: [string, string][] = [

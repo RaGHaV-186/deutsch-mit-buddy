@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { errorIds, germanShare, lessonErrors, lintLesson } from "./lesson-lint.ts";
+import { errorIds, germanShare, lessonErrors, lintLesson, sentenceCount, sentencesAsked } from "./lesson-lint.ts";
 import type { Lesson, Phase } from "./lesson-schema.ts";
 import { validLesson } from "./test-fixtures.ts";
 
@@ -75,8 +75,31 @@ describe("level bands", () => {
     expect(ruleOf(lint(() => {}, "C1"))).toContain("Z9#writing:writing-length");
   });
 
-  it("a model answer shorter than the task asks for is flagged", () => {
-    expect(ruleOf(lint((l) => (l.writing.model_answer = "Ich trinke Kaffee.")))).toContain("Z9#writing:model-answer-length");
+  it("a model answer must meet its own minimum word count (an error, in every lesson)", () => {
+    const issues = lint((l) => (l.writing.model_answer = "Ich trinke Kaffee."));
+    expect(issues.find((i) => i.rule === "model-answer-length")).toMatchObject({ id: "Z9#writing", level: "error" });
+    expect(ruleOf(lint((l) => (l.writing.min_words = 39)))).not.toContain("Z9#writing:model-answer-length"); // the fixture's answer has 39 words
+    expect(ruleOf(lint((l) => (l.writing.min_words = 40)))).toContain("Z9#writing:model-answer-length");
+  });
+
+  it("a model answer must have the number of sentences its task asks for", () => {
+    const answer = "Ich heiße Anna. Ich komme aus Hamburg. Ich bin müde und hungrig. Mir geht es gut, danke. Wie heißt du?";
+    const withTask = (task: string, min = 5) => ruleOf(lint((l) => { l.writing.task = task; l.writing.model_answer = answer; l.writing.min_words = min; }));
+    expect(withTask("Write 5 short sentences about yourself.")).not.toContain("Z9#writing:model-answer-sentences");
+    expect(withTask("Write 3 to 5 sentences.")).not.toContain("Z9#writing:model-answer-sentences");
+    expect(withTask("Write 3 or 4 short sentences.")).toContain("Z9#writing:model-answer-sentences");
+    expect(withTask("Write 6 sentences.")).toContain("Z9#writing:model-answer-sentences");
+    expect(withTask("Schreibe mindestens 4 Sätze.")).not.toContain("Z9#writing:model-answer-sentences");
+    expect(withTask("Schreibe mindestens 6 Sätze.")).toContain("Z9#writing:model-answer-sentences");
+    expect(withTask("Write a short message to a friend.")).not.toContain("Z9#writing:model-answer-sentences"); // no number named: nothing to check
+  });
+
+  it("sentences are counted by their end marks; a spelled name or a dash dialogue is not split further", () => {
+    expect(sentenceCount("Guten Morgen, ich heiße Anna. Ich buchstabiere: A, N, N, A. Wie heißt du? – Ich heiße Jonas: J, O, N, A, S. Tschüs!")).toBe(5);
+    expect(sentencesAsked("Write 5 short sentences. Greet a person.")).toEqual([5, 5]);
+    expect(sentencesAsked("Introduce yourself in three to five simple sentences.")).toEqual([3, 5]);
+    expect(sentencesAsked("Schreiben Sie 2 bis 3 kurze Sätze.")).toEqual([2, 3]);
+    expect(sentencesAsked("Write a message of about 40 words.")).toBeNull();
   });
 
   it("dictation sentences stay short at low levels", () => {

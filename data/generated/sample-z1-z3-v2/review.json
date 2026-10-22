@@ -1,21 +1,27 @@
 {
   "run": "sample-z1-z3-v2",
-  "builtAt": "2026-10-21T23:32:47.516Z",
+  "builtAt": "2026-10-22T00:05:42.115Z",
   "summary": {
     "lessons": 3,
     "items": 285,
-    "ok": 262,
-    "fixed": 22,
-    "needsHuman": 1,
+    "ok": 261,
+    "fixed": 24,
+    "needsHuman": 0,
     "publishable": [
       "Z1",
-      "Z2"
-    ],
-    "blocked": [
+      "Z2",
       "Z3"
-    ]
+    ],
+    "blocked": []
   },
   "unreviewedLessons": [],
+  "manualFixes": [
+    "Z1#writing",
+    "Z2#writing",
+    "Z2#exam.reading.q1",
+    "Z2#vocabulary.w16",
+    "Z3#exam.gv3"
+  ],
   "failures": {
     "generateA": [],
     "generateB": [],
@@ -2365,13 +2371,13 @@
           "unit": "writing",
           "label": "Writing task",
           "original": {
-            "task": "Write 5 short sentences. Greet a person, say your name and spell it, ask the other person's name and say goodbye. Use the name Jonas for the other person.",
+            "task": "Write 5 short sentences. Greet a person, say your name and spell it, ask the other person's name, write Jonas's answer with his name spelled, and say goodbye.",
             "min_words": 20,
             "must_include": [
               "A greeting such as Guten Morgen",
               "Ich heiße ... with your name",
               "Ich buchstabiere: ... with your name letter by letter",
-              "Wie heißt du?",
+              "Wie heißt du? and Jonas's answer Ich heiße Jonas, spelled letter by letter",
               "A goodbye such as Tschüs"
             ],
             "useful_phrases": [
@@ -2381,7 +2387,7 @@
               "Wie heißt du?",
               "Tschüs!"
             ],
-            "model_answer": "Guten Morgen, ich heiße Anna. Ich buchstabiere: A, N, N, A. Wie heißt du? Du heißt Jonas: J, O, N, A, S. Tschüs!",
+            "model_answer": "Guten Morgen, ich heiße Anna. Ich buchstabiere: A, N, N, A. Wie heißt du? – Ich heiße Jonas: J, O, N, A, S. Tschüs!",
             "rubric": [
               "Includes a greeting and a goodbye (Guten Morgen, Tschüs) spelled correctly, with tsch in Tschüs",
               "Says the name correctly with Ich heiße ...",
@@ -2392,15 +2398,15 @@
           },
           "lint": [],
           "status": "ok",
-          "reason": "Task, model and rubric fit level and grammar.",
+          "reason": "Five sentences, 23 words with letters, all requirements and rubric points met.",
           "final": {
-            "task": "Write 5 short sentences. Greet a person, say your name and spell it, ask the other person's name and say goodbye. Use the name Jonas for the other person.",
+            "task": "Write 5 short sentences. Greet a person, say your name and spell it, ask the other person's name, write Jonas's answer with his name spelled, and say goodbye.",
             "min_words": 20,
             "must_include": [
               "A greeting such as Guten Morgen",
               "Ich heiße ... with your name",
               "Ich buchstabiere: ... with your name letter by letter",
-              "Wie heißt du?",
+              "Wie heißt du? and Jonas's answer Ich heiße Jonas, spelled letter by letter",
               "A goodbye such as Tschüs"
             ],
             "useful_phrases": [
@@ -2410,7 +2416,7 @@
               "Wie heißt du?",
               "Tschüs!"
             ],
-            "model_answer": "Guten Morgen, ich heiße Anna. Ich buchstabiere: A, N, N, A. Wie heißt du? Du heißt Jonas: J, O, N, A, S. Tschüs!",
+            "model_answer": "Guten Morgen, ich heiße Anna. Ich buchstabiere: A, N, N, A. Wie heißt du? – Ich heiße Jonas: J, O, N, A, S. Tschüs!",
             "rubric": [
               "Includes a greeting and a goodbye (Guten Morgen, Tschüs) spelled correctly, with tsch in Tschüs",
               "Says the name correctly with Ich heiße ...",
@@ -3980,13 +3986,13 @@
           ]
         },
         "writing": {
-          "task": "Write 5 short sentences. Greet a person, say your name and spell it, ask the other person's name and say goodbye. Use the name Jonas for the other person.",
+          "task": "Write 5 short sentences. Greet a person, say your name and spell it, ask the other person's name, write Jonas's answer with his name spelled, and say goodbye.",
           "min_words": 20,
           "must_include": [
             "A greeting such as Guten Morgen",
             "Ich heiße ... with your name",
             "Ich buchstabiere: ... with your name letter by letter",
-            "Wie heißt du?",
+            "Wie heißt du? and Jonas's answer Ich heiße Jonas, spelled letter by letter",
             "A goodbye such as Tschüs"
           ],
           "useful_phrases": [
@@ -3996,7 +4002,7 @@
             "Wie heißt du?",
             "Tschüs!"
           ],
-          "model_answer": "Guten Morgen, ich heiße Anna. Ich buchstabiere: A, N, N, A. Wie heißt du? Du heißt Jonas: J, O, N, A, S. Tschüs!",
+          "model_answer": "Guten Morgen, ich heiße Anna. Ich buchstabiere: A, N, N, A. Wie heißt du? – Ich heiße Jonas: J, O, N, A, S. Tschüs!",
           "rubric": [
             "Includes a greeting and a goodbye (Guten Morgen, Tschüs) spelled correctly, with tsch in Tschüs",
             "Says the name correctly with Ich heiße ...",
@@ -5830,21 +5836,21 @@
             "article": "die",
             "de": "Stadt",
             "plural": "die Städte",
-            "example": "Ich komme aus einer Stadt.",
-            "example_en": "I come from a city.",
+            "example": "Berlin ist eine Stadt.",
+            "example_en": "Berlin is a city.",
             "tip": null
           },
           "lint": [],
           "status": "ok",
-          "reason": "die Stadt, die Städte correct.",
+          "reason": "Article, plural, example and translation are correct.",
           "final": {
             "tier": "bonus",
             "en": "city, town",
             "article": "die",
             "de": "Stadt",
             "plural": "die Städte",
-            "example": "Ich komme aus einer Stadt.",
-            "example_en": "I come from a city.",
+            "example": "Berlin ist eine Stadt.",
+            "example_en": "Berlin is a city.",
             "tip": null
           }
         },
@@ -6573,7 +6579,7 @@
           "label": "Writing task",
           "original": {
             "task": "Introduce yourself in 3 to 5 short sentences. Write your name, where you are from and how you are.",
-            "min_words": 25,
+            "min_words": 20,
             "must_include": [
               "Your name with Ich heiße…",
               "Where you are from with Ich komme aus…",
@@ -6599,11 +6605,11 @@
           "lint": [
             "Contains a known trap (Ich bin gut. (for how you feel)). Right: Mir geht es gut. / Mir geht's gut. (also: Gut, danke.)"
           ],
-          "status": "ok",
-          "reason": "Meets requirements; model 22 words ≥ 80% of 25.",
+          "status": "fixed",
+          "reason": "must_include, rubric and model answer require a question to a friend, but the task did not ask for one. Added it to the task.",
           "final": {
-            "task": "Introduce yourself in 3 to 5 short sentences. Write your name, where you are from and how you are.",
-            "min_words": 25,
+            "task": "Introduce yourself in 3 to 5 short sentences. Write your name, where you are from and how you are. Then ask a friend a question.",
+            "min_words": 20,
             "must_include": [
               "Your name with Ich heiße…",
               "Where you are from with Ich komme aus…",
@@ -7066,15 +7072,15 @@
             "answer": "Österreich",
             "distractors": [
               "Deutschland",
-              "Wien ist ein Freund",
+              "Schweiz",
               "Lena"
             ],
             "accepted_answers": [],
             "explanation": "The text says: Ich komme aus Österreich."
           },
           "lint": [],
-          "status": "ok",
-          "reason": "Answerable from text.",
+          "status": "fixed",
+          "reason": "Distractor 'Lena' is a name, not a country. Replaced it with 'Italien'.",
           "final": {
             "skill": "reading",
             "type": "multiple_choice",
@@ -7082,8 +7088,8 @@
             "answer": "Österreich",
             "distractors": [
               "Deutschland",
-              "Wien ist ein Freund",
-              "Lena"
+              "Schweiz",
+              "Italien"
             ],
             "accepted_answers": [],
             "explanation": "The text says: Ich komme aus Österreich."
@@ -7899,8 +7905,8 @@
               "article": "die",
               "de": "Stadt",
               "plural": "die Städte",
-              "example": "Ich komme aus einer Stadt.",
-              "example_en": "I come from a city.",
+              "example": "Berlin ist eine Stadt.",
+              "example_en": "Berlin is a city.",
               "tip": null
             },
             {
@@ -8185,8 +8191,8 @@
           ]
         },
         "writing": {
-          "task": "Introduce yourself in 3 to 5 short sentences. Write your name, where you are from and how you are.",
-          "min_words": 25,
+          "task": "Introduce yourself in 3 to 5 short sentences. Write your name, where you are from and how you are. Then ask a friend a question.",
+          "min_words": 20,
           "must_include": [
             "Your name with Ich heiße…",
             "Where you are from with Ich komme aus…",
@@ -8372,8 +8378,8 @@
                 "answer": "Österreich",
                 "distractors": [
                   "Deutschland",
-                  "Wien ist ein Freund",
-                  "Lena"
+                  "Schweiz",
+                  "Italien"
                 ],
                 "accepted_answers": [],
                 "explanation": "The text says: Ich komme aus Österreich."
@@ -8482,7 +8488,7 @@
         "pronunciation": "ok",
         "reading": "ok",
         "listening": "fixed",
-        "writing": "ok",
+        "writing": "fixed",
         "speaking": "ok",
         "culture": "fixed",
         "mission": "fixed",
@@ -11294,16 +11300,28 @@
           "original": {
             "skill": "word_order",
             "type": "ordering",
-            "prompt": "Nummer / Meine / ist / null / acht / drei",
+            "prompt": "ist / null acht drei / Nummer / Meine",
             "answer": "Meine Nummer ist null acht drei.",
             "distractors": [],
-            "accepted_answers": [],
-            "explanation": "The phrase starts with Meine Nummer ist, then the digits one by one."
+            "accepted_answers": [
+              "Null acht drei ist meine Nummer."
+            ],
+            "explanation": "The digits stay in the order null acht drei, as in a phone number; the sentence can start with Meine Nummer or with Null acht drei."
           },
           "lint": [],
-          "status": "needs-human",
-          "reason": "Digits null/acht/drei can go in any order; 'Null acht drei ist meine Nummer' also possible. Ambiguous.",
-          "final": null
+          "status": "ok",
+          "reason": "Both natural orders accepted; chunks match exactly; explanation is true.",
+          "final": {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "ist / null acht drei / Nummer / Meine",
+            "answer": "Meine Nummer ist null acht drei.",
+            "distractors": [],
+            "accepted_answers": [
+              "Null acht drei ist meine Nummer."
+            ],
+            "explanation": "The digits stay in the order null acht drei, as in a phone number; the sentence can start with Meine Nummer or with Null acht drei."
+          }
         },
         {
           "id": "Z3#exam.gv4",
@@ -12743,11 +12761,13 @@
             {
               "skill": "word_order",
               "type": "ordering",
-              "prompt": "Nummer / Meine / ist / null / acht / drei",
+              "prompt": "ist / null acht drei / Nummer / Meine",
               "answer": "Meine Nummer ist null acht drei.",
               "distractors": [],
-              "accepted_answers": [],
-              "explanation": "The phrase starts with Meine Nummer ist, then the digits one by one."
+              "accepted_answers": [
+                "Null acht drei ist meine Nummer."
+              ],
+              "explanation": "The digits stay in the order null acht drei, as in a phone number; the sentence can start with Meine Nummer or with Null acht drei."
             },
             {
               "skill": "translation",
@@ -12906,10 +12926,10 @@
         "speaking": "fixed",
         "culture": "fixed",
         "mission": "ok",
-        "exam": "needs-human",
+        "exam": "fixed",
         "closing": "ok"
       },
-      "publishable": false
+      "publishable": true
     }
   ]
 }

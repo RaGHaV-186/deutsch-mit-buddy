@@ -40,6 +40,7 @@ import {
   PASS_D_SYSTEM,
   REVIEW_MAX_TOKENS,
   REVIEW_MODEL,
+  REVIEW_PARTIAL_MAX_TOKENS,
   REVIEW_SYSTEM,
   passAPrompt,
   passBPrompt,
@@ -116,11 +117,14 @@ export const buildPassDRequests = (lessons: CurriculumRow[], passA: Map<string, 
 
 const wordsOf = (lesson: { vocabulary: { words: { article: string | null; de: string }[] } } | undefined) => lesson?.vocabulary.words.map((c) => `${c.article ? c.article + " " : ""}${c.de}`);
 
-export const buildReviewRequests = (lessons: CurriculumRow[], contents: Map<string, Lesson>, plan: readonly CurriculumRow[]): BatchRequest[] =>
+/** `only` (lesson code -> item ids) limits the review to those items: the re-review of manual corrections. Lessons without an entry are skipped then. */
+export const buildReviewRequests = (lessons: CurriculumRow[], contents: Map<string, Lesson>, plan: readonly CurriculumRow[], only?: Map<string, string[]>): BatchRequest[] =>
   lessons.flatMap((l) => {
     const c = contents.get(l.code);
+    const ids = only?.get(l.code);
+    if (!c || (only && !ids?.length)) return [];
     const earlier = earlierContext(l, plan, (code) => wordsOf(contents.get(code)));
-    return c ? [request("review", l.code, REVIEW_MODEL, REVIEW_MAX_TOKENS, REVIEW_SYSTEM, reviewPrompt(l, c, lintLesson(l.code, l.phase, c, { first: l.seq === 0 }), earlier), REVIEW_JSON_SCHEMA)] : [];
+    return [request("review", l.code, REVIEW_MODEL, only ? REVIEW_PARTIAL_MAX_TOKENS : REVIEW_MAX_TOKENS, REVIEW_SYSTEM, reviewPrompt(l, c, lintLesson(l.code, l.phase, c, { first: l.seq === 0 }), earlier, ids), REVIEW_JSON_SCHEMA)];
   });
 
 /** The free check that runs before any Opus money is spent: the lessons whose automatic checks find an error. */
@@ -141,7 +145,7 @@ export interface StageEstimate extends RunEstimate {
 
 export const fingerprint = (requests: BatchRequest[]) => createHash("sha256").update(JSON.stringify(requests)).digest("hex").slice(0, 16);
 
-export function estimateStage(stage: Stage, requests: BatchRequest[], opts: { rate?: number; exactInputTokens?: number[] } = {}): StageEstimate {
+export function estimateStage(stage: Stage, requests: BatchRequest[], opts: { rate?: number; exactInputTokens?: number[]; expectedOutput?: number } = {}): StageEstimate {
   const first = requests[0]?.params;
   if (!first) throw new Error("Nothing to estimate: no requests.");
   // A JSON Schema costs input tokens too (about 1 token per 1.3 characters, measured with a real request); the token counter does not include it.
@@ -149,7 +153,7 @@ export function estimateStage(stage: Stage, requests: BatchRequest[], opts: { ra
   const inputTokensPerRequest = opts.exactInputTokens
     ? opts.exactInputTokens.map((n, i) => n + schemaTokens(requests[i]))
     : requests.map((r) => estimateTokens(r.params.system + r.params.messages.map((m) => m.content).join("")) + schemaTokens(r));
-  const estimate = estimateRun({ model: first.model, inputTokensPerRequest, expectedOutputPerRequest: EXPECTED_OUTPUT[stage], maxTokens: first.max_tokens, rate: opts.rate });
+  const estimate = estimateRun({ model: first.model, inputTokensPerRequest, expectedOutputPerRequest: opts.expectedOutput ?? EXPECTED_OUTPUT[stage], maxTokens: first.max_tokens, rate: opts.rate });
   return { ...estimate, stage, id: fingerprint(requests) };
 }
 
@@ -255,7 +259,8 @@ export function combineLesson(a: PassA, b: PassB, c: PassC, d: PassD): Lesson {
 
 export const itemIdsOf = (code: string, lesson: Lesson) => enumerateItems(code, lesson).map((i) => i.id);
 
-export function parseReview(lessons: CurriculumRow[], contents: Map<string, Lesson>, lines: BatchResultLine[]): StageOutcome<ReviewVerdict[]> {
+/** `only` (lesson code -> item ids): the answer to a partial review, which holds a verdict for exactly those items. */
+export function parseReview(lessons: CurriculumRow[], contents: Map<string, Lesson>, lines: BatchResultLine[], only?: Map<string, string[]>): StageOutcome<ReviewVerdict[]> {
   const reviewable = lessons.filter((l) => contents.has(l.code));
   const raw = parseStage("review", reviewable, lines, (v) => reviewResultSchema.safeParse(v));
   const out: StageOutcome<ReviewVerdict[]> = { results: new Map(), failures: raw.failures, usages: raw.usages };
@@ -265,10 +270,43 @@ export function parseReview(lessons: CurriculumRow[], contents: Map<string, Less
     for (const v of parsed.verdicts) if (!first.has(v.id)) first.set(v.id, v);
     out.results.set(
       code,
-      itemIdsOf(code, contents.get(code)!).map((id) => first.get(id) ?? { id, status: "needs-human" as const, reason: "The reviewer returned no verdict for this item.", fixed_json: null }),
+      itemIdsOf(code, contents.get(code)!).filter((id) => !only || only.get(code)?.includes(id)).map((id) => first.get(id) ?? { id, status: "needs-human" as const, reason: "The reviewer returned no verdict for this item.", fixed_json: null }),
     );
   }
   return out;
+}
+
+// ---- Manual corrections
+// The course owner can correct single items after a review (manual-fixes.json in the run folder: item id -> new content + why). A correction is applied on top of
+// what the writers produced, and the old verdict of that item no longer counts: the item waits for a re-review of just the corrected items.
+export interface ManualFix {
+  value: unknown;
+  reason: string;
+}
+export type ManualFixes = Record<string, ManualFix>;
+
+/** The ids of the corrected items of one lesson. */
+export const manualFixIds = (code: string, fixes: ManualFixes) => Object.keys(fixes).filter((id) => id.startsWith(`${code}#`));
+
+/** The lesson with the corrections of its items applied. Throws when a correction names no item or does not fit the item's format. */
+export function applyManualFixes(code: string, lesson: Lesson, fixes: ManualFixes): Lesson {
+  const items = new Map(enumerateItems(code, lesson).map((i) => [i.id, i]));
+  let current = lesson;
+  for (const id of manualFixIds(code, fixes)) {
+    const item = items.get(id);
+    if (!item) throw new Error(`Manual fix for ${id}: the lesson has no such item.`);
+    const applied = applyFix(current, item, JSON.stringify(fixes[id].value));
+    if (!applied) throw new Error(`Manual fix for ${id} does not fit the format of that item.`);
+    current = applied.lesson;
+  }
+  return current;
+}
+
+/** The verdicts that count: the first review's, except for corrected items, whose only valid verdict is the one from the re-review (none yet = waits for a human). */
+export function currentVerdicts(code: string, first: ReviewVerdict[] | undefined, rereviewed: ReviewVerdict[] | undefined, fixes: ManualFixes): ReviewVerdict[] | undefined {
+  if (!first) return undefined;
+  const corrected = new Set(manualFixIds(code, fixes));
+  return [...first.filter((v) => !corrected.has(v.id)), ...(rereviewed ?? []).filter((v) => corrected.has(v.id))];
 }
 
 // ---- Merging the passes
@@ -337,6 +375,12 @@ export function mergeLesson(lesson: CurriculumRow, content: Lesson, verdicts: Re
     }
   }
 
+  // A correction of one item can break another (for example an exam item that now repeats an exercise): the finished lesson is checked once more.
+  const finalErrors = lintLesson(code, phase, current, { first }).filter((l) => l.level === "error" && l.id !== "lesson");
+  for (const err of finalErrors) {
+    const i = items.findIndex((x) => x.id === err.id && x.status !== "needs-human");
+    if (i >= 0) items[i] = { ...items[i], status: "needs-human", reason: `After the corrections an automatic check fails: ${err.message}`, final: null };
+  }
   const lessonIssues = lessonErrors(lintLesson(code, phase, current, { first })).map((l) => l.message);
   const partStatus = Object.fromEntries(
     PARTS.map((part) => {

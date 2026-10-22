@@ -36,6 +36,14 @@ npm run content -- build    --run sample-z1-z3
 npm run dev                 # then open /design/content?run=sample-z1-z3
 npm run content -- markdown --run sample-z1-z3 --lesson Z1 --out ~/Downloads/z1-lesson.md
 
+# 4b. Correcting single items after a review: put the new content of each item in data/generated/<run>/manual-fixes.json
+#     as { "Z1#writing": { "reason": "why", "value": { ...the whole item... } } }. A correction replaces that item only (the format is checked),
+#     the item's old verdict stops counting, and Opus re-checks ONLY the corrected items (a few cents), then build again.
+npm run content -- check    --run sample-z1-z3-v2
+npm run content -- estimate --run sample-z1-z3-v2 --stage review --fixes
+npm run content -- run      --run sample-z1-z3-v2 --stage review --fixes --approve <estimate id>
+npm run content -- build    --run sample-z1-z3-v2
+
 # 5. publish every lesson that has no open item (needs --yes for a hosted database)
 npm run content -- publish  --run sample-z1-z3
 ```
@@ -55,7 +63,7 @@ Opus gives every item of the lesson (about 93: each card, phrase, exercise, pass
 - **fixed**: it corrected a clear error; the file shows the original, the correction and why.
 - **needs-human**: it was unsure, or its correction still failed an automatic check.
 
-Free automatic checks run before and after Opus: counts (15 to 20 words, 5 phrases, 19 exercises of the right mix ...), level bands for reading, listening and writing length, how German the instructions are, broken questions, and more. An "ok" from Opus is not believed when an automatic check fails.
+Free automatic checks run before and after Opus (`check` shows both): counts (15 to 20 words, 5 phrases, 19 exercises of the right mix ...), level bands for reading, listening and writing length, how German the instructions are, broken questions, a writing model answer that meets its own task (at least `min_words` words and the number of sentences the task names), and more. An "ok" from Opus is not believed when an automatic check fails.
 
 **A lesson publishes only when no item needs a human and the lesson as a whole has no errors.** The database enforces it too: `publish_lesson` refuses a lesson unless all 14 parts exist and each passed the review, and a trigger on `lesson_publications` re-checks the counts.
 

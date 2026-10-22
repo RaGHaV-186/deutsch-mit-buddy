@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import { enumerateItems } from "./lesson-items.ts";
 import { PARTS, type ReviewVerdict } from "./lesson-schema.ts";
 import {
+  applyManualFixes,
   assertApproved,
   buildPassARequests,
   buildPassBRequests,
@@ -10,10 +11,12 @@ import {
   buildReviewRequests,
   combineLesson,
   costReport,
+  currentVerdicts,
   customId,
   estimateStage,
   fingerprint,
   itemIdsOf,
+  manualFixIds,
   mergeLesson,
   parsePassA,
   parsePassB,
@@ -390,5 +393,71 @@ describe("items match what the reviewer is asked about", () => {
     const reqs = buildReviewRequests([row], new Map([["Z1", validLesson()]]), [row]);
     const text = reqs[0].params.messages[0].content;
     for (const item of enumerateItems("Z1", validLesson())) expect(text).toContain(`"id":"${item.id}"`);
+  });
+});
+
+describe("manual corrections and the re-review of just those items", () => {
+  const lesson = validLesson();
+  const contents = new Map([["Z1", lesson]]);
+  const fixedWriting = { ...lesson.writing, min_words: 20 };
+  const fixes = { "Z1#writing": { reason: "shorter minimum", value: fixedWriting }, "Z2#goal": { reason: "another lesson", value: lesson.goal } };
+
+  it("a correction replaces exactly its item, in the lesson it names", () => {
+    expect(manualFixIds("Z1", fixes)).toEqual(["Z1#writing"]);
+    const fixed = applyManualFixes("Z1", lesson, fixes);
+    expect(fixed.writing.min_words).toBe(20);
+    expect(fixed.goal).toEqual(lesson.goal);
+    expect(lesson.writing.min_words).toBe(30); // the written lesson is not mutated
+  });
+
+  it("a correction for an item that does not exist, or that does not fit its format, is refused loudly", () => {
+    expect(() => applyManualFixes("Z1", lesson, { "Z1#writing.nope": { reason: "x", value: {} } })).toThrow("no such item");
+    expect(() => applyManualFixes("Z1", lesson, { "Z1#writing": { reason: "x", value: { task: 1 } } })).toThrow("does not fit");
+  });
+
+  it("an old verdict no longer counts for a corrected item: only the re-review's verdict does, and without one the item waits for a human", () => {
+    const first = allOk(lesson);
+    const corrected = applyManualFixes("Z1", lesson, fixes);
+    const waiting = mergeLesson(row, corrected, currentVerdicts("Z1", first, undefined, fixes)!);
+    expect(waiting.items.find((i) => i.id === "Z1#writing")).toMatchObject({ status: "needs-human" });
+    expect(waiting.publishable).toBe(false);
+    const done = mergeLesson(row, corrected, currentVerdicts("Z1", first, [verdict("Z1#writing", "ok", { reason: "re-checked" })], fixes)!);
+    expect(done.items.find((i) => i.id === "Z1#writing")).toMatchObject({ status: "ok", reason: "re-checked" });
+    expect(done.items.filter((i) => i.status === "ok")).toHaveLength(93);
+    expect(done.publishable).toBe(true);
+  });
+
+  it("a re-review verdict for an item that was not corrected is ignored", () => {
+    const got = currentVerdicts("Z1", allOk(lesson), [verdict("Z1#goal", "needs-human"), verdict("Z1#writing")], fixes)!;
+    expect(got.find((v) => v.id === "Z1#goal")!.status).toBe("ok");
+  });
+
+  it("the re-review request holds only the corrected items (and the passage a question refers to), with small token limits", () => {
+    const reqs = buildReviewRequests([row], contents, [row], new Map([["Z1", ["Z1#writing", "Z1#exam.reading.q1"]]]));
+    expect(reqs).toHaveLength(1);
+    const text = reqs[0].params.messages[0].content;
+    expect(text).toContain("Items to check (2)");
+    expect(text).toContain("RE-REVIEW");
+    expect(text).toContain('"id":"Z1#writing"');
+    expect(text).toContain('"id":"Z1#exam.reading.q1"');
+    expect(text).toContain('"id":"Z1#exam.reading.passage"'); // as context
+    expect(text).not.toContain('"id":"Z1#exam.reading.q2"');
+    expect(text).not.toContain('"id":"Z1#goal"');
+    expect(reqs[0].params.max_tokens).toBeLessThan(20_000);
+    expect(buildReviewRequests([row], contents, [row], new Map())).toEqual([]);
+  });
+
+  it("the answer to a re-review holds exactly the asked items; a skipped one waits for a human", () => {
+    const only = new Map([["Z1", ["Z1#writing", "Z1#goal"]]]);
+    const out = parseReview([row], contents, [succeeded("review-Z1", { verdicts: [verdict("Z1#writing"), verdict("Z1#exam.speaking", "needs-human")] })], only);
+    expect(out.results.get("Z1")!.map((v) => [v.id, v.status])).toEqual([["Z1#goal", "needs-human"], ["Z1#writing", "ok"]]);
+  });
+
+  it("a correction that breaks another item is caught when the finished lesson is checked again", () => {
+    const broken = structuredClone(lesson);
+    broken.exam.grammar_vocab[0] = { ...broken.exercises.items[0] }; // an exam item that repeats an exercise
+    const review = mergeLesson(row, broken, allOk(broken));
+    expect(review.items.find((i) => i.id === "Z1#exam.gv1")).toMatchObject({ status: "needs-human" });
+    expect(review.publishable).toBe(false);
   });
 });

@@ -91,4 +91,16 @@ describe("the rules of the generator", () => {
     expect(REVIEW_SYSTEM).toContain("Pronunciation claims: for EVERY statement");
     expect(REVIEW_SYSTEM).toContain("Tschüs has tsch");
   });
+
+  it("distractors must be clearly false but plausible, for the writers and for the reviewer", () => {
+    for (const system of [PASS_A_SYSTEM, PASS_B_SYSTEM, PASS_C_SYSTEM, PASS_D_SYSTEM]) expect(system).toContain("clearly false but plausible");
+    expect(REVIEW_SYSTEM).toContain("clearly false but plausible");
+    expect(REVIEW_SYSTEM).toContain("Wien ist ein Freund");
+    expect(REVIEW_SYSTEM).toContain("also correct");
+  });
+
+  it("the model answer must meet its own task: words and sentences", () => {
+    expect(PASS_B_SYSTEM).toContain("exactly the number of sentences the task names");
+    expect(REVIEW_SYSTEM).toContain("the model answer meets its own task");
+  });
 });

@@ -1,0 +1,14 @@
+{
+  "stage": "review",
+  "model": "claude-opus-5-5",
+  "batchId": "msgbatch_01EqnwwyqUcRxQVKPyTUHXGh",
+  "requests": 3,
+  "failedRequests": 0,
+  "inputTokens": 13392,
+  "outputTokens": 2440,
+  "actualUsd": 0.0512,
+  "actualEur": 0.0486,
+  "estimatedEur": 0.1073,
+  "ceilingEur": 0.2498,
+  "usdToEur": 0.95
+}

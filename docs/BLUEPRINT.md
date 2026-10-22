@@ -247,7 +247,7 @@ Everything except AI and the voice is free at this scale. Lessons are pre-genera
 | Vercel Hobby, Supabase free, Resend free, Sentry free, Cloudflare Turnstile | €0 |
 | Domain deutschmitbuddy.de | ~€1 (≈€10/year) |
 | Neural TTS voice | ~€2–5 |
-| One-off: all 14 parts of the 90 lessons Z1 → B1, Sonnet (write) + Opus (check), Batch API | ~$16 expected, up to ~$35 worst case; run in tranches, each pass under €10 |
+| One-off: all 14 parts of the 90 lessons Z1 → B1, four Sonnet passes (write, incl. rewrites after the free checks) + Opus (check every item), Batch API | ~$31 expected in total (the Z1–Z3 sample ≈ $1.4 + the other 87 lessons ≈ $29: Z4 → A1 $7.9, A2 $6.7, B1 + exam prep $14.4); theoretical worst case ~$45; run in three tranches, each pass under €10 |
 | One-off, later (slice 13): B2–C1 outlines and lessons | ~$17 expected |
 
 **Live AI per activity (approximate, with prompt caching)**
@@ -275,7 +275,7 @@ Pricing (Claude API, checked 19 Oct 2026): Opus 5.5 $4 / $20, Sonnet 5.5 $2 / $1
 
 ## 8. Build order
 
-**Status (22 Oct 2026):** slices 0, 1, 2 and the redesign (design-v1.1) are done and live. Slice 3a (lesson standard, generator v2, preview) is built; the Z1–Z3 sample, second round, is waiting for Raghav's review (Checkpoint A: 262 ok, 22 fixed, 1 needs-human; round cost €0.76). Next: 3b, 3c, then the daily lesson loop 4a–4e. Details and resume steps: CLAUDE.md, "Where we are".
+**Status (22 Oct 2026):** slices 0, 1, 2 and the redesign (design-v1.1) are done and live. Slice 3a (lesson standard, generator v2, preview) is built and the Z1–Z3 sample is approved to publish (Checkpoint A: 261 ok, 24 fixed, 0 needs-human; sample cost €1.36 in total). Next: tranche 1 of 3b (Z4 → W4.5, about €7.5, waits for Raghav's yes), then 3b/3c, then the daily lesson loop 4a–4e. Details and resume steps: CLAUDE.md, "Where we are".
 
 The app is built in 14 slices (3 and 4 split into small steps), each one working end to end and deployed before the next starts. At 1–2 slices per evening the whole v1 takes about two weeks.
 

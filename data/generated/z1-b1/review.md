@@ -1,7 +1,7 @@
 # Review of run z1-b1
 
-2853 items in 30 lessons: **2541 ok**, **310 fixed**, **2 need a human**.
-Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z10, W1.1, W1.2, W1.3, W2.1, W2.2, W2.3, W2.4, W2.5, W3.1, W3.2, W3.3, W3.4, W3.5, W4.1, W4.2, W4.3, W4.4, W4.5, Z9. Blocked: W1.4, W1.5.
+2853 items in 30 lessons: **2539 ok**, **309 fixed**, **5 need a human**.
+Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, W1.1, W1.2, W1.3, W1.4, W2.1, W2.2, W2.3, W2.4, W3.1, W3.3, W3.4, W3.5, W4.1, W4.2, W4.3, W4.4, Z9. Blocked: Z10, W1.5, W2.5, W3.2, W4.5.
 
 ## Z1 (can be published)
 - **CORRECTED BY THE COURSE OWNER** Z1#writing: The model answer asked and answered its own question (Wie heißt du? Du heißt Jonas). Now Jonas answers in the text; the task and the points to include say so.
@@ -106,15 +106,17 @@ Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z10, W1.1, W1.2, W1.3, W2.1, W
 - **FIXED** Z8#culture (Culture note): The sentence 'halb drei does not mean 2:30 ... so it is 2:30' contradicted itself. Rewrote it to contrast halb drei with British 'half three'.
 - **FIXED** Z8#exam.reading.q2 (Exam reading question 2): 'It sleeps' and 'It eats' are nonsense for an alarm clock. Replaced them with 'It is quiet.' and 'It is broken.'
 
-## Z10 (can be published)
+## Z10 (blocked)
 - **CORRECTED BY THE COURSE OWNER** Z10#vocabulary.w08: Names rule now allows the generic surname Lang for formal address; "Mr / man" was misleading (Mann).
 - **CORRECTED BY THE COURSE OWNER** Z10#vocabulary.w09: Names rule now allows the generic surname Lang for formal address; same wording as the Herr card.
 - **CORRECTED BY THE COURSE OWNER** Z10#exam.gv2: Frau Weiß -> Frau Weber: formal address uses only the fixed generic surnames (Braun, Weber, Lang, Schmidt, Müller).
+- **CORRECTED BY THE COURSE OWNER** Z10#writing: New counting rule (Raghav): a salutation on its own and a closing formula do not count as sentences. The model answer now has the exact number of real sentences the task asks for (4 real sentences; the salutation does not count).
 - **FIXED** Z10#grammar.intro (Grammar explanation): du heißt was given as an -st example, but it ends in -t. Now marked as an exception. The English-only hint was a false alarm.
 - **FIXED** Z10#exercises.16 (Exercise 16): Natural correct variants were missing. Added Es geht mir gut, danke and Danke, mir geht es gut.
 - **FIXED** Z10#vocabulary.w02 (Word: Kaffee): In Germany Kaffee is usually stressed on the first syllable (Duden: Kạffee). Corrected the tip.
 - **FIXED** Z10#reading.passage (Reading text): Jonas orders tea and cake, then says only tea. Merged into one consistent order.
 - **FIXED** Z10#reading.q5 (Reading question 5): The distractor 'because they are waiters' was nonsense. Replaced it with 'because they are colleagues'.
+- **NEEDS-HUMAN** Z10#writing (Writing task): No verdict for this item.
 - **FIXED** Z10#speaking.tandem (Tandem scenario): Switching from Sie to du and the phrase 'Und dir?' broke 'keep one form'. Buddy now stays with Sie; changed to 'Und Ihnen?'.
 - **FIXED** Z10#mission (Real-world mission): Kaffee, Freundin and Rechnung contain no ie or ei. Replaced them with Sie, wie, frei, Einen.
 - **FIXED** Z10#exam.gv6 (Exam grammar/vocabulary 6): Natural correct alternatives were missing. Added them.
@@ -162,11 +164,11 @@ Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z10, W1.1, W1.2, W1.3, W2.1, W
 - **FIXED** W1.3#exam.listening.passage (Exam listening dialogue): 'Ja, kein Problem!' is an unnatural answer to 'Do you like the room?'; changed it to 'Ja, sehr!'
 - **FIXED** W1.3#exam.listening.q1 (Exam listening question 1): Table and lamp are never mentioned; the prompt now asks what Lena says she does not have.
 
-## W1.4 (blocked)
-- **CORRECTED BY THE COURSE OWNER** W1.4#writing: Model answer has exactly the 5 sentences of its task (the greeting at the end is the fifth), covers können, wollen, müssen, food and a drink.
+## W1.4 (can be published)
+- **CORRECTED BY THE COURSE OWNER** W1.4#writing: New counting rule (Raghav): a salutation on its own and a closing formula do not count as sentences. The model answer now has the exact number of real sentences the task asks for, and keeps the closing (5 real sentences + the closing).
 - **FIXED** W1.4#vocabulary.w05 (Word: Kaffee): In Germany Kaffee is stressed on the first syllable (KAF-fee); end stress is Austrian. Tip corrected.
 - **FIXED** W1.4#reading.q4 (Reading question 4): "Dein Brot" is the wrong perspective as an answer; replaced with "Ihr Brot".
-- **NEEDS-HUMAN** W1.4#writing (Writing task): The correction still fails an automatic check (The model answer has 6 sentences; its own task asks for 5.). (The model answer had only four real sentences plus the closing, but the task asks for exactly 5. I split the long und-sentence into two, so there are now 5 sentences plus the greeting.)
+- **FIXED** W1.4#writing (Writing task): The model answer had only four real sentences plus the closing, but the task asks for exactly 5. I split the long und-sentence into two, so there are now 5 sentences plus the greeting.
 - **FIXED** W1.4#speaking.d2 (Speaking drill 2): Target has muss (plain u, no ü), and ü is not made with lips as for ee; tip corrected.
 - **FIXED** W1.4#speaking.d4 (Speaking drill 4): Target has darf (plain a), no ü; tip about dürfen's ü misleading, corrected.
 - **FIXED** W1.4#speaking.d5 (Speaking drill 5): Short ö in können is a rounded short e (as in bed), not 'ay'; tip corrected.
@@ -241,7 +243,8 @@ Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z10, W1.1, W1.2, W1.3, W2.1, W
 - **FIXED** W2.4#speaking.d3 (Speaking drill 3): The stress in geradeaus is on the last syllable (geradeAUS), not on 'ra'. Corrected the tip.
 - **FIXED** W2.4#exam.gv4 (Exam grammar/vocabulary 4): Other natural orders were missing from accepted_answers; added them.
 
-## W2.5 (can be published)
+## W2.5 (blocked)
+- **CORRECTED BY THE COURSE OWNER** W2.5#writing: New counting rule (Raghav): a salutation on its own and a closing formula do not count as sentences. The model answer now has the exact number of real sentences the task asks for (5 real sentences; the last one is split in two imperatives).
 - **FIXED** W2.5#warmup.q01 (Warm-up 1): Distractor 'muss' also gives a grammatical sentence ('Ich muss heute nicht kommen'). Replaced it with 'könnt'.
 - **FIXED** W2.5#grammar.intro (Grammar explanation): Said 'e to i' but its own example Lies has ie. Changed to 'e to i or ie'.
 - **FIXED** W2.5#exercises.03 (Exercise 3): Name 'Frau Müller' not allowed; removed the name.
@@ -255,6 +258,7 @@ Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z10, W1.1, W1.2, W1.3, W2.1, W
 - **FIXED** W2.5#vocabulary.w02 (Word: Uhrzeit): 'Wie ist die Uhrzeit?' is unnatural; changed to 'Weißt du die Uhrzeit?'
 - **FIXED** W2.5#vocabulary.w17 (Word: kurz): kurz is not a verb; English 'to take a moment' misleading. Changed en and tip.
 - **FIXED** W2.5#listening.passage (Listening dialogue): 'Ich komme nicht spät' unnatural; changed to 'nicht zu spät'.
+- **NEEDS-HUMAN** W2.5#writing (Writing task): No verdict for this item.
 - **FIXED** W2.5#speaking.tandem (Tandem scenario): Target phrase used Sie with friend Buddy; changed to du 'Warte bitte einen Moment.'
 - **FIXED** W2.5#exam.gv5 (Exam grammar/vocabulary 5): 'Lena, ruft' used ihr-form for one person; placeholder explanation, missing orders. Changed to ruf, added orders and explanation.
 - **FIXED** W2.5#exam.gv6 (Exam grammar/vocabulary 6): Missing variants with bitte first; added them.
@@ -266,12 +270,13 @@ Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z10, W1.1, W1.2, W1.3, W2.1, W
 - **FIXED** W3.1#exam.gv5 (Exam grammar/vocabulary 5): Missing natural variant 'Ich habe Fußball im Park gespielt.'; added it.
 - **FIXED** W3.1#closing (Close day): Example 'Ich habe Kuchen gekocht' is wrong (cake is baked); changed to Suppe gekocht.
 
-## W3.2 (can be published)
+## W3.2 (blocked)
 - **CORRECTED BY THE COURSE OWNER** W3.2#reading.passage: Timeline: no "Gestern" (the text is about the weekend). Saturday evening cinema now follows Saturday; Sunday at home comes last.
 - **CORRECTED BY THE COURSE OWNER** W3.2#reading.q3: Follows the new passage (cinema on Saturday evening).
 - **CORRECTED BY THE COURSE OWNER** W3.2#listening.passage: Timeline: Jonas stayed at home on Sunday and went swimming on Saturday (no "gestern").
 - **CORRECTED BY THE COURSE OWNER** W3.2#listening.q4: Follows the new dialogue.
 - **CORRECTED BY THE COURSE OWNER** W3.2#listening.q5: Follows the new dialogue.
+- **CORRECTED BY THE COURSE OWNER** W3.2#writing: New counting rule (Raghav): a salutation on its own and a closing formula do not count as sentences. The model answer now has the exact number of real sentences the task asks for (5 real sentences + the closing; one Perfekt sentence with sein added).
 - **FIXED** W3.2#exercises.12 (Exercise 12): Missing the natural variant with nach Berlin first; added it.
 - **FIXED** W3.2#exercises.13 (Exercise 13): Missing the natural variant with zu Hause first; added it.
 - **FIXED** W3.2#exercises.14 (Exercise 14): Missing correct answers with zum Park and gelaufen; added them.
@@ -279,7 +284,7 @@ Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z10, W1.1, W1.2, W1.3, W2.1, W
 - **FIXED** W3.2#exercises.17 (Exercise 17): Explanation wrongly said bin is at the start; it is in position 2. Corrected.
 - **FIXED** W3.2#vocabulary.w14 (Word: Urlaub): Urlaub has the plural die Urlaube (Duden); replaced the dash.
 - **FIXED** W3.2#reading.q4 (Reading question 4): The instruction 'one word and article' did not fit 'In den Park', and 'Der Park' is wrong after wohin. Fixed the instruction and the accepted answers.
-- **FIXED** W3.2#writing (Writing task): The model answer was set on holiday at the lake yet said 'zu Hause geblieben', and its first sentence used no Perfekt. Rewrote it coherently: 5 sentences, 42 words.
+- **NEEDS-HUMAN** W3.2#writing (Writing task): No verdict for this item.
 - **FIXED** W3.2#speaking.d5 (Speaking drill 5): The tip was garbled and implied Wochenende has ei, which it does not. Replaced it with a correct word-order tip.
 - **FIXED** W3.2#mission (Real-world mission): bleiben was called a movement verb; changed to 'verbs with sein'.
 - **FIXED** W3.2#exam.gv4 (Exam grammar/vocabulary 4): Missing the natural variant with nach Spanien first; added it.
@@ -377,7 +382,8 @@ Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z10, W1.1, W1.2, W1.3, W2.1, W
 - **FIXED** W4.4#mission (Real-world mission): 'Ich hänge den Termin an die Wand' is unnatural; changed to den Zettel (the note).
 - **FIXED** W4.4#exam.gv5 (Exam grammar/vocabulary 5): Separate chunks allowed swapping objects and missing orders; merged 'an den Tisch' and added accepted orders.
 
-## W4.5 (can be published)
+## W4.5 (blocked)
+- **CORRECTED BY THE COURSE OWNER** W4.5#writing: New counting rule (Raghav): a salutation on its own and a closing formula do not count as sentences. The model answer now has the exact number of real sentences the task asks for (5 real sentences; one sentence about the family added).
 - **FIXED** W4.5#warmup.q01 (Warm-up 1): ausziehen (move out) takes sein and 'aus der Wohnung'; 'die Wohnung ausgezogen haben' is wrong. Changed the sentence to use sein.
 - **FIXED** W4.5#warmup.q03 (Warm-up 3): The prompt mixed in an unrelated lamp sentence and asked for a 'sentence'. Made it a clear verb choice.
 - **FIXED** W4.5#reading.q3 (Reading question 3): The distractors Zeit and Haus are not foods (wrong kind). Replaced them with Käse and Kuchen.
@@ -385,7 +391,7 @@ Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z10, W1.1, W1.2, W1.3, W2.1, W
 - **FIXED** W4.5#reading.q5 (Reading question 5): Natural answers were missing. Added 'Jonas wohnt in einem Haus in der Nähe.' and 'In der Nähe.'
 - **FIXED** W4.5#listening.passage (Listening dialogue): Anna answers 'Mir geht es gut' although nobody asked. Jonas now asks 'Wie geht es Ihnen?'
 - **FIXED** W4.5#listening.q2 (Listening question 2): Anna's town is unknown and could be Berlin, so that option might be right. Replaced it with 'In Hamburg'.
-- **FIXED** W4.5#writing (Writing task): The model answer never uses du although the task requires it, and 'arbeite nicht, aber keine Zeit' was illogical. Changed the sentence to '... und habe Zeit für dich'.
+- **NEEDS-HUMAN** W4.5#writing (Writing task): No verdict for this item.
 - **FIXED** W4.5#speaking.d4 (Speaking drill 4): Wrong stress claim: inseparable wiederholen is stressed on 'ho', not 'wie'. Corrected the tip.
 - **FIXED** W4.5#mission (Real-world mission): tsch in Deutsch is not a first sound. Changed 'first sounds' to 'sounds'.
 - **FIXED** W4.5#exam.gv5 (Exam grammar/vocabulary 5): Natural answers were missing. Added 'Woher sind Sie?' and 'Wo kommen Sie her?'

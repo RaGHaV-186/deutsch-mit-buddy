@@ -235,7 +235,7 @@
     }
   },
   "W1.4#writing": {
-    "reason": "Model answer has exactly the 5 sentences of its task (the greeting at the end is the fifth), covers können, wollen, müssen, food and a drink.",
+    "reason": "New counting rule (Raghav): a salutation on its own and a closing formula do not count as sentences. The model answer now has the exact number of real sentences the task asks for, and keeps the closing (5 real sentences + the closing).",
     "value": {
       "task": "Write a short postcard to a friend. You are on holiday. Tell your friend what you can eat there, what you must or want to try, and what you want to drink. Write exactly 5 sentences.",
       "min_words": 30,
@@ -253,7 +253,7 @@
         "Ich möchte einen Kaffee.",
         "Viele Grüße"
       ],
-      "model_answer": "Liebe Lena, ich bin im Urlaub und das Essen ist super. Ich kann hier jeden Tag Fisch und Gemüse essen. Ich will heute den Kuchen probieren und ich muss unbedingt Wasser bestellen. Zum Trinken möchte ich einen Kaffee. Viele Grüße, Anna",
+      "model_answer": "Liebe Lena, ich bin im Urlaub und das Essen ist super. Ich kann hier jeden Tag Fisch und Gemüse essen. Ich will heute den Kuchen probieren. Ich muss ein Glas Wasser bestellen, denn mir ist heiß. Zum Trinken möchte ich einen Kaffee. Viele Grüße, Anna",
       "rubric": [
         "Uses exactly 5 sentences and at least 30 words",
         "Uses können, wollen and müssen correctly conjugated in position 2",
@@ -505,6 +505,121 @@
       "title": "Coffee and cake in the café",
       "note": "In Germany, Austria and Switzerland, many people like to meet friends in a café. A common tradition is \"Kaffee und Kuchen\" in the afternoon. Many people eat a Brötchen with cheese for breakfast, often from a bakery. In a café you usually sit down first and wait for the waiter. You often pay at the table and say \"Die Rechnung, bitte.\" It is common to round up the bill a little as a tip. In Germany, restaurants often charge for water, so people usually order a drink; in many Austrian cafés a glass of tap water comes with your coffee. Remember: use Sie with the waiter, not du.",
       "reflection_question": "What do you usually eat or drink in a café in your country, and is it the same in Germany?"
+    }
+  },
+  "Z10#writing": {
+    "reason": "New counting rule (Raghav): a salutation on its own and a closing formula do not count as sentences. The model answer now has the exact number of real sentences the task asks for (4 real sentences; the salutation does not count).",
+    "value": {
+      "task": "Write 4 short sentences. You meet a friend in a café and say du. Greet your friend, say your name, ask how your friend is, and order a drink.",
+      "min_words": 20,
+      "must_include": [
+        "a greeting",
+        "your name with Ich heiße",
+        "Wie geht es dir?",
+        "an order with Einen ... , bitte"
+      ],
+      "useful_phrases": [
+        "Hallo!",
+        "Ich heiße ...",
+        "Wie geht es dir?",
+        "Einen Kaffee, bitte.",
+        "Freut mich."
+      ],
+      "model_answer": "Hallo Jonas! Ich heiße Anna und ich komme aus Berlin. Wie geht es dir? Ich trinke gern Kaffee. Einen Kaffee und einen Tee, bitte.",
+      "rubric": [
+        "Uses du forms consistently (dir, du ... -st) and does not mix in Sie",
+        "Includes a greeting and Ich heiße with a name",
+        "Asks Wie geht es dir? correctly",
+        "Uses café words such as Kaffee or Tee with bitte",
+        "Correct capital letters, word order and punctuation"
+      ]
+    }
+  },
+  "W2.5#writing": {
+    "reason": "New counting rule (Raghav): a salutation on its own and a closing formula do not count as sentences. The model answer now has the exact number of real sentences the task asks for (5 real sentences; the last one is split in two imperatives).",
+    "value": {
+      "task": "Write a short message to a friend (du) about an appointment tomorrow. Use at least three imperatives and tell the time. Write exactly 5 sentences.",
+      "min_words": 35,
+      "must_include": [
+        "the day and time of the appointment",
+        "an imperative with Sei (be on time)",
+        "an imperative with anrufen",
+        "Vergiss ... nicht",
+        "a time with halb or Viertel"
+      ],
+      "useful_phrases": [
+        "Wir haben morgen einen Termin.",
+        "Sei bitte pünktlich!",
+        "Ruf mich heute an.",
+        "Vergiss den Termin nicht!",
+        "Der Termin beginnt um halb drei."
+      ],
+      "model_answer": "Hallo Jonas! Wir haben morgen einen Termin beim Arzt. Er beginnt um halb drei in der Stadt. Sei bitte pünktlich und komm nicht zu spät! Vergiss den Termin nicht! Ruf mich heute Abend kurz an.",
+      "rubric": [
+        "Uses correct du-imperatives (Sei, Komm, Ruf ... an, Vergiss)",
+        "Uses time words correctly (halb, Viertel, um ... Uhr)",
+        "Uses vocabulary such as Termin, morgen, pünktlich",
+        "Writes exactly 5 sentences with correct word order, capitals and punctuation",
+        "Message is clear and reaches the minimum length"
+      ]
+    }
+  },
+  "W3.2#writing": {
+    "reason": "New counting rule (Raghav): a salutation on its own and a closing formula do not count as sentences. The model answer now has the exact number of real sentences the task asks for (5 real sentences + the closing; one Perfekt sentence with sein added).",
+    "value": {
+      "task": "Write a short postcard to a friend about your weekend or holiday. Use the Perfekt with sein (for example: Ich bin ... gefahren). Write exactly 5 sentences.",
+      "min_words": 30,
+      "must_include": [
+        "a greeting",
+        "where you went (Perfekt with sein)",
+        "how you travelled (fahren, gehen or fliegen)",
+        "one day you stayed at home (bleiben)",
+        "a goodbye"
+      ],
+      "useful_phrases": [
+        "Liebe Anna,",
+        "Ich bin zum See gefahren.",
+        "Am Sonntag bin ich zu Hause geblieben.",
+        "Das Wetter war schön.",
+        "Bis bald!"
+      ],
+      "model_answer": "Liebe Anna, mein Wochenende war schön. Am Samstag bin ich mit dem Fahrrad zum See gefahren. Ich bin im See geschwommen und dann ins Museum gegangen. Am Abend bin ich müde nach Hause gefahren. Am Sonntag bin ich zu Hause geblieben, denn das Wetter war nicht schön. Bis bald, Jonas",
+      "rubric": [
+        "Uses sein in position 2 and the past participle at the end (Ich bin ... gegangen).",
+        "Uses correct participles: gegangen, gefahren, geblieben, geflogen.",
+        "Uses theme words such as See, Park, Kino, Wochenende correctly.",
+        "Includes a greeting, a goodbye and the required number of sentences.",
+        "Spelling, capitals and punctuation are correct."
+      ]
+    }
+  },
+  "W4.5#writing": {
+    "reason": "New counting rule (Raghav): a salutation on its own and a closing formula do not count as sentences. The model answer now has the exact number of real sentences the task asks for (5 real sentences; one sentence about the family added).",
+    "value": {
+      "task": "Write a short postcard to a friend (use du). Say your name, where you come from and where you live. Write about your family and what you do today. Write exactly 5 sentences.",
+      "min_words": 30,
+      "must_include": [
+        "Your name and where you come from",
+        "Where you live",
+        "One person from your family or a friend",
+        "One thing you do (or do not do) today with nicht or kein",
+        "The word gern or oft"
+      ],
+      "useful_phrases": [
+        "Ich komme aus ...",
+        "Ich wohne in ...",
+        "Heute arbeite ich nicht.",
+        "Ich habe keine Zeit.",
+        "Ich trinke gern Wasser."
+      ],
+      "model_answer": "Hallo Jonas! Ich heiße Lena und ich komme aus Deutschland. Ich wohne in einer Stadt mit meiner Familie. Meine Familie ist groß. Heute arbeite ich nicht und habe Zeit für dich. Ich esse oft Brot und trinke gern Wasser.",
+      "rubric": [
+        "The verb is in second position in every statement.",
+        "The verb endings match the person (ich wohne, er wohnt).",
+        "kein is used for nouns and nicht for verbs.",
+        "Nouns have the correct article and capital letters; du is used for the friend.",
+        "The lesson words (e.g. Familie, Stadt, gern, oft) are used."
+      ]
     }
   }
 }

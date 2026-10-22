@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { errorIds, germanShare, lessonErrors, lintLesson, sentenceCount, sentencesAsked } from "./lesson-lint.ts";
+import { errorIds, germanShare, isMessageFrame, lessonErrors, lintLesson, sentenceCount, sentencesAsked } from "./lesson-lint.ts";
 import type { Lesson, Phase } from "./lesson-schema.ts";
 import { validLesson } from "./test-fixtures.ts";
 
@@ -95,7 +95,7 @@ describe("level bands", () => {
   });
 
   it("sentences are counted by their end marks; a spelled name or a dash dialogue is not split further", () => {
-    expect(sentenceCount("Guten Morgen, ich heiße Anna. Ich buchstabiere: A, N, N, A. Wie heißt du? – Ich heiße Jonas: J, O, N, A, S. Tschüs!")).toBe(5);
+    expect(sentenceCount("Guten Morgen, ich heiße Anna. Ich buchstabiere: A, N, N, A. Wie heißt du? – Ich heiße Jonas: J, O, N, A, S. Tschüs!")).toBe(5); // "Tschüs!" is a sentence: a task can ask for it ("say goodbye")
     expect(sentencesAsked("Write 5 short sentences. Greet a person.")).toEqual([5, 5]);
     expect(sentencesAsked("Introduce yourself in three to five simple sentences.")).toEqual([3, 5]);
     expect(sentencesAsked("Schreiben Sie 2 bis 3 kurze Sätze.")).toEqual([2, 3]);
@@ -314,5 +314,39 @@ describe("known traps are flagged for the reviewer (a warning, not an error)", (
   });
   it("but not inside a trap that marks it as wrong", () => {
     expect(lint((l) => (l.grammar.traps[0] = { wrong: "Ich bin gut.", right: "Mir geht es gut.", why: "Ich bin gut means I am good at something." }))).toEqual([]);
+  });
+});
+
+describe("message framing does not count as sentences", () => {
+  it.each(["Hallo Jonas!", "Hallo!", "Liebe Lena,", "Lieber Jonas", "Guten Tag", "Hi Anna", "Viele Grüße, Anna", "Viele Grüße", "Liebe Grüße, Lena", "Herzliche Grüße, Anna Weber", "Bis bald, Jonas", "Bis bald", "Dein Jonas"])("%s is framing", (text) => {
+    expect(isMessageFrame(text)).toBe(true);
+  });
+
+  it.each(["Hallo Jonas, ich wohne in Berlin", "Liebe Lena, das ist meine Familie", "Ich habe Grüße für dich", "Viele Leute wohnen hier", "Bis bald sehe ich dich", "Guten Tag, ich heiße Anna", "Hallo, wie geht es dir", "Wie heißt du", "Tschüs", "Tschüss, Lena"])("%s is a sentence", (text) => {
+    expect(isMessageFrame(text)).toBe(false);
+  });
+
+  it("a salutation on its own and a closing formula are not counted; a greeting inside a sentence belongs to it", () => {
+    expect(sentenceCount("Hallo Jonas! Ich wohne in Berlin. Wie heißt du? Viele Grüße, Anna")).toBe(2);
+    expect(sentenceCount("Liebe Lena, ich bin im Urlaub. Das Essen ist super. Bis bald, Anna")).toBe(2);
+    expect(sentenceCount("Hallo Jonas, ich wohne in Berlin. Wie heißt du?")).toBe(2);
+    expect(sentenceCount("Ich esse Brot. Ich trinke Tee.")).toBe(2);
+  });
+
+  it("the model answer is checked against the task by real sentences: 'exactly 5' with a closing needs 5 real ones plus the closing", () => {
+    const withTask = (task: string, answer: string) =>
+      lint((l) => {
+        l.writing.task = task;
+        l.writing.min_words = 5;
+        l.writing.model_answer = answer;
+      });
+    const five = "Liebe Lena, ich bin im Urlaub. Das Essen ist super. Ich kann Fisch essen. Ich will Kuchen probieren. Ich möchte einen Kaffee.";
+    expect(ruleOf(withTask("Write exactly 5 sentences.", `${five} Viele Grüße, Anna`))).not.toContain("Z9#writing:model-answer-sentences");
+    expect(ruleOf(withTask("Write exactly 5 sentences.", five))).not.toContain("Z9#writing:model-answer-sentences");
+    // four real sentences and a closing are four, not five
+    const four = "Liebe Lena, ich bin im Urlaub. Das Essen ist super. Ich kann Fisch essen. Ich möchte einen Kaffee.";
+    expect(ruleOf(withTask("Write exactly 5 sentences.", `${four} Viele Grüße, Anna`))).toContain("Z9#writing:model-answer-sentences");
+    // a sixth real sentence is one too many
+    expect(ruleOf(withTask("Write exactly 5 sentences.", `${five} Ich freue mich. Viele Grüße, Anna`))).toContain("Z9#writing:model-answer-sentences");
   });
 });

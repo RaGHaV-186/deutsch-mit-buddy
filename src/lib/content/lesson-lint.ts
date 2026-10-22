@@ -35,8 +35,21 @@ export function sentencesAsked(task: string): [number, number] | null {
   return [lo, m[1] ? Infinity : m[3] ? asNumber(m[3]) : lo];
 }
 
-/** Sentences in a text: the pieces between . ! ? … (a spelled name "A, N, N, A." or a dash dialogue still counts by its full stops). */
-export const sentenceCount = (text: string) => text.split(/[.!?…]+(?:\s+|$)/).filter((s) => /\p{L}/u.test(s)).length;
+/** A salutation on its own: "Hallo Jonas!", "Liebe Lena,", "Guten Tag". It does not count as a sentence. ("Liebe Lena, ich ..." is one sentence: the salutation belongs to it.) */
+const SALUTATION = /^(?:hallo|hi|liebe[rs]?|guten\s+(?:morgen|tag|abend))(?:\s+\p{Lu}[\p{L}-]+)?\s*,?$/iu;
+/** A closing formula, with the signature: "Viele Grüße, Anna", "Liebe Grüße, Lena", "Bis bald, Jonas", "Dein Jonas". It does not count as a sentence. */
+const CLOSING = /^(?:(?:viele|liebe|herzliche|beste|freundliche)\s+gr(?:ü|ue)ße|bis\s+(?:bald|später|morgen|dann))(?:\s*,?\s*\p{Lu}[\p{L}-]+){0,2}\s*,?$|^(?:dein|deine)\s+\p{Lu}[\p{L}-]+$/iu;
+/** True for a piece of text that is only a salutation or a closing formula (message framing, not a sentence). */
+export const isMessageFrame = (piece: string) => {
+  const text = piece.trim().replace(/[.!?…]+$/, "");
+  return SALUTATION.test(text) || CLOSING.test(text);
+};
+
+/**
+ * Sentences in a text: the pieces between . ! ? … (a spelled name "A, N, N, A." or a dash dialogue still counts by its full stops).
+ * A salutation on its own and a closing formula with its signature do not count: they frame a message, they are not sentences of it.
+ */
+export const sentenceCount = (text: string) => text.split(/[.!?…]+(?:\s+|$)/).filter((s) => /\p{L}/u.test(s) && !isMessageFrame(s)).length;
 
 const DE = new Set("der die das und ist nicht ich du wir sie er es ein eine einen einem mit für auf zu von den dem im auch aber wie wo wer ja nein bitte danke sind haben hat bin bist wird werden kann können muss dass wenn oder nach bei aus über unter sich mein dein".split(" "));
 const EN = new Set("the and is not you we they he it a an with for on to of at also but how what where who yes no please thank are have has be this that your my his her can must will would should or if when from about into your our their".split(" "));

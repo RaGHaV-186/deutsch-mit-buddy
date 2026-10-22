@@ -93,6 +93,13 @@ function ItemBox({ item }: { item: ReviewItem }) {
   );
 }
 
+/** A link to this page. Built as a fixed path plus encoded query values (run folder names and lesson codes come from files on disk), so it can only ever point here. */
+const contentHref = (query: { run: string | undefined; lesson?: string; show?: string }) => {
+  const q = new URLSearchParams();
+  for (const [key, value] of Object.entries(query)) if (value) q.set(key, value);
+  return `/design/content?${q.toString()}`;
+};
+
 function Link2({ href, on, children }: { href: string; on?: boolean; children: React.ReactNode }) {
   return (
     <Link href={href} className={`rounded-full px-3 py-1.5 text-caption font-bold ${on ? "bg-coat text-on-coat" : "bg-surface shadow-cushion"}`}>
@@ -197,7 +204,6 @@ export default async function ContentPreviewPage({ searchParams }: { searchParam
   const run = name ? loadRun(name) : null;
   const codes = run ? (run.review?.lessons.map((l) => l.code) ?? Object.keys(run.generated ?? {})) : [];
   const code = typeof params.lesson === "string" && codes.includes(params.lesson) ? params.lesson : codes[0];
-  const base = `/design/content?run=${name}`;
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-4 py-8">
@@ -205,7 +211,7 @@ export default async function ContentPreviewPage({ searchParams }: { searchParam
         <h1 className="text-display">Content review</h1>
         <p className="text-muted">A generated lesson, all 14 parts, with the Opus verdict on every item. A lesson is published only when no item needs a human. Dev tool, not part of the app.</p>
         <nav aria-label="Runs" className="flex flex-wrap gap-2">
-          {runs.map((r) => <Link2 key={r} href={`/design/content?run=${r}`} on={r === name}>{r}</Link2>)}
+          {runs.map((r) => <Link2 key={r} href={contentHref({ run: r })} on={r === name}>{r}</Link2>)}
         </nav>
       </header>
 
@@ -215,12 +221,12 @@ export default async function ContentPreviewPage({ searchParams }: { searchParam
         <>
           <Totals run={run} />
           <nav aria-label="Lessons" className="flex flex-wrap items-center gap-2">
-            {codes.map((c) => <Link2 key={c} href={`${base}&lesson=${c}&show=${filter}`} on={c === code}>{c}</Link2>)}
+            {codes.map((c) => <Link2 key={c} href={contentHref({ run: name, lesson: c, show: filter })} on={c === code}>{c}</Link2>)}
             {run.review ? (
               <>
                 <span className="mx-1 text-caption text-muted">Show:</span>
                 {(["all", "fixed", "needs-human"] as const).map((f) => (
-                  <Link2 key={f} href={`${base}&lesson=${code}&show=${f}`} on={filter === f}>{f === "all" ? "Everything" : f === "fixed" ? "Fixed" : "Needs human"}</Link2>
+                  <Link2 key={f} href={contentHref({ run: name, lesson: code, show: f })} on={filter === f}>{f === "all" ? "Everything" : f === "fixed" ? "Fixed" : "Needs human"}</Link2>
                 ))}
               </>
             ) : null}

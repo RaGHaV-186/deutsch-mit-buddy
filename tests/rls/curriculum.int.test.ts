@@ -106,9 +106,11 @@ describe("curriculum content tables", () => {
         expect(error?.code, JSON.stringify(bad)).toBe("23514");
       }
       expect((await admin.from("question_bank").insert(question())).error?.code).toBe("23505");
-      expect((await admin.from("question_bank").insert(question({ type: "typing", prompt: "Type it", distractors: [] }))).error).toBeNull();
-      expect((await admin.from("question_bank").insert(question({ type: "dictation", skill: "dictation", prompt: "Listen and write.", distractors: [] }))).error).toBeNull(); // new in the lesson standard
-      expect((await admin.from("question_bank").insert(question({ part: "exam" }))).error).toBeNull(); // the same prompt may appear in another part
+      expect((await admin.from("question_bank").insert(question({ type: "typing", prompt: "Type it", position: 1, distractors: [] }))).error).toBeNull();
+      expect((await admin.from("question_bank").insert(question({ type: "dictation", skill: "dictation", prompt: "Listen and write.", position: 2, distractors: [] }))).error).toBeNull(); // new in the lesson standard
+      // dictation questions share their prompt: only the slot (part + position) is the identity
+      expect((await admin.from("question_bank").insert(question({ type: "dictation", skill: "dictation", prompt: "Listen and write.", position: 3, distractors: [] }))).error).toBeNull();
+      expect((await admin.from("question_bank").insert(question({ part: "exam" }))).error).toBeNull(); // the same slot number may appear in another part
     });
   });
 

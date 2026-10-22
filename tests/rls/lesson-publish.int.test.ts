@@ -71,6 +71,37 @@ describe("publish_lesson", () => {
     expect(tooMany.error?.code).toBe("23514");
   });
 
+  it("a question is identified by its slot, not its prompt: dictation questions share one, and a corrected prompt replaces the old row", async () => {
+    const p = payload();
+    const exercises = p.questions.filter((q) => q.part === "exercises");
+    for (const q of exercises.slice(0, 2)) Object.assign(q, { type: "dictation", skill: "dictation", prompt: "Listen and write the sentence.", distractors: [] });
+    expect((await publish(p)).error).toBeNull();
+    expect((await counts()).questions).toBe(42);
+
+    const corrected = payload();
+    const first = corrected.questions.find((q) => q.part === "exercises" && q.position === 1)!;
+    const oldPrompt = first.prompt;
+    first.prompt = "A corrected prompt?";
+    expect((await publish(corrected)).error).toBeNull();
+    expect((await counts()).questions).toBe(42);
+    const { data } = await admin.from("question_bank").select("prompt").eq("session_code", CODE).eq("part", "exercises").eq("position", 1);
+    expect(data).toEqual([{ prompt: "A corrected prompt?" }]);
+    expect((await admin.from("question_bank").select("id").eq("session_code", CODE).eq("part", "exercises").eq("prompt", oldPrompt)).data).toHaveLength(0);
+  });
+
+  it("a card template is identified by its slot: a corrected word replaces the template, a removed slot is deleted", async () => {
+    expect((await publish(payload())).error).toBeNull();
+    const again = payload();
+    const word = again.cards.find((c) => c.kind === "word" && c.position === 1)!;
+    word.de = "Korrektur";
+    word.en = "correction";
+    again.cards = again.cards.filter((c) => !(c.kind === "word" && c.position === 18)); // 17 words are still allowed (15 to 20)
+    expect((await publish(again)).error).toBeNull();
+    const { data } = await admin.from("card_templates").select("de, kind, position").eq("session_code", CODE).order("position");
+    expect(data!.filter((c) => c.kind === "word" && c.position === 1)).toEqual([{ de: "Korrektur", kind: "word", position: 1 }]);
+    expect(data).toHaveLength(22); // 23 minus the removed word; the corrected word did not add a second row
+  });
+
   it("needs 3 warm-up questions, except in the very first lesson, whose warm-up is a preview", async () => {
     const noWarmup = (p: PublishPayload) => p.questions.filter((q) => q.part !== "warmup");
     expect((await publish(payload(), { questions: noWarmup(payload()) })).error?.message).toMatch(/too few exercises or questions/);

@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { requireAal2 } from "@/lib/auth/guard";
+import { ensureLessonCards } from "@/lib/cards/ensure-unlocked";
 import { findStartingPoint } from "@/lib/curriculum/starting-points";
 import { getProfile } from "@/lib/profile";
 import { limitError } from "@/lib/rate-limit";
@@ -38,5 +39,7 @@ export async function saveStartingPointAction(_prev: OnboardingState, formData: 
     .eq("user_id", userId)
     .is("onboarded_at", null);
   if (error) return { error: "generic" };
+  // The cards of the published lessons up to the chosen one (earlier ones as already seen). A failure here never blocks sign-up.
+  await ensureLessonCards(userId);
   redirect("/home");
 }

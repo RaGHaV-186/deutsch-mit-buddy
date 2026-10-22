@@ -4,7 +4,9 @@ import { startOfLocalDay, startOfNextLocalDay } from "@/lib/time";
 import { DAILY_NEW_LIMIT } from "./queue";
 import { planImportSchedule } from "./schedule-plan";
 import { snapshotCardSchema, type ReviewEventInput, type SnapshotCard, type SnapshotResponse, type SyncResponse } from "./schema";
+import { SEED_PROFILE } from "@data/seed-tracker";
 import { parseSeedDeck, seedStartSeq } from "./seed";
+import { cardKey } from "./unlock";
 
 // Server-side card logic. Every function takes the Supabase client to use, so the route decides the privilege:
 // reads use the member's own session (row-level security applies), writes use the service role and are always
@@ -277,10 +279,12 @@ export interface ImportResult {
 export async function importSeedDeck(db: SupabaseClient, userId: string, rawSeed: unknown, now: Date): Promise<ImportResult> {
   const { cards, duplicates } = parseSeedDeck(rawSeed);
 
-  const existing = await db.from("cards").select("kind, de, en").eq("user_id", userId).eq("source", "seed").limit(5000);
+  const existing = await db.from("cards").select("kind, de, en, source").eq("user_id", userId).limit(5000);
   if (existing.error) fail("Reading the deck", existing.error);
-  const have = new Set((existing.data ?? []).map((c) => `${c.kind}\u0000${c.de}\u0000${c.en}`));
-  const missing = cards.filter((c) => !have.has(`${c.kind}\u0000${c.de}\u0000${c.en}`));
+  const have = new Set((existing.data ?? []).filter((c) => c.source === "seed").map((c) => `${c.kind}\u0000${c.de}\u0000${c.en}`));
+  // A word that came with a lesson (or was added by hand) is not added a second time from the seed deck.
+  const ownedElsewhere = new Set((existing.data ?? []).filter((c) => c.source !== "seed").map((c) => cardKey(c.kind, c.de)));
+  const missing = cards.filter((c) => !have.has(`${c.kind}\u0000${c.de}\u0000${c.en}`) && !ownedElsewhere.has(cardKey(c.kind, c.de)));
 
   const plan = planImportSchedule(missing, { startSeq: seedStartSeq(), today: now });
   let seen = 0;
@@ -324,6 +328,23 @@ export async function importSeedDeck(db: SupabaseClient, userId: string, rawSeed
     seen,
     fresh: missing.length - seen,
   };
+}
+
+/**
+ * Puts the learner's pointer where Raghav's history ends: Day 11, lesson Z9 (start_code Z9 too, so the lessons before it count as already seen).
+ * Never moves a learner backwards: one who is already further along (or on Day 12+ of Z9) keeps their place.
+ */
+export async function setSeedPointer(db: SupabaseClient, userId: string): Promise<{ moved: boolean }> {
+  const seq = seedStartSeq();
+  const day = SEED_PROFILE.day_count + 1;
+  const profile = await db.from("profiles").select("session_seq, day_count").eq("user_id", userId).maybeSingle();
+  if (profile.error) fail("Reading the profile", profile.error);
+  if (!profile.data) return { moved: false };
+  const { session_seq: here, day_count: today } = profile.data as { session_seq: number; day_count: number };
+  if (here > seq || (here === seq && today >= day)) return { moved: false };
+  const moved = await db.from("profiles").update({ session_seq: seq, day_count: day, start_code: SEED_PROFILE.next_code }).eq("user_id", userId);
+  if (moved.error) fail("Moving the pointer", moved.error);
+  return { moved: true };
 }
 
 /** For the Home screen: how many cards are waiting today (reviews due + new cards still allowed). */

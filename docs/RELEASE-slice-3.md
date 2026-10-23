@@ -1,7 +1,7 @@
 # Release plan: slice 3 (lesson content, card unlock, Learn tab) → production
 
-**Status: written, NOT run. Nothing in this file has touched the hosted database or Vercel. Each step waits for Raghav's explicit go.**
-**Progress log:** (c) `db push` done 23 Oct (9 migrations, counts unchanged); (d) seed done (131 sessions); (e) published 24 lessons, every verify number matched (24 publications, 336 parts, 554 templates = 432 words + 122 phrases, 1005 questions, cards still 202, profiles still 1); next: f. (a) backup done 23 Oct 2026 (schema 20 KB with 9 tables and 12 policies, data 113 KB, auth 15 KB; profiles and cards present; a3 query results saved). The project is on the **Supabase Free plan, which has no automatic backups**, so this manual dump is the backup for the release. (b) re-checked 23 Oct (see b). Next: c.
+**Status: DONE on 23 Oct 2026 (steps a to g), each step run after Raghav's explicit "next".** Keep this file as the template for the next release (tranches 2 to 4): the steps, the checks and the lessons learned below hold for any release that adds migrations or content.
+**Progress log:** (a) backup done (schema 20 KB, data 113 KB, auth 15 KB, valid; a3 results saved). (b) all four migrations additive, main's 54 DB tests pass against the migrated schema. (c) `db push` done (9 migrations, counts unchanged: cards 202, profiles 1). (d) 131 plan rows seeded. (e) 24 lessons published, every verify number matched (24 publications, 336 parts, 554 templates = 432 words + 122 phrases, 1005 questions). (f) PR #12 merged with a merge commit (`bf0b801`, parents `f366725` and `e6bec61`), tagged `slice-3`; Vercel deployed production from it. (g) "Import seed deck" ran; Home shows Day 11 · Z9 and Learn works (reported by Raghav). `.env.hosted` was deleted afterwards. Held back for later: Z10, W1.4, W1.5, W2.5, W3.2, W4.5. Their re-checks are collected: Z10, W1.4, W2.5, W3.2 and W4.5 passed (ready to publish with the same command as step e); W1.5 is still blocked on one item.
 
 Branch `slice-3-curriculum`, PR #12. Run the steps in this order, one at a time, and stop at the first surprise (each step says what "surprise" means).
 
@@ -13,12 +13,19 @@ Branch `slice-3-curriculum`, PR #12. Run the steps in this order, one at a time,
 ## Before you start
 1. PR #12: CI green (lint, unit tests, build, database tests). Review the diff once.
 2. Content is final: the re-review of the corrected items is collected, `npm run content -- build --run z1-b1` shows which lessons are publishable, and Raghav has said which ones go live. **Decision (23 Oct): go live with the 24 lessons that are publishable now** (Z1–Z9, W1.1–W1.3, W2.1–W2.4, W3.1, W3.3–W3.5, W4.1–W4.4; `publish-payloads.json` holds exactly these). W1.4, W1.5, Z10, W2.5, W3.2 and W4.5 are published later, with the same `publish` command, when their re-checks pass (publishing is safe to repeat). `npm run content -- check --run z1-b1` has no error for them.
-3. Create `.env.hosted` (git-ignored, never committed or pasted into chat) with exactly these two lines, from the Supabase dashboard (Project settings → API):
+3. Create `.env.hosted` (git-ignored, never committed or pasted into chat) with exactly these two lines, from the Supabase dashboard (Project settings → API → the `service_role` secret key):
    ```
    NEXT_PUBLIC_SUPABASE_URL=https://<project-ref>.supabase.co
    SUPABASE_SERVICE_ROLE_KEY=<the service role key>
    ```
-   The scripts below read `.env.local` first and `.env.hosted` second (the later file wins), so `.env.local` keeps pointing at your local stack. The scripts print `Database: <host> (REMOTE)` and refuse a hosted database without `--yes`.
+   Without the key showing on screen or landing in the shell history, in **zsh** (the macOS default shell; `read -s -p` is bash syntax and fails in zsh with "no coprocess"; zsh puts the prompt after a `?`):
+   ```zsh
+   read -s "KEY?Paste the service role key, then Enter: "; echo
+   printf 'NEXT_PUBLIC_SUPABASE_URL=https://<project-ref>.supabase.co\nSUPABASE_SERVICE_ROLE_KEY=%s\n' "$KEY" > .env.hosted
+   unset KEY; chmod 600 .env.hosted
+   git check-ignore -v .env.hosted     # must print the .gitignore rule; nothing printed = stop
+   ```
+   The scripts below read `.env.local` first and `.env.hosted` second (the later file wins), so `.env.local` keeps pointing at your local stack. The scripts print `Database: <host> (REMOTE)` and refuse a hosted database without `--yes`. **Delete `.env.hosted` when the release is finished.**
 4. `npm run test:rls` refuses to run unless `SUPABASE_URL` is localhost or 127.0.0.1 (and it no longer touches published lessons or any account that is not an `rls-…@example.test` test user). Never point it anywhere else.
 
 ## a) Backup (and write down what you will need to undo)
@@ -112,14 +119,43 @@ select count(*) from public.profiles;                                           
 Not published yet, on purpose: Z10, W1.4, W1.5, W2.5, W3.2, W4.5 (their re-checks are still running).
 
 ## f) Merge PR #12 and deploy
-1. CI green, then merge (squash or merge commit, as usual); Vercel deploys `main`.
-2. Smoke test on the live site, signed in with 2FA: Home shows "Continue" and opens Learn; Learn shows today's lesson (or "not ready yet" for an unpublished one); "Read today's lesson" opens it; Cards opens and a review syncs.
-3. **What happens to members on their first visit:** the app copies the cards of the published lessons up to their current lesson into their deck. Check `select count(*) from cards where source = 'lesson'` after a few minutes. **Raghav is the exception:** the admin's deck is not unlocked until the seed deck is imported (step g), so his own cards come first (about a quarter of his seed words are also lesson words).
+1. Confirm CI is green on the latest commit of the PR (both `check` runs, both `rls` runs, CodeQL with no open alert, Vercel) and that `origin/main` has not moved. Pushing even a docs commit restarts CI, so check again after the last push. Merge only on Raghav's go for this step.
+2. Merge with a merge commit, pinned to the commit that was checked: `gh pr merge 12 --merge --match-head-commit <sha>`; then tag the merge commit: `git tag -a slice-3 <merge sha> -m "…" && git push origin slice-3`. Done 23 Oct: merge commit `bf0b801`, tag `slice-3`.
+3. Vercel starts the production deploy by itself when `main` changes. Check it is Ready: the **Vercel** status of the merge commit on GitHub says "Deployment has completed", and in the Vercel dashboard (Deployments) the top row is marked Production and Ready with the merge commit; then open `https://deutschmitbuddy.de/api/health` (expect `"app":"ok"` and `"supabase":"ok"`).
+4. **Before anyone opens the live app, run the g0 check below.**
+5. Smoke test on a phone, signed in with 2FA: Home shows "Continue" and the right day; Learn opens with today's goal and the card counts; "Read today's lesson" opens the lesson text; Cards opens and a review syncs; old cards keep their own wording.
+6. **What happens to members on their first visit:** the app copies the cards of the published lessons up to their current lesson into their deck (in the layout, so it happens on any page). Only 1 profile existed at this release (Raghav), so nobody else was affected. **The admin is held back only while he has no seed cards** (so his own cards come first); Raghav's hosted deck already had the 202 seed cards, so for him the unlock ran on the first page load, before he pressed Import.
 
-**Surprise = roll back the deploy** (see below): errors on Home or Cards after the deploy, or lesson cards appearing for Raghav before he imports.
+**Surprise = roll back the deploy** (see below): errors on Home or Cards after the deploy, or a card count that is far off the number computed in g.
 
-## g) Import the seed deck (Raghav)
-Sign in as the admin, Cards → "Import seed deck", once. It imports his 213 cards (skipping words already in his deck), moves him to Day 11 · Z9 (never backwards) and unlocks the published lessons up to Z9. The button reports the counts. Z9 itself needs to be published for its text to open on Learn.
+## g) Check the profile, open the app, import the seed deck (Raghav)
+**g0, before the first page load after the deploy** (SQL editor):
+```sql
+select start_code, session_seq, day_count, deck_unlocked_seq from public.profiles;
+```
+Expect `start_code` = `Z9` or empty, and `session_seq` = 10. The start lesson decides which lesson cards arrive as already seen (spread over days) and which as new: with `Z9` (or empty, then the current lesson counts), Z1 to Z8 are seen and only Z9 is new. If `start_code` is anything else (for example `Z1`), those lessons would arrive as a pile of NEW cards, and fixing it after the first load does not turn them into seen ones. Fix it first: `update public.profiles set start_code = 'Z9' where role = 'admin';`.
+
+**g1, open the live app** signed in as admin. The unlock runs. The numbers below were computed from the data before the release (209 templates for Z1 to Z9, minus 109 he already owns or that repeat):
+```sql
+select count(*) from public.cards;                                        -- 302 (202 seed + 100 lesson)
+select count(*) from public.cards where source = 'lesson';                -- 100
+select session_code, count(*) from public.cards where source = 'lesson' group by 1 order by 1;
+  -- Z1 19, Z2 10, Z3 8, Z4 8, Z5 12, Z6 8, Z7 13, Z8 11, Z9 11
+select count(*) from public.card_srs s join public.cards c on c.id = s.card_id
+  where c.source = 'lesson' and s.last_reviewed_at is null;               -- 11 (only the Z9 cards are new)
+select start_code, session_seq, day_count, deck_unlocked_seq from public.profiles;  -- Z9, 10, 11, 10
+```
+**g2, Cards → "Import seed deck", once.** With the seed cards already there it adds no cards ("Imported 0 cards … 202 were already there, 11 repeats skipped. 0 cards of the lessons were added."); it only makes sure the pointer is Day 11 · Z9 (adds "You are on Day 11 · Z9 now." when it had to move it). Z9 itself must be published for its text to open on Learn.
+
+## Lessons learned (23 Oct 2026)
+- **`seq` is a plan position, not a day or a lesson number.** The plan holds review and test days (R1, T1, Saturdays, …) between lessons, so Z7 is seq 8 and **Z9 is seq 10 (Day 11)**. I once wrote a verify query with Z9 at seq 8 from a test fixture. Write verify queries by `code`, never by `seq`; the code looks positions up by lesson code (`indexOfCode`), and the only literal is `seq = 0` (the first session, Z1, which has no warm-up questions).
+- **The Supabase Free plan has no automatic backups.** The manual dump is the only backup: run `npm run backup` before every release, check it, keep the files outside the repo.
+- **zsh is not bash.** `read -s -p "prompt" VAR` fails in zsh ("no coprocess"); use `read -s "VAR?prompt"`. Commands in this file are written for zsh.
+- **Check what the unlock will do to the existing user before the first page load.** My plan assumed Raghav's deck had no seed cards, so the "admin waits for the import" rule would protect him; it did not apply because his 202 seed cards already existed. What mattered was his `start_code` (g0). Compute the expected numbers from the real data first.
+- **A migration list that looks short is a stop.** Raghav's list first showed 3 pending instead of 4 (a cut-off paste). Pushing three would have left the old unique index on `question_bank` and every lesson would have failed to publish.
+- **Pushing a docs commit restarts CI**, so confirm the green state on the final commit, not an earlier one; CodeQL can fail on a PR even when the project's own CI is green.
+- **Count what you publish.** Per-lesson card and question counts and the totals (24, 336, 554, 1005) were computed from the payload file before the run, so every verify query had an expected number.
+- **Follow-up after the release (done 23 Oct):** the Vercel variable `NEXT_PUBLIC_SITE_URL` was missing (health showed `"siteUrl":"missing"`); it is set to the canonical `https://www.deutschmitbuddy.de` now. See `docs/DOMAIN.md`.
 
 ## Rollback
 Everything here is additive, so the usual rollback is to undo the **code** and leave the schema in place.

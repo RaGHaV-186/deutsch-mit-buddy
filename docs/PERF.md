@@ -88,3 +88,41 @@ Could not reproduce in real Chrome: a minimal Next 16.4.2 + React 19.3.0 app (`l
 6. **Flashcards**: advance the card first, write to IndexedDB in the background (grade tap stays under 100 ms on iOS too); one limiter round trip instead of two on the API routes.
 7. **Layout fixes** from section 7 (Turnstile space, touch targets, hover states, animation budget, `touch-action`).
 8. **Guardrails**: Lighthouse CI with the budgets, Playwright tests at 375/390/430/768/1024/1280/1440 (no overflow, targets, CLS), Vercel Speed Insights (package + component; Raghav switches it on in the Vercel dashboard: project → Speed Insights tab → Enable).
+
+## 9. Results
+### PR A: functions pinned to Frankfurt (merged, live 23 Oct 2026)
+`x-vercel-id` now `fra1::fra1`. Production TTFB, median of 8 from here:
+
+| | before | after |
+|---|---|---|
+| `/api/health` (function + 2 serial Supabase calls) | 851 ms | **239 ms** |
+| `/login` (function, no DB) | 264 ms | 199 ms |
+| static file (CDN) | 78 ms | 94 ms (noise) |
+
+Per Supabase call: about 300 ms → about 25 ms.
+
+### PR B: fewer round trips
+What changed: pages that only read take the session from the token's claims (`requireAal2FromClaims`, aal2 still enforced, the proxy applies the same rule first); server actions, onboarding and every API route keep `getUser`. The card unlock left the layout and pages (`ensureLessonCardsIfNew`: a minute-long per-instance memory of the published lessons decides in memory; the full unlock runs only when a lesson up to today's is waiting, and in the snapshot route that feeds the device). The layout makes one call (the profile, shared with the page). The desktop Cards badge is counted from the deck on the device. Page data runs in parallel. API routes make one limiter call, keyed by the user from the verified claims, in parallel with `getUser`.
+
+Calls (local production build, warm), count / chain:
+
+| | before | after |
+|---|---|---|
+| Home (full load) | 7 / 5 | **4 / 2** |
+| Learn | 9 / 6 | **3 / 2** |
+| Cards shell | 7 / 5 | **1 / 1** |
+| Me | 7 / 5 | **1 / 1** |
+| Lesson page `/learn/<code>` | 8 / 5 | **2 / 1** |
+| `POST /api/cards/sync` | 8 / 7 | 7 / 5 |
+| `POST /api/cards/snapshot` | 9 / 5 | 9 / 4 (the unlock check is the 1 extra read in a cold instance) |
+| Request without a valid token | 1+ limiter call | 0 |
+
+Server TTFB of a full page load by per-call latency (median of 3):
+
+| per call | /home | /learn | /cards | /me |
+|---|---|---|---|---|
+| 10 ms (Frankfurt, now) before → after | 97 → **47 ms** | 122 → **37 ms** | 100 → **28 ms** | 95 → **26 ms** |
+| 100 ms before → after | 567 → 247 | 680 → 241 | 564 → 130 | 559 → 126 |
+| 300 ms before → after | 1577 → 649 | 1904 → 640 | 1574 → 327 | 1551 → 325 |
+
+Phone tab taps (4× CPU, Fast 4G, +100 ms per call), tap → painted: Home→Learn 713–721 → 330–426 ms; Learn→Cards 301–313 → 297–313; Cards→Home 597–626 → 330. (Client-only timings such as flip and grade doubled during that run because the Mac was busy with other apps, flip is unchanged code; re-measured in the final run.) The tab tap still shows nothing until the response arrives: PR C.

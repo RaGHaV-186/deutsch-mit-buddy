@@ -1,9 +1,9 @@
 import { SESSIONS } from "@data/curriculum";
 import { getTranslations } from "next-intl/server";
 import { HomeView } from "@/components/home/HomeView";
-import { requireAal2 } from "@/lib/auth/guard";
+import { requireAal2FromClaims } from "@/lib/auth/guard";
 import { homeLine, lessonTitle } from "@/lib/buddy-lines";
-import { ensureLessonCards } from "@/lib/cards/ensure-unlocked";
+import { ensureLessonCardsIfNew } from "@/lib/cards/ensure-unlocked";
 import { getDueCounts } from "@/lib/cards/server";
 import { gameDataForHome } from "@/lib/game-layer";
 import { getProfile } from "@/lib/profile";
@@ -11,7 +11,7 @@ import { createClient } from "@/lib/supabase/server";
 import { safeTimeZone } from "@/lib/time";
 
 export default async function HomePage() {
-  const { userId } = await requireAal2();
+  const { userId } = await requireAal2FromClaims();
   const profile = await getProfile(userId);
   const b = await getTranslations("Buddy.home");
   const session = profile ? SESSIONS[profile.session_seq] : undefined;
@@ -19,8 +19,8 @@ export default async function HomePage() {
   const line = homeLine(session, dayCount);
   const timeZone = safeTimeZone(profile?.timezone);
   const now = new Date();
-  // The layout unlocks too; this shares its promise, so the counts below see the new cards.
-  await ensureLessonCards(userId);
+  // Normally no database call: only when a published lesson is waiting are its cards copied in first, so the counts include them.
+  if (profile) await ensureLessonCardsIfNew(userId, profile);
   const counts = await getDueCounts(await createClient(), userId, now, timeZone);
   // Only the desktop hero shows it. German, because Buddy greets in German (the interface labels stay English).
   const dateLabel = new Intl.DateTimeFormat("de-DE", { weekday: "long", day: "numeric", month: "long", timeZone }).format(now);

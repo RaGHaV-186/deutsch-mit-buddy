@@ -3,14 +3,14 @@ import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { AppNav, CoatHeader, PillButton, Screen } from "@/components/ds";
 import { LessonReader } from "@/components/learn/LessonReader";
-import { requireAal2 } from "@/lib/auth/guard";
+import { requireAal2FromClaims } from "@/lib/auth/guard";
 import { lessonTitle } from "@/lib/buddy-lines";
 import { getPublishedLesson } from "@/lib/lessons/server";
 import { createClient } from "@/lib/supabase/server";
 
 /** The published lesson to read through. Any published lesson can be opened by its code (members see published lessons only). */
 export default async function LessonPage({ params }: { params: Promise<{ code: string }> }) {
-  await requireAal2();
+  await requireAal2FromClaims();
   const { code } = await params;
   const session = SESSIONS.find((s) => s.kind === "lesson" && s.code === decodeURIComponent(code));
   if (!session) notFound();

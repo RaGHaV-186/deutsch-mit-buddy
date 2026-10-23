@@ -15,7 +15,8 @@ const getDueCounts = vi.fn();
 vi.mock("next-intl/server", () => ({
   getTranslations: async (namespace: string) => createTranslator({ locale: "en", messages, namespace: namespace as never }),
 }));
-vi.mock("@/lib/auth/guard", () => ({ requireAal2: (...a: unknown[]) => requireAal2(...a) }));
+vi.mock("@/lib/auth/guard", () => ({ requireAal2FromClaims: (...a: unknown[]) => requireAal2(...a) }));
+vi.mock("@/lib/cards/ensure-unlocked", () => ({ ensureLessonCardsIfNew: async () => {} }));
 vi.mock("@/lib/profile", () => ({ getProfile: (...a: unknown[]) => getProfile(...a) }));
 vi.mock("@/lib/cards/server", () => ({ getDueCounts: (...a: unknown[]) => getDueCounts(...a) }));
 vi.mock("@/lib/supabase/server", () => ({ createClient: async () => ({}) }));

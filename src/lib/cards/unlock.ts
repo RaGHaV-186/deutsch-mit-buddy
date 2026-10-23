@@ -77,6 +77,19 @@ export interface UnlockResult {
   throughSeq: number | null;
 }
 
+/**
+ * The published lessons whose cards the learner does not have yet: published, up to their current lesson, and after the last lesson
+ * already unlocked. Pure, so the screens can ask the question without a database round trip (see ensure-unlocked.ts).
+ */
+export function newLessonCodes(
+  publishedCodes: readonly string[],
+  progress: { targetSeq: number; unlockedSeq: number | null },
+  plan: Plan = SESSIONS,
+): string[] {
+  const seqs = new Map<string, number>(plan.flatMap((s, seq) => (s.kind === "lesson" && seq <= progress.targetSeq ? [[s.code, seq] as [string, number]] : [])));
+  return publishedCodes.filter((code) => seqs.has(code) && seqs.get(code)! > (progress.unlockedSeq ?? -1));
+}
+
 const PAGE = 1000;
 const TEMPLATE_COLUMNS = "id, session_code, kind, tier, position, en, article, de, plural, example, example_en, tip";
 
@@ -105,9 +118,7 @@ export async function unlockLessonCards(
 
   const published = await db.from("lesson_publications").select("session_code").limit(1000);
   if (published.error) throw new Error(`Reading published lessons: ${published.error.message}`);
-  const newlyPublished = (published.data ?? [])
-    .map((r) => r.session_code as string)
-    .filter((code) => lessonSeqs.has(code) && lessonSeqs.get(code)! > (options.unlockedSeq ?? -1));
+  const newlyPublished = newLessonCodes((published.data ?? []).map((r) => r.session_code as string), options, plan);
   if (newlyPublished.length === 0) return { unlocked: 0, skipped: 0, throughSeq: options.unlockedSeq };
 
   const templates = await fetchAll<TemplateRow>(

@@ -273,5 +273,15 @@
     "batchId": "msgbatch_01SaERXiu9TfqZYLacB7yuo4",
     "actualEur": 0.0768,
     "estimatedEur": 0.2018
+  },
+  {
+    "at": "2026-10-23T11:53:35.572Z",
+    "stage": "review-fixes",
+    "lessons": [
+      "W1.5"
+    ],
+    "batchId": "msgbatch_01WpVhChUk8Kkwp7wGp3oBqV",
+    "actualEur": 0.0109,
+    "estimatedEur": 0.0501
   }
 ]

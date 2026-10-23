@@ -349,22 +349,19 @@
     }
   },
   "W1.5#reading.q5": {
-    "reason": "The question has two true answers from the text (break, lunch): both are listed, with and without Anna and eine.",
+    "reason": "Open \"answer in a sentence\" typing question: Opus kept asking for more accepted answers (9, 17, 15; the limit is 8). Converted to multiple choice as Raghav decided: one right answer, three plausible wrong ones, no accepted answers.",
     "value": {
       "skill": "reading",
-      "type": "typing",
-      "prompt": "Was macht Anna mittags? Answer in German with one short sentence.",
-      "answer": "Sie macht eine Pause.",
-      "distractors": [],
-      "accepted_answers": [
-        "Anna macht eine Pause.",
-        "Sie macht Pause.",
-        "Anna macht Pause.",
-        "Sie isst das Mittagessen.",
-        "Anna isst das Mittagessen.",
-        "Sie macht eine Pause und isst das Mittagessen."
+      "type": "multiple_choice",
+      "prompt": "Was macht Anna mittags? Choose the correct answer.",
+      "answer": "Sie macht eine Pause und isst das Mittagessen.",
+      "distractors": [
+        "Sie kauft ein.",
+        "Sie frühstückt.",
+        "Sie sieht fern."
       ],
-      "explanation": "At noon she takes a break and eats lunch."
+      "accepted_answers": [],
+      "explanation": "Mittags = at noon. In the evening she shops and watches TV; breakfast is in the morning."
     }
   },
   "W3.2#reading.passage": {

@@ -111,6 +111,16 @@ describe("the rules of the generator", () => {
     }
   });
 
+  it("typing questions must be narrow: open reading questions are multiple choice, accepted answers stay at 8 (writer and reviewer)", () => {
+    for (const system of [PASS_A_SYSTEM, PASS_B_SYSTEM, PASS_C_SYSTEM]) {
+      expect(system).toContain("Typing questions ask for a NARROW answer only");
+      expect(system).toContain("at most 8 answers");
+    }
+    expect(REVIEW_SYSTEM).toContain("must ask for a narrow answer");
+    expect(REVIEW_SYSTEM).toContain("NEVER by adding more accepted answers");
+    expect(REVIEW_SYSTEM).toContain("at most 8");
+  });
+
   it("the writer is told how to count a model answer, and how to keep the exam fresh", () => {
     expect(PASS_B_SYSTEM).toContain("count before you answer");
     expect(PASS_B_SYSTEM).toContain("do NOT count as sentences");

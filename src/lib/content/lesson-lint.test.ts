@@ -350,3 +350,29 @@ describe("message framing does not count as sentences", () => {
     expect(ruleOf(withTask("Write exactly 5 sentences.", `${five} Ich freue mich. Viele Grüße, Anna`))).toContain("Z9#writing:model-answer-sentences");
   });
 });
+
+describe("typing questions in reading and listening must be narrow", () => {
+  const typing = (prompt: string, answer: string) => ({ skill: "reading" as const, type: "typing" as const, prompt, answer, distractors: [], accepted_answers: [], explanation: "x" });
+  const flagged = (mutate: (l: Lesson) => void) => ruleOf(lint(mutate)).filter((r) => r.endsWith(":typing-open"));
+
+  it("an open 'answer in a sentence' question or a long answer is flagged, in the reading, listening and exam parts", () => {
+    expect(flagged((l) => (l.reading.questions[0] = typing("Was macht Anna mittags? Answer in German with one short sentence.", "Sie macht eine Pause.")))).toEqual(["Z9#reading.q1:typing-open"]);
+    expect(flagged((l) => (l.listening.questions[1] = typing("Which two things does she need? Write them in German.", "Die Adresse und die Unterschrift.")))).toEqual(["Z9#listening.q2:typing-open"]);
+    expect(flagged((l) => (l.exam.reading.questions[0] = typing("Wo wohnt Lena?", "Lena wohnt in einer kleinen Wohnung in Berlin.")))).toEqual(["Z9#exam.reading.q1:typing-open"]);
+    expect(flagged((l) => (l.exam.listening.questions[0] = typing("Describe the weather.", "Es ist kalt.")))).toEqual(["Z9#exam.listening.q1:typing-open"]);
+  });
+
+  it("a narrow answer is fine: a word, a number, a time, a fixed phrase from the text", () => {
+    expect(flagged((l) => (l.reading.questions[0] = typing("Wann schläft Anna ein? Answer in German with a short phrase (um ... Uhr).", "Um zehn Uhr.")))).toEqual([]);
+    expect(flagged((l) => (l.reading.questions[0] = typing("Which counter number does Anna go to?", "Schalter 3")))).toEqual([]);
+    expect(flagged((l) => (l.reading.questions[0] = typing("How many pens does Anna have? Answer in German with one word.", "zwei")))).toEqual([]);
+  });
+
+  it("only warns (it never blocks a lesson), and only for reading and listening: a translation in the exercises may be a sentence", () => {
+    const issues = lint((l) => (l.reading.questions[0] = typing("Describe Anna's day in a sentence.", "Anna macht eine Pause.")));
+    expect(issues.filter((i) => i.rule === "typing-open").every((i) => i.level === "warn")).toBe(true);
+    expect(errorIds(issues).has("Z9#reading.q1")).toBe(false);
+    const translation = { ...typing("Translate: I would like a coffee, please, and a piece of cake.", "Ich möchte bitte einen Kaffee und ein Stück Kuchen."), skill: "translation" as const };
+    expect(flagged((l) => (l.exercises.items[0] = translation))).toEqual([]);
+  });
+});

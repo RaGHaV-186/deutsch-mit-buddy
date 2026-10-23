@@ -1,14 +1,14 @@
 {
   "stage": "review",
   "model": "claude-opus-5-5",
-  "batchId": "msgbatch_01SaERXiu9TfqZYLacB7yuo4",
-  "requests": 4,
+  "batchId": "msgbatch_01WpVhChUk8Kkwp7wGp3oBqV",
+  "requests": 1,
   "failedRequests": 0,
-  "inputTokens": 19410,
-  "outputTokens": 4198,
-  "actualUsd": 0.0808,
-  "actualEur": 0.0768,
-  "estimatedEur": 0.2018,
-  "ceilingEur": 0.3348,
+  "inputTokens": 4590,
+  "outputTokens": 226,
+  "actualUsd": 0.0114,
+  "actualEur": 0.0109,
+  "estimatedEur": 0.0501,
+  "ceilingEur": 0.0834,
   "usdToEur": 0.95
 }

@@ -125,6 +125,15 @@ const range = (n: number, [lo, hi]: readonly [number, number]) => n >= lo && n <
 const rangeText = ([lo, hi]: readonly [number, number]) => (lo === hi ? `${lo}` : `${lo} to ${hi}`);
 
 /** What makes a question "the same" as another one: the finished sentence (gap filled in), or the answer, or the English prompt of a translation. */
+/** Typing questions in reading and listening must ask for a narrow answer. A prompt that asks for a sentence or a list, or an answer of more than 5 words, is an open question: it belongs in multiple choice. */
+const OPEN_PROMPT = /\b(?:in (?:a|one)(?: short| full)? sentence|(?:a|one|full|short) sentence|ganzen? Satz|in einem Satz|(?:two|three|zwei|drei) (?:things|Dinge)|list|describe|explain|beschreib\w*|erkl\w+)\b|write them/i;
+function lintOpenTyping(q: Question, id: string, out: LintIssue[]) {
+  if (q.type !== "typing") return;
+  if (OPEN_PROMPT.test(q.prompt) || wordCount(q.answer) > 5) {
+    out.push({ id, level: "warn", rule: "typing-open", message: "A typing question in reading or listening must ask for a narrow answer (one word, a number, a time, one fixed phrase from the text). An open question that wants a sentence or a list belongs in multiple choice." });
+  }
+}
+
 function questionKeys(q: Question): string[] {
   const keys: string[] = [];
   if (q.type === "gap_fill") keys.push(normalise(q.prompt.replace("___", q.answer)));
@@ -247,6 +256,11 @@ export function lintLesson(code: string, phase: Phase, lesson: Lesson, options: 
   lesson.exam.grammar_vocab.forEach((q, i) => lintQuestion(q, id("exam", "grammar_vocab", i), profile.dictationMaxWords, out, lessonForms));
   lesson.exam.reading.questions.forEach((q, i) => lintQuestion(q, id("exam", "reading", "questions", i), profile.dictationMaxWords, out, lessonForms));
   lesson.exam.listening.questions.forEach((q, i) => lintQuestion(q, id("exam", "listening", "questions", i), profile.dictationMaxWords, out, lessonForms));
+  // Open "answer in a sentence" typing questions: warnings for the reviewer (the reading and listening parts, the day exam included).
+  lesson.reading.questions.forEach((q, i) => lintOpenTyping(q, id("reading", "questions", i), out));
+  lesson.listening.questions.forEach((q, i) => lintOpenTyping(q, id("listening", "questions", i), out));
+  lesson.exam.reading.questions.forEach((q, i) => lintOpenTyping(q, id("exam", "reading", "questions", i), out));
+  lesson.exam.listening.questions.forEach((q, i) => lintOpenTyping(q, id("exam", "listening", "questions", i), out));
   // ---- the day exam is fresh: nothing in it repeats the warm-up, the exercises or the reading and listening texts
   const lessonQuestions = [...lesson.warmup.items, ...lesson.exercises.items, ...lesson.reading.questions, ...lesson.listening.questions];
   const seenKeys = new Set(lessonQuestions.flatMap(questionKeys));

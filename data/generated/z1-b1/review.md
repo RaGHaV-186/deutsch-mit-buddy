@@ -1,7 +1,7 @@
 # Review of run z1-b1
 
-2853 items in 30 lessons: **2543 ok**, **309 fixed**, **1 need a human**.
-Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z10, W1.1, W1.2, W1.3, W1.4, W2.1, W2.2, W2.3, W2.4, W2.5, W3.1, W3.2, W3.3, W3.4, W3.5, W4.1, W4.2, W4.3, W4.4, W4.5, Z9. Blocked: W1.5.
+2853 items in 30 lessons: **2544 ok**, **309 fixed**, **0 need a human**.
+Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z10, W1.1, W1.2, W1.3, W1.4, W1.5, W2.1, W2.2, W2.3, W2.4, W2.5, W3.1, W3.2, W3.3, W3.4, W3.5, W4.1, W4.2, W4.3, W4.4, W4.5, Z9. Blocked: none.
 
 ## Z1 (can be published)
 - **CORRECTED BY THE COURSE OWNER** Z1#writing: The model answer asked and answered its own question (Wie heißt du? Du heißt Jonas). Now Jonas answers in the text; the task and the points to include say so.
@@ -173,13 +173,12 @@ Can be published: Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z10, W1.1, W1.2, W1.3, W1.4, W
 - **FIXED** W1.4#exam.gv3 (Exam grammar/vocabulary 3): Missing natural order with object first; added "Wasser kann Anna jetzt trinken."
 - **FIXED** W1.4#exam.gv4 (Exam grammar/vocabulary 4): Missing alternative "Tee müssen wir bestellen." (accepted elsewhere in lesson); added.
 
-## W1.5 (blocked)
-- **CORRECTED BY THE COURSE OWNER** W1.5#reading.q5: The question has two true answers from the text (break, lunch): both are listed, with and without Anna and eine.
+## W1.5 (can be published)
+- **CORRECTED BY THE COURSE OWNER** W1.5#reading.q5: Open "answer in a sentence" typing question: Opus kept asking for more accepted answers (9, 17, 15; the limit is 8). Converted to multiple choice as Raghav decided: one right answer, three plausible wrong ones, no accepted answers.
 - **FIXED** W1.5#warmup.q01 (Warm-up 1): The English left out 'gern' (likes to); changed it to 'Anna likes to eat fish and vegetables.'
 - **FIXED** W1.5#warmup.q03 (Warm-up 3): The distractor 'kanne' is not a real word; replaced it with 'könnt'.
 - **FIXED** W1.5#vocabulary.w12 (Word: Arbeit): Arbeit has the Duden plural 'die Arbeiten'. The tip named suffixes that Arbeit does not have (it is not -heit/-keit), which is misleading. Set the plural and removed the tip.
 - **FIXED** W1.5#reading.q4 (Reading question 4): Natural variants with the digit 10 were missing; added them.
-- **NEEDS-HUMAN** W1.5#reading.q5 (Reading question 5): Marked fixed, but the correction is missing or does not fit this item. (Accepted answers were missing natural variants such as 'Anna macht eine Pause und isst das Mittagessen.' and 'Sie macht mittags eine Pause.' Added them.)
 - **FIXED** W1.5#exam.gv5 (Exam grammar/vocabulary 5): 'Want to' can also be rendered with willst/möchtest ... mitkommen; added these correct variants.
 - **FIXED** W1.5#exam.writing (Exam writing task): The task listed frühstücken as a separable verb, but it is not; replaced it with aufwachen.
 

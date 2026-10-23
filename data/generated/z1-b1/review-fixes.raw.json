@@ -93,9 +93,9 @@
     "W1.5": [
       {
         "id": "W1.5#reading.q5",
-        "status": "fixed",
-        "reason": "Accepted answers were missing natural variants such as 'Anna macht eine Pause und isst das Mittagessen.' and 'Sie macht mittags eine Pause.' Added them.",
-        "fixed_json": "{\"skill\":\"reading\",\"type\":\"typing\",\"prompt\":\"Was macht Anna mittags? Answer in German with one short sentence.\",\"answer\":\"Sie macht eine Pause.\",\"distractors\":[],\"accepted_answers\":[\"Anna macht eine Pause.\",\"Sie macht Pause.\",\"Anna macht Pause.\",\"Sie isst das Mittagessen.\",\"Anna isst das Mittagessen.\",\"Sie macht eine Pause und isst das Mittagessen.\",\"Anna macht eine Pause und isst das Mittagessen.\",\"Sie macht Pause und isst das Mittagessen.\",\"Anna macht Pause und isst das Mittagessen.\",\"Mittags macht sie eine Pause.\",\"Sie macht mittags eine Pause.\",\"Anna macht mittags eine Pause.\",\"Mittags macht sie eine Pause und isst das Mittagessen.\",\"Sie isst Mittagessen.\",\"Anna isst Mittagessen.\"],\"explanation\":\"At noon she takes a break and eats lunch.\"}"
+        "status": "ok",
+        "reason": "Correct answer from text; plausible distractors; explanation accurate.",
+        "fixed_json": null
       }
     ],
     "W2.2": [
@@ -233,7 +233,7 @@
     "Z5#reading.q4": "cbfc134cad5e",
     "Z5#reading.q5": "583848856486",
     "Z9#culture": "6dd0765f4e0a",
-    "W1.5#reading.q5": "923c98845322",
+    "W1.5#reading.q5": "888676672c34",
     "W2.2#writing": "7d1c0de6e7be",
     "W3.1#writing": "1cd18a34e07c",
     "W4.2#speaking.tandem": "6ee65ddec9e5",

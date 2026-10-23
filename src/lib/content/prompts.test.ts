@@ -111,6 +111,29 @@ describe("the rules of the generator", () => {
     }
   });
 
+  it("typing questions must be narrow: open reading questions are multiple choice, accepted answers stay at 8 (writer and reviewer)", () => {
+    for (const system of [PASS_A_SYSTEM, PASS_B_SYSTEM, PASS_C_SYSTEM]) {
+      expect(system).toContain("Typing questions ask for a NARROW answer only");
+      expect(system).toContain("at most 8 answers");
+    }
+    expect(REVIEW_SYSTEM).toContain("must ask for a narrow answer");
+    expect(REVIEW_SYSTEM).toContain("NEVER by adding more accepted answers");
+    expect(REVIEW_SYSTEM).toContain("at most 8");
+  });
+
+  it("the replacement multiple choice has three options that are clearly wrong according to the text (one defensible answer), in both rules", () => {
+    const wording = "three options that are clearly wrong according to the text, ideally taken from the text at another time, place or person, so exactly one answer is defensible";
+    expect(PASS_B_SYSTEM).toContain(wording);
+    expect(REVIEW_SYSTEM).toContain(wording);
+    expect(PASS_B_SYSTEM).not.toContain("three plausible wrong ones");
+    expect(REVIEW_SYSTEM).not.toContain("three plausible wrong options");
+  });
+
+  it("the narrow-typing rule says it does not concern writing tasks, speaking, tandem, ordering or dictation", () => {
+    expect(PASS_B_SYSTEM).toContain("typing QUESTIONS only: the writing task, the speaking drill and the Tandem scenario are open by design");
+    expect(REVIEW_SYSTEM).toContain("typing questions only: writing tasks, speaking drills, Tandem scenarios, ordering (sentence-building) and dictation questions are not affected");
+  });
+
   it("the writer is told how to count a model answer, and how to keep the exam fresh", () => {
     expect(PASS_B_SYSTEM).toContain("count before you answer");
     expect(PASS_B_SYSTEM).toContain("do NOT count as sentences");

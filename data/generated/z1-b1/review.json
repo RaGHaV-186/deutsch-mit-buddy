@@ -1,12 +1,12 @@
 {
   "run": "z1-b1",
-  "builtAt": "2026-10-23T11:36:56.029Z",
+  "builtAt": "2026-10-23T11:53:36.087Z",
   "summary": {
     "lessons": 30,
     "items": 2853,
-    "ok": 2543,
+    "ok": 2544,
     "fixed": 309,
-    "needsHuman": 1,
+    "needsHuman": 0,
     "publishable": [
       "Z1",
       "Z2",
@@ -21,6 +21,7 @@
       "W1.2",
       "W1.3",
       "W1.4",
+      "W1.5",
       "W2.1",
       "W2.2",
       "W2.3",
@@ -38,9 +39,7 @@
       "W4.5",
       "Z9"
     ],
-    "blocked": [
-      "W1.5"
-    ]
+    "blocked": []
   },
   "unreviewedLessons": [],
   "manualFixes": [
@@ -10718,7 +10717,9 @@
             ],
             "explanation": "Anna's number ends in 567."
           },
-          "lint": [],
+          "lint": [
+            "A typing question in reading or listening must ask for a narrow answer (one word, a number, a time, one fixed phrase from the text). An open question that wants a sentence or a list belongs in multiple choice."
+          ],
           "status": "ok",
           "reason": "Answerable; accepted forms fine.",
           "final": {
@@ -48810,7 +48811,9 @@
             ],
             "explanation": "Anna has no table and no lamp yet; Tisch is masculine, so keinen Tisch."
           },
-          "lint": [],
+          "lint": [
+            "A typing question in reading or listening must ask for a narrow answer (one word, a number, a time, one fixed phrase from the text). An open question that wants a sentence or a list belongs in multiple choice."
+          ],
           "status": "fixed",
           "reason": "Learners may write the full sentence; added the full-sentence variants to the accepted answers.",
           "final": {
@@ -57320,24 +57323,33 @@
           "label": "Reading question 5",
           "original": {
             "skill": "reading",
-            "type": "typing",
-            "prompt": "Was macht Anna mittags? Answer in German with one short sentence.",
-            "answer": "Sie macht eine Pause.",
-            "distractors": [],
-            "accepted_answers": [
-              "Anna macht eine Pause.",
-              "Sie macht Pause.",
-              "Anna macht Pause.",
-              "Sie isst das Mittagessen.",
-              "Anna isst das Mittagessen.",
-              "Sie macht eine Pause und isst das Mittagessen."
+            "type": "multiple_choice",
+            "prompt": "Was macht Anna mittags? Choose the correct answer.",
+            "answer": "Sie macht eine Pause und isst das Mittagessen.",
+            "distractors": [
+              "Sie kauft ein.",
+              "Sie frühstückt.",
+              "Sie sieht fern."
             ],
-            "explanation": "At noon she takes a break and eats lunch."
+            "accepted_answers": [],
+            "explanation": "Mittags = at noon. In the evening she shops and watches TV; breakfast is in the morning."
           },
           "lint": [],
-          "status": "needs-human",
-          "reason": "Marked fixed, but the correction is missing or does not fit this item. (Accepted answers were missing natural variants such as 'Anna macht eine Pause und isst das Mittagessen.' and 'Sie macht mittags eine Pause.' Added them.)",
-          "final": null
+          "status": "ok",
+          "reason": "Correct answer from text; plausible distractors; explanation accurate.",
+          "final": {
+            "skill": "reading",
+            "type": "multiple_choice",
+            "prompt": "Was macht Anna mittags? Choose the correct answer.",
+            "answer": "Sie macht eine Pause und isst das Mittagessen.",
+            "distractors": [
+              "Sie kauft ein.",
+              "Sie frühstückt.",
+              "Sie sieht fern."
+            ],
+            "accepted_answers": [],
+            "explanation": "Mittags = at noon. In the evening she shops and watches TV; breakfast is in the morning."
+          }
         },
         {
           "id": "W1.5#listening.passage",
@@ -59107,19 +59119,16 @@
             },
             {
               "skill": "reading",
-              "type": "typing",
-              "prompt": "Was macht Anna mittags? Answer in German with one short sentence.",
-              "answer": "Sie macht eine Pause.",
-              "distractors": [],
-              "accepted_answers": [
-                "Anna macht eine Pause.",
-                "Sie macht Pause.",
-                "Anna macht Pause.",
-                "Sie isst das Mittagessen.",
-                "Anna isst das Mittagessen.",
-                "Sie macht eine Pause und isst das Mittagessen."
+              "type": "multiple_choice",
+              "prompt": "Was macht Anna mittags? Choose the correct answer.",
+              "answer": "Sie macht eine Pause und isst das Mittagessen.",
+              "distractors": [
+                "Sie kauft ein.",
+                "Sie frühstückt.",
+                "Sie sieht fern."
               ],
-              "explanation": "At noon she takes a break and eats lunch."
+              "accepted_answers": [],
+              "explanation": "Mittags = at noon. In the evening she shops and watches TV; breakfast is in the morning."
             }
           ]
         },
@@ -59535,7 +59544,7 @@
         "exercises": "ok",
         "vocabulary": "fixed",
         "pronunciation": "ok",
-        "reading": "needs-human",
+        "reading": "fixed",
         "listening": "ok",
         "writing": "ok",
         "speaking": "ok",
@@ -59544,7 +59553,7 @@
         "exam": "fixed",
         "closing": "ok"
       },
-      "publishable": false
+      "publishable": true
     },
     {
       "code": "W2.1",
@@ -117090,7 +117099,9 @@
             ],
             "explanation": "The woman needs the address and the signature."
           },
-          "lint": [],
+          "lint": [
+            "A typing question in reading or listening must ask for a narrow answer (one word, a number, a time, one fixed phrase from the text). An open question that wants a sentence or a list belongs in multiple choice."
+          ],
           "status": "fixed",
           "reason": "Missing reversed short answer; added 'Unterschrift und Adresse'.",
           "final": {

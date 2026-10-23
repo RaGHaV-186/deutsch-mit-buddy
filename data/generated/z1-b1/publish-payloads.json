@@ -27449,6 +27449,2127 @@
       }
     ]
   },
+  "W1.5": {
+    "code": "W1.5",
+    "parts": {
+      "goal": {
+        "can_do": "I can talk about my daily routine with separable verbs, for example: Ich stehe um sieben Uhr auf."
+      },
+      "warmup": {
+        "preview": {
+          "points": []
+        },
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna ___ gern Fisch und Gemüse. (Anna likes to eat fish and vegetables.)",
+            "answer": "isst",
+            "distractors": [
+              "esse",
+              "esst",
+              "essen"
+            ],
+            "accepted_answers": [],
+            "explanation": "Essen changes to isst with er/sie/es, and Anna is one person."
+          },
+          {
+            "skill": "articles",
+            "type": "multiple_choice",
+            "prompt": "Choose the correct sentence: You see a table in the living room.",
+            "answer": "Ich sehe einen Tisch im Wohnzimmer.",
+            "distractors": [
+              "Ich sehe ein Tisch im Wohnzimmer.",
+              "Ich sehe einer Tisch im Wohnzimmer.",
+              "Ich sehe eine Tisch im Wohnzimmer."
+            ],
+            "accepted_answers": [],
+            "explanation": "Der Tisch is masculine, so the object takes einen in the Akkusativ."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas ___ heute nicht kochen. Er hat keine Zeit. (Jonas cannot cook today.)",
+            "answer": "kann",
+            "distractors": [
+              "kannst",
+              "können",
+              "könnt"
+            ],
+            "accepted_answers": [],
+            "explanation": "Können is kann with er/sie/es, and the second verb stays in the infinitive at the end."
+          }
+        ]
+      },
+      "grammar": {
+        "intro": {
+          "title": "Separable verbs: the prefix goes to the end",
+          "explanation": [
+            "Many German verbs have a prefix that can separate, such as auf-stehen, ein-kaufen, an-rufen and fern-sehen. In the dictionary and after words like müssen you see the whole verb: aufstehen.",
+            "In a normal statement or question, the verb stem takes the ending and stays in position 2 (or first in a question). The prefix jumps to the very end of the sentence: Ich stehe um sieben Uhr auf.",
+            "Other information (time, place, objects) goes between the verb and the prefix: Anna kauft heute im Supermarkt ein.",
+            "Not every verb with a prefix separates. Frühstücken is just one verb, so it does not split: Ich frühstücke um acht Uhr."
+          ],
+          "rule_summary": "Main clause: conjugated stem in position 2, separable prefix at the end: Ich stehe um sieben Uhr auf."
+        },
+        "examples": [
+          {
+            "de": "Ich stehe um sieben Uhr auf.",
+            "en": "I get up at seven o'clock.",
+            "note": "The prefix auf goes to the end."
+          },
+          {
+            "de": "Anna kauft heute ein.",
+            "en": "Anna is shopping today.",
+            "note": "einkaufen: kauft ... ein."
+          },
+          {
+            "de": "Jonas sieht abends fern.",
+            "en": "Jonas watches TV in the evening.",
+            "note": "fernsehen: sehen changes to sieht with er/sie."
+          },
+          {
+            "de": "Wann fängt der Kurs an?",
+            "en": "When does the course start?",
+            "note": "In a question the prefix is also at the end. anfangen: er fängt an."
+          },
+          {
+            "de": "Lena ruft ihre Mutter an.",
+            "en": "Lena calls her mother.",
+            "note": "The object stays before the prefix."
+          },
+          {
+            "de": "Um acht Uhr räume ich die Wohnung auf.",
+            "en": "At eight o'clock I tidy up the flat.",
+            "note": "When the time comes first, the verb is still in position 2."
+          }
+        ],
+        "traps": [
+          {
+            "wrong": "Ich aufstehe um sieben Uhr.",
+            "right": "Ich stehe um sieben Uhr auf.",
+            "why": "In a main clause the prefix separates from the verb and goes to the end."
+          },
+          {
+            "wrong": "Ich stehe auf um sieben Uhr.",
+            "right": "Ich stehe um sieben Uhr auf.",
+            "why": "The prefix must be the last word of the sentence, after the time and other information."
+          },
+          {
+            "wrong": "Ich frühstücke um acht Uhr auf.",
+            "right": "Ich frühstücke um acht Uhr.",
+            "why": "Frühstücken has no separable prefix, so nothing goes to the end."
+          }
+        ],
+        "tables": [
+          {
+            "title": "aufstehen in the present tense",
+            "headers": [
+              "Person",
+              "Sentence"
+            ],
+            "rows": [
+              [
+                "ich",
+                "Ich stehe um sieben Uhr auf."
+              ],
+              [
+                "du",
+                "Du stehst um sieben Uhr auf."
+              ],
+              [
+                "er / sie / es",
+                "Er steht um sieben Uhr auf."
+              ],
+              [
+                "wir",
+                "Wir stehen um sieben Uhr auf."
+              ],
+              [
+                "ihr",
+                "Ihr steht um sieben Uhr auf."
+              ],
+              [
+                "sie / Sie",
+                "Sie stehen um sieben Uhr auf."
+              ]
+            ]
+          },
+          {
+            "title": "Common separable verbs",
+            "headers": [
+              "Infinitive",
+              "Sentence with ich",
+              "Meaning"
+            ],
+            "rows": [
+              [
+                "einkaufen",
+                "Ich kaufe ein.",
+                "to shop"
+              ],
+              [
+                "fernsehen",
+                "Ich sehe fern.",
+                "to watch TV"
+              ],
+              [
+                "anrufen",
+                "Ich rufe an.",
+                "to call"
+              ],
+              [
+                "aufräumen",
+                "Ich räume auf.",
+                "to tidy up"
+              ],
+              [
+                "anfangen",
+                "Ich fange an.",
+                "to begin"
+              ]
+            ]
+          }
+        ]
+      },
+      "exercises": {
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich stehe um sechs Uhr ___.",
+            "answer": "auf",
+            "distractors": [
+              "an",
+              "ein",
+              "fern"
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb is aufstehen, so the prefix auf goes to the end."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna kauft heute im Supermarkt ___.",
+            "answer": "ein",
+            "distractors": [
+              "auf",
+              "an",
+              "ab"
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb is einkaufen, so ein goes to the end."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas ___ abends fern.",
+            "answer": "sieht",
+            "distractors": [
+              "sehe",
+              "siehst",
+              "sehen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With er/sie the verb is sieht."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Wann ___ du auf?",
+            "answer": "stehst",
+            "distractors": [
+              "stehe",
+              "steht",
+              "stehen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With du the ending is -st: du stehst."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Der Kurs fängt um neun Uhr ___.",
+            "answer": "an",
+            "distractors": [
+              "auf",
+              "ein",
+              "ab"
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb is anfangen, so an goes to the end."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena ___ ihre Freundin an.",
+            "answer": "ruft",
+            "distractors": [
+              "rufe",
+              "rufst",
+              "rufen"
+            ],
+            "accepted_answers": [],
+            "explanation": "With sie (she) the ending is -t: sie ruft an."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Ich räume die Wohnung auf.",
+            "distractors": [
+              "Ich aufräume die Wohnung.",
+              "Ich räume auf die Wohnung.",
+              "Ich räumen die Wohnung auf."
+            ],
+            "accepted_answers": [],
+            "explanation": "The stem is in position 2 and the prefix auf is at the end."
+          },
+          {
+            "skill": "word_order",
+            "type": "multiple_choice",
+            "prompt": "Where does the separable prefix go in a main clause?",
+            "answer": "At the end of the sentence",
+            "distractors": [
+              "Directly after the subject",
+              "At the beginning of the sentence",
+              "Attached to the verb"
+            ],
+            "accepted_answers": [],
+            "explanation": "The prefix always goes to the end of a main clause."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does fernsehen mean?",
+            "answer": "to watch TV",
+            "distractors": [
+              "to call",
+              "to shop",
+              "to get up"
+            ],
+            "accepted_answers": [],
+            "explanation": "Fernsehen means to watch TV."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which verb is NOT separable?",
+            "answer": "frühstücken",
+            "distractors": [
+              "aufstehen",
+              "einkaufen",
+              "anrufen"
+            ],
+            "accepted_answers": [],
+            "explanation": "Frühstücken has no separable prefix."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "auf / Ich / sieben / um / stehe / Uhr",
+            "answer": "Ich stehe um sieben Uhr auf.",
+            "distractors": [],
+            "accepted_answers": [
+              "Um sieben Uhr stehe ich auf."
+            ],
+            "explanation": "The stem stands in position 2 and auf at the end."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "kauft / Jonas / ein / heute",
+            "answer": "Jonas kauft heute ein.",
+            "distractors": [],
+            "accepted_answers": [
+              "Heute kauft Jonas ein."
+            ],
+            "explanation": "The verb is in position 2 and ein at the end."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Wann / stehst / du / auf",
+            "answer": "Wann stehst du auf?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "After the question word comes the verb, and auf goes last."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "I get up at six o'clock.",
+            "answer": "Ich stehe um sechs Uhr auf.",
+            "distractors": [],
+            "accepted_answers": [
+              "Um sechs Uhr stehe ich auf."
+            ],
+            "explanation": "Use stehe ... auf with the time in between."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Anna calls Lena.",
+            "answer": "Anna ruft Lena an.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Anrufen separates: ruft ... an."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "I watch TV in the evening.",
+            "answer": "Ich sehe abends fern.",
+            "distractors": [],
+            "accepted_answers": [
+              "Abends sehe ich fern.",
+              "Ich sehe am Abend fern.",
+              "Am Abend sehe ich fern."
+            ],
+            "explanation": "Fernsehen separates: sehe ... fern."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Ich stehe früh auf.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Stem stehe in position 2, prefix auf at the end."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Wir kaufen heute ein.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Einkaufen splits into kaufen ... ein."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Der Kurs fängt um neun Uhr an.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Anfangen splits into fängt ... an."
+          }
+        ]
+      },
+      "vocabulary": {
+        "words": [
+          {
+            "tier": "core",
+            "en": "to get up",
+            "article": null,
+            "de": "aufstehen",
+            "plural": "ich stehe auf · du stehst auf · er steht auf",
+            "example": "Ich stehe um sieben Uhr auf.",
+            "example_en": "I get up at seven o'clock.",
+            "tip": "Separable: auf goes to the end."
+          },
+          {
+            "tier": "core",
+            "en": "to shop",
+            "article": null,
+            "de": "einkaufen",
+            "plural": "ich kaufe ein · du kaufst ein · er kauft ein",
+            "example": "Anna kauft heute ein.",
+            "example_en": "Anna is shopping today.",
+            "tip": "Separable: ein goes to the end."
+          },
+          {
+            "tier": "core",
+            "en": "to watch TV",
+            "article": null,
+            "de": "fernsehen",
+            "plural": "ich sehe fern · du siehst fern · er sieht fern",
+            "example": "Jonas sieht abends fern.",
+            "example_en": "Jonas watches TV in the evening.",
+            "tip": "sehen changes to sieht/siehst."
+          },
+          {
+            "tier": "core",
+            "en": "to call (phone)",
+            "article": null,
+            "de": "anrufen",
+            "plural": "ich rufe an · du rufst an · er ruft an",
+            "example": "Lena ruft ihre Mutter an.",
+            "example_en": "Lena calls her mother.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "to tidy up",
+            "article": null,
+            "de": "aufräumen",
+            "plural": "ich räume auf · du räumst auf · er räumt auf",
+            "example": "Ich räume am Abend die Wohnung auf.",
+            "example_en": "In the evening I tidy up the flat.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "to begin, to start",
+            "article": null,
+            "de": "anfangen",
+            "plural": "ich fange an · du fängst an · er fängt an",
+            "example": "Der Kurs fängt um neun Uhr an.",
+            "example_en": "The course starts at nine o'clock.",
+            "tip": "a changes to ä with du and er."
+          },
+          {
+            "tier": "core",
+            "en": "to have breakfast",
+            "article": null,
+            "de": "frühstücken",
+            "plural": "ich frühstücke · du frühstückst · er frühstückt",
+            "example": "Wir frühstücken um acht Uhr.",
+            "example_en": "We have breakfast at eight o'clock.",
+            "tip": "Not separable!"
+          },
+          {
+            "tier": "core",
+            "en": "morning",
+            "article": "der",
+            "de": "Morgen",
+            "plural": "die Morgen",
+            "example": "Am Morgen trinke ich Kaffee.",
+            "example_en": "In the morning I drink coffee.",
+            "tip": "am Morgen = in the morning"
+          },
+          {
+            "tier": "core",
+            "en": "evening",
+            "article": "der",
+            "de": "Abend",
+            "plural": "die Abende",
+            "example": "Am Abend sehe ich fern.",
+            "example_en": "In the evening I watch TV.",
+            "tip": "abends = in the evenings"
+          },
+          {
+            "tier": "core",
+            "en": "clock, o'clock",
+            "article": "die",
+            "de": "Uhr",
+            "plural": "die Uhren",
+            "example": "Es ist acht Uhr.",
+            "example_en": "It is eight o'clock.",
+            "tip": "um sieben Uhr = at seven o'clock"
+          },
+          {
+            "tier": "core",
+            "en": "day",
+            "article": "der",
+            "de": "Tag",
+            "plural": "die Tage",
+            "example": "Mein Tag beginnt früh.",
+            "example_en": "My day begins early.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "work",
+            "article": "die",
+            "de": "Arbeit",
+            "plural": "die Arbeiten",
+            "example": "Die Arbeit fängt um neun Uhr an.",
+            "example_en": "Work starts at nine o'clock.",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "to pick up",
+            "article": null,
+            "de": "abholen",
+            "plural": "ich hole ab · du holst ab · er holt ab",
+            "example": "Jonas holt Anna um drei Uhr ab.",
+            "example_en": "Jonas picks Anna up at three o'clock.",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "to come along",
+            "article": null,
+            "de": "mitkommen",
+            "plural": "ich komme mit · du kommst mit · er kommt mit",
+            "example": "Kommst du heute Abend mit?",
+            "example_en": "Are you coming along this evening?",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "to fall asleep",
+            "article": null,
+            "de": "einschlafen",
+            "plural": "ich schlafe ein · du schläfst ein · er schläft ein",
+            "example": "Ich schlafe um elf Uhr ein.",
+            "example_en": "I fall asleep at eleven o'clock.",
+            "tip": "a changes to ä with du and er."
+          },
+          {
+            "tier": "bonus",
+            "en": "to wake up",
+            "article": null,
+            "de": "aufwachen",
+            "plural": "ich wache auf · du wachst auf · er wacht auf",
+            "example": "Ich wache früh auf.",
+            "example_en": "I wake up early.",
+            "tip": "aufwachen = wake up; aufstehen = get up"
+          },
+          {
+            "tier": "bonus",
+            "en": "lunch",
+            "article": "das",
+            "de": "Mittagessen",
+            "plural": "die Mittagessen",
+            "example": "Das Mittagessen ist um zwölf Uhr.",
+            "example_en": "Lunch is at twelve o'clock.",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "break",
+            "article": "die",
+            "de": "Pause",
+            "plural": "die Pausen",
+            "example": "Wir machen um zehn Uhr Pause.",
+            "example_en": "We take a break at ten o'clock.",
+            "tip": "Pause machen = to take a break"
+          }
+        ],
+        "phrases": [
+          {
+            "en": "What time do you get up?",
+            "de": "Wann stehst du auf?",
+            "example": "Wann stehst du am Morgen auf?",
+            "example_en": "What time do you get up in the morning?",
+            "tip": "Use Wann stehen Sie auf? when formal."
+          },
+          {
+            "en": "I get up at seven.",
+            "de": "Ich stehe um sieben Uhr auf.",
+            "example": "Ich stehe um sieben Uhr auf und frühstücke.",
+            "example_en": "I get up at seven and have breakfast.",
+            "tip": null
+          },
+          {
+            "en": "When does the course start?",
+            "de": "Wann fängt der Kurs an?",
+            "example": "Wann fängt der Kurs heute an?",
+            "example_en": "When does the course start today?",
+            "tip": null
+          },
+          {
+            "en": "I'll call you later.",
+            "de": "Ich rufe dich später an.",
+            "example": "Ich rufe dich am Abend an.",
+            "example_en": "I'll call you in the evening.",
+            "tip": "dich = you (informal)"
+          },
+          {
+            "en": "Do you want to come along?",
+            "de": "Kommst du mit?",
+            "example": "Ich kaufe ein. Kommst du mit?",
+            "example_en": "I'm going shopping. Do you want to come along?",
+            "tip": "The prefix mit is at the end."
+          }
+        ]
+      },
+      "pronunciation": {
+        "focus": "Stressed prefixes in separable verbs, and the sounds au, ei and äu",
+        "explanation": "In separable verbs the prefix is stressed: AUFstehen, EINkaufen, ANrufen. In the sentence the stressed prefix at the end is clearly heard. Also: au sounds like English \"ow\" in \"now\", ei like \"eye\", and äu like \"oy\" in \"boy\".",
+        "words": [
+          {
+            "de": "aufstehen",
+            "hint": "AUF-shte-en: stress on AUF, au = ow, st at the start of a stem sounds like sht"
+          },
+          {
+            "de": "einkaufen",
+            "hint": "EIN-kow-fen: ei = eye, au = ow, stress on EIN"
+          },
+          {
+            "de": "anrufen",
+            "hint": "AN-roo-fen: stress on AN"
+          },
+          {
+            "de": "fernsehen",
+            "hint": "FERN-zay-en: s before a vowel is like English z"
+          },
+          {
+            "de": "aufräumen",
+            "hint": "AUF-roy-men: äu = oy"
+          },
+          {
+            "de": "abholen",
+            "hint": "AP-hoh-len: b at the end of a syllable sounds like p"
+          },
+          {
+            "de": "aufwachen",
+            "hint": "AUF-vakh-en: w = English v, ch like a soft hiss in the throat"
+          },
+          {
+            "de": "mitkommen",
+            "hint": "MIT-kommen: stress on MIT"
+          }
+        ],
+        "sentences": [
+          "Ich stehe um sieben Uhr auf.",
+          "Anna kauft heute ein.",
+          "Jonas sieht abends fern.",
+          "Lena ruft ihre Mutter an."
+        ]
+      },
+      "reading": {
+        "passage": {
+          "title": "Annas Tag",
+          "text": "Anna wacht um sechs Uhr auf. Sie steht um halb sieben auf und frühstückt. Um acht Uhr fängt ihre Arbeit an. Mittags macht sie eine Pause und isst das Mittagessen. Am Abend kauft sie ein. Dann räumt sie die Wohnung auf und sieht fern. Um zehn Uhr schläft sie ein."
+        },
+        "questions": [
+          {
+            "skill": "reading",
+            "type": "multiple_choice",
+            "prompt": "When does Anna get up?",
+            "answer": "At half past six",
+            "distractors": [
+              "At six o'clock",
+              "At eight o'clock",
+              "At ten o'clock"
+            ],
+            "accepted_answers": [],
+            "explanation": "The text says she gets up at half past six (halb sieben)."
+          },
+          {
+            "skill": "reading",
+            "type": "multiple_choice",
+            "prompt": "When does Anna's work start?",
+            "answer": "At eight o'clock",
+            "distractors": [
+              "At six o'clock",
+              "At half past six",
+              "At ten o'clock"
+            ],
+            "accepted_answers": [],
+            "explanation": "Her work starts at eight: Um acht Uhr fängt ihre Arbeit an."
+          },
+          {
+            "skill": "reading",
+            "type": "multiple_choice",
+            "prompt": "What does Anna do in the evening?",
+            "answer": "She goes shopping",
+            "distractors": [
+              "She has breakfast",
+              "She starts work",
+              "She makes a phone call"
+            ],
+            "accepted_answers": [],
+            "explanation": "The text says Am Abend kauft sie ein."
+          },
+          {
+            "skill": "reading",
+            "type": "typing",
+            "prompt": "Wann schläft Anna ein? Answer in German with a short phrase (um ... Uhr).",
+            "answer": "Um zehn Uhr.",
+            "distractors": [],
+            "accepted_answers": [
+              "Sie schläft um zehn Uhr ein.",
+              "Anna schläft um zehn Uhr ein.",
+              "Um 10 Uhr.",
+              "Sie schläft um 10 Uhr ein.",
+              "Anna schläft um 10 Uhr ein."
+            ],
+            "explanation": "The last sentence says she falls asleep at ten o'clock."
+          },
+          {
+            "skill": "reading",
+            "type": "multiple_choice",
+            "prompt": "Was macht Anna mittags? Choose the correct answer.",
+            "answer": "Sie macht eine Pause und isst das Mittagessen.",
+            "distractors": [
+              "Sie kauft ein.",
+              "Sie frühstückt.",
+              "Sie sieht fern."
+            ],
+            "accepted_answers": [],
+            "explanation": "Mittags = at noon. In the evening she shops and watches TV; breakfast is in the morning."
+          }
+        ]
+      },
+      "listening": {
+        "passage": {
+          "title": "Kommst du mit?",
+          "speakers": [
+            "Anna",
+            "Jonas"
+          ],
+          "script": [
+            {
+              "speaker": "Jonas",
+              "de": "Hallo Anna! Wann stehst du morgen auf?",
+              "en": "Hello Anna! When are you getting up tomorrow?"
+            },
+            {
+              "speaker": "Anna",
+              "de": "Ich stehe um sieben Uhr auf. Warum?",
+              "en": "I get up at seven o'clock. Why?"
+            },
+            {
+              "speaker": "Jonas",
+              "de": "Ich kaufe morgen ein. Kommst du mit?",
+              "en": "I am going shopping tomorrow. Are you coming along?"
+            },
+            {
+              "speaker": "Anna",
+              "de": "Gern! Wann fängst du an?",
+              "en": "Gladly! When are you starting?"
+            },
+            {
+              "speaker": "Jonas",
+              "de": "Um neun Uhr. Ich hole dich ab.",
+              "en": "At nine o'clock. I will pick you up."
+            },
+            {
+              "speaker": "Anna",
+              "de": "Super. Danach machen wir eine Pause.",
+              "en": "Great. Afterwards we take a break."
+            },
+            {
+              "speaker": "Jonas",
+              "de": "Ja, und ich rufe Lena an. Sie kommt auch mit.",
+              "en": "Yes, and I will call Lena. She is coming along too."
+            },
+            {
+              "speaker": "Anna",
+              "de": "Prima, bis morgen!",
+              "en": "Great, see you tomorrow!"
+            }
+          ]
+        },
+        "questions": [
+          {
+            "skill": "listening",
+            "type": "multiple_choice",
+            "prompt": "When does Anna get up tomorrow?",
+            "answer": "At seven o'clock",
+            "distractors": [
+              "At six o'clock",
+              "At eight o'clock",
+              "At nine o'clock"
+            ],
+            "accepted_answers": [],
+            "explanation": "Anna says: Ich stehe um sieben Uhr auf."
+          },
+          {
+            "skill": "listening",
+            "type": "multiple_choice",
+            "prompt": "What does Jonas want to do tomorrow?",
+            "answer": "Go shopping",
+            "distractors": [
+              "Watch TV",
+              "Tidy up",
+              "Have breakfast"
+            ],
+            "accepted_answers": [],
+            "explanation": "Jonas says: Ich kaufe morgen ein."
+          },
+          {
+            "skill": "listening",
+            "type": "multiple_choice",
+            "prompt": "When do they start?",
+            "answer": "At nine o'clock",
+            "distractors": [
+              "At seven o'clock",
+              "At eight o'clock",
+              "At ten o'clock"
+            ],
+            "accepted_answers": [],
+            "explanation": "Jonas says they start at nine."
+          },
+          {
+            "skill": "listening",
+            "type": "multiple_choice",
+            "prompt": "Who picks up Anna?",
+            "answer": "Jonas",
+            "distractors": [
+              "Lena",
+              "Nobody",
+              "Anna's mother"
+            ],
+            "accepted_answers": [],
+            "explanation": "Jonas says: Ich hole dich ab."
+          },
+          {
+            "skill": "listening",
+            "type": "multiple_choice",
+            "prompt": "Who will Jonas call?",
+            "answer": "Lena",
+            "distractors": [
+              "Anna",
+              "Buddy",
+              "His teacher"
+            ],
+            "accepted_answers": [],
+            "explanation": "Jonas says: Ich rufe Lena an."
+          }
+        ]
+      },
+      "writing": {
+        "task": "Write a short postcard to a friend about your day. Write exactly 5 sentences and use at least three separable verbs.",
+        "min_words": 35,
+        "must_include": [
+          "when you get up (aufstehen)",
+          "when your work or course starts (anfangen)",
+          "something you do in the evening (for example einkaufen, fernsehen or aufräumen)",
+          "a question with Kommst du mit?"
+        ],
+        "useful_phrases": [
+          "Ich stehe um ... Uhr auf.",
+          "Mein Tag fängt um ... Uhr an.",
+          "Am Abend sehe ich fern.",
+          "Ich rufe dich später an.",
+          "Kommst du mit?"
+        ],
+        "model_answer": "Liebe Lena, ich stehe um sieben Uhr auf und frühstücke. Meine Arbeit fängt um neun Uhr an. Mittags mache ich eine Pause und esse das Mittagessen. Am Abend kaufe ich ein und sehe fern. Kommst du am Samstag mit?",
+        "rubric": [
+          "Separable verbs are split correctly: the conjugated stem is in position 2 and the prefix is at the end.",
+          "At least three different separable verbs are used.",
+          "Times are given correctly with um ... Uhr.",
+          "Vocabulary from the lesson is used (Morgen, Abend, Arbeit, Pause).",
+          "The text has exactly 5 sentences, with a greeting and correct spelling and punctuation."
+        ]
+      },
+      "speaking": {
+        "drill": [
+          {
+            "prompt": "Say that you get up at seven o'clock.",
+            "target": "Ich stehe um sieben Uhr auf.",
+            "tip": "Stress the prefix: AUF-stehen. The au sounds like English 'ow' in 'house'."
+          },
+          {
+            "prompt": "Ask a friend when they get up.",
+            "target": "Wann stehst du auf?",
+            "tip": "The prefix auf is stressed and comes last."
+          },
+          {
+            "prompt": "Ask when the course starts.",
+            "target": "Wann fängt der Kurs an?",
+            "tip": "The ä in fängt sounds like a short 'e'; stress AN."
+          },
+          {
+            "prompt": "Say that you will call your friend later.",
+            "target": "Ich rufe dich später an.",
+            "tip": "Stress the prefix AN at the end of the sentence."
+          },
+          {
+            "prompt": "Invite a friend to come along.",
+            "target": "Kommst du mit?",
+            "tip": "Stress MIT, and let your voice go up at the end of the question."
+          }
+        ],
+        "tandem": {
+          "title": "Mein Tag",
+          "setting": "Buddy and you chat about your daily routines over a coffee break.",
+          "buddy_role": "A friendly conversation partner who also tells about his own day.",
+          "learner_role": "A learner who tells Buddy about their day and asks questions.",
+          "opening_line": "Hallo! Ich stehe jeden Morgen um sechs Uhr auf. Wann stehst du auf?",
+          "target_phrases": [
+            "Ich stehe um ... Uhr auf.",
+            "Wann fängt deine Arbeit an?",
+            "Ich kaufe am Abend ein.",
+            "Kommst du mit?"
+          ],
+          "target_grammar": "Separable verbs in main clauses: the conjugated stem is in position 2 and the prefix goes to the end.",
+          "topics": [
+            "Wann frühstückst du?",
+            "Wann fängt dein Kurs oder deine Arbeit an?",
+            "Was machst du am Abend?",
+            "Siehst du abends fern?",
+            "Wann schläfst du ein?"
+          ],
+          "end_condition": "The learner has told Buddy about their morning, afternoon and evening using at least three separable verbs, or after about 8 exchanges."
+        }
+      },
+      "culture": {
+        "title": "Daily rhythm in German-speaking countries",
+        "note": "In Germany, Austria and Switzerland, many people start work or school fairly early, often between seven and nine in the morning. Many people eat a quick breakfast at home, for example bread with cheese or jam. The main hot meal is often at midday, but many adults who work have a lighter lunch in a short break and eat a warm meal in the evening. The evening meal is often simpler and is sometimes called Abendbrot, which refers to bread with cold food. Punctuality is valued: arriving on time for an appointment or a course is normal and polite. If you will be late, it is common to call or write a message. Shops often close in the evening, and in many places they are closed on Sundays, so people often go shopping on Saturday or during the week.",
+        "reflection_question": "What does your typical day look like, and which part is different from the daily rhythm described here?"
+      },
+      "mission": {
+        "title": "My day in separable verbs",
+        "task": "Describe your own day with at least five separable verbs. Write short German sentences that show what you do from morning to evening, and say them aloud once.",
+        "steps": [
+          "Think of five things you do every day, for example getting up, shopping, watching TV, calling someone or tidying up.",
+          "Write five sentences in German with a time, for example: Ich stehe um sieben Uhr auf. Put the prefix at the end of each sentence.",
+          "Read your sentences aloud and stress the prefix, for example AUF-stehen and EIN-kaufen.",
+          "Add one question for a friend, for example: Wann stehst du auf?"
+        ],
+        "report_prompt": "Report your five German sentences and your question for a friend. Tell us which separable verb was hardest to place correctly.",
+        "success_check": [
+          "I wrote five sentences with separable verbs.",
+          "I put the prefix at the end of the main clause.",
+          "I asked one question with Wann."
+        ],
+        "safety_note": null
+      },
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Lena wacht um halb acht auf.",
+            "distractors": [
+              "Lena aufwacht um halb acht.",
+              "Lena wacht auf um halb acht.",
+              "Lena auf wacht um halb acht."
+            ],
+            "accepted_answers": [],
+            "explanation": "The conjugated verb is in position 2 and the prefix goes to the end."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas holt Anna am Bahnhof ___.",
+            "answer": "ab",
+            "distractors": [
+              "an",
+              "auf",
+              "mit"
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb is abholen, so the prefix ab goes to the end."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "fängt / Die Arbeit / um acht Uhr / an",
+            "answer": "Die Arbeit fängt um acht Uhr an.",
+            "distractors": [],
+            "accepted_answers": [
+              "Um acht Uhr fängt die Arbeit an."
+            ],
+            "explanation": "The verb stays in position 2 and the prefix an goes to the end."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does einschlafen mean?",
+            "answer": "to fall asleep",
+            "distractors": [
+              "to wake up",
+              "to tidy up",
+              "to have breakfast"
+            ],
+            "accepted_answers": [],
+            "explanation": "Einschlafen means to fall asleep."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: Do you want to come along, Lena?",
+            "answer": "Kommst du mit, Lena?",
+            "distractors": [],
+            "accepted_answers": [
+              "Lena, kommst du mit?",
+              "Willst du mitkommen, Lena?",
+              "Lena, willst du mitkommen?",
+              "Möchtest du mitkommen, Lena?",
+              "Lena, möchtest du mitkommen?"
+            ],
+            "explanation": "Mitkommen is separable, so mit goes to the end."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Am Abend räume ich die Wohnung ___.",
+            "answer": "auf",
+            "distractors": [
+              "ein",
+              "fern",
+              "an"
+            ],
+            "accepted_answers": [],
+            "explanation": "Aufräumen means to tidy up, so the prefix auf goes to the end."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Jonas wacht um sechs Uhr auf. Er frühstückt um sieben Uhr. Um acht Uhr fängt seine Arbeit an. Am Abend kauft er im Supermarkt ein."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "When does Jonas have breakfast?",
+              "answer": "At seven o'clock",
+              "distractors": [
+                "At six o'clock",
+                "At eight o'clock",
+                "In the evening"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says he has breakfast at seven."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Jonas do in the evening?",
+              "answer": "He goes shopping.",
+              "distractors": [
+                "He starts work.",
+                "He wakes up.",
+                "He has breakfast."
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says he shops in the evening."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Lena",
+                "de": "Anna, kommst du heute Abend mit?",
+                "en": "Anna, are you coming along tonight?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Ja, gern. Wann fängt es an?",
+                "en": "Yes, gladly. When does it start?"
+              },
+              {
+                "speaker": "Lena",
+                "de": "Um neun Uhr. Ich hole dich um halb neun ab.",
+                "en": "At nine o'clock. I'll pick you up at half past eight."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "When does it start?",
+              "answer": "At nine o'clock",
+              "distractors": [
+                "At half past eight",
+                "At eight o'clock",
+                "At ten o'clock"
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena says it starts at nine."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Who picks up Anna?",
+              "answer": "Lena",
+              "distractors": [
+                "Jonas",
+                "Buddy",
+                "Nobody"
+              ],
+              "accepted_answers": [],
+              "explanation": "Lena says she will pick Anna up."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 to 3 sentences about your morning. Use at least two separable verbs, for example aufstehen, aufwachen or anfangen, and say the time.",
+          "min_words": 15,
+          "rubric": [
+            "Uses at least two separable verbs correctly",
+            "Puts the prefix at the end of the main clause",
+            "Verb is in position 2",
+            "Gives at least one time with Uhr"
+          ]
+        },
+        "speaking": {
+          "prompt": "Tell Buddy about your day: When do you wake up and when does your work or course start? Speak in two or three sentences.",
+          "target_hint": "Ich wache um ... Uhr auf. Mein Kurs fängt um ... Uhr an."
+        }
+      },
+      "closing": {
+        "covered": [
+          "You can now say that a verb has a separable prefix, such as aufstehen or einkaufen.",
+          "You can now put the prefix at the end of a main clause: Ich stehe um sieben Uhr auf.",
+          "You can now talk about your day with words such as Morgen, Abend, Uhr and Pause.",
+          "You can now ask and answer questions like Wann stehst du auf? and Kommst du mit?",
+          "You can now stress the prefix and say the sounds au, ei and äu."
+        ],
+        "review_tomorrow": "Review the separable verbs aufstehen, einkaufen, anrufen and anfangen, and say one sentence with each verb out loud."
+      }
+    },
+    "part_status": {
+      "goal": "ok",
+      "warmup": "fixed",
+      "grammar": "ok",
+      "exercises": "ok",
+      "vocabulary": "fixed",
+      "pronunciation": "ok",
+      "reading": "fixed",
+      "listening": "ok",
+      "writing": "ok",
+      "speaking": "ok",
+      "culture": "ok",
+      "mission": "ok",
+      "exam": "fixed",
+      "closing": "ok"
+    },
+    "cards": [
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "core",
+        "position": 1,
+        "en": "to get up",
+        "article": null,
+        "de": "aufstehen",
+        "plural": "ich stehe auf · du stehst auf · er steht auf",
+        "example": "Ich stehe um sieben Uhr auf.",
+        "example_en": "I get up at seven o'clock.",
+        "tip": "Separable: auf goes to the end."
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "core",
+        "position": 2,
+        "en": "to shop",
+        "article": null,
+        "de": "einkaufen",
+        "plural": "ich kaufe ein · du kaufst ein · er kauft ein",
+        "example": "Anna kauft heute ein.",
+        "example_en": "Anna is shopping today.",
+        "tip": "Separable: ein goes to the end."
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "core",
+        "position": 3,
+        "en": "to watch TV",
+        "article": null,
+        "de": "fernsehen",
+        "plural": "ich sehe fern · du siehst fern · er sieht fern",
+        "example": "Jonas sieht abends fern.",
+        "example_en": "Jonas watches TV in the evening.",
+        "tip": "sehen changes to sieht/siehst."
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "core",
+        "position": 4,
+        "en": "to call (phone)",
+        "article": null,
+        "de": "anrufen",
+        "plural": "ich rufe an · du rufst an · er ruft an",
+        "example": "Lena ruft ihre Mutter an.",
+        "example_en": "Lena calls her mother.",
+        "tip": null
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "core",
+        "position": 5,
+        "en": "to tidy up",
+        "article": null,
+        "de": "aufräumen",
+        "plural": "ich räume auf · du räumst auf · er räumt auf",
+        "example": "Ich räume am Abend die Wohnung auf.",
+        "example_en": "In the evening I tidy up the flat.",
+        "tip": null
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "core",
+        "position": 6,
+        "en": "to begin, to start",
+        "article": null,
+        "de": "anfangen",
+        "plural": "ich fange an · du fängst an · er fängt an",
+        "example": "Der Kurs fängt um neun Uhr an.",
+        "example_en": "The course starts at nine o'clock.",
+        "tip": "a changes to ä with du and er."
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "core",
+        "position": 7,
+        "en": "to have breakfast",
+        "article": null,
+        "de": "frühstücken",
+        "plural": "ich frühstücke · du frühstückst · er frühstückt",
+        "example": "Wir frühstücken um acht Uhr.",
+        "example_en": "We have breakfast at eight o'clock.",
+        "tip": "Not separable!"
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "core",
+        "position": 8,
+        "en": "morning",
+        "article": "der",
+        "de": "Morgen",
+        "plural": "die Morgen",
+        "example": "Am Morgen trinke ich Kaffee.",
+        "example_en": "In the morning I drink coffee.",
+        "tip": "am Morgen = in the morning"
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "core",
+        "position": 9,
+        "en": "evening",
+        "article": "der",
+        "de": "Abend",
+        "plural": "die Abende",
+        "example": "Am Abend sehe ich fern.",
+        "example_en": "In the evening I watch TV.",
+        "tip": "abends = in the evenings"
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "core",
+        "position": 10,
+        "en": "clock, o'clock",
+        "article": "die",
+        "de": "Uhr",
+        "plural": "die Uhren",
+        "example": "Es ist acht Uhr.",
+        "example_en": "It is eight o'clock.",
+        "tip": "um sieben Uhr = at seven o'clock"
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "core",
+        "position": 11,
+        "en": "day",
+        "article": "der",
+        "de": "Tag",
+        "plural": "die Tage",
+        "example": "Mein Tag beginnt früh.",
+        "example_en": "My day begins early.",
+        "tip": null
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "core",
+        "position": 12,
+        "en": "work",
+        "article": "die",
+        "de": "Arbeit",
+        "plural": "die Arbeiten",
+        "example": "Die Arbeit fängt um neun Uhr an.",
+        "example_en": "Work starts at nine o'clock.",
+        "tip": null
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 13,
+        "en": "to pick up",
+        "article": null,
+        "de": "abholen",
+        "plural": "ich hole ab · du holst ab · er holt ab",
+        "example": "Jonas holt Anna um drei Uhr ab.",
+        "example_en": "Jonas picks Anna up at three o'clock.",
+        "tip": null
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 14,
+        "en": "to come along",
+        "article": null,
+        "de": "mitkommen",
+        "plural": "ich komme mit · du kommst mit · er kommt mit",
+        "example": "Kommst du heute Abend mit?",
+        "example_en": "Are you coming along this evening?",
+        "tip": null
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 15,
+        "en": "to fall asleep",
+        "article": null,
+        "de": "einschlafen",
+        "plural": "ich schlafe ein · du schläfst ein · er schläft ein",
+        "example": "Ich schlafe um elf Uhr ein.",
+        "example_en": "I fall asleep at eleven o'clock.",
+        "tip": "a changes to ä with du and er."
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 16,
+        "en": "to wake up",
+        "article": null,
+        "de": "aufwachen",
+        "plural": "ich wache auf · du wachst auf · er wacht auf",
+        "example": "Ich wache früh auf.",
+        "example_en": "I wake up early.",
+        "tip": "aufwachen = wake up; aufstehen = get up"
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 17,
+        "en": "lunch",
+        "article": "das",
+        "de": "Mittagessen",
+        "plural": "die Mittagessen",
+        "example": "Das Mittagessen ist um zwölf Uhr.",
+        "example_en": "Lunch is at twelve o'clock.",
+        "tip": null
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "word",
+        "tier": "bonus",
+        "position": 18,
+        "en": "break",
+        "article": "die",
+        "de": "Pause",
+        "plural": "die Pausen",
+        "example": "Wir machen um zehn Uhr Pause.",
+        "example_en": "We take a break at ten o'clock.",
+        "tip": "Pause machen = to take a break"
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "say",
+        "tier": "core",
+        "position": 19,
+        "en": "What time do you get up?",
+        "article": null,
+        "de": "Wann stehst du auf?",
+        "plural": null,
+        "example": "Wann stehst du am Morgen auf?",
+        "example_en": "What time do you get up in the morning?",
+        "tip": "Use Wann stehen Sie auf? when formal."
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "say",
+        "tier": "core",
+        "position": 20,
+        "en": "I get up at seven.",
+        "article": null,
+        "de": "Ich stehe um sieben Uhr auf.",
+        "plural": null,
+        "example": "Ich stehe um sieben Uhr auf und frühstücke.",
+        "example_en": "I get up at seven and have breakfast.",
+        "tip": null
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "say",
+        "tier": "core",
+        "position": 21,
+        "en": "When does the course start?",
+        "article": null,
+        "de": "Wann fängt der Kurs an?",
+        "plural": null,
+        "example": "Wann fängt der Kurs heute an?",
+        "example_en": "When does the course start today?",
+        "tip": null
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "say",
+        "tier": "core",
+        "position": 22,
+        "en": "I'll call you later.",
+        "article": null,
+        "de": "Ich rufe dich später an.",
+        "plural": null,
+        "example": "Ich rufe dich am Abend an.",
+        "example_en": "I'll call you in the evening.",
+        "tip": "dich = you (informal)"
+      },
+      {
+        "session_code": "W1.5",
+        "kind": "say",
+        "tier": "core",
+        "position": 23,
+        "en": "Do you want to come along?",
+        "article": null,
+        "de": "Kommst du mit?",
+        "plural": null,
+        "example": "Ich kaufe ein. Kommst du mit?",
+        "example_en": "I'm going shopping. Do you want to come along?",
+        "tip": "The prefix mit is at the end."
+      }
+    ],
+    "questions": [
+      {
+        "session_code": "W1.5",
+        "part": "warmup",
+        "position": 1,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Anna ___ gern Fisch und Gemüse. (Anna likes to eat fish and vegetables.)",
+        "answer": "isst",
+        "distractors": [
+          "esse",
+          "esst",
+          "essen"
+        ],
+        "accepted_answers": [],
+        "explanation": "Essen changes to isst with er/sie/es, and Anna is one person."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "warmup",
+        "position": 2,
+        "skill": "articles",
+        "type": "multiple_choice",
+        "prompt": "Choose the correct sentence: You see a table in the living room.",
+        "answer": "Ich sehe einen Tisch im Wohnzimmer.",
+        "distractors": [
+          "Ich sehe ein Tisch im Wohnzimmer.",
+          "Ich sehe einer Tisch im Wohnzimmer.",
+          "Ich sehe eine Tisch im Wohnzimmer."
+        ],
+        "accepted_answers": [],
+        "explanation": "Der Tisch is masculine, so the object takes einen in the Akkusativ."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "warmup",
+        "position": 3,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Jonas ___ heute nicht kochen. Er hat keine Zeit. (Jonas cannot cook today.)",
+        "answer": "kann",
+        "distractors": [
+          "kannst",
+          "können",
+          "könnt"
+        ],
+        "accepted_answers": [],
+        "explanation": "Können is kann with er/sie/es, and the second verb stays in the infinitive at the end."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 1,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Ich stehe um sechs Uhr ___.",
+        "answer": "auf",
+        "distractors": [
+          "an",
+          "ein",
+          "fern"
+        ],
+        "accepted_answers": [],
+        "explanation": "The verb is aufstehen, so the prefix auf goes to the end."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 2,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Anna kauft heute im Supermarkt ___.",
+        "answer": "ein",
+        "distractors": [
+          "auf",
+          "an",
+          "ab"
+        ],
+        "accepted_answers": [],
+        "explanation": "The verb is einkaufen, so ein goes to the end."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 3,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Jonas ___ abends fern.",
+        "answer": "sieht",
+        "distractors": [
+          "sehe",
+          "siehst",
+          "sehen"
+        ],
+        "accepted_answers": [],
+        "explanation": "With er/sie the verb is sieht."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 4,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Wann ___ du auf?",
+        "answer": "stehst",
+        "distractors": [
+          "stehe",
+          "steht",
+          "stehen"
+        ],
+        "accepted_answers": [],
+        "explanation": "With du the ending is -st: du stehst."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 5,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Der Kurs fängt um neun Uhr ___.",
+        "answer": "an",
+        "distractors": [
+          "auf",
+          "ein",
+          "ab"
+        ],
+        "accepted_answers": [],
+        "explanation": "The verb is anfangen, so an goes to the end."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 6,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Lena ___ ihre Freundin an.",
+        "answer": "ruft",
+        "distractors": [
+          "rufe",
+          "rufst",
+          "rufen"
+        ],
+        "accepted_answers": [],
+        "explanation": "With sie (she) the ending is -t: sie ruft an."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 7,
+        "skill": "grammar",
+        "type": "multiple_choice",
+        "prompt": "Which sentence is correct?",
+        "answer": "Ich räume die Wohnung auf.",
+        "distractors": [
+          "Ich aufräume die Wohnung.",
+          "Ich räume auf die Wohnung.",
+          "Ich räumen die Wohnung auf."
+        ],
+        "accepted_answers": [],
+        "explanation": "The stem is in position 2 and the prefix auf is at the end."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 8,
+        "skill": "word_order",
+        "type": "multiple_choice",
+        "prompt": "Where does the separable prefix go in a main clause?",
+        "answer": "At the end of the sentence",
+        "distractors": [
+          "Directly after the subject",
+          "At the beginning of the sentence",
+          "Attached to the verb"
+        ],
+        "accepted_answers": [],
+        "explanation": "The prefix always goes to the end of a main clause."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 9,
+        "skill": "vocabulary",
+        "type": "multiple_choice",
+        "prompt": "What does fernsehen mean?",
+        "answer": "to watch TV",
+        "distractors": [
+          "to call",
+          "to shop",
+          "to get up"
+        ],
+        "accepted_answers": [],
+        "explanation": "Fernsehen means to watch TV."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 10,
+        "skill": "grammar",
+        "type": "multiple_choice",
+        "prompt": "Which verb is NOT separable?",
+        "answer": "frühstücken",
+        "distractors": [
+          "aufstehen",
+          "einkaufen",
+          "anrufen"
+        ],
+        "accepted_answers": [],
+        "explanation": "Frühstücken has no separable prefix."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 11,
+        "skill": "word_order",
+        "type": "ordering",
+        "prompt": "auf / Ich / sieben / um / stehe / Uhr",
+        "answer": "Ich stehe um sieben Uhr auf.",
+        "distractors": [],
+        "accepted_answers": [
+          "Um sieben Uhr stehe ich auf."
+        ],
+        "explanation": "The stem stands in position 2 and auf at the end."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 12,
+        "skill": "word_order",
+        "type": "ordering",
+        "prompt": "kauft / Jonas / ein / heute",
+        "answer": "Jonas kauft heute ein.",
+        "distractors": [],
+        "accepted_answers": [
+          "Heute kauft Jonas ein."
+        ],
+        "explanation": "The verb is in position 2 and ein at the end."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 13,
+        "skill": "word_order",
+        "type": "ordering",
+        "prompt": "Wann / stehst / du / auf",
+        "answer": "Wann stehst du auf?",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "After the question word comes the verb, and auf goes last."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 14,
+        "skill": "translation",
+        "type": "typing",
+        "prompt": "I get up at six o'clock.",
+        "answer": "Ich stehe um sechs Uhr auf.",
+        "distractors": [],
+        "accepted_answers": [
+          "Um sechs Uhr stehe ich auf."
+        ],
+        "explanation": "Use stehe ... auf with the time in between."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 15,
+        "skill": "translation",
+        "type": "typing",
+        "prompt": "Anna calls Lena.",
+        "answer": "Anna ruft Lena an.",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "Anrufen separates: ruft ... an."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 16,
+        "skill": "translation",
+        "type": "typing",
+        "prompt": "I watch TV in the evening.",
+        "answer": "Ich sehe abends fern.",
+        "distractors": [],
+        "accepted_answers": [
+          "Abends sehe ich fern.",
+          "Ich sehe am Abend fern.",
+          "Am Abend sehe ich fern."
+        ],
+        "explanation": "Fernsehen separates: sehe ... fern."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 17,
+        "skill": "dictation",
+        "type": "dictation",
+        "prompt": "Listen and write the sentence.",
+        "answer": "Ich stehe früh auf.",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "Stem stehe in position 2, prefix auf at the end."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 18,
+        "skill": "dictation",
+        "type": "dictation",
+        "prompt": "Listen and write the sentence.",
+        "answer": "Wir kaufen heute ein.",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "Einkaufen splits into kaufen ... ein."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exercises",
+        "position": 19,
+        "skill": "dictation",
+        "type": "dictation",
+        "prompt": "Listen and write the sentence.",
+        "answer": "Der Kurs fängt um neun Uhr an.",
+        "distractors": [],
+        "accepted_answers": [],
+        "explanation": "Anfangen splits into fängt ... an."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "reading",
+        "position": 1,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "When does Anna get up?",
+        "answer": "At half past six",
+        "distractors": [
+          "At six o'clock",
+          "At eight o'clock",
+          "At ten o'clock"
+        ],
+        "accepted_answers": [],
+        "explanation": "The text says she gets up at half past six (halb sieben)."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "reading",
+        "position": 2,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "When does Anna's work start?",
+        "answer": "At eight o'clock",
+        "distractors": [
+          "At six o'clock",
+          "At half past six",
+          "At ten o'clock"
+        ],
+        "accepted_answers": [],
+        "explanation": "Her work starts at eight: Um acht Uhr fängt ihre Arbeit an."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "reading",
+        "position": 3,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "What does Anna do in the evening?",
+        "answer": "She goes shopping",
+        "distractors": [
+          "She has breakfast",
+          "She starts work",
+          "She makes a phone call"
+        ],
+        "accepted_answers": [],
+        "explanation": "The text says Am Abend kauft sie ein."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "reading",
+        "position": 4,
+        "skill": "reading",
+        "type": "typing",
+        "prompt": "Wann schläft Anna ein? Answer in German with a short phrase (um ... Uhr).",
+        "answer": "Um zehn Uhr.",
+        "distractors": [],
+        "accepted_answers": [
+          "Sie schläft um zehn Uhr ein.",
+          "Anna schläft um zehn Uhr ein.",
+          "Um 10 Uhr.",
+          "Sie schläft um 10 Uhr ein.",
+          "Anna schläft um 10 Uhr ein."
+        ],
+        "explanation": "The last sentence says she falls asleep at ten o'clock."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "reading",
+        "position": 5,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "Was macht Anna mittags? Choose the correct answer.",
+        "answer": "Sie macht eine Pause und isst das Mittagessen.",
+        "distractors": [
+          "Sie kauft ein.",
+          "Sie frühstückt.",
+          "Sie sieht fern."
+        ],
+        "accepted_answers": [],
+        "explanation": "Mittags = at noon. In the evening she shops and watches TV; breakfast is in the morning."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "listening",
+        "position": 1,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "When does Anna get up tomorrow?",
+        "answer": "At seven o'clock",
+        "distractors": [
+          "At six o'clock",
+          "At eight o'clock",
+          "At nine o'clock"
+        ],
+        "accepted_answers": [],
+        "explanation": "Anna says: Ich stehe um sieben Uhr auf."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "listening",
+        "position": 2,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "What does Jonas want to do tomorrow?",
+        "answer": "Go shopping",
+        "distractors": [
+          "Watch TV",
+          "Tidy up",
+          "Have breakfast"
+        ],
+        "accepted_answers": [],
+        "explanation": "Jonas says: Ich kaufe morgen ein."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "listening",
+        "position": 3,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "When do they start?",
+        "answer": "At nine o'clock",
+        "distractors": [
+          "At seven o'clock",
+          "At eight o'clock",
+          "At ten o'clock"
+        ],
+        "accepted_answers": [],
+        "explanation": "Jonas says they start at nine."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "listening",
+        "position": 4,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "Who picks up Anna?",
+        "answer": "Jonas",
+        "distractors": [
+          "Lena",
+          "Nobody",
+          "Anna's mother"
+        ],
+        "accepted_answers": [],
+        "explanation": "Jonas says: Ich hole dich ab."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "listening",
+        "position": 5,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "Who will Jonas call?",
+        "answer": "Lena",
+        "distractors": [
+          "Anna",
+          "Buddy",
+          "His teacher"
+        ],
+        "accepted_answers": [],
+        "explanation": "Jonas says: Ich rufe Lena an."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exam",
+        "position": 1,
+        "skill": "grammar",
+        "type": "multiple_choice",
+        "prompt": "Which sentence is correct?",
+        "answer": "Lena wacht um halb acht auf.",
+        "distractors": [
+          "Lena aufwacht um halb acht.",
+          "Lena wacht auf um halb acht.",
+          "Lena auf wacht um halb acht."
+        ],
+        "accepted_answers": [],
+        "explanation": "The conjugated verb is in position 2 and the prefix goes to the end."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exam",
+        "position": 2,
+        "skill": "grammar",
+        "type": "gap_fill",
+        "prompt": "Jonas holt Anna am Bahnhof ___.",
+        "answer": "ab",
+        "distractors": [
+          "an",
+          "auf",
+          "mit"
+        ],
+        "accepted_answers": [],
+        "explanation": "The verb is abholen, so the prefix ab goes to the end."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exam",
+        "position": 3,
+        "skill": "word_order",
+        "type": "ordering",
+        "prompt": "fängt / Die Arbeit / um acht Uhr / an",
+        "answer": "Die Arbeit fängt um acht Uhr an.",
+        "distractors": [],
+        "accepted_answers": [
+          "Um acht Uhr fängt die Arbeit an."
+        ],
+        "explanation": "The verb stays in position 2 and the prefix an goes to the end."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exam",
+        "position": 4,
+        "skill": "vocabulary",
+        "type": "multiple_choice",
+        "prompt": "What does einschlafen mean?",
+        "answer": "to fall asleep",
+        "distractors": [
+          "to wake up",
+          "to tidy up",
+          "to have breakfast"
+        ],
+        "accepted_answers": [],
+        "explanation": "Einschlafen means to fall asleep."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exam",
+        "position": 5,
+        "skill": "translation",
+        "type": "typing",
+        "prompt": "Translate: Do you want to come along, Lena?",
+        "answer": "Kommst du mit, Lena?",
+        "distractors": [],
+        "accepted_answers": [
+          "Lena, kommst du mit?",
+          "Willst du mitkommen, Lena?",
+          "Lena, willst du mitkommen?",
+          "Möchtest du mitkommen, Lena?",
+          "Lena, möchtest du mitkommen?"
+        ],
+        "explanation": "Mitkommen is separable, so mit goes to the end."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exam",
+        "position": 6,
+        "skill": "vocabulary",
+        "type": "gap_fill",
+        "prompt": "Am Abend räume ich die Wohnung ___.",
+        "answer": "auf",
+        "distractors": [
+          "ein",
+          "fern",
+          "an"
+        ],
+        "accepted_answers": [],
+        "explanation": "Aufräumen means to tidy up, so the prefix auf goes to the end."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exam",
+        "position": 7,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "When does Jonas have breakfast?",
+        "answer": "At seven o'clock",
+        "distractors": [
+          "At six o'clock",
+          "At eight o'clock",
+          "In the evening"
+        ],
+        "accepted_answers": [],
+        "explanation": "The text says he has breakfast at seven."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exam",
+        "position": 8,
+        "skill": "reading",
+        "type": "multiple_choice",
+        "prompt": "What does Jonas do in the evening?",
+        "answer": "He goes shopping.",
+        "distractors": [
+          "He starts work.",
+          "He wakes up.",
+          "He has breakfast."
+        ],
+        "accepted_answers": [],
+        "explanation": "The text says he shops in the evening."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exam",
+        "position": 9,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "When does it start?",
+        "answer": "At nine o'clock",
+        "distractors": [
+          "At half past eight",
+          "At eight o'clock",
+          "At ten o'clock"
+        ],
+        "accepted_answers": [],
+        "explanation": "Lena says it starts at nine."
+      },
+      {
+        "session_code": "W1.5",
+        "part": "exam",
+        "position": 10,
+        "skill": "listening",
+        "type": "multiple_choice",
+        "prompt": "Who picks up Anna?",
+        "answer": "Lena",
+        "distractors": [
+          "Jonas",
+          "Buddy",
+          "Nobody"
+        ],
+        "accepted_answers": [],
+        "explanation": "Lena says she will pick Anna up."
+      }
+    ]
+  },
   "W2.1": {
     "code": "W2.1",
     "parts": {

@@ -18,7 +18,7 @@ vi.mock("next/navigation", () => ({
   },
 }));
 
-import { getAuthState, getClaimsState, requireAal2, requireAal2FromClaims, withAuth } from "./guard";
+import { getAuthState, getClaimsState, requireAal2, requireAal2FromClaims, requireSession, withAuth } from "./guard";
 
 const signedIn = (aal: string) => {
   getUser.mockResolvedValue({ data: { user: { id: "u1", email: "a@b.de" } }, error: null });
@@ -46,6 +46,19 @@ describe("getAuthState / requireAal2", () => {
     await expect(requireAal2()).rejects.toThrow("REDIRECT:/mfa");
     signedIn("aal2");
     await expect(requireAal2()).resolves.toMatchObject({ userId: "u1" });
+  });
+});
+
+describe("a session the auth server no longer accepts but whose token still looks valid (deleted user, revoked session)", () => {
+  const staleToken = () => getClaims.mockResolvedValue({ data: { claims: { aal: "aal2", sub: "gone", email: "a@b.de" } }, error: null });
+  it("requireAal2 and requireSession go through /auth/stale (which clears the cookies), not straight to /login", async () => {
+    staleToken();
+    await expect(requireAal2()).rejects.toThrow("REDIRECT:/auth/stale");
+    await expect(requireSession()).rejects.toThrow("REDIRECT:/auth/stale");
+  });
+  it("without any token they still go to /login", async () => {
+    await expect(requireAal2()).rejects.toThrow("REDIRECT:/login");
+    await expect(requireSession()).rejects.toThrow("REDIRECT:/login");
   });
 });
 

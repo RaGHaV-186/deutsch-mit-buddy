@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 import type { ZodType } from "zod";
 import { limitError } from "@/lib/rate-limit";
+import { STALE_SESSION_PATH } from "./stale-session";
 import { createClient } from "@/lib/supabase/server";
 
 export type AuthState =
@@ -38,6 +39,15 @@ export const getClaimsState = cache(async (): Promise<AuthState> => {
   return claims.aal === "aal2" ? { status: "aal2", ...base } : { status: "aal1", ...base };
 });
 
+/**
+ * The auth server does not accept the session. If the token still looks valid (user deleted, session revoked) the cookies must be
+ * cleared first, or /login would send the browser straight back into the app: /auth/stale does that and lands on /login once.
+ */
+async function leaveUnusableSession(): Promise<never> {
+  const claimed = await getClaimsState();
+  redirect(claimed.status === "anonymous" ? "/login" : STALE_SESSION_PATH);
+}
+
 /** For pages that only read: signed in AND two-factor verified (from the token's claims), else redirect. */
 export async function requireAal2FromClaims() {
   const state = await getClaimsState();
@@ -49,7 +59,7 @@ export async function requireAal2FromClaims() {
 /** For server actions and anything that changes data: signed in AND two-factor verified, checked with the auth server, else redirect. */
 export async function requireAal2() {
   const state = await getAuthState();
-  if (state.status === "anonymous") redirect("/login");
+  if (state.status === "anonymous") return leaveUnusableSession();
   if (state.status === "aal1") redirect("/mfa");
   return state;
 }
@@ -57,7 +67,7 @@ export async function requireAal2() {
 /** For pages and actions that need a session but not yet 2FA (the MFA screens). */
 export async function requireSession() {
   const state = await getAuthState();
-  if (state.status === "anonymous") redirect("/login");
+  if (state.status === "anonymous") return leaveUnusableSession();
   return state;
 }
 

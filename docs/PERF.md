@@ -126,3 +126,5 @@ Server TTFB of a full page load by per-call latency (median of 3):
 | 300 ms before → after | 1577 → 649 | 1904 → 640 | 1574 → 327 | 1551 → 325 |
 
 Phone tab taps (4× CPU, Fast 4G, +100 ms per call), tap → painted: Home→Learn 713–721 → 330–426 ms; Learn→Cards 301–313 → 297–313; Cards→Home 597–626 → 330. (Client-only timings such as flip and grade doubled during that run because the Mac was busy with other apps, flip is unchanged code; re-measured in the final run.) The tab tap still shows nothing until the response arrives: PR C.
+
+Also in PR B: known-issue 2 (stale login redirect loop) is fixed through `/auth/stale` (see `docs/known-issues.md`). Rate limits after PR B, pinned by tests: per IP on sign-up (10/h), log-in (20/10 min), Google sign-in (20/10 min), password-reset request (5/h), waitlist (5/h), Google callback and email links (30/10 min each) and the new `/auth/stale` (30/10 min); **per user** (never per IP) on the two-factor actions (10/10 min); per user on the API routes (one call). Not limited by us: setting a new password after the reset link (`resetPasswordAction`; it needs the recovery session, Supabase limits it).

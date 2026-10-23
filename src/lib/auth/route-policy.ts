@@ -20,6 +20,10 @@ const PUBLIC_EXACT = new Set([
   "/impressum",
   "/datenschutz",
   "/terms",
+  // TEMPORARY (iPhone hydration check, perf slice): delete with src/app/hydration-check.
+  "/hydration-check",
+  "/hydration-check/loading-file",
+  "/hydration-check/suspense",
   "/api/health",
 ]);
 // Signed-out visitors only; signed-in (AAL2) members are sent to the app.

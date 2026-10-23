@@ -1,7 +1,7 @@
 # Release plan: slice 3 (lesson content, card unlock, Learn tab) → production
 
 **Status: written, NOT run. Nothing in this file has touched the hosted database or Vercel. Each step waits for Raghav's explicit go.**
-**Progress log:** (a) backup done 23 Oct 2026 (schema 20 KB with 9 tables and 12 policies, data 113 KB, auth 15 KB; profiles and cards present; a3 query results saved). The project is on the **Supabase Free plan, which has no automatic backups**, so this manual dump is the backup for the release. (b) re-checked 23 Oct (see b). Next: c.
+**Progress log:** (c) `db push` done 23 Oct (9 migrations, counts unchanged); (d) seed done (131 sessions); next: e. (a) backup done 23 Oct 2026 (schema 20 KB with 9 tables and 12 policies, data 113 KB, auth 15 KB; profiles and cards present; a3 query results saved). The project is on the **Supabase Free plan, which has no automatic backups**, so this manual dump is the backup for the release. (b) re-checked 23 Oct (see b). Next: c.
 
 Branch `slice-3-curriculum`, PR #12. Run the steps in this order, one at a time, and stop at the first surprise (each step says what "surprise" means).
 
@@ -76,14 +76,40 @@ Production code keeps running during and after this step (that is what b proves)
 ```bash
 node --env-file=.env.local --env-file=.env.hosted --no-warnings scripts/seed-curriculum.mts --yes
 ```
-Expect `Database: <host> (REMOTE)` and `Upserted 131 sessions (90 lessons)`. Safe to repeat.
+Expect `Database: <host> (REMOTE)` and `Upserted 131 sessions (90 lessons). The table now holds 131.` Safe to repeat. **Done 23 Oct 2026: 131 sessions on the hosted database.**
 
-## e) Publish `z1-b1`
+Verify (each query runs on its own). A lesson's position (`seq`) is its index in the whole plan, which also holds review and test days (R1, T1, Saturdays, …), so it is not the lesson number: **Z9 is seq 10 (Day 11)**, and Z7 is seq 8. The code always looks positions up by lesson code (`indexOfCode`, Raghav's pointer comes from `SEED_PROFILE.next_code`), never from a number; the only literal is `seq = 0`, the very first session (Z1), which has no warm-up questions.
+```sql
+select count(*) from public.curriculum_sessions;                       -- 131
+select count(*) from public.curriculum_sessions where kind = 'lesson'; -- 90
+select seq from public.curriculum_sessions where code = 'Z1';          -- 0
+select seq from public.curriculum_sessions where code = 'Z9';          -- 10
+```
+
+## e) Publish the 24 lessons
+Publishes exactly the lessons in `data/generated/z1-b1/publish-payloads.json` (built from the review file; only lessons without an open item are in it). Run it from the repo folder in zsh:
 ```bash
-node --env-file=.env.local --env-file=.env.hosted --no-warnings scripts/content.mts build --run z1-b1
+cd ~/code/deutsch-mit-buddy
 node --env-file=.env.local --env-file=.env.hosted --no-warnings scripts/content.mts publish --run z1-b1 --yes
 ```
-Expect one `Published <code>: 23 cards, 42 questions, 14 parts.` line per lesson (Z1 has 25 cards and 39 questions) and no refusal. In the SQL editor: `select count(*) from public.lesson_publications;` = the number of lessons you decided to publish. Nobody sees the lessons yet: the current app has no screen for them. Publishing again later (after a correction) is safe: it updates in place.
+Expect `Database: <host> (REMOTE)` and then one line per lesson, 24 in all, in this order (Z9 comes last): `Published Z1: 25 cards, 39 questions, 14 parts.` for Z1 and `Published <code>: 23 cards, 42 questions, 14 parts.` for each of the other 23 (Z2 to Z8, W1.1 to W4.4 as listed above, then Z9). A line like `<code> was refused by the database: …` means that lesson was NOT published (nothing of it was written); stop and paste it. Nobody sees the lessons yet: the current app has no screen for them. Publishing again later (after a correction, or to add the 6 held-back lessons) is safe: it updates in place.
+
+Verify (each runs on its own):
+```sql
+select count(*) from public.lesson_publications;                                    -- 24
+select count(*) from public.lesson_parts;                                           -- 336 (24 x 14)
+select count(*) from public.lesson_parts where review_status not in ('ok', 'fixed'); -- 0
+select count(*) from public.card_templates;                                         -- 554
+select count(*) from public.card_templates where kind = 'word';                     -- 432
+select count(*) from public.card_templates where kind = 'say';                      -- 122
+select count(*) from public.question_bank;                                          -- 1005
+select string_agg(p.session_code, ', ' order by s.seq)
+  from public.lesson_publications p join public.curriculum_sessions s on s.code = p.session_code;
+  -- Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z9, W1.1, W1.2, W1.3, W2.1, W2.2, W2.3, W2.4, W3.1, W3.3, W3.4, W3.5, W4.1, W4.2, W4.3, W4.4
+select count(*) from public.cards;                                                  -- still 202 (publishing never creates cards)
+select count(*) from public.profiles;                                               -- still 1
+```
+Not published yet, on purpose: Z10, W1.4, W1.5, W2.5, W3.2, W4.5 (their re-checks are still running).
 
 ## f) Merge PR #12 and deploy
 1. CI green, then merge (squash or merge commit, as usual); Vercel deploys `main`.

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { cx } from "./cx";
-import { TAB_BAR_CLEARANCE } from "./FloatingTabBar";
+import { TAB_BAR_CLEARANCE } from "./tab-bar-clearance";
 
 /**
  * The page's `<main>` landmark. Phone: a column of at most 480px, centred; 768 to 1023px: 560px. Desktop (1024px and up):

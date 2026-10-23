@@ -507,5 +507,11 @@
       "tandemNote": "You can practise this scene with Buddy once Tandem opens.",
       "covered": "You can now:"
     }
+  },
+  "Offline": {
+    "banner": "You're offline. Your cards still work, and your answers sync when you're back.",
+    "openApp": "Open the app",
+    "noDeck": "Open Deutsch mit Buddy once with a connection, and your cards will be ready here next time.",
+    "loading": "Loading your cards…"
   }
 }

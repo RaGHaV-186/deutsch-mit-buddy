@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { AppChromeLive } from "@/components/AppChromeLive";
+import { NavPending } from "@/components/NavPending";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import { requireAal2FromClaims } from "@/lib/auth/guard";
 import { STALE_SESSION_PATH } from "@/lib/auth/stale-session";
@@ -20,6 +21,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   return (
     <>
       <ServiceWorkerRegister />
+      <NavPending />
       <AppChromeLive initial={initial} userId={userId}>
         <div className="flex flex-1 flex-col">{children}</div>
       </AppChromeLive>

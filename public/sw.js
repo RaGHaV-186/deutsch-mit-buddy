@@ -1,14 +1,19 @@
 /* Deutsch mit Buddy service worker.
  *
- * Keeps the Home and Cards screens (and the files they need) on the phone so Cards opens without a connection.
- * Card data itself lives in IndexedDB, not here. This worker never caches the API, login pages or anything else.
- * Bump VERSION to drop every cached file on the next visit. */
+ * Two jobs, nothing else:
+ *  1. Static files (/_next/static, /buddy) are kept on the phone and served cache-first: they never change under the same name.
+ *  2. The offline shell (/offline) is a public page with no account data. When an app screen cannot be reached, the worker sends the
+ *     browser there, and it opens the Cards on this device from IndexedDB (card data lives there, not here).
+ * It never stores an app screen (the HTML of /home, /cards ... holds the learner's data), the API, login pages or any user data.
+ * Bump VERSION to drop every cached file on the next visit (older versions saved app screens; that cache is deleted on activate). */
 
-const VERSION = "v2";
+const VERSION = "v3";
 const STATIC = "buddy-static-" + VERSION;
-const PAGES = "buddy-pages-" + VERSION;
-const APP_PAGES = ["/home", "/cards"];
-const NETWORK_TIMEOUT_MS = 4000;
+const SHELL = "buddy-shell-" + VERSION;
+const SHELL_PATH = "/offline";
+const APP_SCREENS = ["/home", "/learn", "/cards", "/me", "/play"];
+/** An app screen that has not answered after this long counts as unreachable (a bad connection is not better than none). */
+const NETWORK_TIMEOUT_MS = 6000;
 const MAX_STATIC_ENTRIES = 400;
 const STATIC_URL = /\/_next\/static\/[^"'\\\s)<>]+/g;
 
@@ -20,9 +25,7 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
       const names = await caches.keys();
-      await Promise.all(
-        names.filter((n) => n.startsWith("buddy-") && n !== STATIC && n !== PAGES).map((n) => caches.delete(n)),
-      );
+      await Promise.all(names.filter((n) => n.startsWith("buddy-") && n !== STATIC && n !== SHELL).map((n) => caches.delete(n)));
       await self.clients.claim();
     })(),
   );
@@ -35,6 +38,10 @@ function cacheable(res) {
 
 function isStaticAsset(pathname) {
   return pathname.startsWith("/_next/static/") || pathname.startsWith("/buddy/");
+}
+
+function isAppScreen(pathname) {
+  return APP_SCREENS.includes(pathname) || pathname.startsWith("/learn/");
 }
 
 function offlineResponse() {
@@ -65,21 +72,34 @@ async function trim(cache) {
   await Promise.all(keys.slice(0, keys.length - MAX_STATIC_ENTRIES + 100).map((k) => cache.delete(k)));
 }
 
-function timeout(ms) {
-  return new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), ms));
+/** An app screen always comes from the network (never from a saved copy); if the network does not answer, the offline shell takes over. */
+async function screenOrShell(request) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), NETWORK_TIMEOUT_MS);
+  try {
+    return await fetch(request, { signal: controller.signal });
+  } catch {
+    return Response.redirect(new URL(SHELL_PATH, self.location.origin).href, 302);
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
-/** Fresh page when the network answers quickly; the saved copy when it is down or slow; a short notice if neither. */
-async function networkFirst(request, key) {
-  const cache = await caches.open(PAGES);
-  const saved = await cache.match(key);
-  const network = fetch(request).then((res) => {
-    if (cacheable(res)) cache.put(key, res.clone());
-    return res;
-  });
-  if (!saved) return network.catch(() => offlineResponse());
-  network.catch(() => {});
-  return Promise.race([network, timeout(NETWORK_TIMEOUT_MS)]).catch(() => saved);
+/** The shell is served from the phone at once and refreshed in the background, so it follows new deployments one visit later. */
+async function shell(event) {
+  const cache = await caches.open(SHELL);
+  const saved = await cache.match(SHELL_PATH);
+  const refresh = refreshShell([]);
+  if (saved) {
+    event.waitUntil(refresh);
+    return saved;
+  }
+  try {
+    await refresh;
+    return (await cache.match(SHELL_PATH)) || offlineResponse();
+  } catch {
+    return offlineResponse();
+  }
 }
 
 self.addEventListener("fetch", (event) => {
@@ -90,18 +110,20 @@ self.addEventListener("fetch", (event) => {
 
   if (isStaticAsset(url.pathname)) {
     event.respondWith(cacheFirst(request));
-  } else if (request.mode === "navigate" && APP_PAGES.includes(url.pathname)) {
-    event.respondWith(networkFirst(request, url.pathname));
+  } else if (request.mode === "navigate" && url.pathname === SHELL_PATH) {
+    event.respondWith(shell(event));
+  } else if (request.mode === "navigate" && isAppScreen(url.pathname)) {
+    event.respondWith(screenOrShell(request));
   }
   // Everything else (API calls, login, other pages, app-router data requests) goes straight to the network.
 });
 
 /**
- * The page asks us to save the app pages and the files they reference, because the very first visit happened
- * before this worker was in control and so was never cached.
+ * Saves the offline shell and the files it references (its own scripts and styles, plus the files the page reports), because the very
+ * first visit happened before this worker was in control and so was never cached.
  */
-async function warm(pages, assets) {
-  const pageCache = await caches.open(PAGES);
+async function refreshShell(assets) {
+  const shellCache = await caches.open(SHELL);
   const staticCache = await caches.open(STATIC);
   const wanted = new Set();
 
@@ -114,23 +136,17 @@ async function warm(pages, assets) {
     }
   }
 
-  for (const path of pages) {
-    if (!APP_PAGES.includes(path)) continue;
-    try {
-      const res = await fetch(path, { credentials: "same-origin", headers: { Accept: "text/html" } });
-      if (!cacheable(res)) continue;
-      await pageCache.put(path, res.clone());
-      for (const match of (await res.text()).match(STATIC_URL) || []) wanted.add(match);
-    } catch {
-      /* offline: keep what we have */
-    }
+  const res = await fetch(SHELL_PATH, { credentials: "same-origin", headers: { Accept: "text/html" } });
+  if (cacheable(res)) {
+    await shellCache.put(SHELL_PATH, res.clone());
+    for (const match of (await res.text()).match(STATIC_URL) || []) wanted.add(match);
   }
 
   for (const asset of wanted) {
     try {
       if (await staticCache.match(asset)) continue;
-      const res = await fetch(asset, { credentials: "same-origin" });
-      if (cacheable(res)) await staticCache.put(asset, res);
+      const file = await fetch(asset, { credentials: "same-origin" });
+      if (cacheable(file)) await staticCache.put(asset, file);
     } catch {
       /* the next visit will try again */
     }
@@ -140,7 +156,7 @@ async function warm(pages, assets) {
 
 self.addEventListener("message", (event) => {
   const data = event.data;
-  if (data && data.type === "warm" && Array.isArray(data.pages)) {
-    event.waitUntil(warm(data.pages, Array.isArray(data.assets) ? data.assets : []));
+  if (data && data.type === "warm") {
+    event.waitUntil(refreshShell(Array.isArray(data.assets) ? data.assets : []).catch(() => {}));
   }
 });

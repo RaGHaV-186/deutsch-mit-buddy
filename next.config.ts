@@ -6,6 +6,11 @@ import { staticSecurityHeaders } from "./src/lib/security-headers";
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Dynamic screens are not cached on the client (dynamic: 0), so they always show current data. A full prefetch of a tab (the tab bar and
+    // sidebar ask for one) is kept only briefly, long enough for the tap that follows; the default 5 minutes would show stale due counts.
+    staleTimes: { dynamic: 0, static: 20 },
+  },
   async headers() {
     return [
       { source: "/:path*", headers: staticSecurityHeaders },

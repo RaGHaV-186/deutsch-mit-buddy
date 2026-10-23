@@ -20,6 +20,8 @@ const PUBLIC_EXACT = new Set([
   "/impressum",
   "/datenschutz",
   "/terms",
+  // The offline shell (public, no account data): the service worker sends the browser here when an app screen cannot be reached.
+  "/offline",
   "/api/health",
 ]);
 // Signed-out visitors only; signed-in (AAL2) members are sent to the app.

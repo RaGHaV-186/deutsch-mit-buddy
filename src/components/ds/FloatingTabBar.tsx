@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { cx } from "./cx";
 import { BookIcon, CardsIcon, GameIcon, HomeIcon, UserIcon } from "./icons";
+import { usePendingTab } from "./use-pending-tab";
+
+export { TAB_BAR_CLEARANCE } from "./tab-bar-clearance";
 
 export type TabId = "home" | "learn" | "cards" | "play" | "me";
 
@@ -25,6 +30,7 @@ interface Props {
 /** Detached pill with the five tabs. The active tab shows its label on a belly-pink pill; the others are icon-only. */
 export function FloatingTabBar({ active, badges = {}, position = "fixed", className }: Props) {
   const t = useTranslations("Ds.nav");
+  const { shown, pending, onTap } = usePendingTab(active);
   return (
     <div
       className={cx(
@@ -39,12 +45,16 @@ export function FloatingTabBar({ active, badges = {}, position = "fixed", classN
         className="pointer-events-auto flex h-[68px] items-center justify-between rounded-tabbar bg-surface px-2 shadow-cushion max-[359px]:px-1.5"
       >
         {TABS.map(({ id, href, Icon }) => {
-          const isActive = id === active;
+          const isActive = id === shown;
           return (
             <Link
               key={id}
               href={href}
-              aria-current={isActive ? "page" : undefined}
+              // Full prefetch of the other screens, so a tap is served from the client cache (a few seconds, see staleTimes in next.config.ts).
+              prefetch={id !== active}
+              onClick={() => onTap(id)}
+              aria-current={id === active ? "page" : undefined}
+              aria-busy={pending === id || undefined}
               aria-label={isActive ? undefined : t(id)}
               className={cx(
                 "ds-press ds-focus relative flex h-[52px] items-center justify-center rounded-full text-[14px] font-bold",
@@ -67,6 +77,3 @@ export function FloatingTabBar({ active, badges = {}, position = "fixed", classN
     </div>
   );
 }
-
-/** Bottom padding that keeps content clear of the floating tab bar. */
-export const TAB_BAR_CLEARANCE = "calc(68px + max(28px, env(safe-area-inset-bottom) + 12px) + 16px)";

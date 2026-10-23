@@ -6,7 +6,7 @@ const aal1: SessionClaims = { sub: "u1", aal: "aal1" };
 const aal2: SessionClaims = { sub: "u1", aal: "aal2" };
 
 describe("decideRoute", () => {
-  it.each(["/", "/login", "/signup", "/forgot-password", "/waitlist", "/check-email", "/impressum", "/datenschutz", "/terms", "/api/health", "/auth/callback", "/auth/confirm"])(
+  it.each(["/", "/login", "/signup", "/forgot-password", "/waitlist", "/check-email", "/impressum", "/datenschutz", "/terms", "/offline", "/api/health", "/auth/callback", "/auth/confirm"])(
     "lets everyone open public %s",
     (path) => {
       for (const claims of [none, aal1]) expect(decideRoute(path, claims)).toEqual({ type: "next" });

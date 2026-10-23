@@ -7,7 +7,7 @@ const source = readFileSync("public/sw.js", "utf8");
 const ORIGIN = "https://buddy.test";
 // Cache names carry the worker's VERSION; read it so bumping the version does not break these tests.
 const VERSION = /const VERSION = "([^"]+)"/.exec(source)![1];
-const PAGES = `buddy-pages-${VERSION}`;
+const SHELL = `buddy-shell-${VERSION}`;
 const STATIC = `buddy-static-${VERSION}`;
 
 class FakeCache {
@@ -44,11 +44,11 @@ function setup(fetchImpl: (req: Request | string, init?: RequestInit) => Promise
     skipWaiting: vi.fn(),
     clients: { claim: vi.fn() },
   };
-  vm.runInNewContext(source, { self, caches, fetch: fetchImpl, Response, Request, URL, Promise, setTimeout, console });
+  vm.runInNewContext(source, { self, caches, fetch: fetchImpl, Response, Request, URL, Promise, setTimeout, clearTimeout, AbortController, console });
 
   const fetchEvent = (request: Request) => {
     let promise: Promise<Response> | undefined;
-    handlers.fetch({ request, respondWith: (p: Promise<Response>) => (promise = p) });
+    handlers.fetch({ request, respondWith: (p: Promise<Response>) => (promise = p), waitUntil: (p: Promise<unknown>) => void p.catch(() => {}) });
     return promise; // undefined = the worker left the request to the network
   };
   const waitFor = async (type: string, event: Record<string, unknown>) => {
@@ -78,17 +78,20 @@ describe("service worker", () => {
     network = vi.fn(async (req: Request | string) => {
       if (!online) throw new TypeError("Failed to fetch");
       const path = new URL(typeof req === "string" ? req : req.url, ORIGIN).pathname;
-      if (path === "/cards") return basic(html('<script src="/_next/static/chunks/cards-abc.js"></script>'));
-      if (path === "/home") return basic(html("home page /_next/static/css/app.css"));
+      if (path === "/offline") return basic(html('<script src="/_next/static/chunks/shell-abc.js"></script> <link href="/_next/static/css/shell.css">'));
+      if (path === "/cards") return basic(html("Anna's cards, 12 due"));
+      if (path === "/home") return basic(html("Hallo, Anna! home page"));
       return basic(html("file:" + path));
     });
   });
 
-  it("leaves the API, login, other pages and non-GET requests to the network", () => {
+  it("leaves the API, login, other pages, data requests and non-GET requests to the network", () => {
     const sw = setup(network);
     for (const path of ["/api/cards/sync", "/login", "/mfa", "/", "/cards?_rsc=1abc"]) {
       expect(sw.fetchEvent(new Request(ORIGIN + path))).toBeUndefined();
     }
+    expect(sw.fetchEvent(nav("/login"))).toBeUndefined();
+    expect(sw.fetchEvent(nav("/auth/callback"))).toBeUndefined();
     expect(sw.fetchEvent(new Request(ORIGIN + "/cards", { method: "POST", body: "x" }))).toBeUndefined();
     expect(sw.fetchEvent(new Request("https://other.example/_next/static/x.js"))).toBeUndefined();
   });
@@ -103,72 +106,94 @@ describe("service worker", () => {
     expect(network).toHaveBeenCalledTimes(1);
   });
 
-  it("an app page: fresh from the network, saved, and served from the save when offline", async () => {
+  it("an app screen comes from the network every time and is never saved (it holds the learner's data)", async () => {
     const sw = setup(network);
-    const live = await sw.fetchEvent(nav("/cards"));
-    expect(await live!.text()).toContain("cards-abc.js");
-    online = false;
-    const offline = await sw.fetchEvent(nav("/cards"));
-    expect(offline!.status).toBe(200);
-    expect(await offline!.text()).toContain("cards-abc.js");
+    for (const path of ["/home", "/cards", "/learn", "/learn/Z4", "/me", "/play"]) {
+      const res = await sw.fetchEvent(nav(path));
+      expect(res!.status).toBe(200);
+    }
+    expect(await (await sw.fetchEvent(nav("/home")))!.text()).toContain("Hallo, Anna");
+    expect(network).toHaveBeenCalledTimes(7);
+    const everything = [...sw.stores.values()].flatMap((c) => [...c.entries.keys()]);
+    expect(everything).toEqual([]);
   });
 
-  it("offline with nothing saved: a short notice instead of the browser error page", async () => {
-    online = false;
+  it("an app screen that cannot be reached sends the browser to the offline shell, not to a saved copy", async () => {
     const sw = setup(network);
+    await sw.fetchEvent(nav("/cards")); // online once: nothing is kept
+    online = false;
     const res = await sw.fetchEvent(nav("/cards"));
-    expect(res!.status).toBe(503);
-    expect(await res!.text()).toContain("offline");
+    expect(res!.status).toBe(302);
+    expect(new URL(res!.headers.get("location")!).pathname).toBe("/offline");
+    expect(await caches_(sw, SHELL).then((c) => c.entries.size)).toBe(0);
   });
 
-  it("never saves a redirect (e.g. to the login page) or an error", async () => {
-    const redirected = basic(html("login page"));
-    Object.defineProperty(redirected, "redirected", { value: true });
-    const failing = basic(new Response("boom", { status: 500 }));
-    let next: Response = redirected;
-    const sw = setup(async () => next);
-    await sw.fetchEvent(nav("/cards"));
-    next = failing;
-    await sw.fetchEvent(nav("/home"));
-    expect([...(await caches_(sw, PAGES)).entries.keys()]).toEqual([]);
-  });
-
-  it("a slow network falls back to the saved page", async () => {
+  it("an app screen that hangs on a bad connection is treated as unreachable after the timeout", async () => {
     vi.useFakeTimers();
     try {
-      const sw = setup(network);
-      await sw.fetchEvent(nav("/home")); // saved
-      network.mockImplementation(() => new Promise(() => {})); // hangs: a bad connection
+      const sw = setup((req, init) => new Promise((_, reject) => init?.signal?.addEventListener("abort", () => reject(new TypeError("aborted")))));
       const pending = sw.fetchEvent(nav("/home"))!;
-      await vi.advanceTimersByTimeAsync(4100);
-      expect(await (await pending).text()).toContain("home page");
+      await vi.advanceTimersByTimeAsync(6100);
+      expect((await pending).status).toBe(302);
     } finally {
       vi.useRealTimers();
     }
   });
 
-  it("warm: saves the app pages and every file they reference, plus files the page reports", async () => {
+  it("the offline shell: fetched once, then served from the phone (even offline) and refreshed in the background", async () => {
+    const sw = setup(network);
+    const first = await sw.fetchEvent(nav("/offline"));
+    expect(await first!.text()).toContain("shell-abc.js");
+    online = false;
+    const offline = await sw.fetchEvent(nav("/offline"));
+    expect(offline!.status).toBe(200);
+    expect(await offline!.text()).toContain("shell-abc.js");
+  });
+
+  it("the shell is the only page ever saved, and never a redirect or an error", async () => {
+    const redirected = basic(html("login page"));
+    Object.defineProperty(redirected, "redirected", { value: true });
+    const failing = basic(new Response("boom", { status: 500 }));
+    let next: Response = redirected;
+    const sw = setup(async () => next);
+    await sw.fetchEvent(nav("/offline"))?.catch(() => {});
+    next = failing;
+    await sw.fetchEvent(nav("/offline"))?.catch(() => {});
+    expect([...(await caches_(sw, SHELL)).entries.keys()]).toEqual([]);
+  });
+
+  it("offline with no shell saved yet: a short notice instead of the browser error page", async () => {
+    online = false;
+    const sw = setup(network);
+    const res = await sw.fetchEvent(nav("/offline"));
+    expect(res!.status).toBe(503);
+    expect(await res!.text()).toContain("offline");
+  });
+
+  it("warm: saves the shell and every file it references, plus static files the page reports, and nothing else", async () => {
     const sw = setup(network);
     await sw.waitFor("message", {
-      data: { type: "warm", pages: ["/home", "/cards", "/api/secret"], assets: [`${ORIGIN}/_next/static/media/font.woff2`, "https://evil.test/_next/static/x.js", `${ORIGIN}/login`] },
+      data: { type: "warm", assets: [ORIGIN + "/_next/static/chunks/loaded.js", ORIGIN + "/buddy/buddy-happy.svg", ORIGIN + "/cards", "https://other.example/_next/static/x.js"] },
     });
-    const pages = await caches_(sw, PAGES);
-    expect([...pages.entries.keys()].sort()).toEqual(["/cards", "/home"]); // not /api/secret
-    const files = [...(await caches_(sw, STATIC)).entries.keys()].sort();
-    expect(files).toEqual(["/_next/static/chunks/cards-abc.js", "/_next/static/css/app.css", "/_next/static/media/font.woff2"]);
+    expect([...(await caches_(sw, SHELL)).entries.keys()]).toEqual(["/offline"]);
+    expect([...(await caches_(sw, STATIC)).entries.keys()].sort()).toEqual([
+      "/_next/static/chunks/loaded.js",
+      "/_next/static/chunks/shell-abc.js",
+      "/_next/static/css/shell.css",
+      "/buddy/buddy-happy.svg",
+    ]);
   });
 
   it("warm while offline keeps what it has and does not throw", async () => {
-    const sw = setup(network);
-    await sw.waitFor("message", { data: { type: "warm", pages: ["/cards"], assets: [] } });
     online = false;
-    await expect(sw.waitFor("message", { data: { type: "warm", pages: ["/cards"], assets: [] } })).resolves.toBeUndefined();
-    expect((await caches_(sw, PAGES)).entries.has("/cards")).toBe(true);
+    const sw = setup(network);
+    await expect(sw.waitFor("message", { data: { type: "warm", assets: [] } })).resolves.toBeUndefined();
   });
 
-  it("activation removes caches from older versions, and only ours", async () => {
+  it("a new version deletes every older cache of ours, including the one that used to hold app screens, and nobody else's", async () => {
     const sw = setup(network);
-    sw.stores.set("buddy-static-v0", new FakeCache()); // an older version
+    sw.stores.set("buddy-pages-v2", new FakeCache()); // v2 saved the HTML of /home and /cards
+    sw.stores.set("buddy-static-v2", new FakeCache());
     sw.stores.set("somebody-elses", new FakeCache());
     await sw.waitFor("activate", {});
     expect([...sw.stores.keys()]).toEqual(["somebody-elses"]);

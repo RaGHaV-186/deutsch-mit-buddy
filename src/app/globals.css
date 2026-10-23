@@ -221,6 +221,14 @@ body {
   outline-offset: 2px;
 }
 
+/* A link to another screen was pressed (NavPending): the current screen dims a little until the next one arrives. Opacity only. */
+main {
+  transition: opacity 0.2s var(--ease-out) 0.1s;
+}
+html[data-nav-pending] main {
+  opacity: 0.6;
+}
+
 /* Counters and codes line up. */
 .tabular {
   font-variant-numeric: tabular-nums;

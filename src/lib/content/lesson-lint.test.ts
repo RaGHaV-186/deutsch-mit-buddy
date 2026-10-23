@@ -375,4 +375,38 @@ describe("typing questions in reading and listening must be narrow", () => {
     const translation = { ...typing("Translate: I would like a coffee, please, and a piece of cake.", "Ich möchte bitte einen Kaffee und ein Stück Kuchen."), skill: "translation" as const };
     expect(flagged((l) => (l.exercises.items[0] = translation))).toEqual([]);
   });
+
+  it("writing tasks, speaking drills and the Tandem scenario are open by design: never flagged, whatever their wording", () => {
+    const rules = ruleOf(
+      lint((l) => {
+        l.writing.task = "Write two things about your day in one sentence. List them and describe the weather in a full sentence.";
+        l.writing.model_answer = "Heute ist es kalt und ich lerne Deutsch mit meiner Freundin Lena im Café.";
+        l.speaking.drill[0] = { prompt: "Describe your day in one sentence.", target: "Ich lerne heute Deutsch mit Anna im Café.", tip: null };
+        l.speaking.tandem.topics = ["Explain your day in a sentence", "List two things you like"];
+      }),
+    );
+    expect(rules.filter((r) => r.endsWith(":typing-open"))).toEqual([]);
+  });
+
+  it("sentence-building (ordering), dictation and multiple-choice questions are never flagged, even with long answers or 'sentence' in the prompt", () => {
+    const rules = ruleOf(
+      lint((l) => {
+        l.reading.questions[0] = { skill: "word_order", type: "ordering", prompt: "Anna / trinkt / heute / Kaffee / im / Café", answer: "Anna trinkt heute Kaffee im Café.", distractors: [], accepted_answers: [], explanation: "Verb in position 2." };
+        l.listening.questions[0] = { skill: "dictation", type: "dictation", prompt: "Listen and write the sentence.", answer: "Anna trinkt heute einen Kaffee im Café.", distractors: [], accepted_answers: [], explanation: "x" };
+        l.exam.reading.questions[0] = { skill: "word_order", type: "ordering", prompt: "Jonas / isst / Kuchen / und / trinkt / Tee", answer: "Jonas isst Kuchen und trinkt Tee.", distractors: [], accepted_answers: [], explanation: "x" };
+        l.exam.listening.questions[0] = { skill: "listening", type: "multiple_choice", prompt: "Which sentence is correct? Describe what you hear.", answer: "Ich esse Salat mit Brot und Käse.", distractors: ["Ich essen Salat.", "Ich isst Salat.", "Salat ich esse."], accepted_answers: [], explanation: "x" };
+      }),
+    );
+    expect(rules.filter((r) => r.endsWith(":typing-open"))).toEqual([]);
+  });
+
+  it("typing in the exercises and the exam's grammar/vocabulary part (translations of sentences) is not scanned either", () => {
+    const rules = ruleOf(
+      lint((l) => {
+        l.exercises.items[0] = { skill: "translation", type: "typing", prompt: "Translate and describe: I would like a coffee and a piece of cake, please.", answer: "Ich möchte bitte einen Kaffee und ein Stück Kuchen.", distractors: [], accepted_answers: [], explanation: "x" };
+        l.exam.grammar_vocab[0] = { skill: "translation", type: "typing", prompt: "Translate in one sentence: Anna drinks coffee in the café today.", answer: "Anna trinkt heute Kaffee im Café.", distractors: [], accepted_answers: [], explanation: "x" };
+      }),
+    );
+    expect(rules.filter((r) => r.endsWith(":typing-open"))).toEqual([]);
+  });
 });

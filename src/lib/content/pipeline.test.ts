@@ -365,6 +365,51 @@ describe("mergeLesson: a lesson publishes only when every item is settled", () =
     expect(() => publishPayload(review)).toThrow(/not publishable/);
   });
 
+  describe("a correction may change an item's TYPE: an open typing question becomes multiple choice", () => {
+    const openQuestion = { skill: "reading" as const, type: "typing" as const, prompt: "Was machen Anna und Jonas? Answer in one short sentence.", answer: "Sie essen und trinken.", distractors: [], accepted_answers: ["Anna und Jonas essen und trinken."], explanation: "Anna und Jonas sind im Café." };
+    const choice = { skill: "reading" as const, type: "multiple_choice" as const, prompt: "Was machen Anna und Jonas? Choose the correct answer.", answer: "Sie essen und trinken im Café.", distractors: ["Sie arbeiten im Büro.", "Sie schlafen zu Hause.", "Sie kaufen im Supermarkt ein."], accepted_answers: [], explanation: "Anna und Jonas sind im Café." };
+    const open = () => {
+      const l = validLesson();
+      l.reading.questions[4] = openQuestion;
+      return l;
+    };
+
+    it("the merge step accepts it: the type changes, the id stays, the part is fixed, and the lesson publishes with the new question", () => {
+      const l = open();
+      const review = mergeLesson(row, l, withVerdict("Z1#reading.q5", { status: "fixed", reason: "too open for typing", fixed_json: JSON.stringify(choice) }, l));
+      const item = review.items.find((i) => i.id === "Z1#reading.q5")!;
+      expect(item).toMatchObject({ status: "fixed", original: { type: "typing" }, final: { type: "multiple_choice", accepted_answers: [] } });
+      expect(review.partStatus.reading).toBe("fixed");
+      expect(review.publishable).toBe(true);
+      expect(review.final.reading.questions[4]).toMatchObject({ type: "multiple_choice", answer: "Sie essen und trinken im Café." });
+      expect(publishPayload(review).questions.find((q) => q.part === "reading" && q.position === 5)).toMatchObject({ type: "multiple_choice", accepted_answers: [], distractors: choice.distractors });
+    });
+
+    it("it works for the day exam's reading questions too", () => {
+      const l = validLesson();
+      l.exam.reading.questions[0] = { ...openQuestion, prompt: "Was macht Lena? Answer in one short sentence." };
+      const review = mergeLesson(row, l, withVerdict("Z1#exam.reading.q1", { status: "fixed", reason: "too open", fixed_json: JSON.stringify({ ...choice, prompt: "Was macht Lena? Choose the correct answer." }) }, l));
+      expect(review.items.find((i) => i.id === "Z1#exam.reading.q1")).toMatchObject({ status: "fixed", final: { type: "multiple_choice" } });
+      expect(review.publishable).toBe(true);
+    });
+
+    it("a manual correction can do the same (how W1.5 question 5 was changed)", () => {
+      const fixed = applyManualFixes("Z1", open(), { "Z1#reading.q5": { reason: "too open", value: choice } });
+      expect(fixed.reading.questions[4].type).toBe("multiple_choice");
+    });
+
+    it("but a badly formed multiple choice is still refused by the automatic checks and waits for a human (accepted answers left in, too few wrong options)", () => {
+      const l = open();
+      const withAccepted = mergeLesson(row, l, withVerdict("Z1#reading.q5", { status: "fixed", reason: "x", fixed_json: JSON.stringify({ ...choice, accepted_answers: ["Anna und Jonas essen."] }) }, l));
+      expect(withAccepted.items.find((i) => i.id === "Z1#reading.q5")).toMatchObject({ status: "needs-human" });
+      expect(withAccepted.publishable).toBe(false);
+      const oneWrong = mergeLesson(row, l, withVerdict("Z1#reading.q5", { status: "fixed", reason: "x", fixed_json: JSON.stringify({ ...choice, distractors: ["Sie arbeiten."] }) }, l));
+      expect(oneWrong.items.find((i) => i.id === "Z1#reading.q5")).toMatchObject({ status: "needs-human" });
+      const sameAsAnswer = mergeLesson(row, l, withVerdict("Z1#reading.q5", { status: "fixed", reason: "x", fixed_json: JSON.stringify({ ...choice, distractors: ["Sie essen und trinken im Café.", "Sie schlafen.", "Sie arbeiten."] }) }, l));
+      expect(sameAsAnswer.items.find((i) => i.id === "Z1#reading.q5")).toMatchObject({ status: "needs-human" });
+    });
+  });
+
   it("a correction is applied to the lesson, keeps the original for the review file, and marks the part fixed", () => {
     const fixed = { ...lesson.vocabulary.words[0], plural: "die Kaffees (selten)" };
     const review = mergeLesson(row, lesson, withVerdict("Z1#vocabulary.w01", { status: "fixed", reason: "plural note", fixed_json: JSON.stringify(fixed) }));

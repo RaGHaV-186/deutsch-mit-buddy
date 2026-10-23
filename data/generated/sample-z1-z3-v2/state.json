@@ -1,0 +1,64 @@
+{
+  "batches": [
+    {
+      "stage": "generate-a",
+      "id": "msgbatch_01T3TMmEUbtffK9MdQzmut3Q",
+      "fingerprint": "b9ad6471c0214e52",
+      "submittedAt": "2026-10-21T23:06:48.154Z"
+    },
+    {
+      "stage": "generate-b",
+      "id": "msgbatch_01KExhwHYP6vS8CJNncD4gzq",
+      "fingerprint": "00d72a1d75d5f5aa",
+      "submittedAt": "2026-10-21T23:10:04.069Z"
+    },
+    {
+      "stage": "generate-c",
+      "id": "msgbatch_011iZ3ScwzVuFSG5wkQcN8ug",
+      "fingerprint": "bf1a421348ebf638",
+      "submittedAt": "2026-10-21T23:13:08.489Z"
+    },
+    {
+      "stage": "generate-d",
+      "id": "msgbatch_01UVBVehqP714aXRBtxWmpEg",
+      "fingerprint": "29d5b635bb34dada",
+      "submittedAt": "2026-10-21T23:15:42.396Z"
+    },
+    {
+      "stage": "generate-b",
+      "id": "msgbatch_01TvnQVx9sBkNyxujDJRfMqq",
+      "fingerprint": "54b2ce0dc11ea1c7",
+      "submittedAt": "2026-10-21T23:19:00.621Z"
+    },
+    {
+      "stage": "generate-c",
+      "id": "msgbatch_01PYdXt5uEbZXYtpEbKsLbhg",
+      "fingerprint": "17fb39a9c9001722",
+      "submittedAt": "2026-10-21T23:21:34.345Z"
+    },
+    {
+      "stage": "generate-c",
+      "id": "msgbatch_019fMvbBTTjg9xHcA6Aqhkkg",
+      "fingerprint": "3ef58e7e9d087261",
+      "submittedAt": "2026-10-21T23:24:12.805Z"
+    },
+    {
+      "stage": "generate-c",
+      "id": "msgbatch_01QsuT6g23ju3VA7Jih61uRC",
+      "fingerprint": "ca967b76216393f5",
+      "submittedAt": "2026-10-21T23:27:29.490Z"
+    },
+    {
+      "stage": "review",
+      "id": "msgbatch_01L3QSPa626PWfmtnN17dzJV",
+      "fingerprint": "0e6d640bdcf44ed9",
+      "submittedAt": "2026-10-21T23:29:43.634Z"
+    },
+    {
+      "stage": "review",
+      "id": "msgbatch_01EqnwwyqUcRxQVKPyTUHXGh",
+      "fingerprint": "4cba2602823d2e21",
+      "submittedAt": "2026-10-21T23:59:59.141Z"
+    }
+  ]
+}

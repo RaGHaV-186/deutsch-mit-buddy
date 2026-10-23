@@ -1,0 +1,20 @@
+{
+  "model": "claude-opus-5-5",
+  "requests": 3,
+  "inputTokens": 11469,
+  "expectedOutputTokens": 9000,
+  "ceilingOutputTokens": 24000,
+  "expectedUsd": 0.112938,
+  "ceilingUsd": 0.262938,
+  "expectedEur": 0.10729109999999999,
+  "ceilingEur": 0.2497911,
+  "usdToEur": 0.95,
+  "stage": "review",
+  "id": "4cba2602823d2e21",
+  "lessons": [
+    "Z1",
+    "Z2",
+    "Z3"
+  ],
+  "exactTokenCount": false
+}

@@ -1,0 +1,18 @@
+{
+  "model": "claude-sonnet-5-5",
+  "requests": 1,
+  "inputTokens": 5300,
+  "expectedOutputTokens": 3500,
+  "ceilingOutputTokens": 8000,
+  "expectedUsd": 0.0228,
+  "ceilingUsd": 0.0453,
+  "expectedEur": 0.02166,
+  "ceilingEur": 0.043035,
+  "usdToEur": 0.95,
+  "stage": "generate-c",
+  "id": "5458e35cc7ae4cb2",
+  "lessons": [
+    "Z9"
+  ],
+  "exactTokenCount": false
+}

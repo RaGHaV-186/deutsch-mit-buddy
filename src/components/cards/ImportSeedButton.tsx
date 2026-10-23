@@ -39,6 +39,8 @@ export function ImportSeedButton({ onImported }: { onImported: () => void }) {
             fresh: state.result.fresh,
             alreadyThere: state.result.alreadyThere,
             duplicatesSkipped: state.result.duplicatesSkipped,
+            lessonCards: state.result.lessonCardsUnlocked,
+            pointer: state.result.pointerMoved ? t("pointerMoved") : "",
           })}
         </p>
       ) : null}

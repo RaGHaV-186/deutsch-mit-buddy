@@ -1,0 +1,28 @@
+{
+  "batches": [
+    {
+      "stage": "generate-a",
+      "id": "msgbatch_01PuN5bhwBpwnGqmYfAp7d1J",
+      "fingerprint": "e68929cfe24ba29c",
+      "submittedAt": "2026-10-21T21:19:28.571Z"
+    },
+    {
+      "stage": "generate-b",
+      "id": "msgbatch_01BVJf6gXec1cru1ax75ZbMQ",
+      "fingerprint": "ba4a4636df96bffc",
+      "submittedAt": "2026-10-21T21:21:47.325Z"
+    },
+    {
+      "stage": "generate-c",
+      "id": "msgbatch_01K4ey8Cea1pweGCxHSWwsjy",
+      "fingerprint": "b61701b590a55c1b",
+      "submittedAt": "2026-10-21T21:21:55.366Z"
+    },
+    {
+      "stage": "review",
+      "id": "msgbatch_01G3Rk1zNB3GRVQT1p6kKYgE",
+      "fingerprint": "b83b296ff55facbd",
+      "submittedAt": "2026-10-21T21:24:14.485Z"
+    }
+  ]
+}

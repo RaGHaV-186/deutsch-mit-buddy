@@ -1,0 +1,1685 @@
+{
+  "verdicts": {
+    "Z1": [
+      {
+        "id": "Z1#goal",
+        "status": "ok",
+        "reason": "Clear can-do statement matching the lesson.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#warmup.q01",
+        "status": "ok",
+        "reason": "Correct; one clear answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#warmup.q02",
+        "status": "ok",
+        "reason": "Correct for beginner level.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#warmup.q03",
+        "status": "ok",
+        "reason": "Correct; distractors clearly wrong.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#grammar.intro",
+        "status": "ok",
+        "reason": "Accurate, simple explanation in English.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#grammar.ex1",
+        "status": "ok",
+        "reason": "Correct example and note.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#grammar.ex2",
+        "status": "ok",
+        "reason": "Correct; letter-name approximations acceptable.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#grammar.ex3",
+        "status": "ok",
+        "reason": "Correct example and note.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#grammar.ex4",
+        "status": "ok",
+        "reason": "Correct example and note.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#grammar.ex5",
+        "status": "ok",
+        "reason": "Correct and useful.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#grammar.ex6",
+        "status": "ok",
+        "reason": "Correct; reasonable pronunciation hint.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#grammar.trap1",
+        "status": "ok",
+        "reason": "Correct rule for Germany.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#grammar.trap2",
+        "status": "ok",
+        "reason": "Correct trap and explanation.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#grammar.trap3",
+        "status": "ok",
+        "reason": "Correct trap and explanation.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.01",
+        "status": "ok",
+        "reason": "One correct answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.02",
+        "status": "ok",
+        "reason": "Only Nacht fits Gute.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.03",
+        "status": "ok",
+        "reason": "One correct answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.04",
+        "status": "ok",
+        "reason": "Distractors clearly wrong.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.05",
+        "status": "ok",
+        "reason": "One correct answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.06",
+        "status": "ok",
+        "reason": "One correct answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.07",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.08",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.09",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.10",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.11",
+        "status": "ok",
+        "reason": "Words match; standard order.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.12",
+        "status": "ok",
+        "reason": "Words match; unique order.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.13",
+        "status": "ok",
+        "reason": "Words match answer including punctuation; check is false alarm.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.14",
+        "status": "needs-human",
+        "reason": "'Guten Tag!' is also a valid translation of 'Hello!' (lesson glosses it so); typing may reject it.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.15",
+        "status": "needs-human",
+        "reason": "'Mein Name ist Jonas.' is also correct and taught; check typing accepts alternatives.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.16",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.17",
+        "status": "ok",
+        "reason": "Natural dictation sentence.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.18",
+        "status": "ok",
+        "reason": "Natural dictation sentence.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exercises.19",
+        "status": "ok",
+        "reason": "Natural dictation phrase.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w01",
+        "status": "ok",
+        "reason": "Correct card.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w02",
+        "status": "ok",
+        "reason": "Correct card; Duden spelling.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w03",
+        "status": "ok",
+        "reason": "Article and plural correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w04",
+        "status": "ok",
+        "reason": "Article and plural correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w05",
+        "status": "ok",
+        "reason": "Article and plural correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w06",
+        "status": "ok",
+        "reason": "Article and plural correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w07",
+        "status": "ok",
+        "reason": "Article and plural correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w08",
+        "status": "ok",
+        "reason": "Article and plural correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w09",
+        "status": "ok",
+        "reason": "Correct card.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w10",
+        "status": "ok",
+        "reason": "Correct card.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w11",
+        "status": "ok",
+        "reason": "Correct card.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w12",
+        "status": "ok",
+        "reason": "Correct card.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w13",
+        "status": "ok",
+        "reason": "Verb forms correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w14",
+        "status": "ok",
+        "reason": "Verb forms correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w15",
+        "status": "ok",
+        "reason": "Article and plural correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w16",
+        "status": "ok",
+        "reason": "Article and plural correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w17",
+        "status": "ok",
+        "reason": "Article and plural correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.w18",
+        "status": "ok",
+        "reason": "Article and plural correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.p1",
+        "status": "ok",
+        "reason": "Correct phrase and tip.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.p2",
+        "status": "ok",
+        "reason": "Correct phrase.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.p3",
+        "status": "ok",
+        "reason": "Correct phrase.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.p4",
+        "status": "ok",
+        "reason": "Correct phrase.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#vocabulary.p5",
+        "status": "ok",
+        "reason": "Correct phrase.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#pronunciation",
+        "status": "ok",
+        "reason": "Accurate beginner-level pronunciation guidance.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#reading.passage",
+        "status": "ok",
+        "reason": "Simple, level-appropriate; slight narrator shift but understandable.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#reading.q1",
+        "status": "ok",
+        "reason": "Answerable from text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#reading.q2",
+        "status": "ok",
+        "reason": "Answerable from text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#reading.q3",
+        "status": "ok",
+        "reason": "Answerable from text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#reading.q4",
+        "status": "ok",
+        "reason": "Answerable from text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#reading.q5",
+        "status": "ok",
+        "reason": "Answerable from text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#listening.passage",
+        "status": "ok",
+        "reason": "Natural, simple dialogue with correct translations.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#listening.q1",
+        "status": "ok",
+        "reason": "Answerable from dialogue.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#listening.q2",
+        "status": "ok",
+        "reason": "Answerable from dialogue.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#listening.q3",
+        "status": "ok",
+        "reason": "Answerable from spelling given.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#listening.q4",
+        "status": "ok",
+        "reason": "Answerable from dialogue.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#listening.q5",
+        "status": "ok",
+        "reason": "Answerable from dialogue.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#writing",
+        "status": "fixed",
+        "reason": "Model answer had only 17 words (min 20) and spelled Jonas right after the last name. Reordered and added the surname spelling.",
+        "fixed_json": "{\"task\":\"Write 3 to 5 short sentences in German. Greet someone, say your name, spell your first name and say goodbye.\",\"min_words\":20,\"must_include\":[\"A greeting (Guten Tag! or Hallo!)\",\"Your first name with Ich heiße ...\",\"Your name spelled letter by letter\",\"A goodbye (Tschüs! or Auf Wiedersehen!)\"],\"useful_phrases\":[\"Guten Tag!\",\"Ich heiße ...\",\"Das buchstabiert man so: ...\",\"Mein Nachname ist ...\",\"Auf Wiedersehen!\"],\"model_answer\":\"Guten Tag! Ich heiße Jonas. Das buchstabiert man so: J-O-N-A-S. Mein Nachname ist Schmidt, das ist S-C-H-M-I-D-T. Danke und tschüs!\",\"rubric\":[\"Uses a greeting and a goodbye correctly\",\"Uses Ich heiße ... with a name\",\"Spells the name with correct German letters, separated by hyphens\",\"Writes sentences with a capital letter at the start and correct punctuation\",\"Uses lesson words such as Vorname, Nachname or buchstabieren correctly\"]}"
+      },
+      {
+        "id": "Z1#speaking.d1",
+        "status": "fixed",
+        "reason": "Tip called final g 'soft' though it is devoiced to k; reworded.",
+        "fixed_json": "{\"prompt\":\"Greet someone politely during the day.\",\"target\":\"Guten Tag!\",\"tip\":\"The g at the end of Tag sounds like a k.\"}"
+      },
+      {
+        "id": "Z1#speaking.d2",
+        "status": "ok",
+        "reason": "Correct target and tip.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#speaking.d3",
+        "status": "fixed",
+        "reason": "Tip mentioned sch, but 'buchstabiert' has ch + st, no sch; corrected tip.",
+        "fixed_json": "{\"prompt\":\"Ask how to spell something.\",\"target\":\"Wie buchstabiert man das?\",\"tip\":\"W sounds like English v; in buchstabiert, ch is rough and st sounds like sht.\"}"
+      },
+      {
+        "id": "Z1#speaking.d4",
+        "status": "ok",
+        "reason": "Correct target and tip.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#speaking.d5",
+        "status": "ok",
+        "reason": "Correct target and tip.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#speaking.tandem",
+        "status": "fixed",
+        "reason": "Setting said Anna meets the learner; Buddy is the partner. Replaced Anna with Buddy.",
+        "fixed_json": "{\"title\":\"Meeting and spelling names\",\"setting\":\"Buddy and the learner meet for the first time at a language café and say hello.\",\"buddy_role\":\"Buddy is a friendly new acquaintance who greets the learner and asks for their name.\",\"learner_role\":\"The learner greets Buddy, says their name, spells it and says goodbye.\",\"opening_line\":\"Guten Tag! Ich heiße Buddy. Wie heißt du?\",\"target_phrases\":[\"Guten Tag!\",\"Ich heiße ...\",\"Wie buchstabiert man das?\",\"Danke!\",\"Auf Wiedersehen!\"],\"target_grammar\":\"Spelling names letter by letter and pronouncing ei, ie, ch and sch.\",\"topics\":[\"Wie buchstabiert man deinen Vornamen?\",\"Wie heißt dein Nachname?\",\"Wie buchstabiert man Tschüs?\",\"Sag bitte: Guten Morgen, Guten Abend, Gute Nacht!\"],\"end_condition\":\"The conversation ends when the learner has said their name, spelled it and said goodbye.\"}"
+      },
+      {
+        "id": "Z1#culture",
+        "status": "ok",
+        "reason": "Accurate, neutral cultural information.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#mission",
+        "status": "ok",
+        "reason": "Clear, safe, useful mission.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exam.gv1",
+        "status": "ok",
+        "reason": "Correct; one clear answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exam.gv2",
+        "status": "ok",
+        "reason": "Correct; one clear answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exam.gv3",
+        "status": "ok",
+        "reason": "Correct; one clear answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exam.gv4",
+        "status": "fixed",
+        "reason": "Identical to exercises.01, not fresh; changed name to Lena.",
+        "fixed_json": "{\"skill\":\"grammar\",\"type\":\"gap_fill\",\"prompt\":\"Ich ___ Lena.\",\"answer\":\"heiße\",\"distractors\":[\"heißt\",\"heißen\"],\"explanation\":\"With \\\"ich\\\" the verb ends in -e: ich heiße.\"}"
+      },
+      {
+        "id": "Z1#exam.gv5",
+        "status": "fixed",
+        "reason": "Same sentence as exercises.12, not fresh; replaced with lesson question 'Wie buchstabiert man das?'.",
+        "fixed_json": "{\"skill\":\"word_order\",\"type\":\"ordering\",\"prompt\":\"man / das? / Wie / buchstabiert\",\"answer\":\"Wie buchstabiert man das?\",\"distractors\":[],\"explanation\":\"The question word comes first, then the verb, then man and das.\"}"
+      },
+      {
+        "id": "Z1#exam.gv6",
+        "status": "fixed",
+        "reason": "Identical to exercises.15, not fresh; changed name to Lena.",
+        "fixed_json": "{\"skill\":\"translation\",\"type\":\"typing\",\"prompt\":\"Translate into German: My name is Lena.\",\"answer\":\"Ich heiße Lena.\",\"distractors\":[],\"explanation\":\"Use \\\"Ich heiße\\\" plus your name to say your name.\"}"
+      },
+      {
+        "id": "Z1#exam.reading.passage",
+        "status": "ok",
+        "reason": "Short, simple, level-appropriate.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exam.reading.q1",
+        "status": "ok",
+        "reason": "Answerable from text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exam.reading.q2",
+        "status": "ok",
+        "reason": "Answerable from text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exam.listening.passage",
+        "status": "ok",
+        "reason": "Simple, correct dialogue.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exam.listening.q1",
+        "status": "ok",
+        "reason": "Answerable from dialogue.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exam.listening.q2",
+        "status": "ok",
+        "reason": "Answerable from dialogue.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exam.writing",
+        "status": "ok",
+        "reason": "Clear task and matching rubric.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#exam.speaking",
+        "status": "ok",
+        "reason": "Clear prompt and hint.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z1#closing",
+        "status": "ok",
+        "reason": "Accurate summary of lesson content.",
+        "fixed_json": null
+      }
+    ],
+    "Z2": [
+      {
+        "id": "Z2#goal",
+        "status": "ok",
+        "reason": "Clear English can-do statement; German words are only the pronouns taught.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#warmup.q01",
+        "status": "ok",
+        "reason": "Correct gap, one right answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#warmup.q02",
+        "status": "ok",
+        "reason": "Correct; distractors clearly wrong.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#warmup.q03",
+        "status": "ok",
+        "reason": "Sie is the only fitting pronoun.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#grammar.intro",
+        "status": "ok",
+        "reason": "English explanation; German appears only as examples.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#grammar.ex1",
+        "status": "ok",
+        "reason": "Correct and well translated.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#grammar.ex2",
+        "status": "ok",
+        "reason": "Correct and well translated.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#grammar.ex3",
+        "status": "ok",
+        "reason": "Correct and well translated.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#grammar.ex4",
+        "status": "ok",
+        "reason": "Correct and well translated.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#grammar.ex5",
+        "status": "ok",
+        "reason": "Grammatically correct literal example of wir sind.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#grammar.ex6",
+        "status": "ok",
+        "reason": "Correct and natural.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#grammar.trap1",
+        "status": "ok",
+        "reason": "Correct trap and explanation.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#grammar.trap2",
+        "status": "ok",
+        "reason": "Correct trap and explanation.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#grammar.trap3",
+        "status": "ok",
+        "reason": "Correct trap and explanation.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.01",
+        "status": "ok",
+        "reason": "One correct answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.02",
+        "status": "ok",
+        "reason": "One correct answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.03",
+        "status": "ok",
+        "reason": "One correct answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.04",
+        "status": "ok",
+        "reason": "One correct answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.05",
+        "status": "ok",
+        "reason": "Only aus fits.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.06",
+        "status": "ok",
+        "reason": "Only Sie fits.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.07",
+        "status": "ok",
+        "reason": "Correct translation question.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.08",
+        "status": "ok",
+        "reason": "One correct sentence.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.09",
+        "status": "ok",
+        "reason": "Correct pronoun question.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.10",
+        "status": "ok",
+        "reason": "Only one answer fits woher.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.11",
+        "status": "ok",
+        "reason": "Words match; standard order is clear.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.12",
+        "status": "needs-human",
+        "reason": "\"Aus Deutschland kommt Jonas.\" is also a natural, correct word order.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.13",
+        "status": "ok",
+        "reason": "Only one correct question order.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.14",
+        "status": "ok",
+        "reason": "Correct translation.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.15",
+        "status": "ok",
+        "reason": "Correct translation.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.16",
+        "status": "ok",
+        "reason": "Correct translation.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.17",
+        "status": "ok",
+        "reason": "Natural dictation sentence.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.18",
+        "status": "ok",
+        "reason": "Natural dictation sentence.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exercises.19",
+        "status": "ok",
+        "reason": "Natural dictation sentence.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w01",
+        "status": "ok",
+        "reason": "Correct card.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w02",
+        "status": "ok",
+        "reason": "der Name, die Namen correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w03",
+        "status": "ok",
+        "reason": "Correct forms and example.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w04",
+        "status": "ok",
+        "reason": "Correct forms and example.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w05",
+        "status": "ok",
+        "reason": "Example uses ist, a form of sein; hint is a false alarm.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w06",
+        "status": "ok",
+        "reason": "Correct card.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w07",
+        "status": "ok",
+        "reason": "das Land, die Länder correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w08",
+        "status": "ok",
+        "reason": "die Stadt, die Städte correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w09",
+        "status": "ok",
+        "reason": "Correct card.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w10",
+        "status": "ok",
+        "reason": "Correct card.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w11",
+        "status": "needs-human",
+        "reason": "\"Ich bin gut\" does not mean \"I am fine\". Natives say \"Mir geht es gut\". The same usage recurs in the writing rubric and mission.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w12",
+        "status": "ok",
+        "reason": "Correct card.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w13",
+        "status": "ok",
+        "reason": "Correct card.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w14",
+        "status": "ok",
+        "reason": "Correct card.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w15",
+        "status": "ok",
+        "reason": "Correct card and tip.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w16",
+        "status": "ok",
+        "reason": "der Freund, die Freunde correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w17",
+        "status": "ok",
+        "reason": "die Freundin, die Freundinnen correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.w18",
+        "status": "ok",
+        "reason": "Correct card.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.p1",
+        "status": "ok",
+        "reason": "Correct phrase.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.p2",
+        "status": "ok",
+        "reason": "Correct phrase.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.p3",
+        "status": "ok",
+        "reason": "Correct phrase.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.p4",
+        "status": "ok",
+        "reason": "Correct phrase.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#vocabulary.p5",
+        "status": "ok",
+        "reason": "Correct phrase.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#pronunciation",
+        "status": "ok",
+        "reason": "Accurate, simple pronunciation hints.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#reading.passage",
+        "status": "ok",
+        "reason": "Simple, coherent text within the length range.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#reading.q1",
+        "status": "ok",
+        "reason": "Answerable from the text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#reading.q2",
+        "status": "ok",
+        "reason": "Text separates coming from and living in.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#reading.q3",
+        "status": "ok",
+        "reason": "Answerable from the text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#reading.q4",
+        "status": "ok",
+        "reason": "Answerable from the text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#reading.q5",
+        "status": "ok",
+        "reason": "Answerable from the text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#listening.passage",
+        "status": "ok",
+        "reason": "Natural dialogue with accurate translations.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#listening.q1",
+        "status": "ok",
+        "reason": "Answerable from the dialogue.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#listening.q2",
+        "status": "ok",
+        "reason": "Answerable from the dialogue.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#listening.q3",
+        "status": "ok",
+        "reason": "Answerable from the dialogue.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#listening.q4",
+        "status": "ok",
+        "reason": "Answerable from the dialogue.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#listening.q5",
+        "status": "ok",
+        "reason": "The sentence occurs in the dialogue.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#writing",
+        "status": "needs-human",
+        "reason": "Task asks for 3–5 sentences but the model answer has 7 and repeats \"Ich komme aus\" awkwardly. The rubric also promotes \"ich bin gut\".",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#speaking.d1",
+        "status": "ok",
+        "reason": "Correct drill.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#speaking.d2",
+        "status": "ok",
+        "reason": "W-questions usually fall at the end.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#speaking.d3",
+        "status": "ok",
+        "reason": "Correct drill.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#speaking.d4",
+        "status": "ok",
+        "reason": "Correct drill.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#speaking.d5",
+        "status": "ok",
+        "reason": "Correct drill.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#speaking.tandem",
+        "status": "ok",
+        "reason": "Buddy is a conversation partner; level fits.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#culture",
+        "status": "ok",
+        "reason": "Accurate, neutral and simple.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#mission",
+        "status": "ok",
+        "reason": "Clear, safe and useful task.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exam.gv1",
+        "status": "needs-human",
+        "reason": "Same prompt as warmup.q01; the exam item is not fresh.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exam.gv2",
+        "status": "ok",
+        "reason": "One correct answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exam.gv3",
+        "status": "ok",
+        "reason": "One correct answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exam.gv4",
+        "status": "ok",
+        "reason": "One correct answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exam.gv5",
+        "status": "needs-human",
+        "reason": "Same sentence as exercises.11, so not fresh. The words match the answer; the hint was triggered by the prompt prefix.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exam.gv6",
+        "status": "ok",
+        "reason": "Correct translation item.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exam.reading.passage",
+        "status": "ok",
+        "reason": "Short, simple text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exam.reading.q1",
+        "status": "ok",
+        "reason": "Answerable; distractors clearly wrong.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exam.reading.q2",
+        "status": "ok",
+        "reason": "Answerable from the text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exam.listening.passage",
+        "status": "ok",
+        "reason": "Short, natural dialogue.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exam.listening.q1",
+        "status": "ok",
+        "reason": "Answerable from the dialogue.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exam.listening.q2",
+        "status": "ok",
+        "reason": "Answerable from the dialogue.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exam.writing",
+        "status": "ok",
+        "reason": "Fits the level; rubric covers the grammar.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#exam.speaking",
+        "status": "ok",
+        "reason": "Clear task.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#closing",
+        "status": "ok",
+        "reason": "Accurate summary.",
+        "fixed_json": null
+      }
+    ],
+    "Z3": [
+      {
+        "id": "Z3#goal",
+        "status": "ok",
+        "reason": "Clear, matches the lesson goal.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#warmup.q01",
+        "status": "ok",
+        "reason": "Correct answer, clearly wrong distractors.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#warmup.q02",
+        "status": "ok",
+        "reason": "Only bin fits.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#warmup.q03",
+        "status": "ok",
+        "reason": "Correct and unambiguous.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#grammar.intro",
+        "status": "ok",
+        "reason": "English explanations; German only in examples. Rules accurate.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#grammar.ex1",
+        "status": "ok",
+        "reason": "Correct and well translated.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#grammar.ex2",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#grammar.ex3",
+        "status": "ok",
+        "reason": "Correct; note true.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#grammar.ex4",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#grammar.ex5",
+        "status": "ok",
+        "reason": "Correct digit-by-digit example.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#grammar.ex6",
+        "status": "ok",
+        "reason": "Correct; note accurate.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#grammar.trap1",
+        "status": "ok",
+        "reason": "Valid trap.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#grammar.trap2",
+        "status": "ok",
+        "reason": "Valid common learner error.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#grammar.trap3",
+        "status": "ok",
+        "reason": "Accurate spelling trap.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.01",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.02",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.03",
+        "status": "ok",
+        "reason": "Only alt fits.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.04",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.05",
+        "status": "ok",
+        "reason": "Only ist fits.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.06",
+        "status": "ok",
+        "reason": "Correct, good distractors.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.07",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.08",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.09",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.10",
+        "status": "ok",
+        "reason": "One correct standard answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.11",
+        "status": "ok",
+        "reason": "Words match; natural order unique.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.12",
+        "status": "ok",
+        "reason": "Words match answer.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.13",
+        "status": "ok",
+        "reason": "Capitalised Das signals start; answer correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.14",
+        "status": "ok",
+        "reason": "Correct translation.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.15",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.16",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.17",
+        "status": "ok",
+        "reason": "Natural dictation sentence.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.18",
+        "status": "ok",
+        "reason": "Natural dictation sentence.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exercises.19",
+        "status": "ok",
+        "reason": "Natural dictation sentence.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w01",
+        "status": "ok",
+        "reason": "Article and plural correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w02",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w03",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w04",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w05",
+        "status": "ok",
+        "reason": "Article correct; plural note acceptable.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w06",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w07",
+        "status": "ok",
+        "reason": "Correct spelling and plural.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w08",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w09",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w10",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w11",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w12",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w13",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w14",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w15",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w16",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w17",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.w18",
+        "status": "ok",
+        "reason": "Verb forms correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.p1",
+        "status": "ok",
+        "reason": "Correct; tip accurate.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.p2",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.p3",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.p4",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#vocabulary.p5",
+        "status": "ok",
+        "reason": "Functional translation acceptable.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#pronunciation",
+        "status": "ok",
+        "reason": "Hints reasonable for beginners.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#reading.passage",
+        "status": "ok",
+        "reason": "Simple, within word range.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#reading.q1",
+        "status": "ok",
+        "reason": "Answerable from text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#reading.q2",
+        "status": "ok",
+        "reason": "Answerable from text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#reading.q3",
+        "status": "ok",
+        "reason": "Answerable from text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#reading.q4",
+        "status": "ok",
+        "reason": "Answerable from text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#reading.q5",
+        "status": "ok",
+        "reason": "Answerable from text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#listening.passage",
+        "status": "ok",
+        "reason": "Natural dialogue, correct translations.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#listening.q1",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#listening.q2",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#listening.q3",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#listening.q4",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#listening.q5",
+        "status": "ok",
+        "reason": "Natural dictation sentence.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#writing",
+        "status": "fixed",
+        "reason": "Model answer uses Meine Telefonnummer ist, but must_include/rubric demanded Meine Nummer ist only; allowed both forms.",
+        "fixed_json": "{\"task\":\"Write 3 to 5 short sentences about yourself. Say how old you are and give your phone number. Write the numbers as words.\",\"min_words\":20,\"must_include\":[\"Your name\",\"Your age with Jahre alt\",\"Your phone number with Meine Nummer ist or Meine Telefonnummer ist\",\"Your house number\"],\"useful_phrases\":[\"Ich heiße ...\",\"Ich bin ... Jahre alt.\",\"Meine Nummer ist ...\",\"Meine Hausnummer ist ...\"],\"model_answer\":\"Ich heiße Lena. Ich bin fünfunddreißig Jahre alt. Meine Telefonnummer ist null eins fünf zwei, drei vier sechs sieben. Ich wohne in der Gartenstraße. Meine Hausnummer ist achtzehn.\",\"rubric\":[\"Numbers 21–99 are written correctly as one word (unit + und + tens)\",\"Age sentence uses Ich bin ... Jahre alt\",\"Phone number is given with Meine Nummer ist or Meine Telefonnummer ist and digits as words\",\"Vocabulary from the lesson is used (Telefonnummer, Hausnummer, Straße)\",\"Sentences are short, with capital letters and full stops\"]}"
+      },
+      {
+        "id": "Z3#speaking.d1",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#speaking.d2",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#speaking.d3",
+        "status": "ok",
+        "reason": "Correct; stress hint accurate.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#speaking.d4",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#speaking.d5",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#speaking.tandem",
+        "status": "needs-human",
+        "reason": "Topic Wann ist dein Geburtstag? needs dates/ordinals not taught; e-mail needs spelling. Possibly above level.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#culture",
+        "status": "ok",
+        "reason": "Facts accurate and neutral.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#mission",
+        "status": "fixed",
+        "reason": "Success check required numbers 21–99, but step 3 numbers may be any; aligned success check with steps.",
+        "fixed_json": "{\"title\":\"My number card\",\"task\":\"Make a small card with your German contact details and say the numbers aloud.\",\"steps\":[\"Write on a piece of paper: Ich bin ... Jahre alt. Meine Nummer ist ... Write the numbers as words, for example einundzwanzig.\",\"Say your age and your phone number aloud three times. Say the phone number in pairs of digits.\",\"Look around your home and find five numbers, for example on a clock, a package or a house number. Say each number in German.\",\"Record yourself on your phone saying 'Wie alt bist du? Ich bin ... Jahre alt.' and listen to it once.\"],\"report_prompt\":\"Report back: Which five numbers did you find? Write them in German words. Which number was hardest to say?\",\"success_check\":[\"I can say my age in German.\",\"I can say my phone number in pairs of digits.\",\"I can say five numbers from my home in German.\"],\"safety_note\":\"Use a made-up phone number or only practise alone. Do not share your real phone number, address or other personal data online.\"}"
+      },
+      {
+        "id": "Z3#exam.gv1",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exam.gv2",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exam.gv3",
+        "status": "fixed",
+        "reason": "Prompt lacked scrambled words; added the answer's words in scrambled order.",
+        "fixed_json": "{\"skill\":\"word_order\",\"type\":\"ordering\",\"prompt\":\"deine / ist / Telefonnummer / Wie\",\"answer\":\"Wie ist deine Telefonnummer?\",\"distractors\":[],\"explanation\":\"The question word comes first, then the verb ist.\"}"
+      },
+      {
+        "id": "Z3#exam.gv4",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exam.gv5",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exam.gv6",
+        "status": "fixed",
+        "reason": "Dictation had 7 words, above the 6-word limit; shortened the number.",
+        "fixed_json": "{\"skill\":\"dictation\",\"type\":\"dictation\",\"prompt\":\"Listen and write the sentence.\",\"answer\":\"Meine Nummer ist null eins sieben.\",\"distractors\":[],\"explanation\":\"Say each number word and write null as the first digit word.\"}"
+      },
+      {
+        "id": "Z3#exam.reading.passage",
+        "status": "fixed",
+        "reason": "Exam reused lesson's Lindenstraße zwölf (not fresh); changed to Rosenstraße siebzehn.",
+        "fixed_json": "{\"text\":\"Das ist Anna. Anna ist achtundzwanzig Jahre alt. Ihre Handynummer ist null eins fünf eins, drei vier fünf. Ihre Adresse ist Rosenstraße siebzehn.\"}"
+      },
+      {
+        "id": "Z3#exam.reading.q1",
+        "status": "ok",
+        "reason": "Answerable from text.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exam.reading.q2",
+        "status": "fixed",
+        "reason": "Updated to match the fresh exam passage (house number 17).",
+        "fixed_json": "{\"skill\":\"reading\",\"type\":\"multiple_choice\",\"prompt\":\"What is Anna's house number?\",\"answer\":\"17\",\"distractors\":[\"7\",\"70\",\"16\"],\"explanation\":\"The text says Rosenstraße siebzehn, so 17.\"}"
+      },
+      {
+        "id": "Z3#exam.listening.passage",
+        "status": "ok",
+        "reason": "Short, correct, fresh.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exam.listening.q1",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exam.listening.q2",
+        "status": "ok",
+        "reason": "Correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exam.writing",
+        "status": "ok",
+        "reason": "Task and rubric fit grammar point.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#exam.speaking",
+        "status": "ok",
+        "reason": "Fits lesson.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z3#closing",
+        "status": "ok",
+        "reason": "Accurate summary.",
+        "fixed_json": null
+      }
+    ]
+  },
+  "failures": []
+}

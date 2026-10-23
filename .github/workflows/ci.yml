@@ -19,6 +19,8 @@ jobs:
       # Dummy public values so the build passes; real ones live in Vercel.
       NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-dummy-anon-key
+      # A canary: the build must never put it into anything a browser downloads (checked right after the build).
+      ANTHROPIC_API_KEY: sk-ant-ci-canary-0000000000000000
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,6 +31,8 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npm run build
+      - name: The Anthropic key must not be in the client bundle
+        run: npm run check:bundle
 
   # Row-level security tests: try to read and write other users' rows against a real local Supabase stack.
   rls:

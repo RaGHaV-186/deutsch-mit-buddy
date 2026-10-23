@@ -1,9 +1,8 @@
 /**
- * What the big button on Home does. Lessons (Buddy teaching in chat) arrive in slice 4; until then the lesson has no content,
- * so the button leads to today's cards instead of a "coming soon" page. Cards are not linked to a lesson deck screen yet,
- * so it goes to the whole due queue (/cards).
+ * What the big button on Home does. Published lessons can be read on the Learn tab (slice 3), so Continue leads there; the lesson player
+ * (Buddy teaching in chat) arrives in slice 4. Set to false to send the button to the due queue (/cards) instead.
  */
-export const LESSON_CONTENT_AVAILABLE = false;
+export const LESSON_CONTENT_AVAILABLE = true;
 
 export interface HomeAction {
   href: string;

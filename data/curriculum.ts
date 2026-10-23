@@ -9,7 +9,8 @@ export interface Session {
   grammar: string;
   theme: string;
   goal?: string;
-  phase: "zero" | "A1" | "A2" | "B1" | "exam";
+  // B2 and C1 are accepted so the plan can grow past B1 without a schema change (no content for them yet).
+  phase: "zero" | "A1" | "A2" | "B1" | "exam" | "B2" | "C1";
 }
 
 const L = (code: string, grammar: string, theme: string, goal?: string): Session => ({

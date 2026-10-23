@@ -1,0 +1,76 @@
+{
+  "batches": [
+    {
+      "stage": "generate-a",
+      "id": "msgbatch_013EBwhSjE2TwFPN2aepWxiz",
+      "fingerprint": "3663a0c4b399d855",
+      "submittedAt": "2026-10-22T00:21:46.787Z"
+    },
+    {
+      "stage": "generate-a",
+      "id": "msgbatch_012Q5JYzh1LFDwf7YGzyBeny",
+      "fingerprint": "66e7551d03344411",
+      "submittedAt": "2026-10-22T00:30:19.381Z"
+    },
+    {
+      "stage": "generate-b",
+      "id": "msgbatch_01PL7ditX51GbKd8dH8mqXXm",
+      "fingerprint": "195b387fb332ece3",
+      "submittedAt": "2026-10-22T00:30:20.486Z"
+    },
+    {
+      "stage": "generate-c",
+      "id": "msgbatch_01X1nc6aAVW3rDBvNjRast8W",
+      "fingerprint": "f8b487660b6af70d",
+      "submittedAt": "2026-10-22T00:30:21.633Z"
+    },
+    {
+      "stage": "generate-d",
+      "id": "msgbatch_011yGH7oTSd1LojXP6H5BXom",
+      "fingerprint": "42468236167da891",
+      "submittedAt": "2026-10-22T00:30:22.718Z"
+    },
+    {
+      "stage": "generate-b",
+      "id": "msgbatch_01Mv2jdrcYsLuJRNP5BnxDco",
+      "fingerprint": "65d6dbaf7d83d761",
+      "submittedAt": "2026-10-22T08:25:35.388Z"
+    },
+    {
+      "stage": "generate-c",
+      "id": "msgbatch_01LY9a9AuVfptJHv1mtpHFeL",
+      "fingerprint": "5458e35cc7ae4cb2",
+      "submittedAt": "2026-10-22T08:25:36.489Z"
+    },
+    {
+      "stage": "generate-d",
+      "id": "msgbatch_01MJj4C8qoALEbeLBiLPDBGb",
+      "fingerprint": "764274ce01730054",
+      "submittedAt": "2026-10-22T08:25:37.720Z"
+    },
+    {
+      "stage": "review",
+      "id": "msgbatch_01TWzAqbYVEBSy7237cPvsjL",
+      "fingerprint": "49644ae25783e9a2",
+      "submittedAt": "2026-10-22T12:47:49.384Z"
+    },
+    {
+      "stage": "review",
+      "id": "msgbatch_016YbRZbh5odZqExGdL4KbTd",
+      "fingerprint": "0515dfb467288cb8",
+      "submittedAt": "2026-10-22T14:29:31.394Z"
+    },
+    {
+      "stage": "review",
+      "id": "msgbatch_018rU7QjSXH994R5xCRXYLuk",
+      "fingerprint": "645aa8bf820a2dcf",
+      "submittedAt": "2026-10-22T22:13:41.278Z"
+    },
+    {
+      "stage": "review",
+      "id": "msgbatch_01SaERXiu9TfqZYLacB7yuo4",
+      "fingerprint": "a6dc7711416461a9",
+      "submittedAt": "2026-10-22T22:23:48.727Z"
+    }
+  ]
+}

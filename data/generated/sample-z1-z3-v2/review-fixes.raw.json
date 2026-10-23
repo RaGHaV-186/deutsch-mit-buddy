@@ -1,0 +1,41 @@
+{
+  "verdicts": {
+    "Z1": [
+      {
+        "id": "Z1#writing",
+        "status": "ok",
+        "reason": "Five sentences, 23 words with letters, all requirements and rubric points met.",
+        "fixed_json": null
+      }
+    ],
+    "Z2": [
+      {
+        "id": "Z2#vocabulary.w16",
+        "status": "ok",
+        "reason": "Article, plural, example and translation are correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z2#writing",
+        "status": "fixed",
+        "reason": "must_include, rubric and model answer require a question to a friend, but the task did not ask for one. Added it to the task.",
+        "fixed_json": "{\"task\":\"Introduce yourself in 3 to 5 short sentences. Write your name, where you are from and how you are. Then ask a friend a question.\",\"min_words\":20,\"must_include\":[\"Your name with Ich heiße…\",\"Where you are from with Ich komme aus…\",\"How you are with Mir geht es gut or Ich bin müde / hungrig / froh\",\"A question to a friend, for example Wie heißt du?\"],\"useful_phrases\":[\"Ich heiße …\",\"Ich komme aus …\",\"Ich bin müde.\",\"Mir geht es gut, danke.\",\"Wie heißt du?\"],\"model_answer\":\"Ich heiße Jonas. Ich komme aus Hamburg in Deutschland. Ich bin müde und hungrig. Mir geht es gut, danke. Wie heißt du?\",\"rubric\":[\"Uses Ich heiße… correctly for the name.\",\"Uses Ich komme aus… once, with a city or country.\",\"Uses sein correctly (ich bin, du bist) for feelings such as müde, hungrig, froh.\",\"Says how they are with Mir geht es gut, not Ich bin gut.\",\"Writes 3 to 5 short, complete sentences with capital letters and full stops.\"]}"
+      },
+      {
+        "id": "Z2#exam.reading.q1",
+        "status": "fixed",
+        "reason": "Distractor 'Lena' is a name, not a country. Replaced it with 'Italien'.",
+        "fixed_json": "{\"skill\":\"reading\",\"type\":\"multiple_choice\",\"prompt\":\"Where does Jonas come from?\",\"answer\":\"Österreich\",\"distractors\":[\"Deutschland\",\"Schweiz\",\"Italien\"],\"accepted_answers\":[],\"explanation\":\"The text says: Ich komme aus Österreich.\"}"
+      }
+    ],
+    "Z3": [
+      {
+        "id": "Z3#exam.gv3",
+        "status": "ok",
+        "reason": "Both natural orders accepted; chunks match exactly; explanation is true.",
+        "fixed_json": null
+      }
+    ]
+  },
+  "failures": []
+}

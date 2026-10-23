@@ -1,0 +1,182 @@
+{
+  "review-W1_1": {
+    "custom_id": "review-W1_1",
+    "result": {
+      "type": "succeeded",
+      "message": {
+        "model": "claude-opus-5-5",
+        "id": "msg_011CgHuxwjKrE7zHpDyCYp7m",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "thinking",
+            "thinking": "",
+            "signature": "CAQS0AkKEAgTGAI4AUIIdGhpbmtpbmcSDLIHkJHtM9hSHtkU9BoMn8HYIFCpCWCONsrwIjBr+8krAUUhiXspiD6uAw4iiCpbebUHmGY1Gtiyio2uLLo+iCAtR7CbA/4oyhD7hREq7Qg8i26LUmg0uCQENiB9J3AywuLLQsrdh/Tv7m5Jnw6j12wTPcaszzXr1rZposlMN+h7pBTz3j0tuWjJ7wNJtODpiiYH/Dcsfc6Act8gjPomescI9kkhs2Az2yiBzM/4tjOhaIOnl+7KGpgOMEZ+Y4QfPvjWT/6x4ueekS0NvLMdJdInpNiGNU7HlUK6PT0nsWeZXpp88l5KB2UOCb63fpUL/c2kW9EYXLN/AEQOeXEiV4J4y8e2c3aoBWsGQHEvq1ROI1HyDpsIFaL5ZrVBnTnXxZlPNldlSZCQXKUsuDnG2PIhHnMb+eoEe8gLqyGMPWPKLWIDq0TXzrK14MUbRU5muANr3JX6Ky/x9wJ4z8cv3R+5ERIzsd/NZQjQ50IGz0NsAE/9kP00fFJwtynNOT/POcXuzi+8T6zBqBWxRnKANwtAiXFO031i56KQWyZuPlXfIq8UTY4jdhIAo8bU+A5zXvy1oP1C8idNnyMNbCqtDfFq+nV03BUKVfdYmC9IcsaJakKF6Qu0pkWY3VjGWcZoacVqiqYiNhHtWsw6+9dKCc7cy11z1rMI3PmTk5ufzeSpdzG7N5GaZwVHM92LBchFXZ4ATLdxu0Ks1mz/2Brtj9ydWzDD5XhZH+PqgislsBYuoJroWVA78YcytnBWjAI3sAsqvRr8dHGrKKDofrEtqmT0IaPs3+tPQrJC94PX9sUeGxVcL0TnGl3rEh00OS/rvY1yOUMtdDsLtnRU8FNSN3LnDwjKKI12jq8Ktn6Ig6NIjZwFQ2cmUZOXIDH6InIvaalsK/AfnvRnr0zyyovKsIL0FL8ODFsBAOcdX/LXDdU/Bu/KX0ahvPAQppnSrWwGb7kqEPtnmBHZxiiT9Ar+uN4j+OvDlhWtefYTA0li9rijr8nI2o41avAkpS2iuX8xElQ/f7FgGRLfr+vEYEbgcVJvOPjWyflurDNyv4De1EH39VAImC/Vz4Ctn6EzzXmRHO0riFwhBJtcSdycQP4rjX6pi7KSygIBjLtO17aYdWJnAdHpq6L2Koso2svdzSU13Q4UC6TV4+R3wlrSSyu9FU1DzMEJjU/eHLfrAw+2+fuVArT9wLJyN42P1pRRfA7hAAuRrqtOQLcL7qZ9aJZKX6r773mVB+2lHtukv1jLk65uZ/HS+iSjy3GnuOwcNsMKyNc8gVLBx/23cqOiUxLMhv+ASpl2xhObJGjmTs2WUXlRaQQo1o20L8WgATGCSJ0sx0iM1TiGNqyLs4XSyUrx9qb3C3VCCoWiaXFccQIR78WP3vAOgi3ygo3xGaLW3bZnd4wVz63ibxPwnVpQDx6c9ioTqzki2ADfyDEK4w1Y10mD5upqKVf5ZimYbpgyG6meu9IO1UfICq49L+D32dqk6YnBw5hsV4deB2zlS708uXO2dRa/+gK3zkPF2Hrs9hiLH2SiNECO3K1lROeXGOh0dfavmXkZzYfYtKZNUig6G2fWYEQHV/1+OTXTeBzJOwV58eVzvR4n+C5J33we2hgB"
+          },
+          {
+            "type": "text",
+            "text": "{\"verdicts\":[{\"id\":\"W1.1#culture\",\"status\":\"fixed\",\"reason\":\"The surname Weber appeared outside formal Herr/Frau address ('ich heiße Anna Weber'), which breaks the names rule. Changed the example to 'ich heiße Anna.' The rest is accurate.\",\"fixed_json\":\"{\\\"title\\\":\\\"Du or Sie? Introducing yourself\\\",\\\"note\\\":\\\"In German-speaking countries, people usually shake hands when they meet for the first time in a formal situation, and they often say their name: \\\\\\\"Guten Tag, ich heiße Anna.\\\\\\\" With adults you do not know, at work or in shops, you use Sie and often the last name, for example \\\\\\\"Frau Weber\\\\\\\" or \\\\\\\"Herr Weber\\\\\\\". Friends, family, children and many fellow students say du and use first names. Among young people and in many workplaces, people switch to du quickly, but it is polite to wait until the other person offers it. When in doubt, start with Sie. A small, friendly \\\\\\\"Freut mich!\\\\\\\" is a good answer after you hear someone's name.\\\",\\\"reflection_question\\\":\\\"How do people in your country greet each other when they meet for the first time, and does your language also have a formal and an informal \\\\\\\"you\\\\\\\"?\\\"}\"}]}"
+          }
+        ],
+        "container": null,
+        "stop_reason": "end_turn",
+        "stop_sequence": null,
+        "stop_details": null,
+        "usage": {
+          "input_tokens": 4315,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 711,
+          "service_tier": "standard",
+          "inference_geo": "global",
+          "speed": "standard",
+          "output_tokens_details": {
+            "thinking_tokens": 283
+          }
+        },
+        "diagnostics": null,
+        "parsed_output": null
+      }
+    }
+  },
+  "review-Z10": {
+    "custom_id": "review-Z10",
+    "result": {
+      "type": "succeeded",
+      "message": {
+        "model": "claude-opus-5-5",
+        "id": "msg_011CgHuxwqH61k18V76tKMTz",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "thinking",
+            "thinking": "",
+            "signature": "CAQS7gkKEAgTGAI4AUIIdGhpbmtpbmcSDBX6lr17IQJ5UhqAIhoMX8l3L/lWubQyoXQEIjAl7vLHMjkEiHmk9ZmxXizC1T79Uj9k5mt1BiLg959WHUT6j0l0UCiB0jn6sJRnQmMqiwlgUV4eoLrphns4eLTZW8W/SOzBWcIw6cjnOHNBHURpo1eYibm59J5bj5A+OQVTYWrPDEtCs2gSQ2Eto5r9003tWh96293ZD1/EH+x8/ybtyO759ReMN8oQQkc1s64UXaJB8lkrizarCBUI0zpP0+EF0FSV3JKnStbK8ssaQrDSpiQQhOXy4YNfyHohrWz/Hbd9eYpMUz0soj0CYAa7jpwrJBblYrcYRw3AZmtDVnLTqejSpwb+Ilwd/d/zO7Fe6kNWecPk2tLgAUu4hC1o3AobHnONfPDKMZrXtPgyWN/jYwQlraNbgm+AXB+dYtLTKI2qx5uqAP1NDwa5ZnbUBYw/X9dvlvEa2/nOXK2p9XAO/jTpU7q4EnW3QMS3mYRhJTaEZjIv/gwYI45wqHQg9ijLN4P/8KRf0tEIo+XWDwtWKs0f8ej4brzCU6OeyziDqjJDgDzampsiFjp0W2H4Tpl3MWLS/IzjlchXr4Za2q1iZrRBVAlffAq/PN9tPnSBANIkmeBpN6P7DVxzTUpifGjkn5yrj7kBMY5CRWL8ZBZ2kKIl11GTgH5Z2vpzoM9nyzf4qvBXZgln0zXz8DSgj5ffAP7y5RaqVWQj0yFrOCn7FUrDhnVHAyFF7UagK6Sq5GV+sx0uJJ40H98m/4g3DsQzdE13GBaN8EHpOFu6/ppF4kFOcsdPJhNTjsR8Mc23LwngpLXx1/E8Y6J8gD4rM3swmfxxtriy4Gh/zWIKWCSJrmsrnIJWJis8D6PL7tGJsw7EgYgZBFj22oBtz+hGzWtSn5yyP/6+GSxwh5LRSVDYio5Q2GgAR45JyHvFprWW3AzZnG6h+bt7xJs0iURKxA1UasvsrnL+wiTDFhql0FlazO1GxMsHxHNIE9VUVImPRMkhLOBwzXb72S24LlPaIdT8jxT823VlxajvqvOZjyeHGf8CWzTicQHXPw9tmrq2l1PsHxPI3cWmaHbELN9og+ku/ZlbHZVZcf5ZMaXfXHK3zOg38hqYLUCFc7s/KihYaMXYaXhcpQKcdGreFT3PBaudB7YrZTIQQQUzWgrsq+XzxKVaKGt2qifQrvHJ4BO4iGJNlAgaAD9hJepuw/6+jqk+SXI9y4UckEZJQEsF41QkzQEdm71x6gFe+UA0soyyYqggSmh9uQ1q8zsF3EkdId1uFXWBa8ZGfSiq6yYz5jHhVouHO1qgelWaBBH2bsE23DUeiMIhOpBFLvvQySf5E9BGw/EKJzIAgX0xx8pLFP8o2nV0pkb/Ig9AHVuaB6excMEydomq++nLqVa5Q969sPWphCFhswW9MOpKmr9hrj6AF+/RG/F0lwLNV99otj9sIjPICf9s5MZg13/rP3j63yd6DADn86rINfnLr/Ip0u0vhMUw4u2HMCsM6t5WuX6chbeyvdYl/L9F+dO/24InMa00LeyqCWXUKCObr1rWfDfYHM2HpajoG7uu1tmd5Bzy6fLlwuG7htGJRTSS80UUoOV2Yv0vDVWBPEeFw+V7Go49RyGoCVwPFTITZz5hBr5O2/P4EwzbmwGokW8INxgB"
+          },
+          {
+            "type": "text",
+            "text": "{\"verdicts\":[{\"id\":\"Z10#vocabulary.w08\",\"status\":\"ok\",\"reason\":\"Article, plural, example and tip are correct; the surname is allowed.\",\"fixed_json\":null},{\"id\":\"Z10#vocabulary.w09\",\"status\":\"ok\",\"reason\":\"Article, plural, example and tip are correct; the surname is allowed.\",\"fixed_json\":null},{\"id\":\"Z10#exam.gv2\",\"status\":\"ok\",\"reason\":\"Only 'bestellen' fits formal Sie; the distractors are plausible.\",\"fixed_json\":null}]}"
+          }
+        ],
+        "container": null,
+        "stop_reason": "end_turn",
+        "stop_sequence": null,
+        "stop_details": null,
+        "usage": {
+          "input_tokens": 4476,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 498,
+          "service_tier": "standard",
+          "inference_geo": "global",
+          "speed": "standard",
+          "output_tokens_details": {
+            "thinking_tokens": 307
+          }
+        },
+        "diagnostics": null,
+        "parsed_output": null
+      }
+    }
+  },
+  "review-W2_4": {
+    "custom_id": "review-W2_4",
+    "result": {
+      "type": "succeeded",
+      "message": {
+        "model": "claude-opus-5-5",
+        "id": "msg_011CgHuxwnnz37MbxyiXYeaZ",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "thinking",
+            "thinking": "",
+            "signature": "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"
+          },
+          {
+            "type": "text",
+            "text": "{\"verdicts\":[{\"id\":\"W2.4#writing\",\"status\":\"ok\",\"reason\":\"Model answer has 5 sentences, 41 words, and meets every requirement.\",\"fixed_json\":null}]}"
+          }
+        ],
+        "container": null,
+        "stop_reason": "end_turn",
+        "stop_sequence": null,
+        "stop_details": null,
+        "usage": {
+          "input_tokens": 4417,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 802,
+          "service_tier": "standard",
+          "inference_geo": "global",
+          "speed": "standard",
+          "output_tokens_details": {
+            "thinking_tokens": 733
+          }
+        },
+        "diagnostics": null,
+        "parsed_output": null
+      }
+    }
+  },
+  "review-W3_2": {
+    "custom_id": "review-W3_2",
+    "result": {
+      "type": "succeeded",
+      "message": {
+        "model": "claude-opus-5-5",
+        "id": "msg_011CgHuyUvna3B8gTiegmdob",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "thinking",
+            "thinking": "",
+            "signature": "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"
+          },
+          {
+            "type": "text",
+            "text": "{\"verdicts\":[{\"id\":\"W3.2#reading.passage\",\"status\":\"ok\",\"reason\":\"Correct Perfekt with sein, natural German, 50 words, on theme.\",\"fixed_json\":null},{\"id\":\"W3.2#reading.q3\",\"status\":\"ok\",\"reason\":\"One correct answer from the text; distractors plausible and false.\",\"fixed_json\":null},{\"id\":\"W3.2#listening.passage\",\"status\":\"ok\",\"reason\":\"Natural dialogue, correct Perfekt with sein, suitable length.\",\"fixed_json\":null},{\"id\":\"W3.2#listening.q4\",\"status\":\"ok\",\"reason\":\"Answer matches the script; distractors are clearly false.\",\"fixed_json\":null},{\"id\":\"W3.2#listening.q5\",\"status\":\"ok\",\"reason\":\"Answer matches the script; distractors plausible and false.\",\"fixed_json\":null}]}"
+          }
+        ],
+        "container": null,
+        "stop_reason": "end_turn",
+        "stop_sequence": null,
+        "stop_details": null,
+        "usage": {
+          "input_tokens": 4969,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 745,
+          "service_tier": "standard",
+          "inference_geo": "global",
+          "speed": "standard",
+          "output_tokens_details": {
+            "thinking_tokens": 457
+          }
+        },
+        "diagnostics": null,
+        "parsed_output": null
+      }
+    }
+  }
+}

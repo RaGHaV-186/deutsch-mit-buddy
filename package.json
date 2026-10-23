@@ -11,7 +11,11 @@
     "test:watch": "vitest",
     "test:rls": "vitest run --project rls",
     "db:start": "supabase start",
-    "db:reset": "supabase db reset"
+    "db:reset": "supabase db reset",
+    "seed:curriculum": "node --env-file=.env.local --no-warnings scripts/seed-curriculum.mts",
+    "content": "node --env-file=.env.local --no-warnings scripts/content.mts",
+    "backup": "node --no-warnings scripts/backup.mts",
+    "check:bundle": "node --no-warnings scripts/check-client-bundle.mts"
   },
   "dependencies": {
     "@sentry/nextjs": "^11.8.0",
@@ -24,6 +28,7 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^1.0.0",
     "@tailwindcss/turbopack": "^4",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",

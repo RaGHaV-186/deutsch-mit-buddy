@@ -1,0 +1,522 @@
+{
+  "lessons": {
+    "Z1": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which phrase means \"Goodbye\" in German?",
+            "answer": "Auf Wiedersehen!",
+            "distractors": [
+              "Guten Abend!",
+              "Guten Morgen!",
+              "Hallo!"
+            ],
+            "accepted_answers": [],
+            "explanation": "\"Auf Wiedersehen!\" is the German way to say goodbye."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "It is the evening. You say: Guten ___!",
+            "answer": "Abend",
+            "distractors": [
+              "Morgen",
+              "Nacht",
+              "Lehrer"
+            ],
+            "accepted_answers": [],
+            "explanation": "The evening greeting is \"Guten Abend\"."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which word has sch, which sounds like English \"sh\" in \"shoe\"?",
+            "answer": "Schule",
+            "distractors": [
+              "Tschüs",
+              "Deutsch"
+            ],
+            "accepted_answers": [],
+            "explanation": "Schule has sch (English \"sh\"), but Tschüs and Deutsch have tsch (English \"ch\")."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "How is ie said in the word \"Wie\"?",
+            "answer": "Like English \"ee\" in \"see\"",
+            "distractors": [
+              "Like English \"eye\"",
+              "Like English \"ay\" in \"day\""
+            ],
+            "accepted_answers": [],
+            "explanation": "German ie sounds like English \"ee\", while ei sounds like English \"eye\"."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "How do you write that?",
+            "answer": "Wie schreibt man das?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "You ask \"Wie schreibt man das?\" when you want to know the spelling."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Auf Wiedersehen, Jonas!",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Write ie in \"Wiedersehen\" and put a comma before the name."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Guten Tag! Ich bin Anna. Ich buchstabiere meinen Namen: A-N-N-A. Tschüs!"
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What does Anna do in the text?",
+              "answer": "She spells her name.",
+              "distractors": [
+                "She asks for a teacher.",
+                "She says good night."
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says \"Ich buchstabiere meinen Namen\", so she spells her name."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "How does Anna say goodbye?",
+              "answer": "Tschüs!",
+              "distractors": [
+                "Hallo!",
+                "Guten Tag!"
+              ],
+              "accepted_answers": [],
+              "explanation": "The last word of the text is \"Tschüs!\"."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Jonas",
+                "de": "Guten Abend! Wie ist Ihr Name?",
+                "en": "Good evening! What is your name?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Mein Name ist Anna. A-N-N-A.",
+                "en": "My name is Anna. A-N-N-A."
+              },
+              {
+                "speaker": "Jonas",
+                "de": "Ja, Anna. Auf Wiedersehen!",
+                "en": "Yes, Anna. Goodbye!"
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What does Jonas ask Anna?",
+              "answer": "Her name",
+              "distractors": [
+                "Her teacher",
+                "Her age"
+              ],
+              "accepted_answers": [],
+              "explanation": "Jonas asks \"Wie ist Ihr Name?\"."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "How does Anna spell her name?",
+              "answer": "A-N-N-A",
+              "distractors": [
+                "A-N-A",
+                "A-N-N-E",
+                "E-N-N-A"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna spells her name A-N-N-A."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 to 3 short sentences in German. Greet someone, say your name and spell it letter by letter, then say goodbye.",
+          "min_words": 15,
+          "rubric": [
+            "Uses a correct greeting such as Hallo or Guten Tag",
+            "Says the name with Ich heiße or Mein Name ist",
+            "Spells the name letter by letter",
+            "Uses a correct goodbye such as Tschüs or Auf Wiedersehen",
+            "Correct spelling and capital letters"
+          ]
+        },
+        "speaking": {
+          "prompt": "Say hello to your teacher, say your name and spell it aloud. Then say goodbye.",
+          "target_hint": "Guten Tag! Ich heiße ... Das schreibt man ... Auf Wiedersehen!"
+        }
+      }
+    },
+    "Z2": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena: Ich ___ Lena.",
+            "answer": "heiße",
+            "distractors": [
+              "heißt",
+              "heißen",
+              "bist"
+            ],
+            "accepted_answers": [],
+            "explanation": "With ich, heißen becomes heiße."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Jonas, du ___ müde.",
+            "answer": "bist",
+            "distractors": [
+              "bin",
+              "ist",
+              "kommst"
+            ],
+            "accepted_answers": [],
+            "explanation": "The verb sein goes with du as bist."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "You meet an adult you do not know. How do you ask for the name?",
+            "answer": "Wie heißen Sie?",
+            "distractors": [
+              "Wie heißt du?",
+              "Wie geht es dir?",
+              "Woher kommst du?"
+            ],
+            "accepted_answers": [],
+            "explanation": "Use Sie with adults you do not know well."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "How do you say that you are fine?",
+            "answer": "Mir geht es gut.",
+            "distractors": [
+              "Ich bin gut.",
+              "Ich heiße gut.",
+              "Ich komme gut."
+            ],
+            "accepted_answers": [],
+            "explanation": "Well-being uses Mir geht es gut, not Ich bin gut."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "aus / Anna / Spanien / kommt",
+            "answer": "Anna kommt aus Spanien.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "The verb kommt is in second place, and aus goes before the country."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Translate: I am hungry.",
+            "answer": "Ich bin hungrig.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Ich goes with bin, and hungrig is a state with sein."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Hallo! Ich heiße Jonas. Ich komme aus Österreich. Die Stadt heißt Wien. Heute bin ich müde, aber mir geht es gut."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "Where does Jonas come from?",
+              "answer": "Österreich",
+              "distractors": [
+                "Deutschland",
+                "Wien ist ein Freund",
+                "Lena"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: Ich komme aus Österreich."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "How is Jonas today?",
+              "answer": "He is tired, but fine.",
+              "distractors": [
+                "He is hungry.",
+                "He is happy and not tired.",
+                "He is not fine."
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says: Ich bin müde, aber mir geht es gut."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Lena",
+                "de": "Hallo, ich heiße Lena. Wie heißt du?",
+                "en": "Hello, my name is Lena. What is your name?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Ich heiße Anna. Ich komme aus Deutschland.",
+                "en": "My name is Anna. I come from Germany."
+              },
+              {
+                "speaker": "Lena",
+                "de": "Wie geht es dir?",
+                "en": "How are you?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Danke, mir geht es gut.",
+                "en": "Thanks, I am fine."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "Where does Anna come from?",
+              "answer": "Deutschland",
+              "distractors": [
+                "Spanien",
+                "Wien",
+                "Österreich"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says: Ich komme aus Deutschland."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "How is Anna?",
+              "answer": "She is fine.",
+              "distractors": [
+                "She is hungry.",
+                "She is tired.",
+                "She is sad."
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says: Mir geht es gut."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 or 3 simple sentences in German about yourself. Say your name, where you come from, and how you are. Use ich heiße, ich komme aus and mir geht es gut or ich bin müde.",
+          "min_words": 15,
+          "rubric": [
+            "Says the name with Ich heiße…",
+            "Says the country or city with Ich komme aus…",
+            "Says how they are with Mir geht es gut or Ich bin müde/hungrig/froh, and does not use Ich bin gut",
+            "Uses correct verb forms and capital letters for nouns"
+          ]
+        },
+        "speaking": {
+          "prompt": "Say hello to a new friend. Tell your name, where you come from, and how you are.",
+          "target_hint": "Hallo! Ich heiße … Ich komme aus … Mir geht es gut."
+        }
+      }
+    },
+    "Z3": {
+      "exam": {
+        "grammar_vocab": [
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which number is 53?",
+            "answer": "dreiundfünfzig",
+            "distractors": [
+              "fünfunddreißig",
+              "dreiundsechzig",
+              "fünfzehn"
+            ],
+            "accepted_answers": [],
+            "explanation": "In 53 you say the small number first: drei + und + fünfzig."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena ist siebenundzwanzig ___ alt.",
+            "answer": "Jahre",
+            "distractors": [
+              "Jahr",
+              "Euro",
+              "Nummer"
+            ],
+            "accepted_answers": [],
+            "explanation": "Age is said with Jahre alt after a number above one."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Nummer / Meine / ist / null / acht / drei",
+            "answer": "Meine Nummer ist null acht drei.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "The phrase starts with Meine Nummer ist, then the digits one by one."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "How old are you? (to a friend)",
+            "answer": "Wie alt bist du?",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Wie alt bist du? is the question for age with a friend."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which word means the street where you live?",
+            "answer": "die Straße",
+            "distractors": [
+              "die Stadt",
+              "die E-Mail",
+              "der Geburtstag"
+            ],
+            "accepted_answers": [],
+            "explanation": "Die Straße is the street; die Stadt is the city."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Jonas ist vierundsechzig Jahre alt.",
+            "distractors": [],
+            "accepted_answers": [],
+            "explanation": "Write the small number first: vier + und + sechzig."
+          }
+        ],
+        "reading": {
+          "passage": {
+            "text": "Das ist Jonas. Er ist sechsunddreißig Jahre alt. Seine Telefonnummer ist null eins sieben drei. Seine Stadt ist schön."
+          },
+          "questions": [
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "How old is Jonas?",
+              "answer": "36",
+              "distractors": [
+                "63",
+                "26",
+                "46"
+              ],
+              "accepted_answers": [],
+              "explanation": "Sechsunddreißig means six and thirty, so 36."
+            },
+            {
+              "skill": "reading",
+              "type": "multiple_choice",
+              "prompt": "What is Jonas's phone number?",
+              "answer": "0173",
+              "distractors": [
+                "0137",
+                "0713",
+                "1073"
+              ],
+              "accepted_answers": [],
+              "explanation": "The text says null eins sieben drei, so 0173."
+            }
+          ]
+        },
+        "listening": {
+          "passage": {
+            "script": [
+              {
+                "speaker": "Lena",
+                "de": "Wie alt bist du, Anna?",
+                "en": "How old are you, Anna?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Ich bin achtundzwanzig Jahre alt.",
+                "en": "I am twenty-eight years old."
+              },
+              {
+                "speaker": "Lena",
+                "de": "Wie ist deine Nummer?",
+                "en": "What is your number?"
+              },
+              {
+                "speaker": "Anna",
+                "de": "Meine Nummer ist null neun vier sechs.",
+                "en": "My number is zero nine four six."
+              }
+            ]
+          },
+          "questions": [
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "How old is Anna?",
+              "answer": "28",
+              "distractors": [
+                "82",
+                "18",
+                "38"
+              ],
+              "accepted_answers": [],
+              "explanation": "Achtundzwanzig means eight and twenty, so 28."
+            },
+            {
+              "skill": "listening",
+              "type": "multiple_choice",
+              "prompt": "What is Anna's number?",
+              "answer": "0946",
+              "distractors": [
+                "0964",
+                "0496",
+                "0649"
+              ],
+              "accepted_answers": [],
+              "explanation": "Anna says null neun vier sechs, so 0946."
+            }
+          ]
+        },
+        "writing": {
+          "task": "Write 2 or 3 short sentences about yourself in German. Say how old you are and give your phone number. Use Ich bin ... Jahre alt. and Meine Nummer ist ...",
+          "min_words": 15,
+          "rubric": [
+            "Says age with Ich bin ... Jahre alt.",
+            "Gives a phone number digit by digit with German number words",
+            "Uses correct number words and short, simple sentences"
+          ]
+        },
+        "speaking": {
+          "prompt": "Say how old you are and say your phone number out loud in German.",
+          "target_hint": "Ich bin ... Jahre alt. Meine Nummer ist ..."
+        }
+      }
+    }
+  },
+  "failures": []
+}

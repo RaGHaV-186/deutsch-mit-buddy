@@ -1,0 +1,1671 @@
+{
+  "lessons": {
+    "Z1": {
+      "goal": {
+        "can_do": "I can say the German letters and sounds, spell my name aloud, and greet people and say goodbye."
+      },
+      "warmup": {
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "How does German 'ie' sound in 'Wiedersehen'?",
+            "answer": "like a long 'ee'",
+            "distractors": [
+              "like English 'eye'",
+              "like a short 'e'"
+            ],
+            "explanation": "In German, 'ie' is a long 'ee' sound."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "How does German 'sch' sound in 'Tschüs'?",
+            "answer": "like English 'sh'",
+            "distractors": [
+              "like English 'k'",
+              "like English 's'"
+            ],
+            "explanation": "The letters 'sch' always sound like English 'sh'."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "How does German 'z' sound in 'zehn'?",
+            "answer": "like 'ts' in 'cats'",
+            "distractors": [
+              "like 'z' in 'zoo'",
+              "like 's' in 'sun'"
+            ],
+            "explanation": "German 'z' is always a 'ts' sound."
+          }
+        ]
+      },
+      "grammar": {
+        "intro": {
+          "title": "The German alphabet and sounds",
+          "explanation": [
+            "German has 26 letters like English, plus ä, ö, ü and ß. The dots on ä, ö, ü change the sound. ß is a sharp 's' that comes after a long vowel, as in 'heißen'.",
+            "Some letters sound different from English. Z sounds like 'ts', W sounds like English 'v', and V usually sounds like English 'f' (as in 'vier'). The letters ei sound like English 'eye' ('nein'). The letters ie sound like a long 'ee' ('Wiedersehen'). Sch sounds like 'sh', and ch is a soft breath sound ('ich') or a rough sound at the back of the throat ('Nacht').",
+            "To spell a name (buchstabieren), say each letter name one after the other: 'Lena' is L – E – N – A. You can ask: 'Wie buchstabiert man das?'"
+          ],
+          "rule_summary": "Z = 'ts', W = 'v', ei = 'eye', ie = 'ee', sch = 'sh', ß = sharp 's'; spell names letter by letter."
+        },
+        "examples": [
+          {
+            "de": "Ich heiße Anna.",
+            "en": "My name is Anna.",
+            "note": "ei sounds like English 'eye'; ß is a sharp 's'."
+          },
+          {
+            "de": "Mein Name ist Lena: L – E – N – A.",
+            "en": "My name is Lena: L – E – N – A.",
+            "note": "Say each letter name: L is 'ell', E is 'ay', N is 'en', A is 'ah'."
+          },
+          {
+            "de": "Auf Wiedersehen, Jonas!",
+            "en": "Goodbye, Jonas!",
+            "note": "W sounds like English 'v'; ie sounds like 'ee'."
+          },
+          {
+            "de": "Tschüs, Anna!",
+            "en": "Bye, Anna!",
+            "note": "tsch sounds like 'ch' in 'church'; ü needs rounded lips."
+          },
+          {
+            "de": "Wie buchstabiert man das?",
+            "en": "How do you spell that?",
+            "note": "Useful when you do not know a word."
+          },
+          {
+            "de": "Das ist ein Ö.",
+            "en": "That is an Ö.",
+            "note": "Ö is said with rounded lips, like English 'er' with round lips."
+          }
+        ],
+        "traps": [
+          {
+            "wrong": "Ich heisse Anna.",
+            "right": "Ich heiße Anna.",
+            "why": "In Germany we write ß after a long vowel or diphthong like 'ei'."
+          },
+          {
+            "wrong": "Tschues!",
+            "right": "Tschüs!",
+            "why": "Ü is its own letter; 'ue' is only an emergency spelling."
+          },
+          {
+            "wrong": "Wie heiße du?",
+            "right": "Wie heißt du?",
+            "why": "After 'du' the verb ends in -st."
+          }
+        ]
+      },
+      "exercises": {
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ Anna.",
+            "answer": "heiße",
+            "distractors": [
+              "heißt",
+              "heißen"
+            ],
+            "explanation": "After 'ich' the verb ends in -e."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Gute ___!",
+            "answer": "Nacht",
+            "distractors": [
+              "Morgen",
+              "Tag"
+            ],
+            "explanation": "We say 'Gute Nacht' before going to bed."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Wie ___ du?",
+            "answer": "heißt",
+            "distractors": [
+              "heiße",
+              "heißen"
+            ],
+            "explanation": "After 'du' the verb ends in -st."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Auf ___!",
+            "answer": "Wiedersehen",
+            "distractors": [
+              "Wiedersein",
+              "Wiederhallo"
+            ],
+            "explanation": "'Auf Wiedersehen' means goodbye."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Ja oder ___?",
+            "answer": "nein",
+            "distractors": [
+              "danke",
+              "bitte"
+            ],
+            "explanation": "'Nein' is the opposite of 'ja'."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "___ Morgen, Jonas!",
+            "answer": "Guten",
+            "distractors": [
+              "Gute",
+              "Guter"
+            ],
+            "explanation": "The greeting is 'Guten Morgen'."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which letter is the German 'sharp s'?",
+            "answer": "ß",
+            "distractors": [
+              "ä",
+              "ö",
+              "ü"
+            ],
+            "explanation": "ß is the sharp s, as in 'heißen'."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "How do you say 'ei' in 'nein'?",
+            "answer": "like English 'eye'",
+            "distractors": [
+              "like 'ee'",
+              "like 'ay'"
+            ],
+            "explanation": "German 'ei' sounds like English 'eye'."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which word has the long 'ee' sound?",
+            "answer": "Wiedersehen",
+            "distractors": [
+              "nein",
+              "heiße"
+            ],
+            "explanation": "The letters 'ie' sound like a long 'ee'."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "How is German W in 'Wiedersehen' pronounced?",
+            "answer": "like English 'v'",
+            "distractors": [
+              "like English 'w'",
+              "like English 'y'"
+            ],
+            "explanation": "German W sounds like English 'v'."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "heiße / Ich / Lena",
+            "answer": "Ich heiße Lena.",
+            "distractors": [],
+            "explanation": "The sentence starts with 'Ich', then the verb."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "du / heißt / Wie",
+            "answer": "Wie heißt du?",
+            "distractors": [],
+            "explanation": "In a question with 'wie', the verb comes second."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Nacht! / Gute",
+            "answer": "Gute Nacht!",
+            "distractors": [],
+            "explanation": "The greeting is 'Gute Nacht'."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Hello!",
+            "answer": "Hallo!",
+            "distractors": [],
+            "explanation": "'Hallo' is the usual informal greeting."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "My name is Jonas.",
+            "answer": "Ich heiße Jonas.",
+            "distractors": [],
+            "explanation": "Literally 'I am called Jonas'."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Good morning!",
+            "answer": "Guten Morgen!",
+            "distractors": [],
+            "explanation": "We use 'Guten Morgen' in the morning."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Hallo, ich heiße Lena.",
+            "distractors": [],
+            "explanation": "Remember the comma after 'Hallo'."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Guten Abend, Anna!",
+            "distractors": [],
+            "explanation": "Nouns like 'Abend' and names start with a capital letter."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Auf Wiedersehen!",
+            "distractors": [],
+            "explanation": "'Wiedersehen' is written with 'ie' and 'W'."
+          }
+        ]
+      },
+      "vocabulary": {
+        "words": [
+          {
+            "tier": "core",
+            "en": "hello",
+            "article": null,
+            "de": "Hallo",
+            "plural": null,
+            "example": "Hallo, Anna!",
+            "example_en": "Hello, Anna!",
+            "tip": "Informal greeting, used all day."
+          },
+          {
+            "tier": "core",
+            "en": "bye (informal)",
+            "article": null,
+            "de": "Tschüs",
+            "plural": null,
+            "example": "Tschüs, Jonas!",
+            "example_en": "Bye, Jonas!",
+            "tip": "Say 'tsch' like English 'ch'."
+          },
+          {
+            "tier": "core",
+            "en": "name",
+            "article": "der",
+            "de": "Name",
+            "plural": "die Namen",
+            "example": "Mein Name ist Lena.",
+            "example_en": "My name is Lena.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "letter (of the alphabet)",
+            "article": "der",
+            "de": "Buchstabe",
+            "plural": "die Buchstaben",
+            "example": "Das ist ein Buchstabe.",
+            "example_en": "That is a letter.",
+            "tip": "Nouns ending in -e are often 'die', but not this one."
+          },
+          {
+            "tier": "core",
+            "en": "morning",
+            "article": "der",
+            "de": "Morgen",
+            "plural": "die Morgen",
+            "example": "Guten Morgen, Anna!",
+            "example_en": "Good morning, Anna!",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "day",
+            "article": "der",
+            "de": "Tag",
+            "plural": "die Tage",
+            "example": "Guten Tag, Lena!",
+            "example_en": "Hello, Lena! (lit. good day)",
+            "tip": "Pronounced 'Tahk'."
+          },
+          {
+            "tier": "core",
+            "en": "evening",
+            "article": "der",
+            "de": "Abend",
+            "plural": "die Abende",
+            "example": "Guten Abend, Jonas!",
+            "example_en": "Good evening, Jonas!",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "night",
+            "article": "die",
+            "de": "Nacht",
+            "plural": "die Nächte",
+            "example": "Gute Nacht, Anna!",
+            "example_en": "Good night, Anna!",
+            "tip": "'Nacht' is feminine, so 'Gute'."
+          },
+          {
+            "tier": "core",
+            "en": "yes",
+            "article": null,
+            "de": "ja",
+            "plural": null,
+            "example": "Ja, ich heiße Lena.",
+            "example_en": "Yes, my name is Lena.",
+            "tip": "J sounds like English 'y'."
+          },
+          {
+            "tier": "core",
+            "en": "no",
+            "article": null,
+            "de": "nein",
+            "plural": null,
+            "example": "Nein, danke.",
+            "example_en": "No, thank you.",
+            "tip": "ei sounds like 'eye'."
+          },
+          {
+            "tier": "core",
+            "en": "thank you",
+            "article": null,
+            "de": "danke",
+            "plural": null,
+            "example": "Danke, Anna!",
+            "example_en": "Thank you, Anna!",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "please / you're welcome",
+            "article": null,
+            "de": "bitte",
+            "plural": null,
+            "example": "Bitte, Jonas.",
+            "example_en": "Please, Jonas. / You're welcome, Jonas.",
+            "tip": "One word for both 'please' and 'you're welcome'."
+          },
+          {
+            "tier": "bonus",
+            "en": "to be called",
+            "article": null,
+            "de": "heißen",
+            "plural": "ich heiße · du heißt · er heißt",
+            "example": "Ich heiße Jonas.",
+            "example_en": "My name is Jonas.",
+            "tip": "The ß stays; 'du heißt' has only one s."
+          },
+          {
+            "tier": "bonus",
+            "en": "to spell",
+            "article": null,
+            "de": "buchstabieren",
+            "plural": "ich buchstabiere · du buchstabierst · er buchstabiert",
+            "example": "Ich buchstabiere meinen Namen.",
+            "example_en": "I spell my name.",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "alphabet",
+            "article": "das",
+            "de": "Alphabet",
+            "plural": "die Alphabete",
+            "example": "Das Alphabet hat 26 Buchstaben.",
+            "example_en": "The alphabet has 26 letters.",
+            "tip": "Plus ä, ö, ü and ß."
+          },
+          {
+            "tier": "bonus",
+            "en": "word",
+            "article": "das",
+            "de": "Wort",
+            "plural": "die Wörter",
+            "example": "Das Wort ist neu.",
+            "example_en": "The word is new.",
+            "tip": "Plural has an umlaut: Wörter."
+          },
+          {
+            "tier": "bonus",
+            "en": "first name",
+            "article": "der",
+            "de": "Vorname",
+            "plural": "die Vornamen",
+            "example": "Mein Vorname ist Anna.",
+            "example_en": "My first name is Anna.",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "last name",
+            "article": "der",
+            "de": "Nachname",
+            "plural": "die Nachnamen",
+            "example": "Wie ist dein Nachname?",
+            "example_en": "What is your last name?",
+            "tip": null
+          }
+        ],
+        "phrases": [
+          {
+            "en": "Hello (polite, during the day)",
+            "de": "Guten Tag!",
+            "example": "Guten Tag, ich heiße Lena.",
+            "example_en": "Hello, my name is Lena.",
+            "tip": "Good all day, except early morning and evening."
+          },
+          {
+            "en": "Ask someone's name",
+            "de": "Wie heißt du?",
+            "example": "Hallo! Wie heißt du?",
+            "example_en": "Hello! What is your name?",
+            "tip": "Informal 'du' form."
+          },
+          {
+            "en": "Say your name",
+            "de": "Ich heiße ...",
+            "example": "Ich heiße Jonas.",
+            "example_en": "My name is Jonas.",
+            "tip": null
+          },
+          {
+            "en": "Ask how to spell something",
+            "de": "Wie buchstabiert man das?",
+            "example": "Wie buchstabiert man Anna?",
+            "example_en": "How do you spell Anna?",
+            "tip": "Very useful when you do not understand a word."
+          },
+          {
+            "en": "Goodbye (polite)",
+            "de": "Auf Wiedersehen!",
+            "example": "Auf Wiedersehen, Anna!",
+            "example_en": "Goodbye, Anna!",
+            "tip": "For friends, 'Tschüs' is common."
+          }
+        ]
+      },
+      "pronunciation": {
+        "focus": "ei, ie, ch and sch",
+        "explanation": "The letters ei sound like English 'eye', but ie sounds like a long 'ee'. Sch sounds like 'sh', and tsch like 'ch' in 'church'. Ch after i is a soft hissing breath ('ich'); after a, o, u it is rougher, at the back of the throat ('Nacht').",
+        "words": [
+          {
+            "de": "nein",
+            "hint": "ei = 'eye': 'nine'"
+          },
+          {
+            "de": "heiße",
+            "hint": "'HY-seh' with a sharp s"
+          },
+          {
+            "de": "Wiedersehen",
+            "hint": "'VEE-der-zay-en': W = v, ie = ee"
+          },
+          {
+            "de": "Tschüs",
+            "hint": "'chüs' with rounded lips for ü"
+          },
+          {
+            "de": "Nacht",
+            "hint": "rough ch at the back of the throat"
+          },
+          {
+            "de": "ich",
+            "hint": "soft ch: a gentle hiss, no k"
+          },
+          {
+            "de": "Buchstabe",
+            "hint": "'BOOKH-shtah-beh': rough ch, st = sht"
+          }
+        ],
+        "sentences": [
+          "Ich heiße Anna.",
+          "Nein, danke.",
+          "Auf Wiedersehen, Jonas!",
+          "Gute Nacht, Lena!"
+        ]
+      }
+    },
+    "Z2": {
+      "goal": {
+        "can_do": "I can say my name, where I come from and how I am, using ich, du, er, sie, wir and the verb sein."
+      },
+      "warmup": {
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ müde.",
+            "answer": "bin",
+            "distractors": [
+              "bist",
+              "ist"
+            ],
+            "explanation": "With ich, sein becomes bin."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which sentence is correct?",
+            "answer": "Du bist Jonas.",
+            "distractors": [
+              "Du ist Jonas.",
+              "Du bin Jonas."
+            ],
+            "explanation": "With du, sein becomes bist."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Anna ist müde. ___ kommt aus Deutschland.",
+            "answer": "Sie",
+            "distractors": [
+              "Er",
+              "Ich"
+            ],
+            "explanation": "Anna is a woman, so we use sie (she)."
+          }
+        ]
+      },
+      "grammar": {
+        "intro": {
+          "title": "Personal pronouns + sein: Ich bin, Ich heiße, Ich komme aus",
+          "explanation": [
+            "Pronouns replace names. ich = I, du = you (one friend), er = he, sie = she, wir = we. In German the verb changes its ending after each pronoun.",
+            "The most important verb is sein (to be). It is irregular, so learn the forms by heart: ich bin, du bist, er ist, sie ist, wir sind.",
+            "To say your name, use heißen: Ich heiße Anna. To say where you are from, use kommen + aus: Ich komme aus Deutschland. To say how you are, use sein: Ich bin müde.",
+            "Questions with a question word put the verb second: Wie heißt du? Woher kommst du?"
+          ],
+          "rule_summary": "ich bin · du bist · er/sie ist · wir sind; ich heiße · ich komme aus + country."
+        },
+        "examples": [
+          {
+            "de": "Ich bin Anna.",
+            "en": "I am Anna.",
+            "note": "ich + bin"
+          },
+          {
+            "de": "Du bist müde.",
+            "en": "You are tired.",
+            "note": "du + bist"
+          },
+          {
+            "de": "Er ist Jonas.",
+            "en": "He is Jonas.",
+            "note": "er + ist"
+          },
+          {
+            "de": "Sie ist Lena.",
+            "en": "She is Lena.",
+            "note": "sie + ist"
+          },
+          {
+            "de": "Wir sind gut.",
+            "en": "We are good.",
+            "note": "wir + sind"
+          },
+          {
+            "de": "Ich heiße Anna und ich komme aus Deutschland.",
+            "en": "My name is Anna and I come from Germany.",
+            "note": "heißen and kommen aus"
+          }
+        ],
+        "traps": [
+          {
+            "wrong": "Ich ist Anna.",
+            "right": "Ich bin Anna.",
+            "why": "The verb sein has its own form for each pronoun: ich bin, not ich ist."
+          },
+          {
+            "wrong": "Ich komme von Deutschland.",
+            "right": "Ich komme aus Deutschland.",
+            "why": "To say where you are from, German uses aus, not von."
+          },
+          {
+            "wrong": "Ich bin heiße Jonas.",
+            "right": "Ich heiße Jonas.",
+            "why": "Use only one verb: either Ich heiße Jonas or Ich bin Jonas."
+          }
+        ]
+      },
+      "exercises": {
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ Anna.",
+            "answer": "heiße",
+            "distractors": [
+              "heißt",
+              "heißen"
+            ],
+            "explanation": "With ich, heißen ends in -e."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Woher ___ du?",
+            "answer": "kommst",
+            "distractors": [
+              "komme",
+              "kommt"
+            ],
+            "explanation": "With du, kommen ends in -st."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Er ___ müde.",
+            "answer": "ist",
+            "distractors": [
+              "bist",
+              "bin",
+              "sind"
+            ],
+            "explanation": "With er, sein becomes ist."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Wir ___ gut.",
+            "answer": "sind",
+            "distractors": [
+              "bin",
+              "ist",
+              "bist"
+            ],
+            "explanation": "With wir, sein becomes sind."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Ich komme ___ Deutschland.",
+            "answer": "aus",
+            "distractors": [
+              "von",
+              "in"
+            ],
+            "explanation": "We say aus to give the country you come from."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Lena ist müde. ___ ist müde.",
+            "answer": "Sie",
+            "distractors": [
+              "Er",
+              "Ich",
+              "Du"
+            ],
+            "explanation": "Lena is a woman, so we use sie."
+          },
+          {
+            "skill": "translation",
+            "type": "multiple_choice",
+            "prompt": "What does \"Ich bin müde.\" mean?",
+            "answer": "I am tired.",
+            "distractors": [
+              "I am good.",
+              "You are tired.",
+              "He is tired."
+            ],
+            "explanation": "Ich bin = I am, müde = tired."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Choose the correct sentence: You are Jonas.",
+            "answer": "Du bist Jonas.",
+            "distractors": [
+              "Du ist Jonas.",
+              "Du bin Jonas.",
+              "Du sind Jonas."
+            ],
+            "explanation": "With du, sein becomes bist."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "Which pronoun do you use for Jonas?",
+            "answer": "er",
+            "distractors": [
+              "sie",
+              "ich",
+              "wir"
+            ],
+            "explanation": "Jonas is a man, so we use er."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Someone asks: Woher kommst du? Which answer fits?",
+            "answer": "Ich komme aus Deutschland.",
+            "distractors": [
+              "Ich heiße Anna.",
+              "Ich bin müde.",
+              "Danke, gut."
+            ],
+            "explanation": "Woher asks where you are from, so you answer with aus."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Ich / Lena / heiße",
+            "answer": "Ich heiße Lena.",
+            "distractors": [],
+            "explanation": "The verb comes in second place."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "kommt / Jonas / aus / Deutschland",
+            "answer": "Jonas kommt aus Deutschland.",
+            "distractors": [],
+            "explanation": "Subject first, then the verb in second place."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Woher / du / kommst",
+            "answer": "Woher kommst du?",
+            "distractors": [],
+            "explanation": "In a question with woher, the verb is second."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "I am Anna.",
+            "answer": "Ich bin Anna.",
+            "distractors": [],
+            "explanation": "ich + bin."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "He comes from Germany.",
+            "answer": "Er kommt aus Deutschland.",
+            "distractors": [],
+            "explanation": "er + kommt, then aus."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "We are tired.",
+            "answer": "Wir sind müde.",
+            "distractors": [],
+            "explanation": "wir + sind."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Ich heiße Anna.",
+            "distractors": [],
+            "explanation": "Remember ß in heiße and the capital letter for Anna."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Ich komme aus Deutschland.",
+            "distractors": [],
+            "explanation": "Deutschland is a country name and starts with a capital letter."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Er ist Jonas.",
+            "distractors": [],
+            "explanation": "er + ist; names start with a capital letter."
+          }
+        ]
+      },
+      "vocabulary": {
+        "words": [
+          {
+            "tier": "core",
+            "en": "hello",
+            "article": null,
+            "de": "hallo",
+            "plural": null,
+            "example": "Hallo, ich bin Anna.",
+            "example_en": "Hello, I am Anna.",
+            "tip": "Use it with friends and in most daily situations."
+          },
+          {
+            "tier": "core",
+            "en": "name",
+            "article": "der",
+            "de": "Name",
+            "plural": "die Namen",
+            "example": "Mein Name ist Jonas.",
+            "example_en": "My name is Jonas.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "to be called",
+            "article": null,
+            "de": "heißen",
+            "plural": "ich heiße · du heißt · er heißt",
+            "example": "Ich heiße Lena.",
+            "example_en": "My name is Lena.",
+            "tip": "Literally: I am called."
+          },
+          {
+            "tier": "core",
+            "en": "to come",
+            "article": null,
+            "de": "kommen",
+            "plural": "ich komme · du kommst · er kommt",
+            "example": "Du kommst aus Deutschland.",
+            "example_en": "You come from Germany.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "to be",
+            "article": null,
+            "de": "sein",
+            "plural": "ich bin · du bist · er ist",
+            "example": "Er ist Jonas.",
+            "example_en": "He is Jonas.",
+            "tip": "Irregular: learn the forms by heart."
+          },
+          {
+            "tier": "core",
+            "en": "from, out of",
+            "article": null,
+            "de": "aus",
+            "plural": null,
+            "example": "Ich komme aus Deutschland.",
+            "example_en": "I come from Germany.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "country",
+            "article": "das",
+            "de": "Land",
+            "plural": "die Länder",
+            "example": "Deutschland ist ein Land.",
+            "example_en": "Germany is a country.",
+            "tip": "The plural has an Umlaut: Länder."
+          },
+          {
+            "tier": "core",
+            "en": "city",
+            "article": "die",
+            "de": "Stadt",
+            "plural": "die Städte",
+            "example": "Die Stadt ist gut.",
+            "example_en": "The city is good.",
+            "tip": "The plural has an Umlaut: Städte."
+          },
+          {
+            "tier": "core",
+            "en": "man",
+            "article": "der",
+            "de": "Mann",
+            "plural": "die Männer",
+            "example": "Jonas ist ein Mann.",
+            "example_en": "Jonas is a man.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "woman",
+            "article": "die",
+            "de": "Frau",
+            "plural": "die Frauen",
+            "example": "Lena ist eine Frau.",
+            "example_en": "Lena is a woman.",
+            "tip": "Frau also means Mrs."
+          },
+          {
+            "tier": "core",
+            "en": "good, fine",
+            "article": null,
+            "de": "gut",
+            "plural": null,
+            "example": "Ich bin gut.",
+            "example_en": "I am fine.",
+            "tip": null
+          },
+          {
+            "tier": "core",
+            "en": "thank you",
+            "article": null,
+            "de": "danke",
+            "plural": null,
+            "example": "Danke, gut!",
+            "example_en": "Thanks, fine!",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "tired",
+            "article": null,
+            "de": "müde",
+            "plural": null,
+            "example": "Ich bin müde.",
+            "example_en": "I am tired.",
+            "tip": "Say ü with rounded lips."
+          },
+          {
+            "tier": "bonus",
+            "en": "great",
+            "article": null,
+            "de": "super",
+            "plural": null,
+            "example": "Wir sind super.",
+            "example_en": "We are great.",
+            "tip": "A very common word for great."
+          },
+          {
+            "tier": "bonus",
+            "en": "Germany",
+            "article": null,
+            "de": "Deutschland",
+            "plural": null,
+            "example": "Anna kommt aus Deutschland.",
+            "example_en": "Anna comes from Germany.",
+            "tip": "Most countries have no article."
+          },
+          {
+            "tier": "bonus",
+            "en": "friend (male)",
+            "article": "der",
+            "de": "Freund",
+            "plural": "die Freunde",
+            "example": "Jonas ist mein Freund.",
+            "example_en": "Jonas is my friend.",
+            "tip": "Add -in for a female friend."
+          },
+          {
+            "tier": "bonus",
+            "en": "friend (female)",
+            "article": "die",
+            "de": "Freundin",
+            "plural": "die Freundinnen",
+            "example": "Lena ist meine Freundin.",
+            "example_en": "Lena is my friend.",
+            "tip": "Freund + -in = Freundin."
+          },
+          {
+            "tier": "bonus",
+            "en": "where from",
+            "article": null,
+            "de": "woher",
+            "plural": null,
+            "example": "Woher kommst du?",
+            "example_en": "Where do you come from?",
+            "tip": "Woher asks about origin."
+          }
+        ],
+        "phrases": [
+          {
+            "en": "What is your name?",
+            "de": "Wie heißt du?",
+            "example": "Hallo! Wie heißt du?",
+            "example_en": "Hello! What is your name?",
+            "tip": "Use this with friends and people your age."
+          },
+          {
+            "en": "My name is …",
+            "de": "Ich heiße …",
+            "example": "Ich heiße Anna.",
+            "example_en": "My name is Anna.",
+            "tip": null
+          },
+          {
+            "en": "Where are you from?",
+            "de": "Woher kommst du?",
+            "example": "Woher kommst du, Jonas?",
+            "example_en": "Where are you from, Jonas?",
+            "tip": null
+          },
+          {
+            "en": "I am from …",
+            "de": "Ich komme aus …",
+            "example": "Ich komme aus Deutschland.",
+            "example_en": "I am from Germany.",
+            "tip": "Put a country or city after aus."
+          },
+          {
+            "en": "How are you?",
+            "de": "Wie geht's?",
+            "example": "Hallo Lena, wie geht's? Danke, gut!",
+            "example_en": "Hello Lena, how are you? Thanks, fine!",
+            "tip": "A short, relaxed question for friends."
+          }
+        ]
+      },
+      "pronunciation": {
+        "focus": "The ich-sound (ch), ei and the letter ß",
+        "explanation": "After i, the letters ch make a soft hissing sound, like a quiet \"h\" in \"huge\". The letters ei sound like English \"eye\". The letter ß is a sharp \"s\", as in heiße.",
+        "words": [
+          {
+            "de": "ich",
+            "hint": "Soft ch: say \"ee\" and push air gently over your tongue."
+          },
+          {
+            "de": "heiße",
+            "hint": "HY-sseh: ei sounds like \"eye\", ß is a sharp s."
+          },
+          {
+            "de": "heißt",
+            "hint": "Like \"hyst\" with a sharp s."
+          },
+          {
+            "de": "Freund",
+            "hint": "FROYNT: eu sounds like \"oy\"."
+          },
+          {
+            "de": "Freundin",
+            "hint": "FROYN-din: the ch is not in this word, just eu and -in."
+          },
+          {
+            "de": "Deutschland",
+            "hint": "DOYTSH-lant: eu = oy, tsch = ch in church."
+          },
+          {
+            "de": "bin",
+            "hint": "Short i, as in \"bin\"."
+          },
+          {
+            "de": "müde",
+            "hint": "MÜ-deh: round your lips for ü."
+          }
+        ],
+        "sentences": [
+          "Ich heiße Anna.",
+          "Ich bin müde.",
+          "Er kommt aus Deutschland.",
+          "Wir sind gut."
+        ]
+      }
+    },
+    "Z3": {
+      "goal": {
+        "can_do": "I can say and understand numbers from 0 to 100, give my phone number and say how old I am."
+      },
+      "warmup": {
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "How do you say 24 in German?",
+            "answer": "vierundzwanzig",
+            "distractors": [
+              "zwanzigvier",
+              "vierzwanzig"
+            ],
+            "explanation": "From 21 on, you say the unit first, then und, then the tens."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ zwanzig Jahre alt.",
+            "answer": "bin",
+            "distractors": [
+              "habe",
+              "heiße"
+            ],
+            "explanation": "In German you say \"I am ... years old\", so you use sein."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which question asks for someone's age?",
+            "answer": "Wie alt bist du?",
+            "distractors": [
+              "Wie heißt du?",
+              "Wie ist deine Nummer?"
+            ],
+            "explanation": "Wie alt means how old."
+          }
+        ]
+      },
+      "grammar": {
+        "intro": {
+          "title": "Numbers 0–100, phone numbers and age",
+          "explanation": [
+            "Numbers 0 to 12 are new words you learn by heart: null, eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn, elf, zwölf. Then 13 to 19 use the ending -zehn: dreizehn, vierzehn, fünfzehn. Watch out: sechzehn (not sechszehn) and siebzehn (not siebenzehn).",
+            "The tens are: zwanzig, dreißig, vierzig, fünfzig, sechzig, siebzig, achtzig, neunzig, hundert. Note dreißig (30), sechzig (60) and siebzig (70).",
+            "From 21 to 99 the order is the opposite of English: first the unit, then und, then the tens, all written as one word. 21 = einundzwanzig (one-and-twenty). With 1, you say ein, not eins: einunddreißig.",
+            "To say your age, use sein: Ich bin 25 Jahre alt. Ask with: Wie alt bist du? For phone numbers, say the digits one by one or in pairs: 0151 – null eins fünf eins."
+          ],
+          "rule_summary": "21–99: unit + und + tens in one word (einundzwanzig); age = Ich bin ... Jahre alt."
+        },
+        "examples": [
+          {
+            "de": "Ich bin einundzwanzig Jahre alt.",
+            "en": "I am 21 years old.",
+            "note": "21 = ein + und + zwanzig."
+          },
+          {
+            "de": "Wie alt bist du?",
+            "en": "How old are you?",
+            "note": "Wie alt asks for age."
+          },
+          {
+            "de": "Anna ist dreißig.",
+            "en": "Anna is 30.",
+            "note": "Jahre alt can be left out."
+          },
+          {
+            "de": "Jonas ist achtundvierzig Jahre alt.",
+            "en": "Jonas is 48 years old.",
+            "note": "8 + und + 40."
+          },
+          {
+            "de": "Meine Telefonnummer ist null eins fünf eins, drei vier.",
+            "en": "My phone number is 0 1 5 1, 3 4.",
+            "note": "Say phone numbers digit by digit."
+          },
+          {
+            "de": "Lena ist siebenundsechzig Jahre alt.",
+            "en": "Lena is 67 years old.",
+            "note": "siebenundsechzig: sieben keeps its -en here."
+          }
+        ],
+        "traps": [
+          {
+            "wrong": "zwanzigeins",
+            "right": "einundzwanzig",
+            "why": "The unit comes first, then und, then the tens."
+          },
+          {
+            "wrong": "Ich habe zwanzig Jahre.",
+            "right": "Ich bin zwanzig Jahre alt.",
+            "why": "In German you are a certain age, you do not have it."
+          },
+          {
+            "wrong": "sechszehn",
+            "right": "sechzehn",
+            "why": "Sixteen drops the s of sechs; 17 is siebzehn, not siebenzehn."
+          }
+        ]
+      },
+      "exercises": {
+        "items": [
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "21 = ___",
+            "answer": "einundzwanzig",
+            "distractors": [
+              "zwanzigeins",
+              "zweiundzwanzig"
+            ],
+            "explanation": "21 is one-and-twenty: ein + und + zwanzig."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Ich ___ dreißig Jahre alt.",
+            "answer": "bin",
+            "distractors": [
+              "habe",
+              "heiße"
+            ],
+            "explanation": "You use sein to give your age."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "Wie ___ bist du?",
+            "answer": "alt",
+            "distractors": [
+              "viel",
+              "heißt"
+            ],
+            "explanation": "Wie alt asks for age."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "45 = fünf___vierzig",
+            "answer": "und",
+            "distractors": [
+              "mit",
+              "plus"
+            ],
+            "explanation": "The little word between unit and tens is und."
+          },
+          {
+            "skill": "grammar",
+            "type": "gap_fill",
+            "prompt": "Meine Telefonnummer ___ null eins fünf eins.",
+            "answer": "ist",
+            "distractors": [
+              "bin",
+              "hat"
+            ],
+            "explanation": "Nummer is a thing, so you use ist."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "gap_fill",
+            "prompt": "16 = ___",
+            "answer": "sechzehn",
+            "distractors": [
+              "sechszehn",
+              "sechzig"
+            ],
+            "explanation": "Sixteen is sechzehn; sechzig is 60."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which number is 33?",
+            "answer": "dreiunddreißig",
+            "distractors": [
+              "dreißigdrei",
+              "dreiunddreizig"
+            ],
+            "explanation": "33 is drei + und + dreißig."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "Which number is 72?",
+            "answer": "zweiundsiebzig",
+            "distractors": [
+              "siebenundzwanzig",
+              "siebzigzwei"
+            ],
+            "explanation": "72 is zwei + und + siebzig."
+          },
+          {
+            "skill": "vocabulary",
+            "type": "multiple_choice",
+            "prompt": "What does vierundachtzig mean?",
+            "answer": "84",
+            "distractors": [
+              "48",
+              "74"
+            ],
+            "explanation": "vier + und + achtzig = 4 + 80 = 84."
+          },
+          {
+            "skill": "grammar",
+            "type": "multiple_choice",
+            "prompt": "How do you say \"I am 20 years old\"?",
+            "answer": "Ich bin zwanzig Jahre alt.",
+            "distractors": [
+              "Ich habe zwanzig Jahre alt.",
+              "Ich heiße zwanzig Jahre.",
+              "Ich bin zwanzig Jahre."
+            ],
+            "explanation": "The pattern is Ich bin ... Jahre alt."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "Ich / bin / achtzehn / Jahre / alt",
+            "answer": "Ich bin achtzehn Jahre alt.",
+            "distractors": [],
+            "explanation": "The verb bin is in second position."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "alt / du / Wie / bist",
+            "answer": "Wie alt bist du?",
+            "distractors": [],
+            "explanation": "The question word comes first, then the verb."
+          },
+          {
+            "skill": "word_order",
+            "type": "ordering",
+            "prompt": "ist / Das / Telefonnummer / meine",
+            "answer": "Das ist meine Telefonnummer.",
+            "distractors": [],
+            "explanation": "Telefonnummer is feminine, so you use meine."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "I am 25 years old.",
+            "answer": "Ich bin fünfundzwanzig Jahre alt.",
+            "distractors": [],
+            "explanation": "25 is fünf + und + zwanzig."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "How old are you?",
+            "answer": "Wie alt bist du?",
+            "distractors": [],
+            "explanation": "Wie alt bist du? is the standard question for age."
+          },
+          {
+            "skill": "translation",
+            "type": "typing",
+            "prompt": "Anna is 31 years old.",
+            "answer": "Anna ist einunddreißig Jahre alt.",
+            "distractors": [],
+            "explanation": "With 1 in a compound, you say ein, not eins."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Ich bin zweiundzwanzig Jahre alt.",
+            "distractors": [],
+            "explanation": "22 is zwei + und + zwanzig, written as one word."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Jonas ist vierzig.",
+            "distractors": [],
+            "explanation": "Numbers are written as words and not capitalised."
+          },
+          {
+            "skill": "dictation",
+            "type": "dictation",
+            "prompt": "Listen and write the sentence.",
+            "answer": "Lena ist sechsundsechzig Jahre alt.",
+            "distractors": [],
+            "explanation": "66 is sechs + und + sechzig, one word."
+          }
+        ]
+      },
+      "vocabulary": {
+        "words": [
+          {
+            "tier": "core",
+            "en": "number",
+            "article": "die",
+            "de": "Zahl",
+            "plural": "die Zahlen",
+            "example": "Zehn ist eine Zahl.",
+            "example_en": "Ten is a number.",
+            "tip": "Zahl = a number as a quantity."
+          },
+          {
+            "tier": "core",
+            "en": "number (phone, house)",
+            "article": "die",
+            "de": "Nummer",
+            "plural": "die Nummern",
+            "example": "Das ist meine Nummer.",
+            "example_en": "This is my number.",
+            "tip": "Used for phone, house and room numbers."
+          },
+          {
+            "tier": "core",
+            "en": "phone number",
+            "article": "die",
+            "de": "Telefonnummer",
+            "plural": "die Telefonnummern",
+            "example": "Meine Telefonnummer ist neun acht sieben.",
+            "example_en": "My phone number is nine eight seven.",
+            "tip": "Telefon + Nummer."
+          },
+          {
+            "tier": "core",
+            "en": "mobile number",
+            "article": "die",
+            "de": "Handynummer",
+            "plural": "die Handynummern",
+            "example": "Wie ist deine Handynummer?",
+            "example_en": "What is your mobile number?",
+            "tip": "das Handy = mobile phone."
+          },
+          {
+            "tier": "core",
+            "en": "age",
+            "article": "das",
+            "de": "Alter",
+            "plural": "—",
+            "example": "Mein Alter ist dreißig.",
+            "example_en": "My age is thirty.",
+            "tip": "No usual plural."
+          },
+          {
+            "tier": "core",
+            "en": "year",
+            "article": "das",
+            "de": "Jahr",
+            "plural": "die Jahre",
+            "example": "Ich bin zwanzig Jahre alt.",
+            "example_en": "I am twenty years old.",
+            "tip": "After a number: Jahre."
+          },
+          {
+            "tier": "core",
+            "en": "email address",
+            "article": "die",
+            "de": "E-Mail-Adresse",
+            "plural": "die E-Mail-Adressen",
+            "example": "Das ist meine E-Mail-Adresse.",
+            "example_en": "This is my email address.",
+            "tip": "Hyphens join the parts."
+          },
+          {
+            "tier": "core",
+            "en": "zero",
+            "article": null,
+            "de": "null",
+            "plural": null,
+            "example": "Meine Nummer ist null eins fünf.",
+            "example_en": "My number is zero one five.",
+            "tip": "Used for 0 in phone numbers."
+          },
+          {
+            "tier": "core",
+            "en": "twenty",
+            "article": null,
+            "de": "zwanzig",
+            "plural": null,
+            "example": "Anna ist zwanzig.",
+            "example_en": "Anna is twenty.",
+            "tip": "-zig = the tens ending."
+          },
+          {
+            "tier": "core",
+            "en": "thirty",
+            "article": null,
+            "de": "dreißig",
+            "plural": null,
+            "example": "Jonas ist dreißig Jahre alt.",
+            "example_en": "Jonas is thirty years old.",
+            "tip": "Special: ending -ßig, not -zig."
+          },
+          {
+            "tier": "core",
+            "en": "hundred",
+            "article": null,
+            "de": "hundert",
+            "plural": null,
+            "example": "Hundert ist eine große Zahl.",
+            "example_en": "A hundred is a big number.",
+            "tip": "Written in lower case."
+          },
+          {
+            "tier": "core",
+            "en": "old",
+            "article": null,
+            "de": "alt",
+            "plural": null,
+            "example": "Wie alt bist du?",
+            "example_en": "How old are you?",
+            "tip": "Wie alt = how old."
+          },
+          {
+            "tier": "bonus",
+            "en": "address",
+            "article": "die",
+            "de": "Adresse",
+            "plural": "die Adressen",
+            "example": "Wie ist deine Adresse?",
+            "example_en": "What is your address?",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "street",
+            "article": "die",
+            "de": "Straße",
+            "plural": "die Straßen",
+            "example": "Lena wohnt in der Hauptstraße.",
+            "example_en": "Lena lives on Main Street.",
+            "tip": "ß is a special letter."
+          },
+          {
+            "tier": "bonus",
+            "en": "house number",
+            "article": "die",
+            "de": "Hausnummer",
+            "plural": "die Hausnummern",
+            "example": "Die Hausnummer ist zwölf.",
+            "example_en": "The house number is twelve.",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "postcode",
+            "article": "die",
+            "de": "Postleitzahl",
+            "plural": "die Postleitzahlen",
+            "example": "Meine Postleitzahl ist eins zwei drei vier fünf.",
+            "example_en": "My postcode is one two three four five.",
+            "tip": "Often shortened to PLZ."
+          },
+          {
+            "tier": "bonus",
+            "en": "birthday",
+            "article": "der",
+            "de": "Geburtstag",
+            "plural": "die Geburtstage",
+            "example": "Mein Geburtstag ist heute.",
+            "example_en": "My birthday is today.",
+            "tip": null
+          },
+          {
+            "tier": "bonus",
+            "en": "to count",
+            "article": null,
+            "de": "zählen",
+            "plural": "ich zähle · du zählst · er zählt",
+            "example": "Ich zähle bis zehn.",
+            "example_en": "I count to ten.",
+            "tip": "Do not mix up Zahl and zählen."
+          }
+        ],
+        "phrases": [
+          {
+            "en": "How old are you?",
+            "de": "Wie alt bist du?",
+            "example": "Hallo Anna, wie alt bist du?",
+            "example_en": "Hello Anna, how old are you?",
+            "tip": "For adults you do not know, use: Wie alt sind Sie?"
+          },
+          {
+            "en": "I am ... years old.",
+            "de": "Ich bin ... Jahre alt.",
+            "example": "Ich bin achtundzwanzig Jahre alt.",
+            "example_en": "I am 28 years old.",
+            "tip": null
+          },
+          {
+            "en": "What is your phone number?",
+            "de": "Wie ist deine Telefonnummer?",
+            "example": "Wie ist deine Telefonnummer, Jonas?",
+            "example_en": "What is your phone number, Jonas?",
+            "tip": null
+          },
+          {
+            "en": "My number is ...",
+            "de": "Meine Nummer ist ...",
+            "example": "Meine Nummer ist null eins sieben eins.",
+            "example_en": "My number is 0 1 7 1.",
+            "tip": "Say each digit slowly."
+          },
+          {
+            "en": "Can you repeat that, please?",
+            "de": "Noch einmal, bitte.",
+            "example": "Noch einmal, bitte. Wie ist die Nummer?",
+            "example_en": "Once more, please. What is the number?",
+            "tip": "Very useful when you do not catch a number."
+          }
+        ]
+      },
+      "pronunciation": {
+        "focus": "The sound z (ts) and the endings -zig / -zehn",
+        "explanation": "German z sounds like ts in cats. So zwei is tsvai and zehn is tsayn. The ending -zig sounds like -tsikh, with a soft ch at the end. ei sounds like English eye.",
+        "words": [
+          {
+            "de": "zwei",
+            "hint": "tsvai: start with ts, ei as in eye"
+          },
+          {
+            "de": "zehn",
+            "hint": "tsayn: long e"
+          },
+          {
+            "de": "zwanzig",
+            "hint": "TSVAN-tsikh: end with a soft ch"
+          },
+          {
+            "de": "dreißig",
+            "hint": "DRAI-sikh: ß is a sharp s"
+          },
+          {
+            "de": "sechzehn",
+            "hint": "ZEKH-tsayn: ch as in a soft hiss"
+          },
+          {
+            "de": "siebzig",
+            "hint": "ZEEP-tsikh: b sounds like p"
+          },
+          {
+            "de": "vierzig",
+            "hint": "FEER-tsikh: ie is a long ee"
+          },
+          {
+            "de": "hundert",
+            "hint": "HOON-dert: short u"
+          }
+        ],
+        "sentences": [
+          "Ich bin zwanzig Jahre alt.",
+          "Zwei plus zehn ist zwölf.",
+          "Wie alt bist du?",
+          "Meine Nummer ist null eins sieben zwei."
+        ]
+      }
+    }
+  },
+  "failures": []
+}

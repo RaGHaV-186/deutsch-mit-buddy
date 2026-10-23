@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { Client } from "pg";
+import { assertLocalSupabase } from "@/lib/dev/local-only";
 import { totp } from "./totp";
 
 const url = process.env.SUPABASE_URL!;
@@ -10,10 +11,8 @@ const dbUrl = process.env.SUPABASE_DB_URL ?? "postgresql://postgres:postgres@127
 
 export const PASSWORD = "correct-horse-battery-staple";
 
-// These tests delete every user, so they must never run against a hosted project.
-if (!/^https?:\/\/(127\.0\.0\.1|localhost)(:|\/|$)/.test(url ?? "")) {
-  throw new Error(`Refusing to run RLS tests against non-local Supabase URL: ${url}`);
-}
+// These tests reset and delete data, so they must never run against a hosted project (the global setup checks too; this covers a file run on its own).
+assertLocalSupabase(process.env);
 
 const opts = { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } };
 

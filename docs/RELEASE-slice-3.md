@@ -1,7 +1,7 @@
 # Release plan: slice 3 (lesson content, card unlock, Learn tab) → production
 
 **Status: written, NOT run. Nothing in this file has touched the hosted database or Vercel. Each step waits for Raghav's explicit go.**
-**Progress log:** (c) `db push` done 23 Oct (9 migrations, counts unchanged); (d) seed done (131 sessions); next: e. (a) backup done 23 Oct 2026 (schema 20 KB with 9 tables and 12 policies, data 113 KB, auth 15 KB; profiles and cards present; a3 query results saved). The project is on the **Supabase Free plan, which has no automatic backups**, so this manual dump is the backup for the release. (b) re-checked 23 Oct (see b). Next: c.
+**Progress log:** (c) `db push` done 23 Oct (9 migrations, counts unchanged); (d) seed done (131 sessions); (e) published 24 lessons, every verify number matched (24 publications, 336 parts, 554 templates = 432 words + 122 phrases, 1005 questions, cards still 202, profiles still 1); next: f. (a) backup done 23 Oct 2026 (schema 20 KB with 9 tables and 12 policies, data 113 KB, auth 15 KB; profiles and cards present; a3 query results saved). The project is on the **Supabase Free plan, which has no automatic backups**, so this manual dump is the backup for the release. (b) re-checked 23 Oct (see b). Next: c.
 
 Branch `slice-3-curriculum`, PR #12. Run the steps in this order, one at a time, and stop at the first surprise (each step says what "surprise" means).
 

@@ -52,6 +52,16 @@ Front: English (word cards) or "Say it in German" / "Answer out loud" (speaking 
 - Paid AI runs: show an estimate (requests, tokens, euros, worst case) and wait for a yes; no pass may be able to cost more than €10; `ANTHROPIC_API_KEY` only in `.env.local`, never in Vercel or a NEXT_PUBLIC variable.
 - Keep "Where we are" below and the status line in BLUEPRINT section 8 current at every stopping point, so Raghav can /clear between steps without losing context.
 
+## Performance budgets (permanent: every slice, every PR)
+Goal: feels like a top native app, on phone and desktop. A slice is not done if it breaks one of these (CI enforces them once the perf slice has added Lighthouse CI and the Playwright width tests).
+- Tap → visible feedback < 100 ms, always local (never waits for the network or the server).
+- Screen change after the first visit < 300 ms on 4G; INP p75 < 200 ms.
+- LCP < 2.0 s on a mid-range phone (4× CPU throttle + Fast 4G); JS per route ≤ 200 KB gzipped.
+- Animations use only `transform` and `opacity`, 150–250 ms, and respect `prefers-reduced-motion`.
+- No layout shift while loading (reserve space for anything that arrives late); touch targets ≥ 44 px on mobile; no horizontal scroll at 375, 390, 430, 768, 1024, 1280 and 1440 px.
+- Server work: no sequential round trips that could run in parallel or be skipped; nothing on a read path that only a write needs (rate limiter, unlock, counts); count the Supabase calls of any new page and keep them in the PR description.
+- Measure on both surfaces: installed PWA on iPhone (standalone) and desktop 1440×900. Details of the baseline and the fixes: `docs/PERF.md`.
+
 ## Where we are (update at every stop)
 Updated 23 Oct 2026. **Slice 3 is live** (PR #12 merged as `bf0b801`, tag `slice-3`, production deployed from `main`). Slices 0–3 and the redesign (design-v1.1) are on `main`.
 
@@ -60,6 +70,8 @@ Updated 23 Oct 2026. **Slice 3 is live** (PR #12 merged as `bf0b801`, tag `slice
 **Tranche 1 is complete and live (23 Oct 2026; total cost €6.75, 0 items need a human).** Rules that hold for tranches 2–4: (1) typing questions ask for a narrow answer only (one word, a number, a time, one fixed phrase from the text, or a short fixed translation); an open "answer in a sentence" reading/listening question is multiple choice with three options that are clearly wrong according to the text (ideally from the text at another time, place or person, so exactly one answer is defensible); accepted answers stay at most 8; the reviewer fixes an open one by replacing the item with multiple choice, never by listing more accepted answers (writer and reviewer prompts, plus the free warning `typing-open`, which currently flags `W4.4#reading.q4`, a live lesson: a one-item fix for later); (2) a standalone salutation and a closing formula do not count as sentences of a model answer; (3) re-review verdicts are bound to the exact correction text (`fixHash`); (4) a batch that hangs for hours: tell Raghav; a `--direct` run is double price and needs his explicit yes; (5) to publish only some lessons, copy their payloads into a new run folder and use `--run` with it (`docs/RELEASE-slice-3.md`, lessons learned).
 
 **Domain (live 23 Oct 2026)**: canonical address `https://www.deutschmitbuddy.de`; the apex `deutschmitbuddy.de` redirects (308) to `www`; DNS at INWX (A `@` → 216.198.79.1, CNAME `www` → Vercel). Raghav set `NEXT_PUBLIC_SITE_URL=https://www.deutschmitbuddy.de` (Production only), redeployed without cache (`/api/health` shows `siteUrl` set), and updated Supabase Site URL + Redirect URLs, Google OAuth origins and Turnstile hostnames; password reset and Google login tested OK on `www`. The code has no hard-coded domain (only `siteUrl()`); where every address setting lives and how to check: `docs/DOMAIN.md`. Not set up yet: `metadataBase`/canonical/Open Graph tags, `robots.txt`, sitemap. Claude does not change Vercel or Supabase settings.
+
+**Perf slice (started 23 Oct 2026)**: step 1 (measure only) is done, nothing in the app was changed; the full report and the ranked fix list are in `docs/PERF.md`. Headline: production functions run in Washington (`iad1`) while the database is in Frankfurt (`eu-central-1`), about 300 ms per Supabase call, and a screen makes 5–6 calls in a row; every route is over the 200 KB JS budget (216–260 KB). Waiting for Raghav's go on step 2 (fixes, before/after table, Lighthouse CI, Playwright width tests, Speed Insights). The budgets above are now permanent.
 
 **Next**: tranches 2–4 of the content (A2 about €6.4, B1 + exam prep about €13.7, the last review split in two; reviews have run about 25% over their estimate) under the same run name `z1-b1` (write pass A for the whole stretch before pass D), after Raghav tops up the API credits (about $19 before tranche 1, a top-up of about $12+ is needed before B1; at least $5 must stay unspent). Then slice 3c (report a mistake, `content_reports`, admin screen, AI label, B2/C1 "coming soon" in the picker), then the lesson player 4a–4e. Cost limits are hard (see Working rules). Idea for later: noun-gender check against a German noun dictionary (BLUEPRINT "Later").
 

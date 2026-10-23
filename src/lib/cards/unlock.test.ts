@@ -2,7 +2,7 @@ import { indexOfCode } from "@data/curriculum";
 import rawSeed from "@data/seed-cards.json";
 import { describe, expect, it } from "vitest";
 import { parseSeedDeck } from "./seed";
-import { cardKey, planUnlock, startSeqOf, type TemplateRow } from "./unlock";
+import { cardKey, newLessonCodes, planUnlock, startSeqOf, type TemplateRow } from "./unlock";
 
 const NOW = new Date("2026-10-23T08:00:00Z");
 let n = 0;
@@ -107,5 +107,20 @@ describe("startSeqOf", () => {
     expect(startSeqOf({ start_code: "Z9", session_seq: indexOfCode("W1.2") })).toBe(indexOfCode("Z9"));
     expect(startSeqOf({ start_code: null, session_seq: 12 })).toBe(12);
     expect(startSeqOf({ start_code: "NOPE", session_seq: 12 })).toBe(12);
+  });
+});
+
+describe("newLessonCodes", () => {
+  const z = (code: string) => indexOfCode(code);
+  it("keeps published lessons after the last unlocked one, up to the learner's current lesson", () => {
+    const published = ["Z5", "Z6", "Z7", "Z8", "Z9"];
+    expect(newLessonCodes(published, { targetSeq: z("Z8"), unlockedSeq: z("Z6") })).toEqual(["Z7", "Z8"]);
+  });
+  it("is empty when everything up to today is unlocked, and ignores codes that are not lessons", () => {
+    expect(newLessonCodes(["Z5", "Z6"], { targetSeq: z("Z6"), unlockedSeq: z("Z6") })).toEqual([]);
+    expect(newLessonCodes(["nonsense"], { targetSeq: z("Z6"), unlockedSeq: null })).toEqual([]);
+  });
+  it("with nothing unlocked yet, everything published up to today's lesson is new", () => {
+    expect(newLessonCodes(["Z1", "Z2", "Z9"], { targetSeq: z("Z2"), unlockedSeq: null })).toEqual(["Z1", "Z2"]);
   });
 });

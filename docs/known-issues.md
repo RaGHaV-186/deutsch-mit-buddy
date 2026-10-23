@@ -28,10 +28,16 @@
 
 ## 2. Stale login redirect loop (auth bug, not part of the redesign)
 
-**Status:** open. Found while testing; no auth code was changed.
+**Status:** fixed (perf slice, PR B). Kept here for the history and the rule.
 
-**Symptom:** if a user's account is deleted (or its session revoked) while their browser still holds a not-yet-expired access token, `/login` and `/home` redirect to each other forever and the browser gives up ("too many redirects"). Clearing the site's cookies fixes it.
+**Symptom (was):** if a user's account is deleted (or its session revoked) while their browser still holds a not-yet-expired access token, `/login` and the app redirected to each other forever and the browser gave up ("too many redirects"). Clearing the site's cookies fixed it.
 
-**Cause:** `proxy.ts` decides from the JWT claims only (no network): a token with `aal2` makes `/login` redirect to `/home`. But `/home` calls `requireAal2()`, which verifies the user with the auth server (`getUser`), finds nobody, and redirects to `/login`.
+**Cause:** `proxy.ts` decides from the JWT claims only (no network): a token with `aal2` makes `/login` redirect to `/home`. A page or action then asked the auth server (`getUser`), found nobody, and redirected to `/login`. A server component cannot clear cookies, so nothing ever ended the session.
 
-**Fix idea (for the auth owner):** when `getUser()` fails in `requireAal2()` / `requireSession()`, clear the Supabase auth cookies (sign out) before redirecting, or let `/login` ignore a session that the server can't verify.
+**Fix:** every place that finds the session unusable redirects to `/auth/stale` (`src/app/auth/stale/route.ts`) instead of `/login`: the guards (`requireAal2`, `requireSession`) when the auth server rejects a token whose claims look valid, and the app layout when the signed-in account has no profile row. The route re-checks for itself, signs out (a client that writes no cookies), expires every `sb-*` cookie and redirects to `/login` once. Rules it keeps:
+- it never signs out a healthy session (a link to it cannot log anyone out): healthy and verified goes to `/home`, healthy without two-factor to `/mfa`;
+- it never acts on a guess: an auth-server outage, a 5xx or a database error answers 503 and leaves the cookies alone (`isDefinitivelySignedOut`: only "session missing" and 401/403/404 count);
+- it is limited per IP (30 per 10 minutes), so a flapping error cannot become an endless loop.
+Tests: `src/app/auth/stale/route.test.ts`, `src/lib/auth/guard.test.ts`, `src/lib/auth/stale-session.test.ts`, `src/app/(app)/layout.test.tsx`. Checked by hand on a production build: delete the user, keep the cookie, `GET /home` → `/auth/stale` → `/login` (cookie expired) → `/login` renders.
+
+**Still true (by design):** pages that only read trust the token's claims (`requireAal2FromClaims`), so a deleted or revoked user keeps seeing cached screens until their token expires (at most an hour) or an action / API call / layout profile read notices. Anything that changes data re-checks with the auth server.

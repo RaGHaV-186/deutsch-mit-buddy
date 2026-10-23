@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { withAuth } from "@/lib/auth/guard";
 import { snapshotRequestSchema } from "@/lib/cards/schema";
+import { ensureLessonCardsIfNew } from "@/lib/cards/ensure-unlocked";
 import { getSnapshot } from "@/lib/cards/server";
+import { getProfile } from "@/lib/profile";
 import { safeTimeZone } from "@/lib/time";
 import { createClient } from "@/lib/supabase/server";
 
@@ -11,7 +13,9 @@ export const POST = withAuth(
   async ({ userId }) => {
     try {
       const supabase = await createClient();
-      const { data: profile } = await supabase.from("profiles").select("timezone").eq("user_id", userId).maybeSingle();
+      const profile = await getProfile(userId);
+      // The deck on the phone comes from here, so a lesson released since the last visit is unlocked before the cards are read.
+      if (profile) await ensureLessonCardsIfNew(userId, profile);
       const snapshot = await getSnapshot(supabase, userId, new Date(), safeTimeZone(profile?.timezone));
       return NextResponse.json(snapshot);
     } catch (err) {

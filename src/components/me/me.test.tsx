@@ -10,7 +10,7 @@ const getProfile = vi.fn();
 vi.mock("next-intl/server", () => ({
   getTranslations: async (namespace: string) => createTranslator({ locale: "en", messages, namespace: namespace as never }),
 }));
-vi.mock("@/lib/auth/guard", () => ({ requireAal2: (...a: unknown[]) => requireAal2(...a) }));
+vi.mock("@/lib/auth/guard", () => ({ requireAal2FromClaims: (...a: unknown[]) => requireAal2(...a) }));
 vi.mock("@/lib/profile", () => ({ getProfile: (...a: unknown[]) => getProfile(...a) }));
 // The real SignOutForm calls a server action; what matters here is that the confirm button submits it.
 vi.mock("@/components/SignOutForm", () => ({

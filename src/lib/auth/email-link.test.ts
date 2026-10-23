@@ -91,6 +91,13 @@ describe("guards", () => {
     expect(exchangeCodeForSession).not.toHaveBeenCalled();
   });
 
+  it("limits per IP, on both email-link routes", async () => {
+    await call(confirm, "/auth/confirm?code=abc");
+    await call(confirmRecovery, "/auth/confirm/recovery?code=abc");
+    expect(limitError).toHaveBeenNthCalledWith(1, "confirm:1.1.1.1", 30, 600);
+    expect(limitError).toHaveBeenNthCalledWith(2, "confirm:1.1.1.1", 30, 600);
+  });
+
   it("shows 'unavailable' rather than 'too many tries' when the limiter is down", async () => {
     limitError.mockResolvedValue("unavailable");
     expect(where(await call(confirm, "/auth/confirm?code=abc"))).toBe("/login?error=unavailable");

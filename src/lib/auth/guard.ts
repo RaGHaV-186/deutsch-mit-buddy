@@ -1,8 +1,10 @@
 import "server-only";
+import { cache } from "react";
 import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 import type { ZodType } from "zod";
-import { clientIp, limitError } from "@/lib/rate-limit";
+import { limitError } from "@/lib/rate-limit";
+import { STALE_SESSION_PATH } from "./stale-session";
 import { createClient } from "@/lib/supabase/server";
 
 export type AuthState =
@@ -21,10 +23,43 @@ export async function getAuthState(): Promise<AuthState> {
   return aal === "aal2" ? { status: "aal2", ...base } : { status: "aal1", ...base };
 }
 
-/** For pages and server actions: signed in AND two-factor verified, else redirect. */
+/**
+ * Reads the session from the access token's claims. The token's signature is checked locally against the project's cached signing
+ * keys, so there is no auth-server round trip (`getAuthState` below costs one). Same shape as `getAuthState`.
+ * A session revoked on the server stays readable here until its token expires (at most an hour), which is fine for showing the
+ * member's own rows (row-level security applies either way) and wrong for anything that changes data: pages that read use this,
+ * server actions and API routes use `getAuthState` / `requireAal2`.
+ */
+export const getClaimsState = cache(async (): Promise<AuthState> => {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getClaims();
+  const claims = data?.claims;
+  if (error || !claims?.sub) return { status: "anonymous" };
+  const base = { userId: claims.sub, email: typeof claims.email === "string" ? claims.email : undefined };
+  return claims.aal === "aal2" ? { status: "aal2", ...base } : { status: "aal1", ...base };
+});
+
+/**
+ * The auth server does not accept the session. If the token still looks valid (user deleted, session revoked) the cookies must be
+ * cleared first, or /login would send the browser straight back into the app: /auth/stale does that and lands on /login once.
+ */
+async function leaveUnusableSession(): Promise<never> {
+  const claimed = await getClaimsState();
+  redirect(claimed.status === "anonymous" ? "/login" : STALE_SESSION_PATH);
+}
+
+/** For pages that only read: signed in AND two-factor verified (from the token's claims), else redirect. */
+export async function requireAal2FromClaims() {
+  const state = await getClaimsState();
+  if (state.status === "anonymous") redirect("/login");
+  if (state.status === "aal1") redirect("/mfa");
+  return state;
+}
+
+/** For server actions and anything that changes data: signed in AND two-factor verified, checked with the auth server, else redirect. */
 export async function requireAal2() {
   const state = await getAuthState();
-  if (state.status === "anonymous") redirect("/login");
+  if (state.status === "anonymous") return leaveUnusableSession();
   if (state.status === "aal1") redirect("/mfa");
   return state;
 }
@@ -32,7 +67,7 @@ export async function requireAal2() {
 /** For pages and actions that need a session but not yet 2FA (the MFA screens). */
 export async function requireSession() {
   const state = await getAuthState();
-  if (state.status === "anonymous") redirect("/login");
+  if (state.status === "anonymous") return leaveUnusableSession();
   return state;
 }
 
@@ -48,21 +83,27 @@ interface RouteOptions<T> {
 }
 
 /**
- * Wraps a route handler: rate limit (per IP, then per user) -> auth + AAL2 -> zod validation.
+ * Wraps a route handler: auth + AAL2 -> rate limit -> zod validation.
  * Every API route except the public health check uses this.
+ *
+ * The session is verified with the auth server (`getUser`). The rate limit is one call per request, keyed by the user from the
+ * token's locally verified claims, and runs at the same time as that check, so the handler waits for one round trip, not three.
+ * A request without a valid token never reaches the database (proxy.ts also turns those away).
  */
 export function withAuth<T>(
   options: RouteOptions<T>,
   handler: (ctx: { userId: string; email: string | undefined; input: T; request: Request }) => Promise<Response>,
 ) {
   return async function route(request: Request): Promise<Response> {
-    const ip = clientIp(request.headers);
-    const ipBlocked = await limitError(`ip:${options.name}:${ip}`, options.limit * 3, options.windowSeconds);
-    if (ipBlocked) return limitResponse(ipBlocked);
-    const state = await getAuthState();
+    const claimed = await getClaimsState();
+    if (claimed.status === "anonymous") return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
+    if (claimed.status === "aal1") return NextResponse.json({ error: "mfa_required" }, { status: 403 });
+    const [state, userBlocked] = await Promise.all([
+      getAuthState(),
+      limitError(`user:${options.name}:${claimed.userId}`, options.limit, options.windowSeconds),
+    ]);
     if (state.status === "anonymous") return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
     if (state.status === "aal1") return NextResponse.json({ error: "mfa_required" }, { status: 403 });
-    const userBlocked = await limitError(`user:${options.name}:${state.userId}`, options.limit, options.windowSeconds);
     if (userBlocked) return limitResponse(userBlocked);
     let body: unknown;
     try {

@@ -21,7 +21,7 @@ vi.mock("@/lib/supabase/admin", () => ({ createAdminClient: () => ({}) }));
 vi.mock("@/lib/turnstile", () => ({ verifyTurnstile: async () => true }));
 vi.mock("@/lib/auth/guard", () => ({ requireSession: async () => ({ userId: "u1" }) }));
 
-import { signUpAction } from "./actions";
+import { forgotPasswordAction, googleSignInAction, joinWaitlistAction, signInAction, signUpAction } from "./actions";
 
 const form = (over: Record<string, string> = {}) => {
   const f = new FormData();
@@ -102,5 +102,27 @@ describe("signUpAction: which message each failure shows", () => {
     isPasswordPwned.mockResolvedValue(true);
     expect(await signUpAction(undefined, form())).toEqual({ error: "pwned" });
     expect(await signUpAction(undefined, form({ terms: "" }))).toEqual({ error: "terms_required" });
+  });
+});
+
+describe("every public auth action is limited per IP, before anything else is asked of Supabase", () => {
+  const withCaptcha = (fields: Record<string, string>) => {
+    const f = new FormData();
+    for (const [k, v] of Object.entries({ "cf-turnstile-response": "tok", ...fields })) f.set(k, v);
+    return f;
+  };
+  const cases: [string, () => Promise<unknown>, string, number, number][] = [
+    ["sign up", () => signUpAction(undefined, form()), "signup:203.0.113.9", 10, 3600],
+    ["log in", () => signInAction(undefined, withCaptcha({ email: "anna@example.com", password: "Quiet-Dog-Walks-71" })), "login:203.0.113.9", 20, 600],
+    ["Google sign-in", () => googleSignInAction(), "oauth:203.0.113.9", 20, 600],
+    ["password reset request", () => forgotPasswordAction(undefined, withCaptcha({ email: "anna@example.com" })), "reset:203.0.113.9", 5, 3600],
+    ["waitlist", () => joinWaitlistAction(undefined, withCaptcha({ email: "anna@example.com" })), "waitlist:203.0.113.9", 5, 3600],
+  ];
+  it.each(cases)("%s: key %s", async (_name, run, key, limit, window) => {
+    limitError.mockResolvedValue("rate_limited");
+    expect(await run()).toEqual({ error: "rate_limited" });
+    expect(limitError).toHaveBeenCalledTimes(1);
+    expect(limitError).toHaveBeenCalledWith(key, limit, window);
+    expect(signUp).not.toHaveBeenCalled();
   });
 });

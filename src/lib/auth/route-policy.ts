@@ -31,7 +31,7 @@ const isUnder = (path: string, prefix: string) => path === prefix || path.starts
 
 /**
  * The one rule for who may open what. Everything not listed needs a session at AAL2.
- * Runs in proxy.ts on JWT claims only (no network); pages, actions and API routes re-check with requireAal2().
+ * Runs in proxy.ts on JWT claims only (no network); pages that only read re-check the same claims (requireAal2FromClaims()); actions and API routes re-check with the auth server (requireAal2(), withAuth).
  */
 export function decideRoute(rawPath: string, claims: SessionClaims | null, search = ""): RouteDecision {
   const path = rawPath.length > 1 ? rawPath.replace(/\/+$/, "") : rawPath;

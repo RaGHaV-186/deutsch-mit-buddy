@@ -6,15 +6,15 @@ const getClaims = vi.fn();
 const limitError = vi.fn();
 const applyReviews = vi.fn();
 const getSnapshot = vi.fn();
-const maybeSingle = vi.fn();
+const getProfile = vi.fn();
+const ensureLessonCardsIfNew = vi.fn();
 const adminClient = { admin: true };
 
 vi.mock("@/lib/supabase/server", () => ({
-  createClient: async () => ({
-    auth: { getUser, getClaims },
-    from: () => ({ select: () => ({ eq: () => ({ maybeSingle }) }) }),
-  }),
+  createClient: async () => ({ auth: { getUser, getClaims } }),
 }));
+vi.mock("@/lib/profile", () => ({ getProfile: (...a: unknown[]) => getProfile(...a) }));
+vi.mock("@/lib/cards/ensure-unlocked", () => ({ ensureLessonCardsIfNew: (...a: unknown[]) => ensureLessonCardsIfNew(...a) }));
 vi.mock("@/lib/supabase/admin", () => ({ createAdminClient: () => adminClient }));
 vi.mock("@/lib/rate-limit", () => ({
   limitError: (...a: unknown[]) => limitError(...a),
@@ -35,8 +35,9 @@ import { POST as snapshot } from "./snapshot/route";
 
 const signedIn = (aal = "aal2") => {
   getUser.mockResolvedValue({ data: { user: { id: "user-1", email: "a@b.de" } }, error: null });
-  getClaims.mockResolvedValue({ data: { claims: { aal } } });
+  getClaims.mockResolvedValue({ data: { claims: { aal, sub: "user-1", email: "a@b.de" } } });
 };
+const profile = (timezone: string) => ({ timezone, onboarded_at: "2026-10-01T00:00:00Z", session_seq: 5, deck_unlocked_seq: 5 });
 const post = (route: (r: Request) => Promise<Response>, body: unknown) =>
   route(new Request("http://x/api/cards", { method: "POST", body: JSON.stringify(body) }));
 const event = (over: Record<string, unknown> = {}) => ({
@@ -53,7 +54,8 @@ beforeEach(() => {
   vi.spyOn(console, "error").mockImplementation(() => {});
   limitError.mockResolvedValue(undefined);
   getUser.mockResolvedValue({ data: { user: null }, error: { message: "none" } });
-  maybeSingle.mockResolvedValue({ data: { timezone: "Asia/Kolkata" } });
+  getClaims.mockResolvedValue({ data: { claims: null }, error: { message: "no session" } });
+  getProfile.mockResolvedValue(profile("Asia/Kolkata"));
   applyReviews.mockResolvedValue({ acknowledged: [], cards: [] });
   getSnapshot.mockResolvedValue({ now: "2026-10-20T10:00:00.000Z", timezone: "Asia/Kolkata", newToday: 0, cards: [] });
 });
@@ -99,6 +101,15 @@ describe("POST /api/cards/sync", () => {
     expect((await post(sync, { reviews: Array.from({ length: 500 }, () => event()) })).status).toBe(200);
   });
 
+  it("makes one rate-limit call, keyed by the user, and none without a session", async () => {
+    expect((await post(sync, { reviews: [event()] })).status).toBe(401);
+    expect(limitError).not.toHaveBeenCalled();
+    signedIn();
+    await post(sync, { reviews: [event()] });
+    expect(limitError).toHaveBeenCalledTimes(1);
+    expect(limitError.mock.calls[0][0]).toBe("user:cards-sync:user-1");
+  });
+
   it("is rate limited", async () => {
     signedIn();
     limitError.mockResolvedValue("rate_limited");
@@ -130,9 +141,16 @@ describe("POST /api/cards/snapshot", () => {
     expect(getSnapshot).toHaveBeenCalledWith(expect.anything(), "user-1", expect.any(Date), "Asia/Kolkata");
   });
 
+  it("unlocks lessons released since the last visit before reading the deck", async () => {
+    signedIn();
+    await post(snapshot, {});
+    expect(ensureLessonCardsIfNew).toHaveBeenCalledWith("user-1", expect.objectContaining({ session_seq: 5 }));
+    expect(ensureLessonCardsIfNew.mock.invocationCallOrder[0]).toBeLessThan(getSnapshot.mock.invocationCallOrder[0]);
+  });
+
   it("falls back to Berlin when the profile has no usable timezone", async () => {
     signedIn();
-    maybeSingle.mockResolvedValue({ data: { timezone: "Not/AZone" } });
+    getProfile.mockResolvedValue(profile("Not/AZone"));
     await post(snapshot, {});
     expect(getSnapshot.mock.calls[0][3]).toBe("Europe/Berlin");
   });

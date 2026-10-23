@@ -1,7 +1,8 @@
 import "server-only";
 import { cache } from "react";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { unlockForUser, type UnlockResult } from "./unlock";
+import type { Profile } from "@/lib/profile";
+import { newLessonCodes, unlockForUser, type UnlockResult } from "./unlock";
 
 async function run(userId: string, now: Date): Promise<UnlockResult | null> {
   try {
@@ -24,4 +25,36 @@ const oncePerRequest = cache((userId: string) => run(userId, new Date()));
  */
 export function ensureLessonCards(userId: string, now?: Date): Promise<UnlockResult | null> {
   return now ? run(userId, now) : oncePerRequest(userId);
+}
+
+const PUBLISHED_TTL_MS = 60_000;
+let publishedCache: { at: number; codes: string[] } | null = null;
+
+/** Which lessons are published, remembered for a minute per server instance (it changes only when a lesson is released). Null when it could not be read. */
+async function publishedCodes(): Promise<string[] | null> {
+  if (publishedCache && Date.now() - publishedCache.at < PUBLISHED_TTL_MS) return publishedCache.codes;
+  try {
+    const { data, error } = await createAdminClient().from("lesson_publications").select("session_code").limit(1000);
+    if (error) throw error;
+    publishedCache = { at: Date.now(), codes: (data ?? []).map((r) => r.session_code as string) };
+    return publishedCache.codes;
+  } catch {
+    return null;
+  }
+}
+
+/** For the screens that count cards: the full unlock above, but only when a published lesson is waiting. Normally no database call at all. */
+export async function ensureLessonCardsIfNew(
+  userId: string,
+  profile: Pick<Profile, "onboarded_at" | "session_seq" | "deck_unlocked_seq">,
+): Promise<void> {
+  if (!profile.onboarded_at) return;
+  const codes = await publishedCodes();
+  if (codes && newLessonCodes(codes, { targetSeq: profile.session_seq, unlockedSeq: profile.deck_unlocked_seq }).length === 0) return;
+  await ensureLessonCards(userId);
+}
+
+/** Tests only: forget the remembered list of published lessons. */
+export function resetPublishedCache() {
+  publishedCache = null;
 }

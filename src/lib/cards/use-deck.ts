@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Grade } from "@/lib/srs";
+import { announceDeckChanged } from "./deck-badge";
 import { openStore, type DeckInfo, type OfflineStore } from "./offline-store";
 import type { SnapshotCard } from "./schema";
 import { syncNow, type SyncStatus } from "./sync";
@@ -43,6 +44,7 @@ export function useDeck(userId: string, reviewing: boolean) {
     if (!store) return;
     const [cards, info, pending] = await Promise.all([store.getCards(), store.info(userId, new Date()), store.pendingCount()]);
     setState((s) => ({ ...s, status: "ready", cards: info ? cards : [], info, pending }));
+    announceDeckChanged();
   }, [userId]);
 
   const sync = useCallback(

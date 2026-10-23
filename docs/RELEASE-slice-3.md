@@ -155,7 +155,7 @@ select start_code, session_seq, day_count, deck_unlocked_seq from public.profile
 - **A migration list that looks short is a stop.** Raghav's list first showed 3 pending instead of 4 (a cut-off paste). Pushing three would have left the old unique index on `question_bank` and every lesson would have failed to publish.
 - **Pushing a docs commit restarts CI**, so confirm the green state on the final commit, not an earlier one; CodeQL can fail on a PR even when the project's own CI is green.
 - **Count what you publish.** Per-lesson card and question counts and the totals (24, 336, 554, 1005) were computed from the payload file before the run, so every verify query had an expected number.
-- **Open after the release:** the Vercel variable `NEXT_PUBLIC_SITE_URL` is missing (health shows `"siteUrl":"missing"`); see `docs/SETUP-ACCOUNTS.md` section 4 and the steps in `CLAUDE.md` "Where we are".
+- **Follow-up after the release (done 23 Oct):** the Vercel variable `NEXT_PUBLIC_SITE_URL` was missing (health showed `"siteUrl":"missing"`); it is set to the canonical `https://www.deutschmitbuddy.de` now. See `docs/DOMAIN.md`.
 
 ## Rollback
 Everything here is additive, so the usual rollback is to undo the **code** and leave the schema in place.

@@ -56,7 +56,7 @@ Lost authenticator? Authentication → Users → the user → remove the MFA fac
 |------|-------|
 | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` | from S1 |
 | `SUPABASE_SERVICE_ROLE_KEY` | from S1. **Server only**, never `NEXT_PUBLIC_` |
-| `NEXT_PUBLIC_SITE_URL` | `https://deutschmitbuddy.de`, **Production only** (leave Preview and Development unticked: previews use `VERCEL_URL`). See "The site URL" below |
+| `NEXT_PUBLIC_SITE_URL` | `https://www.deutschmitbuddy.de` (the canonical address, see `docs/DOMAIN.md`), **Production only** (leave Preview and Development unticked: previews use `VERCEL_URL`). See "The site URL" below |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY` | from Cloudflare |
 | `NEXT_PUBLIC_SENTRY_DSN` | optional; Sentry → new project, **EU region** |
 | `SENTRY_ORG`, `SENTRY_PROJECT`, `SENTRY_AUTH_TOKEN` | optional; only for source-map upload on production builds |
@@ -64,19 +64,20 @@ Lost authenticator? Authentication → Users → the user → remove the MFA fac
 GitHub needs no secrets: CI runs the RLS tests against a throwaway local Supabase.
 
 ### The site URL (`NEXT_PUBLIC_SITE_URL`)
+*Set on 23 Oct 2026 to `https://www.deutschmitbuddy.de`; DNS, the redirect and every address setting are in `docs/DOMAIN.md`.*
 It is the address that goes into the links of **sign-up confirmation emails**, **Google sign-in** and **password-reset emails** (`src/lib/site-url.ts`, used by the three actions in `src/app/(auth)/actions.ts`). If it is not set, the app falls back to `VERCEL_URL`, which on production is the address of that one deployment (`deutsch-mit-buddy-<hash>-<team>.vercel.app`), not `deutschmitbuddy.de`: the links then point at a changing address (and at Vercel's login wall if Deployment Protection is on). Signing in with a password and 2FA does not use it. `/api/health` shows `"siteUrl":"missing"` until it is set.
 
 Setting it (a `NEXT_PUBLIC_` value is baked in when the app is built, so it needs a new build):
-1. Vercel → the project → Settings → Environment Variables → Add: Name `NEXT_PUBLIC_SITE_URL`, Value `https://deutschmitbuddy.de` (no path; a trailing slash is stripped), Environments: tick **Production only** → Save.
+1. Vercel → the project → Settings → Environment Variables → Add: Name `NEXT_PUBLIC_SITE_URL`, Value `https://www.deutschmitbuddy.de` (no path; a trailing slash is stripped), Environments: tick **Production only** → Save.
 2. Deployments → the latest Production deployment → ⋯ → **Redeploy**, with "Use existing Build Cache" switched **off**.
 3. When it is Ready, `https://deutschmitbuddy.de/api/health` shows `"siteUrl":"set"`.
 
 Supabase must agree with it (Dashboard → Authentication → URL Configuration; these are the S4 values):
-- **Site URL**: `https://deutschmitbuddy.de`
-- **Redirect URLs** (an allow-list; a redirect that is not on it falls back to the Site URL and the link breaks): `https://deutschmitbuddy.de/**` (covers `/auth/confirm`, `/auth/callback` and `/auth/confirm/recovery`), `https://*-<your-vercel-team>.vercel.app/**` (previews; the team part of your Vercel URLs), and `http://localhost:3000/**` for local work.
-- Google Cloud Console → your OAuth client: `https://deutschmitbuddy.de` is among the Authorized JavaScript origins (the redirect URI stays Supabase's `…supabase.co/auth/v1/callback`). Cloudflare Turnstile: `deutschmitbuddy.de` is among the widget's hostnames.
+- **Site URL**: `https://www.deutschmitbuddy.de`
+- **Redirect URLs** (an allow-list; a redirect that is not on it falls back to the Site URL and the link breaks): `https://www.deutschmitbuddy.de/**` (covers `/auth/confirm`, `/auth/callback` and `/auth/confirm/recovery`), `https://*-<your-vercel-team>.vercel.app/**` (previews; the team part of your Vercel URLs), and `http://localhost:3000/**` for local work.
+- Google Cloud Console → your OAuth client: `https://www.deutschmitbuddy.de` is among the Authorized JavaScript origins (the redirect URI stays Supabase's `…supabase.co/auth/v1/callback`). Cloudflare Turnstile: `www.deutschmitbuddy.de` is among the widget's hostnames.
 
-Check it end to end: request a password reset for your own address on the live site; the link in the email must start with `https://deutschmitbuddy.de` (after Supabase's verification hop) and open the reset page.
+Check it end to end: request a password reset for your own address on the live site; the link in the email must lead to `https://www.deutschmitbuddy.de` (after Supabase's verification hop) and open the reset page.
 
 ### Checking a deployment
 Open `https://<deployment>/api/health` (on a preview, while signed in to Vercel). It answers with plain words only, never keys:

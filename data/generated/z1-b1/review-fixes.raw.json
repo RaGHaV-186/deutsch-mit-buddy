@@ -85,17 +85,17 @@
     "W1.4": [
       {
         "id": "W1.4#writing",
-        "status": "fixed",
-        "reason": "The model answer had only four real sentences plus the closing, but the task asks for exactly 5. I split the long und-sentence into two, so there are now 5 sentences plus the greeting.",
-        "fixed_json": "{\"task\":\"Write a short postcard to a friend. You are on holiday. Tell your friend what you can eat there, what you must or want to try, and what you want to drink. Write exactly 5 sentences.\",\"min_words\":30,\"must_include\":[\"one sentence with können\",\"one sentence with wollen\",\"one sentence with müssen\",\"one food or drink word from the lesson\",\"a greeting at the end\"],\"useful_phrases\":[\"Ich kann ... essen.\",\"Ich will ... probieren.\",\"Ich muss ... bestellen.\",\"Ich möchte einen Kaffee.\",\"Viele Grüße\"],\"model_answer\":\"Liebe Lena, ich bin im Urlaub und das Essen ist super. Ich kann hier jeden Tag Fisch und Gemüse essen. Ich will heute den Kuchen probieren. Ich muss unbedingt Wasser bestellen. Zum Trinken möchte ich einen Kaffee. Viele Grüße, Anna\",\"rubric\":[\"Uses exactly 5 sentences and at least 30 words\",\"Uses können, wollen and müssen correctly conjugated in position 2\",\"Main verb is in the infinitive at the end of the sentence\",\"Uses food and drink words from the lesson with correct articles\",\"Has a greeting and correct spelling of ö and ü\"]}"
+        "status": "ok",
+        "reason": "Model answer has five sentences, 41 words, and correct modal use.",
+        "fixed_json": null
       }
     ],
     "W1.5": [
       {
         "id": "W1.5#reading.q5",
         "status": "fixed",
-        "reason": "accepted_answers lacked natural variants (Anna + both actions, 'isst Mittagessen', mittags word orders); added them.",
-        "fixed_json": "{\"skill\":\"reading\",\"type\":\"typing\",\"prompt\":\"Was macht Anna mittags? Answer in German with one short sentence.\",\"answer\":\"Sie macht eine Pause.\",\"distractors\":[],\"accepted_answers\":[\"Anna macht eine Pause.\",\"Sie macht Pause.\",\"Anna macht Pause.\",\"Sie isst das Mittagessen.\",\"Anna isst das Mittagessen.\",\"Sie isst Mittagessen.\",\"Anna isst Mittagessen.\",\"Sie macht eine Pause und isst das Mittagessen.\",\"Anna macht eine Pause und isst das Mittagessen.\",\"Sie macht eine Pause und isst Mittagessen.\",\"Anna macht eine Pause und isst Mittagessen.\",\"Sie macht mittags eine Pause.\",\"Anna macht mittags eine Pause.\",\"Mittags macht sie eine Pause.\",\"Mittags macht Anna eine Pause.\",\"Mittags macht sie eine Pause und isst das Mittagessen.\",\"Mittags macht Anna eine Pause und isst das Mittagessen.\"],\"explanation\":\"At noon she takes a break and eats lunch.\"}"
+        "reason": "Accepted answers were missing natural variants such as 'Anna macht eine Pause und isst das Mittagessen.' and 'Sie macht mittags eine Pause.' Added them.",
+        "fixed_json": "{\"skill\":\"reading\",\"type\":\"typing\",\"prompt\":\"Was macht Anna mittags? Answer in German with one short sentence.\",\"answer\":\"Sie macht eine Pause.\",\"distractors\":[],\"accepted_answers\":[\"Anna macht eine Pause.\",\"Sie macht Pause.\",\"Anna macht Pause.\",\"Sie isst das Mittagessen.\",\"Anna isst das Mittagessen.\",\"Sie macht eine Pause und isst das Mittagessen.\",\"Anna macht eine Pause und isst das Mittagessen.\",\"Sie macht Pause und isst das Mittagessen.\",\"Anna macht Pause und isst das Mittagessen.\",\"Mittags macht sie eine Pause.\",\"Sie macht mittags eine Pause.\",\"Anna macht mittags eine Pause.\",\"Mittags macht sie eine Pause und isst das Mittagessen.\",\"Sie isst Mittagessen.\",\"Anna isst Mittagessen.\"],\"explanation\":\"At noon she takes a break and eats lunch.\"}"
       }
     ],
     "W2.2": [
@@ -126,19 +126,25 @@
       {
         "id": "Z10#vocabulary.w08",
         "status": "ok",
-        "reason": "Article, plural, example and tip are correct; the surname is allowed.",
+        "reason": "Article, plural, example and translation are correct.",
         "fixed_json": null
       },
       {
         "id": "Z10#vocabulary.w09",
         "status": "ok",
-        "reason": "Article, plural, example and tip are correct; the surname is allowed.",
+        "reason": "Article, plural, example and tip are correct.",
+        "fixed_json": null
+      },
+      {
+        "id": "Z10#writing",
+        "status": "ok",
+        "reason": "Model has four sentences and 22+ words, and meets every requirement.",
         "fixed_json": null
       },
       {
         "id": "Z10#exam.gv2",
         "status": "ok",
-        "reason": "Only 'bestellen' fits formal Sie; the distractors are plausible.",
+        "reason": "One correct answer; plausible wrong verb forms as distractors.",
         "fixed_json": null
       }
     ],
@@ -162,19 +168,19 @@
       {
         "id": "W3.2#reading.passage",
         "status": "ok",
-        "reason": "Correct Perfekt with sein, natural German, 50 words, on theme.",
+        "reason": "Correct Perfekt with sein, suitable length and A1 level.",
         "fixed_json": null
       },
       {
         "id": "W3.2#reading.q3",
         "status": "ok",
-        "reason": "One correct answer from the text; distractors plausible and false.",
+        "reason": "One correct answer; distractors plausible and absent from text.",
         "fixed_json": null
       },
       {
         "id": "W3.2#listening.passage",
         "status": "ok",
-        "reason": "Natural dialogue, correct Perfekt with sein, suitable length.",
+        "reason": "Coherent dialogue, correct German and translations, length fits.",
         "fixed_json": null
       },
       {
@@ -186,8 +192,30 @@
       {
         "id": "W3.2#listening.q5",
         "status": "ok",
-        "reason": "Answer matches the script; distractors plausible and false.",
+        "reason": "Answer matches the script; distractors are plausible but wrong.",
         "fixed_json": null
+      },
+      {
+        "id": "W3.2#writing",
+        "status": "ok",
+        "reason": "Model answer has five sentences, 30+ words, all requirements met.",
+        "fixed_json": null
+      }
+    ],
+    "W2.5": [
+      {
+        "id": "W2.5#writing",
+        "status": "ok",
+        "reason": "Five sentences, 35 words, all required elements and imperatives present.",
+        "fixed_json": null
+      }
+    ],
+    "W4.5": [
+      {
+        "id": "W4.5#writing",
+        "status": "fixed",
+        "reason": "The model answer named no single family member, which must_include requires. I changed 'Meine Familie ist groß.' to 'Meine Mutter ist sehr nett.' It still has 5 sentences and over 30 words.",
+        "fixed_json": "{\"task\":\"Write a short postcard to a friend (use du). Say your name, where you come from and where you live. Write about your family and what you do today. Write exactly 5 sentences.\",\"min_words\":30,\"must_include\":[\"Your name and where you come from\",\"Where you live\",\"One person from your family or a friend\",\"One thing you do (or do not do) today with nicht or kein\",\"The word gern or oft\"],\"useful_phrases\":[\"Ich komme aus ...\",\"Ich wohne in ...\",\"Heute arbeite ich nicht.\",\"Ich habe keine Zeit.\",\"Ich trinke gern Wasser.\"],\"model_answer\":\"Hallo Jonas! Ich heiße Lena und ich komme aus Deutschland. Ich wohne in einer Stadt mit meiner Familie. Meine Mutter ist sehr nett. Heute arbeite ich nicht und habe Zeit für dich. Ich esse oft Brot und trinke gern Wasser.\",\"rubric\":[\"The verb is in second position in every statement.\",\"The verb endings match the person (ich wohne, er wohnt).\",\"kein is used for nouns and nicht for verbs.\",\"Nouns have the correct article and capital letters; du is used for the friend.\",\"The lesson words (e.g. Familie, Stadt, gern, oft) are used.\"]}"
       }
     ]
   },
@@ -218,6 +246,11 @@
     "W3.2#reading.q3": "c3845b71cf4d",
     "W3.2#listening.passage": "f2717996859e",
     "W3.2#listening.q4": "d25188dd0abc",
-    "W3.2#listening.q5": "e91541c9dbfb"
+    "W3.2#listening.q5": "e91541c9dbfb",
+    "W1.4#writing": "6b71eb499ebe",
+    "Z10#writing": "71c041624816",
+    "W2.5#writing": "2cb9590664a0",
+    "W3.2#writing": "999e4f867c8b",
+    "W4.5#writing": "e8e3d87aebaf"
   }
 }

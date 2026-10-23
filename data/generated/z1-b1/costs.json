@@ -249,5 +249,29 @@
     "batchId": "direct",
     "actualEur": 0.1214,
     "estimatedEur": 0.4001
+  },
+  {
+    "at": "2026-10-23T11:36:45.000Z",
+    "stage": "review-fixes",
+    "lessons": [
+      "W1.4",
+      "W1.5"
+    ],
+    "batchId": "msgbatch_018rU7QjSXH994R5xCRXYLuk",
+    "actualEur": 0.0303,
+    "estimatedEur": 0.0999
+  },
+  {
+    "at": "2026-10-23T11:36:46.308Z",
+    "stage": "review-fixes",
+    "lessons": [
+      "Z10",
+      "W2.5",
+      "W3.2",
+      "W4.5"
+    ],
+    "batchId": "msgbatch_01SaERXiu9TfqZYLacB7yuo4",
+    "actualEur": 0.0768,
+    "estimatedEur": 0.2018
   }
 ]

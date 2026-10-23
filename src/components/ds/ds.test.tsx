@@ -404,6 +404,38 @@ describe("FloatingTabBar", () => {
     }
   });
 
+  it("a tap answers at once and locally: the tapped tab takes the active look and is marked busy, the real current page does not change", () => {
+    renderWithIntl(<FloatingTabBar active="home" />);
+    const learn = screen.getByRole("link", { name: "Learn" });
+    expect(learn).not.toHaveTextContent("Learn");
+    fireEvent.click(learn);
+    expect(learn).toHaveTextContent("Learn");
+    expect(learn.className).toContain("bg-tint");
+    expect(learn).toHaveAttribute("aria-busy", "true");
+    expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("aria-current", "page"); // still the screen we are on
+    expect(screen.getAllByRole("link").filter((l) => l.className.includes("bg-tint"))).toHaveLength(1);
+  });
+
+  it("tapping the tab you are on changes nothing", () => {
+    renderWithIntl(<FloatingTabBar active="home" />);
+    fireEvent.click(screen.getByRole("link", { name: "Home" }));
+    expect(screen.getByRole("link", { name: "Home" })).not.toHaveAttribute("aria-busy");
+  });
+
+  it("a navigation that never lands stops looking pending after 10 seconds", () => {
+    vi.useFakeTimers();
+    try {
+      renderWithIntl(<FloatingTabBar active="home" />);
+      fireEvent.click(screen.getByRole("link", { name: "Learn" }));
+      expect(screen.getByRole("link", { name: "Learn" })).toHaveAttribute("aria-busy", "true");
+      act(() => void vi.advanceTimersByTime(10_100));
+      expect(screen.getByRole("link", { name: "Learn" })).not.toHaveAttribute("aria-busy");
+      expect(screen.getByRole("link", { name: "Home" })).toHaveTextContent("Home");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it("badge dot on an inactive tab, announced, in the progress colour", () => {
     renderWithIntl(<FloatingTabBar active="home" badges={{ play: true }} />);
     const dot = screen.getByRole("img", { name: "New activity" });

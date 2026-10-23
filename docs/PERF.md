@@ -128,3 +128,22 @@ Server TTFB of a full page load by per-call latency (median of 3):
 Phone tab taps (4× CPU, Fast 4G, +100 ms per call), tap → painted: Home→Learn 713–721 → 330–426 ms; Learn→Cards 301–313 → 297–313; Cards→Home 597–626 → 330. (Client-only timings such as flip and grade doubled during that run because the Mac was busy with other apps, flip is unchanged code; re-measured in the final run.) The tab tap still shows nothing until the response arrives: PR C.
 
 Also in PR B: known-issue 2 (stale login redirect loop) is fixed through `/auth/stale` (see `docs/known-issues.md`). Rate limits after PR B, pinned by tests: per IP on sign-up (10/h), log-in (20/10 min), Google sign-in (20/10 min), password-reset request (5/h), waitlist (5/h), Google callback and email links (30/10 min each) and the new `/auth/stale` (30/10 min); **per user** (never per IP) on the two-factor actions (10/10 min); per user on the API routes (one call). Not limited by us: setting a new password after the reset link (`resetPasswordAction`; it needs the recovery session, Supabase limits it).
+
+### PR C: taps answer at once, tabs prefetched, service worker no longer stores screens
+What changed:
+- **Pending state**: a tab tap makes the tapped tab look active immediately (`usePendingTab`, local state, clears itself when the new screen mounts or after 10 s) and any tap on a link to another screen dims the current screen a little (`NavPending`, opacity only). Nothing waits for the network.
+- **Prefetch**: the tab bar and the sidebar prefetch the other screens in full (`prefetch` on the links; a dynamic screen is otherwise not prefetched without `loading.tsx`). `experimental.staleTimes = { dynamic: 0, static: 20 }`: a prefetched screen is reused for 20 seconds only (the default 5 minutes would show stale due counts); screens that are not prefetched are never cached on the client. Cost: about 4 extra server renders (9 database calls) per full page load, none per tap.
+- **Service worker v3**: static files cache-first (unchanged); the only page it keeps is the public **offline shell** (`/offline`, no account data), served cache-first and refreshed in the background. App screens (`/home`, `/cards` ... hold the learner's data) are **never stored**: they always come from the network, and when the network does not answer within 6 s the worker sends the browser to `/offline`, which opens the Cards from this device's IndexedDB for the account that synced there. Activating v3 deletes the old `buddy-pages-v2` cache (it held the HTML of `/home` and `/cards`). Verified in Chrome: only `/offline` plus static files are cached; with the server stopped, `/cards` and `/home` both land on `/offline` with the offline banner and **Start review** working.
+
+Numbers (production build, +100 ms per database call, phone = 4× CPU + Fast 4G), tap → painted:
+
+| | before PR C (after PR B) | after |
+|---|---|---|
+| Phone tab tap Home → Learn | 330–426 ms | **81–99 ms** |
+| Phone tab tap Learn → Cards | 297–313 ms | **97–129 ms** |
+| Phone tab tap Cards → Home | 330 ms | **80–81 ms** |
+| Desktop tab taps | ~330–630 ms | **45–93 ms** |
+| Longest event duration (INP-style), phone tab tap | 208–304 ms | **24–32 ms** |
+| Tap after more than 20 s idle (prefetch expired) | n/a | 410 ms here (the tab shows active and the screen dims at once; ~150 ms at today's 10 ms per call) |
+
+First-load JS of `/home` rose from 216 to 222 KB gzip (client tab bar); PR D takes it below 200.

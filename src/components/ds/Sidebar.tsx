@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { useAppChrome } from "./app-chrome";
 import { cx } from "./cx";
 import { BookIcon, CardsIcon, GameIcon, HomeIcon } from "./icons";
+import { usePendingTab } from "./use-pending-tab";
 import type { TabId } from "./FloatingTabBar";
 
 const ITEMS: { id: Exclude<TabId, "me">; href: string; Icon: typeof HomeIcon }[] = [
@@ -23,6 +24,7 @@ export function Sidebar({ active }: { active: TabId }) {
   const t = useTranslations("Ds.nav");
   const meta = useTranslations("Meta");
   const { initial, due } = useAppChrome();
+  const { shown, pending, onTap } = usePendingTab(active);
   return (
     <aside className="fixed inset-y-0 left-0 z-40 hidden w-60 flex-col border-r border-track bg-surface desk:flex">
       <div className="flex items-center gap-2.5 px-6 pb-3 pt-7">
@@ -31,12 +33,15 @@ export function Sidebar({ active }: { active: TabId }) {
       </div>
       <nav aria-label={t("label")} className="flex flex-1 flex-col gap-1.5 px-4 pt-4">
         {ITEMS.map(({ id, href, Icon }) => {
-          const isActive = id === active;
+          const isActive = id === shown;
           return (
             <Link
               key={id}
               href={href}
-              aria-current={isActive ? "page" : undefined}
+              prefetch={id !== active}
+              onClick={() => onTap(id)}
+              aria-current={id === active ? "page" : undefined}
+              aria-busy={pending === id || undefined}
               className={cx(
                 "ds-focus flex h-12 items-center gap-3 rounded-full px-4 text-[15px] font-semibold",
                 isActive ? "bg-tint text-on-tint" : "text-muted hover:bg-bg",
@@ -57,10 +62,13 @@ export function Sidebar({ active }: { active: TabId }) {
       <div className="p-4 pb-7">
         <Link
           href="/me"
+          prefetch={active !== "me"}
+          onClick={() => onTap("me")}
           aria-current={active === "me" ? "page" : undefined}
+          aria-busy={pending === "me" || undefined}
           className={cx(
             "ds-focus flex h-14 items-center gap-3 rounded-full border border-track px-3 text-[15px] font-bold",
-            active === "me" ? "bg-tint text-on-tint" : "bg-surface hover:bg-bg",
+            shown === "me" ? "bg-tint text-on-tint" : "bg-surface hover:bg-bg",
           )}
         >
           <span aria-hidden="true" className="flex h-8 w-8 items-center justify-center rounded-full bg-coat text-[14px] font-bold text-on-coat">
